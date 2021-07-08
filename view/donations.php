@@ -5,6 +5,8 @@ require dirname(__FILE__) . "./_layout/header.php"
 ?>
 
 <div class = 'container'>
+    <div class = 'placeholder-box mr1' style = 'height:50px; width:100px;'>Logo</div>
+    <h2 class = 'mt1 txt-clr'>Donate to Tails of Freedom</h2> <!--fetch name of org and display-->
     <form>
         <!-- <div class = 'field'>
 
