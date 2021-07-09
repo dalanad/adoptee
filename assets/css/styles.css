@@ -85,14 +85,14 @@ th {
 	max-width: 100%;
 	display: inline-flex;
 	padding: 0 0.7em;
-	min-height: 2.1rem;
-	border: 3px solid var(--primary);
+	min-height: 2rem;
+	border: .1rem solid var(--primary);
 	font-size: 1rem;
-	border-radius: 8px;
+	border-radius: .5rem;
 	text-decoration: none !important;
 	background-color: var(--primary);
 	color: white;
-	padding: 0 1rem;
+	padding: 0 .75rem;
 }
 .txt-clr {
 	color: var(--primary);
@@ -197,11 +197,11 @@ header .logo img {
 .ctrl {
 	padding: 0.4em 0.5em;
 	line-height: 1;
-	border-radius: 8px;
+	border-radius: .4rem;
 	font-family: inherit;
 	color: var(--color);
 	font-size: 1rem;
-	border: 0.2rem solid var(--gray-2);
+	border: 0.1rem solid var(--gray-3);
 	background: var(--gray-1);
 	width: 100%;
 	box-sizing: border-box;
@@ -264,11 +264,11 @@ header .logo img {
 	border-radius: 0;
 }
 .ctrl-group :first-child {
-	border-radius: 8px 0px 0px 8px;
+	border-radius: .4rem 0px 0px .4rem;
 	border-right: 0;
 }
 .ctrl-group :last-child {
-	border-radius: 0px 8px 8px 0px;
+	border-radius: 0px .4rem .4rem 0px;
 	border-left: 0;
 }
 .field {
@@ -287,8 +287,8 @@ header .logo img {
 	font-size: 0.7em;
 	display: block;
 	color: var(--gray-5);
-	margin-top: 2px;
-	margin-left: 0.3em;
+    margin-top: .2rem;
+    margin-left: .2rem;
 }
 /* checkbox & radio box */
 .ctrl-check[type="checkbox"],
