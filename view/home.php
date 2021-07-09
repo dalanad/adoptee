@@ -1,72 +1,28 @@
 <?php
-require_once dirname(__FILE__) . './_layout/layout.php';
-require dirname(__FILE__) . "./_layout/header.php";
+require_once __DIR__ .  './_layout/layout.php';
+require __DIR__ . "./_layout/header.php";
 ?>
-
+<div style="width: 100%; overflow: hidden; display: flex;   justify-content: center; align-items: center;">
+    <img style="min-width:900px" src="/assets/images/pets-lineup.jpg">
+</div>
 <div class="container">
-    <main style="    margin: 1em;">
-        <section style="display: grid;grid-template-columns: repeat(auto-fit,minmax(180px,1fr));    grid-gap: 1em;">
-            <div class="field">
-                <label>Label</label>
-                <input class="ctrl" />
-            </div>
-            <div class="field">
-                <label>Label</label>
-                <div class="ctrl-group">
-                    <span class="ctrl static">RS</span>
-                    <input class="ctrl" />
-                    <span class="ctrl static">.00</span>
-                </div>
-                <span class="field-msg">Hint or field-msg</span>
-            </div>
-            <div class="field">
-                <label>Label</label>
-                <select class="ctrl">
-                    <option>Dog</option>
-                    <option>Cat</option>
-                    <option>Bird</option>
-                </select>
-                <span class="field-msg">Hint or field-msg</span>
-            </div>
-            <div class="field">
-                <label>Label</label>
-                <input class="danger ctrl" />
-                <span class="field-msg">Hint or field-msg</span>
-            </div>
-            <div class="field">
-                <label>Label</label>
-                <input class="ctrl" type="date" />
-            </div>
-            <div class="field">
-                <label>Button</label>
-                <div class="ctrl-group">
-                    <input class="ctrl" type="date" />
-                    <button type="button">Test</button>
-                </div>
-            </div>
-            <div class="field">
-                <label>Select</label>
-                <helix-select></helix-select>
-            </div>
-            <div class="field">
-                <label>Select</label>
-                <helix-toggle name="test" value="1"></helix-toggle>
-            </div>
-            <div class="field">
-                <div>
-                    <input class="ctrl-check" type="checkbox">
-                    <input class="ctrl-radio" name="gender" type="radio">
-                    <input class="ctrl-radio" name="gender" type="radio">
-                </div>
-            </div>
-        </section>
-        <div class="btn">Test Button</div>
-
+    <main style="margin: 1em;display:flex;justify-content:space-around;flex-wrap:wrap;">
+        <div style="display:flex;flex-direction:column;align-items:center">
+            <img style="max-height: 180px;margin:1rem 0" src="/assets/images/need-home.jpg">
+            <button class="btn">Adopt</button>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center">
+            <img style="max-height: 180px;margin:1rem 0" src="/assets/images/medical-equipment.jpg">
+            <button class="btn orange">Report</button>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center">
+            <img style="max-height: 180px;margin:1rem 0" src="/assets/images/shelter.jpg">
+            <button class="btn green">Donate</button>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center">
+            <img style="max-height: 180px;margin:1rem 0" src="/assets/images/doctor_holding_pet.jpg">
+            <button class="btn pink">Consult</button>
+        </div>
     </main>
     <footer></footer>
-
-
 </div>
-</body>
-
-</html>
