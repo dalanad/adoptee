@@ -1,72 +1,55 @@
 <?php
-require_once dirname(__FILE__) . './_layout/layout.php';
-require dirname(__FILE__) . "./_layout/header.php";
+require_once __DIR__ .  './_layout/layout.php';
+require __DIR__ . "./_layout/header.php";
 ?>
-
-<div class="container">
-    <main style="    margin: 1em;">
-        <section style="display: grid;grid-template-columns: repeat(auto-fit,minmax(180px,1fr));    grid-gap: 1em;">
-            <div class="field">
-                <label>Label</label>
-                <input class="ctrl" />
-            </div>
-            <div class="field">
-                <label>Label</label>
-                <div class="ctrl-group">
-                    <span class="ctrl static">RS</span>
-                    <input class="ctrl" />
-                    <span class="ctrl static">.00</span>
-                </div>
-                <span class="field-msg">Hint or field-msg</span>
-            </div>
-            <div class="field">
-                <label>Label</label>
-                <select class="ctrl">
-                    <option>Dog</option>
-                    <option>Cat</option>
-                    <option>Bird</option>
-                </select>
-                <span class="field-msg">Hint or field-msg</span>
-            </div>
-            <div class="field">
-                <label>Label</label>
-                <input class="danger ctrl" />
-                <span class="field-msg">Hint or field-msg</span>
-            </div>
-            <div class="field">
-                <label>Label</label>
-                <input class="ctrl" type="date" />
-            </div>
-            <div class="field">
-                <label>Button</label>
-                <div class="ctrl-group">
-                    <input class="ctrl" type="date" />
-                    <button type="button">Test</button>
-                </div>
-            </div>
-            <div class="field">
-                <label>Select</label>
-                <helix-select></helix-select>
-            </div>
-            <div class="field">
-                <label>Select</label>
-                <helix-toggle name="test" value="1"></helix-toggle>
-            </div>
-            <div class="field">
-                <div>
-                    <input class="ctrl-check" type="checkbox">
-                    <input class="ctrl-radio" name="gender" type="radio">
-                    <input class="ctrl-radio" name="gender" type="radio">
-                </div>
-            </div>
-        </section>
-        <div class="btn">Test Button</div>
-
-    </main>
-    <footer></footer>
-
-
+<div style="width: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+    <img style="min-width:900px" src="/assets/images/pets-lineup.jpg">
 </div>
-</body>
+<style>
+    .activity-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 250px;
+        text-align: center;
+    }
 
-</html>
+    .activity-card .btn {
+        min-height: 2.3em;
+        padding: .0 1rem;
+        margin-top: 1rem;
+    }
+
+    .activity-card img {
+        max-height: 180px;
+        margin: 1rem 0
+    }
+</style>
+<div class="container">
+    <!-- TODO : images are not very good. need to replace them with better matching ones-->
+    <main style="margin: 1em;display:flex;justify-content:space-around;flex-wrap:wrap;">
+        <div class="activity-card">
+            <img src="/assets/images/need-home.jpg">
+            Help us give them a family by Bringing one Home
+            <button class="btn outline green">Adopt a Pet</button>
+        </div>
+        <div class="activity-card">
+            <img src="/assets/images/medical-equipment.jpg">
+            Let us know about The animals that, need help
+            <button class="btn outline orange flex-column">
+                <div> Report</div>
+                <div style="line-height:1;font-size:.75em"> Injured / Abandoned Animals </div>
+            </button>
+        </div>
+        <div class="activity-card">
+            <img src="/assets/images/shelter.jpg">
+            Support Organizations that give Life to helpless Souls
+            <button class="btn outline blue">Donate or Sponsor</button>
+        </div>
+        <div class="activity-card">
+            <img src="/assets/images/doctor_holding_pet.jpg">
+            Veterinary Consultations at Your Fingertips
+            <button class="btn outline pink">Consult Doctor</button>
+        </div>
+    </main>
+</div>
