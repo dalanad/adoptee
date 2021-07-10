@@ -50,12 +50,7 @@ require dirname(__FILE__) . "./_layout/header.php"
     <form>
         <div class='field'>
             <label for='type'>Type</label>
-            <input class="ctrl" type="text" name="type" placeholder="Dog" required/>
-        </div>
-
-        <div class='field'>
-            <label for='type'>Type</label>
-                <select class="ctrl" name='type' placeholder="Hamster" required>
+                <select class="ctrl" name='type' required>
                     <option selected='true' disabled='disabled'>Select</option>
                     <option value='dog'>Dog</option>
                     <option value='cat'>Cat</option>
