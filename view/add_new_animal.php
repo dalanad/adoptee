@@ -17,7 +17,32 @@ require dirname(__FILE__) . "./_layout/header.php"
 	width: 20%;
 	box-sizing: border-box;
 }
+
+.box {
+      display: none;
+    }
+
+.other {
+    }
+
 </style>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+      $("select").change(function() {
+        $(this).find("option:selected").each(function() {
+          var optionValue = $(this).attr("value");
+          if (optionValue) {
+            $(".box").not("." + optionValue).hide();
+            $("." + optionValue).show();
+          } else {
+            $(".box").hide();
+          }
+        });
+      }).change();
+    });
+</script>
 
 <div class='container px2'>
     <div class='placeholder-box mr1' style='height:50px; width:100px;'>Logo</div>
@@ -26,6 +51,21 @@ require dirname(__FILE__) . "./_layout/header.php"
         <div class='field'>
             <label for='type'>Type</label>
             <input class="ctrl" type="text" name="type" placeholder="Dog" required/>
+        </div>
+
+        <div class='field'>
+            <label for='type'>Type</label>
+                <select class="ctrl" name='type' required>
+                    <option selected='true' disabled='disabled'>Select</option>
+                    <option value='dog'>Dog</option>
+                    <option value='cat'>Cat</option>
+                    <option value='other'>Other</option>
+                </select>
+        </div>
+
+        <div class='field other box'>
+            <label for='type'>Other</label>
+            <input class="ctrl" type="text" name="other" placeholder="Hamster" required/>
         </div>
 
         <div class='field'>
