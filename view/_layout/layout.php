@@ -22,5 +22,4 @@ $data = array(
     <link href="/assets/css/styles.css?w=<?= rand(1, 100) ?>" rel="stylesheet" type="text/css" />
     <link href="/assets/css/util.css" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
 </head>
