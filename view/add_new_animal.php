@@ -27,7 +27,7 @@ require dirname(__FILE__) . "./_layout/header.php"
 
 </style>
 
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $(document).ready(function() {
       $("select").change(function() {
@@ -55,7 +55,7 @@ require dirname(__FILE__) . "./_layout/header.php"
 
         <div class='field'>
             <label for='type'>Type</label>
-                <select class="ctrl" name='type' required>
+                <select class="ctrl" name='type' placeholder="Hamster" required>
                     <option selected='true' disabled='disabled'>Select</option>
                     <option value='dog'>Dog</option>
                     <option value='cat'>Cat</option>
