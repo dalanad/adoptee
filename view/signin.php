@@ -4,7 +4,6 @@
     .bg-primary {
         background-color: var(--primary);
     }
-
     .animated-card {
         overflow: hidden;
         width: 280px;
