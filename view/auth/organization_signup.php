@@ -1,119 +1,164 @@
 <?php require_once  __DIR__ . './../_layout/layout.php' ?>
+<?php $step = isset($_GET["step"]) ? $_GET["step"] : 1; ?>
 
+<link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
 <style>
-    .bg-primary {
-        background-color: var(--primary);
+    .heading {
+        padding: 1rem;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
     }
+
+    .heading img {
+        height: 200px;
+    }
+
+
 
     .animated-card {
-        overflow: hidden;
-        width: 280px;
-        transition: width 0.3s ease-out, padding 0.5s ease-out;
-        white-space: nowrap;
-        border-radius: 16px;
-        padding: 1em;
+        width: 100%;
     }
 
-    .animated-card.hidden {
-        width: 0;
-        padding-left: 0px;
-        padding-right: 0;
-    }
-
-    .centered-container {
-        display: flex;
-        height: 100%;
-        flex-direction: column;
-        justify-content: center;
+    .lg-3col-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 1rem;
     }
 
     @media (max-width:600px) {
-        .centered-container {
-            display: block;
+        .heading img {
+            height: 80px;
         }
-    }
 
-    .stepper {
-        display: flex;
-    }
+        .lg-3col-grid {
+            grid-template-columns: 1fr;
+        }
 
-    .step {
-        padding: 1rem 0;
-        display: flex;
-        align-items: center;
-        /* cursor: pointer; */
-        line-height: 1;
-        border-radius: .4rem;
-        color: var(--gray-5);
-    }
-
-    /* .step:hover {
-        color: black;
-        transition: all .2s ease-in-out;
-    } */
-
-    .step.active {
-        color: var(--primary);
-    }
-
-    .step.active .step-icon {
-        font-weight: 900;
-    }
-
-    .step:not(:first-child)::before,
-    .step:not(:last-child)::after {
-        min-width: 1rem;
-        content: " ";
-        height: .1rem;
-        background-color: var(--gray-3);
-        display: block;
-    }
-
-    .step-icon,
-    .step-title {
-        margin: 0 .3rem;
     }
 </style>
-
 <div class="centered-container">
     <div>
         <div style="margin: 0 auto;margin-bottom: 5rem;max-width: 700px;">
-            <div class="p2">
-                <div>Welcome to Adoptee</div>
-                <h2 class="m0">Organization Registration</h2>
+            <div class="heading">
+                <div>
+                    <div>Welcome to Adoptee</div>
+                    <h2 class="m0">Organization Registration</h2>
+                </div>
+                <img src="/assets/images/graphics/task-list.webp">
             </div>
-
             <div class="stepper px2">
-                <div class="step active">
+                <div class="step <?= $step == 1 ? 'active' : '' ?>">
                     <i class="step-icon far fa-file-alt"></i>
-                    <span class="step-title">Basic Details</span>
+                    <span class="step-title">Basic Information</span>
                 </div>
-                <div class="step">
+                <div class="step  <?= $step == 2 ? 'active' : '' ?>">
                     <i class="step-icon far fa-user-circle "></i>
-                    <span class="step-title">Admin User</span>
+                    <span class="step-title">User</span>
                 </div>
-                <div class="step">
+                <div class="step  <?= $step == 3 ? 'active' : '' ?>">
                     <i class="step-icon fa fa-fingerprint"></i>
                     <span class="step-title">Verification</span>
                 </div>
             </div>
-
             <div style="display: flex;">
-                <div class="animated-card" id="sign-up">
-                    <div class="field">
-                        <label>Name</label>
-                        <input class="ctrl" type="email" />
-                        <span class="field-msg"> </span>
+                <div class="animated-card <?= $step != 1 ? 'hidden' : '' ?>" id="step-1">
+                    <div class="lg-3col-grid">
+                        <div class="field" style="grid-column: span 2;">
+                            <label>Organization Name</label>
+                            <input class="ctrl" type="email" />
+                            <span class="field-msg"> </span>
+                        </div>
+                        <div class="field">
+                            <label>Telephone</label>
+                            <input class="ctrl" type="email" />
+                            <span class="field-msg"> </span>
+                        </div>
+                        <div class="field">
+                            <label>Address Line 1</label>
+                            <input class="ctrl" type="email" />
+                            <span class="field-msg"> </span>
+                        </div>
+                        <div class="field">
+                            <label>Address Line 2</label>
+                            <input class="ctrl" type="email" />
+                            <span class="field-msg"> </span>
+                        </div>
+                        <div class="field">
+                            <label>City</label>
+                            <input class="ctrl" type="email" />
+                            <span class="field-msg"> </span>
+                        </div>
                     </div>
-                    <div class="field">
-                        <label>Email Address</label>
-                        <input class="ctrl" type="email" />
-                        <span class="field-msg"> </span>
+                    <div class="flex justify-between mt2">
+                        <div></div>
+                        <a class="btn" href="?step=2" style="margin-top: 1em;">Next</a>
                     </div>
-                    <button class="btn" style="margin-top: 1em;">Next</button>
                 </div>
-                <div style="flex: 1 1 0;text-align: center;">
-                    <img src="/assets/images/graphics/task-list.webp" style="height: 200px;">
+                <div class="animated-card <?= $step != 2 ? 'hidden' : '' ?>" id="step-2">
+                    <div class="flex">
+                        <div class="flex-auto mx1">
+                            <div class="field">
+                                <label>Email Address</label>
+                                <input class="ctrl" type="email" />
+                                <span class="field-msg"> </span>
+                            </div>
+                        </div>
+                        <div class="flex-auto mx1">
+                            <div class="field">
+                                <label>Password</label>
+                                <input class="ctrl" type="password" />
+                                <span class="field-msg"> </span>
+                            </div>
+                            <div class="field">
+                                <label>Confirm Password</label>
+                                <input class="ctrl" type="password" />
+                                <span class="field-msg"> </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt2">
+                        <a class="btn outline pink" href="?step=1">Back</a>
+                        <a class="btn" href="?step=3">Next</a>
+                    </div>
+                </div>
+                <div class="animated-card <?= $step != 3 ? 'hidden' : '' ?>" id="step-3">
+                    <style>
+                        .verify-card {
+                            border: .1rem solid var(--gray-3);
+                            width: 300px;
+                            padding: .5rem .8rem;
+                            margin: .2rem 0;
+                            border-radius: .4rem;
+
+                            line-height: 1;
+                        }
+
+                        .verify-card-heading {
+                            display: flex;
+                            justify-content: space-between;
+                        }
+                    </style>
+                    <div style="display: flex;flex-direction:column;align-items:center">
+                        <div class="verify-card">
+                            <div class="verify-card-heading"> Email <i class="txt-clr green fa  fa-check-circle"></i></div>
+                        </div>
+                        <div class="verify-card">
+                            <div class="verify-card-heading">Telephone
+                                <i class="txt-clr orange fas fa-exclamation-circle"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 600;text-align:center;margin:.5rem 0">OTP</div>
+                                <input type="text" inputmode="numeric" required pattern="\d{6}" autocomplete="one-time-code" class="ctrl">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt2">
+                        <a class="btn outline pink" href="?step=2">Back</a>
+                        <a class="btn" href="/view/organization_dashboard.php">Finish</a>
+                    </div>
                 </div>
             </div>
         </div>
