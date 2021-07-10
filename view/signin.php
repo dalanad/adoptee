@@ -1,63 +1,61 @@
-<?php require_once  dirname(__FILE__) . './_layout/layout.php' ?>
+<?php require_once  __DIR__ . './_layout/layout.php' ?>
+<?php $active = isset($_GET["active"]) ? $_GET["active"] : "signin"; ?>
 
-<style>
-    .bg-primary {
-        background-color: var(--primary);
-    }
+<link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
 
-    .animated-card {
-        overflow: hidden;
-        width: 280px;
-        transition: width 0.3s ease-out, padding 0.5s ease-out;
-        white-space: nowrap;
-        border-radius: 16px;
-        padding: 1em;
-    }
-
-    .animated-card.hidden {
-        width: 0;
-        padding-left: 0px;
-        padding-right: 0;
-    }
-</style>
-<div style="margin: .5em;display: flex; height: 100%; flex-direction: column; justify-content: center;">
-    <div>
-        <div style="display: flex;margin: 0 auto;max-width: 700px;">
-            <div class="animated-card hidden" id="sign-up">
+<div class="centered-container">
+    <div style="padding: .5em;">
+        <div class="card-container">
+            <div class="animated-card <?= $active == 'signin' ? "hidden" : '' ?>" id="sign-up">
                 <div>Welcome to Adoptee</div>
-                <div style="font-size: 1.5em;font-weight:700;margin-bottom: 1.2em;">Sign Up</div>
+                <div class="title-text">Sign Up</div>
                 <div class="field">
                     <label>Name</label>
                     <input class="ctrl" type="email" />
-                    <span class="field-msg"> </span>
+                    <span class="field-msg"></span>
                 </div>
                 <div class="field">
                     <label>Email Address</label>
                     <input class="ctrl" type="email" />
                     <span class="field-msg"> </span>
                 </div>
-                <button class="btn" style="margin-top: 1em;">Sign Up</button>
-                <div style="text-align: end;">
-                    <button class="btn btn-link" style="margin-top: 1em;font-size:small " onclick="SignIn()">Sign In Instead</button>
+                <button class="btn">Register</button>
+                <div class="body-text">
+                    Alreaday have an account ? <a class="btn btn-link" style="font-size:1em;padding:0" onclick="SignIn()">Sign In </a>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <div class="body-text">Register as</div>
+                    <a class="btn outline green" href="/view/auth/organization_signup.php"> <i class="fa fa-hand-holding-heart"></i>&nbsp;Organization</a>
+                    <button class="btn outline pink"> <i class="fa fa-user-md"></i>&nbsp;Doctor</button>
                 </div>
             </div>
-            <div class="animated-card bg-primary" id="sep" style="transition:background-color .3s ease-out;z-index: 0;flex:1 1 0"></div>
-            <div class="animated-card" id="sign-in">
+            <div class="spacer-card"></div>
+            <div class="animated-card <?= $active == 'signup' ? "hidden" : '' ?>" id="sign-in">
                 <div>Welcome to Adoptee</div>
-                <div style="font-size: 1.5em;font-weight:700;margin-bottom: 1.2em;">Sign In</div>
+                <div class="title-text">Sign In</div>
                 <div class="field">
                     <label>Email Address</label>
                     <input class="ctrl" type="email" />
                     <span class="field-msg"> </span>
                 </div>
                 <div class="field">
-                    <label>Password</label>
+                    <label ondblclick="show()">Password</label>
                     <input class="ctrl" type="password" />
                     <a href="#" class="field-msg"> Forgot Password ? </a>
                 </div>
-                <a class="btn" style="margin-top: 1em;" href="/view/home.php">Sign In</a>
-                <div style="text-align: end;">
-                    <button class="btn btn-link" style="margin-top: 1em;font-size:small" onclick="SignUp()">Sign Up Instead</button>
+                <a class="btn" style="margin: 1em 0;" href="/view/home.php">Sign In</a>
+                <div class="body-text">
+                    Don't have an account ? <a class="btn btn-link" style="font-size:1em;padding:0" onclick="SignUp()">Sign Up </a>
+                </div>
+                <script>
+                    function show() {
+                        document.getElementById('links').style.display = 'block'
+                    }
+                </script>
+                <div style="display: none;" id="links">
+                    <a class="btn btn-link" href="/view/organization_dashboard.php">Org Admin </a>
+                    <a class="btn btn-link" href="/view/organization_dashboard.php">Org User </a>
+                    <a class="btn btn-link" href="">Doctor</a>
                 </div>
             </div>
         </div>
@@ -68,12 +66,15 @@
 
             function SignUp() {
                 signInCard.classList.add("hidden")
-                signUpCard.classList.remove("hidden")
+                signUpCard.classList.remove("hidden");
+                window.history.replaceState(null, null, "?active=signup");
+
             }
 
             function SignIn() {
                 signUpCard.classList.add("hidden")
-                signInCard.classList.remove("hidden")
+                signInCard.classList.remove("hidden");
+                window.history.replaceState(null, null, "?active=signin");
             }
         </script>
     </div>
