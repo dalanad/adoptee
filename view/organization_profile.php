@@ -14,6 +14,9 @@ require dirname(__FILE__) . "./_layout/header.php"
         <div>
             <a class="btn" href="/view/organization_settings.php">CTA</a>
         </div>
+        <div>
+            <a class = 'btn' href = 'donations.php' style = 'margin-left :20px;'>Donate</a>
+        </div>
     </div>
 </div>
 
