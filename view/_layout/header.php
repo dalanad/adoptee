@@ -19,7 +19,7 @@
         <?php } ?>
 
         <?php if (isset($data["user"])) { ?>
-            <a class="btn btn-link" style="font-size:1rem"><i class="fa fa-user"> </i> &nbsp; Dalana </a>
+            <a class="btn btn-link" style="font-size:1rem"  href="/view/signin.php"><i class="fa fa-user"> </i> &nbsp; Dalana </a>
         <?php } else { ?>
             <a class="btn" href="/view/signin.php">Sign In</a>
         <?php } ?>
