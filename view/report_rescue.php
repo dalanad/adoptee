@@ -1,9 +1,8 @@
 <?php
-
 require_once dirname(__FILE__) . './_layout/layout.php';
 require  dirname(__FILE__) ."./_layout/header.php"
-
 ?>
+
 <style>
     #googleMap {
         margin-bottom: 1rem;
@@ -11,8 +10,7 @@ require  dirname(__FILE__) ."./_layout/header.php"
 
     .report {
         display: grid;
-        margin: 0 1rem;
-        margin-bottom: 3rem;
+        margin: 0rem 1rem 3rem 1rem;
     }
 
     @media (min-width:780px) {
