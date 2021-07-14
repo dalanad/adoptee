@@ -49,11 +49,11 @@ a:active {
 <p>Emergency Contact Numbers</p>
     <p><i class="material-icons">phone</i>Contact Info</p>
 
-<p><span class="num" id="myInput" >Dalana: <a href="tel:+94111111111">+94 11 111 1111</a><button onclick="myFunction()"> Copy</button></span> </p>
+<p><span class="num" id="myInput" >Dalana: <a href="tel:+94111111111">+94 11 111 1111</a><button class="btn btn-link" onclick="myFunction()"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy</button></span> </p>
 
-<p><span class="num" id="myInput" >Hiruni: <a href="tel:+94112222222">+94 11 222 2222</a><button onclick="myFunction()">  Copy</button></span> </p>
-<p><span class="num" id="myInput">Ovini: <a href="tel:+94113333333">+94 11 333 3333</a><button onclick="myFunction()">  Copy</button></span> </p>
-<p><span class="num" id="myInput">Tharani: <a href="tel:+94114444444">+94 11 444 4444</a><button onclick="myFunction()">  Copy</button></span> </p>
+<p><span class="num" id="myInput" >Hiruni: <a href="tel:+94112222222">+94 11 222 2222</a><button class="btn btn-link" onclick="myFunction()"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy</button></span> </p>
+<p><span class="num" id="myInput">Ovini: <a href="tel:+94113333333">+94 11 333 3333</a><button class="btn btn-link" onclick="myFunction()"><i class="fa fa-clipboard" aria-hidden="true"></i>  Copy</button></span> </p>
+<p><span class="num" id="myInput">Tharani: <a href="tel:+94114444444">+94 11 444 4444</a><button class="btn btn-link" onclick="myFunction()"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy</button></span> </p>
 </div>
 </div>
 <div class="right">
