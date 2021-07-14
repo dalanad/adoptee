@@ -9,7 +9,7 @@ require dirname(__FILE__) . "./_layout/header.php"
     .center {
    text-align: center;
     color: var(--color);
-	font-size: 40px;
+	font-size: 30px;
     }
     .main{
         width:500px;
@@ -17,14 +17,16 @@ require dirname(__FILE__) . "./_layout/header.php"
         border style:solid;
     }
   
-
 </style>
 
 <div class="center">
+    
 <p><b>Register As A Doctor </b></p>
 </div>
+
 <div class="main">
 <div class="field">
+
     <label for="fname"><b>First Name</b></label>        
     <input class="ctrl" type="text" placeholder="Enter First Name" name="fname" id="fname" required>
     </div>
@@ -44,11 +46,9 @@ require dirname(__FILE__) . "./_layout/header.php"
     <input class="ctrl" type="number" placeholder="Enter Contact Number " name="teleno" id="teleno" required>
     </div>
 
-    <div class="field">
-    <label for="address"><b>Address</b></label>
-    <input class="ctrl" type="text" placeholder="Enter Address" name="address" id="address" required>
+    <div class="field"><b>Adress</b></label>
+    <input class="ctrl" type="text" placeholder="Enter Adress " name="adress" id="adress" required>
     </div>
-
 
 <div class ="btn" >
     <button type="submit" class="btn">Register</button><br>
