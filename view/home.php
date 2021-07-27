@@ -2,10 +2,20 @@
 require_once __DIR__ .  './_layout/layout.php';
 require __DIR__ . "./_layout/header.php";
 ?>
-<div style="width: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
-    <img style="min-width:900px" src="/assets/images/pets-lineup.jpg">
-</div>
 <style>
+    .landing-image-container {
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing-image-container img {
+        min-width: 900px;
+        max-width: 1150px;
+    }
+
     .activity-card {
         display: flex;
         flex-direction: column;
@@ -21,35 +31,35 @@ require __DIR__ . "./_layout/header.php";
     }
 
     .activity-card img {
-        max-height: 180px;
+        max-height: 150px;
         margin: 1rem 0
     }
 </style>
-<div class="container">
-    <!-- TODO : images are not very good. need to replace them with better matching ones-->
+<div class="landing-image-container"> <img src="/assets/images/pets-lineup.jpg" /></div>
+<div class="container" style="max-width: 1500px;">
     <main style="margin: 1em;display:flex;justify-content:space-around;flex-wrap:wrap;">
         <div class="activity-card">
-            <img src="/assets/images/need-home.jpg">
+            <img src="/assets/images/graphics/pet_taged.png">
             Help us give them a family by Bringing one Home
-            <button class="btn outline green">Adopt a Pet</button>
+            <a class="btn green" href="/view/adoption_listing.php">Adopt a Pet</a>
         </div>
         <div class="activity-card">
-            <img src="/assets/images/medical-equipment.jpg">
+            <img src="/assets/images/graphics/takecare.png">
             Let us know about The animals that, need help
-            <button class="btn outline orange flex-column">
+            <a class="btn orange flex-column" href="/view/report_rescue.php">
                 <div> Report</div>
                 <div style="line-height:1;font-size:.75em"> Injured / Abandoned Animals </div>
-            </button>
+            </a>
         </div>
         <div class="activity-card">
-            <img src="/assets/images/shelter.jpg">
+            <img src="/assets/images/graphics/shelter.png">
             Support Organizations that give Life to helpless Souls
-            <button class="btn outline blue">Donate or Sponsor</button>
+            <a class="btn blue" href="/view/organization_listing.php">Donate or Sponsor</a>
         </div>
         <div class="activity-card">
-            <img src="/assets/images/doctor_holding_pet.jpg">
+            <img src="/assets/images/graphics/vet.png">
             Veterinary Consultations at Your Fingertips
-            <button class="btn outline pink">Consult Doctor</button>
+            <a class="btn pink" href="/view/doctor_consultation.php">Consult Doctor</a>
         </div>
     </main>
 </div>
