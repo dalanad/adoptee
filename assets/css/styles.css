@@ -10,10 +10,10 @@
 	--gray-5: #888888;
 	--muted: var(--gray-4);
 	--primary: #0d6efd;
-	--danger: #f34e1e;
-	--info: #0ebbff;
+	--red: #f34e1e;
+	--blue: #0ebbff;
 	--orange: orange;
-	--success: #08d5a2;
+	--green: #08d5a2;
 	--shadow: rgba(67, 90, 111, 0.3) 0px 0px 1px,
 		rgba(67, 90, 111, 0.47) 0px 5px 8px -4px;
 	--shadow-light: rgba(67, 90, 111, 0.3) 0px 0px 1px,
@@ -48,7 +48,7 @@ th {
 }
 
 .red {
-	--primary: var(--danger);
+	--primary: var(--red);
 }
 
 .pink {
@@ -56,13 +56,16 @@ th {
 }
 
 .blue {
-	--primary: var(--info);
+	--primary: var(--blue);
 }
 
 .green {
-	--primary: var(--success);
+	--primary: var(--green);
 }
 
+.black {
+	--primary: black;
+}
 .rounded {
 	border-radius: 1rem;
 }
@@ -161,7 +164,7 @@ header .logo img {
 	display: flex;
 	flex: 1 1 0;
 	justify-content: space-around;
-	max-width: 600px;
+	max-width: 700px;
 	flex-wrap: wrap;
 	margin: 0 1rem;
 }
@@ -273,12 +276,12 @@ header .logo img {
 
 .ctrl.invalid,
 .ctrl:focus:invalid.validate {
-	--muted: var(--danger);
+	--muted: var(--red);
 }
 
 .ctrl .valid,
 .ctrl:focus:valid.validate {
-	--muted: var(--success);
+	--muted: var(--green);
 }
 
 .ctrl-group {
