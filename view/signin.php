@@ -20,13 +20,13 @@
                     <span class="field-msg"> </span>
                 </div>
                 <button class="btn">Register</button>
-                <div class="body-text">
+                <div class="body-text" style="margin-top: 1rem;">
                     Alreaday have an account ? <a class="btn btn-link" style="font-size:1em;padding:0" onclick="SignIn()">Sign In </a>
                 </div>
                 <div style="margin-top: 1rem;">
                     <div class="body-text">Register as</div>
                     <a class="btn outline green" href="/view/auth/organization_signup.php"> <i class="fa fa-hand-holding-heart"></i>&nbsp;Organization</a>
-                    <button class="btn outline pink"> <i class="fa fa-user-md"></i>&nbsp;Doctor</button>
+                    <a class="btn outline pink" href="/view/vet_doctor_regi.php"> <i class="fa fa-user-md"></i>&nbsp;Doctor</a>
                 </div>
             </div>
             <div class="spacer-card"></div>
@@ -53,9 +53,8 @@
                     }
                 </script>
                 <div style="display: none;" id="links">
-                    <a class="btn btn-link" href="/view/organization_dashboard.php">Org Admin </a>
-                    <a class="btn btn-link" href="/view/organization_dashboard.php">Org User </a>
-                    <a class="btn btn-link" href="">Doctor</a>
+                    <a class="btn btn-link" href="/view/organization_dashboard.php">Org User / Admin </a>
+                    <a class="btn btn-link" href="/view/doctor_page.php">Doctor</a>
                 </div>
             </div>
         </div>

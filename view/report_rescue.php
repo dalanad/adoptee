@@ -39,7 +39,9 @@ require  dirname(__FILE__) ."./_layout/header.php"
 
 <div class="container ctx">
     <div class="report ">
-        <h2 class="mt1 txt-clr">Report Injured Animals</h2>
+        <h2 class="mt1">Report Injured Animals 
+            <a class="btn red outline" style="float: right;" href="/view/emergency.php"><i class="fas fa-ambulance"></i>&nbsp; Emergency </a>
+        </h2>
         <div class="field">
             <label>Description</label>
             <textarea rows="6" class="ctrl"></textarea>
