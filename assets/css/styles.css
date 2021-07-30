@@ -97,6 +97,7 @@ th {
 	display: inline-flex;
 	padding: 0 0.7em;
 	min-height: 2rem;
+	min-width: fit-content;
 	border: .1rem solid var(--primary);
 	font-size: 1rem;
 	border-radius: .4rem;
@@ -260,12 +261,10 @@ header .logo img {
 
 .ctrl:focus,
 .ctrl:focus-within {
-	transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out,
-		background-color 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
 	--muted: var(--primary);
 	border-color: var(--muted);
 	background: white;
-	box-shadow: var(--primary) 0 0px 0px 1px;
 }
 
 .ctrl:hover {
