@@ -10,7 +10,7 @@ class Controller
             // 'persons' => $model -> getPersons()
         ];
         
-        View::render("home", $data);
+        View::render("public/home", $data);
     }
 
    

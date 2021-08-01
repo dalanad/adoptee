@@ -1,20 +1,20 @@
 <?php
 
 
-require_once  dirname(__FILE__) . './_layout/layout.php';
+require_once  __DIR__ . './../_layout/layout.php';
 
 $data["header"]["nav"] = false;
 $data["user"] = "Dalana";
 
-require  dirname(__FILE__) . "./_layout/header.php";
+require __DIR__ . "./../_layout/header.php";
 
 $menu_items = array(
-    "general" => array("name" => "General", "icon" => "building"),
-    "users" =>  array("name" =>  "Users", "icon" => "users"),
-    "sponsorships" =>  array("name" =>  "Sponsorships", "icon" => "donate"),
-    "merchandise" =>  array("name" =>  "Merchandise", "icon" => "hat-wizard"),
-    "payments" =>  array("name" =>  "Payments", "icon" => "money-check-alt"),
-    "integrations" =>  array("name" =>  "Integrations", "icon" => "sync"),
+    "Add Animal for Adoption" => array("name" => "Add Animal for Adoption", "icon" => "paw"),
+    "Adoption Requests" =>  array("name" =>  "Adoption Requests", "icon" => "file-alt"),
+    "Reported Cases" =>  array("name" =>  "Reported Cases", "icon" => "exclamation-circle"),
+    "News & Events" =>  array("name" =>  "News & Events", "icon" => "calendar-alt"),
+    "Store" =>  array("name" =>  "Store", "icon" => "store-alt"),
+    "Client Reviews" =>  array("name" =>  "Client Reviews", "icon" => "thumbs-up"),
 );
 
 $active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["menu"] : "general";
@@ -29,7 +29,7 @@ $active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["me
     .side-nav {
         flex: 1 1 0;
         margin-left: 1rem;
-        min-width: 10rem;
+        min-width: 15rem;
         max-width: 10rem;
         display: flex;
         flex-direction: column;
@@ -105,7 +105,7 @@ $active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["me
     <div class="mx2 txt-clr">
         <h2 class="flex items-center">
             <a href="/view/organization_dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
-            Organization Settings
+            Organization Dashboard
         </h2>
     </div>
     <div class="container">
