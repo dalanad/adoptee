@@ -1,9 +1,8 @@
 <?php
-
 require_once dirname(__FILE__) . './_layout/layout.php';
 require  dirname(__FILE__) ."./_layout/header.php"
-
 ?>
+
 <style>
     #googleMap {
         margin-bottom: 1rem;
@@ -11,8 +10,7 @@ require  dirname(__FILE__) ."./_layout/header.php"
 
     .report {
         display: grid;
-        margin: 0 1rem;
-        margin-bottom: 3rem;
+        margin: 0rem 1rem 3rem 1rem;
     }
 
     @media (min-width:780px) {
@@ -41,7 +39,9 @@ require  dirname(__FILE__) ."./_layout/header.php"
 
 <div class="container ctx">
     <div class="report ">
-        <h2 class="mt1 txt-clr">Report Injured Animals</h2>
+        <h2 class="mt1">Report Injured Animals 
+            <a class="btn red outline" style="float: right;" href="/view/emergency.php"><i class="fas fa-ambulance"></i>&nbsp; Emergency </a>
+        </h2>
         <div class="field">
             <label>Description</label>
             <textarea rows="6" class="ctrl"></textarea>

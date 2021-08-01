@@ -4,6 +4,18 @@ require dirname(__FILE__) . "./_layout/header.php"
 // include "conn.php";
 ?>
 
+<!--removed arrow keys for amount-->
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;       
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+                                    
 <div class='container px2'>
     <div class='placeholder-box mr1' style='height:50px; width:100px;'>Logo</div>
     <h2 class='mt1 txt-clr'>Donate to Tails of Freedom</h2>
@@ -11,7 +23,7 @@ require dirname(__FILE__) . "./_layout/header.php"
     <form>
         <div class='field'>
             <label for = "amount">Amount</label>
-            <input class = "ctrl" type="number" name = "amount" step="10.00" min = "0.00" 
+            <input class = "ctrl" type="number" name = "amount" step="1.00" min = "0.00" 
             placeholder = "0.00" required>
         </div>
 
