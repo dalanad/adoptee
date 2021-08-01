@@ -82,6 +82,11 @@ require dirname(__FILE__) . "./_layout/header.php"
             </div>
         </div>
 
+        <div class='field'>
+            <label for='color'>Color</label>
+            <input class="ctrl" type="text" name="color" placeholder="*If multi-colored seperate each color by a space" required/>
+        </div>
+
         <div class="field">
             <label>Description</label>
             <textarea rows="6" class="ctrl"></textarea>

@@ -1,58 +1,133 @@
 <?php
-require_once __DIR__ .  './_layout/layout.php';
-require __DIR__ . "./_layout/header.php";
+
+
+require_once  dirname(__FILE__) . './_layout/layout.php';
+
+$data["header"]["nav"] = false;
+$data["user"] = "Dalana";
+
+require  dirname(__FILE__) . "./_layout/header.php";
+
+$menu_items = array(
+    "Add Animal for Adoption" => array("name" => "Add Animal for Adoption", "icon" => "paw"),
+    "Adoption Requests" =>  array("name" =>  "Adoption Requests", "icon" => "file-alt"),
+    "Reported Cases" =>  array("name" =>  "Reported Cases", "icon" => "exclamation-circle"),
+    "News & Events" =>  array("name" =>  "News & Events", "icon" => "calendar-alt"),
+    "Store" =>  array("name" =>  "Store", "icon" => "store-alt"),
+    "Client Reviews" =>  array("name" =>  "Client Reviews", "icon" => "thumbs-up"),
+);
+
+$active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["menu"] : "general";
+
 ?>
-<div class='container px2'>
-<div class='placeholder-box mr1' style='height:50px; width:100px;'>Logo</div>
-    <h2 class='mt1 txt-clr'>Organization Dashboard</h2>
-</div>
-<br>
+
 <style>
-    .activity-card {
+    .settings-container {
+        display: flex;
+    }
+
+    .side-nav {
+        flex: 1 1 0;
+        margin-left: 1rem;
+        min-width: 15rem;
+        max-width: 10rem;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        max-width: 250px;
-        text-align: center;
     }
 
-    .activity-card .btn {
-        min-height: 2.3em;
-        padding: .0 1rem;
-        margin-top: 1rem;
+    .side-nav-link {
+        display: block;
+        padding: 0.6em 0.5em;
+        margin-bottom: 0.6em;
+        background: var(--gray-1);
+        text-decoration: none;
+        color: #858585;
+        line-height: 0.9;
+        font-weight: 500;
+        border: .2rem solid var(--gray-1);
+        border-radius: 8px;
+        white-space: nowrap;
+        scroll-margin: 0.6em;
     }
 
-    .activity-card img {
-        max-height: 180px;
-        margin: 1rem 0
-    } 
+    .side-nav-link:hover {
+        transition: background .3s ease-in-out, border-color .3s ease-in-out, color .2s ease-in-out;
+        background: transparent;
+        border-color: var(--gray-4);
+    }
+
+    .side-nav-link.active {
+        border-color: var(--primary);
+        color: var(--primary);
+        background: transparent;
+
+    }
+
+    @media (max-width:700px) {
+        .settings-container {
+            flex-direction: column;
+        }
+
+        .side-nav-link {
+            margin: 0 0.3em;
+        }
+
+        .side-nav-link:first-child {
+            margin-left: 1rem;
+        }
+
+        .side-nav-link:last-child {
+            margin-right: 1rem;
+        }
+
+        .side-nav::-webkit-scrollbar {
+            height: 3px;
+        }
+
+        .side-nav {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .side-nav {
+            overflow: auto;
+            flex-direction: row;
+            margin-left: 0rem;
+            flex: unset;
+            margin-bottom: 1rem;
+            padding-bottom: .5rem;
+            max-width: unset
+        }
+    }
 </style>
 
 <div class="container">
-    <main style="margin: 1em;display:flex;justify-content:space-around;flex-wrap:wrap;">
-        <div class="activity-card">
-            <img src="/assets/images/paw.jpg">
-            <button class="btn mr2">Animals for adoption</button>
+    <div class="mx2 txt-clr">
+        <h2 class="flex items-center">
+            <a href="/view/organization_dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
+            Organization Dashboard
+        </h2>
+    </div>
+    <div class="container">
+        <div class="settings-container ">
+            <div class="side-nav">
+                <?php foreach ($menu_items as $key => $value) { ?>
+                    <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="?menu=<?= $key ?>">
+                        <i class="fa fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
+                    </a>
+                <?php  } ?>
+            </div>
+            <div class="flex-auto   mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem">
+                <?php include "./org_settings/" . $active . ".php" ?>
+            </div>
         </div>
-        <div class="activity-card">
-            <img src="/assets/images/request.png">
-            <button class="btn mr2">Adoption Requests</button>
-        </div>
-        <div class="activity-card">
-            <img src="/assets/images/report.png">
-            <button class="btn mr2">Reported Cases</button>
-        </div>
-        <div class="activity-card">
-            <img src="/assets/images/store.png">
-            <button class="btn mr2">Store</button>
-        </div>
-        <div class="activity-card">
-            <img src="/assets/images/event.png">
-            <button class="btn mr2">News and Events</button>
-        </div>
-        <div class="activity-card">
-            <img src="/assets/images/review.png">
-            <button class="btn mr2">Client Reviews</button>
-        </div>
-    </main>
+    </div>
 </div>
+
+<script>
+    document.querySelector(".side-nav .active").scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+        inline: 'center'
+    });
+</script>
