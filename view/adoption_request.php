@@ -6,8 +6,7 @@ require dirname(__FILE__) . "./_layout/header.php"
 <style>
     .report {
         display: grid;
-        margin: 0 1rem;
-        margin-bottom: 3rem;
+        margin: 0rem 1rem 3rem 1rem;
     }
     
     @media (min-width:780px) {
@@ -56,7 +55,7 @@ require dirname(__FILE__) . "./_layout/header.php"
         </div>
 
         <!-- temporary image -->
-        <div class="rounded" style="min-height: 250px;" id = "image"><img src = "..\assets\images\need-home.jpg"/></div>
+        <div class="rounded"   id = "image"><img    style="border-radius:8px;max-height: 450px;margin:0 auto" src = "/assets/images/dogs/placeholder0.jpg"/></div>
 
         <div class='field'>
             <label>Email</label>

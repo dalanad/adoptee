@@ -9,7 +9,7 @@ $dog_names = array(
     'Max', 'Bailey',
     'Cooper', 'Daisy',
     'Sadie', 'Molly', 'Buddy', 'Lola', 'Stella', 'Tucker', 'Bentley', 'Zoey', 'Harley', 'Maggie', 'Riley', 'Bear', 'Sophie', 'Duke', 'Jax', 'Oliver', 'Chloe', 'Jack',
-  
+
 );  ?>
 <style>
     .adoption-grid {
@@ -23,6 +23,8 @@ $dog_names = array(
         background: #fafafa;
         transition: background-color .5s ease-out;
         cursor: pointer;
+        box-shadow: var(--shadow);
+        overflow: hidden;
     }
 
     .adoption-card-details {
@@ -38,14 +40,15 @@ $dog_names = array(
         align-items: center;
         justify-content: center;
         text-transform: uppercase;
-        font-weight: 500;
+        font-weight: 900;
         letter-spacing: 2px;
         color: white;
-        font-size: 1.2em;
+        font-size: 1.4em;
+        height: 2.9rem;
     }
 
     .adoption-card:hover {
-        background: var(--primary);
+        background: var(--green);
     }
 
     .adoption-card:hover .adoption-card-action {
@@ -58,19 +61,19 @@ $dog_names = array(
 </style>
 
 <div class="container">
-    <div class="mx2 flex justify-between">
-        <h2 class="txt-clr mb0">Adopt Pets</h2>
+    <div class="mx2 mt2 flex items-center justify-between">
+        <h2 class="m0">Adopt Pets</h2>
         <div>
-            <div class="placeholder-box p1">Filters</div>
+           <input class="ctrl" placeholder="Search"/>
         </div>
     </div>
     <div class="m2 adoption-grid">
         <?php
         foreach ($dog_names as $key => $value) {
         ?>
-            <div class="adoption-card">
-                <div class="placeholder-box" style="height: 160px;"><?= $value ?></div>
-                <div class="adoption-card-details">
+            <div class="adoption-card" onclick="location.href='/view/adoption_request.php'">
+                <div style="background-image: url('/assets/images/dogs/placeholder<?=$key%3?>.jpg');background-size: cover;height: 160px;""></div>
+                <div class=" adoption-card-details">
                     <div class="p1 px2">
                         <div style="font-weight: 500;"><?= $value ?></div>
                         <div style="font-size:small"><?= rand(1, 15) ?> years</div>
@@ -79,7 +82,7 @@ $dog_names = array(
                         <?= rand(1, 5) > 3 ? '<i class="txt-clr blue fa fa-mars"></i>' : '<i class="txt-clr pink fa fa-venus"></i>' ?>
                     </div>
                 </div>
-                <div class="adoption-card-action">View</div>
+                <div class="adoption-card-action">ADOPT</div>
             </div>
         <?php } ?>
     </div>
