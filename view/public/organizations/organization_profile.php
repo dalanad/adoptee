@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./_layout/header.php" ?>
+<?php require __DIR__ . "./../../_layout/header.php"; ?>
 <?php $active = isset($_GET["tab"]) ? $_GET["tab"] : "timeline"; ?>
 <style>
     .profile-links {
@@ -35,7 +35,7 @@
             <div style="font-size:small">Tagline</div>
         </div>
         <div>
-            <a class='btn green' href='donations.php' style='margin-left :20px;'>Donate</a>
+            <a class='btn green' href='/view/public/organizations/donations.php' style='margin-left :20px;'>Donate</a>
         </div>
     </div>
     <div class="m2 profile-links">
