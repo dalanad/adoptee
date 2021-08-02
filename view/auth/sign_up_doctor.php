@@ -1,6 +1,4 @@
-<?php require_once  dirname(__FILE__) . './_layout/layout.php';
-require dirname(__FILE__) . "./_layout/header.php"
-?>
+<?php require_once __DIR__ . "./../_layout/layout.php" ?>
 
 <style>
     .bg-primary {

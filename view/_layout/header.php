@@ -12,18 +12,18 @@
                         <i class="fa fa-times"></i>
                     </button>
                 </div>
-                <a class="link" href="/view/home.php">Home</a>
-                <a class="link" href="/view/adoption_listing.php">Adoptions</a>
-                <a class="link" href="/view/report_rescue.php">Rescues</a>
-                <a class="link" href="/view/organization_listing.php">Organizations</a>
-                <a class="link" href="/view/doctor_consultation.php">Veterinary Consultations</a>
+                <a class="link" href="/view/public/home.php">Home</a>
+                <a class="link" href="/view/public/adoptions/adoption_listing.php">Adoptions</a>
+                <a class="link" href="/view/public/rescues/report_rescue.php">Rescues</a>
+                <a class="link" href="/view/public/organizations/organization_listing.php">Organizations</a>
+                <a class="link" href="/view/public/consultations/doctor_consultation.php">Veterinary Consultations</a>
             </nav>
         <?php } ?>
 
         <?php if (isset($data["user"])) { ?>
-            <a class="btn btn-link" style="font-size:1rem" href="/view/signin.php"><i class="fa fa-user"> </i> &nbsp; Dalana </a>
+            <a class="btn btn-link" style="font-size:1rem" href="/view/auth/sign_in.php"><i class="fa fa-user"> </i> &nbsp; Dalana </a>
         <?php } else { ?>
-            <a class="btn green" href="/view/signin.php">Sign In</a>
+            <a class="btn green" href="/view/auth/sign_in.php">Sign In</a>
         <?php } ?>
 
         <?php if ($data["header"]["nav"] == true) { ?>
