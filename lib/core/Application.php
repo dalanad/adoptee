@@ -11,9 +11,14 @@ class Application
             $action = $path[1];
             $c = new $controllerName();
             $c->$action();
+        } else if ($path[0] == "") {
+            $s = new Controller();
+            $s->HomePage();
         } else {
-            $c = new Controller();
-            $c->HomePage();
+            header("HTTP/1.0 404 Not Found");
+            print_r($path);
+            echo "404 Page Not found";
+            die();
         }
     }
 }

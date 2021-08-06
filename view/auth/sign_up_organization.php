@@ -1,4 +1,4 @@
-<?php require_once  __DIR__ . './../_layout/layout.php' ?>
+<?php require_once __DIR__ . "./../_layout/layout.php" ?>
 <?php $step = isset($_GET["step"]) ? $_GET["step"] : 1; ?>
 
 <link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
@@ -157,7 +157,7 @@
 
                     <div class="flex justify-between mt2">
                         <a class="btn outline pink" href="?step=2">Back</a>
-                        <a class="btn" href="/view/organization_dashboard.php">Finish</a>
+                        <a class="btn" href="/view/org/dashboard.php">Finish</a>
                     </div>
                 </div>
             </div>
