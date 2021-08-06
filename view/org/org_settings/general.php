@@ -18,7 +18,7 @@
             </div>
             <div class="field" style="grid-column: span 2;">
                 <label>Tagline </label>
-                <input type="text" class="ctrl">
+                <input type="text" class="ctrl" <?=""?>>
             </div>
         </div>
 

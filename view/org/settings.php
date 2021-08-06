@@ -1,12 +1,8 @@
 <?php
-
-
-require_once  dirname(__FILE__) . './_layout/layout.php';
-
 $data["header"]["nav"] = false;
 $data["user"] = "Dalana";
 
-require  dirname(__FILE__) . "./_layout/header.php";
+require __DIR__ . "./../_layout/header.php";
 
 $menu_items = array(
     "general" => array("name" => "General", "icon" => "building"),

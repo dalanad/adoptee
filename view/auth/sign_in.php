@@ -1,4 +1,4 @@
-<?php require_once  __DIR__ . './_layout/layout.php' ?>
+<?php require_once __DIR__ . "./../_layout/layout.php" ?>
 <?php $active = isset($_GET["active"]) ? $_GET["active"] : "signin"; ?>
 
 <link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
@@ -25,8 +25,8 @@
                 </div>
                 <div style="margin-top: 1rem;">
                     <div class="body-text">Register as</div>
-                    <a class="btn outline green" href="/view/auth/organization_signup.php"> <i class="fa fa-hand-holding-heart"></i>&nbsp;Organization</a>
-                    <a class="btn outline pink" href="/view/vet_doctor_regi.php"> <i class="fa fa-user-md"></i>&nbsp;Doctor</a>
+                    <a class="btn outline green" href="/view/auth/sign_up_organization.php"> <i class="fa fa-hand-holding-heart"></i>&nbsp;Organization</a>
+                    <a class="btn outline pink" href="/view/auth/sign_up_doctor.php"> <i class="fa fa-user-md"></i>&nbsp;Doctor</a>
                 </div>
             </div>
             <div class="spacer-card"></div>
@@ -43,7 +43,7 @@
                     <input class="ctrl" type="password" />
                     <a href="#" class="field-msg"> Forgot Password ? </a>
                 </div>
-                <a class="btn" style="margin: 1em 0;" href="/view/home.php">Sign In</a>
+                <a class="btn" style="margin: 1em 0;" href="/view/public/home.php">Sign In</a>
                 <div class="body-text">
                     Don't have an account ? <a class="btn btn-link" style="font-size:1em;padding:0" onclick="SignUp()">Sign Up </a>
                 </div>
@@ -53,8 +53,8 @@
                     }
                 </script>
                 <div style="display: none;" id="links">
-                    <a class="btn btn-link" href="/view/organization_dashboard.php">Org User / Admin </a>
-                    <a class="btn btn-link" href="/view/doctor_page.php">Doctor</a>
+                    <a class="btn btn-link" href="/view/organizations/organization_dashboard.php">Org User / Admin </a>
+                    <a class="btn btn-link" href="/view/doctor/doctor_page.php">Doctor</a>
                 </div>
             </div>
         </div>

@@ -1,8 +1,4 @@
-<?php
-require_once  dirname(__FILE__) . './_layout/layout.php';
-require dirname(__FILE__) . "./_layout/header.php"
-// include "conn.php";
-?>
+<?php require __DIR__ . "./../_layout/header.php"; ?>
 
 <style>
 .ctrl2 {
