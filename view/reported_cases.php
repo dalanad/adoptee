@@ -31,6 +31,37 @@ $active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? 
 ?>
 
 <style>
+    #googleMap {
+        margin-bottom: 1rem;
+    }
+
+    .report {
+        display: grid;
+        margin: 0rem 1rem 3rem 1rem;
+    }
+
+    @media (min-width:780px) {
+        .report {
+            grid-template-columns: 1fr 1fr;
+            column-gap: 1rem;
+            margin: 2rem;
+        }
+
+        #googleMap {
+            grid-column: 1;
+            grid-row: 1 / span 10;
+            height: 100%;
+        }
+    }
+
+    @media (min-width:1200px) {
+        .ctx {
+            height: calc(100% - 150px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
     .settings-container {
         display: flex;
     }
@@ -143,9 +174,45 @@ $active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? 
                 <?php  } ?>
 
             </div>
-            <div class="flex-auto   mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem">
-                <?php include "./org_settings/" . $active . ".php" ?>
-            </div>
+            <script>
+    var map
+
+    function myMap() {
+        var mapProp = {
+            center: new google.maps.LatLng(6.9038086, 79.9110850),
+            zoom: 12,
+        };
+        map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    };
+
+    var x = document.getElementById("demo");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+
+        var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            title: "Hello World!"
+        });
+
+        // To add the marker to the map, call setMap();
+        marker.setMap(map);
+        map.setCenter(myLatlng);
+        map.setZoom(15)
+    }
+</script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN2HxM42eIrEG1e5b9ar2H_2_V6bMRjWk&callback=myMap"></script>
         </div>
     </div>
 </div>
