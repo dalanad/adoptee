@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . "./../_layout/layout.php" ?>
+<?php require_once __DIR__ . "./../../_layout/layout.php" ?>
 
 <link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
 
@@ -17,12 +17,8 @@
 <div class="card-container">
 <div>
 
-    <div class = "body-text">
-        <p class = "m0">Welcome to Adoptee</p>
-    </div>
-
     <div class = "title-text">
-        <label style = "font-size:1.5rem;">Sign Up</label>
+        <label style = "font-size:1.1rem;">Update your profile</label>
     </div>
 
     <div class = "row">
@@ -33,7 +29,7 @@
         </div>
         
         <div class = "field column">
-            <label>Email Address</label>
+            <label>Email</label>
             <input class = "ctrl" type = "email">
             <span class = "field-msg"></span>
         </div>
@@ -41,32 +37,25 @@
 
     <div class = "row">
         <div class = "field column">
-            <label>Password</label>
-            <input class = "ctrl" type = "password">
+            <label>Telephone</label>
+            <input class = "ctrl" type = "text">
             <span class = "field-msg"></span>
         </div>
-        
+    </div>
+
+    <div class = "row">
         <div class = "field column">
-            <label>Confirm Password</label>
-            <input class = "ctrl" type = "password">
+            <label>Address</label>
+            <input class = "ctrl" type = "text">
             <span class = "field-msg"></span>
         </div>
     </div>
 
-    <div class = "field" style = "display:inline; font-size:0.8rem">
-        <input class="ctrl-check mb2" type="checkbox">&nbsp Accept
-        <a class = "btn-link bold mb2" href = "">Terms and Conditions</a>
+    <div><button class = "btn">Update</button></div>
+    
+    <div class = "mt2" style = "font-size:0.8rem;">
+        <a class = "btn-link bold text-decoration-none" href = "./user_profile.php">Back</a>
     </div>
-
-    <div><button class = "btn">Sign Up</button></div>
-
-    <div class = "body-text">
-        <p>Already have an account? 
-            <a class = "btn-link bold text-decoration-none" href = "./sign_in.php">Sign in</a></p>
-    </div>
-
-
-
 </div>
 </div>
 </div>
