@@ -37,6 +37,9 @@
         <div>
             <a class='btn green' href='/view/public/organizations/donations.php' style='margin-left :20px;'>Donate</a>
         </div>
+        <div>
+            <a class='btn green' href='/view/public/organizations/review_organization.php' style='margin-left :20px;'>Review</a>
+        </div>
     </div>
     <div class="m2 profile-links">
         <a class="prof-sec-link <?= $active == "timeline" ? 'active' : '' ?>" href="?tab=timeline">Timeline</a>
