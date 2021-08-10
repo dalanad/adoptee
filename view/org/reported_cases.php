@@ -211,7 +211,7 @@ $active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? 
     }
 </script>
 
-
+<div class="rounded" style="height: 100%; width: 100%" id="googleMap"></div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN2HxM42eIrEG1e5b9ar2H_2_V6bMRjWk&callback=myMap"></script>
         </div>
     </div>
