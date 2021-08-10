@@ -17,6 +17,12 @@
     </div>
 
     <div class = "field">
+        <label>Current Password</label>
+        <input class = "ctrl" type = "password">
+        <span class = "field-msg"></span>
+    </div>
+
+    <div class = "field">
         <label>New Password</label>
         <input class = "ctrl" type = "password">
         <span class = "field-msg"></span>
@@ -29,6 +35,10 @@
     </div>
 
     <div class = "field center mt1"><button class = "btn">Change Pasword</btn></div>
+
+    <div class = "center mt2" style = "font-size:0.8rem;">
+        <a class = "btn-link bold text-decoration-none" href = "./user_profile.php">Back</a>
+    </div>
 
 </div>
 </div>
