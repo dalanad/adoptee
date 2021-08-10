@@ -1,12 +1,12 @@
 <?php
 
 
-require_once  dirname(__FILE__) . './_layout/layout.php';
+require_once  dirname(__FILE__) . './../_layout/layout.php';
 
 $data["header"]["nav"] = false;
 $data["user"] = "Dalana";
 
-require  dirname(__FILE__) . "./_layout/header.php";
+require  dirname(__FILE__) . "./../_layout/header.php";
 
 $management_menu = array(
     "adoption_listing" => array("name" => "Adoption Listing", "icon" => "paw"),
@@ -39,6 +39,17 @@ $active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? 
         display: grid;
         margin: 0rem 1rem 3rem 1rem;
     }
+
+    .cont-items-monitor {
+position: absolute;
+top: 60px;
+left: 0;
+bottom: 30px;
+z-index: 1;
+background-color: white;
+overflow-x: scroll;
+padding: 10px 15px 10px 0;
+}
 
     @media (min-width:780px) {
         .report {
@@ -141,7 +152,7 @@ $active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? 
 </style>
 
 
-    <div class="container">
+    <div>
         <div class="mx1">
             <h4 class="flex items-center">
                 <a href="/view/organization_dashboard.php" class="btn btn-link btn-icon mr1 " style="color: #313636; font-size: 1em;"><i class="fa fa-chart-line"></i></a>
@@ -211,7 +222,18 @@ $active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? 
     }
 </script>
 
-<div class="rounded" style="height: 100%; width: 100%" id="googleMap"></div>
+<!-- <script>
+    $(document).ready(function () {
+    $('.cont-items-monitor').appendTo($('#google-map').find('div')[0]);
+});
+    </script>
+
+<div class="cont-items-monitor">
+<h4>ABC</h4>
+</div>
+ -->
+ 
+<div class="rounded" style="height: 530px; width: 1255px" id="googleMap"></div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN2HxM42eIrEG1e5b9ar2H_2_V6bMRjWk&callback=myMap"></script>
         </div>
     </div>

@@ -9,7 +9,7 @@ $data["user"] = "Dalana";
 require __DIR__ . "./../_layout/header.php";
 
 $management_menu = array(
-    "adoption_listing" => array("name" => "Adoption Listing", "icon" => "paw"),
+    "org_adoption_listing" => array("name" => "Adoption Listing", "icon" => "paw"),
     "adoption_request" =>  array("name" =>  "Adoption Requests", "icon" => "dog"),
     "reported_cases" =>  array("name" =>  "Reported Cases", "icon" => "exclamation-circle"),
     "rescues" =>  array("name" =>  "Rescues", "icon" => "ambulance"),
@@ -110,7 +110,7 @@ $active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? 
 </style>
 
 
-    <div class="container">
+    <div>
         <div class="mx1">
             <h4 class="flex items-center">
                 <a href="/view/organization_dashboard.php" class="btn btn-link btn-icon mr1 " style="color: #313636; font-size: 1em;"><i class="fa fa-chart-line"></i></a>
