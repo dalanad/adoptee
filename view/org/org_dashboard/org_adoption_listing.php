@@ -1,13 +1,5 @@
 <?php
 
-
-require_once  dirname(__FILE__) . './../../_layout/layout.php';
-
-$data["header"]["nav"] = false;
-$data["user"] = "Dalana";
-
-require  dirname(__FILE__) . "./../../_layout/header.php";
-
 $animals = array(
     array("id" => 1, "name" => "Tobi", "type" => "Dog", "age" => "3 Years", "gender" => "Male", "date_listed" => "01-01-2021", "status" => false),
     array("id" => 2, "name" => "Zeus", "type" => "Rabbit", "age" => "3 Years", "gender" => "Male", "date_listed" => "01-01-2021", "status" => false),
@@ -20,7 +12,7 @@ $animals = array(
 <div class="container">
 <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
     Adoptees
-    <button class="btn right">Add New Animal</button>
+    <a href="./org_dashboard/add_new_animal.php"><button class="btn right">Add New Animal</button></a>
 </h3>
 
 <table class="table">

@@ -6,11 +6,11 @@ require_once  __DIR__ . './../_layout/layout.php';
 $data["header"]["nav"] = false;
 $data["user"] = "Dalana";
 
-require __DIR__ . "./../_layout/header.php";
+require __DIR__ . "./../_layout/org_header.php";
 
 $management_menu = array(
     "org_adoption_listing" => array("name" => "Adoption Listing", "icon" => "paw"),
-    "adoption_request" =>  array("name" =>  "Adoption Requests", "icon" => "dog"),
+    "adoption_requests" =>  array("name" =>  "Adoption Requests", "icon" => "dog"),
     "reported_cases" =>  array("name" =>  "Reported Cases", "icon" => "exclamation-circle"),
     "rescues" =>  array("name" =>  "Rescues", "icon" => "ambulance"),
     "org_donations" =>  array("name" =>  "Donations", "icon" => "hand-holding-usd"),
@@ -26,7 +26,7 @@ $administration_menu = array(
 );
 
 $active = isset($_GET["menu"]) && isset($management_menu[$_GET["menu"]])  ? $_GET["menu"] : "org_adoption_listing";
-$active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? $_GET["menu"] : "feedback";
+$active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? $_GET["menu"] : $active;
 
 ?>
 
@@ -112,8 +112,11 @@ $active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? 
 
     <div>
         <div class="mx1">
+                <a href="./dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
+        </div>
+        <div class="mx1">
             <h4 class="flex items-center">
-                <a href="/view/organization_dashboard.php" class="btn btn-link btn-icon mr1 " style="color: #313636; font-size: 1em;"><i class="fa fa-chart-line"></i></a>
+                <a href="./dashboard.php" class="btn btn-link btn-icon mr1 " style="color: #313636; font-size: 1em;"><i class="fa fa-chart-line"></i></a>
                 Dashboard
             </h4>
         </div>
@@ -143,7 +146,7 @@ $active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? 
                 <?php  } ?>
 
             </div>
-            <div class="flex-auto   mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem">
+            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
                 <?php include "./org_dashboard/" . $active . ".php" ?>
             </div>
         </div>
