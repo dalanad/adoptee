@@ -14,6 +14,10 @@
 	box-sizing: border-box;
 }
 
+.field-font{
+    font-size: 0.8rem;
+}
+
 .box {
       display: none;
     }
@@ -41,11 +45,14 @@
 
 <div class='container px2'>
     <div class='placeholder-box mr1' style='height:50px; width:100px;'>Logo</div>
-    <h2 class='mt1 txt-clr'>Add New Animal for Adoption</h2>
+    <div>
+        <a href="./../dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
+    </div>
+    <h3 class='mt1 txt-clr'>Add New Animal for Adoption</h3>
     <form>
         <div class='field'>
             <label for='type'>Type</label>
-                <select class="ctrl" name='type' required>
+                <select class="ctrl field-font" name='type' required>
                     <option selected='true' disabled='disabled'>Select</option>
                     <option value='dog'>Dog</option>
                     <option value='cat'>Cat</option>
@@ -55,12 +62,12 @@
 
         <div class='field other box'>
             <label for='type'>Other</label>
-            <input class="ctrl" type="text" name="other" placeholder="Hamster" required/>
+            <input class="ctrl field-font" type="text" name="other" placeholder="Hamster" required/>
         </div>
 
         <div class='field'>
             <label for='gender'>Gender</label>
-                <select class="ctrl" name='gender' required>
+                <select class="ctrl field-font" name='gender' required>
                     <option selected='true' disabled='disabled'>Select</option>
                     <option value='male'>Male</option>
                     <option value='female'>Female</option>
@@ -70,30 +77,29 @@
         <div class='field'>
             <label for='age'>Age</label>
             <div>
-            
-            <input class="ctrl2" type="number" step="1" min="0" name="years" placeholder="Years" required/>
-            <input class="ctrl2" type="number" step="1" min="0" max="11" name="months" placeholder="Months" required/>
-            <input class="ctrl2" type="number" step="1" min="0" max="3" name="months" placeholder="Weeks" required/>
-            <input class="ctrl2" type="number" step="1" min="0" max="6" name="months" placeholder="Days" required/>
+            <input class="ctrl2 field-font" type="number" step="1" min="0" name="years" placeholder="Years" required/>
+            <input class="ctrl2 field-font" type="number" step="1" min="0" max="11" name="months" placeholder="Months" required/>
+            <input class="ctrl2 field-font" type="number" step="1" min="0" max="3" name="months" placeholder="Weeks" required/>
+            <input class="ctrl2 field-font" type="number" step="1" min="0" max="6" name="months" placeholder="Days" required/>
             </div>
         </div>
 
         <div class='field'>
             <label for='color'>Color</label>
-            <input class="ctrl" type="text" name="color" placeholder="*If multi-colored seperate each color by a space" required/>
+            <input class="ctrl field-font" type="text" name="color" placeholder="Use commas to seperate colors" required/>
         </div>
 
         <div class="field">
             <label>Description</label>
-            <textarea rows="6" class="ctrl"></textarea>
+            <textarea rows="6" class="ctrl field-font"></textarea>
             <span class="field-msg"> </span>
         </div>
         
         <div class="field ">
             <label>Upload Photo</label>
-            <div class="ctrl-group">
+            <div class="ctrl-group field-font">
                 <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-                <input class="ctrl" type="file" multiple />
+                <input class="ctrl field-font" type="file" multiple />
             </div>
             <span class="field-msg"> </span>
         </div>
