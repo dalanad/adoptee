@@ -70,7 +70,7 @@ $dog_names = array(
         <?php
         foreach ($dog_names as $key => $value) {
         ?>
-            <div class="adoption-card" onclick="location.href='/view/adoptions/adoption_request.php'">
+            <div class="adoption-card" onclick="location.href='/view/public/adoptions/adoption_request.php'">
                 <div style="background-image: url('/assets/images/dogs/placeholder<?=$key%3?>.jpg');background-size: cover;height: 160px;""></div>
                 <div class=" adoption-card-details">
                     <div class="p1 px2">
