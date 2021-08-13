@@ -2,7 +2,7 @@
 
 function auto_load($class_name)
 {
-    $file_locations = array('lib/core', "controllers", 'model');
+    $file_locations = array('lib/core', "controllers", 'models');
 
     foreach ($file_locations as $folder) {
         $path = "./" . $folder . "/" . $class_name . '.php';
@@ -17,6 +17,6 @@ function auto_load($class_name)
 spl_autoload_register('auto_load');
 
 $app = new Application();
-$app->processRequest();
+$app->process($_SERVER["QUERY_STRING"]);
 
 

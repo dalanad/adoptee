@@ -1,24 +1,39 @@
 <?php
 class Application
 {
-    function processRequest()
-    {
-        $url = isset($_GET["url"]) ? $_GET["url"] : "";
-        $path = explode("/", $url);
+    private $params = ["url" => ""];
 
-        if ($path[0] == "employee") {
-            $controllerName = $path[0] . "Controller";
-            $action = $path[1];
-            $c = new $controllerName();
-            $c->$action();
-        } else if ($path[0] == "") {
-            $s = new Controller();
-            $s->HomePage();
+    function process($qs = "")
+    {
+        $params = [];
+        parse_str($qs, $params);
+        
+        $this->params = array_merge($this->params, $params);
+
+        $url = rtrim($this->params["url"], "/");
+        $path = explode("/", $url);
+        $this->match($path);
+    }
+
+
+    private function match($path)
+    {
+        $controller = (isset($path[0]) && $path[0] != "" ? $path[0] :   "Main") . "Controller";
+
+        $action = $path[1] ?? "index";
+
+        if (class_exists($controller)) {
+
+            $controller_object = new $controller();
+
+            if (is_callable([$controller_object, $action])) {
+                $controller_object->$action();
+            } else {
+                print_r($path);
+                throw new \Exception("Method \"$action\" in \"$controller\" not found", 404);
+            }
         } else {
-            header("HTTP/1.0 404 Not Found");
-            print_r($path);
-            echo "404 Page Not found";
-            die();
+            throw new \Exception("path does not exist", 404);
         }
     }
 }
