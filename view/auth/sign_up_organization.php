@@ -62,66 +62,69 @@
                 </div>
             </div>
             <div style="display: flex;">
-                <div class="animated-card <?= $step != 1 ? 'hidden' : '' ?>" id="step-1">
+
+                <form class="animated-card <?= $step != 1 ? 'hidden' : '' ?>" method="POST" action="?step=2" id="step-1">
                     <div class="lg-3col-grid">
                         <div class="field" style="grid-column: span 2;">
                             <label>Organization Name</label>
-                            <input class="ctrl" type="email" />
+                            <input class="ctrl" type="text" name="name" />
                             <span class="field-msg"> </span>
                         </div>
                         <div class="field">
                             <label>Telephone</label>
-                            <input class="ctrl" type="email" />
+                            <input class="ctrl" type="telephone" name="telephone" />
                             <span class="field-msg"> </span>
                         </div>
                         <div class="field">
                             <label>Address Line 1</label>
-                            <input class="ctrl" type="email" />
+                            <input class="ctrl" type="text" name="address_line_1" />
                             <span class="field-msg"> </span>
                         </div>
                         <div class="field">
                             <label>Address Line 2</label>
-                            <input class="ctrl" type="email" />
+                            <input class="ctrl" type="text" name="address_line_2" />
                             <span class="field-msg"> </span>
                         </div>
                         <div class="field">
                             <label>City</label>
-                            <input class="ctrl" type="email" />
+                            <input class="ctrl" type="text" name="city" />
                             <span class="field-msg"> </span>
                         </div>
                     </div>
                     <div class="flex justify-between mt2">
                         <div></div>
-                        <a class="btn" href="?step=2" style="margin-top: 1em;">Next</a>
+                        <button class="btn" type="submit" style="margin-top: 1em;">Next</button>
                     </div>
-                </div>
-                <div class="animated-card <?= $step != 2 ? 'hidden' : '' ?>" id="step-2">
+                </form>
+
+                <form class="animated-card <?= $step != 2 ? 'hidden' : '' ?>" action="?step=3" id="step-2" method="post">
                     <div class="flex">
                         <div class="flex-auto mx1">
                             <div class="field">
                                 <label>Email Address</label>
-                                <input class="ctrl" type="email" />
+                                <input class="ctrl" type="email" name="email" />
                                 <span class="field-msg"> </span>
                             </div>
                         </div>
                         <div class="flex-auto mx1">
                             <div class="field">
                                 <label>Password</label>
-                                <input class="ctrl" type="password" />
+                                <input class="ctrl" type="password" name="password" />
                                 <span class="field-msg"> </span>
                             </div>
                             <div class="field">
                                 <label>Confirm Password</label>
-                                <input class="ctrl" type="password" />
+                                <input class="ctrl" type="password" name="confirm-password" />
                                 <span class="field-msg"> </span>
                             </div>
                         </div>
                     </div>
                     <div class="flex justify-between mt2">
-                        <a class="btn outline pink" href="?step=1">Back</a>
-                        <a class="btn" href="?step=3">Next</a>
+                        <!-- <a class="btn outline pink" href="?step=1">Back</a> -->
+                        <button class="btn" type="submit">Next</button>
                     </div>
-                </div>
+                </form>
+
                 <div class="animated-card <?= $step != 3 ? 'hidden' : '' ?>" id="step-3">
                     <style>
                         .verify-card {

@@ -6,10 +6,9 @@ class BaseModel
         static $db = null;
 
         if ($db === null) {
-            $dsn = 'mysql:host=;dbname=bankofasia;charset=utf8';
+            $dsn = 'mysql:host=;dbname=adoptee;charset=utf8';
 
             $db = new PDO($dsn, "root", "root");
-            // Throw an Exception when an error occurs
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
 
@@ -17,16 +16,23 @@ class BaseModel
         return $db;
     }
 
-
-    public function select($query)
+    public static function select($query)
     {
 
-        $db = $this->getDB();
+        $db = BaseModel::getDB();
         $stmt = $db->prepare($query);
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $result = $stmt->fetchAll();
         return  $result;
+    }
+
+    public static function insert($query)
+    {
+
+        $db = BaseModel::getDB();
+        $stmt = $db->prepare($query);
+        return $stmt->execute();;
     }
 }

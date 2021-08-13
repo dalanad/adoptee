@@ -23,7 +23,7 @@
         <?php if (isset($data["user"])) { ?>
             <a class="btn btn-link" style="font-size:1rem" href="/view/auth/sign_in.php"><i class="fa fa-user"> </i> &nbsp; Dalana </a>
         <?php } else { ?>
-            <a class="btn green" href="/view/auth/sign_in.php">Sign In</a>
+            <a class="btn green" href="/auth/signin">Sign In</a>
         <?php } ?>
 
         <?php if ($data["header"]["nav"] == true) { ?>
