@@ -16,7 +16,7 @@ class AuthController extends Controller
             }
 
             if ($_GET["step"] == "3") {
-                User::createUser($_POST);
+                User::createUser($_POST["email"], $_POST["password"], $_POST["name"], $_POST["telephone"]);
             }
         }
 
