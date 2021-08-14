@@ -1,0 +1,43 @@
+.admin-header {
+    padding: 1rem 1rem;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.side-nav-container {
+    display: flex;
+    height: calc(100vh);
+}
+
+.side-nav {
+    height: 100%;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.side-nav .side-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    text-decoration: none;
+    white-space: nowrap;
+    color: black;
+    margin: 0.2rem 0.6rem;
+    border-radius: 0.3rem;
+}
+
+.side-link:hover {
+    background: var(--gray-1);
+}
+
+.side-link.active {
+    color: var(--primary);
+    font-weight: 500;
+    background: #0d6efd14;
+}
+
+.side-link-text {
+    font-size: .9rem;
+}
