@@ -61,3 +61,28 @@
 		flex: 0;
 	}
 }
+
+.separator {
+	margin: 1rem 0;
+	grid-column: 1 / -1;
+	display: flex;
+	align-items: center;
+	color: var(--gray-5);
+	font-weight: 300;
+	line-height: 1rem;
+}
+
+.form-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	grid-column-gap: 0.5rem;
+}
+
+.separator::after {
+	height: 1px;
+	content: " ";
+	display: block;
+	background: var(--gray-2);
+	margin-left: 0.5rem;
+	flex: 1 1 0;
+}
