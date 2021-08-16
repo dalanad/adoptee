@@ -3,6 +3,7 @@
     .report {
         display: grid;
         margin: 0rem 1rem 3rem 1rem;
+        overflow:scroll;
     }
 
     @media (min-width:780px) {
@@ -37,8 +38,14 @@
     }
 </style>
 
-<div class="container ctx">
+<form class="container ctx" action = "/AdoptionRequest/submit" method = "POST">
     <div class="report">
+
+        <!-- temporary image -->
+        <div class="rounded" id="image">
+            <img style="border-radius:8px;max-height: 350px;margin:0 auto" 
+            src="/assets/images/dogs/placeholder0.jpg" />
+        </div>
 
         <div class='field'>
             <div class = "row">
@@ -58,13 +65,7 @@
             
             <?php /*Fetch contact number of adopter and display*/?>
 
-        </div>
-
-        <!-- temporary image -->
-        <div class="rounded" id="image">
-            <img style="border-radius:8px;max-height: 450px;margin:0 auto" 
-            src="/assets/images/dogs/placeholder0.jpg" />
-        </div>
+        </div>        
 
         <div class='field'>
             <div class = "row">
@@ -73,7 +74,7 @@
             </div>
 
             <?php /*Fetch email address of adopter and display*/ ?>
-            
+
         </div>
 
         <div class='field'>
@@ -95,22 +96,21 @@
                         <label for="has_pets">Do you own any pets?</label>
                     </div>
                     <div class = "column">
-                        Yes <input class="ctrl-check" type="radio" value="yes" name="has_pets" />
-                        No <input class="ctrl-check" type="radio" value="no" name="has_pets" />
+                        Yes <input class="ctrl-check" type="radio" value="1" name="has_pets" />
+                        No <input class="ctrl-check" type="radio" value="0" name="has_pets" />
                     </div>
                 </div>
         </div>
 
         <div class='field'>
-            <div class = "row">
-                <div class = "column">
-                    <label for="petsafety">If "Yes", would it be safe for the requested pet to 
+           <div>
+                </br>
+                <label for="petsafety">If "Yes", would it be safe for the requested pet to 
                         live in the same household?
-                    </label>
-                </div>
-                <div class = "column">
-                    <textarea rows = "4" class="ctrl" name="petsafety"></textarea>
-                </div>
+                </label>
+            </div>
+            <div>
+                <textarea rows = "4" class="ctrl" name="petsafety"></textarea>
             </div>
         </div>
 
@@ -122,27 +122,28 @@
                     <label for="children">Are there children living in the same household?</label>
                 </div>
                 <div class = "column">
-                    Yes <input class="ctrl-check" type="radio" value="yes" name="children" />
-                    No <input class="ctrl-check" type="radio" value="no" name="children" />
+                    Yes <input class="ctrl-check" type="radio" value="1" name="children" />
+                    No <input class="ctrl-check" type="radio" value="0" name="children" />
                 </div>
             </div>
         </div>
 
         <div class='field'>
-            <div class = "row">
-                <div class = "column">
-                    <label for="childsafety">If "Yes", would it be safe for the requested pet to 
-                        live in the same household?
-                    </label>
-                </div>
-                <div class = "column">
-                    <textarea rows = "4" class="ctrl" name="childsafety"></textarea>
-                </div>
+            <div>
+            </br>
+                <label for="childsafety">If "Yes", would it be safe for the requested pet to 
+                    live in the same household?
+                </label>
+            </div>
+            <div>
+                <textarea rows = "4" class="ctrl" name="childsafety"></textarea>
             </div>
         </div>
 
-    </br>
+        <div class = "">
+            pet details 
+        </div>
 
         <div><button class='btn mr2'>Send request</button></div>
     </div>
-</div>
+</form>
