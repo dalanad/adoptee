@@ -30,6 +30,37 @@
 
 <div class="container px2">
   <h2>Doctor Consultation</h2>
+  <div>
+
+    <?php
+
+    $animals = array(
+      array("id" => 1, "name" => "Tobi", "type" => "Dog", "age" => "3 Years", "gender" => "Male", "date_listed" => "01-01-2021", "status" => false),
+      array("id" => 2, "name" => "Zeus", "type" => "Rabbit", "age" => "3 Years", "gender" => "Male", "date_listed" => "01-01-2021", "status" => false),
+      array("id" => 3, "name" => "Ellie", "type" => "Cat", "age" => "3 Years", "gender" => "Male", "date_listed" => "01-01-2021", "status" => true),
+      array("id" => 4, "name" => "Nala", "type" => "Dog", "age" => "3 Years", "gender" => "Male", "date_listed" => "01-01-2021", "status" => true),
+    );
+
+    ?>
+
+    <table class="table">
+      <tr>
+        <th>PET</th>
+        <th>TYPE</th>
+        <th>AGE</th>
+        <th>GENDER</th>
+      </tr>
+      <?php foreach ($animals as $animal) { ?>
+        <tr>
+          <td><?= $animal["name"] ?></td>
+          <td><?= $animal["type"] ?></td>
+          <td><?= $animal["age"] ?></td>
+          <td><?= $animal["gender"] ?></td>
+        </tr>
+      <?php } ?>
+    </table>
+  </div>
+
   <div style="display: grid;grid-template-columns:1fr 1fr 1fr">
     <div>
       Doctor Details
