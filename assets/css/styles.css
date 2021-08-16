@@ -10,7 +10,7 @@
 	--gray-5: #888888;
 	--muted: var(--gray-4);
 	--primary: #0d6efd;
-	--red: #f34e1e;
+	--red:red;
 	--blue: #0ebbff;
 	--orange: orange;
 	--green: #08d5a2;
@@ -105,6 +105,7 @@ th {
 	background-color: var(--primary);
 	color: white;
 	padding: 0 .75rem;
+	box-shadow: var(--shadow-light);
 }
 
 .txt-clr {
@@ -117,7 +118,7 @@ th {
 }
 
 .btn:hover {
-	opacity: 0.8;
+	opacity: .75;
 }
 
 .btn:active {
@@ -127,6 +128,7 @@ th {
 
 .btn.outline {
 	background-color: white;
+	box-shadow: none;
 	color: var(--primary);
 }
 
@@ -135,6 +137,25 @@ th {
 	background: no-repeat;
 	border: none;
 	min-height: 1em;
+	box-shadow: none;
+}
+
+.btn-faded {
+	color: var(--primary);
+	background: no-repeat;
+	border: none;
+	box-shadow: none;
+	position: relative;
+}
+
+.btn-faded::before{
+	content: ' ';
+    background: currentColor;
+    opacity: 0.08;
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
 }
 
 .btn-icon {
@@ -403,7 +424,7 @@ header .logo img {
 }
 
 * ::-webkit-scrollbar-thumb {
-	background: var(--primary);
+	background: var(--gray-3);
 }
 
 .table {

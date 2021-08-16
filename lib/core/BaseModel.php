@@ -33,6 +33,6 @@ class BaseModel
 
         $db = BaseModel::getDB();
         $stmt = $db->prepare($query);
-        return $stmt->execute();;
+        return $stmt->execute();
     }
 }
