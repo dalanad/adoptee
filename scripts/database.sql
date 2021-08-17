@@ -6,11 +6,8 @@ CREATE DATABASE adoptee;
 use adoptee;
 
 create table user( 
-<<<<<<< HEAD
     user_id int(10) AUTO_INCREMENT,
-=======
     email varchar(50) primary key ,
->>>>>>> 9b1a0c78364483693d9da57b653736928e73e07d
     name varchar(50) not null ,
     email varchar(20) ,
     password varchar(50) not null ,
@@ -36,7 +33,6 @@ create table organization (
     city varchar(20) 
 );
 
-<<<<<<< HEAD
 create table adoption_request (
     org_id int(10)  ,
     animal_id varchar(10)  ,
@@ -51,7 +47,6 @@ create table adoption_request (
     foreign key(user_id) references user(user_id)
 
 );
-=======
 create table consultation (
     consultation_id int(10) auto_increment primary key -- should we add a primary key ?
     consultation_date date not null,
@@ -88,4 +83,3 @@ create table medical_record_attachment(
 )
 
 
->>>>>>> 9b1a0c78364483693d9da57b653736928e73e07d
