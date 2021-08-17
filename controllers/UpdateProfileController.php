@@ -7,7 +7,7 @@ class UpdateProfileController extends Controller{
     }
 
     function submit(){
-        UpdateProfile::updateProfile($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address']);
+        UpdateProfile::updateProfileData($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address']);
     }
 }
 

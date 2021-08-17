@@ -49,7 +49,7 @@
         <a href="./../dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
     </div>
     <h3 class='mt1 txt-clr'>Add New Animal for Adoption</h3>
-    <form>
+    <form action="/AddNewAnimal/submit" method="post"> 
         <div class='field'>
             <label for='type'>Type</label>
                 <select class="ctrl field-font" name='type' required>
@@ -62,7 +62,7 @@
 
         <div class='field other box'>
             <label for='type'>Other</label>
-            <input class="ctrl field-font" type="text" name="other" placeholder="Hamster" required/>
+            <input class="ctrl field-font" type="text" name="other" placeholder="Hamster" />
         </div>
 
         <div class='field'>
@@ -106,7 +106,7 @@
         <br>
 
         <button class='btn mr2' type='reset'>Clear</button>
-        <button class='btn mr2'>Add</button>
+        <button class='btn mr2' type="submit">Add</button>
     </form>
 
 </div>
