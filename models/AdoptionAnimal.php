@@ -1,6 +1,6 @@
 <?php
 
-class AddNewAnimal extends BaseModel
+class AdoptionAnimal extends BaseModel
 {
     static function createNewAnimal($org_id, $animal_id, $animal_type, $gender, $age_years, $age_months, $age_weeks, $age_days, $color, $animal_description, $photo)
     {

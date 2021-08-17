@@ -49,7 +49,7 @@
         <a href="./../dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
     </div>
     <h3 class='mt1 txt-clr'>Add New Animal for Adoption</h3>
-    <form action="/AddNewAnimal/submit" method="post"> 
+    <form action="/adoptionrequest/process_add_new_animal" method="post"> 
         <div class='field'>
             <label for='type'>Type</label>
                 <select class="ctrl field-font" name='type' required>
