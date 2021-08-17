@@ -8,7 +8,7 @@ function auto_load($class_name)
         $path = "./" . $folder . "/" . $class_name . '.php';
 
         if (file_exists($path)) {
-            require_once $path;
+            require_once __DIR__ . $path;
             break;
         }
     }
