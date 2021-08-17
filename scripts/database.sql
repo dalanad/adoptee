@@ -50,18 +50,18 @@ create table adoption_request (
 
 create table animal_for_adoption (
     org_id int(10),
-    animal_id varchar(50),
-    animal_type varchar(50),
-    gender varchar(10),
+    animal_id varchar(50) not null,
+    animal_type varchar(50) not null,
+    gender varchar(10) not null,
     age_years int(10),
     age_months int(10),
     age_weeks int(10),
     age_days int(10),
-    color varchar(50),
+    color varchar(50) not null,
     animal_description varchar(1000),
-    photo varbinary(max),
+    photo varbinary(max) not null,
     primary key(animal_id),
-    foreign key(org_id) references organization(org_id),
+    foreign key(org_id) references organization(org_id);
 )
 
 create table consultation (
