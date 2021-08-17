@@ -4,7 +4,7 @@ class AddNewAnimalController extends Controller{
 
     function view()
     {
-        View::render("view/org/org_dashboard/add_new_animal");
+        View::render("org/org_dashboard/add_new_animal");
     }
 
     function submit(){

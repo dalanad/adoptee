@@ -6,16 +6,15 @@ CREATE DATABASE adoptee;
 use adoptee;
 
 create table user( 
-    user_id int(10) AUTO_INCREMENT,
-    email varchar(50) primary key ,
+    user_id int(10) AUTO_INCREMENT primary key,
+    email varchar(50) unique ,
     name varchar(50) not null ,
-    email varchar(20) ,
     password varchar(50) not null ,
     telephone char(10) not null,
     address varchar(150)
 );
 
-insert into user values ('dalana@test','dalana','123','102345667');
+insert into user values (default,'dalana@test','dalana','123','102345667','');
 
 create table doctor (
     reg_no varchar(50) primary key,
@@ -42,9 +41,9 @@ create table adoption_request (
     children boolean,
     childsafety varchar(100) ,
     primary key(org_id, animal_id, user_id)
-    foreign key(org_id) references organization(org_id),
+    -- foreign key(org_id) references organization(org_id),
     -- foreign key(animal_id) references animal(animal_id),
-    foreign key(user_id) references user(user_id)
+    -- foreign key(user_id) references user(user_id)
 
 );
 
@@ -59,13 +58,13 @@ create table animal_for_adoption (
     age_days int(10),
     color varchar(50) not null,
     animal_description varchar(1000),
-    photo varbinary(max) not null,
+    photo varchar(100) not null,
     primary key(animal_id),
-    foreign key(org_id) references organization(org_id);
-)
+    foreign key(org_id) references organization(org_id)
+);
 
 create table consultation (
-    consultation_id int(10) auto_increment primary key -- should we add a primary key ?
+    consultation_id int(10) auto_increment primary key, -- should we add a primary key ?
     consultation_date date not null,
     consultation_time time not null,
     animal_id int(10) not null,
@@ -73,30 +72,30 @@ create table consultation (
     status enum('CANCELLED','PENDING','ACCEPTED','COMPLETED') not null default 'PENDING', 
     type enum('LIVE','ADVISE') not null default 'ADVISE',
     payment_txn_id varchar(50) 
-)
+);
 
 alter table consultation   
-  add primary key (`consultation_id`),
+  
   add unique key `consultation_doctor_availability` (doctor_email, type, consultation_date, consultation_time); 
 -- cancelled sessions on same time ?
 
 create table consulataton_message(
      consultation_id int(10),
      created_at timestamp,
-     medical_record_id int(10)
+     medical_record_id int(10),
      message varchar(128)
-)
+);
 
 create table medical_record (
     animal_id int(10) not null,
     created_at timestamp,
     content varchar(128) not null
-)
+);
 
 create table medical_record_attachment(
     animal_id int(10) not null,
     created_at timestamp,
     file_path varchar(20)
-)
+);
 
 
