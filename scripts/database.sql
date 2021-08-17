@@ -47,6 +47,23 @@ create table adoption_request (
     foreign key(user_id) references user(user_id)
 
 );
+
+create table animal_for_adoption (
+    org_id int(10),
+    animal_id varchar(50),
+    animal_type varchar(50),
+    gender varchar(10),
+    age_years int(10),
+    age_months int(10),
+    age_weeks int(10),
+    age_days int(10),
+    color varchar(50),
+    animal_description varchar(1000),
+    photo varbinary(max),
+    primary key(animal_id),
+    foreign key(org_id) references organization(org_id),
+)
+
 create table consultation (
     consultation_id int(10) auto_increment primary key -- should we add a primary key ?
     consultation_date date not null,
