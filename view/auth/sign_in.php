@@ -8,7 +8,7 @@
 <div class="centered-container">
     <div style="padding: .5em;">
         <div class="card-container">
-            <form class="animated-card <?= $active == 'signin' ? "hidden" : '' ?>" action="/view/auth/sign_up.php" method="POST" id="sign-up">
+            <form class="animated-card <?= $active == 'signin' ? "hidden" : '' ?>" action="/auth/sign_up" method="POST" id="sign-up">
                 <div>Welcome to Adoptee</div>
                 <div class="title-text">Sign Up</div>
                 <div class="field">
@@ -22,7 +22,7 @@
                     <span class="field-msg"> </span>
                 </div>
 
-                <input type="submit" class="btn" href="/view/auth/sign_up.php" value="Register" />
+                <input type="submit" class="btn" value="Register" />
 
                 <div class="body-text" style="margin-top: 1rem;">
                     Alreaday have an account ? <a class="btn btn-link" style="font-size:1em;padding:0" onclick="SignIn()">Sign In </a>

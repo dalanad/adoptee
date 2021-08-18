@@ -11,7 +11,8 @@ create table user(
     email varchar(50) unique ,
     telephone char(10) not null,
     address varchar(150),
-    password varchar(50) not null
+    password varchar(50) not null,
+
 );
 
 insert into user values (default,'dalana@test','dalana','123','102345667','');
