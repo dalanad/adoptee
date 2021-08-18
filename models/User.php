@@ -17,4 +17,9 @@ class User extends BaseModel
         address = '$address' WHERE isset($address)";
         return BaseModel::insert($query);
     }
+
+    static function findUserByEmail($email){
+        $query = "select *  from `user` where email= '$email'";
+        return BaseModel::select($query)[0];
+    }
 }

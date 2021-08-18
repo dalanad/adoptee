@@ -17,7 +17,7 @@ $_SESSION['email'] = $_POST["email"]; ?>
 </style>
 
 
-<form class="centered-container" action="/Profile/sign_up" method="POST">
+<form class="centered-container" action="/auth/process_sign_up" method="POST">
     <div class="card-container">
         <div>
 
