@@ -7,11 +7,11 @@ use adoptee;
 
 create table user( 
     user_id int(10) AUTO_INCREMENT primary key,
-    email varchar(50) unique ,
     name varchar(50) not null ,
-    password varchar(50) not null ,
+    email varchar(50) unique ,
     telephone char(10) not null,
-    address varchar(150)
+    address varchar(150),
+    password varchar(50) not null
 );
 
 insert into user values (default,'dalana@test','dalana','123','102345667','');

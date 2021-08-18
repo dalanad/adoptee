@@ -6,9 +6,14 @@ class ProfileController extends Controller{
         View::render("auth/profile/update_profile");
     }
 
-    function submit(){
+    function sign_up(){
+        User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_POST[`password`]);
+    }
+
+    function update(){
         User::updateProfileData($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address']);
     }
+
 }
 
 ?>
