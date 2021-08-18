@@ -13,7 +13,7 @@
     }
 </style>
 
-<form class="centered-container" action = "/UpdateProfile/submit" method = "POST">
+<form class="centered-container" action = "/Profile/update" method = "POST">
 <div class="card-container">
 <div>
 
