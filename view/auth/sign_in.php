@@ -1,25 +1,29 @@
+<?php session_start(); ?>
 <?php require_once __DIR__ . "./../_layout/layout.php" ?>
 <?php $active = isset($_GET["active"]) ? $_GET["active"] : "signin"; ?>
+
 
 <link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
 
 <div class="centered-container">
     <div style="padding: .5em;">
         <div class="card-container">
-            <div class="animated-card <?= $active == 'signin' ? "hidden" : '' ?>" id="sign-up">
+            <form class="animated-card <?= $active == 'signin' ? "hidden" : '' ?>" action="/view/auth/sign_up.php" method="POST" id="sign-up">
                 <div>Welcome to Adoptee</div>
                 <div class="title-text">Sign Up</div>
                 <div class="field">
                     <label>Name</label>
-                    <input class="ctrl" type="email" />
+                    <input class="ctrl" type="text" name="name" />
                     <span class="field-msg"></span>
                 </div>
                 <div class="field">
                     <label>Email Address</label>
-                    <input class="ctrl" type="email" />
+                    <input class="ctrl" type="email" name="email" />
                     <span class="field-msg"> </span>
                 </div>
-                <button class="btn">Register</button>
+
+                <input type="submit" class="btn" href="/view/auth/sign_up.php" value="Register" />
+
                 <div class="body-text" style="margin-top: 1rem;">
                     Alreaday have an account ? <a class="btn btn-link" style="font-size:1em;padding:0" onclick="SignIn()">Sign In </a>
                 </div>
@@ -28,7 +32,7 @@
                     <a class="btn outline green" href="/view/auth/sign_up_organization.php"> <i class="fa fa-hand-holding-heart"></i>&nbsp;Organization</a>
                     <a class="btn outline pink" href="/view/auth/sign_up_doctor.php"> <i class="fa fa-user-md"></i>&nbsp;Doctor</a>
                 </div>
-            </div>
+            </form>
             <div class="spacer-card"></div>
             <div class="animated-card <?= $active == 'signup' ? "hidden" : '' ?>" id="sign-in">
                 <div>Welcome to Adoptee</div>
