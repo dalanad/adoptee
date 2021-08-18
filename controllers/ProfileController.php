@@ -4,6 +4,7 @@ class ProfileController extends Controller{
 
     function view(){
         View::render("auth/profile/update_profile");
+        View::render("auth/sign_up");
     }
 
     function sign_up(){

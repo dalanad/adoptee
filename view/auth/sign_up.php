@@ -17,7 +17,7 @@ $_SESSION['email'] = $_POST["email"]; ?>
 </style>
 
 
-<form class="centered-container" action="/ProfileController/sign_up" method="POST">
+<form class="centered-container" action="/Profile/sign_up" method="POST">
     <div class="card-container">
         <div>
 
@@ -32,39 +32,39 @@ $_SESSION['email'] = $_POST["email"]; ?>
             <div class="row">
                 <div class="field column">
                     <label>Name</label>
-                    <input class="ctrl" type="text" value="<?php echo ($_SESSION['name']); ?>">
+                    <input class="ctrl" type="text" value="<?php echo ($_SESSION['name']); ?>" name="name">
                     <span class="field-msg"></span>
                 </div>
 
                 <div class="field column">
                     <label>Email Address</label>
-                    <input class="ctrl" type="email" value="<?php echo ($_SESSION['email']); ?>">
+                    <input class="ctrl" type="email" value="<?php echo ($_SESSION['email']); ?>" name="email">
                     <span class="field-msg"></span>
                 </div>
             </div>
 
             <div class="field column" style="width:50%;">
                 <label>Telephone</label>
-                <input class="ctrl" type="text">
+                <input class="ctrl" type="text" name="telephone">
                 <span class="field-msg"></span>
             </div>
 
             <div class="field column">
                 <label>Home Address</label>
-                <input class="ctrl" type="text">
+                <input class="ctrl" type="text" name="address">
                 <span class="field-msg"></span>
             </div>
 
             <div class="row">
                 <div class="field column">
                     <label>Password</label>
-                    <input class="ctrl" type="password">
+                    <input class="ctrl" type="password" name="password">
                     <span class="field-msg"></span>
                 </div>
 
                 <div class="field column">
                     <label>Confirm Password</label>
-                    <input class="ctrl" type="password">
+                    <input class="ctrl" type="password" name="confirmPassword">
                     <span class="field-msg"></span>
                 </div>
             </div>
