@@ -47,20 +47,47 @@ create table adoption_request (
 
 );
 
+create table animal (
+    animal_id varchar(50) AUTO_INCREMENT not null,
+    name varchar(50),
+    animal_type varchar(50) not null,
+    gender varchar(10),
+    appox_DOB date,
+    org_id int(10),
+    primary key(animal_id),
+    foreign key(org_id) references organization(org_id)
+);
+
+create table animal_color (
+    animal_id varchar(50) not null,
+    color varchar(50),
+    primary key(animal_id, color),
+    foreign key(animal_id) references animal(animal_id)
+);
+
+create table animal_age(
+
+
+);
+
 create table animal_for_adoption (
     org_id int(10),
     animal_id varchar(50) not null,
-    animal_type varchar(50) not null,
-    gender varchar(10) not null,
-    age_years int(10),
-    age_months int(10),
-    age_weeks int(10),
-    age_days int(10),
     color varchar(50) not null,
     animal_description varchar(1000),
-    photo varchar(100) not null,
+    status enum('LISTED','ADOPTED') not null default 'LISTED',
+    listed_date timestamp,
+    adopted_date date,
     primary key(animal_id),
+    foreign key(animal_id) references animal(animal_id),
     foreign key(org_id) references organization(org_id)
+);
+
+create table animal_for_adoption_photos(
+    animal_id varchar(50) not null,
+    photo varchar(100) not null,
+    primary key(animal_id, photo),
+    foreign key(animal_id) references animal(animal_id)
 );
 
 create table consultation (

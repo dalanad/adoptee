@@ -10,7 +10,7 @@
 	font-size: 1rem;
 	border: 0.2rem solid var(--gray-2);
 	background: var(--gray-1);
-	width: 20%;
+	width: 32.5%;
 	box-sizing: border-box;
 }
 
@@ -75,12 +75,11 @@
         </div>
 
         <div class='field'>
-            <label for='age'>Age</label>
+            <label for='age'>Approximate DOB</label>
             <div>
-            <input class="ctrl2 field-font" type="number" step="1" min="0" name="years" placeholder="Years" required/>
-            <input class="ctrl2 field-font" type="number" step="1" min="0" max="11" name="months" placeholder="Months" required/>
-            <input class="ctrl2 field-font" type="number" step="1" min="0" max="3" name="months" placeholder="Weeks" required/>
-            <input class="ctrl2 field-font" type="number" step="1" min="0" max="6" name="months" placeholder="Days" required/>
+            <input class="ctrl2 field-font" type="number" step="1" min="1" name="year" placeholder="YYYY" required/>
+            <input class="ctrl2 field-font" type="number" step="1" min="1" max="12" name="month" placeholder="MM" required/>
+            <input class="ctrl2 field-font" type="number" step="1" min="1" max="31" name="date" placeholder="DD" required/>
             </div>
         </div>
 
