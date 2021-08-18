@@ -25,9 +25,6 @@ $administration_menu = array(
     "help" =>  array("name" =>  "Help", "icon" => "question-circle"),
 );
 
-$active = isset($_GET["menu"]) && isset($management_menu[$_GET["menu"]])  ? $_GET["menu"] : "org_adoption_listing";
-$active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? $_GET["menu"] : $active;
-
 ?>
 
 <style>
@@ -147,16 +144,8 @@ $active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? 
 
             </div>
             <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
-                <?php include "./org_dashboard/" . $active . ".php" ?>
+                <?php include __DIR__ . "/org_dashboard/" . $active . ".php" ?>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    document.querySelector(".side-nav .active").scrollIntoView({
-        behavior: 'auto',
-        block: 'center',
-        inline: 'center'
-    });
-</script>
