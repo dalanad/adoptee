@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 $_SESSION['name'] = $_POST["name"];
 $_SESSION['email'] = $_POST["email"]; ?>
 <?php require_once __DIR__ . "./../_layout/layout.php" ?>
