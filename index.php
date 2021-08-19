@@ -16,5 +16,9 @@ function auto_load($class_name)
 
 spl_autoload_register('auto_load');
 
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 $app = new Application();
 $app->process($_SERVER["QUERY_STRING"]);

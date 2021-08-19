@@ -19,13 +19,12 @@
                 <a class="link" href="/view/public/consultations/doctor_consultation.php">Veterinary Consultations</a>
             </nav>
         <?php } ?>
-
-        <?php if (isset($data["user"])) { ?>
-            <a class="btn btn-link" style="font-size:1rem" href="/view/auth/sign_in.php"><i class="fa fa-user"> </i> &nbsp; Dalana </a>
+        <?php if (isset($_SESSION['user'])) { ?>
+            <a class="btn btn-link" style="font-size:1rem" href="/auth/sign_out"><i class="fa fa-user"> </i> &nbsp; <?= $_SESSION['user']["name"] ?> </a>
         <?php } else { ?>
-            <a class="btn green" href="/auth/signin">Sign In</a>
+            <a class="btn green" href="/auth/sign_in">Sign In</a>
         <?php } ?>
-
+        
         <?php if ($data["header"]["nav"] == true) { ?>
             <button class="btn btn-link more-btn black" onclick="document.querySelector('.main-nav').classList.toggle('shown')">
                 <i class="fa fa-bars"></i>

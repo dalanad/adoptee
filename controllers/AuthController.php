@@ -4,9 +4,37 @@
 class AuthController extends Controller
 {
 
-    function signin()
+    function sign_in()
     {
         View::render("auth/sign_in");
+    }
+
+    function process_sign_in()
+    {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        try {
+            $user = User::findUserByEmail($email);
+
+            // check email/ telephone verified ? else send to verification
+
+            if (Crypto::verify($password, $user["password"])) {
+                // todo : identify user
+                $_SESSION['user'] =  $user;
+                $this->redirect("/");
+            } else {
+                $this->redirect("/auth/sign_in?error=true");
+            }
+        } catch (Exception $e) {
+            $this->redirect("/auth/sign_in?error=true");
+        }
+    }
+
+    function sign_out()
+    {
+        session_destroy();
+        $this->redirect("/");
     }
 
     function sign_up()
@@ -40,7 +68,6 @@ class AuthController extends Controller
             $email = new EmailService();
             $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email'> verify Email </a> ";
             $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
-
         } else if ($_GET["action"] == "verify_email") {
             // update verified column;
             User::verifyEmail($user["email"]);
