@@ -35,4 +35,11 @@ class BaseModel
         $stmt = $db->prepare($query);
         return $stmt->execute();
     }
+
+    public static function update($query)
+    {
+        $db = BaseModel::getDB();
+        $stmt = $db->prepare($query);
+        return $stmt->execute();
+    }
 }
