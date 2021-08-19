@@ -16,7 +16,7 @@ class AuthController extends Controller
 
     function process_sign_up()
     {
-        User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_POST[`password`]);
+        User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_POST['password']);
         header('Location: /auth/verify?email=' . $_POST['email']);
     }
 
@@ -43,7 +43,7 @@ class AuthController extends Controller
 
         } else if ($_GET["action"] == "verify_email") {
             // update verified column;
-
+            User::verifyEmail($user["email"]);
             // header('Location: /adoptionanimals/add_new_animal');
         }
 

@@ -46,7 +46,7 @@
     <div class = "row">
         <div class = "field column">
             <label>Address</label>
-            <input class = "ctrl" class = "address" type = "text">
+            <input class = "ctrl" name = "address" type = "text">
             <span class = "field-msg"></span>
         </div>
     </div>
