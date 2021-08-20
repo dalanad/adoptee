@@ -17,7 +17,11 @@ class AuthController extends Controller
         try {
             $user = User::findUserByEmail($email);
 
-            // check email/ telephone verified ? else send to verification
+                // check email/ telephone verified ? else send to verification
+
+            if($user['email_verified']==0 || $user['telephone-verified']==0){
+                //
+            }
 
             if (Crypto::verify($password, $user["password"])) {
                 // todo : identify user
@@ -66,7 +70,7 @@ class AuthController extends Controller
         if (!isset($_GET["action"])) {
 
             $email = new EmailService();
-            $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email'> verify Email </a> ";
+            $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email'> Verify Email </a> ";
             $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
         } else if ($_GET["action"] == "verify_email") {
             // update verified column;
