@@ -8,7 +8,7 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        min-width: 70%;
+        min-width: 80%;
         padding: 1rem 1rem;
         border: var(--border);
         border-radius: .6rem;
