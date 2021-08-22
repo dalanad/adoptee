@@ -15,8 +15,8 @@
         overflow: auto;
         background-color: var(--gray-1);
         box-shadow: var(--shadow-heavy);
-        opacity:95%;
-        
+        opacity: 95%;
+
     }
 
     .dropdown:hover .dropdown-content {
@@ -31,7 +31,7 @@
 </style>
 <div class="container">
     <header class="header">
-        <a class="logo">
+        <a class="logo" href="/">
             <img src="/assets/images/logo_vector.svg" />
         </a>
 
@@ -42,11 +42,10 @@
                         <i class="fa fa-times"></i>
                     </button>
                 </div>
-                <a class="link" href="/view/public/home.php">Home</a>
                 <a class="link" href="/view/public/adoptions/adoption_listing.php">Adoptions</a>
                 <a class="link" href="/view/public/rescues/report_rescue.php">Rescues</a>
                 <a class="link" href="/view/public/organizations/organization_listing.php">Organizations</a>
-                <a class="link" href="/view/public/consultations/doctor_consultation.php">Veterinary Consultations</a>
+                <a class="link" href="/consultation">Veterinary Consultations</a>
             </nav>
         <?php } ?>
         <?php if (isset($_SESSION['user'])) { ?>
