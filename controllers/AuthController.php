@@ -1,6 +1,5 @@
 <?php
 
-
 class AuthController extends Controller
 {
 
@@ -17,9 +16,9 @@ class AuthController extends Controller
         try {
             $user = User::findUserByEmail($email);
 
-                // check email/ telephone verified ? else send to verification
+            // check email/ telephone verified ? else send to verification
 
-            if($user['email_verified']==0 || $user['telephone-verified']==0){
+            if ($user['email_verified'] == 0 || $user['telephone-verified'] == 0) {
                 //
             }
 
@@ -48,8 +47,12 @@ class AuthController extends Controller
 
     function process_sign_up()
     {
-        User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_POST['password']);
-        header('Location: /auth/verify?email=' . $_POST['email']);
+        if (User::matchPasswords($_POST['password'], $_POST['confirmPassword'])) {
+            User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_POST['password']);
+            $this->redirect('Location: /auth/verify?email=' . $_POST['email']);
+        } else {
+            $this->redirect("/auth/sign_up?error=true");
+        }
     }
 
     function organizationRegistration()
@@ -79,5 +82,17 @@ class AuthController extends Controller
         }
 
         View::render("auth/user_verification");
+    }
+
+    function change_password()
+    {
+        $user = $_SESSION['user'];
+        if (Crypto::verify($_POST['current'], $user["password"])) {
+
+            if (User::matchPasswords($_POST['new'], $_POST['confirm'])) {
+                User::changePassword($user, $_POST['new']);
+                $this->redirect("/auth/profile/change_password");
+            }
+        }
     }
 }

@@ -82,7 +82,7 @@
 
                     <div class="flex justify-between mt2">
                         <!-- <a class="btn outline pink" href="?step=2">Back</a> -->
-                        <a class="btn" href="/view/org/dashboard.php">Continue</a>
+                        <a class="btn" href="/">Continue</a>
                     </div>
                 </div>
             </div>
