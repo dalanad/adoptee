@@ -17,9 +17,9 @@ class AuthController extends Controller
         try {
             $user = User::findUserByEmail($email);
 
-                // check email/ telephone verified ? else send to verification
+            // check email/ telephone verified ? else send to verification
 
-            if($user['email_verified']==0 || $user['telephone-verified']==0){
+            if ($user['email_verified'] == 0 || $user['telephone-verified'] == 0) {
                 //
             }
 
@@ -68,7 +68,6 @@ class AuthController extends Controller
         $user = User::findUserByEmail($_GET["email"]);
 
         if (!isset($_GET["action"])) {
-
             $email = new EmailService();
             $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email'> Verify Email </a> ";
             $email->sendMail($user["email"], $user["name"], "Email Verification", $body);

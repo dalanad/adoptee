@@ -16,6 +16,7 @@
 
     .animated-card {
         width: 100%;
+        transition: none;
     }
 
     .lg-3col-grid {

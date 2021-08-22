@@ -1,4 +1,3 @@
-
 <?php require_once __DIR__ . "./../_layout/layout.php" ?>
 <?php $active = isset($_GET["active"]) ? $_GET["active"] : "sign_in"; ?>
 
@@ -29,8 +28,8 @@
                 </div>
                 <div style="margin-top: 1rem;">
                     <div class="body-text">Register as</div>
-                    <a class="btn outline green" href="/view/auth/sign_up_organization.php"> <i class="fa fa-hand-holding-heart"></i>&nbsp;Organization</a>
-                    <a class="btn outline pink" href="/view/auth/sign_up_doctor.php"> <i class="fa fa-user-md"></i>&nbsp;Doctor</a>
+                    <a class="btn outline green" href="/auth/organizationRegistration"> <i class="fa fa-hand-holding-heart"></i>&nbsp;Organization</a>
+                    <a class="btn outline pink" href="/doctor/register"> <i class="fa fa-user-md"></i>&nbsp;Doctor</a>
                 </div>
             </form>
             <div class="spacer-card"></div>
@@ -42,7 +41,7 @@
                     <input class="ctrl" type="email" name="email" required />
                 </div>
                 <div class="field">
-                    <label ondblclick="show()">Password</label>
+                    <label>Password</label>
                     <input class="ctrl" type="password" name="password" required />
                     <a href="#" class="field-msg"> Forgot Password ? </a>
                 </div>
@@ -54,15 +53,6 @@
                 <button class="btn" style="margin: 1em 0;">Sign In</button>
                 <div class="body-text">
                     Don't have an account ? <a class="btn btn-link" style="font-size:1em;padding:0" onclick="SignUp()">Sign Up </a>
-                </div>
-                <script>
-                    function show() {
-                        document.getElementById('links').style.display = 'block'
-                    }
-                </script>
-                <div style="display: none;" id="links">
-                    <a class="btn btn-link" href="/view/organizations/organization_dashboard.php">Org User / Admin </a>
-                    <a class="btn btn-link" href="/view/doctor/doctor_page.php">Doctor</a>
                 </div>
             </form>
         </div>
