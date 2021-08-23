@@ -9,18 +9,18 @@
     }
 
     .cont-items-monitor {
-position: absolute;
-top: 60px;
-left: 0;
-bottom: 30px;
-z-index: 1;
-background-color: white;
-overflow-x: scroll;
-padding: 10px 15px 10px 0;
-}
+        position: absolute;
+        top: 60px;
+        left: 0;
+        bottom: 30px;
+        z-index: 1;
+        background-color: white;
+        overflow-x: scroll;
+        padding: 10px 15px 10px 0;
+    }
 </style>
 
-            <script>
+<script>
     var map
 
     function myMap() {
@@ -67,11 +67,11 @@ padding: 10px 15px 10px 0;
 <h4>ABC</h4>
 </div>
  -->
- 
+
 <div class="rounded" style="height: 500px; width: 1248px" id="googleMap"></div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN2HxM42eIrEG1e5b9ar2H_2_V6bMRjWk&callback=myMap"></script>
-        </div>
-    </div>
+</div>
+</div>
 </div>
 
 <script>

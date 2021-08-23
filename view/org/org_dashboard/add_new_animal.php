@@ -10,7 +10,7 @@
 	font-size: 1rem;
 	border: 0.2rem solid var(--gray-2);
 	background: var(--gray-1);
-	width: 20%;
+	width: 32.5%;
 	box-sizing: border-box;
 }
 
@@ -49,7 +49,7 @@
         <a href="./../dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
     </div>
     <h3 class='mt1 txt-clr'>Add New Animal for Adoption</h3>
-    <form>
+    <form action="/adoptionrequest/process_add_new_animal" method="post"> 
         <div class='field'>
             <label for='type'>Type</label>
                 <select class="ctrl field-font" name='type' required>
@@ -62,7 +62,7 @@
 
         <div class='field other box'>
             <label for='type'>Other</label>
-            <input class="ctrl field-font" type="text" name="other" placeholder="Hamster" required/>
+            <input class="ctrl field-font" type="text" name="other" placeholder="Hamster" />
         </div>
 
         <div class='field'>
@@ -75,12 +75,11 @@
         </div>
 
         <div class='field'>
-            <label for='age'>Age</label>
+            <label for='age'>Approximate DOB</label>
             <div>
-            <input class="ctrl2 field-font" type="number" step="1" min="0" name="years" placeholder="Years" required/>
-            <input class="ctrl2 field-font" type="number" step="1" min="0" max="11" name="months" placeholder="Months" required/>
-            <input class="ctrl2 field-font" type="number" step="1" min="0" max="3" name="months" placeholder="Weeks" required/>
-            <input class="ctrl2 field-font" type="number" step="1" min="0" max="6" name="months" placeholder="Days" required/>
+            <input class="ctrl2 field-font" type="number" step="1" min="1" name="year" placeholder="YYYY" required/>
+            <input class="ctrl2 field-font" type="number" step="1" min="1" max="12" name="month" placeholder="MM" required/>
+            <input class="ctrl2 field-font" type="number" step="1" min="1" max="31" name="date" placeholder="DD" required/>
             </div>
         </div>
 
@@ -106,7 +105,7 @@
         <br>
 
         <button class='btn mr2' type='reset'>Clear</button>
-        <button class='btn mr2'>Add</button>
+        <button class='btn mr2' type="submit">Add</button>
     </form>
 
 </div>

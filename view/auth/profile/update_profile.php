@@ -13,7 +13,7 @@
     }
 </style>
 
-<div class="centered-container">
+<form class="centered-container" action = "/Profile/update" method = "POST">
 <div class="card-container">
 <div>
 
@@ -24,13 +24,13 @@
     <div class = "row">
         <div class = "field column">
             <label>Name</label>
-            <input class = "ctrl" type = "text">
+            <input class = "ctrl" name = "name" type = "text">
             <span class = "field-msg"></span>
         </div>
         
         <div class = "field column">
             <label>Email</label>
-            <input class = "ctrl" type = "email">
+            <input class = "ctrl" name = "email" type = "email">
             <span class = "field-msg"></span>
         </div>
     </div>
@@ -38,7 +38,7 @@
     <div class = "row">
         <div class = "field column">
             <label>Telephone</label>
-            <input class = "ctrl" type = "text">
+            <input class = "ctrl" name = "telephone" type = "text">
             <span class = "field-msg"></span>
         </div>
     </div>
@@ -46,7 +46,7 @@
     <div class = "row">
         <div class = "field column">
             <label>Address</label>
-            <input class = "ctrl" type = "text">
+            <input class = "ctrl" name = "address" type = "text">
             <span class = "field-msg"></span>
         </div>
     </div>
@@ -58,4 +58,4 @@
     </div>
 </div>
 </div>
-</div>
+</form>

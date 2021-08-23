@@ -1,2 +1,2 @@
-assets/vendor/** linguist-vendored
-lib/vendor/** linguist-vendored
+assets/vendor/** linguist-generated
+lib/vendor/** linguist-generated

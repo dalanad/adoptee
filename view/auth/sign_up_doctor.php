@@ -52,7 +52,8 @@
                     <textarea class="ctrl" type="text" rows="5" name="credentials"></textarea>
                 </div>
             </div>
-            <div style="margin-top: 1rem;">
+            <div style="margin-top: 1rem;display:flex;justify-content:space-between">
+                <a class="btn btn-faded pink" href="/view/auth/sign_in.php?active=signup">Go Back</a>
                 <button type="submit" class="btn">Register</button>
             </div>
         </form>
