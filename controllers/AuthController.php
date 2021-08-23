@@ -49,7 +49,7 @@ class AuthController extends Controller
     {
         if (User::matchPasswords($_POST['password'], $_POST['confirmPassword'])) {
             User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_POST['password']);
-            $this->redirect('Location: /auth/verify?email=' . $_POST['email']);
+            $this->redirect('/auth/verify?email=' . $_POST['email']);
         } else {
             $this->redirect("/auth/sign_up?error=true");
         }

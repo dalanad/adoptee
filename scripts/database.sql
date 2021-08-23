@@ -122,4 +122,8 @@ create table medical_record_attachment(
     file_path varchar(20)
 );
 
-
+create table report_rescue(
+    description varchar(100),
+    location varchar(100) not null,
+    photo varchar(100) not null
+);
