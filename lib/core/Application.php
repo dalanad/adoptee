@@ -29,7 +29,9 @@ class Application
             if (is_callable([$controller_object, $action])) {
                 $controller_object->$action();
             } else {
+                echo "<code><h1>404 Not Found</h1>";
                 print_r($path);
+                echo "<pre>";
                 throw new \Exception("Method \"$action\" in \"$controller\" not found", 404);
             }
         } else {
