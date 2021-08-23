@@ -33,7 +33,7 @@ $animals = array(
         <td><?= $animal["age"] ?></td>
         <td><?= $animal["gender"] ?></td>
         <td><?= $animal["date_listed"] ?></td>
-        <td><span class="tag <?= $animal["status"] =="ADOPTED? 'green' : 'pink' ?>">< ?= $animal["status"] ?> </span></td>
+        <td><span class="tag <?= $animal["status"] =="ADOPTED? 'green' : 'pink'" ?>"><?= $animal["status"] ?> </span></td>
         <td><button title="Edit" class="btn btn-link btn-icon"><i class="fas fa-pen"></i> &nbsp Edit </button></td>
     </tr>
     <?php } ?>
