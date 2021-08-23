@@ -122,4 +122,8 @@ create table medical_record_attachment(
     file_path varchar(20)
 );
 
-
+create table sponsorship_tier(
+  name varchar(50) primary key,
+  amount int(10) not null,
+  description varchar(100)
+);

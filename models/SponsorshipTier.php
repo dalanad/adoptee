@@ -1,6 +1,6 @@
 <?php
 
-class Organization extends BaseModel
+class SponsorshipTier extends BaseModel
 {
     static function createSponsorshipTier($name,$amount,$description)
     {

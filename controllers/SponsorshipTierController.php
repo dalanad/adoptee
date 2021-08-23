@@ -11,6 +11,7 @@ class SponsorshipTierController extends Controller
     function getdata(){
         print_r($_POST);
         SponsorshipTier::createSponsorshipTier($_POST["name"],$_POST["amount"],$_POST["description"]);
+        //header('Location:')
     }
 }
 
