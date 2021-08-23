@@ -10,7 +10,7 @@
 	--gray-5: #888888;
 	--muted: var(--gray-4);
 	--primary: #0d6efd;
-	--red:red;
+	--red: red;
 	--blue: #0ebbff;
 	--orange: orange;
 	--green: #08d5a2;
@@ -23,9 +23,11 @@
 	--font-family: "Roboto", sans-serif;
 	--border: 1px solid var(--gray-3);
 	--bg-hover: #eee;
-	--bg-gradient: linear-gradient(-135deg,
-			hsl(197deg 100% 49%) 0%,
-			hsl(197deg 100% 70%) 100%);
+	--bg-gradient: linear-gradient(
+		-135deg,
+		hsl(197deg 100% 49%) 0%,
+		hsl(197deg 100% 70%) 100%
+	);
 }
 
 body,
@@ -98,13 +100,13 @@ th {
 	padding: 0 0.7em;
 	min-height: 2rem;
 	min-width: fit-content;
-	border: .1rem solid var(--primary);
+	border: 0.1rem solid var(--primary);
 	font-size: 1rem;
-	border-radius: .4rem;
+	border-radius: 0.4rem;
 	text-decoration: none !important;
 	background-color: var(--primary);
 	color: white;
-	padding: 0 .75rem;
+	padding: 0 0.75rem;
 	box-shadow: var(--shadow-light);
 }
 
@@ -118,7 +120,7 @@ th {
 }
 
 .btn:hover {
-	opacity: .75;
+	opacity: 0.75;
 }
 
 .btn:active {
@@ -148,14 +150,14 @@ th {
 	position: relative;
 }
 
-.btn-faded::before{
-	content: ' ';
-    background: currentColor;
-    opacity: 0.08;
-    display: block;
-    height: 100%;
-    position: absolute;
-    width: 100%;
+.btn-faded::before {
+	content: " ";
+	background: currentColor;
+	opacity: 0.08;
+	display: block;
+	height: 100%;
+	position: absolute;
+	width: 100%;
 }
 
 .btn-icon {
@@ -249,7 +251,7 @@ header .logo img {
 .ctrl {
 	padding: 0.4em 0.5em;
 	line-height: 1;
-	border-radius: .4rem;
+	border-radius: 0.4rem;
 	font-family: inherit;
 	color: var(--color);
 	font-size: 1rem;
@@ -330,12 +332,12 @@ header .logo img {
 }
 
 .ctrl-group :first-child {
-	border-radius: .4rem 0px 0px .4rem;
+	border-radius: 0.4rem 0px 0px 0.4rem;
 	border-right: 0;
 }
 
 .ctrl-group :last-child {
-	border-radius: 0px .4rem .4rem 0px;
+	border-radius: 0px 0.4rem 0.4rem 0px;
 	border-left: 0;
 }
 
@@ -346,7 +348,7 @@ header .logo img {
 	justify-content: start;
 }
 
-.field>label {
+.field > label {
 	display: block;
 	margin-bottom: 0.3em;
 	font-weight: 500;
@@ -357,8 +359,8 @@ header .logo img {
 	font-size: 0.7em;
 	display: block;
 	color: var(--gray-5);
-	margin-top: .2rem;
-	margin-left: .2rem;
+	margin-top: 0.2rem;
+	margin-left: 0.2rem;
 }
 
 /* checkbox & radio box */
@@ -480,7 +482,7 @@ header .logo img {
 	align-items: center;
 	/* cursor: pointer; */
 	line-height: 1;
-	border-radius: .4rem;
+	border-radius: 0.4rem;
 	color: var(--gray-5);
 	flex: 1;
 }
@@ -502,7 +504,7 @@ header .logo img {
 .step:not(:last-child)::after {
 	min-width: 1rem;
 	content: " ";
-	height: .1rem;
+	height: 0.1rem;
 	background-color: var(--gray-3);
 	display: block;
 	flex: 1;
@@ -510,7 +512,7 @@ header .logo img {
 
 .step-icon,
 .step-title {
-	margin: 0 .3rem;
+	margin: 0 0.3rem;
 	white-space: nowrap;
 }
 

@@ -16,6 +16,7 @@
 
     .animated-card {
         width: 100%;
+        transition: none;
     }
 
     .lg-3col-grid {
@@ -82,7 +83,7 @@
 
                     <div class="flex justify-between mt2">
                         <!-- <a class="btn outline pink" href="?step=2">Back</a> -->
-                        <a class="btn" href="/view/org/dashboard.php">Continue</a>
+                        <a class="btn" href="/">Continue</a>
                     </div>
                 </div>
             </div>
