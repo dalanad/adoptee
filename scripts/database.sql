@@ -65,11 +65,6 @@ create table animal_color (
     foreign key(animal_id) references animal(animal_id)
 );
 
-create table animal_age(
-
-
-);
-
 create table animal_for_adoption (
     org_id int(10),
     animal_id varchar(50) not null,
