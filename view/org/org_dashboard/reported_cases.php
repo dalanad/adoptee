@@ -21,10 +21,14 @@
 
     .cases_list{
         position: absolute;
-        width: 100px; 
-        height: 100px;
+        width: 200px; 
+        height: 250px;
         top: 10px;
+        left: 10px;
         background:white;
+        box-shadow: var(--shadow);
+        z-index: 100;
+        border-radius: 0.5rem;
     }
 </style>
 
