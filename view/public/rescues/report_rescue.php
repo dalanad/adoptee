@@ -34,21 +34,21 @@
     }
 </style>
 
-<div class="container ctx">
+<form class="container ctx" action="/ReportRescues/report" method="POST">
     <div class="report ">
         <h2 class="mt1">Report Injured Animals 
             <a class="btn red outline" style="float: right;" href="/view/public/rescues/emergency.php"><i class="fas fa-ambulance"></i>&nbsp; Emergency </a>
         </h2>
         <div class="field">
             <label>Description</label>
-            <textarea rows="6" class="ctrl"></textarea>
+            <textarea rows="6" class="ctrl" name="description"></textarea>
             <span class="field-msg"> </span>
         </div>
         <div class="field ">
             <label>Where can we find this animal ? </label>
             <div class="ctrl-group">
                 <span class="ctrl static"><i class="fa fa-map-marked-alt"></i></span>
-                <input class="ctrl" type="location" />
+                <input class="ctrl" type="location" name="location" />
                 <button class="btn outline" onclick="getLocation()">Set Location</button>
             </div>
             <span class="field-msg"> </span>
@@ -58,7 +58,7 @@
             <label>Photos</label>
             <div class="ctrl-group">
                 <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-                <input class="ctrl" type="file" multiple />
+                <input class="ctrl" type="file" name="photo" multiple />
             </div>
             <span class="field-msg"> </span>
         </div>
@@ -66,7 +66,7 @@
             <button class="btn my1 mb2">Report</button>
         </div>
     </div>
-</div>
+</form>
 
 <script>
     var map
