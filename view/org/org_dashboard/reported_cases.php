@@ -18,6 +18,14 @@
         overflow-x: scroll;
         padding: 10px 15px 10px 0;
     }
+
+    .cases_list{
+        position: absolute;
+        width: 100px; 
+        height: 100px;
+        top: 10px;
+        background:white;
+    }
 </style>
 
 <script>
@@ -56,19 +64,10 @@
         map.setZoom(15)
     }
 </script>
-
-<!-- <script>
-    $(document).ready(function () {
-    $('.cont-items-monitor').appendTo($('#google-map').find('div')[0]);
-});
-    </script>
-
-<div class="cont-items-monitor">
-<h4>ABC</h4>
-</div>
- -->
-
-<div class="rounded" style="height: 500px; width: 1248px" id="googleMap"></div>
+<div style="position: relative;">
+    <div class="cases_list"></div>
+    <div class="rounded" style="height: 500px; width: 1248px" id="googleMap"></div>
+<div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN2HxM42eIrEG1e5b9ar2H_2_V6bMRjWk&callback=myMap"></script>
 </div>
 </div>

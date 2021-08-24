@@ -25,6 +25,10 @@ $administration_menu = array(
     "help" =>  array("name" =>  "Help", "icon" => "question-circle"),
 );
 
+$active = isset($_GET["menu"]) && isset($managment_menu[$_GET["menu"]]) ? $_GET["menu"] : "org_adoption_listing";
+$active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]]) ? $_GET["menu"] : $active;
+
+
 ?>
 
 <style>
@@ -144,7 +148,7 @@ $administration_menu = array(
 
             </div>
             <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
-                <?php include __DIR__ . "/org_dashboard/" . $active . ".php" ?>
+                <?php include __DIR__ . "./org_dashboard/" . $active . ".php" ?>
             </div>
         </div>
     </div>
