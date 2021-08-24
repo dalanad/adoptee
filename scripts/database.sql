@@ -122,8 +122,15 @@ create table medical_record_attachment(
     file_path varchar(20)
 );
 
+<<<<<<< HEAD
 create table sponsorship_tier(
   name varchar(50) primary key,
   amount int(10) not null,
   description varchar(100)
+=======
+create table report_rescue(
+    description varchar(100),
+    location varchar(100) not null,
+    photo varchar(100) not null
+>>>>>>> 3ffb098a6e06741ccafd0adf559db812f679c29a
 );
