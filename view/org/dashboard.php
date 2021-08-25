@@ -25,8 +25,6 @@ $administration_menu = array(
     "help" =>  array("name" =>  "Help", "icon" => "question-circle"),
 );
 
-$active = isset($_GET["menu"]) && isset($management_menu[$_GET["menu"]])  ? $_GET["menu"] : "org_adoption_listing";
-$active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? $_GET["menu"] : $active;
 
 ?>
 
@@ -62,7 +60,7 @@ $active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? 
         transition: background .3s ease-in-out, border-color .3s ease-in-out, color .2s ease-in-out;
         background: #ebf4ff;
         color: var(--primary);
-        
+
     }
 
     .side-nav-link.active {
@@ -110,53 +108,45 @@ $active = isset($_GET["menu"]) && isset($administration_menu[$_GET["menu"]])  ? 
 </style>
 
 
-    <div>
-        <div class="mx1">
-                <a href="./dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
-        </div>
-        <div class="mx1">
-            <h4 class="flex items-center">
-                <a href="./dashboard.php" class="btn btn-link btn-icon mr1 " style="color: #313636; font-size: 1em;"><i class="fa fa-chart-line"></i></a>
-                Dashboard
-            </h4>
-        </div>
-        <div class="settings-container ">
-            <div class="side-nav" style="font-size: 0.9em">
-                <div class="mx1">
-                    <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
-                        MANAGEMENT
-                    </h4>
-                </div>
-                <?php foreach ($management_menu as $key => $value) { ?>
-                    <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="?menu=<?= $key ?>">
-                        <i class="fa fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
-                    </a>
-                <?php  } ?>
-
-                <div class="mx1">
-                    <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
-                        ADMINISTRATION
-                    </h4>
-                </div>
-
-                <?php foreach ($administration_menu as $key => $value) { ?>
-                    <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="?menu=<?= $key ?>">
-                        <i class="fa fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
-                    </a>
-                <?php  } ?>
-
+<div>
+    <div class="mx1">
+        <a href="./dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
+    </div>
+    <div class="mx1">
+        <h4 class="flex items-center">
+            <a href="./dashboard.php" class="btn btn-link btn-icon mr1 " style="color: #313636; font-size: 1em;"><i class="fa fa-chart-line"></i></a>
+            Dashboard
+        </h4>
+    </div>
+    <div class="settings-container ">
+        <div class="side-nav" style="font-size: 0.9em">
+            <div class="mx1">
+                <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
+                    MANAGEMENT
+                </h4>
             </div>
-            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
-                <?php include "./org_dashboard/" . $active . ".php" ?>
+            <?php foreach ($management_menu as $key => $value) { ?>
+                <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="?menu=<?= $key ?>">
+                    <i class="fa fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
+                </a>
+            <?php  } ?>
+
+            <div class="mx1">
+                <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
+                    ADMINISTRATION
+                </h4>
             </div>
+
+            <?php foreach ($administration_menu as $key => $value) { ?>
+                <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="?menu=<?= $key ?>">
+                    <i class="fa fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
+                </a>
+            <?php  } ?>
+
+        </div>
+        <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
+            <?php include __DIR__ . "./org_dashboard/" . $active . ".php" ?>
         </div>
     </div>
 </div>
-
-<script>
-    document.querySelector(".side-nav .active").scrollIntoView({
-        behavior: 'auto',
-        block: 'center',
-        inline: 'center'
-    });
-</script>
+</div>

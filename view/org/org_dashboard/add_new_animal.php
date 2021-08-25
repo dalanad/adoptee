@@ -10,7 +10,7 @@
 	font-size: 1rem;
 	border: 0.2rem solid var(--gray-2);
 	background: var(--gray-1);
-	width: 32.5%;
+	width: 25%;
 	box-sizing: border-box;
 }
 
@@ -22,9 +22,40 @@
       display: none;
     }
 
-.other {
-    }
+.tooltip {
+  position: relative;
+  display: inline-block;
+  height: 40px;
+  border-bottom: 1px transparent;
+}
 
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 110%;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 </style>
 
 <script>
@@ -41,6 +72,33 @@
         });
       }).change();
     });
+
+    function ageCalculator() {  
+    var userinput = document.getElementById("dob").value;  
+    var dob = new Date(userinput);  
+    if(userinput==null || userinput=='') {  
+      document.getElementById("message").innerHTML = "Please select a date";    
+      return false;   
+    } else {  
+      
+    //calculate month difference from current date in time  
+    var month_diff = Date.now() - dob.getTime();  
+      
+    //convert the calculated difference in date format  
+    var age_dt = new Date(month_diff);   
+      
+    //extract year from date      
+    var year = age_dt.getUTCFullYear();  
+      
+    //now calculate the age of the user  
+    var age = Math.abs(year - 1970);  
+      
+    //display the calculated age  
+    return document.getElementById("result").innerHTML =    
+             "Age: " + age + " years. ";  
+    }  
+} 
+
 </script>
 
 <div class='container px2'>
@@ -49,7 +107,7 @@
         <a href="./../dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
     </div>
     <h3 class='mt1 txt-clr'>Add New Animal for Adoption</h3>
-    <form action="/adoptionrequest/process_add_new_animal" method="post"> 
+    <form action="/AdoptionAnimals/process_add_new_animal" method="post"> 
         <div class='field'>
             <label for='type'>Type</label>
                 <select class="ctrl field-font" name='type' required>
@@ -75,11 +133,15 @@
         </div>
 
         <div class='field'>
-            <label for='age'>Approximate DOB</label>
+            <label for='dob'>Approximate DOB</label>
             <div>
-            <input class="ctrl2 field-font" type="number" step="1" min="1" name="year" placeholder="YYYY" required/>
-            <input class="ctrl2 field-font" type="number" step="1" min="1" max="12" name="month" placeholder="MM" required/>
-            <input class="ctrl2 field-font" type="number" step="1" min="1" max="31" name="date" placeholder="DD" required/>
+            <input class="ctrl2 field-font" type="date" name="dob" id="dob" required/>
+            <span id = "message"> </span> 
+            <div class="tooltip">
+            <button class="btn btn-link btn-icon tooltip" type="submit" onclick = "ageCalculator()"><span class="ctrl static"><i class="fa fa-photo-video"></i></span></button>
+            <span class="tooltiptext">Calculate Age</span>  
+            </div>
+            <p id="result"></p>
             </div>
         </div>
 
@@ -90,7 +152,7 @@
 
         <div class="field">
             <label>Description</label>
-            <textarea rows="6" class="ctrl field-font"></textarea>
+            <textarea rows="6" class="ctrl field-font" name="description"></textarea>
             <span class="field-msg"> </span>
         </div>
         
@@ -98,7 +160,7 @@
             <label>Upload Photo</label>
             <div class="ctrl-group field-font">
                 <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-                <input class="ctrl field-font" type="file" multiple />
+                <input class="ctrl field-font" type="file" name="photo" multiple />
             </div>
             <span class="field-msg"> </span>
         </div>
