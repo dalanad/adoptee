@@ -47,7 +47,8 @@ class AuthController extends Controller
 
     function process_sign_up()
     {
-        if (User::matchPasswords($_POST['password'], $_POST['confirmPassword'])) {
+        if (User::matchPasswords($_POST['password'], $_POST['confirmPassword'])) 
+        {
             User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_POST['password']);
             $this->redirect('Location: /auth/verify?email=' . $_POST['email']);
         } else {
@@ -93,5 +94,22 @@ class AuthController extends Controller
                 $this->redirect("/auth/profile/change_password");
             }
         }
+    }
+
+    function request_link()
+    {
+        $user = User::findUserByEmail($_POST["email"]);
+
+        if (!isset($_GET["action"])) {
+            $email = new EmailService();
+            $body = "Dear " . $user["name"] . ", Click the link below to reset your password<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email'> Verify Email </a> ";
+            $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
+        } else if ($_GET["action"] == "verify_email") {
+            // update verified column;
+            User::verifyEmail($user["email"]);
+            // header('Location: /adoptionanimals/add_new_animal');
+        }
+
+        View::render("auth/user_verification");
     }
 }

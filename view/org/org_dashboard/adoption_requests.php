@@ -10,40 +10,46 @@ $adoption_requests = array(
 ?>
 
 <div class="container">
-<h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
-    Adoptees
-</h3>
+    <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
+        ADOPTION REQUESTS
+    </h3>
 
-<table class="table">
-    <tr>
-        <th>ADOPTEE</th>
-        <th>ADOPTEE TYPE</th>
-        <th>ADOPTER</th>
-        <th>CONTACT NMBER</th>
-        <th>EMAIL</th>
-        <th>HOME ADDRESS</th>
-        <th>RESPONSE 01</th>
-        <th>RESPONSE 02</th>
-        <th>ACCEPT / REJECT REQUEST</th>
-    </tr>
+    <div class="overflow-auto" style="height:450px">
+        <table class="table">
+            <tr>
+                <th>ADOPTEE</th>
+                <th>ADOPTEE TYPE</th>
+                <th>ADOPTER</th>
+                <th>CONTACT DETAILS</th>
+                <th>HAVE PETS</th>
+                <th>HAVE CHILDREN</th>
+                <th>ACCEPT / REJECT REQUEST</th>
+                <th></th>
+            </tr>
 
-    <?php foreach ($adoption_requests as $adoption_request) { ?>
-    <tr style="font-size: 0.8rem;">
-        <td><?= $adoption_request["adoptee"] ?></td>
-        <td><?= $adoption_request["type"] ?></td>
-        <td><?= $adoption_request["adopter"] ?></td>
-        <td><?= $adoption_request["contact"] ?></td>
-        <td><?= $adoption_request["email"] ?></td>
-        <td><?= $adoption_request["address"] ?></td>
-        <td><span class="tag <?= $adoption_request["r1"] ? 'green' : 'red' ?>"><?= $adoption_request["r1"] ? "YES" : "NO" ?> </span></td>
-        <td><span class="tag <?= $adoption_request["r2"] ? 'green' : 'red' ?>"><?= $adoption_request["r2"] ? "YES" : "NO" ?> </span></td>
-        <td>
-            <button title="Accept" class="btn btn-link btn-icon green"><i class="fas fa-check-circle"></i> </button>
-            &nbsp;
-            <button title="Reject" class="btn btn-link btn-icon red"><i class="fas fa-times-circle"></i></button>
-        </td>
-    </tr>
-    <?php } ?>
+            <?php foreach ($adoption_requests as $adoption_request) { ?>
+                <tr style="font-size: 0.8rem;">
+                    <td><?= $adoption_request["adoptee"] ?></td>
+                    <td><?= $adoption_request["type"] ?></td>
+                    <td><?= $adoption_request["adopter"] ?></td>
+                    <td>
+                        <button title="mobile" class="btn btn-link btn-icon"><i class="fas fa-phone"></i> </button>
+                        &nbsp;
+                        <button title="email" class="btn btn-link btn-icon"><i class="fas fa-envelope"></i></button>
+                        &nbsp;
+                        <button title="address" class="btn btn-link btn-icon"><i class="fas fa-map-marker-alt"></i></button>
+                    </td>
+                    <td><span class="tag <?= $adoption_request["r1"] ? 'green' : 'red' ?>"><?= $adoption_request["r1"] ? "YES" : "NO" ?> </span></td>
+                    <td><span class="tag <?= $adoption_request["r2"] ? 'green' : 'red' ?>"><?= $adoption_request["r2"] ? "YES" : "NO" ?> </span></td>
+                    <td>
+                        <button title="Accept" class="btn btn-link btn-icon green"><i class="fas fa-check-circle"></i> </button>
+                        &nbsp;
+                        <button title="Reject" class="btn btn-link btn-icon red"><i class="fas fa-times-circle"></i></button>
+                    </td>
+                    <td><button title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button></td>
+                </tr>
+            <?php } ?>
 
-</table>
+        </table>
+    </div>
 </div>
