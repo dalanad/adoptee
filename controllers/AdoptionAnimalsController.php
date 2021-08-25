@@ -21,9 +21,28 @@ class AdoptionAnimalsController extends Controller{
         View::render("org/dashboard", $data);
     }
 
+    function adoption_requests()
+    {
+        $data = [
+            "active" => "adoption_requests"
+    ];
+        View::render("org/dashboard", $data);
+    }
+
     function reported_cases()
     {
-        View::render("org/org_dashboard/reported_cases");
+        $data = [
+            "active" => "reported_cases"
+    ];
+        View::render("org/dashboard", $data);
+    }
+
+    function org_donations()
+    {
+        $data = [
+            "active" => "org_donations"
+    ];
+        View::render("org/dashboard", $data);
     }
 }
 
