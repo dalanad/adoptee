@@ -72,11 +72,7 @@
 	line-height: 1rem;
 }
 
-.form-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	grid-column-gap: 0.5rem;
-}
+
 
 .separator::after {
 	height: 1px;

@@ -379,7 +379,7 @@ header .logo img {
 	background: var(--bg);
 	cursor: pointer;
 	color: var(--muted);
-	font-family: "Font Awesome 5 Free";
+	font-family: "Font Awesome 5 Pro";
 	position: absolute;
 	top: -0.1em;
 	line-height: 1;
@@ -400,6 +400,11 @@ header .logo img {
 .ctrl-check[type="checkbox"][type="radio"]:checked::before,
 .ctrl-radio[type="radio"][type="radio"]:checked::before {
 	content: "\f192";
+}
+.form-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	grid-column-gap: 0.5rem;
 }
 
 /* FORMS END */
