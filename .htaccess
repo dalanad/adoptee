@@ -13,6 +13,12 @@ RewriteBase /
   </IfModule>
 </FilesMatch>
 
+<FilesMatch "\.(svg|jpg|jpeg|png)$">
+  <IfModule mod_headers.c>
+    Header set Cache-Control "public, max-age=604800, immutable"
+  </IfModule>
+</FilesMatch>
+ 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 #RewriteCond %{REQUEST_URI} !^(/assets/(.*)\.(.*))$

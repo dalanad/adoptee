@@ -11,6 +11,16 @@
                     <div style="font-size:1.5rem">Register As A Doctor </div>
                 </div>
             </div>
+            <div>
+                <ul style="font-size: .8rem;color:red">
+                    <?php if (isset($_SESSION['form_errors'])) {
+                        foreach ($_SESSION['form_errors'] as  $error) {
+                    ?>
+                            <li><?= $error ?></li>
+                    <? }
+                    }  ?>
+                </ul>
+            </div>
             <div class="form-grid">
                 <div class="separator body-text"><i class="far fa-user"></i> &nbsp; User Information</div>
                 <div class="field">
@@ -34,7 +44,7 @@
                 <div class="separator body-text"> <i class="far fa-stethoscope"></i> &nbsp; Doctor Details</div>
                 <div class="field">
                     <label>VCSL Registration Number</label>
-                    <input class="ctrl" type="text" name="reg_no" required>
+                    <input class="ctrl" type="text" pattern="/[0-9+]+/[a-zA-Z]+/[0-9+]/" name="reg_no" required>
                 </div>
 
                 <div class="field">
