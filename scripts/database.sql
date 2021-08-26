@@ -30,7 +30,9 @@ create table organization (
     telephone char(10) not null,
     address_line_1 varchar(20)   ,
     address_line_2 varchar(20)  ,
-    city varchar(20) 
+    city varchar(20) ,
+    tagline varchar(50),
+    logo varchar(200)
 );
 
 create table adoption_request (

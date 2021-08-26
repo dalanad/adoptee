@@ -63,8 +63,7 @@ class AuthController extends Controller
 
     public function process_register_organization()
     {
-        Organization::createOrganization($_POST);
-        User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_POST[`password`]);
+        Organization::createOrganization($_POST['name'], $_POST['telephone'], $_POST['address_line_1'], $_POST[`address_line_2`], $_POST[`telephone`]);
     }
 
     function verify()
@@ -100,18 +99,31 @@ class AuthController extends Controller
 
     function request_link()
     {
+        View::render("auth/password_reset/request_link.php");
+    }
+
+    function process_request_link()
+    {
         $user = User::findUserByEmail($_POST["email"]);
 
-        if (!isset($_GET["action"])) {
             $email = new EmailService();
-            $body = "Dear " . $user["name"] . ", Click the link below to reset your password<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email'> Verify Email </a> ";
-            $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
-        } else if ($_GET["action"] == "verify_email") {
-            // update verified column;
-            User::verifyEmail($user["email"]);
-            // header('Location: /adoptionanimals/add_new_animal');
-        }
+            $body = "Dear " . $user["name"] . ", Click the link below to reset your password<br> <a href='http://localhost/auth/set_password?email=" . $_GET["email"] . "'> Reset Password </a> ";
+            $email->sendMail($user["email"], $user["name"], "Reset Password", $body);
+            $this->redirect("/auth/password_reset/request_link?sent=true");
 
-        View::render("auth/user_verification");
+    }
+
+    function set_password()
+    {
+        View::render("auth/password_reset/set_password.php");
+    }
+
+    function proces_set_password()
+    {
+        $user = User::findUserByEmail($_GET["email"]);
+
+        if (User::matchPasswords($_POST['pass1'], $_POST['pass2'])) {
+            User::resetPassword($user, $_POST['pass1']);
+        }
     }
 }
