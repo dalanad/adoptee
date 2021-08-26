@@ -29,10 +29,13 @@
 </style>
 <div class="container" style="max-width: 900px;">
     <div style="display:flex;margin: 1em;align-items:center">
-        <div class="placeholder-box mr1" style=" height: 100px; width:100px; ">LOGO</div>
+        <div class="placeholder-box mr1" style=" height: 100px; width:100px; "><?php foreach($details as $key=>$value){print_r($value['logo']);} ?></div>
+        <!-- <div class="placeholder-box mr1" style=" height: 100px; width:100px; ">LOGO</div> -->
         <div class="flex-auto">
-            <div style="font-weight:500">Organization Name</div>
-            <div style="font-size:small">Tagline</div>
+            <div style = "font-weight:500"><?php foreach($details as $key=>$value){print_r($value['name']);} ?></div>
+            <!-- <div style="font-weight:500">Organization Name</div> -->
+            <div style = "font-size:small"><?php foreach($details as $key=>$value){print_r($value['tagline']);} ?></div>
+            <!-- <div style="font-size:small">Tagline</div> -->
         </div>
         <div>
             <a class='btn green' href='/view/public/organizations/donations.php' style='margin-left :20px;'>Donate</a>

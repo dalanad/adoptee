@@ -39,4 +39,10 @@ class User extends BaseModel
         $query = "UPDATE 'user' set password= $hashed_password WHERE user = $user";
         return BaseModel::update($query);
     }
+
+    static function resetPassword($user,$password){
+        $hashed_password = Crypto::hash($password);
+        $query = "UPDATE 'user' set password= $hashed_password WHERE 'user' = $user";
+        return BaseModel::update($query);
+    }
 }

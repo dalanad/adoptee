@@ -15,17 +15,22 @@
                     <label style="font-size:1.1rem;">Reset Password</label>
                 </div>
 
-                <div class="body-text relative">
-                    Please enter your email below to reset the password
+                <div class="body-text"><p  style="text-align:center">Please enter your email below to reset</br> the password</p>
+                   
                 </div>
                 <!-- <p class = "center wrap"> </p>-->
 
-                <form action="/Auth/request_link" method="POST">
+                <form action="/Auth/process_request_link" method="POST">
                     <div class="field">
                         <label>Email</label>
-                        <input class="ctrl" type="email">
+                        <input class="ctrl" type="email" name="email">
                         <span class="field-msg"></span>
                     </div>
+                    <?php if (isset($_POST["sent"])) { ?>
+                    <div style="color: blue; font-weight:bold;font-weight: bold;text-align: center;margin-top: 1rem; ">
+                        Password reset email has been sent
+                    </div>
+                <?php } ?>
                 </form>
 
                 <div class="field center mt1"><button class="btn orange" type="submit">Reset Pasword</btn>

@@ -3,34 +3,36 @@
 <link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
 
 <div class="centered-container">
-<div class="card-container">
-<div class="animated-card" id="sign-up">
-<div>
+    <div class="card-container">
+        <div class="animated-card" id="sign-up">
+            <div>
 
-    <div class = "m2" id = "image" style="text-align:center;">
-        <img style="border-radius:8px; height:50px;" 
-        src="/assets/images/logo.png" />
+                <div class="m2" id="image" style="text-align:center;">
+                    <img style="border-radius:8px; height:50px;" src="/assets/images/logo.png" />
+                </div>
+
+                <div class="title-text center">
+                    <label style="font-size:1.1rem;">Change Password</label>
+                </div>
+
+                <form action="/Auth/process_set_password" method="POST">
+                    <div class="field">
+                        <label>New Password</label>
+                        <input class="ctrl" type="password" name="pass1">
+                        <span class="field-msg"></span>
+                    </div>
+
+                    <div class="field">
+                        <label>Confirm Password</label>
+                        <input class="ctrl" type="password" name="pass2">
+                        <span class="field-msg"></span>
+                    </div>
+                </form>
+
+                <div class="field center mt1"><button class="btn">Change Pasword</btn>
+                </div>
+
+            </div>
+        </div>
     </div>
-
-    <div class = "title-text center">
-    <label style = "font-size:1.1rem;">Change Password</label>
-    </div>
-
-    <div class = "field">
-        <label>New Password</label>
-        <input class = "ctrl" type = "password">
-        <span class = "field-msg"></span>
-    </div>
-
-    <div class = "field">
-        <label>Confirm Password</label>
-        <input class = "ctrl" type = "password">
-        <span class = "field-msg"></span>
-    </div>
-
-    <div class = "field center mt1"><button class = "btn">Change Pasword</btn></div>
-
-</div>
-</div>
-</div>
 </div>
