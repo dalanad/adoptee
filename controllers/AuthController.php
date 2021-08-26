@@ -50,7 +50,7 @@ class AuthController extends Controller
         if (User::matchPasswords($_POST['password'], $_POST['confirmPassword'])) 
         {
             User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_POST['password']);
-            $this->redirect('Location: /auth/verify?email=' . $_POST['email']);
+            $this->redirect('/auth/verify?email=' . $_POST['email']);
         } else {
             $this->redirect("/auth/sign_up?error=true");
         }
@@ -73,9 +73,11 @@ class AuthController extends Controller
 
         if (!isset($_GET["action"])) {
             $email = new EmailService();
-            $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email'> Verify Email </a> ";
+            $token = Crypto::encrypt($user["email"]);
+            $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email&token=$token'> Verify Email </a> ";
             $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
-        } else if ($_GET["action"] == "verify_email") {
+            
+        } else if ($_GET["action"] == "verify_email"&&  $user["email"] == Crypto::decrypt($_GET["token"])) {
             // update verified column;
             User::verifyEmail($user["email"]);
             // header('Location: /adoptionanimals/add_new_animal');

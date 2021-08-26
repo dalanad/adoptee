@@ -16,30 +16,30 @@ class BaseModel
         return $db;
     }
 
-    public static function select($query)
+    public static function select($query, $params= [])
     {
 
         $db = BaseModel::getDB();
         $stmt = $db->prepare($query);
-        $stmt->execute();
+        $stmt->execute($params);
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $result = $stmt->fetchAll();
         return  $result;
     }
 
-    public static function insert($query)
+    public static function insert($query, $params = [])
     {
 
         $db = BaseModel::getDB();
         $stmt = $db->prepare($query);
-        return $stmt->execute();
+        return $stmt->execute($params);
     }
 
-    public static function update($query)
+    public static function update($query, $params= [])
     {
         $db = BaseModel::getDB();
         $stmt = $db->prepare($query);
-        return $stmt->execute();
+        return $stmt->execute($params);
     }
 }

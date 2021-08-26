@@ -30,7 +30,7 @@ class User extends BaseModel
     }
 
     static function verifyEmail($email){
-        $query = "update `user` set email_verified= 1 where email= $email";
+        $query = "update `user` set email_verified= 1 where email= '$email'";
         return BaseModel::update($query);
     }
 
