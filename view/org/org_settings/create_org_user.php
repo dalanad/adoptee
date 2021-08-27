@@ -4,7 +4,7 @@
 .page{
     padding-left:300px;
     padding-right:300px;
-    padding-top:30px;
+    padding-top:80px;
 }
 
 .column {
@@ -12,7 +12,7 @@
   width: 30%;
   padding: 10px;
   height: 300px;
-  font-size:18px ;
+  font-size:20px ;
   font-family:Calibri,sans serif;
 }
 .row:after {
@@ -26,7 +26,6 @@
 }
 </style>
 <div class="row page">
-    <h1>Doctor Consultation</h1>
     
 <div class="column">
     <strong>Create Organization User</strong><br><br>

@@ -8,14 +8,16 @@ class AdoptionAnimalsController extends Controller{
     }
 
     function process_add_new_animal(){
-        
+
         AdoptionAnimals::createNewAnimal(1, 1, $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['photo']);
+
     }  
     
     function animals_for_adoption()
     {
         $data = [
             "active" => "org_adoption_listing",
+
             "animals"=>AdoptionAnimals::findAnimalsByOrgId(1)
     ];
         View::render("org/dashboard", $data);
@@ -41,6 +43,7 @@ class AdoptionAnimalsController extends Controller{
     {
         $data = [
             "active" => "org_donations"
+
     ];
         View::render("org/dashboard", $data);
     }
