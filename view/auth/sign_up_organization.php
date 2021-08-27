@@ -14,6 +14,10 @@
             grid-template-columns: 1fr;
         }
     }
+    .row {
+        display: flex;
+    }
+
 </style>
 <div class="centered-container">
     <div style="margin: 0 auto;max-width: 700px;padding: 1rem;">
@@ -59,6 +63,11 @@
                 <label>Confirm Password</label>
                 <input class="ctrl" type="password" name="confirm-password" />
             </div>
+            <?php if (isset($_GET["error"])) { ?>
+                    <div style="color: red; font-weight: bold;text-align: center;margin-top: 1rem; ">
+                        Passwords do not match
+                    </div>
+                <?php } ?>
             <div style="grid-column: 1 / -1; margin-top:1rem">
                 <button class="btn" type="submit">Register</button>
             </div>
