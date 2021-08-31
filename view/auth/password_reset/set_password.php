@@ -5,7 +5,7 @@
 <div class="centered-container">
     <div class="card-container">
         <div class="animated-card" id="sign-up">
-            <div>
+            <form action="/Auth/process_set_password?email=<?=$_GET["email"]?>" method="POST">
 
                 <div class="m2" id="image" style="text-align:center;">
                     <img style="border-radius:8px; height:50px;" src="/assets/images/logo.png" />
@@ -15,7 +15,7 @@
                     <label style="font-size:1.1rem;">Change Password</label>
                 </div>
 
-                <form action="/Auth/process_set_password" method="POST">
+                <div>
                     <div class="field">
                         <label>New Password</label>
                         <input class="ctrl" type="password" name="pass1">
@@ -27,12 +27,12 @@
                         <input class="ctrl" type="password" name="pass2">
                         <span class="field-msg"></span>
                     </div>
-                </form>
+                </div>
 
                 <div class="field center mt1"><button class="btn">Change Pasword</btn>
                 </div>
 
-            </div>
+            </form>
         </div>
     </div>
 </div>

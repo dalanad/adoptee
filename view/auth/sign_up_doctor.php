@@ -3,7 +3,7 @@
 
 <div class="centered-container">
     <div class="card-container" style="max-width: 500px; width: 100%;">
-        <form style="margin: 1rem; flex: 1 1 0; max-width: 500px;" action="/doctor/process_registration" method="POST">
+        <form style="margin: 1rem; flex: 1 1 0; max-width: 500px;" action="/doctor/process_registration" method="POST" enctype="multipart/form-data">
             <div style="display: flex; align-items:flex-end; ">
                 <img src="/assets/images/consultations/doctor_standing.png" style="width: 50px;" />
                 <div>
@@ -27,7 +27,6 @@
                     <label>Full Name </label>
                     <input class="ctrl" type="text" name="name" required>
                 </div>
-
                 <div class="field">
                     <label>Email</label>
                     <input class="ctrl" type="email" name="email" required>
@@ -38,20 +37,27 @@
                 </div>
                 <div class="field">
                     <label>Confirm Password</label>
-                    <input class="ctrl" type="password" name="confirm-password" required>
+                    <input class="ctrl" type="password" onkeyup="validateForm(event)" name="confirm-password" required>
                 </div>
 
                 <div class="separator body-text"> <i class="far fa-stethoscope"></i> &nbsp; Doctor Details</div>
                 <div class="field">
                     <label>VCSL Registration Number</label>
-                    <input class="ctrl" type="text" pattern="/[0-9+]+/[a-zA-Z]+/[0-9+]/" name="reg_no" required>
+                    <input class="ctrl" type="number" name="reg_no" required>
                 </div>
-
                 <div class="field">
-                    <label>Contact Number</label>
+                    <label>Proof of Registration</label>
+                    <input type="file" name="proof_image" required>
+                    <span class="field-msg">Upload a photo of your registration</span>
+                </div>
+                <div class="field">
+                    <label>Contact Number (Mobile)</label>
                     <input class="ctrl" type="number" minlength="10" name="telephone" required>
                 </div>
-
+                <div class="field">
+                    <label>Contact Number (Fixed)</label>
+                    <input class="ctrl" type="number" minlength="10" name="telephone_fixed" required>
+                </div>
                 <div class="field" style="grid-column: 1 / -1;">
                     <label>Address</label>
                     <input class="ctrl" type="text" name="address">
@@ -69,3 +75,32 @@
         </form>
     </div>
 </div>
+<script>
+    let password = document.querySelector("[name='password']")
+    let confirm_password = document.querySelector("[name='confirm-password']")
+
+    const form = document.querySelector('form');
+
+    form.addEventListener("submit", validateForm)
+
+    function validateForm(event) {
+
+        form.querySelectorAll(".field-msg").forEach(e => {
+            e.remove()
+        })
+
+
+        let valid = password.value === confirm_password.value;
+
+
+        if (!valid) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            console.log(confirm_password.parentElement)
+            confirm_password.parentElement.innerHTML += "<span class='field-msg' style='color:var(--red);'>Password Not Matching</span>"
+        }
+
+    }
+</script>

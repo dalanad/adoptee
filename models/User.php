@@ -30,19 +30,14 @@ class User extends BaseModel
     }
 
     static function verifyEmail($email){
-        $query = "update `user` set email_verified= 1 where email= '$email'";
+        $query = "update `user` set email_verified = 1 where email= '$email'";
         return BaseModel::update($query);
     }
 
-    static function changePassword($user, $new){
+    static function changePassword($email, $new){
         $hashed_password = Crypto::hash($new);
-        $query = "UPDATE 'user' set password= $hashed_password WHERE user = $user";
+        $query = "UPDATE user set password= '$hashed_password' WHERE email = '$email'";
         return BaseModel::update($query);
     }
 
-    static function resetPassword($user,$password){
-        $hashed_password = Crypto::hash($password);
-        $query = "UPDATE 'user' set password= $hashed_password WHERE 'user' = $user";
-        return BaseModel::update($query);
-    }
 }

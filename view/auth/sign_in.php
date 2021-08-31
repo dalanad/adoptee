@@ -43,7 +43,7 @@
                 <div class="field">
                     <label>Password</label>
                     <input class="ctrl" type="password" name="password" required />
-                    <a href="./../../view/auth/password_reset/request_link.php" class="field-msg"> Forgot Password ? </a>
+                    <a href="/auth/request_link" class="field-msg"> Forgot Password ? </a>
                 </div>
                 <?php if (isset($_GET["error"])) { ?>
                     <div style="color: red; font-weight:bold;font-weight: bold;text-align: center;margin-top: 1rem; ">
