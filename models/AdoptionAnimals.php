@@ -13,6 +13,10 @@ VALUES ($org_id, $animal_id, '$type', '$other', '$gender', $dob, '$color', '$des
         $query = "select * from animal_for_adoption where org_id= $org_id";
         return BaseModel::select($query);
     }
-}
 
-?>
+    public static function searchAnimals()
+    {
+        $query = "select * from animal_for_adoption";
+        return self::select($query);
+    }
+}

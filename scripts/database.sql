@@ -21,15 +21,18 @@ create table doctor (
     reg_no varchar(50) primary key,
     address varchar(50),
     email varchar(50),
-    credentials varchar(50)
+    telephone_fixed char(10),
+    credentials varchar(50),
+    proof_image varchar(50)
 );
+
 
 create table organization ( 
     org_id  int(10) AUTO_INCREMENT primary key ,
     name varchar(50) not null ,
     telephone char(10) not null,
-    address_line_1 varchar(20)   ,
-    address_line_2 varchar(20)  ,
+    address_line_1 varchar(50)   ,
+    address_line_2 varchar(50)  ,
     city varchar(20) ,
     tagline varchar(50),
     logo varchar(200)

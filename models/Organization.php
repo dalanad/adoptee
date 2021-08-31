@@ -2,10 +2,10 @@
 
 class Organization extends BaseModel
 {
-    public function createOrganization($name, $telephone, $address_line_1, $address_line_2, $city)
+    public static function createOrganization($name, $telephone, $address_line_1, $address_line_2, $city)
     {
         $query = "INSERT INTO `organization` (  `name`, `telephone`, `address_line_1`, `address_line_2`, `city`) 
-VALUES ( '$name', $telephone, '$address_line_1', '$address_line_2', '$city')";
+                VALUES ( '$name', $telephone, '$address_line_1', '$address_line_2', '$city')";
         return BaseModel::insert($query);
     }
 
@@ -28,5 +28,3 @@ VALUES ( '$name', $telephone, '$address_line_1', '$address_line_2', '$city')";
         return BaseModel::select($query);
     }
 }
-
-?>
