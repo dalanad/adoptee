@@ -132,7 +132,7 @@ class AuthController extends Controller
 
         if (User::matchPasswords($_POST['pass1'], $_POST['pass2'])) {
             User::changePassword($user["email"], $_POST['pass1']);
-            // send to login
+            $this->redirect("/auth/sign_in");
         }
     }
 }

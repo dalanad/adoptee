@@ -15,12 +15,13 @@ class OrganizationController extends Controller
         View::render("public/organizations/organization_listing", $data);
     }
 
-    static function get_org_details()
+    static function get_org_timeline()
     {
         $organization = new Organization;
-        $orgData = ["details" => $organization->findOrgById($_GET['org_id'])];;
+        $orgId = $organization->findOrgById($_GET['org_id']);
+        $orgData = ["details" => $organization->getOrgContent($orgId)];;
 
-        View::render("public/organizations/organization_profile", $orgData); //, $animalData
+        View::render("public/organizations/organization_profile", $orgData);
     }
 }
 
