@@ -1,12 +1,5 @@
 <?php require_once __DIR__ .  './../../_layout/header.php'; ?>
 
-<?php $organizations = array(
-    array("name" => "Cat Haven", "logo" => "LOGO", "tagline" => "Adopt, Don't Shop"),
-    array("name" => "Save a Pet", "logo" => "LOGO", "tagline" => "Save a Life"),
-    array("name" => "Animal Trust", "logo" => "LOGO", "tagline" => "Adopt Today"),
-    array("name" => "Shelter for Pets", "logo" => "LOGO", "tagline" => "Help a Pet")
-); ?>
-
 <style>
     .tier-card {
         text-align: center;
@@ -53,8 +46,6 @@
 
 <div class="container">
 
-<!-- foreach ($organizations as $key => $value) { ?> -->
-
     <?php
     foreach ($orgs as $key => $value) { ?>
     
@@ -63,7 +54,7 @@
             <div class="subtitle"><?php print_r($value['tagline']); ?></div>
             <div class="logo"><?php print_r($value['logo']); ?></div>
             <!-- <a class="btn" href="view_profile">View Profile</a> -->
-            <a class="btn" href="get_org_details?org_id=<?php echo($value['org_id']) ?>">View Profile</a>
+            <a class="btn" href="get_org_timeline?org_id=<?php echo($value['org_id']) ?>">View Profile</a>
     </div>
     <?php } ?>
 
