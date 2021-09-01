@@ -39,23 +39,21 @@ border-radius: 10px;
 <label for="role"><strong>Role</strong></label>
 <select class="ctrl" name="role" id="role">
     <option value="admin">ADMIN</option>
-    <option value="organization user">ORGAIZATION USER</option>
-    <option value="registerd user">REGISTERED USER</option>
-    <option value="doctor">DOCTOR</option>
+    <option value="organization user">NORMAL USER</option>
 </select>
 </div>
-<div class="btn green">
+
 <button class="btn green" type="submit">Accept</button>
-</div>
+
 <hr>
 <strong>If the user has forgotten the password</strong><br><br>
-<div class="btn btn-orange">
+
 <button class="btn btn-orange" type="submit">Reset Password</button>
-</div>
+
 <br><br>
 <hr>
 <strong>Disable Access to the user</strong><br><br>
-<div class="btn btn-pink">
+
 <button class="btn btn-pink" type="submit"><i class="fa fa-trash"></i> Delete User</button>
-</div>
+
 

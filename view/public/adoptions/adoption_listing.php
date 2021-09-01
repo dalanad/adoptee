@@ -1,15 +1,4 @@
-<?php
-
-require __DIR__ . "./../../_layout/header.php";
-
-$dog_names = array(
-    'Toby', 'Zeus', 'Ellie', 'Nala',  'Bella', 'Charlie',
-    'Luna', 'Lucy',
-    'Max', 'Bailey',
-    'Cooper', 'Daisy',
-    'Sadie', 'Molly', 'Buddy', 'Lola', 'Stella', 'Tucker', 'Bentley', 'Zoey', 'Harley', 'Maggie', 'Riley', 'Bear', 'Sophie', 'Duke', 'Jax', 'Oliver', 'Chloe', 'Jack',
-
-);  ?>
+<?php require __DIR__ . "./../../_layout/header.php"; ?>
 <style>
     .adoption-grid {
         display: grid;
@@ -63,26 +52,24 @@ $dog_names = array(
     <div class="mx2 mt2 flex items-center justify-between">
         <h2 class="m0">Adopt Pets</h2>
         <div>
-           <input class="ctrl" placeholder="Search"/>
+            <input class="ctrl" placeholder="Search" />
         </div>
     </div>
     <div class="m2 adoption-grid">
-        <?php
-        foreach ($dog_names as $key => $value) {
-        ?>
-            <div class="adoption-card" onclick="location.href='/view/public/adoptions/adoption_request.php'">
-                <div style="background-image: url('/assets/images/dogs/placeholder<?=$key%3?>.jpg');background-size: cover;height: 160px;""></div>
+        <?php foreach ($animals as $animal) { ?>
+            <div class="adoption-card" onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal["animal_id"] ?>'">
+                <div style="background-image: url('/assets/images/dogs/placeholder2.jpg');background-size: cover;height: 160px;""></div>
                 <div class=" adoption-card-details">
                     <div class="p1 px2">
-                        <div style="font-weight: 500;"><?= $value ?></div>
-                        <div style="font-size:small"><?= rand(1, 15) ?> years</div>
+                        <div style="font-weight: 500;"><?= $animal["type"] ?></div>
+                        <div style="font-size:small"><?= $animal["dob"] ?> years</div>
                     </div>
-                    <div style="font-size: 1.3em; display: flex;    align-items: center;    padding: 0 0.7em;">
-                        <?= rand(1, 5) > 3 ? '<i class="txt-clr blue fa fa-mars"></i>' : '<i class="txt-clr pink fa fa-venus"></i>' ?>
+                    <div style="font-size: 1.3em; display: flex;align-items: center;padding: 0 0.7em;">
+                        <?= $animal["gender"] == 'MALE' ? '<i class="txt-clr blue fa fa-mars"></i>' : '<i class="txt-clr pink fa fa-venus"></i>' ?>
                     </div>
                 </div>
                 <div class="adoption-card-action">ADOPT</div>
             </div>
-        <?php } ?>
+        <? } ?>
     </div>
 </div>

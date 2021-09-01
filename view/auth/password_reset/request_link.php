@@ -5,7 +5,7 @@
 <div class="centered-container">
     <div class="card-container">
         <div class="animated-card" id="sign-up">
-            <div>
+            <form action="/Auth/process_request_link" method="POST">
 
                 <div class="m2" id="image" style="text-align:center;">
                     <img style="border-radius:8px; height:50px;" src="/assets/images/logo.png" />
@@ -15,31 +15,34 @@
                     <label style="font-size:1.1rem;">Reset Password</label>
                 </div>
 
-                <div class="body-text"><p  style="text-align:center">Please enter your email below to reset</br> the password</p>
-                   
+                <div class="body-text">
+                    <p style="text-align:center">Please enter your email below to reset</br> the password</p>
                 </div>
                 <!-- <p class = "center wrap"> </p>-->
 
-                <form action="/Auth/process_request_link" method="POST">
+                <div>
                     <div class="field">
                         <label>Email</label>
                         <input class="ctrl" type="email" name="email">
                         <span class="field-msg"></span>
                     </div>
-                    <?php if (isset($_POST["sent"])) { ?>
-                    <div style="color: blue; font-weight:bold;font-weight: bold;text-align: center;margin-top: 1rem; ">
+
+                </div>
+
+                <div class="field center mt1">
+                    <button class="btn orange" type="submit">Reset Pasword</btn>
+                </div>
+
+                <?php if (isset($_GET["sent"])) { ?>
+                    <div style="color: green; font-weight:bold;font-weight: bold;text-align: center;margin-top: 1rem; ">
                         Password reset email has been sent
                     </div>
                 <?php } ?>
-                </form>
-
-                <div class="field center mt1"><button class="btn orange" type="submit">Reset Pasword</btn>
-                </div>
 
                 <div class="center mt2" style="font-size:0.8rem;">
-                    <a class="btn-link bold text-decoration-none" href="./../sign_in.php">Back to Login</a>
+                    <a class="btn-link bold text-decoration-none" href="/auth/sign_in">Back to Login</a>
                 </div>
-            </div>
         </div>
     </div>
+</div>
 </div>

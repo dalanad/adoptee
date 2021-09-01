@@ -47,8 +47,7 @@ class AuthController extends Controller
 
     function process_sign_up()
     {
-        if (User::matchPasswords($_POST['password'], $_POST['confirmPassword'])) 
-        {
+        if (User::matchPasswords($_POST['password'], $_POST['confirmPassword'])) {
             User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_POST['password']);
             $this->redirect('/auth/verify?email=' . $_POST['email']);
         } else {
@@ -63,7 +62,14 @@ class AuthController extends Controller
 
     public function process_register_organization()
     {
-        Organization::createOrganization($_POST['name'], $_POST['telephone'], $_POST['address_line_1'], $_POST[`address_line_2`], $_POST[`telephone`]);
+
+        if (User::matchPasswords($_POST['password'], $_POST['confirm-Password'])) {
+            User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], "", $_POST[`password`]);
+            Organization::createOrganization($_POST['name'], $_POST['telephone'], $_POST['address_line_1'], $_POST[`address_line_2`], $_POST[`city`]);
+            $this->redirect('/auth/verify?email=' . $_POST['email']);
+        } else {
+            $this->redirect("/auth/sign_up_organization?error=true");
+        }
     }
 
     function verify()
@@ -75,8 +81,7 @@ class AuthController extends Controller
             $token = Crypto::encrypt($user["email"]);
             $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email&token=$token'> Verify Email </a> ";
             $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
-            
-        } else if ($_GET["action"] == "verify_email"&&  $user["email"] == Crypto::decrypt($_GET["token"])) {
+        } else if ($_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
             // update verified column;
             User::verifyEmail($user["email"]);
             // header('Location: /adoptionanimals/add_new_animal');
@@ -99,31 +104,35 @@ class AuthController extends Controller
 
     function request_link()
     {
-        View::render("auth/password_reset/request_link.php");
+        View::render("auth/password_reset/request_link");
     }
 
     function process_request_link()
     {
         $user = User::findUserByEmail($_POST["email"]);
 
-            $email = new EmailService();
-            $body = "Dear " . $user["name"] . ", Click the link below to reset your password<br> <a href='http://localhost/auth/set_password?email=" . $_GET["email"] . "'> Reset Password </a> ";
-            $email->sendMail($user["email"], $user["name"], "Reset Password", $body);
-            $this->redirect("/auth/password_reset/request_link?sent=true");
+        $email = new EmailService();
 
+        $body = "Dear " . $user["name"] . ", 
+        Click the link below to reset your password <br> 
+        <a href='http://localhost/auth/set_password?email=" . $user["email"] . "'> Reset Password </a> ";
+
+        $email->sendMail($user["email"], $user["name"], "Reset Password", $body);
+        $this->redirect("/auth/request_link?sent=true");
     }
 
     function set_password()
     {
-        View::render("auth/password_reset/set_password.php");
+        View::render("auth/password_reset/set_password");
     }
 
-    function proces_set_password()
+    function process_set_password()
     {
         $user = User::findUserByEmail($_GET["email"]);
 
         if (User::matchPasswords($_POST['pass1'], $_POST['pass2'])) {
-            User::resetPassword($user, $_POST['pass1']);
+            User::changePassword($user["email"], $_POST['pass1']);
+            // send to login
         }
     }
 }

@@ -1,6 +1,36 @@
 <?php require __DIR__ . "./../../_layout/header.php"; ?>
 
 <style>
+     .radio-box {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .radio-box input {
+    display: none;
+  }
+  
+  .radio-box label {
+    padding: .5rem 1rem;
+    border: 2px solid var(--gray-3);
+    display: block;
+    border-radius: .4rem;
+    cursor: pointer;
+    margin-right: .3rem;
+    text-align: center;
+    margin-bottom: .3rem;
+  }
+  
+  input:checked+label {
+    border: 2px solid currentColor;
+    color: var(--primary);
+    font-weight: 500;
+    box-shadow: var(--shadow-light);
+  }
+
+  input:checked+label i {
+    font-weight: 900;
+  }
     #googleMap {
         margin-bottom: 1rem;
     }
@@ -15,6 +45,7 @@
             grid-template-columns: 1fr 1fr;
             column-gap: 1rem;
             margin: 2rem;
+            padding-top:40px;
         }
 
         #googleMap {
@@ -54,6 +85,31 @@
             <span class="field-msg"> </span>
         </div>
         <div class="rounded" style="min-height: 250px;" id="googleMap"></div>
+
+        <div class="field ">
+            <label>Contact Number </label>
+            <div class="ctrl-group">
+                <span class="ctrl static"><i class="fa fa-phone"></i></span>
+                <input class="ctrl" type="text" name="telephone"  />
+            </div>
+            <span class="field-msg"> </span>
+        </div>
+
+        <div class="field ">
+            <label>Animal type</label>
+           <div class="radio-box ">
+            <input name="animal_type" id="dog" type="radio">
+            <label for="dog"><i class="far fa-dog"></i><br>Dog</label>
+            <input name="animal_type" id="cat" type="radio">
+            <label for="cat"><i class="far fa-cat"></i><br> Cat </label>
+            <input name="animal_type" id="bird" type="radio">
+            <label for="bird"><i class="far fa-dove"></i><br> Bird</label>
+            <input name="animal_type" id="other" type="radio">
+            <label for="other"><i class="far fa-paw"></i><br>Other </label>
+            </div>
+            <span class="field-msg"> </span>
+        </div>
+
         <div class="field ">
             <label>Photos</label>
             <div class="ctrl-group">

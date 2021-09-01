@@ -26,6 +26,8 @@ $administration_menu = array(
 );
 
 
+
+
 ?>
 
 <style>
@@ -122,6 +124,7 @@ $administration_menu = array(
                     MANAGEMENT
                 </h4>
             </div>
+
             <?php foreach ($management_menu as $key => $value) { ?>
                 <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="<?= $key ?>">
                     <i class="fa fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
@@ -132,6 +135,10 @@ $administration_menu = array(
                 <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
                     ADMINISTRATION
                 </h4>
+
+            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
+                <?php include __DIR__ . "/org_dashboard/" . $active . ".php" ?>
+
             </div>
 
             <?php foreach ($administration_menu as $key => $value) { ?>
@@ -145,5 +152,8 @@ $administration_menu = array(
             <?php include __DIR__ . "./org_dashboard/" . $active . ".php" ?>
         </div>
     </div>
+
 </div>
+
+
 </div>
