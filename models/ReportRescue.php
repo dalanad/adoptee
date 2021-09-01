@@ -10,6 +10,11 @@ VALUES ('$description',$location,$telephone,$animal_type,'$photo' )";
 
         return BaseModel::insert($query);
     }
+
+    static function findReportedCases(){
+        $query = "select * from report_rescue";
+        return BaseModel::select($query);
+    }
 }
 
 ?>

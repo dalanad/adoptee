@@ -23,7 +23,7 @@ $adoption_requests = array(
                 <th>CONTACT DETAILS</th>
                 <th>HAVE PETS</th>
                 <th>HAVE CHILDREN</th>
-                <th>ACCEPT / REJECT REQUEST</th>
+                <th>RESPOND REQUEST</th>
                 <th></th>
             </tr>
 
@@ -39,12 +39,12 @@ $adoption_requests = array(
                         &nbsp;
                         <button title="address" class="btn btn-link btn-icon"><i class="fas fa-map-marker-alt"></i></button>
                     </td>
-                    <td><span class="tag <?= $adoption_request["r1"] ? 'green' : 'red' ?>"><?= $adoption_request["r1"] ? "YES" : "NO" ?> </span></td>
-                    <td><span class="tag <?= $adoption_request["r2"] ? 'green' : 'red' ?>"><?= $adoption_request["r2"] ? "YES" : "NO" ?> </span></td>
+                    <td><span class="tag <?= $adoption_request["r1"] ? 'green' : 'pink' ?>"><?= $adoption_request["r1"] ? "YES" : "NO" ?> </span></td>
+                    <td><span class="tag <?= $adoption_request["r2"] ? 'green' : 'pink' ?>"><?= $adoption_request["r2"] ? "YES" : "NO" ?> </span></td>
                     <td>
                         <button title="Accept" class="btn btn-link btn-icon green"><i class="fas fa-check-circle"></i> </button>
                         &nbsp;
-                        <button title="Reject" class="btn btn-link btn-icon red"><i class="fas fa-times-circle"></i></button>
+                        <button title="Reject" class="btn btn-link btn-icon pink"><i class="fas fa-times-circle"></i></button>
                     </td>
                     <td><button title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button></td>
                 </tr>
