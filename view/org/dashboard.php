@@ -135,10 +135,6 @@ $administration_menu = array(
                 <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
                     ADMINISTRATION
                 </h4>
-
-            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
-                <?php include __DIR__ . "/org_dashboard/" . $active . ".php" ?>
-
             </div>
 
             <?php foreach ($administration_menu as $key => $value) { ?>

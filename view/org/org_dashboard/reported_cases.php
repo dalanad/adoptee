@@ -1,17 +1,3 @@
-<?php
-
-$reported_cases = array(
-    array("type" => "Dog"),
-    array("type" => "Cat"),
-    array("type" => "Dog"),
-    array("type" => "Cat"),
-    array("type" => "Dog"),
-    array("type" => "Cat"),
-    array("type" => "Dog"),
-    array("type" => "Cat")
-);
-
-?>
 
 <style>
     #googleMap {
