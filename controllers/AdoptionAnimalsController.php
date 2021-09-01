@@ -8,12 +8,11 @@ class AdoptionAnimalsController extends Controller{
     }
 
     function process_add_new_animal(){
-
         AdoptionAnimals::createNewAnimal(1, 1, $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['photo']);
 
     }  
     
-    function animals_for_adoption()
+    function org_adoption_listing()
     {
         $data = [
             "active" => "org_adoption_listing",
@@ -26,7 +25,8 @@ class AdoptionAnimalsController extends Controller{
     function adoption_requests()
     {
         $data = [
-            "active" => "adoption_requests"
+            "active" => "adoption_requests",
+            "adoption_requests"=>AdoptionAnimals::findRequestsByOrgId(1)
     ];
         View::render("org/dashboard", $data);
     }
@@ -34,7 +34,8 @@ class AdoptionAnimalsController extends Controller{
     function reported_cases()
     {
         $data = [
-            "active" => "reported_cases"
+            "active" => "reported_cases",
+            "reported_cases"=>ReportRescue::findReportedCases()
     ];
         View::render("org/dashboard", $data);
     }

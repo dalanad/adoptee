@@ -112,9 +112,6 @@ $administration_menu = array(
 
 <div>
     <div class="mx1">
-        <a href="./dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
-    </div>
-    <div class="mx1">
         <h4 class="flex items-center">
             <a href="./dashboard.php" class="btn btn-link btn-icon mr1 " style="color: #313636; font-size: 1em;"><i class="fa fa-chart-line"></i></a>
             Dashboard
@@ -129,7 +126,7 @@ $administration_menu = array(
             </div>
 
             <?php foreach ($management_menu as $key => $value) { ?>
-                <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="?menu=<?= $key ?>">
+                <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="<?= $key ?>">
                     <i class="fa fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
                 </a>
             <?php  } ?>

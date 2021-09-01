@@ -64,20 +64,14 @@ create table adoption_request (
 
 create table animal (
     animal_id int(10) AUTO_INCREMENT not null,
-    gender varchar(10),
+    type varchar(10),
+    other varchar(10),
     primary key(animal_id)
-);
-
-create table animal_color (
-    animal_id int(10) not null,
-    color varchar(50),
-    primary key(animal_id,color),
-    foreign key(animal_id) references animal(animal_id)
 );
  
 create table animal_for_adoption (
     animal_id int(10) not null,
-    type varchar(50) not null,
+    name varchar(50) not null,
     gender varchar(10),
     dob date,
     color varchar(50) not null,
@@ -140,7 +134,9 @@ create table sponsorship_tier(
 );
 
 create table report_rescue(
+    type varchar(50),
     description varchar(100),
+    contact_number varchar(100),
     location varchar(100) not null,
     photo varchar(100) not null
 );

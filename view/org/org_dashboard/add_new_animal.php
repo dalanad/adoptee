@@ -108,6 +108,12 @@
     </div>
     <h3 class='mt1 txt-clr'>Add New Animal for Adoption</h3>
     <form action="/AdoptionAnimals/process_add_new_animal" method="post"> 
+
+    <div class='field'>
+            <label for='name'>Name</label>
+            <input class="ctrl field-font" type="text" name="name" placeholder="Name" required/>
+    </div>
+
         <div class='field'>
             <label for='type'>Type</label>
                 <select class="ctrl field-font" name='type' required>
@@ -135,12 +141,7 @@
         <div class='field'>
             <label for='dob'>Approximate DOB</label>
             <div>
-            <input class="ctrl2 field-font" type="date" name="dob" id="dob" required/>
-            <span id = "message"> </span> 
-            <div class="tooltip">
-            <button class="btn btn-link btn-icon tooltip" type="submit" onclick = "ageCalculator()"><span class="ctrl static"><i class="fa fa-photo-video"></i></span></button>
-            <span class="tooltiptext">Calculate Age</span>  
-            </div>
+            <input class="ctrl2 field-font" type="date" name="dob" id="dob" onclick = "ageCalculator()" required/>
             <p id="result"></p>
             </div>
         </div>
