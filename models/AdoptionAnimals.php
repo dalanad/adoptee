@@ -20,5 +20,10 @@ VALUES ('$gender', $dob, '$color', '$description', '$photo')";
     static function findRequestsByOrgId($org_id){
         $query = "select * from adoption_request where org_id= $org_id";
         return BaseModel::select($query);
+        
+    public static function searchAnimals()
+    {
+        $query = "select * from animal_for_adoption";
+        return self::select($query);
     }
 }

@@ -15,6 +15,7 @@ function auto_load($class_name)
 }
 
 spl_autoload_register('auto_load');
+ini_set("file_uploads", "On");
 
 if (!isset($_SESSION)) {
     session_start();

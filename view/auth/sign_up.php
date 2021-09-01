@@ -67,6 +67,12 @@ $_SESSION['email'] = $_POST["email"]; ?>
                     <input class="ctrl" type="password" name="confirmPassword" required>
                     <span class="field-msg"></span>
                 </div>
+
+                <?php if (isset($_GET["error"])) { ?>
+                    <div style="color: red; font-weight: bold;text-align: center;margin-top: 1rem; ">
+                        Passwords do not match
+                    </div>
+                <?php } ?>
             </div>
 
             <div class="field" style="display:inline; font-size:0.8rem">

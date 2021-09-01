@@ -42,9 +42,9 @@
                         <i class="fa fa-times"></i>
                     </button>
                 </div>
-                <a class="link" href="/view/public/adoptions/adoption_listing.php">Adoptions</a>
+                <a class="link" href="/adoptions">Adoptions</a>
                 <a class="link" href="/view/public/rescues/report_rescue.php">Rescues</a>
-                <a class="link" href="Organization/get_org_listing">Organizations</a>
+                <a class="link" href="/Organization/get_org_listing">Organizations</a>
                 <a class="link" href="/consultation">Veterinary Consultations</a>
             </nav>
         <?php } ?>
