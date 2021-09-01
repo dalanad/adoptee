@@ -79,15 +79,15 @@ class AuthController extends Controller
     public function process_register_organization()
     {
 
-        if (User::matchPasswords($_POST['password'], $_POST['confirm-Password'])) {
+        if (User::matchPasswords($_POST['password'], $_POST['confirm-password'])) {
           
-            User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], "", $_POST[`password`]);
-            Organization::createOrganization($_POST['name'], $_POST['telephone'], $_POST['address_line_1'], $_POST[`address_line_2`], $_POST[`city`]);
+            User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], "", $_POST['password']);
+            Organization::createOrganization($_POST['name'], $_POST['telephone'], $_POST['address_line_1'], $_POST['address_line_2'], $_POST['city']);
            
             $this->redirect('/auth/verify?email=' . $_POST['email']);
         
         } else {
-            $this->redirect("/auth/sign_up_organization?error=true");
+            $this->redirect("/auth/organizationRegistration?error=true");
         }
     }
 
