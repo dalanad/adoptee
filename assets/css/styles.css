@@ -528,8 +528,8 @@ header .logo img {
 /* STEP INDICATOR END */
 
 /* SCROLLBAR START*/
--webkit-scrollbar
-:: {
+
+::-webkit-scrollbar {
 	width: 10px;
   }
 
