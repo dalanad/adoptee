@@ -18,8 +18,8 @@ class OrganizationController extends Controller
     static function get_org_timeline()
     {
         $organization = new Organization;
-        $orgId = $organization->findOrgById($_GET['org_id']);
-        $orgData = ["details" => $organization->getOrgContent($orgId)];;
+        $org = $organization->findOrgById($_GET['org_id']);
+        $orgData = ["details" => $organization->getOrgContent($_GET['org_id'])];;
 
         View::render("public/organizations/organization_profile", $orgData);
     }

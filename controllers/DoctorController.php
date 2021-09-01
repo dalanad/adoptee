@@ -5,9 +5,8 @@ class DoctorController extends Controller
 
     function index()
     {
-        View::render("doctor/home");
+        $this->redirect("/doctor/home");
     }
-
     function register()
     {
 
@@ -48,5 +47,25 @@ class DoctorController extends Controller
                 $this->redirect("/doctor/register");
             };
         }
+    }
+
+    function home()
+    {
+        View::render("doctor/home");
+    }
+
+    function live_consultation()
+    {
+        View::render("doctor/live_consultation");
+    }
+
+    function medical_advise()
+    {
+        View::render("doctor/medical_advise");
+    }
+
+    function consulted_animals()
+    {
+        View::render("doctor/consulted_animals");
     }
 }

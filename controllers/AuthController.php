@@ -16,21 +16,37 @@ class AuthController extends Controller
         try {
             $user = User::findUserByEmail($email);
 
-            // check email/ telephone verified ? else send to verification
-
             if ($user['email_verified'] == 0 || $user['telephone-verified'] == 0) {
-                //
+                $this->redirect('/auth/verify?email=' . $user["email"]);
             }
 
             if (Crypto::verify($password, $user["password"])) {
-                // todo : identify user
-                $_SESSION['user'] =  $user;
-                $this->redirect("/");
+                $this->sendToHomePage($user);
             } else {
                 $this->redirect("/auth/sign_in?error=true");
             }
         } catch (Exception $e) {
             $this->redirect("/auth/sign_in?error=true");
+        }
+    }
+
+    private function sendToHomePage($user)
+    {
+        $_SESSION['user'] =  $user;
+
+        $organizationUser = OrganizationUser::findUserByUID($user["user_id"]);
+        $doctors = Doctor::findByUID($user["user_id"]);
+
+        if (sizeof($organizationUser) > 0) {
+            $_SESSION['org_id'] =  $organizationUser[0]['org_id'];
+            $_SESSION['user_role'] = strtolower("org_" . $organizationUser[0]['role']);
+            $this->redirect("/AdoptionAnimals/org_adoption_listing");
+        } else if (sizeof($doctors) > 0) {
+            $_SESSION['user_role'] = "doctor";
+            $this->redirect("/doctor");
+        } else {
+            $_SESSION['user_role'] = "reg_user";
+            $this->redirect("/");
         }
     }
 
@@ -64,9 +80,12 @@ class AuthController extends Controller
     {
 
         if (User::matchPasswords($_POST['password'], $_POST['confirm-Password'])) {
+          
             User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], "", $_POST[`password`]);
             Organization::createOrganization($_POST['name'], $_POST['telephone'], $_POST['address_line_1'], $_POST[`address_line_2`], $_POST[`city`]);
+           
             $this->redirect('/auth/verify?email=' . $_POST['email']);
+        
         } else {
             $this->redirect("/auth/sign_up_organization?error=true");
         }
@@ -82,9 +101,8 @@ class AuthController extends Controller
             $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email&token=$token'> Verify Email </a> ";
             $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
         } else if ($_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
-            // update verified column;
             User::verifyEmail($user["email"]);
-            // header('Location: /adoptionanimals/add_new_animal');
+            $this->sendToHomePage($user);
         }
 
         View::render("auth/user_verification");
