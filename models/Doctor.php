@@ -21,4 +21,10 @@ class Doctor extends BaseModel
     {
         return self::select("select * from doctor");
     }
+
+    public static function findByUID($user_id)
+    {
+        $query = "select *  from `doctor` where user_id= '$user_id'";
+        return self::select($query);
+    }
 }

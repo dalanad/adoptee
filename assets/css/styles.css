@@ -6,7 +6,7 @@
 	--gray-3: #dddddd;
 	--gray-4: #cccccc;
 	--gray-5: #888888;
-	--muted: var(--gray-4);
+	--muted: var(--gray-3);
 	--primary: #0d6efd;
 	--red: red;
 	--blue: #0ebbff;
@@ -136,7 +136,7 @@ th {
 	color: var(--primary);
 	background: no-repeat;
 	border: none;
-	min-height: 1em;
+	min-height: 1.2em;
 	box-shadow: none;
 }
 
@@ -253,7 +253,7 @@ header .logo img {
 	font-family: inherit;
 	color: var(--color);
 	font-size: 1rem;
-	border: 0.1rem solid var(--gray-3);
+	border: 0.1rem solid var(--muted);
 	background: var(--gray-1);
 	width: 100%;
 	box-sizing: border-box;
@@ -284,7 +284,6 @@ header .logo img {
 .ctrl:focus-within {
 	transition: all 0.2s ease-in-out;
 	--muted: var(--primary);
-	border-color: var(--muted);
 	background: white;
 }
 
@@ -294,9 +293,14 @@ header .logo img {
 	background: white;
 }
 
-.ctrl.invalid,
+.invalid label {
+	color: var(--red);
+}
+
+.invalid,
 .ctrl:focus:invalid.validate {
-	--muted: var(--red);
+	--muted: var(--red) !important;
+	--primary: var(--red);
 }
 
 .ctrl .valid,
@@ -403,6 +407,7 @@ header .logo img {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 	grid-column-gap: 0.5rem;
+	grid-auto-rows: min-content;
 }
 
 /* FORMS END */
@@ -531,18 +536,18 @@ header .logo img {
 
 ::-webkit-scrollbar {
 	width: 10px;
-  }
+}
 
-  ::-webkit-scrollbar-track {
-	background: #f1f1f1; 
-  }
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
 
-  ::-webkit-scrollbar-thumb {
-	background: #888; 
-  }
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
 
-  ::-webkit-scrollbar-thumb:hover {
-	background: #555; 
-  }
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
 
-  /* SCROLLBAR END*/
+/* SCROLLBAR END*/
