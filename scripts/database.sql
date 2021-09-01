@@ -38,6 +38,15 @@ create table organization (
     logo varchar(200)
 );
 
+INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
+VALUES ('Pet Haven', '0112345678', 'No. 58', '5th Lane', 'Battaramulla', 'Help an animal in need', 'LOGO');
+
+INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
+VALUES ('Animal Shelter', '0334567891', 'No.14/A', 'Temple Road', 'Colombo 8', 'Save a Pet', 'LOGO');
+
+INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
+VALUES ('Animal Welfare Centre', '0114567891', 'No. 120', 'Circular Road', 'Dehiwala', 'Give a pet a home', 'LOGO');
+
 create table adoption_request (
     org_id int(10)  ,
     animal_id int(10)  ,
@@ -135,3 +144,16 @@ create table report_rescue(
     location varchar(100) not null,
     photo varchar(100) not null
 );
+
+create table org_content(
+    item_id int(10) AUTO_INCREMENT primary key,
+    org_id int(10),
+    item varchar(200),
+    photo varchar(200),
+    foreign key(org_id) references organization(org_id)
+);
+
+INSERT INTO `org_content` (`org_id`, `item`, `photo`)
+VALUES ('1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod', 'PHOTO');
+ INSERT INTO `org_content` (`org_id`, `item`, `photo`)
+VALUES ('1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'PHOTO');

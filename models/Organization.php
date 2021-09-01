@@ -27,4 +27,10 @@ class Organization extends BaseModel
         $query = "SELECT * FROM `organization` WHERE org_id = $orgId";
         return BaseModel::select($query);
     }
+
+    static function getOrgContent($orgId)
+    {
+        $query = "SELECT * FROM `org_content` WHERE org_id = $orgId";
+        return BaseModel::select($query);
+    }
 }

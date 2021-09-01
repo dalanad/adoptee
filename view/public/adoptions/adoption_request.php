@@ -105,8 +105,7 @@
         <div class='field'>
            <div>
                 </br>
-                <label for="petsafety">If "Yes", would it be safe for the requested pet to 
-                        live in the same household?
+                <label for="petsafety">If "Yes", what are the any safety concerns with adopting the requested pet, if any?
                 </label>
             </div>
             <div>
@@ -131,8 +130,7 @@
         <div class='field'>
             <div>
             </br>
-                <label for="childsafety">If "Yes", would it be safe for the requested pet to 
-                    live in the same household?
+                <label for="childsafety">If "Yes", what are the any safety concerns with adopting the requested pet, if any?
                 </label>
             </div>
             <div>
