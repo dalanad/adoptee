@@ -17,15 +17,15 @@ create table user(
 );
 
 create table doctor (
-    user_id int(10),
-    reg_no varchar(50) primary key,
+    user_id int(10) primary key,
+    reg_no varchar(50) unique,
     telephone_fixed char(10),
     credentials varchar(50),
     proof_image varchar(50)
 );
 
 create table organization ( 
-    org_id  int(10) AUTO_INCREMENT primary key ,
+    org_id int(10) AUTO_INCREMENT primary key ,
     name varchar(50) not null ,
     telephone char(10) not null,
     address_line_1 varchar(50)   ,
@@ -42,10 +42,10 @@ create table org_user (
     primary key(user_id,org_id)
 );
 
-
 create table adoption_request (
     animal_id int(10),
     user_id int(10),
+    org_id  int(10),
     request_date date,
     approval_date date,
     status enum('PENDING','APPROVED','REJECTED') not null default 'PENDING',
@@ -54,10 +54,6 @@ create table adoption_request (
     children boolean,
     childsafety varchar(100) ,
     primary key(animal_id, user_id)
-    -- foreign key(org_id) references organization(org_id),
-    -- foreign key(animal_id) references animal(animal_id),
-    -- foreign key(user_id) references user(user_id)
-
 );
 
 create table routine_updates (
@@ -71,7 +67,7 @@ create table animal (
     animal_id int(10) AUTO_INCREMENT not null,
     type varchar(10), 
     name varchar(50),
-    gender enum('M','F') ,
+    gender varchar(10),
     dob date,
     color varchar(50),
     primary key(animal_id)
@@ -84,21 +80,18 @@ create table animal_for_adoption (
     status enum('LISTED','ADOPTED') not null default 'LISTED',
     date_adopted date,
     org_id int(10),
-    primary key(animal_id),
-    foreign key(animal_id) references animal(animal_id),
-    foreign key(org_id) references organization(org_id)
+    primary key(animal_id)
 );
 
 create table animal_for_adoption_photos(
     animal_id int(10) not null,
     photo varchar(100) not null, 
-    primary key(animal_id, photo),
-    foreign key(animal_id) references animal(animal_id)
+    primary key(animal_id, photo)
 );
 
 create table rescued_animal (
+    animal_id int(10) primary key,
     report_id int(10),
-    animal_id int(10) not null,
     rescued_date date
 );
 
@@ -184,11 +177,11 @@ create table sponsorship (
   subscription_id int(10) AUTO_INCREMENT primary key,
   org_id int(10),
   name varchar(50),
-  user_id varchar(5),
+  user_id int(10),
   amount_at_subscription int(10) not null,
   start_date date,
   end_date date,
-  status enum('ACTIVE','CANCELED') not null default 'ACTIVE'
+  status enum('ACTIVE','CANCELLED') not null default 'ACTIVE'
 );
 
 create table report_rescue(
@@ -234,7 +227,7 @@ create table merch_purchase(
     order_id int(10) AUTO_INCREMENT primary key,
     user_id int(10),
     created_time timestamp  DEFAULT CURRENT_TIMESTAMP,
-    status enum('CANCELED','SHIPPED','PENDING') not null default 'PENDING',
+    status enum('CANCELLED','SHIPPED','PENDING') not null default 'PENDING',
     address_line_1 varchar(50)   ,
     address_line_2 varchar(50)  ,
     city varchar(20) ,
@@ -243,12 +236,89 @@ create table merch_purchase(
 
 create table merch_purchase_item (
     order_id int(10),
-     org_id int(10),  
-     sku varchar(50),
-     quantity int(10),
-     primary key (order_id,org_id,sku)
+    org_id int(10),  
+    sku varchar(50),
+    quantity int(10),
+    primary key (order_id,org_id,sku)
 );
 
+alter table adoption_request
+add foreign key(org_id) references organization(org_id),
+add foreign key(animal_id) references animal(animal_id),
+add foreign key(user_id) references user(user_id);
+
+alter table doctor
+add foreign key(user_id) references user(user_id);
+
+alter table org_user
+add foreign key(org_id) references organization(org_id),
+add foreign key(user_id) references user(user_id);
+
+alter table routine_updates
+add foreign key(user_id) references user(user_id),
+add foreign key(animal_id) references animal(animal_id);
+
+alter table animal_for_adoption
+add foreign key(org_id) references organization(org_id),
+add foreign key(animal_id) references animal(animal_id);
+
+alter table animal_for_adoption_photos
+add foreign key(animal_id) references animal(animal_id);
+
+alter table rescued_animal
+add foreign key(report_id) references report_rescue(report_id),
+add foreign key(animal_id) references animal(animal_id);
+
+alter table consultation
+add foreign key(user_id) references user(user_id),
+add foreign key(animal_id) references animal(animal_id);
+
+alter table consulataton_message
+add foreign key(consultation_id) references consultation(consultation_id);
+
+alter table medical_record
+add foreign key(animal_id) references animal(animal_id);
+
+alter table medical_record_attachment
+add foreign key(animal_id) references animal(animal_id);
+
+alter table prescription
+add foreign key(medical_record_id) references medical_record(medical_record_id);
+
+alter table prescription_item
+add foreign key(medical_record_id) references medical_record(medical_record_id),
+add foreign key(medecine_id) references medecine(medecine_id);
+
+alter table donation
+add foreign key(txn_id) references payment(txn_id),
+add foreign key(subscription_id) references sponsorship(subscription_id),
+add foreign key(org_id) references organization(org_id);
+
+alter table sponsorship_tier
+add foreign key(org_id) references organization(org_id);
+
+alter table sponsorship
+add foreign key(org_id) references organization(org_id),
+add foreign key(user_id) references user(user_id);
+
+alter table report_rescue
+add foreign key(org_id) references organization(org_id);
+
+alter table org_content
+add foreign key(org_id) references organization(org_id);
+
+alter table org_feedback
+add foreign key(org_id) references organization(org_id);
+
+alter table org_merch_item
+add foreign key(org_id) references organization(org_id);
+
+alter table merch_purchase
+add foreign key(user_id) references user(user_id);
+
+alter table merch_purchase_item
+add foreign key(org_id) references organization(org_id),
+add foreign key(order_id) references merch_purchase(order_id);
 
 INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
 VALUES ('Pet Haven', '0112345678', 'No. 58', '5th Lane', 'Battaramulla', 'Help an animal in need', 'LOGO');
