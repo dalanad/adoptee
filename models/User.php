@@ -12,7 +12,8 @@ class User extends BaseModel
     {
         $hashed_password = Crypto::hash($password);
         $query = "INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`) VALUES ('$name', '$email', '$telephone', '$address', '$hashed_password')";
-        return BaseModel::insert($query);
+        BaseModel::insert($query);
+        return self::lastInsertId();
     }
     
     static function updateProfileData($name, $email, $telephone, $address)

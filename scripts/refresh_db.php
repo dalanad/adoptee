@@ -1,4 +1,4 @@
-<pre>
+<pre style="width: 100%; white-space: pre-wrap;">
 <?php
 $query = file_get_contents("database.sql");
 
@@ -6,13 +6,16 @@ $conn = new mysqli("localhost", "root", "root");
 
 $conn->multi_query($query);
 $success = true;
-
+$i = 1;
+$lines = explode(";", $query);
 while ($conn->more_results()) {
     $conn->next_result();
     if ($conn->error) {
-        echo "<span style='color:red;'> $conn->error</span>";
+        echo "<span style='color:red;'>$conn->errno : $conn->error</span>";
         $success = false;
+        echo $lines[$i];
     }
+    $i++;
 }
 
 if ($success) {

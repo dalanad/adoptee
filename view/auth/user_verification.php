@@ -66,25 +66,58 @@
                         }
                     </style>
                     <div style="display: flex;flex-direction:column;align-items:center;margin:1rem">
-                        <div class="verify-card">
-                            <div class="verify-card-heading"> Email <i class="txt-clr green fa  fa-check-circle"></i></div>
-                        </div>
-                        <div class="verify-card">
-                            <div class="verify-card-heading">Telephone
-                                <i class="txt-clr orange fas fa-exclamation-circle"></i>
-                            </div>
-                            <div>
-                                <div style="font-weight: 600;text-align:center;margin:.5rem 0">OTP</div>
-                                <input type="text" inputmode="numeric" required pattern="\d{6}" autocomplete="one-time-code" class="ctrl">
 
+                        <?php if ($status == 'email_sent') { ?>
+                           
+                            <div class="verify-card">
+                                <div class="verify-card-heading"> Email <i class="txt-clr orange fa  fa-check-circle"></i></div>
+                                <div style="white-space: pre-wrap; margin: 1rem 0; text-align: center;">We have sent an email to <code><?= $user["email"] ?> </code></div>
                             </div>
-                        </div>
+
+                        <? } ?>
+                        <?php if ($status == 'email_verified') { ?>
+
+                            <div class="verify-card">
+                                <div class="verify-card-heading"> Email <i class="txt-clr green fa  fa-check-circle"></i></div>
+                            </div>
+                            <form action="?email=<?= $user["email"] ?>&action=send_sms" method="POST" class="verify-card">
+                                <div class="verify-card-heading">Telephone
+                                    <i class="txt-clr orange fas fa-exclamation-circle"></i>
+                                </div>
+                                <div style="margin-top: 1rem; text-align:center">
+                                    <button type="submit" class="btn btn-faded green">SEND OTP</button>
+                                </div>
+                            </form>
+
+                        <? } ?>
+                        <?php if ($status == 'sms_sent' || $status == 'otp_invalid') { ?>
+
+                            <form action="?email=<?= $user["email"] ?>&action=validate_sms" method="POST" class="verify-card">
+                                <div class="verify-card-heading">Telephone
+                                    <i class="txt-clr orange fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="field">
+                                    <div style="font-weight: 600;text-align:center;margin:.5rem 0">OTP</div>
+                                    <input type="text" name="otp" inputmode="numeric" required pattern="\d{6}" autocomplete="one-time-code" class="ctrl">
+                                    <?php if($status == 'otp_invalid') {?><div class="field-msg" style="color: red;">Invalid OTP</div><?}?>
+                                </div>
+                                <div style="margin-top: 1rem; text-align:center">
+                                    <button type="submit" class="btn outline green">Verify</button>
+                                </div>
+                                <?= $_SESSION["otp"] ?>
+                            </form>
+
+                        <? } ?>
+                        <?php if ($status == 'sms_verified') { ?>
+
+                            <div style="white-space: pre-wrap; margin: 1rem 0; text-align: center;">Verification Complete</div>
+                            <form action="?email=<?= $user["email"] ?>" class="flex justify-between mt2">
+                                <button class="btn outline">Continue</button>
+                            </form>
+
+                        <? } ?>
                     </div>
 
-                    <div class="flex justify-between mt2">
-                        <!-- <a class="btn outline pink" href="?step=2">Back</a> -->
-                        <a class="btn" href="/">Continue</a>
-                    </div>
                 </div>
             </div>
         </div>

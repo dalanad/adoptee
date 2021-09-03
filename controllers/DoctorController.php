@@ -35,17 +35,23 @@ class DoctorController extends Controller
                 $this->redirect("/doctor/register");
             }
 
-            User::createUser($name, $email, $telephone, $address, $password);
-            Doctor::createDoctor($email, $reg_no, $address, $credentials, $telephone_fixed, $proofImage);
+            BaseModel::beginTransaction();
+            $userId = User::createUser($name, $email, $telephone, $address, $password);
+            Doctor::createDoctor($userId, $reg_no, $credentials, $telephone_fixed, $proofImage);
+            BaseModel::commit();
 
             $this->redirect("/auth/verify?email=$email");
         } catch (PDOException $e) {
+
+            BaseModel::rollBack();
 
             if ($e->getCode() == 23000) {
 
                 $_SESSION['form_errors'] = array("Email Already Registered");
                 $this->redirect("/doctor/register");
-            };
+            } else {
+                throw $e;
+            }
         }
     }
 

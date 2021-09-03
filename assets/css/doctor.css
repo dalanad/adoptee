@@ -43,3 +43,131 @@
 .side-link-text {
 	font-size: 0.9rem;
 }
+
+/* live_consultation */
+/* calender */
+.cal-month {
+	flex: 1 1 0;
+	font-weight: 500;
+}
+
+.cal-body {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	margin-top: 1rem;
+}
+
+.date {
+	text-align: center;
+	font-size: 0.8rem;
+	padding: 5px 0;
+	border-radius: 8px;
+}
+
+.date.inactive {
+	opacity: 0.5;
+}
+
+.date.active {
+	color: white;
+	font-weight: 500;
+	background: var(--primary) !important;
+}
+
+.date.head {
+	opacity: 0.5;
+	font-size: 0.7em;
+	margin-bottom: 5px;
+}
+
+.date:not(.head):hover {
+	cursor: pointer;
+	background-color: var(--gray-2);
+}
+/* timeline */
+
+.timeline-container {
+	box-shadow: var(--shadow);
+	overflow: auto;
+	border-radius: 0.4rem;
+}
+
+#appointments-timeline {
+	display: grid;
+	grid-template-columns: 80px repeat(7, 1fr);
+	min-width: 35em;
+	max-height: 35em;
+}
+
+.timeline-column {
+	text-align: center;
+	font-size: 0.9em;
+	position: relative;
+}
+
+.timeline-column.active .heading.cell {
+	color: var(--primary);
+	font-weight: 500;
+}
+
+.timeline-column.active::before {
+	content: " ";
+	background: var(--primary);
+	opacity: 0.08;
+	display: block;
+	height: 100%;
+	position: absolute;
+	width: 100%;
+}
+
+.timeline-column:first-child {
+	position: sticky;
+	left: 0px;
+	background: white;
+	z-index: 101;
+}
+
+.timeline-column:not(:last-child) {
+	border-right: 1px solid var(--gray-2);
+}
+.cell {
+	min-height: 2em;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.fade {
+	animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.cell:first-child {
+	position: sticky;
+	top: 0px;
+	background: white;
+	z-index: 100;
+}
+
+.cell:not(:first-child) {
+	border-top: 1px solid var(--gray-2);
+}
+
+.heading.cell {
+	position: sticky;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+::-webkit-scrollbar {
+	width: 2px;
+}

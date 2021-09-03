@@ -80,12 +80,11 @@ class AuthController extends Controller
     {
 
         if (User::matchPasswords($_POST['password'], $_POST['confirm-password'])) {
-          
+
             User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], "", $_POST['password']);
             Organization::createOrganization($_POST['name'], $_POST['telephone'], $_POST['address_line_1'], $_POST['address_line_2'], $_POST['city']);
-           
+
             $this->redirect('/auth/verify?email=' . $_POST['email']);
-        
         } else {
             $this->redirect("/auth/organizationRegistration?error=true");
         }
@@ -95,17 +94,43 @@ class AuthController extends Controller
     {
         $user = User::findUserByEmail($_GET["email"]);
 
-        if (!isset($_GET["action"])) {
+        if ($user['email_verified'] == 1 && $user['telephone_verified'] == 1) {
+            $this->sendToHomePage($user);
+        }
+
+        $status = "";
+
+        if (!isset($_GET["action"]) && $user['email_verified'] == 0) {
+
             $email = new EmailService();
             $token = Crypto::encrypt($user["email"]);
             $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email&token=$token'> Verify Email </a> ";
             $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
-        } else if ($_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
+            $status = "email_sent";
+            
+        } else if (isset($_GET["action"]) && $_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
+
             User::verifyEmail($user["email"]);
-            $this->sendToHomePage($user);
+            $status = "email_verified";
+        } else if (isset($_GET["action"]) && $_GET["action"] == "send_sms") {
+
+            $notification = new EmailService();
+            $otp = rand(100000, 999999);
+            $_SESSION["otp"] = $otp;
+
+            # $notification->sendSMS("94769972727", "OTP : $otp");
+            $status = "sms_sent";
+        } else if ($_GET["action"] == "validate_sms") {
+
+            if ($_SESSION["otp"] == $_POST['otp']) {
+                # User::verifySMS($user["email"]); // TODO:
+                $status = "sms_verified";
+            } else {
+                $status = "otp_invalid";
+            };
         }
 
-        View::render("auth/user_verification");
+        View::render("auth/user_verification", ["status" =>  $status, "user" => $user]);
     }
 
     function change_password()

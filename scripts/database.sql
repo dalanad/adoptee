@@ -131,7 +131,7 @@ create table prescription_item (
     dose int(20),
     duration varchar(20),
     direction varchar(20),
-    medecine_id int (10)
+    medicine_id int (10)
 
 );
 
@@ -295,7 +295,7 @@ add foreign key(medical_record_id) references medical_record(medical_record_id);
 
 alter table prescription_item
 add foreign key(medical_record_id) references medical_record(medical_record_id),
-add foreign key(medecine_id) references medecine(medecine_id);
+add foreign key(medicine_id) references medicine(medicine_id);
 
 alter table donation
 add foreign key(txn_id) references payment(txn_id),
@@ -335,12 +335,14 @@ VALUES ('Animal Shelter', '0334567891', 'No.14/A', 'Temple Road', 'Colombo 8', '
 INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
 VALUES ('Animal Welfare Centre', '0114567891', 'No. 120', 'Circular Road', 'Dehiwala', 'Give a pet a home', 'LOGO');
 
+ 
 INSERT INTO `org_content` (`org_id`, `heading`, `description`, `photo`)
 VALUES ('1', 'Clinic', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero 
 sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO');
  INSERT INTO `org_content` (`org_id`, `heading`, `description`, `photo`)
 VALUES ('1', 'Vaccination Program', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero 
 sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO');
+ 
 
 INSERT INTO `animal` (`animal_id`, `type`, `name`, `gender`, `dob`, `color`) 
 VALUES (NULL, 'Dog', 'Tigger', 'Male', '2021-07-01', 'Black');
@@ -363,3 +365,15 @@ INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `s
 VALUES ('4', 'Playful and a joy to be around', '2021-08-26', 'ADOPTED', '2021-09-01', '1');
 INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) 
 VALUES ('5', 'Has tiny, hedgehog paws', '2021-09-02', 'LISTED', NULL, '1');
+
+
+INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_verified`, `telephone_verified`) VALUES
+('Dr. Weerasinghe', 'doctor@example.com', '0761236547', 'doctor address', '$$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
+('Dalana Pasindu', 'user@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1);
+
+
+INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `proof_image`) VALUES
+(1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '/uploads/1630599314_63.png');
+
+ 
+ 
