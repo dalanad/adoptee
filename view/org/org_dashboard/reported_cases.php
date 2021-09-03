@@ -1,4 +1,3 @@
-
 <style>
     #googleMap {
         margin-bottom: 1rem;
@@ -32,6 +31,7 @@
         border-radius: 0.5rem;
         padding-left: 0.5rem;
         padding-right: 0.5rem;
+        border-color: black;
     }
 
     .btn-link2 {
