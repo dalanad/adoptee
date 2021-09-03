@@ -13,7 +13,8 @@ require __DIR__ . "./../_layout/header.php";
 
     .landing-image-container img {
         min-width: 900px;
-        max-width: 1150px;
+        max-width: 900px;
+        margin: 3rem 0;
     }
 
     .activity-card {
@@ -22,6 +23,7 @@ require __DIR__ . "./../_layout/header.php";
         align-items: center;
         max-width: 250px;
         text-align: center;
+        font-weight: 300;
     }
 
     .activity-card .btn {
@@ -32,34 +34,37 @@ require __DIR__ . "./../_layout/header.php";
 
     .activity-card img {
         max-height: 150px;
-        margin: 1rem 0
+        margin: 2rem 0
     }
 </style>
-<div class="landing-image-container"> <img src="/assets/images/pets-lineup.jpg" /></div>
-<div class="container" style="max-width: 1500px;">
-    <main style="margin: 1em;display:flex;justify-content:space-around;flex-wrap:wrap;">
-        <div class="activity-card">
-            <img src="/assets/images/graphics/pet_taged.png">
-            Help us give them a family by Bringing one Home
-            <a class="btn green" href="/view/public/adoptions/adoption_listing.php">Adopt a Pet</a>
-        </div>
-        <div class="activity-card">
-            <img src="/assets/images/graphics/takecare.png">
-            Let us know about The animals that, need help
-            <a class="btn orange flex-column" href="/view/public/rescues/report_rescue.php">
-                <div> Report</div>
-                <div style="line-height:1;font-size:.75em"> Injured / Abandoned Animals </div>
-            </a>
-        </div>
-        <div class="activity-card">
-            <img src="/assets/images/graphics/shelter.png">
-            Support Organizations that give Life to helpless Souls
-            <a class="btn blue" href="/view/public/organizations/organization_listing.php">Donate or Sponsor</a>
-        </div>
-        <div class="activity-card">
-            <img src="/assets/images/graphics/vet.png">
-            Veterinary Consultations at Your Fingertips
-            <a class="btn pink" href="/view/public/consultations/doctor_consultation.php">Consult Doctor</a>
-        </div>
-    </main>
+ 
+<div>
+    <div class="landing-image-container"> <img src="/assets/images/pets-lineup.jpg" /></div>
+    <div class="container" style="max-width: 1500px;">
+        <main style="margin: 1em;display:flex;justify-content:space-around;flex-wrap:wrap;">
+            <div class="activity-card">
+                <img src="/assets/images/graphics/pet_taged.png">
+                Help us give them a family by Bringing one Home
+                <a class="btn green" href="/view/public/adoptions/adoption_listing.php">Adopt a Pet</a>
+            </div>
+            <div class="activity-card">
+                <img src="/assets/images/graphics/takecare.png">
+                Let us know about The animals that, need help
+                <a class="btn orange flex-column" href="/view/public/rescues/report_rescue.php">
+                    <div> Report</div>
+                    <div style="line-height:1;font-size:.75em"> Injured / Abandoned Animals </div>
+                </a>
+            </div>
+            <div class="activity-card">
+                <img src="/assets/images/graphics/shelter.png">
+                Support Organizations that give Life to helpless Souls
+                <a class="btn blue" href="/view/public/organizations/organization_listing.php">Donate or Sponsor</a>
+            </div>
+            <div class="activity-card">
+                <img src="/assets/images/graphics/vet.png">
+                Veterinary Consultations at Your Fingertips
+                <a class="btn pink" href="/view/public/consultations/doctor_consultation.php">Consult Doctor</a>
+            </div>
+        </main>
+    </div>
 </div>

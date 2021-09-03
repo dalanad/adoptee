@@ -7,24 +7,30 @@
     }
 
     .adoption-card {
-        border-radius: 8px;
-        background: #fafafa;
         transition: background-color .5s ease-out;
         cursor: pointer;
-        box-shadow: var(--shadow);
+    }
+
+    .adoption-card-image,
+    .adoption-card-details {
+        border-radius: 8px;
+        background: #fafafa;
+        box-shadow: var(--shadow-light);
         overflow: hidden;
     }
 
+    .adoption-card-image {
+        background-size: cover;
+        height: 160px;
+    }
+
     .adoption-card-details {
-        display: flex;
-        border-radius: 8px;
-        justify-content: space-between;
+        position: relative;
     }
 
     .adoption-card-action {
         display: none;
         text-align: center;
-        min-height: 2em;
         align-items: center;
         justify-content: center;
         text-transform: uppercase;
@@ -32,20 +38,16 @@
         letter-spacing: 2px;
         color: white;
         font-size: 1.4em;
-        height: 2.9rem;
-    }
-
-    .adoption-card:hover {
+        position: absolute;
         background: var(--green);
+        width: 100%;
+        height: 100%;
     }
 
     .adoption-card:hover .adoption-card-action {
         display: flex;
     }
-
-    .adoption-card:hover .adoption-card-details {
-        display: none;
-    }
+ 
 </style>
 
 <div class="container">
@@ -57,19 +59,22 @@
     </div>
     <div class="m2 adoption-grid">
         <?php foreach ($animals as $animal) { ?>
-            <div class="adoption-card" onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal['animal_id'] ?>'">
-                <div style="background-image: url('/assets/images/dogs/placeholder2.jpg');background-size: cover;height: 160px;"></div>
-                <div class=" adoption-card-details">
-                    <div class="p1 px2">
-                        <div style="font-weight: 500;"><?= $animal["type"] ?></div>
-                        <div style="font-size:small"><?= $animal["dob"] ?> years</div>
+            <a class="adoption-card" onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal['animal_id'] ?>'">
+                <div class="adoption-card-image" style="background-image: url('/assets/images/dogs/placeholder2.jpg');"></div>
+                <div class="adoption-card-details">
+                    <div class="adoption-card-action">ADOPT</div>
+                    <div style="display:flex; padding:.5rem 1rem;align-items: center;">
+                        <div style="flex:1 1 0">
+                            <div style="font-weight: 500;"><?= $animal["name"] ?></div>
+                            <div style="font-size:small"><?= $animal["type"] ?> - <?= round($animal["age"]) ?> years</div>
+                        </div>
+                        <div style="font-size: 1.5em;">
+                            <?= $animal["gender"] == 'MALE' ? '<i class="txt-clr blue fa fa-mars"></i>' : '<i class="txt-clr pink fa fa-venus"></i>' ?>
+                        </div>
                     </div>
-                    <div style="font-size: 1.3em; display: flex;align-items: center;padding: 0 0.7em;">
-                        <?= $animal["gender"] == 'MALE' ? '<i class="txt-clr blue fa fa-mars"></i>' : '<i class="txt-clr pink fa fa-venus"></i>' ?>
-                    </div>
+                    <div style="font-size:small;padding:.5rem 1rem;padding-top:0;color:var(--gray-5)"><i></i><?= $animal["org_name"] ?></div>
                 </div>
-                <div class="adoption-card-action">ADOPT</div>
-            </div>
+            </a>
         <?php } ?>
     </div>
 </div>

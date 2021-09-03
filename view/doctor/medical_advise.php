@@ -6,7 +6,7 @@ require_once  __DIR__ . '/_nav.php';
     .chat-container {
         display: grid;
         grid-template-columns: 280px auto;
-        border: 1px solid var(--gray-3);
+        box-shadow: var(--shadow);
         border-radius: .4rem
     }
 
