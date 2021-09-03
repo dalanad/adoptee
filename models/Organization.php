@@ -15,6 +15,12 @@ class Organization extends BaseModel
         return BaseModel::select($query);
     }
 
+    public function getOrgDetails($orgId)
+    {
+        $query = "SELECT * FROM `organization` WHERE org_id = $orgId";
+        return BaseModel::select($query);
+    }
+
     public function getOrgAnimalsForAdoption()
     {
         $query = "SELECT animal_id, type, gender FROM `animal_for_adoption`, `organization`
@@ -33,4 +39,5 @@ class Organization extends BaseModel
         $query = "SELECT * FROM `org_content` WHERE org_id = $orgId";
         return BaseModel::select($query);
     }
+
 }

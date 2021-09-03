@@ -16,15 +16,6 @@
         border-color: var(--primary);
     }
 
-    /* .tier-card .btn {
-         opacity: .2;
-         transition: opacity .2s ease-in-out;
-     }
-
-     .tier-card:hover .btn {
-         opacity: 1;
-     } */
-
     .tier-card .logo {
         font-size: 2em;
         margin-bottom: 0.8rem;
@@ -53,7 +44,6 @@
             <div class="title"><?php print_r($value['name']); ?></div>
             <div class="subtitle"><?php print_r($value['tagline']); ?></div>
             <div class="logo"><?php print_r($value['logo']); ?></div>
-            <!-- <a class="btn" href="view_profile">View Profile</a> -->
             <a class="btn" href="get_org_timeline?org_id=<?php echo($value['org_id']) ?>">View Profile</a>
     </div>
     <?php } ?>
