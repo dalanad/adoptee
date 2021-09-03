@@ -16,27 +16,37 @@ class EmailService
     {
         $mail = new PHPMailer(true);
 
-                    
-        $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'smtp.sendgrid.net';                     //Set the SMTP server to send through
+        $mail->isSMTP();                            // Send using SMTP
+        $mail->Host       = 'smtp.sendgrid.net';    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;
+        
         //Enable SMTP authentication
-        $mail->Username   = 'apikey';                     //SMTP username
+        $mail->Username   = 'apikey';               // SMTP username
         $mail->Password   = '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';
+        
         //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            // Enable implicit TLS encryption
+        $mail->Port       = 465;                                    
 
         //Recipients
         $mail->setFrom('noreply@adoptee.lk', 'Adoptee');
-        $mail->addAddress("$to", "$toName");     //Add a recipient
+        $mail->addAddress("$to", "$toName");     // Add a recipient
 
         //Content
-        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->isHTML(true);                     // Set email format to HTML
         $mail->Subject = $subject;
         $mail->Body    = $body;
         $mail->AltBody = $body;
 
         $mail->send();
+    }
+
+    public function sendSMS($to_address, $message)
+    {
+        $user_id = "13947";
+        $api_key = "oHMY3jsF85FFUo9AWvWz";
+        
+        // send HTTP get request to the API
+        file_get_contents("https://app.notify.lk/api/v1/send?user_id=$user_id&api_key=$api_key&sender_id=NotifyDEMO&to=$to_address&message=$message");
     }
 }

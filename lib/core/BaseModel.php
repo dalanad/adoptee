@@ -16,7 +16,7 @@ class BaseModel
         return $db;
     }
 
-    public static function select($query, $params= [])
+    public static function select($query, $params = [])
     {
 
         $db = BaseModel::getDB();
@@ -36,10 +36,30 @@ class BaseModel
         return $stmt->execute($params);
     }
 
-    public static function update($query, $params= [])
+    public static function update($query, $params = [])
     {
         $db = BaseModel::getDB();
         $stmt = $db->prepare($query);
         return $stmt->execute($params);
+    }
+
+    public static function lastInsertId($var = null)
+    {
+        return self::getDB()->lastInsertId($var);
+    }
+
+    public static function beginTransaction()
+    {
+        return self::getDB()->beginTransaction();
+    }
+
+    public static function commit()
+    {
+        return self::getDB()->commit();
+    }
+
+    public static function rollBack()
+    {
+        return self::getDB()->rollBack();
     }
 }
