@@ -32,7 +32,9 @@ create table organization (
     address_line_2 varchar(50)  ,
     city varchar(20) ,
     tagline varchar(50),
-    logo varchar(50)
+    logo varchar(50),
+    about varchar(200),
+    about_photo varchar(50)
 );
 
 create table org_user (
@@ -40,24 +42,6 @@ create table org_user (
     org_id  int(10),
     role enum('ADMIN','NORMAL') not null default 'NORMAL',
     primary key(user_id,org_id)
-);
-
-
-create table adoption_request (
-    animal_id int(10),
-    user_id int(10),
-    request_date date,
-    approval_date date,
-    status enum('PENDING','APPROVED','REJECTED') not null default 'PENDING',
-    has_pets boolean,
-    petsafety varchar(100) ,
-    children boolean,
-    childsafety varchar(100) ,
-    primary key(animal_id, user_id)
-    -- foreign key(org_id) references organization(org_id),
-    -- foreign key(animal_id) references animal(animal_id),
-    -- foreign key(user_id) references user(user_id)
-
 );
 
 create table routine_updates (
@@ -153,8 +137,8 @@ create table prescription_item (
 
 );
 
-create table medecine (
-    medecine_id int (10) auto_increment primary key,
+create table medicine (
+    medicine_id int (10) auto_increment primary key,
     name varchar(100)
 );
 
@@ -208,6 +192,7 @@ create table org_content (
     item_id int(10) AUTO_INCREMENT primary key,
     org_id int(10),
     created_time timestamp  DEFAULT CURRENT_TIMESTAMP,
+    heading varchar(50),
     description varchar(200),
     photo varchar(200), -- JSON ?
     foreign key(org_id) references organization(org_id)
@@ -243,10 +228,28 @@ create table merch_purchase(
 
 create table merch_purchase_item (
     order_id int(10),
-     org_id int(10),  
-     sku varchar(50),
-     quantity int(10),
-     primary key (order_id,org_id,sku)
+    org_id int(10),  
+    sku varchar(50),
+    quantity int(10),
+    primary key (order_id,org_id,sku)
+);
+
+create table adoption_request (
+    animal_id int(10),
+    user_id int(10),
+    org_id int(10),
+    request_date date,
+    approval_date date,
+    status enum('PENDING','APPROVED','REJECTED') not null default 'PENDING',
+    has_pets boolean,
+    petsafety varchar(100) ,
+    children boolean,
+    childsafety varchar(100) ,
+    primary key(animal_id, user_id),
+    foreign key(org_id) references organization(org_id),
+    foreign key(animal_id) references animal(animal_id),
+    foreign key(user_id) references user(user_id)
+
 );
 
 
@@ -260,7 +263,9 @@ INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line
 VALUES ('Animal Welfare Centre', '0114567891', 'No. 120', 'Circular Road', 'Dehiwala', 'Give a pet a home', 'LOGO');
 
 
-INSERT INTO `org_content` (`org_id`, `description`, `photo`)
-VALUES ('1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod', 'PHOTO');
- INSERT INTO `org_content` (`org_id`, `description`, `photo`)
-VALUES ('1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'PHOTO');
+INSERT INTO `org_content` (`org_id`, `heading`, `description`, `photo`)
+VALUES ('1', 'Clinic', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero 
+sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO');
+ INSERT INTO `org_content` (`org_id`, `heading`, `description`, `photo`)
+VALUES ('1', 'Vaccination Program', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero 
+sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO');

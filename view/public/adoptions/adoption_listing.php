@@ -57,8 +57,8 @@
     </div>
     <div class="m2 adoption-grid">
         <?php foreach ($animals as $animal) { ?>
-            <div class="adoption-card" onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal["animal_id"] ?>'">
-                <div style="background-image: url('/assets/images/dogs/placeholder2.jpg');background-size: cover;height: 160px;""></div>
+            <div class="adoption-card" onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal['animal_id'] ?>'">
+                <div style="background-image: url('/assets/images/dogs/placeholder2.jpg');background-size: cover;height: 160px;"></div>
                 <div class=" adoption-card-details">
                     <div class="p1 px2">
                         <div style="font-weight: 500;"><?= $animal["type"] ?></div>
@@ -70,6 +70,6 @@
                 </div>
                 <div class="adoption-card-action">ADOPT</div>
             </div>
-        <? } ?>
+        <?php } ?>
     </div>
 </div>

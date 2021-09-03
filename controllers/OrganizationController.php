@@ -4,7 +4,10 @@ class OrganizationController extends Controller
 {
     function view_profile()
     {
-        View::render("public/organizations/organization_profile");
+        $organization = new Organization;
+        $orgData =["details" => $organization->getOrgDetails($_GET['org_id'])]; 
+
+        View::render("public/organizations/organization_profile", $orgData);
     }
 
     static function get_org_listing()
@@ -18,9 +21,16 @@ class OrganizationController extends Controller
     static function get_org_timeline()
     {
         $organization = new Organization;
-        $org = $organization->findOrgById($_GET['org_id']);
-        $orgData = ["details" => $organization->getOrgContent($_GET['org_id'])];;
+        $orgData = ["content" => $organization->getOrgContent($_GET['org_id']), "active"=>"timeline", "details" => $organization->getOrgDetails($_GET['org_id'])];
+        
+        View::render("public/organizations/organization_profile", $orgData);
+    }
 
+    static function get_org_about()
+    {
+        $organization = new Organization;
+        $orgData = ["active"=>"about", "details" => $organization->getOrgDetails($_GET['org_id'])];
+        
         View::render("public/organizations/organization_profile", $orgData);
     }
 }
