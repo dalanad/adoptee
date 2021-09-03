@@ -8,7 +8,7 @@ class AdoptionAnimalsController extends Controller{
     }
 
     function process_add_new_animal(){
-        AdoptionAnimals::createNewAnimal(1, 1, $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['photo']);
+        AdoptionAnimals::createNewAnimal(1, $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['photo']);
 
     }  
     

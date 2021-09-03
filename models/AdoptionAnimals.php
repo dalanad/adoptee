@@ -2,13 +2,15 @@
 
 class AdoptionAnimals extends BaseModel
 {
-    static function createNewAnimal($type, $other, $gender, $dob, $color, $description, $photo)
+    static function createNewAnimal($org_id, $type, $other, $gender, $dob, $color, $description, $photo)
     {
-        $query = " INSERT INTO `animal` (type, other) VALUES ('$type', '$other')";
+        $query = " INSERT INTO `animal` (type, other, gender, dob, color) VALUES ('$type', '$other', '$gender', '$dob', '$color')";
+        echo($query);
         BaseModel::insert($query);
+        $animal_ID = BaseModel::lastInsertId();
 
-        $query = "INSERT INTO `animal_for_adoption` ('gender', dob, 'color', 'description', 'photo')
-                  VALUES ('$gender', $dob, '$color', '$description', '$photo')";
+        $query = "INSERT INTO `animal_for_adoption` (animal_id, org_id, description)
+                  VALUES ('$animal_ID', '$org_id', '$description')";
         return BaseModel::insert($query);
     }
 

@@ -44,20 +44,6 @@ create table org_user (
     primary key(user_id,org_id)
 );
 
-create table adoption_request (
-    animal_id int(10),
-    user_id int(10),
-    org_id  int(10),
-    request_date date,
-    approval_date date,
-    status enum('PENDING','APPROVED','REJECTED') not null default 'PENDING',
-    has_pets boolean,
-    petsafety varchar(100) ,
-    children boolean,
-    childsafety varchar(100) ,
-    primary key(animal_id, user_id)
-);
-
 create table routine_updates (
     animal_id int(10),
     user_id int(10),
@@ -67,14 +53,15 @@ create table routine_updates (
 
 create table animal (
     animal_id int(10) AUTO_INCREMENT not null,
-    type varchar(10), 
+    type varchar(10),
+    other varchar(10), 
     name varchar(50),
     gender varchar(10),
     dob date,
     color varchar(50),
     primary key(animal_id)
 );
- 
+
 create table animal_for_adoption (
     animal_id int(10) not null,
     description varchar(1000),
@@ -343,13 +330,10 @@ add foreign key(order_id) references merch_purchase(order_id);
 
 INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
 VALUES ('Pet Haven', '0112345678', 'No. 58', '5th Lane', 'Battaramulla', 'Help an animal in need', 'LOGO');
-
 INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
 VALUES ('Animal Shelter', '0334567891', 'No.14/A', 'Temple Road', 'Colombo 8', 'Save a Pet', 'LOGO');
-
 INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
 VALUES ('Animal Welfare Centre', '0114567891', 'No. 120', 'Circular Road', 'Dehiwala', 'Give a pet a home', 'LOGO');
-
 
 INSERT INTO `org_content` (`org_id`, `heading`, `description`, `photo`)
 VALUES ('1', 'Clinic', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero 
@@ -357,3 +341,25 @@ sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a
  INSERT INTO `org_content` (`org_id`, `heading`, `description`, `photo`)
 VALUES ('1', 'Vaccination Program', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero 
 sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO');
+
+INSERT INTO `animal` (`animal_id`, `type`, `name`, `gender`, `dob`, `color`) 
+VALUES (NULL, 'Dog', 'Tigger', 'Male', '2021-07-01', 'Black');
+INSERT INTO `animal` (`animal_id`, `type`, `name`, `gender`, `dob`, `color`) 
+VALUES (NULL, 'Cat', 'Leo', 'Male', '2016-01-15', 'Orange');
+INSERT INTO `animal` (`animal_id`, `type`, `name`, `gender`, `dob`, `color`) 
+VALUES (NULL, 'Dog', 'Oliver', 'Female', '2021-12-16', 'White');
+INSERT INTO `animal` (`animal_id`, `type`, `name`, `gender`, `dob`, `color`) 
+VALUES (NULL, 'Cat', 'Milo', 'Female', '2020-02-10', 'Golden Brown');
+INSERT INTO `animal` (`animal_id`, `type`, `name`, `gender`, `dob`, `color`) 
+VALUES (NULL, 'Dog', 'Simba', 'Male', '2015-10-01', 'Grey');
+
+INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) 
+VALUES ('1', 'Active and loves cuddles', '2021-08-31', 'ADOPTED', '2021-09-03', '1');
+INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) 
+VALUES ('2', 'Loves to sleep with his favorite toy', '2021-09-01', 'LISTED', NULL, '2');
+INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) 
+VALUES ('3', 'jade-green eyes', '2021-09-01', 'LISTED', NULL, '1');
+INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) 
+VALUES ('4', 'Playful and a joy to be around', '2021-08-26', 'ADOPTED', '2021-09-01', '1');
+INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) 
+VALUES ('5', 'Has tiny, hedgehog paws', '2021-09-02', 'LISTED', NULL, '1');
