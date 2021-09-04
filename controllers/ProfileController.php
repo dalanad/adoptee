@@ -3,7 +3,7 @@
 class ProfileController extends Controller{
 
     function view(){
-        View::render("auth/profile/update_profile");
+        View::render("auth/profile/user_profile");
         
     }
    

@@ -3,11 +3,15 @@
 
 
 <link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
-
+<a class="btn btn-faded black" href="/" style="margin: .5rem 1rem; "><i class="fa fa-chevron-left"></i>&nbsp; Home</a>
 <div class="centered-container">
     <div style="padding: .5em;">
         <div class="card-container">
-            <form class="animated-card <?= $active == 'sign_in' ? "hidden" : '' ?>" action="/auth/sign_up" method="POST" id="sign-up">
+            <div class="spacer-card">
+                <img src="/assets/images/auth/IMG_<?= rand(1, 4) ?>.svg" style='width:100%' />
+            </div>
+            <form class="animated-card <?= $active == 'sign_in' ? "hidden faded" : '' ?>" action="/auth/sign_up" method="POST" id="sign-up">
+                <img src="/assets/images/logo_vector.svg" style='max-width:150px; margin-bottom:1rem' />
                 <div>Welcome to Adoptee</div>
                 <div class="title-text">Sign Up</div>
                 <div class="field">
@@ -32,8 +36,9 @@
                     <a class="btn outline pink" href="/doctor/register"> <i class="fa fa-user-md"></i>&nbsp;Doctor</a>
                 </div>
             </form>
-            <div class="spacer-card"></div>
-            <form class="animated-card <?= $active == 'signup' ? "hidden" : '' ?>" method="post" action="/auth/process_sign_in" id="sign-in">
+
+            <form class="animated-card <?= $active == 'signup' ? "hidden faded" : '' ?>" method="post" action="/auth/process_sign_in" id="sign-in">
+                <img src="/assets/images/logo_vector.svg" style='max-width:150px; margin-bottom:1rem' />
                 <div>Welcome to Adoptee</div>
                 <div class="title-text">Sign In</div>
                 <div class="field">
@@ -62,15 +67,27 @@
             const sep = document.querySelector("#sep")
 
             function SignUp() {
-                signInCard.classList.add("hidden")
-                signUpCard.classList.remove("hidden");
+                signInCard.classList.add("faded")
+
+                setTimeout(() => {
+                    signUpCard.classList.remove("hidden");
+                    signInCard.classList.add("hidden");
+
+                    signUpCard.classList.remove("faded");
+                }, 300)
+
                 window.history.replaceState(null, null, "?active=signup");
 
             }
 
             function SignIn() {
-                signUpCard.classList.add("hidden")
-                signInCard.classList.remove("hidden");
+                signUpCard.classList.add("faded")
+                setTimeout(() => {
+                    signInCard.classList.remove("hidden");
+                    signUpCard.classList.add("hidden");
+
+                    signInCard.classList.remove("faded");
+                }, 300)
                 window.history.replaceState(null, null, "?active=sign_in");
             }
         </script>

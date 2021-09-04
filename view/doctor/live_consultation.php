@@ -4,7 +4,7 @@ require_once  __DIR__ . '/_nav.php';
 ?>
 
 <div style="display: grid;grid-template-columns:auto 250px;grid-gap:1rem">
-    <div><i class="fa fa-calendar-alt"></i></div>
+    <div><button onclick="showTimeline()"><i class="fa fa-face"></i></button><button onclick="showSchedule()"><i class="fa fa-calendar-alt"></i></button></div>
     <div class="timeline-container" style="grid-column: 1;">
         <div id="appointments-timeline"> </div>
     </div>

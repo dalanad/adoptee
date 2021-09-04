@@ -96,12 +96,18 @@ create table consultation (
     payment_txn_id varchar(50) 
 );
 
+create table consultation_schedule (
+    doctor_user_id int(10),
+    day_of_week int(1),
+    time_slot time,
+    available boolean default 0
+);
 
 alter table consultation   
   add unique key `consultation_doctor_availability` (doctor_user_id, type, consultation_date, consultation_time); 
 -- cancelled sessions on same time ?
 
-create table consulataton_message (
+create table consultation_message (
      consultation_id int(10),
      created_at timestamp,
      medical_record_id int(10),
@@ -281,7 +287,7 @@ alter table consultation
 add foreign key(user_id) references user(user_id),
 add foreign key(animal_id) references animal(animal_id);
 
-alter table consulataton_message
+alter table consultation_message
 add foreign key(consultation_id) references consultation(consultation_id);
 
 alter table medical_record
@@ -369,11 +375,13 @@ VALUES ('5', 'Has tiny, hedgehog paws', '2021-09-02', 'LISTED', NULL, '1');
 
 INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_verified`, `telephone_verified`) VALUES
 ('Dr. Weerasinghe', 'doctor@example.com', '0761236547', 'doctor address', '$$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
-('Dalana Pasindu', 'user@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1);
+('Ms. Org User', 'orguser@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
+('Mr. Reg. User', 'user@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1);
 
+INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL');
 
 INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `proof_image`) VALUES
-(1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '/uploads/1630599314_63.png');
+(1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '/uploads/1630599314_63.png') ;
 
  
  

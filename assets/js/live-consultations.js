@@ -104,67 +104,142 @@ class Calender {
 class AppointmentsTimeline {
 	_hostElement;
 	_date = new Date();
+	_cells = {};
+	_data = {};
 
-	constructor(hostElement) {
-		this._hostElement = hostElement;
-		this.render();
+	isSchedule = false;
+
+	get start_date() {
+		let start_date = new Date(this._date);
+		start_date.setDate(start_date.getDate() - ((start_date.getDay() + 6) % 7));
+		return start_date;
 	}
+
+	constructor(hostElement, isSchedule = false) {
+		this._hostElement = hostElement;
+		this.isSchedule = isSchedule;
+		this.render().then((e) => {
+			if (isSchedule) {
+				this.showSchedule();
+			} else {
+				this.showBookings();
+			}
+		});
+	}
+	async showSchedule() {
+		let data = await fetch("/doctor/get_schedule").then((res) => res.json());
+
+		for (const day in data) {
+			let slots = data[day];
+
+			let current_date = new Date(this.start_date);
+			current_date.setDate(current_date.getDate() + Number(day));
+
+			for (const slot in slots) {
+				this.markCellAvailable(current_date.toISOString().substr(0, 10), slot);
+				  await sleep(30);
+			}
+
+		}
+	}
+
+	async saveSchedule() {
+		fetch("/doctor/update_schedule", {
+			method: "post",
+			body: JSON.stringify({ schedule: this._data }),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((res) => res.json())
+			.then(console.log);
+	}
+
+	showBookings(date_str, time_str, booking_info) {}
 
 	async render() {
 		this._hostElement.innerHTML = "";
+
 		// time
-		let time_col = this.createEl(
-			"<div class='cell heading' style='height:4em'><i class='far fa-clock'></i></div>"
-		);
-		time_col.classList.add("timeline-column");
+		let time_col = this.createCell("", "timeline-column");
+		this.createCell("<i class='far fa-clock'></i>", "cell heading", time_col);
 
 		for (let i = 8; i < 22; i++) {
-			let time_cell = this.createEl(`${i}.00`, time_col);
-			time_cell.classList = "heading cell";
-			time_cell.style.minHeight = "4em";
+			this.createCell(`${i}.00`, "heading cell", time_col);
 		}
 
 		// date headers
-		let current_date = new Date(this._date);
-		current_date.setDate(
-			current_date.getDate() - ((current_date.getDay() + 6) % 7)
-		);
+		let current_date = new Date(this.start_date);
 
 		let dates = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 		for (let i = 0; i < 7; i++) {
-			let column = this.createEl("");
-			column.classList.add("timeline-column");
-			column.classList.add("fade");
+			let column = this.createCell("", "timeline-column");
 
 			if (current_date.getDate() == this._date.getDate()) {
 				column.classList.add("active");
-				column.scrollIntoView({
-					behavior: "auto",
-					block: "center",
-					inline: "center",
-				});
+				column.scrollIntoView({ behavior: "smooth", inline: "center" });
 			}
 
-			let date = this.createEl(
-				`<span style="font-size:1.2em;font-weight:500">${current_date.getDate()}</span> 
-                 <span>${dates[i]}</span>`,
-				column
-			);
-			date.classList = "cell heading";
-			date.style.height = "4em";
+			let date_str = current_date.toISOString().substr(0, 10);
 
-			await sleep(50);
+			this._cells[date_str] = {};
+			this._data[date_str] = {};
+
+			let date =
+				`<b style="font-size:1.2em;">${current_date.getDate()}</b>` +
+				`<span>${dates[i]}</span>`;
+
+			let w_day = `<b style="font-size:1.2em;">${dates[i]}</b>`;
+
+			this.createCell(this.isSchedule ? w_day : date, "cell heading fade", column);
+
+			// await sleep(50);
 
 			for (let i = 8; i < 22; i = i + 0.5) {
-				this.createEl(``, column).classList.add("cell");
+				let time_str = `${(Math.floor(i) + "").padStart(2, "0")}:${
+					(i % 1) * 6
+				}0:00`;
+
+				let slot = this.createCell(``, "cell", column);
+
+				this._cells[date_str][time_str] = slot;
+				this._data[date_str][time_str] = null;
+
+				slot.addEventListener("click", (ev) => {
+					if (this._data[date_str][time_str] !== "AVAILABLE") {
+						this.markCellAvailable(date_str, time_str);
+					} else {
+						this.clearCell(date_str, time_str);
+					}
+					  this.saveSchedule();
+				});
 			}
 			current_date.setDate(current_date.getDate() + 1);
 		}
+
+		console.log(this._cells);
 	}
 
-	createEl(text, parent) {
+	markCellAvailable(date_str, time_str) {
+		let slot = this._cells[date_str][time_str];
+		this._data[date_str][time_str] = "AVAILABLE";
+		slot.innerText = "AVAIL";
+		slot.style.background = "var(--green)";
+		slot.style.color = "white";
+		slot.classList.add("fade");
+	}
+
+	clearCell(date_str, time_str) {
+		let slot = this._cells[date_str][time_str];
+		this._data[date_str][time_str] = null;
+		slot.innerText = "";
+		slot.style.background = "unset";
+	}
+
+	createCell(text, classList, parent) {
 		let el = document.createElement("div");
+		el.classList = classList;
 		el.innerHTML = text;
 		(parent ?? this._hostElement).append(el);
 		return el;
@@ -176,12 +251,20 @@ let cal = new Calender(cal_el);
 
 let appointments_timeline = document.getElementById("appointments-timeline");
 
-let timeline = new AppointmentsTimeline(appointments_timeline);
+function showSchedule() {
+	let timeline = new AppointmentsTimeline(appointments_timeline, true);
+}
 
-cal.onChange(() => {
-	timeline._date = cal._date;
-	timeline.render();
-});
+function showTimeline() {
+	let timeline = new AppointmentsTimeline(appointments_timeline);
+
+	cal.onChange(() => {
+		timeline._date = cal._date;
+		timeline.render();
+	});
+}
+
+showTimeline();
 
 function sleep(ms) {
 	return new Promise((resolve) => setTimeout(resolve, ms));

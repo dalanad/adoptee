@@ -1,6 +1,6 @@
 <?php
 
-require_once  __DIR__ . './../../_layout/layout.php';
+require_once  __DIR__ . './../../_layout/header.php';
 
 $profile_menu = array(
     "update_profile" => array("name" => "Profile", "icon" => "user-cog"),
@@ -18,9 +18,14 @@ $active = isset($_GET["menu"]) && isset($profile_menu[$_GET["menu"]])  ? $_GET["
 ?>
 
 <style>
+    .settings-container {
+        display: flex;
+        margin: 1rem;
+
+    }
+
     .side-nav {
         flex: 1 1 0;
-        margin-left: 1rem;
         min-width: 12rem;
         max-width: 12rem;
         display: flex;
@@ -29,7 +34,7 @@ $active = isset($_GET["menu"]) && isset($profile_menu[$_GET["menu"]])  ? $_GET["
 
     .side-nav-link {
         display: block;
-        padding: 0.6em 0.5em;
+        padding: 0.6em 1em;
         margin-bottom: 0.1em;
         background: none;
         text-decoration: none;
@@ -47,18 +52,19 @@ $active = isset($_GET["menu"]) && isset($profile_menu[$_GET["menu"]])  ? $_GET["
     }
 </style>
 
-<div>
+<div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="margin-left:1rem;">User Profile</h2>
     <div class="settings-container ">
-        <div class="side-nav" style="font-size: 0.9em">
+        <div class="side-nav">
             <?php foreach ($profile_menu as $key => $value) { ?>
                 <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="?menu=<?= $key ?>">
-                    <i class="fa fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
+                    <i class="far fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
                 </a>
             <?php  } ?>
         </div>
 
-        <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
-            <?php include "./" . $active . ".php" ?>
+        <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;padding:1rem">
+            <?php include __DIR__ . "./" . $active . ".php" ?>
         </div>
     </div>
 </div>

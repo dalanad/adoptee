@@ -35,7 +35,7 @@ html {
 	font-family: var(--font-family);
 	color: var(--color);
 	user-select: none;
-	font-size: 18px;
+	/* font-size: 18px; */
 }
 
 b,
@@ -151,7 +151,7 @@ th {
 .btn-faded::before {
 	content: " ";
 	background: currentColor;
-	opacity: 0.08;
+	opacity: 0.05;
 	display: block;
 	height: 100%;
 	position: absolute;
@@ -551,3 +551,44 @@ header .logo img {
 }
 
 /* SCROLLBAR END*/
+
+/* DROPDOWN START */
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	padding: 0.5rem;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	min-width: 80%;
+	padding: 0.5rem 0;
+	top: 100%;
+	border: var(--border);
+	border-radius: 0.3rem;
+	overflow: auto;
+	box-shadow: var(--shadow);
+	z-index: 1000;
+	background: white;
+	right: 0;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background: var(--gray-2);
+}
+
+.dropdown-content a {
+	padding: 0.5rem 1rem;
+	display: block;
+	border-radius: 0;
+	text-decoration: none;
+}
+
+/* DROPDOWN END*/

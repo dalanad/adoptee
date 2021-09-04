@@ -33,7 +33,7 @@ require __DIR__ . "./../_layout/header.php";
     }
 
     .activity-card img {
-        max-height: 150px;
+        max-height: 100px;
         margin: 2rem 0
     }
 </style>
@@ -45,12 +45,12 @@ require __DIR__ . "./../_layout/header.php";
             <div class="activity-card">
                 <img src="/assets/images/graphics/pet_taged.png">
                 Help us give them a family by Bringing one Home
-                <a class="btn green" href="/view/public/adoptions/adoption_listing.php">Adopt a Pet</a>
+                <a class="btn green" href="/Adoptions">Adopt a Pet</a>
             </div>
             <div class="activity-card">
                 <img src="/assets/images/graphics/takecare.png">
                 Let us know about The animals that, need help
-                <a class="btn orange flex-column" href="/view/public/rescues/report_rescue.php">
+                <a class="btn orange" style="flex-direction: column;" href="/ReportRescues/view">
                     <div> Report</div>
                     <div style="line-height:1;font-size:.75em"> Injured / Abandoned Animals </div>
                 </a>
@@ -58,12 +58,12 @@ require __DIR__ . "./../_layout/header.php";
             <div class="activity-card">
                 <img src="/assets/images/graphics/shelter.png">
                 Support Organizations that give Life to helpless Souls
-                <a class="btn blue" href="/view/public/organizations/organization_listing.php">Donate or Sponsor</a>
+                <a class="btn blue" href="/Organization/get_org_listing">Donate or Sponsor</a>
             </div>
             <div class="activity-card">
                 <img src="/assets/images/graphics/vet.png">
                 Veterinary Consultations at Your Fingertips
-                <a class="btn pink" href="/view/public/consultations/doctor_consultation.php">Consult Doctor</a>
+                <a class="btn pink" href="/Consultation">Consult Doctor</a>
             </div>
         </main>
     </div>

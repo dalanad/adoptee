@@ -14,10 +14,10 @@
             grid-template-columns: 1fr;
         }
     }
+
     .row {
         display: flex;
     }
-
 </style>
 <div class="centered-container">
     <div style="margin: 0 auto;max-width: 700px;padding: 1rem;">
@@ -68,7 +68,8 @@
                         Passwords do not match
                     </div>
                 <?php } ?>
-            <div style="grid-column: 1 / -1; margin-top:1rem">
+            <div style="grid-column: 1 / -1; margin-top:1rem;display:flex;justify-content:space-between">
+                <a class="btn btn-faded pink" href="/view/auth/sign_in.php?active=signup">Go Back</a>
                 <button class="btn" type="submit">Register</button>
             </div>
         </form>
