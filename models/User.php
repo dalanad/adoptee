@@ -34,7 +34,11 @@ class User extends BaseModel
         $query = "update `user` set email_verified = 1 where email= '$email'";
         return BaseModel::update($query);
     }
-
+    static function verifySMS($email){
+        $query = "update `user` set telephone_verified = 1 where email= '$email'";
+        return BaseModel::update($query);
+    }
+    
     static function changePassword($email, $new){
         $hashed_password = Crypto::hash($new);
         $query = "UPDATE user set password= '$hashed_password' WHERE email = '$email'";

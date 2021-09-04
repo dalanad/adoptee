@@ -3,11 +3,6 @@
 
 require_once  __DIR__ . './../_layout/layout.php';
 
-$data["header"]["nav"] = false;
-$data["user"] = "Dalana";
-
-require __DIR__ . "./../_layout/org_header.php";
-
 $management_menu = array(
     "org_adoption_listing" => array("name" => "Adoption Listing", "icon" => "paw"),
     "adoption_requests" =>  array("name" =>  "Adoption Requests", "icon" => "dog"),
@@ -111,14 +106,14 @@ $administration_menu = array(
 
 
 <div>
-    <div class="mx1">
-        <h4 class="flex items-center">
-            <a href="./dashboard.php" class="btn btn-link btn-icon mr1 " style="color: #313636; font-size: 1em;"><i class="fa fa-chart-line"></i></a>
-            Dashboard
-        </h4>
-    </div>
     <div class="settings-container ">
         <div class="side-nav" style="font-size: 0.9em">
+            <div style="text-align: center;margin-top: 1rem;margin-bottom:.5rem">
+                <img src="/assets/images/logo_vector_filled.svg" style="height:40px;margin-right: 1rem;">
+            </div>
+            <a class="side-nav-link <?= "stats" == $active ? 'active' : '' ?>" href="stats">
+                <i class="far fa-chart-line"></i> &nbsp; Dashboard
+            </a>
             <div class="mx1">
                 <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
                     MANAGEMENT
@@ -127,7 +122,7 @@ $administration_menu = array(
 
             <?php foreach ($management_menu as $key => $value) { ?>
                 <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="<?= $key ?>">
-                    <i class="fa fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
+                    <i class="far fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
                 </a>
             <?php  } ?>
 
@@ -139,14 +134,22 @@ $administration_menu = array(
 
             <?php foreach ($administration_menu as $key => $value) { ?>
                 <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="?menu=<?= $key ?>">
-                    <i class="fa fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
+                    <i class="far fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
                 </a>
             <?php  } ?>
 
         </div>
-        <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
-            <?php include __DIR__ . "./org_dashboard/" . $active . ".php" ?>
+        <div style="flex: 1 1 0;">
+            <div style="display: flex;padding: 1rem;">
+                <div style="flex: 1 1 0;"></div>
+                <?= user_btn() ?>
+            </div>
+            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
+
+                <?php include __DIR__ . "./org_dashboard/" . $active . ".php" ?>
+            </div>
         </div>
+
     </div>
 
 </div>

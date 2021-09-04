@@ -14,7 +14,7 @@ $menu_items = array(
         <div style="text-align: center;margin-top: 1rem;margin-bottom:.5rem">
             <img src="/assets/images/logo_vector_filled.svg" style="height:35px;margin-right: 1rem;">
         </div>
-        <?php foreach ($menu_items as $key => $value) { ?> 
+        <?php foreach ($menu_items as $key => $value) { ?>
             <?php if (isset($value["title"])) {            ?>
                 <div style="font-weight: 500;font-size:.75rem;opacity:.4;margin:0 1rem;margin-top:1rem"><?= $value["title"] ?></div>
 
@@ -30,6 +30,6 @@ $menu_items = array(
         <div class="admin-header">
             <div style="font-weight: 700;font-size:1.3rem"><?= $menu_items[$active]["name"] ?> </div>
             <div style="flex: 1 1 0;"></div>
-            <div onclick="location.href='/view/auth/profile/profile.php'"><i class="far fa-user-circle"></i> &nbsp;Dalana</div>
+            <?= user_btn() ?>
         </div>
         <div style="padding: 1rem;">

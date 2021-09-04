@@ -36,9 +36,9 @@ class AuthController extends Controller
 
         $organizationUser = OrganizationUser::findUserByUID($user["user_id"]);
         $doctors = Doctor::findByUID($user["user_id"]);
-
         if (sizeof($organizationUser) > 0) {
             $_SESSION['org_id'] =  $organizationUser[0]['org_id'];
+            $_SESSION['org'] =  Organization::findOrgById($_SESSION['org_id'])[0];
             $_SESSION['user_role'] = strtolower("org_" . $organizationUser[0]['role']);
             $this->redirect("/AdoptionAnimals/org_adoption_listing");
         } else if (sizeof($doctors) > 0) {
@@ -81,6 +81,8 @@ class AuthController extends Controller
 
         if (User::matchPasswords($_POST['password'], $_POST['confirm-password'])) {
 
+            // TODO: insert to org user
+
             User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], "", $_POST['password']);
             Organization::createOrganization($_POST['name'], $_POST['telephone'], $_POST['address_line_1'], $_POST['address_line_2'], $_POST['city']);
 
@@ -107,11 +109,12 @@ class AuthController extends Controller
             $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email&token=$token'> Verify Email </a> ";
             $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
             $status = "email_sent";
-            
+        
         } else if (isset($_GET["action"]) && $_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
 
             User::verifyEmail($user["email"]);
             $status = "email_verified";
+       
         } else if (isset($_GET["action"]) && $_GET["action"] == "send_sms") {
 
             $notification = new EmailService();
@@ -123,7 +126,7 @@ class AuthController extends Controller
         } else if ($_GET["action"] == "validate_sms") {
 
             if ($_SESSION["otp"] == $_POST['otp']) {
-                # User::verifySMS($user["email"]); // TODO:
+                User::verifySMS($user["email"]); // TODO:
                 $status = "sms_verified";
             } else {
                 $status = "otp_invalid";

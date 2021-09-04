@@ -4,7 +4,7 @@
     .report {
         display: grid;
         margin: 0rem 1rem 3rem 1rem;
-        overflow: scroll;
+        /* overflow: scroll; */
     }
 
     @media (min-width:780px) {

@@ -42,11 +42,11 @@
         </div>
     </div>
     <div class="m2 profile-links">
-        <a class="prof-sec-link <?= $active == "timeline" ? 'active' : '' ?>" href="?tab=timeline&org_id=<?=$_GET['org_id']?>">Timeline</a>
+        <a class="prof-sec-link <?= $active == "timeline" ? 'active' : '' ?>" href="/organization/get_org_timeline&org_id=<?=$_GET['org_id']?>">Timeline</a>
         <a class="prof-sec-link <?= $active == "adoption" ? 'active' : '' ?>" href="?tab=adoption&org_id=<?=$_GET['org_id']?>">For Adoption</a>
         <a class="prof-sec-link <?= $active == "merchandise" ? 'active' : '' ?>" href="?tab=merchandise&org_id=<?=$_GET['org_id']?>">Merchandise</a>
         <a class="prof-sec-link <?= $active == "sponsorships" ? 'active' : '' ?>" href="?tab=sponsorships&org_id=<?=$_GET['org_id']?>">Sponsorships</a>
-        <a class="prof-sec-link <?= $active == "about" ? 'active' : '' ?>" href="?tab=about&org_id=<?=$_GET['org_id']?>">About</a>
+        <a class="prof-sec-link <?= $active == "about" ? 'active' : '' ?>" href="/organization/get_org_about&org_id=<?=$_GET['org_id']?>">About</a>
     </div>
 
     <?="active page-". $active?>

@@ -96,7 +96,7 @@
 	display: grid;
 	grid-template-columns: 80px repeat(7, 1fr);
 	min-width: 35em;
-	max-height: 35em;
+	max-height: 32em;
 }
 
 .timeline-column {
@@ -118,6 +118,7 @@
 	height: 100%;
 	position: absolute;
 	width: 100%;
+	z-index: -100;
 }
 
 .timeline-column:first-child {
@@ -130,10 +131,16 @@
 .timeline-column:not(:last-child) {
 	border-right: 1px solid var(--gray-2);
 }
+
 .cell {
 	min-height: 2em;
+	max-height: 2em;
 	text-align: center;
 	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	padding: 0.5rem;
+	justify-content: center;
 }
 
 .fade {
@@ -161,11 +168,13 @@
 }
 
 .heading.cell {
+	height: 4em;
 	position: sticky;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	max-height: unset;
 }
 
 ::-webkit-scrollbar {

@@ -1,61 +1,50 @@
 <?php require_once __DIR__ . "./../../_layout/layout.php" ?>
 
-<link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
+
 
 <style>
-    .row{
-        display:flex;
+    .row {
+        display: flex;
     }
 
-    .column{
-        margin-right:1rem;
-        flex:50%;
+    .column {
+        margin-right: 1rem;
+        flex: 50%;
     }
 </style>
 
-<form class="centered-container" action = "/Profile/update" method = "POST">
-<div class="card-container">
-<div>
+<form action="/Profile/update" method="POST">
+        <h3 style="margin-top:0">Update your profile</h3>
 
-    <div class = "title-text">
-        <label style = "font-size:1.1rem;">Update your profile</label>
-    </div>
+        <div class="row">
+            <div class="field column">
+                <label>Name</label>
+                <input class="ctrl" name="name" type="text">
+                <span class="field-msg"></span>
+            </div>
 
-    <div class = "row">
-        <div class = "field column">
-            <label>Name</label>
-            <input class = "ctrl" name = "name" type = "text">
-            <span class = "field-msg"></span>
+            <div class="field column">
+                <label>Email</label>
+                <input class="ctrl" name="email" type="email">
+                <span class="field-msg"></span>
+            </div>
         </div>
-        
-        <div class = "field column">
-            <label>Email</label>
-            <input class = "ctrl" name = "email" type = "email">
-            <span class = "field-msg"></span>
-        </div>
-    </div>
 
-    <div class = "row">
-        <div class = "field column">
-            <label>Telephone</label>
-            <input class = "ctrl" name = "telephone" type = "text">
-            <span class = "field-msg"></span>
+        <div class="row">
+            <div class="field column">
+                <label>Telephone</label>
+                <input class="ctrl" name="telephone" type="text">
+                <span class="field-msg"></span>
+            </div>
         </div>
-    </div>
 
-    <div class = "row">
-        <div class = "field column">
-            <label>Address</label>
-            <input class = "ctrl" name = "address" type = "text">
-            <span class = "field-msg"></span>
+        <div class="row">
+            <div class="field column">
+                <label>Address</label>
+                <input class="ctrl" name="address" type="text">
+                <span class="field-msg"></span>
+            </div>
         </div>
-    </div>
 
-    <div><button class = "btn">Update</button></div>
-    
-    <div class = "mt2" style = "font-size:0.8rem;">
-        <a class = "btn-link bold text-decoration-none" href = "./user_profile.php">Back</a>
-    </div>
-</div>
-</div>
+        <div><button class="btn">Update</button></div>
 </form>

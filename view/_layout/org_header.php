@@ -22,11 +22,7 @@
             </nav>
         <?php } ?>
 
-        <?php if (isset($data["user"])) { ?>
-            <a class="btn btn-link" style="font-size:1rem" href="/view/auth/sign_in.php"><i class="fa fa-user"> </i> &nbsp; Dalana </a>
-        <?php } else { ?>
-            <a class="btn green" href="/view/auth/sign_in.php">Sign In</a>
-        <?php } ?>
+        <?= user_btn() ?>
 
         <?php if ($data["header"]["nav"] == true) { ?>
             <button class="btn btn-link more-btn black" onclick="document.querySelector('.main-nav').classList.toggle('shown')">
