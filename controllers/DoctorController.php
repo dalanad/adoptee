@@ -29,7 +29,7 @@ class DoctorController extends Controller
             $credentials = $_POST["credentials"];
 
             $proofImage =  new Image("proof_image");
- 
+
             if (sizeof($errors) > 0) {
                 $_SESSION['form_errors'] = $errors;
                 $this->redirect("/doctor/register");
@@ -75,6 +75,11 @@ class DoctorController extends Controller
         View::render("doctor/consulted_animals");
     }
 
+    public function schedule()
+    {
+        View::render("doctor/schedule");
+    }
+
     public function update_schedule()
     {
         $_POST = json_decode(file_get_contents('php://input'), true);
@@ -85,5 +90,10 @@ class DoctorController extends Controller
     public function get_schedule()
     {
         View::json(Doctor::getSchedule(1));
+    }
+
+    public function payments()
+    {
+        View::render("doctor/payments");
     }
 }
