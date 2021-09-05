@@ -10,7 +10,6 @@ $menu_items = array(
     "sponsorships" =>  array("name" =>  "Sponsorships", "icon" => "donate"),
     "merchandise" =>  array("name" =>  "Merchandise", "icon" => "hat-wizard"),
     "payments" =>  array("name" =>  "Payments", "icon" => "money-check-alt"),
-    "integrations" =>  array("name" =>  "Integrations", "icon" => "sync"),
 );
 
 $active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["menu"] : "general";
