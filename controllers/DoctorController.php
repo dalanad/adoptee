@@ -65,6 +65,11 @@ class DoctorController extends Controller
         View::render("doctor/live_consultation");
     }
 
+    function consult_conference()
+    {
+        View::render("doctor/consult_conference");
+    }
+
     function medical_advise()
     {
         View::render("doctor/medical_advise");
