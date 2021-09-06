@@ -3,17 +3,26 @@
 class ReportRescue extends BaseModel
 {
 
-    static function createReportRescue($description,$location,$telephone,$animal_type,$photo)
+    static function createReportRescue($org_id,$description,$location,$telephone,$ype,Image $photo)
     {
-        $query = "INSERT INTO `report_rescue` (   `description`, `location`, `telephone`,`animal_type`,`photo`) 
-                   VALUES ('$description',$location,$telephone,$animal_type,'$photo' )";
+        $query = "INSERT INTO `report_rescue` ( org_id,description, location, telephone,type,photo) 
+                   VALUES (org_id,$description','$location',$telephone,'$type','$photo' )";
 
-        return BaseModel::insert($query);
+$params = [
+    "org_id" => $org_id,
+    "description" => $description,
+    " location" => $location,
+    "telephone" => $telephone,
+    "type" => $type,
+    "photo" => $photo->getURL()
+];
+
+return self::insert($query, $params);
     }
 
     static function findReportedCases(){
         $query = "select * from report_rescue";
-        return BaseModel::select($query);
+        return self::select($query);
     }
 }
 

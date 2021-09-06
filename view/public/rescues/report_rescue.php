@@ -65,7 +65,7 @@
     }
 </style>
 
-<form class="container ctx" action="/ReportRescues/report" method="POST">
+<form class="container ctx" action="/ReportRescues/report" method="POST" enctype="multipart/form-data">
     <div class="report ">
         <h2 class="mt1">Report Injured Animals 
             <a class="btn red outline" style="float: right;" href="/view/public/rescues/emergency.php"><i class="fas fa-ambulance"></i>&nbsp; Emergency </a>
@@ -98,13 +98,13 @@
         <div class="field ">
             <label>Animal type</label>
            <div class="radio-box ">
-            <input name="animal_type" id="dog" type="radio">
+            <input name="type" id="dog" type="radio">
             <label for="dog"><i class="far fa-dog"></i><br>Dog</label>
-            <input name="animal_type" id="cat" type="radio">
+            <input name="type" id="cat" type="radio">
             <label for="cat"><i class="far fa-cat"></i><br> Cat </label>
-            <input name="animal_type" id="bird" type="radio">
+            <input name="type" id="bird" type="radio">
             <label for="bird"><i class="far fa-dove"></i><br> Bird</label>
-            <input name="animal_type" id="other" type="radio">
+            <input name="type" id="other" type="radio">
             <label for="other"><i class="far fa-paw"></i><br>Other </label>
             </div>
             <span class="field-msg"> </span>
