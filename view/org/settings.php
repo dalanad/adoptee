@@ -26,7 +26,7 @@ $active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["me
         flex: 1 1 0;
         margin-left: 1rem;
         min-width: 10rem;
-        max-width: 10rem;
+        max-width: 15rem;
         display: flex;
         flex-direction: column;
     }

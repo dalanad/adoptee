@@ -1,6 +1,7 @@
 <?php require __DIR__ . "./../../_layout/header.php"; 
 ?>
 <style>
+
 .page{
     padding-left:300px;
     padding-right:300px;
@@ -36,7 +37,9 @@
 <span class="field-msg">Name</span>
 </div>
 
-<button class="btn btn-blue" type="submit">Submit</button>
+<button class="btn btn-blue" type="submit">Submit</button><br><br>
+
+<a class=" btn btn-faded pink" href="/view/org/settings.php?menu=users"><strong>Go Back</strong></a>
 </div>
 
 <div class="column"><br><br>

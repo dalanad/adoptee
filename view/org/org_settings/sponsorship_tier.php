@@ -6,7 +6,11 @@
         text-align: center;
         font-size: 25px;
     }
-
+    .sec{
+width:30%;
+margin:auto; 
+padding-top:30px;
+}
 .section {
  
   width:30%;
@@ -42,4 +46,8 @@
 <div class="btn btn-cen">
         <button type="save" class="btn" >Save</button><br>
     </div>
+</div>
+<div class="sec">
+    <a class=" btn btn-faded pink" href="/view/org/settings.php?menu=sponsorships"><b> Go Back</b></a>
+</div>
 </form>

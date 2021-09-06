@@ -2,6 +2,7 @@
 ?>
 <style>
   
+
 .section {
  width:30%;
 margin:auto;
@@ -9,6 +10,11 @@ border-radius: 10px;
   padding: 20px;
   font-size:15px;
   border-style: outset;
+}
+.sec{
+width:30%;
+margin:auto; 
+padding-top:30px;
 }
 .fieldm {
 	padding-bottom: 0.5em;
@@ -33,7 +39,7 @@ border-radius: 10px;
 
 </style>
 <br><br>
-<div class="section ">
+<div class="section">
 <h3>Organization User - Actions</h3><br>
 <div class="fieldm">
 <label for="role"><strong>Role</strong></label>
@@ -55,5 +61,10 @@ border-radius: 10px;
 <strong>Disable Access to the user</strong><br><br>
 
 <button class="btn btn-pink" type="submit"><i class="fa fa-trash"></i> Delete User</button>
+</div>
+<div class="sec">
+<a class=" btn btn-faded pink" href="/view/org/settings.php?menu=users">Go Back</a>
+
+</div>
 
 
