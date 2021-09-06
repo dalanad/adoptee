@@ -111,9 +111,10 @@ $administration_menu = array(
             <div style="text-align: center;margin-top: 1rem;margin-bottom:.5rem">
                 <img src="/assets/images/logo_vector_filled.svg" style="height:40px;margin-right: 1rem;">
             </div>
-            <a class="side-nav-link <?= "stats" == $active ? 'active' : '' ?>" href="stats">
+            <a class="side-nav-link <?= "stats" == $active ? 'active' : '' ?>" href="/OrgNavigation/org_adoption_listing">
                 <i class="far fa-chart-line"></i> &nbsp; Dashboard
             </a>
+            <div>
             <div class="mx1">
                 <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
                     MANAGEMENT
@@ -125,7 +126,8 @@ $administration_menu = array(
                     <i class="far fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
                 </a>
             <?php  } ?>
-
+            </div>
+            <div style="position:fixed; bottom: 20px; min-width: 12rem; max-width: 12rem;">
             <div class="mx1">
                 <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
                     ADMINISTRATION
@@ -137,7 +139,7 @@ $administration_menu = array(
                     <i class="far fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
                 </a>
             <?php  } ?>
-
+            </div>
         </div>
         <div style="flex: 1 1 0;">
             <div style="display: flex;padding: 1rem;">

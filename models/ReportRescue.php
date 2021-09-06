@@ -20,10 +20,7 @@ $params = [
 return self::insert($query, $params);
     }
 
-    static function findReportedCases(){
-        $query = "select * from report_rescue";
-        return self::select($query);
-    }
+    
 }
 
 ?>

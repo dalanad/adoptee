@@ -94,8 +94,18 @@ class AuthController extends Controller
 
     function verify()
     {
-        $user = User::findUserByEmail($_GET["email"]);
+        $email = $_GET["email"];
+        if (!isset($email)) {
+            throw new Exception("Invalid Parameters", 400);
+        }
 
+        $user = User::findUserByEmail($email);
+
+        if (!isset($user)) {
+            throw new Exception("User with email '$email' not found", 400);
+        }
+
+        // if both email & telephone is already verified 
         if ($user['email_verified'] == 1 && $user['telephone_verified'] == 1) {
             $this->sendToHomePage($user);
         }
@@ -109,12 +119,10 @@ class AuthController extends Controller
             $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email&token=$token'> Verify Email </a> ";
             $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
             $status = "email_sent";
-        
         } else if (isset($_GET["action"]) && $_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
 
             User::verifyEmail($user["email"]);
             $status = "email_verified";
-       
         } else if (isset($_GET["action"]) && $_GET["action"] == "send_sms") {
 
             $notification = new EmailService();

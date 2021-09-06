@@ -36,10 +36,14 @@ class Application
         $action = $path[1] ?? "index";
 
         if (class_exists($controller)) {
+
             $controller_object = new $controller();
 
             if (is_callable([$controller_object, $action])) {
-                $controller_object->$action();
+                // get the elements in the path array after controller and action
+                $extra_params = array_slice($path, 2);
+                // call the method (named by the value of $action) in the controller by passing the params
+                call_user_func_array([$controller_object, $action], $extra_params);
             } else {
                 throw new Exception("This Page Does Not Exist", 404);
             }
@@ -49,7 +53,7 @@ class Application
     }
 
 
-    public function handleException(Exception $exception)
+    public function handleException($exception)
     {
         $code = $exception->getCode();
 
@@ -66,7 +70,7 @@ class Application
     {
         if (error_reporting() !== 0) {
             echo  $message;
-           // throw new \ErrorException($message, 0, $level, $file, $line);
+            // throw new \ErrorException($message, 0, $level, $file, $line);
         }
     }
 }

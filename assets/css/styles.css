@@ -126,6 +126,13 @@ th {
 	opacity: 1;
 }
 
+.btn:disabled {
+	--primary: var(--gray-5);
+	opacity: 0.45;
+	cursor: not-allowed;
+	box-shadow: none;
+}
+
 .btn.outline {
 	background-color: white;
 	box-shadow: none;

@@ -106,8 +106,12 @@ class AppointmentsTimeline {
 	_date = new Date();
 	_cells = {};
 	_data = {};
+	_onDataChanged = () => {};
+	_onCellSelected = () => {};
+	_activeCell = null;
 
 	isSchedule = false;
+	canEdit = false;
 
 	get start_date() {
 		let start_date = new Date(this._date);
@@ -137,9 +141,8 @@ class AppointmentsTimeline {
 
 			for (const slot in slots) {
 				this.markCellAvailable(current_date.toISOString().substr(0, 10), slot);
-				  await sleep(30);
+				await sleep(30);
 			}
-
 		}
 	}
 
@@ -155,7 +158,56 @@ class AppointmentsTimeline {
 			.then(console.log);
 	}
 
-	showBookings(date_str, time_str, booking_info) {}
+	async showBookings() {
+		let data = appointments;
+
+		for (const date in data) {
+			let bookings = data[date];
+
+			for (const time in bookings) {
+				let cell = this.markBookingCell(date, time, data[date][time]);
+				cell.addEventListener("click", (ev) => {
+					this._activeCell
+						? this._activeCell.classList.remove("selected")
+						: null;
+					this._onCellSelected(date, time, data[date][time]);
+					this._activeCell = cell;
+					this._activeCell.classList.add("selected");
+				});
+			}
+		}
+	}
+
+	markBookingCell(date_str, time_str, data) {
+		if (data) {
+			this._cells[date_str][time_str].classList.add("has-data");
+			this._cells[date_str][time_str].classList.add("txt-clr");
+		 
+
+			this._cells[date_str][time_str].innerHTML = `
+			<i class="far fa-${String(data.animal_type).toLowerCase()}"></i> &nbsp; ${ data.status}
+		`;
+		}
+		return this._cells[date_str][time_str];
+	}
+
+	enableEditing() {
+		this.canEdit = true;
+		this._hostElement.classList.add("editing");
+	}
+
+	disableEditing() {
+		this.canEdit = false;
+		this._hostElement.classList.remove("editing");
+	}
+
+	onChange(fn) {
+		this._onDataChanged = fn;
+	}
+
+	onCellSelected(fn) {
+		this._onCellSelected = fn;
+	}
 
 	async render() {
 		this._hostElement.innerHTML = "";
@@ -176,7 +228,7 @@ class AppointmentsTimeline {
 		for (let i = 0; i < 7; i++) {
 			let column = this.createCell("", "timeline-column");
 
-			if (current_date.getDate() == this._date.getDate()) {
+			if (!this.isSchedule && current_date.getDate() == this._date.getDate()) {
 				column.classList.add("active");
 				column.scrollIntoView({ behavior: "smooth", inline: "center" });
 			}
@@ -192,7 +244,11 @@ class AppointmentsTimeline {
 
 			let w_day = `<b style="font-size:1.2em;">${dates[i]}</b>`;
 
-			this.createCell(this.isSchedule ? w_day : date, "cell heading fade", column);
+			this.createCell(
+				this.isSchedule ? w_day : date,
+				"cell heading fade",
+				column
+			);
 
 			// await sleep(50);
 
@@ -207,24 +263,25 @@ class AppointmentsTimeline {
 				this._data[date_str][time_str] = null;
 
 				slot.addEventListener("click", (ev) => {
-					if (this._data[date_str][time_str] !== "AVAILABLE") {
-						this.markCellAvailable(date_str, time_str);
-					} else {
-						this.clearCell(date_str, time_str);
+					if (this.isSchedule && this.canEdit) {
+						if (this._data[date_str][time_str] !== "AVAILABLE") {
+							this.markCellAvailable(date_str, time_str);
+						} else {
+							this.clearCell(date_str, time_str);
+						}
+						this._onDataChanged();
 					}
-					  this.saveSchedule();
 				});
 			}
+
 			current_date.setDate(current_date.getDate() + 1);
 		}
-
-		console.log(this._cells);
 	}
 
 	markCellAvailable(date_str, time_str) {
 		let slot = this._cells[date_str][time_str];
 		this._data[date_str][time_str] = "AVAILABLE";
-		slot.innerText = "AVAIL";
+		slot.innerText = "AVAILABLE";
 		slot.style.background = "var(--green)";
 		slot.style.color = "white";
 		slot.classList.add("fade");
@@ -245,26 +302,6 @@ class AppointmentsTimeline {
 		return el;
 	}
 }
-
-let cal_el = document.querySelector(".calender");
-let cal = new Calender(cal_el);
-
-let appointments_timeline = document.getElementById("appointments-timeline");
-
-function showSchedule() {
-	let timeline = new AppointmentsTimeline(appointments_timeline, true);
-}
-
-function showTimeline() {
-	let timeline = new AppointmentsTimeline(appointments_timeline);
-
-	cal.onChange(() => {
-		timeline._date = cal._date;
-		timeline.render();
-	});
-}
-
-showTimeline();
 
 function sleep(ms) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
