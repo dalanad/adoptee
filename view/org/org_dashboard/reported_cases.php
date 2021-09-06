@@ -150,10 +150,9 @@
                                 <div class="modal-content">
                                     <span class="close">&times;</span>
                                     <h3>More Details</h3>
-                                    <div><?= $reported_case["time_reported"] ?>&nbsp;<span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span></div>
-                                    <br>
                                     <table>
-                                        <tr><td><div style="padding: 5px;"><button title="Contact Number" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-file-alt"></i></button></td><td><?= $reported_case["description"] ?></i> </button></div></td></tr>
+                                        <tr><td><div style="padding: 5px;"><button title="Time Reported" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-file-clock"></i><?= $reported_case["time_reported"] ?>&nbsp;<span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span></div>
+                                        <tr><td><div style="padding: 5px;"><button title="Description" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-file-alt"></i></button></td><td><?= $reported_case["description"] ?></i> </button></div></td></tr>
                                         <tr><td><div style="padding: 5px;"><button title="Contact Number" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-phone"></i></button></td><td><?= $reported_case["contact_number"] ?></div></td></tr>
                                         <tr><td><div style="padding: 5px;"><button title="Location" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-map-marker-alt"></i></button></td><td><?= $reported_case["location"] ?></div></td></tr>
                                     </table>
@@ -161,7 +160,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td><div><button class="btn btn-link btn-icon" style="font-size: 0.8rem;" onclick=""><span class="tag <?= $reported_case["org_response"] == "RESCUE" ? 'pink' : 'green' ?>"> <?= $reported_case["org_response"] ?> </span></a></div></td>
+                        <td><div><button type="submit" class="btn btn-link btn-icon" style="font-size: 0.8rem;" href="/OrgNavigation/updateRescueReportStatus"><span class="tag <?= $reported_case["org_response"] == "RESCUE" ? 'pink' : 'green' ?>"> <?= $reported_case["org_response"] ?> </span></button></div></td>
                     </tr>
                 <?php } ?>
 
