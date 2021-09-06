@@ -1,6 +1,6 @@
 <?php
 
-class OrgNavigationController extends Controller{
+class OrgManagementController extends Controller{
 
     function add_new_animal()
     {
@@ -8,7 +8,7 @@ class OrgNavigationController extends Controller{
     }
 
     function process_add_new_animal(){
-        OrgNavigation::createNewAnimal(1, $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['photo']);
+        OrgManagement::createNewAnimal(1, $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['photo']);
 
     }  
     
@@ -17,7 +17,7 @@ class OrgNavigationController extends Controller{
         $data = [
             "active" => "org_adoption_listing",
 
-            "animals"=>OrgNavigation::findAnimalsByOrgId(1)
+            "animals"=>OrgManagement::findAnimalsByOrgId(1)
     ];
         View::render("org/dashboard", $data);
     }
@@ -26,7 +26,7 @@ class OrgNavigationController extends Controller{
     {
         $data = [
             "active" => "adoption_requests",
-            "adoption_requests"=>OrgNavigation::findRequestsByOrgId(1)
+            "adoption_requests"=>OrgManagement::findRequestsByOrgId(1)
     ];
         View::render("org/dashboard", $data);
     }
@@ -35,7 +35,7 @@ class OrgNavigationController extends Controller{
     {
         $data = [
             "active" => "reported_cases",
-            "reported_cases"=>OrgNavigation::findReportedCases()
+            "reported_cases"=>OrgManagement::findReportedCases()
     ];
         View::render("org/dashboard", $data);
     }
@@ -43,7 +43,7 @@ class OrgNavigationController extends Controller{
     function updateRescueReportStatus()
     {
         $report_id = $_POST['report_id'];
-        OrgNavigation::updateRescueReportStatus($report_id);
+        OrgManagement::updateRescueReportStatus($report_id);
     }
 
     function org_donations()

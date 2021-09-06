@@ -160,7 +160,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td><div><button type="submit" class="btn btn-link btn-icon" style="font-size: 0.8rem;" href="/OrgNavigation/updateRescueReportStatus"><span class="tag <?= $reported_case["org_response"] == "RESCUE" ? 'pink' : 'green' ?>"> <?= $reported_case["org_response"] ?> </span></button></div></td>
+                        <td><div><a class="btn btn-link btn-icon" style="font-size: 0.8rem;" href="/OrgManagement/updateRescueReportStatus"><span class="tag <?= $reported_case["org_response"] == "RESCUE" ? 'pink' : 'green' ?>"> <?= $reported_case["org_response"] ?> </span></a></div></td>
                     </tr>
                 <?php } ?>
 

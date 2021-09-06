@@ -40,7 +40,7 @@ class AuthController extends Controller
             $_SESSION['org_id'] =  $organizationUser[0]['org_id'];
             $_SESSION['org'] =  Organization::findOrgById($_SESSION['org_id'])[0];
             $_SESSION['user_role'] = strtolower("org_" . $organizationUser[0]['role']);
-            $this->redirect("/AdoptionAnimals/org_adoption_listing");
+            $this->redirect("/OrgManagement/org_adoption_listing");
         } else if (sizeof($doctors) > 0) {
             $_SESSION['user_role'] = "doctor";
             $this->redirect("/doctor");

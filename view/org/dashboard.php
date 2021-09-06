@@ -110,7 +110,7 @@ $administration_menu = array(
             <div style="text-align: center;margin-top: 1rem;margin-bottom:.5rem">
                 <img src="/assets/images/logo_vector_filled.svg" style="height:40px;margin-right: 1rem;">
             </div>
-            <a class="side-nav-link <?= "stats" == $active ? 'active' : '' ?>" href="/OrgNavigation/org_adoption_listing">
+            <a class="side-nav-link <?= "stats" == $active ? 'active' : '' ?>" href="/OrgManagement/org_adoption_listing">
                 <i class="far fa-chart-line"></i> &nbsp; Dashboard
             </a>
             <div>
