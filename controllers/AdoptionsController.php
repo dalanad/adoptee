@@ -7,7 +7,7 @@ class AdoptionsController extends Controller
     {
         $org = new Organization();
         $data = [
-            "animals" => AdoptionAnimals::searchAnimals(),
+            "animals" => Adoptions::searchAnimals(),
             "organizations" => $org->getOrgListing()
         ];
         View::render("public/adoptions/adoption_listing", $data);
