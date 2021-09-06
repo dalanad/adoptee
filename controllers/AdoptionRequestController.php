@@ -5,7 +5,7 @@ class AdoptionRequestController extends Controller{
     function view()
     {
         $request = new AdoptionRequest;
-        $petData = ["data" => $request->getPetData($_GET['animal_id'])];
+        $petData = ["petdata" => $request->getPetData($_GET['animal_id'])];
         View::render("public/adoptions/adoption_request", $petData);
     }
 

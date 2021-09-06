@@ -54,7 +54,7 @@ $active = isset($_GET["menu"]) && isset($profile_menu[$_GET["menu"]])  ? $_GET["
 </style>
 
 <div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="margin-left:1rem;">User Profile</h2>
+    <h2 style="margin-left:1rem;"><?= $_SESSION['user']['name'];?></h2>
     <div class="settings-container ">
         <div class="side-nav">
             <?php foreach ($profile_menu as $key => $value) { ?>
