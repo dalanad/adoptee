@@ -9,7 +9,13 @@ class ReportRescuesController extends Controller
     }
 
     function report(){
-        ReportRescue::createReportRescue($_POST["description"],$_POST["location"],$_POST["telephone"],$_POST["animal_type"],$_POST["photo"]);
+     
+        $org_id = $_POST["org_id"];
+        $description= $_POST["description"];
+        $location = $_POST["location"];
+        $telephone = $_POST["telephone"];
+        $type = $_POST["type"];
+        $photo =  new Image("photo");
     }
 }
 ?>

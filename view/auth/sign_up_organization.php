@@ -32,42 +32,38 @@
             <div class="separator body-text"><i class="far fa-file-alt"></i> &nbsp; Basic Information</div>
             <div class="field" style="grid-column: span 2;">
                 <label>Organization Name</label>
-                <input class="ctrl" type="text" name="name" />
+                <input class="ctrl" type="text" name="name" required/>
             </div>
             <div class="field">
                 <label>Telephone</label>
-                <input class="ctrl" type="telephone" name="telephone" />
+                <input class="ctrl" type="telephone" name="telephone" required />
             </div>
             <div class="field">
                 <label>Address Line 1</label>
-                <input class="ctrl" type="text" name="address_line_1" />
+                <input class="ctrl" type="text" name="address_line_1" required/>
             </div>
             <div class="field">
                 <label>Address Line 2</label>
-                <input class="ctrl" type="text" name="address_line_2" />
+                <input class="ctrl" type="text" name="address_line_2" required />
             </div>
             <div class="field">
                 <label>City</label>
-                <input class="ctrl" type="text" name="city" />
+                <input class="ctrl" type="text" name="city" required />
             </div>
             <div class="separator body-text"><i class="far fa-user"></i> &nbsp;User</div>
             <div class="field">
                 <label>Email Address</label>
-                <input class="ctrl" type="email" name="email" />
+                <input class="ctrl" type="email" name="email" required />
             </div>
             <div class="field">
                 <label>Password</label>
-                <input class="ctrl" type="password" name="password" />
+                <input class="ctrl" type="password" name="password" required/>
             </div>
             <div class="field">
                 <label>Confirm Password</label>
-                <input class="ctrl" type="password" name="confirm-password" />
+                <input class="ctrl" type="password" name="confirm-password" onkeyup="validateForm(event)"  required />
             </div>
-            <?php if (isset($_GET["error"])) { ?>
-                    <div style="color: red; font-weight: bold;text-align: center;margin-top: 1rem; ">
-                        Passwords do not match
-                    </div>
-                <?php } ?>
+           
             <div style="grid-column: 1 / -1; margin-top:1rem;display:flex;justify-content:space-between">
                 <a class="btn btn-faded pink" href="/view/auth/sign_in.php?active=signup">Go Back</a>
                 <button class="btn" type="submit">Register</button>
@@ -76,5 +72,37 @@
     </div>
 </div>
 <script>
+    let password = document.querySelector("[name='password']")
+    let confirm_password = document.querySelector("[name='confirm-password']")
 
+    const form = document.querySelector('form');
+
+    form.addEventListener("submit", validateForm)
+
+    function validateForm(event) {
+
+        form.querySelectorAll(".field-msg").forEach(e => {
+            e.remove()
+        })
+
+        form.querySelectorAll(".field").forEach(e => {
+            e.classList.remove("invalid")
+        })
+
+        let valid = password.value === confirm_password.value;
+        if (!valid) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            let error_msg = document.createElement("span")
+            error_msg.classList.add('field-msg')
+            error_msg.innerText = 'Password Not Matching'
+            error_msg.style.color = 'var(--red)'
+            confirm_password.parentElement.append(error_msg)
+            confirm_password.parentElement.classList.add("invalid")
+        }
+
+    }
 </script>
