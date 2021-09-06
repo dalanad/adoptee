@@ -21,7 +21,7 @@
 
     .cases_list {
         position: absolute;
-        width: 350px;
+        width: 250px;
         height: 250px;
         top: 10px;
         left: 10px;
@@ -48,6 +48,48 @@
         border: none;
         min-height: 1em;
         box-shadow: none;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        box-shadow: var(--shadow);
+        border-radius: 0.5rem;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%;
+        position: fixed;
+        top: 20%;
+        left: 35%;
+
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
     }
 </style>
 
@@ -92,22 +134,34 @@
         <div style="height:240px; overflow-x:hidden; overflow-y: auto;">
             <table class="table" style="text-align: center;">
                 <tr>
-                    <th style="font-size: 0.6rem;">TYPE</th>
-                    <th style="font-size: 0.6rem;">INFO</th>
-                    <th style="font-size: 0.6rem;">CONTACT</th>
-                    <th style="font-size: 0.6rem;">PHOTO</th>
-                    <th style="font-size: 0.6rem;">LOCATION</th>
-                    <th style="font-size: 0.6rem;">RESCUE</th>
+                    <th style="font-size: 0.8rem;">TYPE</th>
+                    <th style="font-size: 0.8rem;">LOCATION</th>
+                    <th style="font-size: 0.8rem;">INFO</th>
+                    <th style="font-size: 0.8rem;">RESCUE</th>
                 </tr>
 
                 <?php foreach ($reported_cases as $reported_case) { ?>
-                    <tr style="font-size: 0.6rem;">
+                    <tr style="font-size: 0.8rem;">
                         <td><?= $reported_case["type"] ?></td>
-                        <td><button title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i> </button></td>
-                        <td><button title="Mobile" class="btn btn-link2 btn-icon"><i class="fas fa-phone"></i> </button></td>
-                        <td><button title="Photo" class="btn btn-link2 btn-icon"><i class="fas fa-images"></i> </button></td>
-                        <td><button title="location" class="btn btn-link2 btn-icon"><i class="fas fa-map-marker-alt"></i> </button></td>
-                        <td><button title="rescue" class="btn btn-link btn-icon btn-link3"><i class="fas fa-check-circle"></i> </button></td>
+                        <td><button title="location" class="btn btn-link btn-icon"><i class="fas fa-map-marker-alt"></i></button></td>
+                        <td>
+                            <button id="popupBtn" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                            <div id="popupModal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <h3>More Details</h3>
+                                    <div><?= $reported_case["time_reported"] ?>&nbsp;<span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span></div>
+                                    <br>
+                                    <table>
+                                        <tr><td><div style="padding: 5px;"><button title="Contact Number" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-file-alt"></i></button></td><td><?= $reported_case["description"] ?></i> </button></div></td></tr>
+                                        <tr><td><div style="padding: 5px;"><button title="Contact Number" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-phone"></i></button></td><td><?= $reported_case["contact_number"] ?></div></td></tr>
+                                        <tr><td><div style="padding: 5px;"><button title="Location" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-map-marker-alt"></i></button></td><td><?= $reported_case["location"] ?></div></td></tr>
+                                    </table>
+                                    <div style="padding: 5px;" class="center"><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><div><button class="btn btn-link btn-icon" style="font-size: 0.8rem;" onclick=""><span class="tag <?= $reported_case["org_response"] == "RESCUE" ? 'pink' : 'green' ?>"> <?= $reported_case["org_response"] ?> </span></a></div></td>
                     </tr>
                 <?php } ?>
 
@@ -127,4 +181,22 @@
         block: 'center',
         inline: 'center'
     });
+
+    var modal = document.getElementById("popupModal");
+    var btn = document.getElementById("popupBtn");
+    var span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 </script>

@@ -1,22 +1,51 @@
 <style>
-    .pop-up {
-        position: absolute;
-        width: 350px;
-        height: 250px;
-        top: 10px;
-        left: 10px;
-        background: white;
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
         box-shadow: var(--shadow);
-        z-index: 100;
         border-radius: 0.5rem;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 25%;
+        position: fixed;
+        top: 40%;
+        left: 35%;
+        
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
     }
 </style>
 
 
 
-<div class="container">
+
+<div class="container" style="top: 100px">
     <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
         ADOPTEES
         <a href="./add_new_animal"><button class="btn right">Add New Animal</button></a>
@@ -37,7 +66,14 @@
 
             <?php foreach ($animals as $animal) { ?>
                 <tr style="font-size: 0.8rem;">
-                    <td><?= $animal["name"] ?></td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 30px; height: 30px; border-radius: 50%;"></td>
+                                <td><?= $animal["name"] ?></td>
+                            </tr>
+                        </table>
+                    </td>
                     <td><?= $animal["type"] ?></td>
                     <td><?= $animal["dob"] ?></td>
                     <td><?= $animal["gender"] ?></td>
@@ -45,31 +81,15 @@
                     <td><span class="tag <?= $animal["status"] == "ADOPTED" ? 'green' : 'pink' ?>"> <?= $animal["status"] ?> </span></td>
                     <td><?= $animal["date_adopted"] ?></td>
                     <td>
-                        <button title="More Details" class="btn btn-link btn-icon" href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop">
-                            <div data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
-                                <div data-role="header" data-theme="a">
-                                    <i class="fas fa-info-circle"></i>
-
-                                </div>
-                                <div class="cases_list">
-                                    <div style="height:240px; overflow-x:hidden; overflow-y: auto;">
-                                        <table class="table" style="text-align: center;">
-                                            <tr>
-                                                <th style="font-size: 0.6rem;">TYPE</th>
-                                                <th style="font-size: 0.6rem;">INFO</th>
-                                                <th style="font-size: 0.6rem;">CONTACT</th>
-                                                <th style="font-size: 0.6rem;">PHOTO</th>
-                                                <th style="font-size: 0.6rem;">LOCATION</th>
-                                                <th style="font-size: 0.6rem;">RESCUE</th>
-                                            </tr>
-                                            <tr style="font-size: 0.6rem;">
-                                                <td><?= $animal["description"] ?></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
+                        <button id="popupBtn" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                        <div id="popupModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h3>Description</h3>
+                                <?= $animal["description"] ?>
                             </div>
-                        </button>
+
+                        </div>
                     </td>
                     <td><button title="Edit" class="btn btn-link btn-icon"><i class="fas fa-pen"></i></button></td>
                 </tr>
@@ -78,3 +98,23 @@
         </table>
     </div>
 </div>
+
+<script>
+    var modal = document.getElementById("popupModal");
+    var btn = document.getElementById("popupBtn");
+    var span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
