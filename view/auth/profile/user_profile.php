@@ -6,6 +6,7 @@ $profile_menu = array(
     "update_profile" => array("name" => "Profile", "icon" => "user-cog"),
     "change_password" =>  array("name" =>  "Password", "icon" => "unlock-alt"),
     "notifications" =>  array("name" =>  "Notifications", "icon" => "bell"),
+    "consultations" =>  array("name" =>  "Consultations", "icon" => "user-md-chat"),
     "adoptions" =>  array("name" =>  "Adoptions", "icon" => "dog"),
     "rescues" =>  array("name" =>  "Rescues", "icon" => "briefcase-medical"),
     "sponsorships" =>  array("name" =>  "Sponsorships", "icon" => "donate"),

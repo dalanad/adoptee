@@ -58,7 +58,7 @@
 
         <!-- temporary image -->
         <div class="rounded" id="image">
-            <img style="border-radius:8px;max-height: 350px;margin:0 auto" src="/assets/images/dogs/placeholder0.jpg" />
+            <img style="border-radius:8px;max-height: 350px;margin:0 auto" src="/assets/images/dogs/placeholder2.jpg" />
         </div>
 
         <?php if (isset($_SESSION['user'])) { ?>
