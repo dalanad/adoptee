@@ -24,7 +24,7 @@
         position: fixed;
         top: 40%;
         left: 35%;
-        
+
     }
 
     .close {
@@ -48,7 +48,7 @@
 <div class="container" style="top: 100px">
     <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
         ADOPTEES
-        <a href="./add_new_animal"><button class="btn right">Add New Animal</button></a>
+        <a href="/OrgNavigation/add_new_animal" class="btn right"> Add New Animal </a>
     </h3>
     <div class="overflow-auto" style="height:450px">
         <table class="table">
@@ -81,10 +81,10 @@
                     <td><span class="tag <?= $animal["status"] == "ADOPTED" ? 'green' : 'pink' ?>"> <?= $animal["status"] ?> </span></td>
                     <td><?= $animal["date_adopted"] ?></td>
                     <td>
-                        <button id="popupBtn" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
-                        <div id="popupModal" class="modal">
+                        <button onclick="showModel('popupModal<?= $animal["animal_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                        <div id="popupModal<?= $animal["animal_id"] ?>" class="modal">
                             <div class="modal-content">
-                                <span class="close">&times;</span>
+                                <span class="close" onclick="hideModel('popupModal<?= $animal["animal_id"] ?>')">&times;</span>
                                 <h3>Description</h3>
                                 <?= $animal["description"] ?>
                             </div>
@@ -100,21 +100,22 @@
 </div>
 
 <script>
-    var modal = document.getElementById("popupModal");
-    var btn = document.getElementById("popupBtn");
-    var span = document.getElementsByClassName("close")[0];
-
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    function showModel(id) {
+        document.getElementById(id).classList.add("shown")
+        document.getElementById(id).style.display = "block";
+        document.getElementById(id).onclick = function(event) {
+            if (event.target.classList.contains('modal') && !event.target.classList.contains('modal-content')) {
+                let model = document.querySelector('.modal.shown');
+                model.style.display = "none"
+                model.classList.remove("shown")
+                document.getElementById(id).onclick = null
+            }
         }
+    }
+
+    function hideModel(id) {
+        document.getElementById(id).classList.remove("shown")
+        document.getElementById(id).style.display = "none";
+        document.getElementById(id).onclick = null
     }
 </script>

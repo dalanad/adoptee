@@ -7,7 +7,8 @@ require __DIR__ . "./../_layout/header.php";
 $menu_items = array(
     "general" => array("name" => "General", "icon" => "building"),
     "users" =>  array("name" =>  "Users", "icon" => "users"),
-    "sponsorships" =>  array("name" =>  "Sponsorships", "icon" => "donate"),
+    "sponsorship" =>  array("name" =>  "Sponsorships", "icon" => "donate"),
+    "sponsorships" =>  array("name" =>  "Sponsorships Tiers", "icon" => "donate"),
     "merchandise" =>  array("name" =>  "Merchandise", "icon" => "hat-wizard"),
     "payments" =>  array("name" =>  "Payments", "icon" => "money-check-alt"),
 );
@@ -99,7 +100,7 @@ $active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["me
 <div class="container">
     <div class="mx2 txt-clr">
         <h2 class="flex items-center">
-            <a href="/view/organization_dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
+            <a href="/OrgNavigation/org_adoption_listing" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
             Organization Settings
         </h2>
     </div>

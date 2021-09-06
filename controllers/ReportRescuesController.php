@@ -8,14 +8,16 @@ class ReportRescuesController extends Controller
         View::render("public/rescues/report_rescue");
     }
 
-    function report(){
-     
-        $org_id = $_POST["org_id"];
-        $description= $_POST["description"];
+    function report()
+    {
+
+
+        $description = $_POST["description"];
         $location = $_POST["location"];
         $telephone = $_POST["telephone"];
         $type = $_POST["type"];
         $photo =  new Image("photo");
+
+        ReportRescue::createReportRescue($description,$location,$telephone,$type, $photo);
     }
 }
-?>

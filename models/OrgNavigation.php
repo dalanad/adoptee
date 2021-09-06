@@ -16,7 +16,7 @@ class OrgNavigation extends BaseModel
 
     static function findAnimalsByOrgId($org_id)
     {
-        $query = "SELECT name,type,dob,gender,date_listed,status,date_adopted,description from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id";
+        $query = "SELECT animal.animal_id, name,type,dob,gender,date_listed,status,date_adopted,description from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id";
         return BaseModel::select($query);
     }
 
