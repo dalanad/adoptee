@@ -1,6 +1,6 @@
 <?php
 
-class OrgNavigation extends BaseModel
+class OrgManagement extends BaseModel
 {
     static function createNewAnimal($org_id, $type, $other, $gender, $dob, $color, $description, $photo)
     {
