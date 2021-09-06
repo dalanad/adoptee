@@ -27,7 +27,7 @@ function user_btn()
 
             <i class='far fa-user-circle' style='font-size:1.2em'> </i>
             <div style='margin-left:.5rem'>" . $_SESSION['user']['name'] .
-                (isset($_SESSION['org']) ? ("<br> <small style='font-weight: 300;'>" . $_SESSION['org']['name'] . "</small></div>") : "") .
+                (isset($_SESSION['org']) ? ("<br><div> <small style='font-weight: 300;'>" . $_SESSION['org']['name'] . "</small></div>") : "") .
             "</div>
              <div class='dropdown-content'>
                 <a class='btn black btn-link' href='/profile/view'><i class='fa fa-user'></i>&nbsp; Profile</a>

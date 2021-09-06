@@ -182,10 +182,13 @@ class AppointmentsTimeline {
 		if (data) {
 			this._cells[date_str][time_str].classList.add("has-data");
 			this._cells[date_str][time_str].classList.add("txt-clr");
-		 
+			let status_colors = { PENDING: "orange", ACCEPTED: "-", CANCELLED: "red" };
+			this._cells[date_str][time_str].classList.add(status_colors[data.status]);
 
 			this._cells[date_str][time_str].innerHTML = `
-			<i class="far fa-${String(data.animal_type).toLowerCase()}"></i> &nbsp; ${ data.status}
+			<i class="fa fa-${String(data.animal_type).toLowerCase()}"></i> &nbsp; ${
+				data.status
+			}
 		`;
 		}
 		return this._cells[date_str][time_str];
