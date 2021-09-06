@@ -33,8 +33,7 @@ create table organization (
     city varchar(20) ,
     tagline varchar(50),
     logo varchar(50),
-    about varchar(200),
-    about_photo varchar(50)
+    about varchar(200)
 );
 
 create table org_user (
@@ -336,8 +335,9 @@ alter table merch_purchase_item
 add foreign key(org_id) references organization(org_id),
 add foreign key(order_id) references merch_purchase(order_id);
 
-INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
-VALUES ('Pet Haven', '0112345678', 'No. 58', '5th Lane', 'Battaramulla', 'Help an animal in need', 'LOGO');
+INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`, `about`) 
+VALUES ('Pet Haven', '0112345678', 'No. 58', '5th Lane', 'Battaramulla', 'Help an animal in need', 'LOGO', 'Animal Haven is a 
+nonprofit organization that finds homes for abandoned cats and dogs and improves chances of adoption.');
 INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
 VALUES ('Animal Shelter', '0334567891', 'No.14/A', 'Temple Road', 'Colombo 8', 'Save a Pet', 'LOGO');
 INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
@@ -349,6 +349,10 @@ VALUES ('1', 'Clinic', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO');
  INSERT INTO `org_content` (`org_id`, `heading`, `description`, `photo`)
 VALUES ('1', 'Vaccination Program', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero 
+sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO');
+VALUES ('2', 'Volunteer', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero 
+sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO');
+VALUES ('3', 'Adoption Day', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero 
 sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO');
  
 
