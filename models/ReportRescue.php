@@ -11,10 +11,6 @@ class ReportRescue extends BaseModel
         return BaseModel::insert($query);
     }
 
-    static function findReportedCases(){
-        $query = "select * from report_rescue";
-        return BaseModel::select($query);
-    }
 }
 
 ?>
