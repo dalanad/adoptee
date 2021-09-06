@@ -15,7 +15,7 @@
 }
 
 .field-font{
-    font-size: 0.8rem;
+ 
 }
 
 .box {
@@ -104,7 +104,7 @@
 <div class='container px2'>
     <div class='placeholder-box mr1' style='height:50px; width:100px;'>Logo</div>
     <div>
-        <a href="./../dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
+        <a href="/OrgNavigation/org_adoption_listing" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
     </div>
     <h3 class='mt1 txt-clr'>Add New Animal for Adoption</h3>
     <form action="/OrgNavigation/process_add_new_animal" method="post"> 

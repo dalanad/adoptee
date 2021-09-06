@@ -1,6 +1,6 @@
  <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
      Sponsorship Tiers
-     <button class="btn green right">New Tier</button>
+     <a href="/view/org/org_settings/sponsorship_tier.php" class="btn green right">New Tier</a>
  </h3>
  <style>
      .tier-card {

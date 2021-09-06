@@ -11,7 +11,6 @@ $management_menu = array(
     "org_donations" =>  array("name" =>  "Donations", "icon" => "hand-holding-usd"),
     "news_events" =>  array("name" =>  "News & Events", "icon" => "calendar-alt"),
     "store" =>  array("name" =>  "Store", "icon" => "store-alt"),
-    "client_reviews" =>  array("name" =>  "Client Reviews", "icon" => "thumbs-up"),
 );
 
 $administration_menu = array(
@@ -115,30 +114,36 @@ $administration_menu = array(
                 <i class="far fa-chart-line"></i> &nbsp; Dashboard
             </a>
             <div>
-            <div class="mx1">
-                <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
-                    MANAGEMENT
-                </h4>
-            </div>
+                <div class="mx1">
+                    <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
+                        MANAGEMENT
+                    </h4>
+                </div>
 
-            <?php foreach ($management_menu as $key => $value) { ?>
-                <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="<?= $key ?>">
-                    <i class="far fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
-                </a>
-            <?php  } ?>
+                <?php foreach ($management_menu as $key => $value) { ?>
+                    <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="<?= $key ?>">
+                        <i class="far fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
+                    </a>
+                <?php  } ?>
             </div>
             <div style="position:fixed; bottom: 20px; min-width: 12rem; max-width: 12rem;">
-            <div class="mx1">
-                <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
-                    ADMINISTRATION
-                </h4>
-            </div>
+                <div class="mx1">
+                    <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
+                        ADMINISTRATION
+                    </h4>
+                </div>
 
-            <?php foreach ($administration_menu as $key => $value) { ?>
-                <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="?menu=<?= $key ?>">
-                    <i class="far fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
+
+                <a class="side-nav-link <?= $active == "feedback"  ? 'active' : '' ?>" href="#">
+                    <i class="far fa-smile"></i> &nbsp; Feedback
                 </a>
-            <?php  } ?>
+                <a class="side-nav-link <?= $active == "setting"  ? 'active' : '' ?>" href="/view/org/settings.php?menu=users">
+                    <i class="far fa-cog"></i> &nbsp; Settings
+                </a>
+                <a class="side-nav-link <?= $active == "help" ? 'active' : '' ?>" href="#">
+                    <i class="far fa-question-circle"></i> &nbsp; Help
+                </a>
+
             </div>
         </div>
         <div style="flex: 1 1 0;">
