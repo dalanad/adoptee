@@ -68,7 +68,7 @@
                     <div style="display: flex;flex-direction:column;align-items:center;margin:1rem">
 
                         <?php if ($status == 'email_sent') { ?>
-                           
+
                             <div class="verify-card">
                                 <div class="verify-card-heading"> Email <i class="txt-clr orange fa  fa-check-circle"></i></div>
                                 <div style="white-space: pre-wrap; margin: 1rem 0; text-align: center;">We have sent an email to <code><?= $user["email"] ?> </code></div>
@@ -83,6 +83,10 @@
                             <form action="?email=<?= $user["email"] ?>&action=send_sms" method="POST" class="verify-card">
                                 <div class="verify-card-heading">Telephone
                                     <i class="txt-clr orange fas fa-exclamation-circle"></i>
+                                </div>
+                                <div style="margin-top:1rem;text-align:center">
+                                    We will send a code to your telephone
+                                    <br> <br><b> 07****<?= substr($user["telephone"], 6) ?></b>
                                 </div>
                                 <div style="margin-top: 1rem; text-align:center">
                                     <button type="submit" class="btn btn-faded green">SEND OTP</button>
@@ -99,7 +103,7 @@
                                 <div class="field">
                                     <div style="font-weight: 600;text-align:center;margin:.5rem 0">OTP</div>
                                     <input type="text" name="otp" inputmode="numeric" required pattern="\d{6}" autocomplete="one-time-code" class="ctrl">
-                                    <?php if($status == 'otp_invalid') {?><div class="field-msg" style="color: red;">Invalid OTP</div><?}?>
+                                    <?php if ($status == 'otp_invalid') { ?><div class="field-msg" style="color: red;">Invalid OTP</div><? } ?>
                                 </div>
                                 <div style="margin-top: 1rem; text-align:center">
                                     <button type="submit" class="btn outline green">Verify</button>
@@ -111,9 +115,9 @@
                         <?php if ($status == 'sms_verified') { ?>
 
                             <div style="white-space: pre-wrap; margin: 1rem 0; text-align: center;">Verification Complete</div>
-                            <form action="?email=<?= $user["email"] ?>" class="flex justify-between mt2">
-                                <button class="btn outline">Continue</button>
-                            </form>
+                            <div class="flex justify-between mt2">
+                                <a href="/auth/sign_in" class="btn outline">Continue to Login</a>
+                            </div>
 
                         <? } ?>
                     </div>
