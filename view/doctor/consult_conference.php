@@ -1,8 +1,9 @@
-<?php require_once __DIR__ .  './../../_layout/header.php'; ?>
-<link rel="stylesheet" href="/assets/css/doctor.css">
-
+<?php
+$active = "live_consultation";
+require_once  __DIR__ . '/_nav.php';
+?>
 <div style="max-width:1000px;padding: 0 1rem;margin:0 auto;padding-bottom:1rem">
-    <a class="btn btn-faded black" style="font-weight: 400;" href="/profile/view?menu=consultations"><i class="far fa-arrow-left"></i> &nbsp; Back </a>
+    <a class="btn btn-faded black" style="font-weight: 400;" href="/doctor/live_consultation"><i class="far fa-arrow-left"></i> &nbsp; Back </a>
     <h2>Live Consultation</h2>
     <div class="chat-container" style="grid-template-columns:auto  280px  ">
         <div class="chat-conversations" style="height: unset;overflow:hidden;position:relative">
@@ -13,16 +14,15 @@
             </div>
             <div class="chat-footer" style=" justify-content:center">
                 <button class="btn btn-link black" style="font-size: 1.5em;"><i class="fa fa-microphone-alt-slash"></i></button>
-                <button class="btn btn-link black" style="font-size: 1.5em;"
-                ><i class="fa fa-video-slash"></i></button>
+                <button class="btn btn-link black" style="font-size: 1.5em;"><i class="fa fa-video-slash"></i></button>
             </div>
         </div>
         <div class="chat-window">
             <div class="chat-header">
-                <div class="animal-image" style="background-image:url('/assets/images/doctor_avatar.jpg');"> </div>
+                <div class="animal-image" style="background-image:url('/assets/images/dogs/placeholder.jpg');"> </div>
                 <div>
-                    <div style="font-weight: 500;margin-left:.5rem"> Doctor Name</div>
-                    <div style="font-size: .8em;margin-left:.5rem"> Doctor Name</div>
+                    <div style="font-weight: 500;margin-left:.5rem"> Pet Name</div>
+                    <div style="font-size: .8em;margin-left:.5rem"> Owner Name</div>
                 </div>
                 <div style="flex:1 1 0"></div>
                 <div>
@@ -36,6 +36,7 @@
 
             </div>
             <div class="chat-footer">
+                <button class="btn btn-link black"><i class="fa fa-file-prescription"></i></button>
                 <button class="btn btn-link black"><i class="fa fa-paperclip"></i></button>
                 <input class="ctrl" placeholder="Your Message ...">
                 <button class="btn btn-link black"><i class="fa fa-paper-plane"></i></button>
@@ -47,8 +48,6 @@
     //Selector for your <video> element
     const speakerVideo = document.querySelector('#speakerVideo');
     const yourVideo = document.querySelector('#yourVideo');
-
-
 
     //Core
     window.navigator.mediaDevices.getUserMedia({
