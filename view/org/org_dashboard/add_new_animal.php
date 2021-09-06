@@ -107,7 +107,7 @@
         <a href="./../dashboard.php" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
     </div>
     <h3 class='mt1 txt-clr'>Add New Animal for Adoption</h3>
-    <form action="/AdoptionAnimals/process_add_new_animal" method="post"> 
+    <form action="/OrgNavigation/process_add_new_animal" method="post"> 
 
     <div class='field'>
             <label for='name'>Name</label>

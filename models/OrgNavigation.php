@@ -1,6 +1,6 @@
 <?php
 
-class AdoptionAnimals extends BaseModel
+class OrgNavigation extends BaseModel
 {
     static function createNewAnimal($org_id, $type, $other, $gender, $dob, $color, $description, $photo)
     {
@@ -16,14 +16,28 @@ class AdoptionAnimals extends BaseModel
 
     static function findAnimalsByOrgId($org_id)
     {
-        $query = "select name,type,dob,gender,date_listed,status,date_adopted from animal_for_adoption,animal where org_id= $org_id";
+        $query = "SELECT name,type,dob,gender,date_listed,status,date_adopted,description from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id";
         return BaseModel::select($query);
     }
 
     static function findRequestsByOrgId($org_id)
     {
-        $query = "select * from adoption_request where org_id= $org_id";
+        $query = "SELECT * from adoption_request where org_id= $org_id";
         return BaseModel::select($query);
+    }
+
+    
+    static function findReportedCases(){
+        $query = "SELECT type, description, contact_number,location, status, photo, time_reported,org_response from report_rescue";
+        return BaseModel::select($query);
+    }
+
+    static function updateRescueReportStatus($report_id)
+    {
+        $query = "UPDATE `report_rescue` SET status='ACCEPTED' WHERE report_id=$report_id;
+        UPDATE `report_rescue` SET org_response='ACCEPTED' WHERE report_id=$report_id;
+        UPDATE `report_rescue` SET org_id = $_SESSION('org_id') WHERE report_id=$report_id";
+        return BaseModel::update($query);
     }
 
     public static function searchAnimals()

@@ -188,7 +188,8 @@ create table report_rescue(
     contact_number int(10),
     location varchar(100) not null,
     location_coordinates varchar(100) ,
-    status enum('PENDING','ACCTPED','REJECTED','RESCUED') not null default 'PENDING',
+    status enum('PENDING','ACCTPED','RESCUED') not null default 'PENDING',
+    org_response enum('RESCUE','RESCUED') not null default 'RESCUE',
     photo varchar(100) not null -- JSON ?
 );
 
@@ -380,8 +381,15 @@ INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_
 
 INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL');
 
-INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `proof_image`) VALUES
-(1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '/uploads/1630599314_63.png') ;
+INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `proof_image`) 
+VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '/uploads/1630599314_63.png') ;
+
+INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
+VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', current_timestamp(), '0771234567', 'Anuradhapura', NULL, 'PENDING', '');
+INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
+VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', current_timestamp(), '0771234567', 'Anuradhapura', NULL, 'PENDING', '');
+INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
+VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', current_timestamp(), '0771234567', 'Anuradhapura', NULL, 'PENDING', '');
 
  
  
