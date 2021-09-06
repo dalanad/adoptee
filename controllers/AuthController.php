@@ -16,7 +16,7 @@ class AuthController extends Controller
         try {
             $user = User::findUserByEmail($email);
 
-            if ($user['email_verified'] == 0 || $user['telephone-verified'] == 0) {
+            if ($user['email_verified'] == 0 || $user['telephone_verified'] == 0) {
                 $this->redirect('/auth/verify?email=' . $user["email"]);
             }
 
@@ -107,7 +107,7 @@ class AuthController extends Controller
 
         // if both email & telephone is already verified 
         if ($user['email_verified'] == 1 && $user['telephone_verified'] == 1) {
-            $this->sendToHomePage($user);
+            throw new Exception("Both User email & telephone is already verified ", 400);
         }
 
         $status = "";
@@ -129,7 +129,7 @@ class AuthController extends Controller
             $otp = rand(100000, 999999);
             $_SESSION["otp"] = $otp;
 
-            # $notification->sendSMS("94769972727", "OTP : $otp");
+            # $notification->sendSMS("94769972727", "OTP : $otp"); // set $user["telephone"]
             $status = "sms_sent";
         } else if ($_GET["action"] == "validate_sms") {
 
