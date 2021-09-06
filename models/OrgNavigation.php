@@ -22,7 +22,7 @@ class OrgNavigation extends BaseModel
 
     static function findRequestsByOrgId($org_id)
     {
-        $query = "SELECT * from adoption_request where org_id= $org_id";
+        $query = "SELECT animal.name, animal.type, adoption_request.user_id,user.name,request_date,status,has_pets,petsafety,children,childsafety from adoption_request,user,animal where org_id= $org_id and adoption_request.user_id=user.user_id";
         return BaseModel::select($query);
     }
 

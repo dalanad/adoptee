@@ -188,8 +188,8 @@ create table report_rescue(
     contact_number int(10),
     location varchar(100) not null,
     location_coordinates varchar(100) ,
-    status enum('PENDING','ACCTPED','RESCUED') not null default 'PENDING',
-    org_response enum('RESCUE','RESCUED') not null default 'RESCUE',
+    status enum('PENDING','ACCETPED','RESCUED') not null default 'PENDING',
+    org_response enum('RESCUE','ACCETPED','RESCUED') not null default 'RESCUE',
     photo varchar(100) not null -- JSON ?
     foreign key(org_id) references organization(org_id);
 );
@@ -392,5 +392,7 @@ VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care. Lorem ipsum dol
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
 VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', current_timestamp(), '0771234567', 'Anuradhapura', NULL, 'PENDING', '');
 
- 
- 
+ INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `approval_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
+ VALUES ('1', '3', '1', '2021-08-01', NULL, 'PENDING', '1', 'The dog that I already have is easy going and bond well with other animals.', '1', 'Used to pets');
+ INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `approval_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
+ VALUES ('2', '3', '1', '2021-10-02', NULL, 'PENDING', '0', '', '1', 'Used to pets');
