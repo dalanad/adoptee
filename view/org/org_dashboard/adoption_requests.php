@@ -81,10 +81,10 @@
                         <button title="Reject" class="btn btn-link btn-icon pink"><i class="fas fa-times-circle"></i></button>
                     </td>
                     <td>
-                        <button id="popupBtn" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
-                        <div id="popupModal" class="modal">
+                        <button  onclick="showModel('popupModal<?= $adoption_request["animal_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                        <div id="popupModal<?= $adoption_request["animal_id"] ?>" class="modal">
                             <div class="modal-content">
-                                <span class="close">&times;</span>
+                                <span class="close" onclick="hideModel('popupModal<?= $animal["animal_id"] ?>')">&times;</span>
                                 <h3>More Details</h3>
                                 <div style="padding: 5px;"><button title="Adoptor Name" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-user"></i></button><?= $adoption_request["user_name"] ?></div>
                                 <div style="padding: 5px;"><button title="Adoptor Mobile" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-phone"></i></button><?= $adoption_request["contact"] ?></div>
@@ -101,21 +101,22 @@
 </div>
 
 <script>
-    var modal = document.getElementById("popupModal");
-    var btn = document.getElementById("popupBtn");
-    var span = document.getElementsByClassName("close")[0];
-
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    function showModel(id) {
+        document.getElementById(id).classList.add("shown")
+        document.getElementById(id).style.display = "block";
+        document.getElementById(id).onclick = function(event) {
+            if (event.target.classList.contains('modal') && !event.target.classList.contains('modal-content')) {
+                let model = document.querySelector('.modal.shown');
+                model.style.display = "none"
+                model.classList.remove("shown")
+                document.getElementById(id).onclick = null
+            }
         }
+    }
+
+    function hideModel(id) {
+        document.getElementById(id).classList.remove("shown")
+        document.getElementById(id).style.display = "none";
+        document.getElementById(id).onclick = null
     }
 </script>

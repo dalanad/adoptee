@@ -32,6 +32,11 @@ class OrgManagement extends BaseModel
         return BaseModel::select($query);
     }
 
+    static function findRescuedAnimalsByOrgId(){
+        $query = "SELECT * from report_rescue";
+        return BaseModel::select($query);
+    }
+
     static function updateRescueReportStatus($report_id)
     {
         $query = "UPDATE `report_rescue` SET status='ACCEPTED' WHERE report_id=$report_id;

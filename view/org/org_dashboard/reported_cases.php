@@ -145,13 +145,13 @@
                         <td><?= $reported_case["type"] ?></td>
                         <td><button title="location" class="btn btn-link btn-icon"><i class="fas fa-map-marker-alt"></i></button></td>
                         <td>
-                            <button id="popupBtn" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
-                            <div id="popupModal" class="modal">
+                            <button  onclick="showModel('popupModal<?= $reported_case["report_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                            <div id="popupModal<?= $reported_case["report_id"] ?>" class="modal">
                                 <div class="modal-content">
-                                    <span class="close">&times;</span>
+                                    <span class="close" onclick="hideModel('popupModal<?= $animal["animal_id"] ?>')">&times;</span>
                                     <h3>More Details</h3>
                                     <table>
-                                        <tr><td><div style="padding: 5px;"><button title="Time Reported" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-file-clock"></i><?= $reported_case["time_reported"] ?>&nbsp;<span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span></div>
+                                        <tr><td><div style="padding: 5px;"><button title="Time Reported" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-clock"></i></td><td><?= $reported_case["time_reported"] ?>&nbsp;<span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span></div></td></tr>
                                         <tr><td><div style="padding: 5px;"><button title="Description" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-file-alt"></i></button></td><td><?= $reported_case["description"] ?></i> </button></div></td></tr>
                                         <tr><td><div style="padding: 5px;"><button title="Contact Number" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-phone"></i></button></td><td><?= $reported_case["contact_number"] ?></div></td></tr>
                                         <tr><td><div style="padding: 5px;"><button title="Location" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-map-marker-alt"></i></button></td><td><?= $reported_case["location"] ?></div></td></tr>
@@ -175,27 +175,22 @@
 </div>
 
 <script>
-    document.querySelector(".side-nav .active").scrollIntoView({
-        behavior: 'auto',
-        block: 'center',
-        inline: 'center'
-    });
-
-    var modal = document.getElementById("popupModal");
-    var btn = document.getElementById("popupBtn");
-    var span = document.getElementsByClassName("close")[0];
-
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    function showModel(id) {
+        document.getElementById(id).classList.add("shown")
+        document.getElementById(id).style.display = "block";
+        document.getElementById(id).onclick = function(event) {
+            if (event.target.classList.contains('modal') && !event.target.classList.contains('modal-content')) {
+                let model = document.querySelector('.modal.shown');
+                model.style.display = "none"
+                model.classList.remove("shown")
+                document.getElementById(id).onclick = null
+            }
         }
+    }
+
+    function hideModel(id) {
+        document.getElementById(id).classList.remove("shown")
+        document.getElementById(id).style.display = "none";
+        document.getElementById(id).onclick = null
     }
 </script>

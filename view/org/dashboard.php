@@ -7,9 +7,9 @@ $management_menu = array(
     "org_adoption_listing" => array("name" => "Adoption Listing", "icon" => "paw"),
     "adoption_requests" =>  array("name" =>  "Adoption Requests", "icon" => "dog"),
     "reported_cases" =>  array("name" =>  "Reported Cases", "icon" => "exclamation-circle"),
-    "rescues" =>  array("name" =>  "Rescues", "icon" => "ambulance"),
+    "org_rescues" =>  array("name" =>  "Rescues", "icon" => "ambulance"),
     "org_donations" =>  array("name" =>  "Donations", "icon" => "hand-holding-usd"),
-    "news_events" =>  array("name" =>  "News & Events", "icon" => "calendar-alt"),
+    "org_news_events" =>  array("name" =>  "News & Events", "icon" => "calendar-alt"),
     "store" =>  array("name" =>  "Store", "icon" => "store-alt"),
 );
 
