@@ -190,7 +190,6 @@ create table report_rescue(
     status enum('PENDING','ACCETPED','RESCUED') not null default 'PENDING',
     org_response enum('RESCUE','ACCETPED','RESCUED') not null default 'RESCUE',
     photo varchar(100) not null -- JSON ?
-    foreign key(org_id) references organization(org_id);
 );
 
 create table org_content (
