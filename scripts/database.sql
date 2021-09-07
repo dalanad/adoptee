@@ -199,7 +199,6 @@ create table org_content (
     heading varchar(50),
     description varchar(200),
     photo varchar(200), -- JSON ?
-    foreign key(org_id) references organization(org_id)
 );
 
 create table org_feedback (
@@ -250,10 +249,6 @@ create table adoption_request (
     children boolean,
     childsafety varchar(100) ,
     primary key(animal_id, user_id),
-    foreign key(org_id) references organization(org_id),
-    foreign key(animal_id) references animal(animal_id),
-    foreign key(user_id) references user(user_id)
-
 );
 
 alter table adoption_request
