@@ -9,6 +9,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="/assets/site.webmanifest">
+    <meta name="description" content="Pet Adoption & Animal Care Platform">
+    <meta name="theme-color" content="#08d5a2">
     <link href="/assets/vendor/normalize.css" rel="stylesheet" type="text/css" />
     <link href="/assets/vendor/fontawesome.css" rel="stylesheet" type="text/css">
     <link href="/assets/vendor/roboto.css" rel="stylesheet" type="text/css">
@@ -16,6 +18,15 @@
     <link href="/assets/css/util.css" rel="stylesheet" type="text/css" />
     <script src="/assets/vendor/jquery-3.6.0.min.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/assets/js/service-worker.js');
+            });
+        }
+    </script>
 </head>
 <?php
 
@@ -27,7 +38,7 @@ function user_btn()
 
             <i class='far fa-user-circle' style='font-size:1.2em'> </i>
             <div style='margin-left:.5rem'>" . $_SESSION['user']['name'] .
-                (isset($_SESSION['org']) ? ("<br><div> <small style='font-weight: 300;'>" . $_SESSION['org']['name'] . "</small></div>") : "") .
+            (isset($_SESSION['org']) ? ("<br><div> <small style='font-weight: 300;'>" . $_SESSION['org']['name'] . "</small></div>") : "") .
             "</div>
              <div class='dropdown-content'>
                 <a class='btn black btn-link' href='/profile/view'><i class='fa fa-user'></i>&nbsp; Profile</a>
