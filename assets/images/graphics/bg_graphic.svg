@@ -1,0 +1,154 @@
+<svg width="405" height="405" viewBox="0 0 405 405" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" from="180" to="265" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" from="171" to="171" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" from="180" to="252.921" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" from="171" to="157.496" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" from="180" to="239.058" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" from="171" to="143.654" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" from="180" to="225.194" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" from="171" to="129.812" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" from="180" to="254.573" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" from="171" to="183.532" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" from="180" to="242.363" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" from="171" to="195.722" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" from="180" to="230.150" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" from="171" to="207.916" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <!-- GROPUP 2 -->
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="4s" from="180" to="265" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="4s" from="171" to="171" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="4s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="4s" from="180" to="265" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="4s" from="171" to="171" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="4s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="4s" from="180" to="252.921" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="4s" from="171" to="157.496" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="4s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="4s" from="180" to="239.058" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="4s" from="171" to="143.654" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="4s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="4s" from="180" to="225.194" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="4s" from="171" to="129.812" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="4s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="4s" from="180" to="254.573" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="4s" from="171" to="183.532" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="4s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="4s" from="180" to="242.363" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="4s" from="171" to="195.722" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="4s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="4s" from="180" to="230.150" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="4s" from="171" to="207.916" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="4s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- GROUP 3 -->
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="2s" from="180" to="265" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="2s" from="171" to="171" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="2s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="2s" from="180" to="265" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="2s" from="171" to="171" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="2s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="2s" from="180" to="252.921" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="2s" from="171" to="157.496" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="2s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="2s" from="180" to="239.058" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="2s" from="171" to="143.654" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="2s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="2s" from="180" to="225.194" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="2s" from="171" to="129.812" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="2s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="2s" from="180" to="254.573" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="2s" from="171" to="183.532" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="2s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="2s" from="180" to="242.363" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="2s" from="171" to="195.722" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="2s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="2" cx="180" cy="171" fill="#0EBBFF">
+        <animate attributeName="cx" begin="2s" from="180" to="230.150" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" begin="2s" from="171" to="207.916" dur="6s" repeatCount="indefinite" />
+        <animate attributeType="CSS" begin="2s" attributeName="opacity" from="1" to="0" values="1; 1; 0" keyTimes="0; 0.8; 1" dur="6s" repeatCount="indefinite" />
+    </circle>
+
+    <path d="M45.4539 387.206L46.4026 388.15L46.4026 378.305L45.4539 379.252L45.4539 387.206" fill="#5BC69A" />
+    <path d="M59.5476 365.18L58.5987 366.128L58.5987 400.331L59.5476 401.278L59.5476 365.18Z" fill="#5BC69A" />
+    <path d="M50.7842 373.93L49.8354 374.878L49.8354 391.581L50.7842 392.528L50.7842 373.93Z" fill="#5BC69A" />
+    <path d="M63.2768 361.458L62.9851 361.749L62.9851 404.706L63.2768 405L63.9307 404.347L63.9307 362.111L63.2768 361.458" fill="#5BC69A"> </path>
+    <path d="M55.166 369.555L54.2172 370.502L54.2172 395.956L55.166 396.903L55.166 369.555" fill="#5BC69A" />
+    <path d="M77.0789 375.239L76.13 374.292L76.13 392.166L77.0789 391.219L77.0789 375.239Z" fill="#5BC69A" />
+    <path d="M81.4614 379.614L80.5125 378.667L80.5125 387.791L81.4614 386.844L81.4614 379.614Z" fill="#5BC69A" />
+    <path d="M68.3152 366.486L67.3663 365.542L67.3663 400.916L68.3152 399.972L68.3152 366.486" fill="#5BC69A" />
+    <path d="M72.6968 370.864L71.748 369.917L71.748 396.542L72.6968 395.597L72.6968 370.864Z" fill="#5BC69A" />
+    <path d="M219.156 170.65L195.852 193.92L172.545 170.65L195.852 147.379L219.156 170.65Z" fill="#0D6EFD" />
+    <path d="M84.9133 297.938L63.1994 319.622L41.4823 297.938L63.1994 276.255L84.9133 297.938Z" fill="#18AD74" />
+    <path d="M-0.00030823 171.738L63.1991 108.638L126.398 171.738L63.1991 234.838L-0.00030823 171.738Z" fill="#F9B13E" />
+    <path d="M63.1993 108.638L126.399 45.5407L189.598 108.638L126.399 171.738L63.1993 108.638Z" fill="#F03954" />
+    <path d="M63.1993 234.838L126.399 171.738L189.598 234.838L126.399 297.938L63.1993 234.838Z" fill="#B9E8EA" />
+    <path d="M97.1201 200.971L97.3796 201.208C116.122 219.918 116.122 250.258 97.3796 268.968L126.399 297.939L131.835 292.511C161.432 257.45 159.717 205.004 126.646 171.988L126.392 171.745L97.1201 200.971" fill="#18AD74">
+        <animate attributeType="CSS" attributeName="opacity" from="1" to="1" values="1; 0.2; 1" keyTimes="0; 0.5; 1" dur="6s" repeatCount="indefinite" />
+    </path>
+    <path d="M126.399 297.938L189.598 361.038L189.598 234.838L126.399 297.938Z" fill="#0EBBFF" />
+    <path d="M0.000325532 171.738L63.1997 108.638L0.000336565 45.5406L0.000325532 171.738Z" fill="#18AD74" />
+    <path d="M0.000523606 45.5411L23.3076 22.2706L0.000527674 -0.999943L0.000523606 45.5411Z" fill="#F03954" />
+    <path d="M0.000325532 297.939L63.1997 234.838L0.000336565 171.738L0.000325532 297.939Z" fill="#0EBBFF" />
+    <g>
+        <!-- <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 315.171 249.016" to="360 315.171 249.016" dur="10s" repeatCount="indefinite" /> -->
+        <path d="M353.295 224.229 L 353.295 227.538 L336.056 210.326 L339.370 210.326 L353.295 224.229Z" fill="#0EBBFF" />
+        <path d="M290.089 210.326 L 293.404 210.326 L353.295 270.123 L353.295 273.429 L290.089 210.326" fill="#0EBBFF" />
+        <path d="M320.734 210.326 L 324.048 210.326 L353.295 239.527 L353.295 242.836 L320.734 210.326Z" fill="#0EBBFF" />
+        <path d="M277.056 210.326 L 278.082 210.326 L353.295 285.422 L353.295 286.446 L351.006 286.446 L277.056 212.611L277.056 210.326Z" fill="#0EBBFF" />
+        <path d="M305.412 210.326 L 308.726 210.326 L353.295 254.825 L353.295 258.131 L305.412 210.326Z" fill="#0EBBFF" />
+        <path d="M277.056 258.506 L 277.056 255.196 L308.351 286.446 L305.037 286.446 L277.056 258.506" fill="#0EBBFF" />
+        <path d="M277.056 227.909 L 277.056 224.600 L338.999 286.446 L335.684 286.446 L277.056 227.909" fill="#0EBBFF" />
+        <path d="M277.056 243.208 L 277.056 239.898 L323.676 286.446 L320.362 286.446 L277.056 243.208Z" fill="#0EBBFF" />
+        <path d="M277.056 273.804 L 277.056 270.498 L293.029 286.446 L289.718 286.446 L277.056 273.804Z" fill="#0EBBFF" />
+    </g>
+</svg>

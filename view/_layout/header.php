@@ -2,7 +2,7 @@
 <div class="container">
     <header class="header">
         <a class="logo" href="/">
-            <img src="/assets/images/logo_vector.svg" />
+            <img src="/assets/images/logo_vector_filled.svg" alt="Adoptee Logo" />
         </a>
         <nav class="main-nav">
             <div class="flex justify-between" style="width:100%">

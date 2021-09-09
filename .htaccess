@@ -13,12 +13,31 @@ RewriteBase /
   </IfModule>
 </FilesMatch>
 
-<FilesMatch "\.(svg|jpg|jpeg|png)$">
+<FilesMatch "\.(svg|jpg|jpeg|png|woff2)$">
   <IfModule mod_headers.c>
     Header set Cache-Control "public, max-age=604800, immutable"
   </IfModule>
 </FilesMatch>
- 
+
+# GZIP compression for text files: HTML, CSS, JS, Text, XML, fonts
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+  AddOutputFilterByType DEFLATE application/x-font
+  AddOutputFilterByType DEFLATE application/x-font-opentype
+  AddOutputFilterByType DEFLATE application/x-font-otf
+  AddOutputFilterByType DEFLATE application/x-font-truetype
+  AddOutputFilterByType DEFLATE application/x-font-ttf
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE font/opentype
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE image/x-icon
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE text/plain
+</IfModule>
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 #RewriteCond %{REQUEST_URI} !^(/assets/(.*)\.(.*))$

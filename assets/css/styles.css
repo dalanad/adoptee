@@ -176,6 +176,9 @@ th {
 	justify-content: space-between;
 	padding: 0.5rem 1rem;
 	position: relative;
+	background: #ffffffad;
+    z-index: 1;
+    border-radius: 0 0 2rem 2rem;
 }
 
 header .logo img {
