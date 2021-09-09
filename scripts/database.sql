@@ -190,6 +190,7 @@ create table report_rescue(
     status enum('PENDING','ACCETPED','RESCUED') not null default 'PENDING',
     org_response enum('RESCUE','ACCETPED','RESCUED') not null default 'RESCUE',
     photo varchar(100) not null -- JSON ?
+    -- foreign key(org_id) references organization(org_id)
 );
 
 create table org_content (
@@ -328,6 +329,9 @@ add foreign key(user_id) references user(user_id);
 alter table merch_purchase_item
 add foreign key(org_id) references organization(org_id),
 add foreign key(order_id) references merch_purchase(order_id);
+
+alter table report_rescue
+add foreign key(org_id) references organization(org_id);
 
 INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`, `about`) 
 VALUES ('Pet Haven', '0112345678', 'No. 58', '5th Lane', 'Battaramulla', 'Help an animal in need', 'LOGO', 'Animal Haven is a 
