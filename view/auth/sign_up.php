@@ -44,7 +44,7 @@ $_SESSION['email'] = $_POST["email"]; ?>
             </div>
 
             <div class="field column" style="width:50%;">
-                <label>Telephone</label>
+                <label>Mobile Phone Number</label>
                 <input class="ctrl" type="text" name="telephone" pattern="[0-9]{10}/" required>
                 <span class="field-msg"></span>
             </div>
