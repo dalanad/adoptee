@@ -32,7 +32,7 @@
 
         <div class="row">
             <div class="field column">
-                <label>Telephone</label>
+                <label>Mobile Phone Number</label>
                 <input class="ctrl" name="telephone" type="text" value="<?= $_SESSION['user']['telephone'];?>">
                 <span class="field-msg"></span>
             </div>

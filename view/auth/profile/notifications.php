@@ -1,81 +1,71 @@
 <style>
-    .notif-card{
+    .column {
+        float: left;
+        width: 30%;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .row{
         border-radius: 6px;
         background: #fafafa;
         box-shadow: var(--shadow-light);
         cursor: pointer;
-        display: grid;
-        min-height: 3rem;
-        padding-top: 1em;
-        padding-left: 1em;
-        margin-bottom: 1em;
+        padding:0.5rem;
     }
 
-    /* .notif-card-action {
-        display: none;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        text-transform: uppercase;
-        font-weight: 900;
-        letter-spacing: 2px;
-        color: white;
-        font-size: 1.4em;
-        position: absolute;
-        background: var(--primary);
+    .date {
+        color: dimgray;
+        font-size: 1rem;
+        width:20%
     }
 
-    .notif-card:hover .notif-card-action {
-        display: flex;
-     } */
-
-     .icon{
-        grid-column: 1 /1;
-    }
-
-    .date{
-        grid-column: 2 / 2;
-        color:dimgray;
-        font-size:1rem;
-        display: inline;
-        margin-right: 1em;
-    }
-
-    .notif-type{
-        grid-column:3 /3;
-        font-size:1rem;
-        display: inline;
+    .notif-type {
+        font-size: 1rem;
         font-weight: bold;
-        margin-left: 1em;
-        margin-right: 1em;
+    }
+
+    .fas{
+        color:var(--green);
+    }
+
+    .fas, .far{
+        width:10%;
     }
 
     .details{
-        grid-column:4 / 4;
-        margin-right: 1em;
+        width:40%;
     }
 
+    @media screen and (max-width: 600px) {
+        .column {
+            width: 100%;
+        }
+    }
 </style>
-<div class="notif-card">
-    <i class="fas fa-bell"></i>
-    <div class="date"><?= date('Y-m-d') ?></div>
-    <div class="notif-type">Adoption Request</div>
-    <div class="details">Your adoption request has been approved!</div>
-    <!-- <div class="notif-card-action">Go to Event</div> -->
+
+<div class="row mb2">
+    <i class="column fas fa-bell"></i>
+    <div class="column date"><?= date('Y-m-d') ?></div>
+    <div class="column notif-type">Adoption Request</div>
+    <div class="column details">Your adoption request has been approved!</div>
 </div>
 
-<div class="notif-card">
-    <i class="fas fa-bell"></i>
-    <div class="date"><?= date('Y-m-d') ?></div>
-    <div class="notif-type">Vaccination Reminder</div>
-    <div class="details">Your pet Tina needs her ARV vaccine on 2021-09-20</div>
-    <!-- <div class="notif-card-action">Go to Event</div> -->
+<div class="row mb2">
+    <i class="column fas fa-bell"></i>
+    <div class="column date"><?= date('Y-m-d') ?></div>
+    <div class="column notif-type">Vaccination Reminder</div>
+    <div class="column details">Your pet Tina needs her ARV vaccine on 2021-09-20</div>
 </div>
 
-<div class="notif-card" style="background:#E7E6E6;">
-    <i class="far fa-bell"></i>
-    <div class="date">2021-08-20</div>
-    <div class="notif-type">Rescue Update</div>
-    <div class="details">Reported pet progress</div>
-    <!-- <div class="notif-card-action">Go to Event</div> -->
+<div class="row mb2" style="background:var(--gray-3);">
+    <i class=" column far fa-bell"></i>
+    <div class="column date">2021-08-20</div>
+    <div class="column notif-type">Rescue Update</div>
+    <div class="column details">Reported pet progress</div>
 </div>
