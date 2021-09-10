@@ -35,10 +35,10 @@
             <div style = "font-size:medium;"><?php foreach($details as $key=>$value){print_r($value['tagline']);} ?></div>
         </div>
         <div>
-            <a class='btn green' href='/view/public/organizations/donations.php' style='margin-left :20px;'>Donate</a>
+            <a class='btn green' href='/Organization/view_donation_page?org_id=<?=$_GET['org_id']?>' style='margin-left :20px;'>Donate</a>
         </div>
         <div>
-            <a class='btn green' href='/view/public/organizations/review_organization.php' style='margin-left :20px;'>Review</a>
+            <a class='btn green' href='/Organization/view_review_page?org_id=<?=$_GET['org_id']?>'' style='margin-left :20px;'>Review</a>
         </div>
     </div>
     <div class="m2 profile-links">

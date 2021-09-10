@@ -57,6 +57,20 @@ class OrganizationController extends Controller
         
         View::render("public/organizations/organization_profile", $orgData);
     }
+
+    static function view_review_page()
+    {
+        $organization = new Organization;
+        $data=["details" => $organization->getOrgDetails($_GET['org_id'])];
+        View::render("public/organizations/review_organization", $data);
+    }
+
+    static function view_donation_page()
+    {
+        $organization = new Organization;
+        $data=["details" => $organization->getOrgDetails($_GET['org_id'])];
+        View::render("public/organizations/donations", $data);
+    }
 }
 
 ?>

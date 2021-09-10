@@ -17,5 +17,6 @@
                 echo "".$telephone." <br>";
                 print_r($address);
             ?>
+            <div class="rounded" style="height:40px;width:40px;" id="googleMap"></div>
         </div>
 </div>
