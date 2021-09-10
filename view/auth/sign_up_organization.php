@@ -35,7 +35,7 @@
                 <input class="ctrl" type="text" name="name" required/>
             </div>
             <div class="field">
-                <label>Telephone</label>
+                <label>Mobile Phone Number</label>
                 <input class="ctrl" type="telephone" name="telephone" required />
             </div>
             <div class="field">

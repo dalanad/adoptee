@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+    .dot{
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        color: var(--green);
+    }
+</style>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,6 +57,21 @@ function user_btn()
         </div>";
     } else {
         echo '<a class="btn green" href="/auth/sign_in">Sign In</a>';
+    }
+}
+
+function notif_btn()
+{
+    if (isset($_SESSION['user'])) {
+        echo
+        "<div class='dropdown' style='display:flex;align-items: center;line-height: 1;'>
+
+            <i class='far fa-bell' style='font-size:1.2em'> </i>
+             <div class='dropdown-content'>
+                <a class='btn black btn-link' href='/profile/view'><i class='dot'></i>&nbsp; Adoption Request Update</a>
+                <a class='btn black btn-link'><i class='dot'></i>&nbsp; Vaccination Reminder</a>
+            </div>
+        </div>";
     }
 }
 ?>
