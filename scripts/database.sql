@@ -33,7 +33,8 @@ create table organization (
     city varchar(20) ,
     tagline varchar(50),
     logo varchar(50),
-    about varchar(200)
+    about varchar(200),
+    about_photo varchar(50)
 );
 
 create table org_user (
@@ -68,6 +69,7 @@ create table animal_for_adoption (
     status enum('LISTED','ADOPTED') not null default 'LISTED',
     date_adopted date,
     org_id int(10),
+    user_id int(10),
     primary key(animal_id)
 );
 
@@ -262,6 +264,9 @@ add foreign key(user_id) references user(user_id);
 
 alter table org_user
 add foreign key(org_id) references organization(org_id),
+add foreign key(user_id) references user(user_id);
+
+alter table animal_for_adoption
 add foreign key(user_id) references user(user_id);
 
 alter table routine_updates
