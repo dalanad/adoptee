@@ -62,7 +62,7 @@ class DoctorController extends Controller
 
     function live_consultation()
     {
-        View::render("doctor/live_consultation");
+        View::render("doctor/live_consultation", ["bookings" => Consultation::getLiveBookings(1, '2021-08-21', '2021-08-30')]);
     }
 
     function consult_conference()
