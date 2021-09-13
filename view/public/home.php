@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./../_layout/header.php";
+<?php require __DIR__ . "/../_layout/header.php";
 /* TODO :  
     Add current page indicator
     social media link (dummy)
