@@ -16,6 +16,10 @@ class AuthController extends Controller
         try {
             $user = User::findUserByEmail($email);
 
+            if (!isset($user)) {
+                $this->redirect("/auth/sign_in?error=true");
+            }
+
             if ($user['email_verified'] == 0 || $user['telephone_verified'] == 0) {
                 $this->redirect('/auth/verify?email=' . $user["email"]);
             }

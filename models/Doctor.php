@@ -20,13 +20,13 @@ class Doctor extends BaseModel
 
     public static function getDoctors()
     {
-        return self::select("SELECT * from doctor");
+        return self::select("SELECT * FROM doctor INNER JOIN user ON user.user_id = doctor.user_id");
     }
 
     public static function findByUID($user_id)
     {
-        $query = "SELECT *  from `doctor` where user_id= '$user_id'";
-        return self::select($query);
+        $query = "SELECT *  from `doctor` INNER JOIN user ON user.user_id = doctor.user_id where doctor.user_id= :id";
+        return self::select($query, ["id" => $user_id]);
     }
 
     /** 
@@ -71,5 +71,24 @@ class Doctor extends BaseModel
             $schedule[$res["day_of_week"]][$res["time_slot"]] = 1;
         }
         return $schedule;
+    }
+
+
+    public static function getSlots(int $doc_id, $date)
+    {
+        return self::select(
+            "SELECT
+                s.doctor_user_id,
+                ('2021-09-08') 'date',
+                s.time_slot,
+                c.consultation_id
+            FROM
+                consultation_schedule s
+            LEFT JOIN consultation c ON
+                WEEKDAY(c.consultation_date) = s.day_of_week AND c.consultation_time = s.time_slot and c.consultation_date = :date
+            WHERE 
+            s.doctor_user_id = :doc_id AND day_of_week =(WEEKDAY(:date))",
+            ["doc_id" => $doc_id, "date" =>  $date]
+        );
     }
 }

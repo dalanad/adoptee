@@ -307,3 +307,47 @@
 	align-self: flex-end;
 }
 /* Chat End */
+
+
+.table.row-border tr {
+	border-bottom: 1px solid var(--gray-3);
+}
+
+.sort-header {
+	cursor: pointer;
+	transition: background-color 0.2s ease-in;
+}
+
+.sort-header:hover {
+	background-color: var(--bg-hover);
+}
+
+.pagination {
+	display: flex;
+}
+
+.paginate_button {
+	padding: 0.4em 0.5em;
+	margin: 0.1em;
+	text-decoration: none !important;
+	border-radius: 4px;
+	color: var(--color);
+	transition: background-color 0.1s ease-in-out;
+	display: block;
+}
+
+.paginate_button:hover {
+	cursor: pointer;
+	color: var(--color);
+	background-color: var(--bg-hover);
+}
+
+.paginate_button.active {
+	background-color: var(--primary);
+	color: var(--bg);
+}
+
+.paginate_button.disabled {
+	pointer-events: none;
+	opacity: 0.3;
+}

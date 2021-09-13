@@ -1,3 +1,7 @@
+window.addEventListener("DOMContentLoaded", (event) => {
+	InitSortHeaders();
+});
+
 class Calender {
 	_hostElement;
 	_date = new Date();
@@ -182,7 +186,11 @@ class AppointmentsTimeline {
 		if (data) {
 			this._cells[date_str][time_str].classList.add("has-data");
 			this._cells[date_str][time_str].classList.add("txt-clr");
-			let status_colors = { PENDING: "orange", ACCEPTED: "-", CANCELLED: "red" };
+			let status_colors = {
+				PENDING: "orange",
+				ACCEPTED: "-",
+				CANCELLED: "red",
+			};
 			this._cells[date_str][time_str].classList.add(status_colors[data.status]);
 
 			this._cells[date_str][time_str].innerHTML = `
@@ -309,3 +317,49 @@ class AppointmentsTimeline {
 function sleep(ms) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+function InitSortHeaders() {
+	for (let e of document.querySelectorAll("th[data-field]")) {
+		e.classList.add("sort-header");
+		e.dataset.dir = new URLSearchParams(window.location.search).getAll(
+			`sort[${e.dataset.field}]`
+		);
+		let i = document.createElement("i");
+		e.appendChild(i);
+		i.style.marginLeft = "1rem";
+		i.classList = e.dataset.dir
+			? `fa fa-arrow-${e.dataset.dir === "ASC" ? "down" : "up"}`
+			: "";
+		e.addEventListener("click", () => {
+			if (e.dataset.dir == "DESC") {
+				delete e.dataset.dir;
+			} else {
+				e.dataset.dir = e.dataset.dir == "ASC" ? "DESC" : "ASC";
+			}
+			if (e.dataset.dir) {
+				params({
+					[`sort[${e.dataset.field}]`]: e.dataset.dir,
+				});
+			} else {
+				params({
+					[`sort[${e.dataset.field}]`]: null,
+				});
+			}
+		});
+	}
+}
+
+function params(data) {
+	let url = new URL(window.location.href);
+	for (const key in data) {
+		if (Object.prototype.hasOwnProperty.call(data, key)) {
+			const element = data[key];
+			url.searchParams.set(key, element);
+			if (element == null) {
+				url.searchParams.delete(key);
+			}
+		}
+	}
+	window.location = decodeURIComponent(url.href);
+}
+window.params = params;
