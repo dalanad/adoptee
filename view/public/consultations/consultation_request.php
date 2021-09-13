@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./../../_layout/header.php"; ?>
+<?php require __DIR__ . "/../../_layout/header.php"; ?>
 <?php $step = isset($_GET["step"]) ? $_GET["step"] : 1; ?>
 <style>
   .radio-box {

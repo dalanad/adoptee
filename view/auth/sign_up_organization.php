@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . "./../_layout/layout.php" ?>
+<?php require_once __DIR__ . "/../_layout/layout.php" ?>
 <?php $step = isset($_GET["step"]) ? $_GET["step"] : 1; ?>
 
 <link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
