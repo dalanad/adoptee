@@ -65,7 +65,7 @@ $active = isset($_GET["menu"]) && isset($profile_menu[$_GET["menu"]])  ? $_GET["
         </div>
 
         <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;padding:1rem">
-            <?php include __DIR__ . "./" . $active . ".php" ?>
+            <?php include __DIR__ . "/" . $active . ".php" ?>
         </div>
     </div>
 </div>

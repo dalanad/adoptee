@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./../../_layout/header.php"; ?>
+<?php require __DIR__ . "/../../_layout/header.php"; ?>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
