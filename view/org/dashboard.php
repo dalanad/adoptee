@@ -1,7 +1,7 @@
 <?php
 
 
-require_once  __DIR__ . './../_layout/layout.php';
+require_once  __DIR__ . '/../_layout/layout.php';
 
 $management_menu = array(
     "org_adoption_listing" => array("name" => "Adoption Listing", "icon" => "paw"),
