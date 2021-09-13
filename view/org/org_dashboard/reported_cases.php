@@ -145,32 +145,62 @@
                         <td><?= $reported_case["type"] ?></td>
                         <td><button title="location" class="btn btn-link btn-icon"><i class="fas fa-map-marker-alt"></i></button></td>
                         <td>
-                            <button  onclick="showModel('popupModal<?= $reported_case["report_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                            <button onclick="showModel('popupModal<?= $reported_case["report_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
                             <div id="popupModal<?= $reported_case["report_id"] ?>" class="modal">
                                 <div class="modal-content">
                                     <span class="close" onclick="hideModel('popupModal<?= $animal["animal_id"] ?>')">&times;</span>
                                     <h3>More Details</h3>
                                     <table>
-                                        <tr><td><div style="padding: 5px;"><button title="Time Reported" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-clock"></i></td><td><?= $reported_case["time_reported"] ?>&nbsp;<span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span></div></td></tr>
-                                        <tr><td><div style="padding: 5px;"><button title="Description" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-file-alt"></i></button></td><td><?= $reported_case["description"] ?></i> </button></div></td></tr>
-                                        <tr><td><div style="padding: 5px;"><button title="Contact Number" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-phone"></i></button></td><td><?= $reported_case["contact_number"] ?></div></td></tr>
-                                        <tr><td><div style="padding: 5px;"><button title="Location" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-map-marker-alt"></i></button></td><td><?= $reported_case["location"] ?></div></td></tr>
-                                    </table>
-                                    <div style="padding: 5px;" class="center"><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;"></div>
+                                        <tr>
+                                            <td>
+                                                <div style="padding: 5px;"><button title="Time Reported" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-clock"></i>
+                                            </td>
+                                            <td><?= $reported_case["time_reported"] ?>&nbsp;<span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span>
                                 </div>
-                            </div>
                         </td>
-                        <td><div><a class="btn btn-link btn-icon" style="font-size: 0.8rem;" href="/OrgManagement/updateRescueReportStatus"><span class="tag <?= $reported_case["org_response"] == "RESCUE" ? 'pink' : 'green' ?>"> <?= $reported_case["org_response"] ?> </span></a></div></td>
                     </tr>
-                <?php } ?>
-
-            </table>
+                    <tr>
+                        <td>
+                            <div style="padding: 5px;"><button title="Description" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-file-alt"></i></button>
+                        </td>
+                        <td><?= $reported_case["description"] ?></i> </button>
         </div>
+        </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="padding: 5px;"><button title="Contact Number" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-phone"></i></button>
+            </td>
+            <td><?= $reported_case["contact_number"] ?>
     </div>
-    <div class="rounded" style="height: 500px; width: 1248px" id="googleMap"></div>
-    <div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN2HxM42eIrEG1e5b9ar2H_2_V6bMRjWk&callback=myMap"></script>
-    </div>
+    </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="padding: 5px;"><button title="Location" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-map-marker-alt"></i></button>
+        </td>
+        <td><?= $reported_case["location"] ?>
+</div>
+</td>
+</tr>
+</table>
+<div style="padding: 5px;" class="center"><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;"></div>
+</div>
+</div>
+</td>
+<td>
+    <div><a class="btn btn-link btn-icon" style="font-size: 0.8rem;" href="/OrgManagement/updateRescueReportStatus"><span class="tag <?= $reported_case["org_response"] == "RESCUE" ? 'pink' : 'green' ?>"> <?= $reported_case["org_response"] ?> </span></a></div>
+</td>
+</tr>
+<?php } ?>
+
+</table>
+</div>
+</div>
+<div class="rounded" style="height: 500px; width: 1248px" id="googleMap"></div>
+<div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN2HxM42eIrEG1e5b9ar2H_2_V6bMRjWk&callback=myMap"></script>
+</div>
 </div>
 </div>
 

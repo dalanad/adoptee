@@ -151,7 +151,7 @@ $administration_menu = array(
                 <div style="flex: 1 1 0;"></div>
                 <?= user_btn() ?>
             </div>
-            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
+            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem; height: 110%">
 
                 <?php include __DIR__ . "/org_dashboard/" . $active . ".php" ?>
             </div>
