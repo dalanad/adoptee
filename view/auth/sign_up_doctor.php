@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . "./../_layout/layout.php" ?>
+<?php require_once __DIR__ . "/../_layout/layout.php" ?>
 <link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
 <div class="card-container" style="max-width: 500px;">
     <form style="margin: 1rem;flex:1 1 0" action="/doctor/process_registration" method="POST" enctype="multipart/form-data">

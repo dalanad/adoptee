@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . "./../_layout/layout.php" ?>
+<?php require_once __DIR__ . "/../_layout/layout.php" ?>
 <?php $active = isset($_GET["active"]) ? $_GET["active"] : "sign_in"; ?>
 
 
