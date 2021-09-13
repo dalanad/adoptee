@@ -1,7 +1,7 @@
 <?php
 $_SESSION['name'] = $_POST["name"];
 $_SESSION['email'] = $_POST["email"]; ?>
-<?php require_once __DIR__ . "./../_layout/layout.php" ?>
+<?php require_once __DIR__ . "/../_layout/layout.php" ?>
 
 <link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
 
