@@ -69,6 +69,15 @@ class OrgManagementController extends Controller{
     ];
         View::render("org/dashboard", $data);
     }
+
+    function org_news_events()
+    {
+        $data = [
+            "active" => "org_news_events"
+
+    ];
+        View::render("org/dashboard", $data);
+    }
 }
 
 ?>

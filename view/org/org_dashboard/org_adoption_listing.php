@@ -48,7 +48,7 @@
 <div class="container" style="top: 100px">
     <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
         ADOPTEES
-        <a href="/OrgManagement/add_new_animal" class="btn right"> Add New Animal </a>
+        <a href="/OrgManagement/add_new_animal" class="btn right outline"> Add New Animal </a>
     </h3>
     <div class="overflow-auto" style="height:450px">
         <table class="table">

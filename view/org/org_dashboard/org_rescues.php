@@ -1,3 +1,17 @@
+<?php
+
+$org_rescues = array(
+    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC")
+);
+
+?>
+
+
 <style>
     .updates {
         position: absolute;
@@ -55,40 +69,48 @@
         text-decoration: none;
         cursor: pointer;
     }
+
+    .rescue{
+        border-radius: 6px;
+        background: #fafafa;
+        box-shadow: var(--shadow-light);
+        display: grid;
+        min-height: 3rem;
+        padding-top: 1em;
+        padding-left: 1em;
+        margin-bottom: 1em;
+    }
 </style>
 
 
 
 
-<div class="container" style="top: 100px">
+<div class="container" style="top: 200px; height: 99%">
     <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
         Rescues
-        <a href="/OrgManagement/add_new_org_rescue" class="btn right"> Add New org_rescue </a>
     </h3>
     <div class="overflow-auto" style="height:450px">
         <table class="table">
             <tr>
-                <th>PET</th>
                 <th>TYPE</th>
-                <th>AGE</th>
-                <th>GENDER</th>
-                <th>DATE LISTED</th>
-                <th>STATUS</th>
-                <th>DATE ADOPTED</th>
+                <th>DATE RESCUED</th>
+                <th>CONTACT NUMBER</th>
+                <th>DESCRIPTION</th>
+                <th>LOCATION</th>
+                <th>PHOTOS</th>
                 <th>INFO</th>
                 <th></th>
             </tr>
 
             <?php foreach ($org_rescues as $org_rescue) { ?>
-                <div>
                 <tr style="font-size: 0.8rem;">
-                    <td><?= $org_rescue["animal_id"] ?></td>
-                    <td><?= $org_rescue["rescued_date"] ?></td>
-                    <td><?= $org_rescue["dob"] ?></td>
-                    <td><?= $org_rescue["gender"] ?></td>
-                    <td><?= $org_rescue["date_listed"] ?></td>
-                    <td><span class="tag <?= $org_rescue["status"] == "ADOPTED" ? 'green' : 'pink' ?>"> <?= $org_rescue["status"] ?> </span></td>
-                    <td><?= $org_rescue["date_adopted"] ?></td>
+                    <div class="rescue">
+                    <td><?= $org_rescue["type"] ?></td>
+                    <td><?= $org_rescue["date_rescued"] ?></td>
+                    <td><?= $org_rescue["contact_number"] ?></td>
+                    <td><?= $org_rescue["description"] ?></td>
+                    <td><?= $org_rescue["location"] ?></td>
+                    <td><?= $org_rescue["photo"] ?></td>
                     <td>
                         <button onclick="showModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
                         <div id="popupModal<?= $org_rescue["org_rescue_id"] ?>" class="modal">
@@ -101,8 +123,10 @@
                         </div>
                     </td>
                     <td><a href="/OrgManagement/add_rescue_update" title="Add Update" class="btn btn-link btn-icon"><i class="fas fa-plus-circle"></i></a></td>
-                </tr>
-            </div>
+                
+
+                    </div>
+                    </tr>
             <?php } ?>
 
         </table>
