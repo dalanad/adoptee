@@ -2,6 +2,7 @@
 $active = "consulted_animals";
 require_once  __DIR__ . '/_nav.php';
 ?>
+<script src="/assets/js/doctor.js"></script>
 
 <table class="table row-border" style="box-shadow:var(--shadow);border-radius: 0.5rem;">
     <tr>
@@ -28,4 +29,4 @@ require_once  __DIR__ . '/_nav.php';
         output.innerHTML = e.data  ;
     };
 </script> -->
-<?php pagination($_GET["page"] ?? 0, $_GET["size"] ?? 5, 100) ?>
+<?php pagination($_GET["page"] ?? 0, $_GET["size"] ?? 5, 99) ?>

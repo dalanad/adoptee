@@ -6,6 +6,8 @@ services:
       - "8080:80"
     networks:
       - default
+    environment:
+      - DB_HOST=db
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password

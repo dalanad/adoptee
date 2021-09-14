@@ -69,8 +69,8 @@ class Application
     public static function handleError($level, $message, $file, $line)
     {
         if (error_reporting() !== 0) {
-            // echo  $message;
-            throw new \ErrorException($message, 0, $level, $file, $line);
+            echo  $message;
+            // throw new \ErrorException($message, 0, $level, $file, $line);
         }
     }
 }
