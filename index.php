@@ -5,7 +5,7 @@ function auto_load($class_name)
     $file_locations = array('lib/core', 'lib/services', "controllers", 'models');
 
     foreach ($file_locations as $folder) {
-        $path = "/" . $folder . "/" . $class_name . '.php';
+        $path = "/" . $folder . "/" . ucfirst($class_name) . '.php';
 
         if (file_exists(__DIR__ . $path)) {
             require_once __DIR__ . $path;

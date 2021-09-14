@@ -91,4 +91,14 @@ class Doctor extends BaseModel
             ["doc_id" => $doc_id, "date" =>  $date]
         );
     }
+
+
+    public static function getConsultedAnimals($doctorId)
+    {
+        $query = "SELECT c.*,u.name 'owner_name' ,a.*, ROUND(DATEDIFF(CURRENT_DATE, a.dob) / 365) 'age' FROM 
+         (SELECT DISTINCT animal_id, user_id FROM consultation WHERE consultation.doctor_user_id = :doctor_id ) c, animal a,user u
+         WHERE a.animal_id = c.animal_id and u.user_id = c.user_id";
+
+        return self::select($query, ["doctor_id" => $doctorId]);
+    }
 }

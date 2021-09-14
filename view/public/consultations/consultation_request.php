@@ -77,8 +77,8 @@
         </div>
         <div class="radio-box" style="display: grid;">
           <?php foreach ($doctors as $doctor) { ?>
-            <input name="pet" id="pet<?= $i ?>" type="radio">
-            <label for="pet<?= $i ?>" style="text-align:left">
+            <input name="pet" id="pet<?= $doctor["user_id"] ?>" type="radio">
+            <label for="pet<?= $doctor["user_id"] ?>" style="text-align:left">
               <div style="display: flex;align-items:center">
                 <div>
                   <div style="font-weight: 500;"><?= $doctor["name"] ?></div>
