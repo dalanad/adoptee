@@ -4,16 +4,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 class Calender {
 	_hostElement;
-	_date = new Date();
+	_date;
 	_onDateChanged;
 
 	constructor(hostElement) {
 		this._hostElement = hostElement;
-		this.render();
+		let url = new URL(window.location.href);
+		this.setDate(url.searchParams.get("calender_date") || new Date());
 	}
 
 	setDate(dt) {
 		this._date = new Date(dt);
+		params({ calender_date: this._date.toISOString().substr(0, 10) }, false);
 		this.render();
 	}
 
@@ -163,7 +165,15 @@ class AppointmentsTimeline {
 	}
 
 	async showBookings() {
-		let data = appointments;
+		let end_date = new Date(this.start_date);
+		end_date.setDate(end_date.getDate() + Number(7));
+
+		let start = this.start_date.toISOString().substr(0, 10);
+		let end = end_date.toISOString().substr(0, 10);
+
+		let data = await fetch(
+			`/doctor/get_live_bookings?start_date=${start}&end_date=${end}`
+		).then((res) => res.json());
 
 		for (const date in data) {
 			let bookings = data[date];
@@ -314,10 +324,6 @@ class AppointmentsTimeline {
 	}
 }
 
-function sleep(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 function InitSortHeaders() {
 	for (let e of document.querySelectorAll("th[data-field]")) {
 		e.classList.add("sort-header");
@@ -349,7 +355,11 @@ function InitSortHeaders() {
 	}
 }
 
-function params(data) {
+function sleep(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function params(data, navigate = true) {
 	let url = new URL(window.location.href);
 	for (const key in data) {
 		if (Object.prototype.hasOwnProperty.call(data, key)) {
@@ -360,6 +370,11 @@ function params(data) {
 			}
 		}
 	}
-	window.location = decodeURIComponent(url.href);
+	if (navigate) {
+		window.location = decodeURIComponent(url.href);
+	} else {
+		window.history.replaceState(null, null, url.search);
+	}
 }
+
 window.params = params;

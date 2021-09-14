@@ -31,7 +31,7 @@ class Application
 
     private function match($path)
     {
-        $controller = (isset($path[0]) && $path[0] != "" ? $path[0] :   "Main") . "Controller";
+        $controller = ucfirst(isset($path[0]) && $path[0] != "" ? $path[0] :   "Main") . "Controller";
 
         $action = $path[1] ?? "index";
 
@@ -69,8 +69,8 @@ class Application
     public static function handleError($level, $message, $file, $line)
     {
         if (error_reporting() !== 0) {
-            echo  $message;
-            // throw new \ErrorException($message, 0, $level, $file, $line);
+            // echo  $message;
+            throw new \ErrorException($message, 0, $level, $file, $line);
         }
     }
 }

@@ -28,7 +28,7 @@ $menu_items = array(
                 <div class="section-heading"><?= $value["title"] ?></div>
 
             <?php } else { ?>
-                <a class="side-link  <?= $key == $active ? 'active' : '' ?> <?= $value["color"] ?>" href="/doctor/<?= $key ?>">
+                <a class="side-link  <?= $key == $active ? 'active' : '' ?> <?= $value["color"] ?? "" ?>" href="/doctor/<?= $key ?>">
                     <i class="link-icon far fa-<?= $value["icon"] ?>"></i>
                     <span class="side-link-text"><?= $value["name"] ?></span>
                 </a>

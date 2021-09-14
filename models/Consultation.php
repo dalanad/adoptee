@@ -8,7 +8,7 @@ class Consultation extends BaseModel
         VALUES ('2021-09-08', '10:30:00', '4', '1', '3', 'PENDING', 'LIVE', NULL);";
     }
 
-    public static function getLiveBookings($doctorId, $start_date, $end_date)
+    public static function getBookingsCalender($doctorId, $start_date, $end_date)
     {
         $bookings = [];
 
@@ -24,5 +24,31 @@ class Consultation extends BaseModel
         return $bookings;
     }
 
-    
+    public static function getConsultationById($consultationId)
+    {
+
+        $consultations = self::select("SELECT * FROM `consultation` WHERE consultation_id = :consultation_id limit 1 ", ["consultation_id" => $consultationId]);
+
+        $consultations = array_map(function ($item) {
+            $item["animal"] =  Animal::getAnimalById($item["animal_id"]);
+            return $item;
+        }, $consultations);
+
+
+        return $consultations[0];
+    }
+
+    public static function getConsultations($doctorId)
+    {
+
+        $consultations = self::select("SELECT * FROM `consultation` WHERE doctor_user_id = :user_id and status in ('ACCEPTED','COMPLETED')", ["user_id" => $doctorId]);
+
+        $consultations = array_map(function ($item) {
+            $item["animal"] =  Animal::getAnimalById($item["animal_id"]);
+            return $item;
+        }, $consultations);
+
+
+        return $consultations;
+    }
 }

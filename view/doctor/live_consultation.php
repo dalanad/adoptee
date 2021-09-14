@@ -29,7 +29,7 @@ require_once  __DIR__ . '/_nav.php';
 </div>
 <script src="/assets/js/doctor.js"></script>
 <script>
-    appointments = <?= json_encode($bookings); ?>
+     
 
     let cal_el = document.querySelector(".calender");
     let cal = new Calender(cal_el);

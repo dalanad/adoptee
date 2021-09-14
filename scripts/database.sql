@@ -110,9 +110,11 @@ alter table consultation
 
 create table consultation_message (
      consultation_id int(10),
-     created_at timestamp,
+     created_at timestamp DEFAULT CURRENT_TIMESTAMP,
      medical_record_id int(10),
-     message varchar(128)
+     sender int(10) not null,
+     message varchar(128),
+     primary key (consultation_id, created_at)
 );
 
 create table medical_record (

@@ -295,7 +295,7 @@
 }
 
 .chat-body .msg {
-	background: var(--gray-1);
+	background-color: var(--gray-1);
 	margin: 0.3em;
 	padding: 0.2em 0.5em;
 	border-radius: 0.5em;
@@ -307,7 +307,6 @@
 	align-self: flex-end;
 }
 /* Chat End */
-
 
 .table.row-border tr {
 	border-bottom: 1px solid var(--gray-3);
@@ -350,4 +349,35 @@
 .paginate_button.disabled {
 	pointer-events: none;
 	opacity: 0.3;
+}
+
+.shine {
+	background: #f6f7f8;
+	background-image: linear-gradient(
+		to right,
+		#f6f7f8 0%,
+		#edeef1 20%,
+		#f6f7f8 40%,
+		#f6f7f8 100%
+	) !important;
+	background-repeat: no-repeat;
+	background-size: 800px 104px;
+	display: inline-block;
+	position: relative;
+
+	-webkit-animation-duration: 1s;
+	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: shimmer;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes shimmer {
+	0% {
+		background-position: -468px 0;
+	}
+
+	100% {
+		background-position: 468px 0;
+	}
 }
