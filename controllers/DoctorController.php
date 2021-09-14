@@ -76,9 +76,11 @@ class DoctorController extends Controller
         View::json($bookings);
     }
 
-    function consult_conference()
+    function consult_conference($consultationId)
     {
-        View::render("doctor/consult_conference");
+        assert(isset($consultationId));
+        $consultation = Consultation::getConsultationById($consultationId);
+        View::render("doctor/consult_conference", ["consultation" => $consultation]);
     }
 
     #endregion  : Live Consultations  

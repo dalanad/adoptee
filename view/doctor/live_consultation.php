@@ -27,10 +27,7 @@ require_once  __DIR__ . '/_nav.php';
     </div>
     <div></div>
 </div>
-<script src="/assets/js/doctor.js"></script>
 <script>
-     
-
     let cal_el = document.querySelector(".calender");
     let cal = new Calender(cal_el);
 
@@ -57,7 +54,7 @@ require_once  __DIR__ . '/_nav.php';
             <div>Owner : Mr. Perera </div>
         </div>
         <div style="text-align:center;margin-top:1rem">
-            <a class="btn pink" href="/doctor/consult_conference">
+            <a class="btn pink" href="/doctor/consult_conference/${data.consultation_id}">
                 <i class="fa fa-video"></i> &nbsp; Consult
             </a>
         </div>

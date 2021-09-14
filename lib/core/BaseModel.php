@@ -6,7 +6,8 @@ class BaseModel
         static $db = null;
 
         if ($db === null) {
-            $dsn = 'mysql:host=;dbname=adoptee;charset=utf8';
+            $db_host = getenv("DB_HOST");
+            $dsn = "mysql:host=$db_host;dbname=adoptee;charset=utf8";
 
             $db = new PDO($dsn, "root", "root");
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
