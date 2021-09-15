@@ -323,13 +323,9 @@ function InitSortHeaders() {
 				e.dataset.dir = e.dataset.dir == "ASC" ? "DESC" : "ASC";
 			}
 			if (e.dataset.dir) {
-				params({
-					[`sort[${e.dataset.field}]`]: e.dataset.dir,
-				});
+				params({ [`sort[${e.dataset.field}]`]: e.dataset.dir });
 			} else {
-				params({
-					[`sort[${e.dataset.field}]`]: null,
-				});
+				params({ [`sort[${e.dataset.field}]`]: null });
 			}
 		});
 	}
@@ -357,8 +353,8 @@ async function initChat(id) {
 		<div class="msg shine" style="width:3rem">&nbsp;</div>
 	</div>
 	<div class="chat-footer">
-		<button class="btn btn-link black"><i class="far fa-file-prescription"></i></button>
-		<button class="btn btn-link black"><i class="fa fa-paperclip"></i></button>
+		<button class="btn btn-link black" id="btn-prescribe"><i class="far fa-file-prescription"></i></button>
+		<button class="btn btn-link black" id="btn-upload"><i class="fa fa-paperclip"></i></button>
 		<input name="message" class="ctrl" placeholder="Your Message ...">
 		<button id="send-message" class="btn btn-link black"><i class="fa fa-paper-plane"></i></button>
 	</div>`;
@@ -384,6 +380,13 @@ async function initChat(id) {
 		}
 	}
 
+	chat_window.querySelector("#btn-prescribe").addEventListener("click", addPrescription);
+	chat_window.querySelector("#btn-upload").addEventListener("click", uploadFile);
+
+	function addPrescription() {
+		showOverlay("<div style='width:500px;height:600px;'><h1>Test</h1></div>");
+	}
+
 	async function postMessage(consultationId, message) {
 		return fetch("/doctor/post_message", {
 			method: "post",
@@ -407,6 +410,44 @@ async function initChat(id) {
 	});
 
 	clearInterval(this.interval);
-	this.interval = setInterval(displayMessages, 1000);
+	// this.interval = setInterval(displayMessages, 1000);
 	setTimeout(displayMessages, 200);
+}
+
+function showOverlay(html) {
+	let div = document.createElement("div");
+	div.classList.add("overlay", "fade");
+	div.insertAdjacentHTML("afterbegin", "<div>" + html + "</div>");
+	document.body.appendChild(div);
+	div.addEventListener("click", (e) => {
+		div.classList.remove("fade");
+		if (e.target == div) div.remove();
+	});
+}
+
+function uploadFile() {
+	let input = document.createElement("input");
+	input.setAttribute("type", "file");
+	// input.setAttribute("multiple", true);
+	input.setAttribute("accept", "image/*");
+	input.click();
+
+	let res = new Promise((resolve, reject) => {
+		input.addEventListener("change", () => {
+			let formData = new FormData();
+			for (const file of input.files) {
+				formData.append(file.name, file);
+			}
+			fetch("/doctor/upload", { method: "POST", body: formData })
+				.then((r) => r.json())
+				.then((e) => {
+					console.log(e);
+					input.remove();
+					resolve(e);
+				})
+				.catch(reject);
+		});
+	});
+	
+	return res;
 }

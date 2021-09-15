@@ -5,54 +5,7 @@ class DoctorController extends Controller
 
     function index()
     {
-        $this->redirect("/doctor/home");
-    }
-    function register()
-    {
-
-        View::render("auth/sign_up_doctor");
-    }
-
-    function process_registration()
-    {
-        try {
-
-            $errors = [];
-
-            $name = $_POST["name"];
-            $email = is_email($_POST["email"], $errors);
-            $reg_no = $_POST["reg_no"];
-            $address = $_POST["address"];
-            $password = $_POST["password"];
-            $telephone = $_POST["telephone"];
-            $telephone_fixed = $_POST["telephone_fixed"];
-            $credentials = $_POST["credentials"];
-
-            $proofImage =  new Image("proof_image");
-
-            if (sizeof($errors) > 0) {
-                $_SESSION['form_errors'] = $errors;
-                $this->redirect("/doctor/register");
-            }
-
-            BaseModel::beginTransaction();
-            $userId = User::createUser($name, $email, $telephone, $address, $password);
-            Doctor::createDoctor($userId, $reg_no, $credentials, $telephone_fixed, $proofImage);
-            BaseModel::commit();
-
-            $this->redirect("/auth/verify?email=$email");
-        } catch (PDOException $e) {
-
-            BaseModel::rollBack();
-
-            if ($e->getCode() == 23000) {
-
-                $_SESSION['form_errors'] = array("Email Already Registered");
-                $this->redirect("/doctor/register");
-            } else {
-                throw $e;
-            }
-        }
+        $this->redirect("/Doctor/home");
     }
 
     function home()
@@ -114,30 +67,6 @@ class DoctorController extends Controller
         View::json($messages);
     }
 
-    public function test_msg()
-    {
-        header('Content-Type: text/event-stream');
-        header('Cache-Control: no-cache'); // recommended to prevent caching of event data.
-        session_write_close();
-        function sendMsg($msg)
-        {
-            echo "data: $msg" . PHP_EOL;
-            echo PHP_EOL;
-            ob_flush();
-            flush();
-        }
-        $i = 0;
-        while ($i != 100) {
-            // check whether Apple's stock price has changed
-            // e.g., by querying a database, or calling a web service
-            // if it HAS changed, sendMsg with new price to client
-            sendMsg(time());
-            // otherwise, do nothing (until next loop)
-            sleep(1); // wait n seconds until checking again
-            $i++;
-        }
-    }
-
     /** Saves the message and returns the updated messages list */
     function post_message()
     {
@@ -152,6 +81,17 @@ class DoctorController extends Controller
         $messages = Message::postMessage($consultationId, $userId, $message);
         View::json($messages);
     }
+
+    function upload()
+    {
+        $links = [];
+        foreach ($_FILES as $fileName => $value) {
+            $uploaded_file = new Image($fileName);
+            array_push($links, $uploaded_file->getURL());
+        }
+        View::json($links);
+    }
+
     #endregion : Medical Advise  
 
     function consulted_animals()

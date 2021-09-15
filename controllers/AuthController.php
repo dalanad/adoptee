@@ -193,4 +193,52 @@ class AuthController extends Controller
             $this->redirect("/auth/sign_in");
         }
     }
+
+    function doctor_registration()
+    {
+
+        View::render("auth/sign_up_doctor");
+    }
+
+    function process_doctor_registration()
+    {
+        try {
+
+            $errors = [];
+
+            $name = $_POST["name"];
+            $email = is_email($_POST["email"], $errors);
+            $reg_no = $_POST["reg_no"];
+            $address = $_POST["address"];
+            $password = $_POST["password"];
+            $telephone = $_POST["telephone"];
+            $telephone_fixed = $_POST["telephone_fixed"];
+            $credentials = $_POST["credentials"];
+
+            $proofImage =  new Image("proof_image");
+
+            if (sizeof($errors) > 0) {
+                $_SESSION['form_errors'] = $errors;
+                $this->redirect("/auth/doctor_registration");
+            }
+
+            BaseModel::beginTransaction();
+            $userId = User::createUser($name, $email, $telephone, $address, $password);
+            Doctor::createDoctor($userId, $reg_no, $credentials, $telephone_fixed, $proofImage);
+            BaseModel::commit();
+
+            $this->redirect("/auth/verify?email=$email");
+        } catch (PDOException $e) {
+
+            BaseModel::rollBack();
+
+            if ($e->getCode() == 23000) {
+
+                $_SESSION['form_errors'] = array("Email Already Registered");
+                $this->redirect("/auth/doctor_registration");
+            } else {
+                throw $e;
+            }
+        }
+    }
 }
