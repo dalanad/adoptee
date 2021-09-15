@@ -1,6 +1,6 @@
 <?php
 
-require_once  __DIR__ . './../../_layout/header.php';
+require_once  __DIR__ . '/../../_layout/header.php';
 
 $profile_menu = array(
     "update_profile" => array("name" => "Profile", "icon" => "user-cog"),

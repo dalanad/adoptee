@@ -1,1 +1,0 @@
-this file will be removed goto  <a href="admin.php">admin.php</a>   

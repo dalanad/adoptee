@@ -1,4 +1,4 @@
-<?php require_once  __DIR__ . './layout.php' ?>
+<?php require_once  __DIR__ . '/layout.php' ?>
 <style>
     .admin-header {
         padding: .6rem 1rem;
