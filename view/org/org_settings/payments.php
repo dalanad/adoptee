@@ -6,7 +6,7 @@ $users = array(
     array("id" => 3, "name" => "Dalana", "amount" => "Rs 1000.00", "sdt" => "2021-05-06 10.00 AM", "reason" => true),
 
 );
-$active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["menu"] : "general";
+
 
 ?>
 <style>
