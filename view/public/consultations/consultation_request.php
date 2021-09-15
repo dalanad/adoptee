@@ -21,6 +21,10 @@
     margin-bottom: .3rem;
   }
 
+  .radio-box label:hover {
+    background: var(--gray-1);
+  }
+
   input:checked:not(.ctrl-radio)+label {
     border: 2px solid currentColor;
     color: var(--primary);
@@ -30,6 +34,12 @@
 
   input:checked+label i {
     font-weight: 900;
+  }
+
+  input:disabled+label {
+    opacity: .4;
+    cursor: not-allowed;
+    background-color: var(--gray-2);
   }
 
   .fa-star {
@@ -66,12 +76,12 @@
           <input class="ctrl">
         </div>
         <div class="radio-box" style="display: grid;">
-          <?php for ($i = 0; $i < 3; $i++) { ?>
-            <input name="pet" id="pet<?= $i ?>" type="radio">
-            <label for="pet<?= $i ?>" style="text-align:left">
+          <?php foreach ($doctors as $doctor) { ?>
+            <input name="pet" id="pet<?= $doctor["user_id"] ?>" type="radio">
+            <label for="pet<?= $doctor["user_id"] ?>" style="text-align:left">
               <div style="display: flex;align-items:center">
                 <div>
-                  <div style="font-weight: 500;">Dr. Wikramasinghe</div>
+                  <div style="font-weight: 500;"><?= $doctor["name"] ?></div>
                   <div style="font-size: .9rem; margin-top:.3rem">
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
@@ -103,11 +113,10 @@
         </div>
         <div class="field">
           <label>Available Times</label>
-          <?php $times = array("10.00 AM", "10.30 AM", "11.00 AM", "11.30 AM", "12.00 AM", "12.30 AM", "1.00 PM"); ?>
           <div class="radio-box " style="display: grid; grid-template-columns: repeat(auto-fill,minmax(7rem,1fr));">
-            <?php foreach ($times as $time) { ?>
-              <input name="time" id="time_<?= $time ?>" type="radio">
-              <label for="time_<?= $time ?>"><?= $time ?></label>
+            <?php foreach ($slots as $slot) { ?>
+              <input name="time" id="time_<?= $slot["time_slot"] ?>" <?= isset($slot["consultation_id"]) ? "disabled" : "" ?> type="radio">
+              <label for="time_<?= $slot["time_slot"] ?>"><?= $slot["time_slot"] ?></label>
             <? } ?>
           </div>
         </div>

@@ -31,7 +31,7 @@ class Application
 
     private function match($path)
     {
-        $controller = (isset($path[0]) && $path[0] != "" ? $path[0] :   "Main") . "Controller";
+        $controller = ucfirst(isset($path[0]) && $path[0] != "" ? $path[0] :   "Main") . "Controller";
 
         $action = $path[1] ?? "index";
 

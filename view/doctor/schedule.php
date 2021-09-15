@@ -20,7 +20,7 @@ require_once  __DIR__ . '/_nav.php';
     </div>
     <div></div>
 </div>
-<script src="/assets/js/live-consultations.js"></script>
+<script src="/assets/js/doctor.js"></script>
 <script>
     let appointments_timeline = document.getElementById("appointments-timeline");
     let schedule = new AppointmentsTimeline(appointments_timeline, true);

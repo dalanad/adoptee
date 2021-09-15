@@ -4,7 +4,8 @@ class ConsultationController extends Controller
     public function index()
     {
         $data = [
-            "doctors" => Doctor::getDoctors()
+            "doctors" => Doctor::getDoctors(),
+            "slots" => Doctor::getSlots(1, '2021-09-08')
         ];
         view::render('public/consultations/consultation_request', $data);
     }
