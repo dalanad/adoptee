@@ -236,7 +236,6 @@
 	align-items: center;
 	transition: background-color 0.2s ease-in-out, border-left-color 0.2s ease-in-out;
 	border-left: 0.2rem solid transparent;
-
 }
 
 .chat-animal:hover {
@@ -357,13 +356,7 @@
 
 .shine {
 	background: #f6f7f8;
-	background-image: linear-gradient(
-		to right,
-		#f6f7f8 0%,
-		#edeef1 20%,
-		#f6f7f8 40%,
-		#f6f7f8 100%
-	) !important;
+	background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%) !important;
 	background-repeat: no-repeat;
 	background-size: 800px 104px;
 	display: inline-block;
@@ -385,3 +378,27 @@
 		background-position: 468px 0;
 	}
 }
+
+.overlay {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	background-color: #0000002b;
+}
+
+.overlay > div {
+	max-width: 600px;
+	margin: 0 auto;
+	box-shadow: var(--shadow-heavy);
+	border-radius: 0.4rem;
+	background-color: white;
+	padding: 1rem;
+}
+
+
+/* ANIMATIONS */
+

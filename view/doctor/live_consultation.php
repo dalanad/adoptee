@@ -26,7 +26,7 @@ require_once  __DIR__ . '/_nav.php';
         <div class="calender" style="box-shadow:var(--shadow);padding:1rem;border-radius:.4rem"> </div>
     </div>
     <div></div>
-</div>
+</div> 
 <script>
     let cal_el = document.querySelector(".calender");
     let cal = new Calender(cal_el);
