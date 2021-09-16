@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<style>
-    .dot{
-        height: 10px;
-        width: 10px;
-        border-radius: 50%;
-        color: var(--green);
-    }
-</style>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +41,8 @@ function user_btn()
             (isset($_SESSION['org']) ? ("<br><div> <small style='font-weight: 300;'>" . $_SESSION['org']['name'] . "</small></div>") : "") .
             "</div>
              <div class='dropdown-content'>
-                <a class='btn black btn-link' href='/profile/view'><i class='fa fa-user'></i>&nbsp; Profile</a>
+                <a class='btn black btn-link' href='/profile/user_profile'><i class='fa fa-user'></i>&nbsp; Profile</a>
+                <a class='btn black btn-link' href='/merchandise/cart'> <i class='fas fa-shopping-cart'></i></i>&nbsp; Cart</a>
                 <a class='btn black btn-link'> <i class='fa fa-question'></i>&nbsp; Help</a>
                 <a class='btn black btn-link' href='/auth/sign_out'> <i class='fa fa-sign-out'></i>&nbsp; Sign Out</a>
             </div>
@@ -68,8 +60,10 @@ function notif_btn()
 
             <i class='far fa-bell' style='font-size:1.2em'> </i>
              <div class='dropdown-content'>
-                <a class='btn black btn-link' href='/profile/view'><i class='dot'></i>&nbsp; Adoption Request Update</a>
-                <a class='btn black btn-link'><i class='dot'></i>&nbsp; Vaccination Reminder</a>
+                <div href=''><a  class='btn black btn-link'>&nbsp; Adoption Request Update</a>
+                <div class='m2' style='font-size:small;'>Your request to adopt Tigger has been accepted</div></div>
+                <div href=''><a class='btn black btn-link'>&nbsp; Vaccination Reminder</a>
+                <div class='m2' style='font-size:small;'>Your pet Tina needs to be vaccinated by 10-10-2021</div></div>
             </div>
         </div>";
     }
