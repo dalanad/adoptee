@@ -59,6 +59,7 @@ create table animal (
     gender varchar(10),
     dob date,
     color varchar(50),
+    photo varchar(100),
     primary key(animal_id)
 );
 
@@ -70,13 +71,8 @@ create table animal_for_adoption (
     date_adopted date,
     org_id int(10),
     user_id int(10),
+    photos JSON,
     primary key(animal_id)
-);
-
-create table animal_for_adoption_photos(
-    animal_id int(10) not null,
-    photo varchar(100) not null, 
-    primary key(animal_id, photo)
 );
 
 create table rescued_animal (
@@ -283,9 +279,6 @@ add foreign key(animal_id) references animal(animal_id);
 
 alter table animal_for_adoption
 add foreign key(org_id) references organization(org_id),
-add foreign key(animal_id) references animal(animal_id);
-
-alter table animal_for_adoption_photos
 add foreign key(animal_id) references animal(animal_id);
 
 alter table rescued_animal

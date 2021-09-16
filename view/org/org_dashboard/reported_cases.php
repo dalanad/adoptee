@@ -199,7 +199,7 @@
 </div>
 <div class="rounded" style="height: 500px; width: 1248px" id="googleMap"></div>
 <div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN2HxM42eIrEG1e5b9ar2H_2_V6bMRjWk&callback=myMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?= config::get("maps.key") ?>&callback=myMap"></script>
 </div>
 </div>
 </div>

@@ -1,7 +1,7 @@
 <style>
     .adoption-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 1rem;
     }
 
@@ -20,7 +20,7 @@
 
     .adoption-card-image {
         background-size: cover;
-        height: 160px;
+        aspect-ratio: 1;
     }
 
     .adoption-card-details {
@@ -52,7 +52,7 @@
 <div class="m2 adoption-grid">
         <?php foreach ($animals as $animal) { ?>
             <a class="adoption-card" onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal['animal_id'] ?>'">
-                <div class="adoption-card-image" style="background-image: url('/assets/images/dogs/placeholder2.jpg');"></div>
+                <div class="adoption-card-image" style="background-image: url('<?= $animal['photo'] ?>');"></div>
                 <div class="adoption-card-details">
                     <div class="adoption-card-action">ADOPT</div>
                     <div style="display:flex; padding:.5rem 1rem;align-items: center;">

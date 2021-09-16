@@ -16,46 +16,50 @@ VALUES ('1', 'Clinic', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   ('3', 'Adoption Day', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO');
  
 
-INSERT INTO `animal` (`animal_id`, `type`, `name`, `gender`, `dob`, `color`) 
-VALUES (NULL, 'Cat', 'Tigger', 'Male', '2021-07-01', 'Black');
-INSERT INTO `animal` (`animal_id`, `type`, `name`, `gender`, `dob`, `color`) 
-VALUES (NULL, 'Dog', 'Leo', 'Male', '2016-01-15', 'Orange');
-INSERT INTO `animal` (`animal_id`, `type`, `name`, `gender`, `dob`, `color`) 
-VALUES (NULL, 'Dog', 'Oliver', 'Female', '2021-12-16', 'White');
-INSERT INTO `animal` (`animal_id`, `type`, `name`, `gender`, `dob`, `color`) 
-VALUES (NULL, 'Cat', 'Milo', 'Female', '2020-02-10', 'Golden Brown');
-INSERT INTO `animal` (`animal_id`, `type`, `name`, `gender`, `dob`, `color`) 
-VALUES (NULL, 'Dog', 'Simba', 'Male', '2015-10-01', 'Grey');
- 
-INSERT INTO `animal` (  `type`, `name`, `gender`, `dob`, `color`) 
-VALUES 
-('Dog', 'Luna', 'Female', '2017-10-01', 'Grey'),
-('Dog', 'Riley', 'Male', '2014-10-01', 'Grey'),
-('Dog', 'Nala', 'Female', '2015-10-01', 'Orange'),
-('Dog', 'Duke', 'Male', '2015-10-01', 'Grey'),
-('Dog', 'Bear', 'Male', '2013-10-01', 'Grey'),
-('Cat', 'Sophie', 'Female', '2015-10-01', 'Grey'),
-('Dog', 'Oliver', 'Male', '2010-10-01', 'White'),
-('Dog', 'Lucy', 'Male', '2012-10-01', 'Grey'),
-('Dog', 'Max', 'Male', '2011-10-01', 'Grey'),
-('Dog', 'Bailey', 'Female', '2015-10-01', 'Golden Brown'),
-('Dog', 'Daisy', 'Female', '2015-10-01', 'Grey'),
-('Dog', 'Cooper', 'Male', '2017-10-01', 'Grey'),
-('Dog', 'Chloe', 'Female', '2015-10-01', 'Grey'),
-('Dog', 'Jack', 'Male', '2018-10-01', 'Black'),
-('Dog', 'Duke', 'Male', '2019-10-01', 'Grey'),
-('Dog', 'Jax', 'Male', '2013-10-01', 'Grey');
+INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) VALUES
+('Dog', 'Tigger', 'Male',   '2021-07-01', 'Black','/assets/data/dogs/1.jpg'),
+('Dog', 'Leo',    'Male',   '2016-01-15', 'Orange','/assets/data/dogs/2.jpg'),
+('Dog', 'Oliver', 'Female', '2021-12-16', 'White','/assets/data/dogs/3.jpg'),
+('Dog', 'Milo',   'Female', '2020-02-10', 'Golden Brown','/assets/data/dogs/4.jpg'),
+('Dog', 'Simba',  'Male',   '2015-10-01', 'Grey','/assets/data/dogs/5.jpg'),
+('Dog', 'Luna',   'Female', '2017-10-01', 'Grey','/assets/data/dogs/6.jpg'),
+('Dog', 'Riley',  'Male',   '2014-10-01', 'Grey','/assets/data/dogs/7.jpg'),
+('Dog', 'Nala',   'Female', '2015-10-01', 'Orange','/assets/data/dogs/8.jpg'),
+('Dog', 'Duke',   'Male',   '2015-10-01', 'Grey','/assets/data/dogs/9.jpg'),
+('Dog', 'Bear',   'Male',   '2013-10-01', 'Grey','/assets/data/dogs/10.jpg'),
+('Cat', 'Sophie', 'Female', '2015-10-01', 'Grey','/assets/data/dogs/11.jpg'),
+('Dog', 'Oliver', 'Male',   '2010-10-01', 'White','/assets/data/dogs/12.jpg'),
+('Dog', 'Lucy',   'Male',   '2012-10-01', 'Grey','/assets/data/dogs/13.jpg'),
+('Dog', 'Max',    'Male',   '2011-10-01', 'Grey','/assets/data/dogs/14.jpg'),
+('Dog', 'Bailey', 'Female', '2015-10-01', 'Golden Brown','/assets/data/dogs/15.jpg'),
+('Dog', 'Daisy',  'Female', '2015-10-01', 'Grey','/assets/data/dogs/16.jpg'),
+('Dog', 'Cooper', 'Male',   '2017-10-01', 'Grey','/assets/data/dogs/17.jpg'),
+('Dog', 'Chloe',  'Female', '2015-10-01', 'Grey','/assets/data/dogs/18.jpg'),
+('Dog', 'Jack',   'Male',   '2018-10-01', 'Black','/assets/data/dogs/19.jpg'),
+('Dog', 'Duke',   'Male',   '2019-10-01', 'Grey','/assets/data/dogs/20.jpg'),
+('Cat', 'Tom',    'Male',   '2013-10-01', 'Grey','/assets/data/cats/1.jpg'),
+('Cat', 'Otis',   'Male',   '2013-10-01', 'Grey','/assets/data/cats/2.jpg'),
+('Cat', 'Benny',  'Male',   '2013-10-01', 'Grey','/assets/data/cats/3.jpg'),
+('Cat', 'Frank',  'Male',   '2013-10-01', 'Grey','/assets/data/cats/4.jpg'),
+('Cat', 'Garfield','Male',   '2013-10-01', 'Grey','/assets/data/cats/5.jpg'),
+('Cat', 'Penny',  'Female', '2013-10-01', 'Grey','/assets/data/cats/6.jpg'),
+('Cat', 'Lily',   'Female', '2013-10-01', 'Grey','/assets/data/cats/7.jpg'),
+('Cat', 'Rosie',  'Female', '2013-10-01', 'Grey','/assets/data/cats/8.jpg'),
+('Cat', 'Maggie', 'Female', '2013-10-01', 'Grey','/assets/data/cats/9.jpg'),
+('Cat', 'Nova',   'Female', '2013-10-01', 'Grey','/assets/data/cats/10.jpg');
 
-INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) 
-VALUES ('1', 'Active and loves cuddles', '2021-08-31', 'ADOPTED', '2021-09-03', '1');
-INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) 
-VALUES ('2', 'Loves to sleep with his favorite toy', '2021-09-01', 'LISTED', NULL, '2');
-INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) 
-VALUES ('3', 'jade-green eyes', '2021-09-01', 'LISTED', NULL, '1');
-INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) 
-VALUES ('4', 'Playful and a joy to be around', '2021-08-26', 'ADOPTED', '2021-09-01', '1');
-INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) 
-VALUES ('5', 'Has tiny, hedgehog paws', '2021-09-02', 'LISTED', NULL, '1');
+INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) VALUES 
+('1', 'Active and loves cuddles', '2021-08-31', 'ADOPTED', '2021-09-03', '1'),
+('21', 'Playful and a joy to be around', '2021-08-26', 'LISTED', NULL, '3'),
+('2', 'Loves to sleep with his favorite toy', '2021-09-01', 'LISTED', NULL, '2'),
+('3', 'jade-green eyes', '2021-09-01', 'LISTED', NULL, '1'),
+('22', 'Playful and a joy to be around', '2021-08-26', 'LISTED', NULL, '2'),
+('4', 'Playful and a joy to be around', '2021-08-26', 'LISTED', NULL, '1'),
+('5', 'Playful and a joy to be around', '2021-08-26', 'LISTED', NULL, '2'),
+('25', 'Playful and a joy to be around', '2021-08-26', 'LISTED', NULL, '2'),
+('6', 'Playful and a joy to be around', '2021-08-26', 'LISTED', NULL, '3'),
+('23', 'Playful and a joy to be around', '2021-08-26', 'LISTED', NULL, '3'),
+('15', 'Has tiny, hedgehog paws', '2021-09-02', 'LISTED', NULL, '1');
 
 
 INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_verified`, `telephone_verified`) VALUES
