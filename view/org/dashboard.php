@@ -1,15 +1,15 @@
 <?php
 
 
-require_once  __DIR__ . './../_layout/layout.php';
+require_once  __DIR__ . '/../_layout/layout.php';
 
 $management_menu = array(
     "org_adoption_listing" => array("name" => "Adoption Listing", "icon" => "paw"),
     "adoption_requests" =>  array("name" =>  "Adoption Requests", "icon" => "dog"),
     "reported_cases" =>  array("name" =>  "Reported Cases", "icon" => "exclamation-circle"),
-    "rescues" =>  array("name" =>  "Rescues", "icon" => "ambulance"),
+    "org_rescues" =>  array("name" =>  "Rescues", "icon" => "ambulance"),
     "org_donations" =>  array("name" =>  "Donations", "icon" => "hand-holding-usd"),
-    "news_events" =>  array("name" =>  "News & Events", "icon" => "calendar-alt"),
+    "org_news_events" =>  array("name" =>  "News & Events", "icon" => "calendar-alt"),
     "store" =>  array("name" =>  "Store", "icon" => "store-alt"),
 );
 
@@ -151,9 +151,9 @@ $administration_menu = array(
                 <div style="flex: 1 1 0;"></div>
                 <?= user_btn() ?>
             </div>
-            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
+            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem; height: 110%">
 
-                <?php include __DIR__ . "./org_dashboard/" . $active . ".php" ?>
+                <?php include __DIR__ . "/org_dashboard/" . $active . ".php" ?>
             </div>
         </div>
 

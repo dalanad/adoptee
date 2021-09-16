@@ -1,6 +1,6 @@
 <?php
 
-require_once  __DIR__ . './../../_layout/header.php';
+require_once  __DIR__ . '/../../_layout/header.php';
 
 $profile_menu = array(
     "update_profile" => array("name" => "Profile", "icon" => "user-cog"),
@@ -54,7 +54,7 @@ $active = isset($_GET["menu"]) && isset($profile_menu[$_GET["menu"]])  ? $_GET["
 </style>
 
 <div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="margin-left:1rem;">User Profile</h2>
+    <h2 style="margin-left:1rem;"><?= $_SESSION['user']['name'];?></h2>
     <div class="settings-container ">
         <div class="side-nav">
             <?php foreach ($profile_menu as $key => $value) { ?>
@@ -65,7 +65,7 @@ $active = isset($_GET["menu"]) && isset($profile_menu[$_GET["menu"]])  ? $_GET["
         </div>
 
         <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;padding:1rem">
-            <?php include __DIR__ . "./" . $active . ".php" ?>
+            <?php include __DIR__ . "/" . $active . ".php" ?>
         </div>
     </div>
 </div>

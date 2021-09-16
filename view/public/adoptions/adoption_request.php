@@ -1,10 +1,10 @@
-<?php require __DIR__ . "./../../_layout/header.php" ?>
+<?php require __DIR__ . "/../../_layout/header.php" ?>
 
 <style>
     .report {
         display: grid;
         margin: 0rem 1rem 3rem 1rem;
-        /* overflow: scroll; */
+        overflow: scroll;
     }
 
     @media (min-width:780px) {
@@ -54,12 +54,38 @@
 
 <form class="container ctx" action="/AdoptionRequest/submit" method="POST">
 
-    <div class="report">
+    <div class="report" >
 
         <!-- temporary image -->
         <div class="rounded" id="image">
             <img style="border-radius:8px;max-height: 350px;margin:0 auto" src="/assets/images/dogs/placeholder2.jpg" />
         </div>
+
+        <div id="details">
+                <?php
+                    foreach($petdata as $key=>$value){?>
+                    <div class="row">
+                            <div class="column">Type:</div>
+                            <div class="column"><?=$value['type']?></div>
+                        </div>
+                        <div class="row">
+                            <div class="column">Name:</div>
+                            <div class="column"><?=$value['name']?></div>
+                        </div>
+                        <div class="row">
+                            <div class="column">Born on:</div>
+                            <div class="column"><?=$value['dob']?></div>
+                        </div>
+                        <div class="row">
+                            <div class="column">Gender:</div>
+                            <div class="column"><?=$value['gender']?></div>
+                        </div>
+                        <div class="row">
+                            <div class="column">Colour:</div>
+                            <div class="column"><?=$value['color']?></div>
+                        </div>
+                    <?php } ?>
+            </div>
 
         <?php if (isset($_SESSION['user'])) { ?>
 
@@ -141,11 +167,6 @@
                     <textarea rows="4" class="ctrl" name="childsafety"></textarea>
                 </div>
             </div>
-
-            <div id="details">
-                <?php print_r($data) ?>
-            </div>
-            <!-- description -->
 
             <div><button class='btn mr2'>Send request</button></div>
         <?php } else { ?>

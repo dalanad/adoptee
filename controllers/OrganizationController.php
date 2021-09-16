@@ -26,12 +26,50 @@ class OrganizationController extends Controller
         View::render("public/organizations/organization_profile", $orgData);
     }
 
+    static function get_org_adoption()
+    {
+        $organization = new Organization;
+        $orgData = ["animals" => $organization->getOrgAdoptions($_GET['org_id']), "active"=>"adoption", "details" => $organization->getOrgDetails($_GET['org_id'])];
+        
+        View::render("public/organizations/organization_profile", $orgData);
+    }
+
+    static function get_org_merchandise()
+    {
+        $organization = new Organization;
+        $orgData = ["merchandise" => $organization->getOrgMerchandise($_GET['org_id']), "active"=>"merchandise", "details" => $organization->getOrgDetails($_GET['org_id'])];
+        
+        View::render("public/organizations/organization_profile", $orgData);
+    }
+
+    static function get_org_sponsorships()
+    {
+        $organization = new Organization;
+        $orgData = ["sponsorship" => $organization->getOrgSponsorships($_GET['org_id']), "active"=>"sponsorships", "details" => $organization->getOrgDetails($_GET['org_id'])];
+        
+        View::render("public/organizations/organization_profile", $orgData);
+    }
+
     static function get_org_about()
     {
         $organization = new Organization;
         $orgData = ["active"=>"about", "details" => $organization->getOrgDetails($_GET['org_id'])];
         
         View::render("public/organizations/organization_profile", $orgData);
+    }
+
+    static function view_review_page()
+    {
+        $organization = new Organization;
+        $data=["details" => $organization->getOrgDetails($_GET['org_id'])];
+        View::render("public/organizations/review_organization", $data);
+    }
+
+    static function view_donation_page()
+    {
+        $organization = new Organization;
+        $data=["details" => $organization->getOrgDetails($_GET['org_id'])];
+        View::render("public/organizations/donations", $data);
     }
 }
 

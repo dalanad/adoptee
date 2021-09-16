@@ -5,54 +5,7 @@ class DoctorController extends Controller
 
     function index()
     {
-        $this->redirect("/doctor/home");
-    }
-    function register()
-    {
-
-        View::render("auth/sign_up_doctor");
-    }
-
-    function process_registration()
-    {
-        try {
-
-            $errors = [];
-
-            $name = $_POST["name"];
-            $email = is_email($_POST["email"], $errors);
-            $reg_no = $_POST["reg_no"];
-            $address = $_POST["address"];
-            $password = $_POST["password"];
-            $telephone = $_POST["telephone"];
-            $telephone_fixed = $_POST["telephone_fixed"];
-            $credentials = $_POST["credentials"];
-
-            $proofImage =  new Image("proof_image");
-
-            if (sizeof($errors) > 0) {
-                $_SESSION['form_errors'] = $errors;
-                $this->redirect("/doctor/register");
-            }
-
-            BaseModel::beginTransaction();
-            $userId = User::createUser($name, $email, $telephone, $address, $password);
-            Doctor::createDoctor($userId, $reg_no, $credentials, $telephone_fixed, $proofImage);
-            BaseModel::commit();
-
-            $this->redirect("/auth/verify?email=$email");
-        } catch (PDOException $e) {
-
-            BaseModel::rollBack();
-
-            if ($e->getCode() == 23000) {
-
-                $_SESSION['form_errors'] = array("Email Already Registered");
-                $this->redirect("/doctor/register");
-            } else {
-                throw $e;
-            }
-        }
+        $this->redirect("/Doctor/home");
     }
 
     function home()
@@ -60,25 +13,94 @@ class DoctorController extends Controller
         View::render("doctor/home");
     }
 
+    #region : Live Consultations 
+
     function live_consultation()
     {
         View::render("doctor/live_consultation");
     }
 
-    function consult_conference()
+    function get_live_bookings()
     {
-        View::render("doctor/consult_conference");
+        $start_date = $_GET["start_date"];
+        $end_date = $_GET["end_date"];
+        assert(isset($start_date) && isset($end_date) && $start_date != "" && $end_date != "");
+        $bookings = Consultation::getBookingsCalender($_SESSION["user"]["user_id"], $start_date, $end_date);
+        View::json($bookings);
     }
 
+    function consult_conference($consultationId)
+    {
+        assert(isset($consultationId));
+        $consultation = Consultation::getConsultationById($consultationId);
+        View::render("doctor/consult_conference", ["consultation" => $consultation]);
+    }
+
+    #endregion  : Live Consultations  
+
+    #region : Medical Advise
     function medical_advise()
     {
         View::render("doctor/medical_advise");
     }
 
+    function get_consultations()
+    {
+        $consultations = Consultation::getConsultations($_SESSION["user"]["user_id"]);
+        View::json($consultations);
+    }
+
+    function get_consultation_by_id()
+    {
+        $consultationId = $_GET["consultation_id"];
+        assert(isset($consultationId) && $consultationId != "");
+        $consultation = Consultation::getConsultationById($consultationId);
+        View::json($consultation);
+    }
+
+    function get_messages()
+    {
+        $consultationId = $_GET["consultation_id"];
+        $userId = $_SESSION["user"]["user_id"];
+        assert(isset($consultationId) && $consultationId != "");
+        $messages = Message::getMessagesOfConsultation($consultationId, $userId);
+        View::json($messages);
+    }
+
+    /** Saves the message and returns the updated messages list */
+    function post_message()
+    {
+        $_POST = json_decode(file_get_contents('php://input'), true);
+
+        $consultationId = $_POST["consultation_id"];
+        $message = $_POST["message"];
+        $userId =  $_SESSION["user"]["user_id"];
+
+        assert(isset($consultationId) && $consultationId != "");
+
+        $messages = Message::postMessage($consultationId, $userId, $message);
+        View::json($messages);
+    }
+
+    function upload()
+    {
+        $links = [];
+        foreach ($_FILES as $fileName => $value) {
+            $uploaded_file = new Image($fileName);
+            array_push($links, $uploaded_file->getURL());
+        }
+        View::json($links);
+    }
+
+    #endregion : Medical Advise  
+
     function consulted_animals()
     {
-        View::render("doctor/consulted_animals");
+        $userId =  $_SESSION["user"]["user_id"];
+        View::render("doctor/consulted_animals", ["animals" => Doctor::getConsultedAnimals($userId)]);
     }
+
+    #region : Doctor Schedule  
 
     public function schedule()
     {
@@ -88,14 +110,16 @@ class DoctorController extends Controller
     public function update_schedule()
     {
         $_POST = json_decode(file_get_contents('php://input'), true);
-        Doctor::updateSchedule(1, $_POST["schedule"]);
+        Doctor::updateSchedule($_SESSION["user"]["id"], $_POST["schedule"]);
         View::json($_POST["schedule"]);
     }
 
     public function get_schedule()
     {
-        View::json(Doctor::getSchedule(1));
+        View::json(Doctor::getSchedule($_SESSION["user"]["id"]));
     }
+
+    #endregion : Doctor Schedule  
 
     public function payments()
     {
