@@ -4,19 +4,19 @@
     <h3 style="text-align:center;margin-top:0" >Change Password</h3>
     <div class="field">
         <label>Current Password</label>
-        <input class="ctrl" type="password" name="current">
+        <input class="ctrl" type="password" name="current" required>
         <span class="field-msg"></span>
     </div>
 
     <div class="field">
         <label>New Password</label>
-        <input class="ctrl" type="password" name="new">
+        <input class="ctrl" type="password" name="new" required>
         <span class="field-msg"></span>
     </div>
 
     <div class="field">
         <label>Confirm Password</label>
-        <input class="ctrl" type="password" name="confirm">
+        <input class="ctrl" type="password" name="confirm" required>
         <span class="field-msg"></span>
     </div>
 

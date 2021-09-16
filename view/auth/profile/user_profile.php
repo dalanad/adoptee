@@ -9,13 +9,10 @@ $profile_menu = array(
     "consultations" =>  array("name" =>  "Consultations", "icon" => "user-md-chat"),
     "adoptions" =>  array("name" =>  "Adoptions", "icon" => "dog"),
     "rescues" =>  array("name" =>  "Rescues", "icon" => "briefcase-medical"),
+    "my_pets" => array("name" => "My Pets", "icon" => "paw"),
     "sponsorships" =>  array("name" =>  "Sponsorships", "icon" => "donate"),
     "payments" =>  array("name" =>  "Payments", "icon" => "money-check"),
 );
-
-$active = isset($_GET["menu"]) && isset($profile_menu[$_GET["menu"]])  ? $_GET["menu"] : "update_profile";
-$active = isset($_GET["menu"]) && isset($profile_menu[$_GET["menu"]])  ? $_GET["menu"] : $active;
-
 ?>
 
 <style>
@@ -58,7 +55,7 @@ $active = isset($_GET["menu"]) && isset($profile_menu[$_GET["menu"]])  ? $_GET["
     <div class="settings-container ">
         <div class="side-nav">
             <?php foreach ($profile_menu as $key => $value) { ?>
-                <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="?menu=<?= $key ?>">
+                <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="/profile/<?= $key ?>">
                     <i class="far fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
                 </a>
             <?php  } ?>

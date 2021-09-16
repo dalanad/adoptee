@@ -34,7 +34,7 @@ VALUES
 ('Dog', 'Nala', 'Female', '2015-10-01', 'Orange'),
 ('Dog', 'Duke', 'Male', '2015-10-01', 'Grey'),
 ('Dog', 'Bear', 'Male', '2013-10-01', 'Grey'),
-('Dog', 'Sophie', 'Female', '2015-10-01', 'Grey'),
+('Cat', 'Sophie', 'Female', '2015-10-01', 'Grey'),
 ('Dog', 'Oliver', 'Male', '2010-10-01', 'White'),
 ('Dog', 'Lucy', 'Male', '2012-10-01', 'Grey'),
 ('Dog', 'Max', 'Male', '2011-10-01', 'Grey'),
@@ -64,23 +64,22 @@ INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_
 ('Mr. Reg. User', 'user@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
 ('Mr. Reg. User2', 'user2@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 0, 0);
 
-INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(5,3);
-INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(6,3);
-INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(7,3);
-INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(8,4);
-INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(9,4); 
+INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(5,3),(6,3),(7,3),(8,4),(9,4); 
 
 INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL');
 
 INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `proof_image`) 
 VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '/uploads/1630599314_63.png') ;
 
-INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
-VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt  ', current_timestamp(), '0771234567', 'Anuradhapura', NULL, 'PENDING', '');
-INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
-VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor  ', current_timestamp(), '0771234567', 'Anuradhapura', NULL, 'PENDING', '');
-INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
-VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor', current_timestamp(), '0771234567', 'Anuradhapura', NULL, 'PENDING', '');
+INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `date_reported`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
+VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt  ', '2021-08-27', current_timestamp(), '0761236547', 'Anuradhapura', NULL, 'RESCUED', '');
+INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `date_reported`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
+VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor  ', '2021-09-10', current_timestamp(), '0761236547', 'Anuradhapura', NULL, 'PENDING', '');
+INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `date_reported`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
+VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor', '2021-09-14', current_timestamp(), '0771234567', 'Anuradhapura', NULL, 'PENDING', '');
+
+INSERT INTO `rescued_animal`(`animal_id`,`report_id`,`rescued_date`)
+VALUES ('10', '1', '2021-08-28'), ('11', '2', '');
 
  INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `approval_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
  VALUES ('1', '3', '1', '2021-08-01', NULL, 'PENDING', '1', 'The dog that I already have is easy going and bond well with other animals.', '1', 'Used to pets');
@@ -100,7 +99,11 @@ VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency.Lorem ipsum do
  ('2021-09-18', '12:00:00', '4', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
  ('2021-09-18', '13:00:00', '1', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
  ('2021-09-19', '09:00:00', '2', '1', '2', 'COMPLETED', 'ADVISE', NULL),
- ('2021-09-19', '11:00:00', '3', '1', '3', 'ACCEPTED', 'LIVE', NULL)
+ ('2021-09-19', '11:00:00', '3', '1', '3', 'ACCEPTED', 'LIVE', NULL),
+ ('2021-09-19', '09:30:00', '2', '1', '2', 'COMPLETED', 'ADVISE', NULL),
+ ('2021-09-19', '10:00:00', '5', '1', '3', 'COMPLETED', 'ADVISE', NULL),
+ ('2021-09-19', '12:00:00', '6', '1', '3', 'COMPLETED', 'ADVISE', NULL),
+ ('2021-09-19', '13:00:00', '7', '1', '3', 'COMPLETED', 'ADVISE', NULL)
  ;
 
 
@@ -147,6 +150,6 @@ VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency.Lorem ipsum do
 (1, 6, '20:30:00', 1);
 
 INSERT INTO `consultation_message` (`consultation_id`,  `created_at`, `sender`, `message`) 
-VALUES ('3', CURRENT_TIMESTAMP,   '1', 'testestset'), ('3', '2021-09-13 00:00:00',  '3', 'Hello 1234567');
+VALUES ('3', CURRENT_TIMESTAMP,   '1', 'testestset'), ('3', '2021-09-13 00:00:00',  '3', 'Hello 1234567'), ('14', CURRENT_TIMESTAMP,   '1', 'Home treatment advised'), ('15', '2021-09-13 00:00:00',  '1', 'Advised to take prescribed medicine'), ('16', CURRENT_TIMESTAMP,   '1', 'Prescription given');
 
 COMMIT;
