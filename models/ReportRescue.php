@@ -18,4 +18,15 @@ class ReportRescue extends BaseModel
 
         return self::insert($query, $params);
     }
+
+    static function getRescuedPets($user_id)
+    {
+        $query = "SELECT o.name 'o_name', type, location, photo, ra.*, rr.*
+        FROM organization o, report_rescue rr, user, rescued_animal ra
+        WHERE o.org_id=rr.org_id 
+        AND rr.contact_number=user.telephone
+        AND user.user_id=$user_id
+        AND rr.report_id=ra.report_id";
+        return BaseModel::select($query);
+    }
 }

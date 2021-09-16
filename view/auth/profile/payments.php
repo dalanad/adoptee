@@ -5,7 +5,7 @@ th{font-weight: bold;}
 </style>
 
 <div class="overflow-auto" style="height:450px">
-<h3 style="margin-left:1rem;">Your Payments</h3>
+<h3 style="margin-left:1rem;">My Payments</h3>
         <table class="table">
             <tr>
                 <th>DATE</th>

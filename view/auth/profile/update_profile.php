@@ -13,7 +13,7 @@
     }
 </style>
 
-<form action="/Profile/update" method="POST">
+<form action="/Profile/update_profile" method="POST">
         <h3 style="margin-top:0">Update your profile</h3>
 
         <div class="row">
