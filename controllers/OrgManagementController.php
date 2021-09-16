@@ -2,16 +2,6 @@
 
 class OrgManagementController extends Controller{
 
-    function add_new_animal()
-    {
-        View::render("org/org_dashboard/add_new_animal");
-    }
-
-    function process_add_new_animal(){
-        OrgManagement::createNewAnimal(1, $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['photo']);
-
-    }  
-    
     function org_adoption_listing()
     {
         $data = [
@@ -21,6 +11,16 @@ class OrgManagementController extends Controller{
     ];
         View::render("org/dashboard", $data);
     }
+
+    function add_new_animal()
+    {
+        View::render("org/org_dashboard/add_new_animal");
+    }
+
+    function process_add_new_animal(){
+        OrgManagement::createNewAnimal(1, $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['photo']);
+
+    }  
 
     function adoption_requests()
     {
@@ -46,10 +46,34 @@ class OrgManagementController extends Controller{
         OrgManagement::updateRescueReportStatus($report_id);
     }
 
+    function org_rescues()
+    {
+        $data = [
+            "active" => "org_rescues",
+
+            "org_rescues"=>OrgManagement::findRescuedAnimalsByOrgId(1)
+    ];
+        View::render("org/dashboard", $data);
+    }
+
+    function add_rescue_update()
+    {
+        View::render("org/org_dashboard/add_rescue_update");
+    }
+
     function org_donations()
     {
         $data = [
             "active" => "org_donations"
+
+    ];
+        View::render("org/dashboard", $data);
+    }
+
+    function org_news_events()
+    {
+        $data = [
+            "active" => "org_news_events"
 
     ];
         View::render("org/dashboard", $data);

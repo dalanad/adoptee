@@ -1,7 +1,7 @@
-<?php require_once __DIR__ . "./../_layout/layout.php" ?>
+<?php require_once __DIR__ . "/../_layout/layout.php" ?>
 <link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
 <div class="card-container" style="max-width: 500px;">
-    <form style="margin: 1rem;flex:1 1 0" action="/doctor/process_registration" method="POST" enctype="multipart/form-data">
+    <form style="margin: 1rem;flex:1 1 0" action="/auth/process_doctor_registration" method="POST" enctype="multipart/form-data">
         <div style="display: flex; align-items:flex-end;">
             <img src="/assets/images/consultations/doctor_standing.png" style="width: 50px;" />
             <div>

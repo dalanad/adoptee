@@ -2,45 +2,40 @@
 $active = "medical_advise";
 require_once  __DIR__ . '/_nav.php';
 ?>
-<link rel="stylesheet" href="/assets/css/doctor.css">
 
 <div class="chat-container">
-    <div class="chat-conversations">
+    <div class="chat-conversations"></div>
+    <div class="chat-window"> </div>
+</div>
 
-        <?php for ($i = 0; $i < 10; $i++) { ?>
+<script>
+    function updateActive(el) {
+        let active_el = document.querySelector('.chat-animal.active')
+        if (active_el) {
+            active_el.classList.remove("active")
+        }
+        el.classList.add("active")
+    }
 
-            <div class="chat-animal <?= $i == 3 ? 'active' : '' ?>">
-                <div class="animal-image" style="background-image:url('/assets/images/dogs/placeholder.jpg');"> </div>
+    async function showConversationsList() {
+        let consultations = await fetch("/doctor/get_consultations").then(r => r.json())
+
+        for (const con of consultations) {
+            let template = `
+            <div class="chat-animal" onclick="initChat(${con.consultation_id});updateActive(this)">
+                <div class="animal-image" style="background-image:url('/assets/data/${con.animal.type.toLowerCase()}s/${con.animal.animal_id}.jpg');"> </div>
                 <div style="margin-left: .5rem;">
-                    <div style="font-weight: 500;">Animal Name</div>
-                    <div style="font-size: .9rem;">3 Years - Male - DOG</div>
+                    <div style="font-weight: 500;">${con.animal.name}</div>
+                    <div style="font-size: .9rem;">${Math.round(con.animal.age)} Years - ${con.animal.gender} - ${con.animal.type.toUpperCase()}</div>
                 </div>
             </div>
+            `
 
-        <? } ?>
+            document.querySelector('.chat-conversations').insertAdjacentHTML('beforeend', template)
+        }
+    }
 
-    </div>
-    <div class="chat-window">
-        <div class="chat-header">
-            <div class="animal-image" style="background-image:url('/assets/images/dogs/placeholder.jpg');"> </div>
-            <div style="font-weight: 500;">&nbsp; Animal Name</div>
-            <div style="flex:1 1 0"></div>
-            <div>
-                <button class="btn btn-link black"><i class="far fa-phone"></i></button>
-                <button class="btn btn-faded green"><i class="fa fa-check"></i></button>
-            </div>
-        </div>
-        <div class="chat-body">
-            <div class="msg sent">Message</div>
-            <div class="msg">Message</div>
-            <div class="msg sent">Message</div>
 
-        </div>
-        <div class="chat-footer">
-            <button class="btn btn-link black"><i class="far fa-file-prescription"></i></button>
-            <button class="btn btn-link black"><i class="fa fa-paperclip"></i></button>
-            <input class="ctrl" placeholder="Your Message ...">
-            <button class="btn btn-link black"><i class="fa fa-paper-plane"></i></button>
-        </div>
-    </div>
-</div>
+
+    showConversationsList();
+</script>

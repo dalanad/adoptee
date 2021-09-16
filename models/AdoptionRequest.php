@@ -11,7 +11,9 @@ class AdoptionRequest extends BaseModel
 
     public function getPetData($animal_id)
     {
-        $query = "SELECT `description` FROM `animal_for_adoption` WHERE animal_id = $animal_id";
+        $query = "SELECT `name`, `gender`, `dob`, `color`, `description`, `type` 
+        FROM  `animal`, `animal_for_adoption` WHERE animal.animal_id = $animal_id
+        AND animal_for_adoption.animal_id = $animal_id";
         return BaseModel::select($query);
     }
 }

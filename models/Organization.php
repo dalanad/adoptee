@@ -40,4 +40,23 @@ class Organization extends BaseModel
         return BaseModel::select($query);
     }
 
+    static function getOrgAdoptions($orgId)
+    {
+        $query = "SELECT * FROM `animal_for_adoption`, `animal` WHERE animal_for_adoption.org_id = $orgId
+        AND animal.animal_id = animal_for_adoption.animal_id";
+        return BaseModel::select($query);
+    }
+
+    static function getOrgMerchandise($orgId)
+    {
+        $query = "SELECT * FROM `sponsorship` WHERE sponsorship.org_id = $orgId";
+        return BaseModel::select($query);
+    }
+
+    static function getOrgSponsorships($orgId)
+    {
+        $query = "SELECT * FROM `org_merch_item` WHERE org_merch_item.org_id = $orgId";
+        return BaseModel::select($query);
+    }
+
 }

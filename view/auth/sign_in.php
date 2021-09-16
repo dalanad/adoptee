@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . "./../_layout/layout.php" ?>
+<?php require_once __DIR__ . "/../_layout/layout.php" ?>
 <?php $active = isset($_GET["active"]) ? $_GET["active"] : "sign_in"; ?>
 
 
@@ -33,7 +33,7 @@
                 <div style="margin-top: 1rem;">
                     <div class="body-text">Register as</div>
                     <a class="btn outline green" href="/auth/organizationRegistration"> <i class="fa fa-hand-holding-heart"></i>&nbsp;Organization</a>
-                    <a class="btn outline pink" href="/doctor/register"> <i class="fa fa-user-md"></i>&nbsp;Doctor</a>
+                    <a class="btn outline pink" href="/auth/doctor_registration"> <i class="fa fa-user-md"></i>&nbsp;Doctor</a>
                 </div>
             </form>
 
