@@ -85,6 +85,11 @@ create table rescued_animal (
     rescued_date date
 );
 
+create table user_pet (
+    animal_id int(10) primary key,
+    user_id int(10)
+);
+
 create table consultation (
     consultation_id int(10) auto_increment primary key, -- should we add a primary key ?
     consultation_date date not null,
@@ -285,6 +290,10 @@ add foreign key(animal_id) references animal(animal_id);
 alter table rescued_animal
 add foreign key(report_id) references report_rescue(report_id),
 add foreign key(animal_id) references animal(animal_id);
+
+alter table user_pet
+add foreign key(animal_id) references animal(animal_id),
+add foreign key(user_id) references user(user_id);
 
 alter table consultation
 add foreign key(user_id) references user(user_id),

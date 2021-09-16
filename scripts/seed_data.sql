@@ -64,6 +64,12 @@ INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_
 ('Mr. Reg. User', 'user@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
 ('Mr. Reg. User2', 'user2@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 0, 0);
 
+INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(5,3);
+INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(6,3);
+INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(7,3);
+INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(8,4);
+INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(9,4); 
+
 INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL');
 
 INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `proof_image`) 
