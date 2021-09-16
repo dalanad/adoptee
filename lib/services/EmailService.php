@@ -17,16 +17,16 @@ class EmailService
         $mail = new PHPMailer(true);
 
         $mail->isSMTP();                            // Send using SMTP
-        $mail->Host       = 'smtp.sendgrid.net';    // Set the SMTP server to send through
+        $mail->Host       = config::get("email.host");    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;
-        
+
         //Enable SMTP authentication
-        $mail->Username   = 'apikey';               // SMTP username
-        $mail->Password   = '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';
-        
+        $mail->Username   = config::get("email.user");               // SMTP username
+        $mail->Password   = config::get("email.pass");
+
         //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            // Enable implicit TLS encryption
-        $mail->Port       = 465;                                    
+        $mail->Port       = 465;
 
         //Recipients
         $mail->setFrom('noreply@adoptee.lk', 'Adoptee');
@@ -43,9 +43,9 @@ class EmailService
 
     public function sendSMS($to_address, $message)
     {
-        $user_id = "13947";
-        $api_key = "oHMY3jsF85FFUo9AWvWz";
-        
+        $user_id = config::get("sms.user");
+        $api_key = config::get("sms.key");
+
         // send HTTP get request to the API
         file_get_contents("https://app.notify.lk/api/v1/send?user_id=$user_id&api_key=$api_key&sender_id=NotifyDEMO&to=$to_address&message=$message");
     }

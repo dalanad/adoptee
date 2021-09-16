@@ -6,10 +6,12 @@ class BaseModel
         static $db = null;
 
         if ($db === null) {
-            $db_host = getenv("DB_HOST");
-            $dsn = "mysql:host=$db_host;dbname=adoptee;charset=utf8";
 
-            $db = new PDO($dsn, "root", "root");
+            $dsn = config::get("db.dsn");
+            $user = config::get("db.user");
+            $pass = config::get("db.pass");
+
+            $db = new PDO($dsn, $user, $pass);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
 

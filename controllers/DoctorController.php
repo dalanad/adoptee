@@ -2,6 +2,10 @@
 
 class DoctorController extends Controller
 {
+    public function __construct()
+    {
+        $this->isLoggedIn(["doctor"]);
+    }
 
     function index()
     {
