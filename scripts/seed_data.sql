@@ -1,12 +1,14 @@
 use adoptee;
 START TRANSACTION;
 INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`, `about`) 
-VALUES ('Pet Haven', '0112345678', 'No. 58', '5th Lane', 'Battaramulla', 'Help an animal in need', 'LOGO', 'Animal Haven is a 
-nonprofit organization that finds homes for abandoned cats and dogs and improves chances of adoption.');
-INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
-VALUES ('Animal Shelter', '0334567891', 'No.14/A', 'Temple Road', 'Colombo 8', 'Save a Pet', 'LOGO');
-INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`) 
-VALUES ('Animal Welfare Centre', '0114567891', 'No. 120', 'Circular Road', 'Dehiwala', 'Give a pet a home', 'LOGO');
+VALUES ('Pet Haven', '0112345678', 'No. 58', '5th Lane', 'Battaramulla', 'Help an animal in need', 'LOGO', 'Pet Haven is a 
+nonprofit organization that finds homes for abandoned cats and dogs and improves chances of adoption. We conduct clinics, adoption days and events to raise awareness, free of charge');
+INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`, `about`) 
+VALUES ('Animal Shelter', '0334567891', 'No.14/A', 'Temple Road', 'Colombo 8', 'Save a Pet', 'LOGO', 'Animal Shelter is a 
+nonprofit organization that finds homes for abandoned cats and dogs and improves chances of adoption. We conduct clinics, adoption days and events to raise awareness, free of charge');
+INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`, `about`) 
+VALUES ('Animal Welfare Centre', '0114567891', 'No. 120', 'Circular Road', 'Dehiwala', 'Give a pet a home', 'LOGO', 'Animal Welfare Center is a 
+nonprofit organization that finds homes for abandoned cats and dogs and improves chances of adoption. We conduct clinics, adoption days and events to raise awareness, free of charge');
 
  
 INSERT INTO `org_content` (`org_id`, `heading`, `description`, `photo`)
@@ -15,6 +17,12 @@ VALUES ('1', 'Clinic', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   ('2', 'Volunteer', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO'),
   ('3', 'Adoption Day', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO');
  
+INSERT INTO `sponsorship_tier` (`org_id`, `name`, `amount`, `recurring_days`, `description`)
+VALUES ('1','Gold',5000.00,'30','Funds are allocated for veterinary needs'),
+('1','Silver',2500.00,'30','Funds are allocated for veterinary needs'),
+('1','Bronze',1000.00,'30','Funds are allocated for food'),
+('2','Medical',5000.00,'30','Funds are allocated for veterinary needs'),
+('3','Basic',2000.00,'30','Funds are allocated for food');
 
 INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) VALUES
 ('Dog', 'Tigger', 'Male',   '2021-07-01', 'Black','/assets/data/dogs/1.jpg'),
