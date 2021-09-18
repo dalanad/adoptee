@@ -11,10 +11,7 @@ class AdoptionRequestController extends Controller{
 
     function submit()
     {
-        // $animal_id=;
-        // $org_id=;
-        // $user_id=;
-        AdoptionRequest::createAdoptionRequest('132', '132', '32', $_POST['has_pets'], $_POST['petsafety'], $_POST['children'], $_POST['childsafety']);
+        AdoptionRequest::createAdoptionRequest($_GET['animal_id'], $_GET['org_id'], $_SESSION['user']['user_id'], $_POST['has_pets'], $_POST['petsafety'], $_POST['children'], $_POST['childsafety']);
     }   
 }
 

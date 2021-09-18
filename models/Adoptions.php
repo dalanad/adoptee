@@ -10,7 +10,8 @@ class Adoptions extends BaseModel
             a.*,
             afa.*,
             DATEDIFF(CURRENT_DATE, a.dob) / 365 'age',
-            o.name 'org_name'
+            o.name 'org_name',
+            o.org_id 'org_id'
         FROM
             animal_for_adoption afa
         INNER JOIN animal a ON
