@@ -23,14 +23,18 @@ require_once  __DIR__ . '/_nav.php';
         for (const con of consultations) {
             let template = `
             <div class="chat-animal" onclick="initChat(${con.consultation_id});updateActive(this)">
-                <div class="animal-image" style="background-image:url('/assets/data/${con.animal.type.toLowerCase()}s/${con.animal.animal_id}.jpg');"> </div>
-                <div style="margin-left: .5rem;">
-                    <div style="font-weight: 500;">${con.animal.name}</div>
-                    <div style="font-size: .9rem;">${Math.round(con.animal.age)} Years - ${con.animal.gender} - ${con.animal.type.toUpperCase()}</div>
+                <div class="animal-image" style="background-image:url('${con.animal.photo}');"> </div>
+                <div style="margin-left: .5rem;flex:1">
+                    <div style="font-weight: 500;display:flex;">${con.animal.name}
+                       &nbsp; <i class="txt-clr fa fa-${con.animal.gender.toLowerCase()=="male"?'mars blue':'venus pink'}"></i> 
+                        <span style="flex: 1 1 0"></span>
+                        <small><b class="tag stale ${con.type=="LIVE"?'green':''}">${con.type}</b></small> &nbsp; 
+                    </div>
+                    <div style="font-size: .9em;">${Math.round(con.animal.age)} Years - ${con.animal.type.toUpperCase()}</div>
+                    <div><small>${con.user.name}</small></div>
                 </div>
             </div>
             `
-
             document.querySelector('.chat-conversations').insertAdjacentHTML('beforeend', template)
         }
     }

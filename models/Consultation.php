@@ -45,6 +45,7 @@ class Consultation extends BaseModel
 
         $consultations = array_map(function ($item) {
             $item["animal"] =  Animal::getAnimalById($item["animal_id"]);
+            $item["user"] =  User::findUserById($item["user_id"]);
             return $item;
         }, $consultations);
 

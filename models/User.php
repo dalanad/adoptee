@@ -34,11 +34,18 @@ class User extends BaseModel
         return BaseModel::select($query)[0];
     }
 
+    static function findUserById($user_id)
+    {
+        $query = "select *  from `user` where user_id= :user_id";
+        return BaseModel::select($query, ["user_id" => $user_id])[0];
+    }
+
     static function verifyEmail($email)
     {
         $query = "update `user` set email_verified = 1 where email= '$email'";
         return BaseModel::update($query);
     }
+
     static function verifySMS($email)
     {
         $query = "update `user` set telephone_verified = 1 where email= '$email'";

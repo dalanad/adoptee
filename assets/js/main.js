@@ -22,14 +22,17 @@ function params(data, navigate = true) {
 
 window.params = params;
 
-//document.addEventListener("DOMContentLoaded", () => init(), false);
+document.addEventListener("DOMContentLoaded", () => init(), false);
 let email_regex = /[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+[.]+[a-z-A-Z]/;
 
 function init() {
+	
+	// form validations
 	document.querySelectorAll("form").forEach((form) => {
 		form.addEventListener("submit", function (e) {
 			let valid = true;
-
+			
+			// validate emails
 			form.querySelectorAll("input[type=email]").forEach((emailField) => {
 				if (!email_regex.test(emailField.value)) {
 					valid = false;
@@ -49,5 +52,10 @@ function init() {
 				e.stopPropagation();
 			}
 		});
+	});
+
+	// add required marker
+	document.querySelectorAll(".field .ctrl[required]").forEach((input) => {
+		input.parentElement.querySelector("label").insertAdjacentHTML("beforeend", `<span style="color:red"> *</span>`);
 	});
 }
