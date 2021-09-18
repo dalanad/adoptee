@@ -315,7 +315,9 @@ function InitSortHeaders() {
 		let i = document.createElement("i");
 		e.appendChild(i);
 		i.style.marginLeft = "1rem";
-		i.classList = e.dataset.dir ? `fa fa-arrow-${e.dataset.dir === "ASC" ? "down" : "up"}` : "";
+		i.style.fontSize = "1.3em";
+		i.style.lineHeight = "0";
+		i.classList = e.dataset.dir ? `far fa-sort-amount-${e.dataset.dir === "ASC" ? "down-alt" : "up"}` : "";
 		e.addEventListener("click", () => {
 			if (e.dataset.dir == "DESC") {
 				delete e.dataset.dir;
@@ -383,8 +385,9 @@ async function initChat(id) {
 	chat_window.querySelector("#btn-prescribe").addEventListener("click", addPrescription);
 	chat_window.querySelector("#btn-upload").addEventListener("click", uploadFile);
 
-	function addPrescription() {
-		showOverlay("<div style='width:500px;height:600px;'><h1>Test</h1></div>");
+	async function addPrescription() {
+		let html = await fetch("/view/doctor/prescription.php").then((e) => e.text());
+		showOverlay(`<div style='width:500px;height:600px;overflow:auto'>${html}</div>`);
 	}
 
 	async function postMessage(consultationId, message) {
@@ -410,7 +413,7 @@ async function initChat(id) {
 	});
 
 	clearInterval(this.interval);
-	// this.interval = setInterval(displayMessages, 1000);
+	this.interval = setInterval(displayMessages, 1000);
 	setTimeout(displayMessages, 200);
 }
 
@@ -448,6 +451,7 @@ function uploadFile() {
 				.catch(reject);
 		});
 	});
-	
+
 	return res;
 }
+

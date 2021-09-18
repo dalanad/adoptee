@@ -91,7 +91,7 @@ INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `date
 VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor', '2021-09-14', current_timestamp(), '0771234567', 'Anuradhapura', NULL, 'PENDING', '');
 
 INSERT INTO `rescued_animal`(`animal_id`,`report_id`,`rescued_date`)
-VALUES ('10', '1', '2021-08-28'), ('11', '2', '');
+VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
 
  INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `approval_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
  VALUES ('1', '3', '1', '2021-08-01', NULL, 'PENDING', '1', 'The dog that I already have is easy going and bond well with other animals.', '1', 'Used to pets');

@@ -27,7 +27,7 @@ $menu_items = array(
                 <div class="section-heading"><?= $value["title"] ?></div>
 
             <?php } else { ?>
-                <a class="side-link  <?= $key == $active ? 'active' : '' ?> <?= $value["color"] ?? "" ?>" href="/doctor/<?= $key ?>">
+                <a class="side-link  <?= $key == $active ? 'active' : '' ?> <?= $value["color"] ?? "" ?>" href="/Doctor/<?= $key ?>">
                     <i class="link-icon far fa-<?= $value["icon"] ?>"></i>
                     <span class="side-link-text"><?= $value["name"] ?></span>
                 </a>
@@ -47,38 +47,4 @@ $menu_items = array(
         </div>
         <div style="padding: 1rem;">
             <script src="/assets/js/doctor.js"></script>
-            <?php
-            function pagination($current_page, $page_size, $total_items)
-            { ?>
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:1rem">
-                    <div>
-                        <div style="display: flex; align-items:baseline;margin-top:.5rem">
-                            <select class="ctrl sm" onchange="params({size:this.value,page:0})">
-                                <? foreach ([5, 10, 25, 50, 100] as $i) { ?>
-                                    <option value="<?= $i ?>" <?= $i == $page_size ? "selected" : "" ?>><?= $i ?></option>
-                                <? } ?>
-                            </select>
-                            <span style="white-space: nowrap;">&nbsp; Per Page</span>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="pagination">
-                            <?= $current_page * $page_size + 1 ?> -
-                            <?= ((($current_page + 1) * $page_size) > $total_items) ? $total_items : (($current_page + 1) * $page_size) ?>
-                            of <?= $total_items ?> &nbsp;
-                            <a onclick="params({page: 0 })" class="paginate_button <?= $current_page == 0 ? "disabled" : "" ?>">
-                                <i class="far fa-chevron-double-left"></i>
-                            </a>
-                            <a onclick="params({page: <?= $current_page - 1 ?> })" class="paginate_button <?= $current_page == 0 ? "disabled" : "" ?>">
-                                <i class="fas fa-chevron-left"></i>
-                            </a>
-                            <a onclick="params({page: <?= $current_page + 1 ?> })" class="paginate_button <?= ($current_page) >= intdiv($total_items, $page_size) ? " disabled" : ""  ?>">
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
-                            <a onclick="params({page: <?= intdiv($total_items, $page_size)  ?> })" class="paginate_button <?= ($current_page) == intdiv($total_items, $page_size) ? " disabled" : ""  ?>">
-                                <i class="far fa-chevron-double-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            <? } ?>
+           

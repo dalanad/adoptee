@@ -71,9 +71,12 @@
 
                             <div class="verify-card">
                                 <div class="verify-card-heading"> Email <i class="txt-clr orange fa  fa-check-circle"></i></div>
-                                <div style="white-space: pre-wrap; margin: 1rem 0; text-align: center;">
-                                    You have been successfully registered.<br><br>
-                                    Now you need to confirm your email. A letter was sent to your email (<code> <?= $user["email"] ?></code>), follow the instructions to complete the registration.
+                                <div style="margin: 1rem 0;white-space: initial;text-align: center;">
+                                    <b class="txt-clr green">You have been successfully registered.</b><br><br>
+                                    Now you need to confirm your email. 
+                                    <br>A letter was sent to your email 
+                                    <code style="padding: 0.5rem 0;display: block;"> <?= $user["email"] ?></code>
+                                    follow the instructions in the email to complete the registration.
                                 </div>
                             </div>
 

@@ -33,7 +33,7 @@ create table organization (
     city varchar(20) ,
     tagline varchar(50),
     logo varchar(50),
-    about varchar(200),
+    about varchar(500),
     about_photo varchar(50)
 );
 
@@ -188,7 +188,7 @@ create table report_rescue(
     report_id int(10) AUTO_INCREMENT primary key,
     type varchar(50), -- animal type
     description varchar(200),
-    date_reported date default CURRENT_DATE,
+    date_reported date ,
     time_reported timestamp DEFAULT CURRENT_TIMESTAMP,
     contact_number int(10),
     location varchar(100) not null,

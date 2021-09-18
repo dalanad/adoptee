@@ -1,6 +1,6 @@
 <?php
-$_SESSION['name'] = $_POST["name"];
-$_SESSION['email'] = $_POST["email"]; ?>
+$_SESSION['name'] = $_POST["name"] ?? "";
+$_SESSION['email'] = $_POST["email"] ?? ""; ?>
 <?php require_once __DIR__ . "/../_layout/layout.php" ?>
 
 <link rel="stylesheet" href="/assets/css/auth.css" type="text/css">
@@ -45,8 +45,8 @@ $_SESSION['email'] = $_POST["email"]; ?>
 
             <div class="field column" style="width:50%;">
                 <label>Mobile Phone Number</label>
-                <input class="ctrl" type="text" name="telephone" pattern="[0-9]{10}/" required>
-                <span class="field-msg"></span>
+                <input class="ctrl" type="text" name="telephone" pattern="07[0-9]{8}" required>
+                <span class="field-msg">Format : 07XXXXXXXX</span>
             </div>
 
             <div class="field column">
@@ -84,12 +84,13 @@ $_SESSION['email'] = $_POST["email"]; ?>
 
             <div class="body-text">
                 <p>Already have an account?
-                    <a class="btn-link bold text-decoration-none" href="./sign_in.php">Sign in</a>
+                    <a class="btn-link bold text-decoration-none" href="/auth/sign_in">Sign in</a>
                 </p>
             </div>
-
-
-
         </div>
     </div>
-    </div>
+</form>
+
+<script>
+
+</script>
