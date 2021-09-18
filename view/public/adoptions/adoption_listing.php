@@ -124,7 +124,7 @@
             </div>
             <div class="adoption-grid">
                 <?php foreach ($animals as $animal) { ?>
-                    <a class="adoption-card" onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal['animal_id'] ?>'">
+                    <a class="adoption-card" onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal['animal_id'] ?>&org_id=<?=$animal['org_id']?>'">
                         <div class="adoption-card-image" style="background-image: url('<?= $animal['photo'] ?>');"></div>
                         <div class="adoption-card-details">
                             <div class="adoption-card-action">ADOPT</div>

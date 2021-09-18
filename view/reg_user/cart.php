@@ -45,6 +45,7 @@
 <?php if ($step == 1) { ?>
     <div class="container" style="display:flex;">
         <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;padding:1rem;">
+        <div style="display:block;">
             <table class="table">
                 <?php for ($i = 0; $i < 3; $i++) { ?>
                     <tr>
@@ -53,7 +54,7 @@
                         <td></td>
                         <td></td>
                         <td class="bold">Rs. 750</td>
-                        <td><input type="number" class="ctrl" style="max-width:3rem;" value=1></td>
+                        <td><input type="number" class="ctrl" style="max-width:3rem;" value=1 min=0></td>
                         <td><i class="fa fa-trash"></i></td>
                     </tr>
                     <tr>
@@ -64,6 +65,8 @@
                 <?php } ?>
             </table>
         </div>
+        <a href='/main/index' class="btn btn-link m2 bold"><i class="fas fa-arrow-left"></i>&nbspBack to site</a>
+                </div>
         <div style="display:block;">
             <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;padding:1rem;">
                 <div class="bold mb2">Order Summary</div>

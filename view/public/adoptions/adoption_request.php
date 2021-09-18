@@ -20,9 +20,9 @@
             height: 50%;
         }
 
-        #details{
+        #details {
             grid-column: 1;
-            grid-row: 11 / span 10;
+            grid-row: 10 / span 10;
             height: 50%;
         }
     }
@@ -44,48 +44,54 @@
         flex: 50%;
     }
 
-    .message{
-        display: block;
-        margin-top: 25%;
-        margin-left: 20%;
+    .message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: 10px;
+        margin-left: -50px;
         color: var(--primary);
     }
 </style>
 
 <form class="container ctx" action="/AdoptionRequest/submit" method="POST">
 
-    <div class="report" >
+    <div class="report">
 
-        <!-- temporary image -->
         <div class="rounded" id="image">
-            <img style="border-radius:8px;max-height: 350px;margin:0 auto" src="/assets/images/dogs/placeholder2.jpg" />
+            <img style="border-radius:8px;max-height: 350px;margin:0 auto" src="<?= $petdata[0]['photo'] ?>" />
         </div>
 
         <div id="details">
-                <?php
-                    foreach($petdata as $key=>$value){?>
-                    <div class="row">
-                            <div class="column">Type:</div>
-                            <div class="column"><?=$value['type']?></div>
-                        </div>
-                        <div class="row">
-                            <div class="column">Name:</div>
-                            <div class="column"><?=$value['name']?></div>
-                        </div>
-                        <div class="row">
-                            <div class="column">Born on:</div>
-                            <div class="column"><?=$value['dob']?></div>
-                        </div>
-                        <div class="row">
-                            <div class="column">Gender:</div>
-                            <div class="column"><?=$value['gender']?></div>
-                        </div>
-                        <div class="row">
-                            <div class="column">Colour:</div>
-                            <div class="column"><?=$value['color']?></div>
-                        </div>
-                    <?php } ?>
-            </div>
+            <?php
+            foreach ($petdata as $key => $value) { ?>
+                <div class="row">
+                    <div class="column">Type:</div>
+                    <div class="column"><?= $value['type'] ?></div>
+                </div>
+                <div class="row">
+                    <div class="column">Name:</div>
+                    <div class="column"><?= $value['name'] ?></div>
+                </div>
+                <div class="row">
+                    <div class="column">Born on:</div>
+                    <div class="column"><?= $value['dob'] ?></div>
+                </div>
+                <div class="row">
+                    <div class="column">Gender:</div>
+                    <div class="column"><?= $value['gender'] ?></div>
+                </div>
+                <div class="row">
+                    <div class="column">Colour:</div>
+                    <div class="column"><?= $value['color'] ?></div>
+                </div>
+                <div class="row">
+                    <div class="column">Description:</div>
+                    <div class="column"><?= $value['description'] ?></div>
+                </div>
+
+            <?php } ?>
+        </div>
 
         <?php if (isset($_SESSION['user'])) { ?>
 
