@@ -25,7 +25,8 @@ class Config
         "videosdk.secret" => "1dce5c535747b314ae1126641ad7c51f788026be2de628efc915080f9eae5cf3",
 
         // Payment Gateway credentials
-        "stripe" => ""
+        "stripe.secret" => "sk_test_51JBINKEu3mtzXdk1hnpQNEAIMfA93QrzvlckDFM5y6xI0JDLptM8k13RF0MTBhTzDUkZG4lMxli88h54SwKp0VeZ00csMtwzQJ",
+        "stripe.publishable"=>"pk_test_51JBINKEu3mtzXdk1RZaQ4mqJoyuHQS7ZL9UdpSrR3oDcRgkbNmCTl9dEKTK5KigEoeDBwO89lCtyQKydIBL7Mf2q00POFEpI41"
     );
 
 

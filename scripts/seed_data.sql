@@ -60,7 +60,7 @@ INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `s
 ('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'ADOPTED', '2021-09-03', '1'),
 ('21', 'Playful and a joy to be around, weaned', '2021-08-26', 'LISTED', NULL, '3'),
 ('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2'),
-('3', 'jade-green eyes', '2021-09-01, not vaccinated', 'LISTED', NULL, '1'),
+('3', 'jade-green eyes not vaccinated','2021-09-01', 'LISTED', NULL, '1'),
 ('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2'),
 ('4', 'Playful and affectionate, vaccinated', '2021-08-26', 'LISTED', NULL, '1'),
 ('5', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2'),
