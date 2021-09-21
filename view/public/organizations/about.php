@@ -20,7 +20,7 @@
         <div style="margin:0.5rem;margin-top:10%;"><?= $details[0]['about']; ?></div>
     </div>
     <div class="rounded" style="min-height: 200px;margin:auto;margin-top:3rem;" id="googleMap"></div>
-    <div style="margin-top:1rem;">
+    <div style="margin-top:1rem;text-align:right;">
         <?php
         $telephone = "Contact us at " . $details[0]['telephone'] . "";
         $address = "" . $details[0]['address_line_1'] . " , " . $details[0]['address_line_2'] . ", " . $details[0]['city'] . "";

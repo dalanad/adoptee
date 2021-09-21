@@ -33,44 +33,47 @@
 
 <?php
 foreach ($petdata as $key => $value) { ?>
-    <div class="card">
-        <table class="table">
-            <tr rowspan="4">
-                <td><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 50px; height: 50px; border-radius: 50%;"></td>
-                <td>
-                    <table>
-                        <tr>
-                            <td><?= $value["name"] ?></td>
-                            <td><?= $value["age"] ?> Years Old</td>
-                            <td><?= $value["gender"] ?></td>
-                        </tr>
-                        <tr>
-                            <th>MEDICAL HISTORY</th>
-                            <td>
-                                <button onclick="showModel('popupModal<?= $consultdata['animal_id'] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
-                                <div id="popupModal<?= $consultdata["animal_id"] ?>" class="modal">
-                                    <div class="modal-content">
-                                        <span class="close" onclick="hideModel('popupModal<?= $consultdata['animal_id'] ?>')">&times;</span>
-                                        <table>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Time</th>
-                                                <th>Doctor's Message</th>
-                                            </tr>
-                                            <tr>
-                                                <td><?= $consultdata['consultation_date'] ?></td>
-                                                <td><?= $consultdata['consultation_time'] ?></td>
-                                                <td><?= $consultdata['message'] ?></td>
-                                            </tr>
-                                        </table>
+    <div class="card" style="margin-bottom:0.5rem;">
+        <div style="display:flex;">
+            <table class="table">
+                <tr rowspan="4">
+                    <td><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 50px; height: 50px; border-radius: 50%;"></td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td><?= $value["name"] ?></td>
+                                <td><?= $value["age"] ?> Years Old</td>
+                                <td><?= $value["gender"] ?></td>
+                            </tr>
+                            <tr>
+                                <td class='bold' style='font-size:0.9rem;'>MEDICAL HISTORY
+
+                                    <button onclick="showModel('popupModal<?= $consultdata['animal_id'] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                                    <div id="popupModal<?= $consultdata["animal_id"] ?>" class="modal">
+                                        <div class="modal-content">
+                                            <span class="close" onclick="hideModel('popupModal<?= $consultdata['animal_id'] ?>')">&times;</span>
+                                            <table>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>Doctor's Message</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><?= $consultdata['consultation_date'] ?></td>
+                                                    <td><?= $consultdata['consultation_time'] ?></td>
+                                                    <td><?= $consultdata['message'] ?></td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <button class="red" title="Remove Pet"><i class="far fa-trash" style="color:red;"></i></button>
+        </div>
     </div>
 <?php } ?>
 

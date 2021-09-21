@@ -42,7 +42,8 @@ class Organization extends BaseModel
 
     static function getOrgAdoptions($orgId)
     {
-        $query = "SELECT * FROM `animal_for_adoption`, `animal` WHERE animal_for_adoption.org_id = $orgId
+        $query = "SELECT *, DATEDIFF(CURRENT_DATE, animal.dob)/365 'age'
+        FROM `animal_for_adoption`, `animal` WHERE animal_for_adoption.org_id = $orgId
         AND animal.animal_id = animal_for_adoption.animal_id";
         return BaseModel::select($query);
     }
@@ -55,7 +56,7 @@ class Organization extends BaseModel
 
     static function getOrgSponsorships($orgId)
     {
-        $query = "SELECT sponsorship_tier.*, o.org_id, o.name as 'o_name'
+        $query = "SELECT sponsorship_tier.*, o.org_id
         FROM `sponsorship_tier`, `organization` o 
         WHERE sponsorship_tier.org_id = $orgId
         AND o.org_id = $orgId";

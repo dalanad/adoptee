@@ -28,4 +28,4 @@
         }
     </script>
 </head>
-<? require __DIR__ . '/helpers.php' ?>
+<?php require __DIR__ . '/helpers.php' ?>

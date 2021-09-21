@@ -73,5 +73,5 @@ function pagination($current_page, $page_size, $total_items)
             </div>
         </div>
     </div>
-<?
+<?php
 } ?>
