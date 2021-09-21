@@ -16,6 +16,13 @@
         justify-content: center;
     }
 
+    img{
+        max-width: 100%;
+        max-height: 100%;
+        margin-right: 0.5rem;
+        border-radius: 5px;
+    }
+
     .item .content-column{
         flex:75%;
         flex-direction: column;
@@ -38,7 +45,7 @@
 <?php
 foreach ($content as $key => $value) { ?>
     <div class="item">
-        <div class="image-column"><?php print_r($value['photo']);?></div>
+        <div class="image-column"><img src=".././../../assets/images/org/adoption_day.jpg"></div>
         <div class="content-column">
             <div class="heading"><?= $value['heading']; ?></div>
             <div class="time"><?= explode(" ",$value['created_time'])[0]; ?></div>
