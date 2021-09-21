@@ -215,7 +215,7 @@ class AuthController extends Controller
             $telephone_fixed = $_POST["telephone_fixed"];
             $credentials = $_POST["credentials"];
 
-            $proofImage =  new Image("proof_image");
+            $proofImage =  new MultipleImages("proof_image");
 
             if (sizeof($errors) > 0) {
                 $_SESSION['form_errors'] = $errors;

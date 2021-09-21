@@ -21,7 +21,7 @@ create table doctor (
     reg_no varchar(50) unique,
     telephone_fixed char(10),
     credentials varchar(50),
-    proof_image varchar(50)
+    proof_image JSON
 );
 
 create table organization ( 

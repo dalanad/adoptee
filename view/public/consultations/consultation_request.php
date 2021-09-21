@@ -124,6 +124,7 @@
     </div>
     <div style="text-align: center;margin:2rem;">
       <a class="btn green" href="?step=2">Make Consultation</a>
+      <a class="btn green" href="/Consultation/pay">Pay</a>
     </div>
   <? } else if ($step == 2) { ?>
     <div style="display: grid;grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));grid-gap:3rem;margin-top:1rem">

@@ -46,7 +46,7 @@
             </div>
             <div class="field">
                 <label>Proof of Registration</label>
-                <input type="file" name="proof_image" class="ctrl" accept="image/*" required>
+                <input type="file" name="proof_image[]" class="ctrl" multiple accept="image/*" required>
                 <span class="field-msg">Upload a photo of your registration</span>
             </div>
             <div class="field">
