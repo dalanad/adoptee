@@ -81,7 +81,7 @@ INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(5,3),(6,3),(7,3),(8,4),(9,
 INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL');
 
 INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `proof_image`) 
-VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '/uploads/1630599314_63.png') ;
+VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_63.png"]') ;
 
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `date_reported`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
 VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt  ', '2021-08-27', current_timestamp(), '0761236547', 'Anuradhapura', NULL, 'RESCUED', '');

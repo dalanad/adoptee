@@ -2,7 +2,7 @@
 
 class Doctor extends BaseModel
 {
-    public static function createDoctor($user_id, $reg_no, $credentials, $telephone_fixed, Image $proof_image)
+    public static function createDoctor($user_id, $reg_no, $credentials, $telephone_fixed, MultipleImages $proof_image)
     {
         $query = "INSERT INTO doctor (user_id, reg_no, credentials,telephone_fixed, proof_image) 
                   VALUES (:user_id, :reg_no,  :credentials,:telephone_fixed, :proof_image)";
@@ -12,7 +12,7 @@ class Doctor extends BaseModel
             "reg_no" => $reg_no,
             "credentials" => $credentials,
             "telephone_fixed" => $telephone_fixed,
-            "proof_image" => $proof_image->getURL()
+            "proof_image" => json_encode($proof_image->getURL())
         ];
 
         return self::insert($query, $params);
