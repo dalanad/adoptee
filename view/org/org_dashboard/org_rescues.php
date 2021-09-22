@@ -85,11 +85,11 @@ $org_rescues = array(
 
 
 
-<div class="container" style="top: 200px; height: 99%">
+<div class="container" style="top: 200px;">
     <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
         Rescues
     </h3>
-    <div class="overflow-auto" style="height:450px">
+    <div class="overflow-auto" style="height: calc(100vh - 200px)">
         <table class="table">
             <tr>
                 <th>TYPE</th>
