@@ -107,7 +107,7 @@
                         <td>
                             <table>
                                 <tr>
-                                    <td><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 30px; height: 30px; border-radius: 50%;"></td>
+                                    <td><img src="<?= $animal["photo"] ?>" style="width: 30px; height: 30px; border-radius: 50%;"></td>
                                     <td><?= $animal["name"] ?></td>
                                 </tr>
                             </table>

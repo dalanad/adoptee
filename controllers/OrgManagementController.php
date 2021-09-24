@@ -18,7 +18,9 @@ class OrgManagementController extends Controller{
     }
 
     function process_add_new_animal(){
-        OrgManagement::createNewAnimal(1, $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['photo']);
+        $photo =  image::multi("photo");
+        OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $photo);
+        
 
     }  
 
@@ -30,13 +32,19 @@ class OrgManagementController extends Controller{
     {
         $data = [
             "active" => "adoption_requests",
-            "adoption_requests"=>OrgManagement::findRequestsByOrgId(1)
+            "adoption_requests"=>OrgManagement::findRequestsByOrgId($_SESSION['org_id'])
     ];
         View::render("org/dashboard", $data);
     }
 
     function accept_adoption_request(){
-        OrgManagement::accept_adoption_request($animal_id);
+        OrgManagement::accept_adoption_request($_GET['animal_id']);
+        $this->redirect('/OrgManagement/adoption_requests');
+    }
+
+    function reject_adoption_request(){
+        OrgManagement::reject_adoption_request($_GET['animal_id']);
+        $this->redirect('/OrgManagement/adoption_requests');
     }
 
     function reported_cases()

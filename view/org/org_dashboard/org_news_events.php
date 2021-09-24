@@ -56,24 +56,10 @@
         cursor: pointer;
     }
 
-    .event {
-        position: relative;
-        width: 500px;
-        height: 500px;
-        top: 10px;
-        left: 10px;
-        background: white;
-        box-shadow: var(--shadow);
-        border-radius: 0.5rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        padding-top: 1rem;
-        border-color: black;
-    }
 
     .event-content{
-        padding-left: .5rem; 
-        padding-right: .5rem;
+        padding-left: 1rem; 
+        padding-right: 1rem;
     }
 
     .event-image {
@@ -88,6 +74,47 @@
   height: 200px; 
   border-radius: 0.5 rem;
 }
+
+    .event-card {
+         text-align: center;
+         padding: 1rem;
+         border: 3px solid var(--gray-3);
+         border-radius: 8px;
+         cursor: pointer;
+         position: relative;
+        width: 500px;
+        height: 450px;
+        top: 10px;
+        left: 10px;
+        border-radius: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 1rem;
+     }
+
+     .event-card:hover {
+         transition: border-color .2s ease-in-out;
+         border-color: var(--primary);
+     }
+
+     .event-card .btn {
+         opacity: .2;
+         transition: opacity .2s ease-in-out;
+     }
+
+     .event-card:hover .btn {
+         opacity: 1;
+     }
+
+     .event-card .icon {
+         font-size: 2em;
+     }
+
+     .event-card .title {
+         font-size: 1.2rem;
+         font-weight: 500;
+         line-height: 1em;
+     }
 </style>
 
 
@@ -101,11 +128,11 @@
             <tr>
                 <td>
                     <div style="position: relative;">
-                        <div class="event">
+                        <div class="event-card">
                             <h2 class="center">Pet Adoption Day</h2>
                             <div class="event-content"><img class="event-image" src="/assets\images\org/adoption_day.jpg"></div>
                             <div class="event-content"><p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>
-                            <p style="position: absolute; color: #aaa6a1; bottom: 10px;">Published On : 10-09-2021</p>    
+                            <p style="position: absolute; color: #aaa6a1; bottom: 0px;">Published On : 10-09-2021</p>    
                         </div>
                         </div>
                 </div>
@@ -113,11 +140,11 @@
 
                 <td>
                     <div style="position: relative;">
-                        <div class="event">
+                        <div class="event-card">
                             <h2 class="center">Stray Feeding Campaign</h2>
                             <div class="event-content"><img class="event-image" src="/assets\images\org/stray_feeding.jpg"></div>
                             <div class="event-content"><p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>    
-                            <p class="flex" style="position: absolute; color: #aaa6a1; bottom: 10px;">Published On : 10-09-2021</p>    
+                            <p class="flex" style="position: absolute; color: #aaa6a1; bottom: 0px;">Published On : 10-09-2021</p>    
                         </div>
                         </div>
                 </div>

@@ -80,6 +80,48 @@ $org_rescues = array(
         padding-left: 1em;
         margin-bottom: 1em;
     }
+
+    .rescue-card {
+         text-align: center;
+         padding: 1rem;
+         border: 3px solid var(--gray-3);
+         border-radius: 8px;
+         cursor: pointer;
+         position: relative;
+        width: 95%;
+        height: 20px;
+        top: 10px;
+        left: 10px;
+        border-radius: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 1rem;
+     }
+
+     .rescue-card:hover {
+         transition: border-color .2s ease-in-out;
+         border-color: var(--primary);
+     }
+
+     .rescue-card .btn {
+         opacity: .2;
+         transition: opacity .2s ease-in-out;
+     }
+
+     .rescue-card:hover .btn {
+         opacity: 1;
+     }
+
+     .rescue-card .icon {
+         font-size: 2em;
+     }
+
+     .rescue-card .title {
+         font-size: 1.2rem;
+         font-weight: 500;
+         line-height: 1em;
+     }
+     
 </style>
 
 
@@ -96,7 +138,7 @@ $org_rescues = array(
                     <div style="width: 100px;">INFO</div>
     </div>
             <?php foreach ($org_rescues as $org_rescue) { ?>
-                    <div class="rescue" style="display:flex;">
+                    <div class="rescue-card" style="display:flex;">
                     <div style="width: 100px;"><?= $org_rescue["type"] ?></div>
                     <div style="width: 220px;"><?= $org_rescue["date_rescued"] ?></div>
                     <div style="width: 270px;"><?= $org_rescue["contact_number"] ?></div>
@@ -119,6 +161,7 @@ $org_rescues = array(
                 
 
                     </div>
+                    <br>
             <?php } ?>
     </div>
 </div>
@@ -127,8 +170,8 @@ $org_rescues = array(
     function showModel(id) {
         document.getElementById(id).classList.add("shown")
         document.getElementById(id).style.display = "block";
-        document.getElementById(id).onclick = function(event) {
-            if (event.target.classList.contains('modal') && !event.target.classList.contains('modal-content')) {
+        document.getElementById(id).onclick = function(rescue) {
+            if (rescue.target.classList.contains('modal') && !rescue.target.classList.contains('modal-content')) {
                 let model = document.querySelector('.modal.shown');
                 model.style.display = "none"
                 model.classList.remove("shown")

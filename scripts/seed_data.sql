@@ -93,11 +93,12 @@ VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency', '2021-09-14'
 INSERT INTO `rescued_animal`(`animal_id`,`report_id`,`rescued_date`)
 VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
 
- INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `approval_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
- VALUES ('1', '3', '1', '2021-08-01', NULL, 'PENDING', '1', 'The dog that I already have is easy going and bond well with other animals.', '1', 'Used to pets');
- INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `approval_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
- VALUES ('2', '3', '1', '2021-10-02', NULL, 'PENDING', '0', '', '1', 'Used to pets');
-
+ INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
+ VALUES ('1', '3', '1', '2021-08-01', 'PENDING', '1', 'The dog that I already have is easy going and bond well with other animals.', '1', 'Used to pets');
+ INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
+ VALUES ('2', '3', '1', '2021-09-02', 'REJECTED', '0', '', '1', 'Used to pets');
+ INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
+ VALUES ('3', '3', '1', '2021-09-12', 'ADOPTED', '0', '', '1', 'Used to pets');
 
  INSERT INTO `consultation` ( `consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
  VALUES ('2021-09-08', '10:30:00', '4', '1', '3', 'PENDING', 'LIVE', NULL),
