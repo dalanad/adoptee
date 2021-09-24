@@ -44,11 +44,9 @@
 </style>
 
 <div class="container">
-    <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
-        ADOPTION REQUESTS
-    </h3>
 
-    <div class="overflow-auto" style="height:450px">
+
+    <div class="overflow-auto" style="height:550px">
         <table class="table">
             <tr>
                 <th>ADOPTEE</th>
@@ -56,24 +54,25 @@
                 <th>ADOPTER ID</th>
                 <th>HAVE PETS</th>
                 <th>HAVE CHILDREN</th>
+                <th>STATUS</th>
                 <th>RESPOND REQUEST</th>
                 <th>INFO</th>
             </tr>
 
             <?php foreach ($adoption_requests as $adoption_request) { ?>
-                <tr style="font-size: 0.8rem;">
+                <tr>
                     <td>
                         <table>
                             <tr>
-                                <td><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 30px; height: 30px; border-radius: 50%;"></td>
+                                <td><img src="/assets\images\dogs/placeholder2.jpg" style="width: 30px; height: 30px; border-radius: 50%;"></td>
                                 <td><?= $adoption_request["name"] ?></td>
                             </tr>
                         </table>
                     </td>
                     <td><?= $adoption_request["type"] ?></td>
                     <td><?= $adoption_request["user_id"] ?></td>
-                    <td><span class="tag <?= $adoption_request["has_pets"] ? 'green' : 'pink' ?>"><?= $adoption_request["r1"] ? "YES" : "NO" ?> </span></td>
-                    <td><span class="tag <?= $adoption_request["children"] ? 'green' : 'pink' ?>"><?= $adoption_request["r2"] ? "YES" : "NO" ?> </span></td>
+                    <td><span class="tag <?= $adoption_request["has_pets"] ? 'green' : 'pink' ?>"><?= $adoption_request["has_pets"] ? "YES" : "NO" ?> </span></td>
+                    <td><span class="tag <?= $adoption_request["children"] ? 'green' : 'pink' ?>"><?= $adoption_request["children"] ? "YES" : "NO" ?> </span></td>
                     <td><span class="tag <?= $adoption_request["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $adoption_request["status"] ?> </span></td>
                     <td>
                         <button title="Accept" class="btn btn-link btn-icon green"><i class="fas fa-check-circle"></i> </button>

@@ -20,6 +20,40 @@ class OrgManagement extends BaseModel
         return BaseModel::select($query);
     }
 
+    
+    static function editAnimalData($status, $name, $type, $gender, $dob, $color, $description, $photo)
+    {
+        
+        $query = "INSERT INTO `animal_for_adoption` (photo)
+        VALUES ('$photo')";
+        echo($query);
+        BaseModel::insert($query);
+
+        $query = "UPDATE `animal_for_adoption` SET status = '$status' WHERE isset($status);
+        UPDATE `animal_for_adoption` SET name = '$name' WHERE isset($name);
+        UPDATE `animal_for_adoption` SET type = $type WHERE isset($type);
+        UPDATE `animal_for_adoption` SET gender = '$gender' WHERE isset($gender);
+        UPDATE `animal_for_adoption` SET dob = '$dob' WHERE isset($dob);
+        UPDATE `animal_for_adoption` SET color = '$color' WHERE isset($color);
+        UPDATE `animal_for_adoption` SET description = '$description' WHERE isset($description)";
+
+        return BaseModel::insert($query);
+    }
+
+    static function accept_adoption_request($animal_id)
+    {
+        $query = "UPDATE `animal_for_adoption` SET status = 'ADOPTED' WHERE animal_id='$animal_id'";
+
+        return BaseModel::insert($query);
+    }
+
+    static function reject_adoption_request($animal_id)
+    {
+        $query = "UPDATE `animal_for_adoption` SET status = 'PENDING' WHERE animal_id='$animal_id'";
+
+        return BaseModel::insert($query);
+    }
+
     static function findRequestsByOrgId($org_id)
     {
         $query = "SELECT animal.name, animal.type, adoption_request.user_id,user.name,request_date,status,has_pets,petsafety,children,childsafety from adoption_request,user,animal where org_id= $org_id and adoption_request.user_id=user.user_id";

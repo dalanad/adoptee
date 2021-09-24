@@ -22,6 +22,10 @@ class OrgManagementController extends Controller{
 
     }  
 
+    function edit_animal_for_adoption(){
+        if(isset($_POST['submit'])){OrgManagement::editAnimalData($_POST['status'], $_POST['name'], $_POST['type'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['descripion'], $_POST['photo']);}
+    }
+
     function adoption_requests()
     {
         $data = [
@@ -29,6 +33,10 @@ class OrgManagementController extends Controller{
             "adoption_requests"=>OrgManagement::findRequestsByOrgId(1)
     ];
         View::render("org/dashboard", $data);
+    }
+
+    function accept_adoption_request(){
+        OrgManagement::accept_adoption_request($animal_id);
     }
 
     function reported_cases()
@@ -78,6 +86,12 @@ class OrgManagementController extends Controller{
     ];
         View::render("org/dashboard", $data);
     }
+
+    function add_new_event()
+    {
+        View::render("org/org_dashboard/add_new_event");
+    }
+
 }
 
 ?>
