@@ -174,19 +174,6 @@
 	white-space: nowrap;
 }
 
-.fade {
-	animation: fadeIn 0.5s;
-}
-
-@keyframes fadeIn {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
-
 .cell:first-child {
 	position: sticky;
 	top: 0px;
@@ -361,15 +348,14 @@
 	background-size: 800px 104px;
 	display: inline-block;
 	position: relative;
-
-	-webkit-animation-duration: 1s;
-	-webkit-animation-fill-mode: forwards;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-name: shimmer;
-	-webkit-animation-timing-function: linear;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: infinite;
+	animation-name: shimmer;
+	animation-timing-function: linear;
 }
 
-@-webkit-keyframes shimmer {
+@keyframes shimmer {
 	0% {
 		background-position: -468px 0;
 	}
@@ -399,6 +385,4 @@
 	padding: 1rem;
 }
 
-
 /* ANIMATIONS */
-
