@@ -363,6 +363,7 @@ header .logo img {
 	font-size: 0.7em;
 	display: block;
 	color: var(--gray-5);
+	white-space: pre-line;
 	margin-top: 0.2rem;
 	margin-left: 0.2rem;
 }
@@ -600,3 +601,18 @@ header .logo img {
 }
 
 /* DROPDOWN END*/
+
+/* ANIMATIONS */
+.fade {
+	animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+/* ANIMATIONS END */

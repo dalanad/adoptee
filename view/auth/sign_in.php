@@ -11,7 +11,7 @@
                 <img src="/assets/images/auth/IMG_<?= rand(1, 4) ?>.svg" style='width:100%' />
             </div>
             <form class="animated-card <?= $active == 'sign_in' ? "hidden faded" : '' ?>" action="/auth/sign_up" method="POST" id="sign-up">
-                <img src="/assets/images/logo_vector.svg" style='max-width:150px; margin-bottom:1rem' />
+                <img src="/assets/images/logo_vector_filled.svg" style='max-width:150px; margin-bottom:1rem' />
                 <div>Welcome to Adoptee</div>
                 <div class="title-text">Sign Up</div>
                 <div class="field">
@@ -38,7 +38,7 @@
             </form>
 
             <form class="animated-card <?= $active == 'signup' ? "hidden faded" : '' ?>" method="post" action="/auth/process_sign_in" id="sign-in">
-                <img src="/assets/images/logo_vector.svg" style='max-width:150px; margin-bottom:1rem' />
+                <img src="/assets/images/logo_vector_filled.svg" style='max-width:150px; margin-bottom:1rem' />
                 <div>Welcome to Adoptee</div>
                 <div class="title-text">Sign In</div>
                 <div class="field">
@@ -48,8 +48,8 @@
                 <div class="field">
                     <label>Password</label>
                     <input class="ctrl" type="password" name="password" required />
-                    <a href="/auth/request_link" class="field-msg"> Forgot Password ? </a>
                 </div>
+                <a href="/auth/request_link" class="field-msg"> Forgot Password ? </a>
                 <?php if (isset($_GET["error"])) { ?>
                     <div style="color: red; font-weight:bold;font-weight: bold;text-align: center;margin-top: 1rem; ">
                         Invalid Credentials

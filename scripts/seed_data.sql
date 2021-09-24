@@ -84,11 +84,11 @@ INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `pr
 VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_63.png"]') ;
 
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `date_reported`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
-VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt  ', '2021-08-27', current_timestamp(), '0761236547', 'Anuradhapura', NULL, 'RESCUED', '');
+VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.', '2021-08-27', current_timestamp(), '0761236547', 'Anuradhapura', NULL, 'RESCUED', '');
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `date_reported`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
-VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor  ', '2021-09-10', current_timestamp(), '0761236547', 'Anuradhapura', NULL, 'PENDING', '');
+VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.', '2021-09-10', current_timestamp(), '0761236547', 'Anuradhapura', NULL, 'PENDING', '');
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `date_reported`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
-VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor', '2021-09-14', current_timestamp(), '0771234567', 'Anuradhapura', NULL, 'PENDING', '');
+VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency', '2021-09-14', current_timestamp(), '0771234567', 'Anuradhapura', NULL, 'PENDING', '');
 
 INSERT INTO `rescued_animal`(`animal_id`,`report_id`,`rescued_date`)
 VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
