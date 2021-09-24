@@ -117,12 +117,12 @@
     <div class="row">
       <div class='field column'>
         <label for='name'>Name</label>
-        <input class="ctrl field-font" type="text" name="name" placeholder="Name" required />
+        <input class="ctrl" type="text" name="name" required />
       </div>
 
       <div class='field column'>
         <label for='type'>Type</label>
-        <select class="ctrl field-font" name='type' required>
+        <select class="ctrl" name='type' required>
           <option selected='true' disabled='disabled'>Select</option>
           <option value='dog'>Dog</option>
           <option value='cat'>Cat</option>
@@ -135,14 +135,14 @@
       </div>
       <div class='field other box column'>
         <label for='type'>Other</label>
-        <input class="ctrl field-font" type="text" name="other" placeholder="Hamster" />
+        <input class="ctrl" type="text" name="other"/>
       </div>
     </div>
-    
+
     <div class="row">
       <div class='field column'>
         <label for='gender'>Gender</label>
-        <select class="ctrl field-font" name='gender' required>
+        <select class="ctrl" name='gender' required>
           <option selected='true' disabled='disabled'>Select</option>
           <option value='male'>Male</option>
           <option value='female'>Female</option>
@@ -152,30 +152,35 @@
       <div class='field column'>
         <label for='dob'>Approximate DOB</label>
         <div>
-          <input class="ctrl2 field-font" type="date" name="dob" id="dob" onclick="ageCalculator()" required />
+          <input class="ctrl2" type="date" name="dob" id="dob" onclick="ageCalculator()" required />
           <p id="result"></p>
         </div>
       </div>
     </div>
 
     <div class='field'>
-      <label for='color'>Color</label>
-      <input class="ctrl field-font" type="text" name="color" placeholder="Use commas to seperate colors" required />
+      <div>
+        <label for='color'>Color</label>
+        <input class="ctrl" type="text" name="color" required />
+      </div>
+      <div>
+        <span class="field-msg">Use commas to seperate colors</span>
+      </div>
     </div>
 
     <div class="field">
       <label>Description</label>
-      <textarea rows="6" class="ctrl field-font" name="description"></textarea>
+      <textarea rows="6" class="ctrl" name="description"></textarea>
       <span class="field-msg"> </span>
     </div>
 
     <div class="field ">
       <label>Upload Photo</label>
-      <div class="ctrl-group field-font">
+      <div class="ctrl-group">
         <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-        <input class="ctrl field-font" type="file" name="photo" multiple />
+        <input type="file" name="photo[]" class="ctrl" multiple accept="image/*" required>
       </div>
-      <span class="field-msg"> </span>
+      <span class="field-msg">Upload a photo of the animal</span>
     </div>
     <br>
 

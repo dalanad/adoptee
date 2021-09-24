@@ -51,7 +51,7 @@
             <tr>
                 <th>ADOPTEE</th>
                 <th>ADOPTEE TYPE</th>
-                <th>ADOPTER ID</th>
+                <th>ADOPTER</th>
                 <th>HAVE PETS</th>
                 <th>HAVE CHILDREN</th>
                 <th>STATUS</th>
@@ -70,14 +70,14 @@
                         </table>
                     </td>
                     <td><?= $adoption_request["type"] ?></td>
-                    <td><?= $adoption_request["user_id"] ?></td>
+                    <td><?= $adoption_request["name"] ?></td>
                     <td><span class="tag <?= $adoption_request["has_pets"] ? 'green' : 'pink' ?>"><?= $adoption_request["has_pets"] ? "YES" : "NO" ?> </span></td>
                     <td><span class="tag <?= $adoption_request["children"] ? 'green' : 'pink' ?>"><?= $adoption_request["children"] ? "YES" : "NO" ?> </span></td>
-                    <td><span class="tag <?= $adoption_request["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $adoption_request["status"] ?> </span></td>
+                    <td><span class="tag <?= $adoption_request["status"] == "PENDING" ? 'orange' :($adoption_request["status"] == "ADOPTED" ? 'green' : 'red')  ?>"> <?= $adoption_request["status"] ?> </span></td>
                     <td>
-                        <button title="Accept" class="btn btn-link btn-icon green"><i class="fas fa-check-circle"></i> </button>
+                        <a href="/OrgManagement/accept_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" title="Accept" class="btn btn-link btn-icon green"><i class="fas fa-check-circle"></i> </a>
                         &nbsp;
-                        <button title="Reject" class="btn btn-link btn-icon pink"><i class="fas fa-times-circle"></i></button>
+                        <a href="/OrgManagement/reject_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" title="Reject" class="btn btn-link btn-icon pink"><i class="fas fa-times-circle"></i></a>
                     </td>
                     <td>
                         <button  onclick="showModel('popupModal<?= $adoption_request["animal_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>

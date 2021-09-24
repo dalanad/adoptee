@@ -4,7 +4,7 @@ class OrgManagement extends BaseModel
 {
     static function createNewAnimal($org_id, $type, $other, $gender, $dob, $color, $description, $photo)
     {
-        $query = " INSERT INTO `animal` (type, other, gender, dob, color) VALUES ('$type', '$other', '$gender', '$dob', '$color')";
+        $query = " INSERT INTO `animal` (type, other, gender, dob, color, photo) VALUES ('$type', '$other', '$gender', '$dob', '$color', '$photo')";
         echo($query);
         BaseModel::insert($query);
         $animal_ID = BaseModel::lastInsertId();
@@ -14,8 +14,9 @@ class OrgManagement extends BaseModel
         return BaseModel::insert($query);
     }
 
-    static function findAnimalsByOrgId($org_id)
+    static function findAnimalsByOrgId()
     {
+        $org_id=$_SESSION['org_id'];
         $query = "SELECT animal.animal_id, name,type,dob,gender,date_listed,status,date_adopted,description from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id";
         return BaseModel::select($query);
     }
@@ -34,32 +35,49 @@ class OrgManagement extends BaseModel
         UPDATE `animal_for_adoption` SET type = $type WHERE isset($type);
         UPDATE `animal_for_adoption` SET gender = '$gender' WHERE isset($gender);
         UPDATE `animal_for_adoption` SET dob = '$dob' WHERE isset($dob);
-        UPDATE `animal_for_adoption` SET color = '$color' WHERE isset($color);
+        UPDATE `animal` SET color = '$color' WHERE isset($color);
         UPDATE `animal_for_adoption` SET description = '$description' WHERE isset($description)";
-
-        return BaseModel::insert($query);
-    }
-
-    static function accept_adoption_request($animal_id)
-    {
-        $query = "UPDATE `animal_for_adoption` SET status = 'ADOPTED' WHERE animal_id='$animal_id'";
-
-        return BaseModel::insert($query);
-    }
-
-    static function reject_adoption_request($animal_id)
-    {
-        $query = "UPDATE `animal_for_adoption` SET status = 'PENDING' WHERE animal_id='$animal_id'";
 
         return BaseModel::insert($query);
     }
 
     static function findRequestsByOrgId($org_id)
     {
-        $query = "SELECT animal.name, animal.type, adoption_request.user_id,user.name,request_date,status,has_pets,petsafety,children,childsafety from adoption_request,user,animal where org_id= $org_id and adoption_request.user_id=user.user_id";
+        $query = "SELECT 
+        animal.name, 
+        animal.type, 
+        user.name,
+        request_date,
+        status,
+        has_pets,
+        petsafety,
+        children,
+        childsafety,
+        animal.animal_id
+
+        from adoption_request
+        INNER JOIN animal ON
+            animal.animal_id = adoption_request.animal_id
+        INNER JOIN user ON
+            user.user_id = adoption_request.user_id";
         return BaseModel::select($query);
     }
 
+    static function accept_adoption_request($animal_id)
+    {
+        $today = date("m-d-y"); 
+        $query = "UPDATE `adoption_request` SET status = 'ADOPTED' WHERE animal_id='$animal_id';
+        UPDATE `animal_for_adoption` SET adopted_date =$today WHERE animal_id='$animal_id';";
+
+        return BaseModel::insert($query);
+    }
+
+    static function reject_adoption_request($animal_id)
+    {
+        $query = "UPDATE `adoption_request` SET status = 'REJECTED' WHERE animal_id='$animal_id'";
+
+        return BaseModel::insert($query);
+    }
     
     static function findReportedCases(){
         $query = "SELECT type, description, contact_number,location, status, photo, time_reported,org_response from report_rescue";
