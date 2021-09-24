@@ -25,6 +25,13 @@ $administration_menu = array(
 ?>
 
 <style>
+    .admin-header {
+	padding: 1rem 1rem;
+	display: flex;
+	box-sizing: border-box;
+	align-items: center;
+}
+
     .settings-container {
         display: flex;
     }
@@ -146,12 +153,19 @@ $administration_menu = array(
 
             </div>
         </div>
-        <div style="flex: 1 1 0;">
-            <div style="display: flex;padding: 1rem;">
-                <div style="flex: 1 1 0;"></div>
-                <?= user_btn() ?>
+
+        <div class="content" style="width: 100%;">
+        <div class="admin-header">
+            <div style="font-weight: 500;font-size:1.3rem">
+                <i class="fal fa-<?= $management_menu[$active]["icon"] ?> txt-clr <?= $management_menu[$active]["color"] ?>" style="font-size: 1.2em;"></i>
+                &nbsp;
+                <?= $management_menu[$active]["name"] ?>
             </div>
-            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;">
+            <div style="flex: 1 1 0;"></div>
+            <?= user_btn() ?>
+        </div>
+        <div style="padding: 1rem;">
+            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem; height: 600px; width: 1250PX;">
 
                 <?php include __DIR__ . "/org_dashboard/" . $active . ".php" ?>
             </div>

@@ -10,11 +10,7 @@ $org_donations = array(
 ?>
 
 <div class="container">
-    <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
-        DONATIONS
-    </h3>
-
-    <div style="height:240px; overflow-x:hidden; overflow-y: auto;">
+    <div class="overflow-auto" style="height:550px">
         <table class="table">
             <tr>
                 <th>DONOR</th>
@@ -24,7 +20,7 @@ $org_donations = array(
             </tr>
 
             <?php foreach ($org_donations as $org_donation) { ?>
-                <tr style="font-size: 0.8rem;">
+                <tr>
                     <td>
                         <button class="btn btn-link btn-icon"><i class="fas fa-donate"></i></button> &nbsp
                         <?= $org_donation["donor"] ?>

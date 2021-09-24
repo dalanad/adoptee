@@ -131,17 +131,17 @@
 </script>
 <div style="position: relative;">
     <div class="cases_list">
-        <div style="height:240px; overflow-x:hidden; overflow-y: auto;">
+        <div style="height:550px; overflow-x:hidden; overflow-y: auto;">
             <table class="table" style="text-align: center;">
                 <tr>
-                    <th style="font-size: 0.8rem;">TYPE</th>
-                    <th style="font-size: 0.8rem;">LOCATION</th>
-                    <th style="font-size: 0.8rem;">INFO</th>
-                    <th style="font-size: 0.8rem;">RESCUE</th>
+                    <th>TYPE</th>
+                    <th>LOCATION</th>
+                    <th>INFO</th>
+                    <th>RESCUE</th>
                 </tr>
 
                 <?php foreach ($reported_cases as $reported_case) { ?>
-                    <tr style="font-size: 0.8rem;">
+                    <tr>
                         <td><?= $reported_case["type"] ?></td>
                         <td><button title="location" class="btn btn-link btn-icon"><i class="fas fa-map-marker-alt"></i></button></td>
                         <td>
@@ -197,7 +197,7 @@
 </table>
 </div>
 </div>
-<div class="rounded" style="height: 500px; width: 1248px" id="googleMap"></div>
+<div class="rounded" style="height: 600px; width: 1250px; border-radius: .5rem;" id="googleMap"></div>
 <div>
     <script src="https://maps.googleapis.com/maps/api/js?key=<?= config::get("maps.key") ?>&callback=myMap"></script>
 </div>

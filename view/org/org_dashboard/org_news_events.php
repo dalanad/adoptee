@@ -58,11 +58,11 @@
 
     .event {
         position: relative;
-        width: 450px;
-        height: 450px;
+        width: 500px;
+        height: 500px;
         top: 10px;
         left: 10px;
-        background: #fafafa;
+        background: white;
         box-shadow: var(--shadow);
         border-radius: 0.5rem;
         padding-left: 1rem;
@@ -71,33 +71,41 @@
         border-color: black;
     }
 
-    .center-image {
+    .event-content{
+        padding-left: .5rem; 
+        padding-right: .5rem;
+    }
+
+    .event-image {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
   box-shadow: var(--shadow);
   border-color: black;
   margin-bottom: 2rem;
+  object-fit: cover;
+  width: 380px; 
+  height: 200px; 
+  border-radius: 0.5 rem;
 }
 </style>
 
 
-<div class="container" style="top: 100px">
+<div>
     <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
         News & Events
+        <a href="/OrgManagement/add_new_event" class="btn right outline"> Add New Event </a>
     </h3>
-    <div class="overflow-auto" style="height:450px">
+    <div class="overflow-auto" style="height:550px">
         <table class="table">
-            <tr style="font-size: 0.8rem;">
+            <tr>
                 <td>
                     <div style="position: relative;">
                         <div class="event">
                             <h2 class="center">Pet Adoption Day</h2>
-                            <img class="center-image" src="../../../assets\images\org/adoption_day.jpg" style="width: 400px; height: 200px; border-radius: 0.5 rem;">
-                            <h3>Description</h3>
-                            <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>    
-                            <p style="color: #aaa6a1; bottom: 20px;">Published On : 10-09-2021</p>    
+                            <div class="event-content"><img class="event-image" src="/assets\images\org/adoption_day.jpg"></div>
+                            <div class="event-content"><p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>
+                            <p style="position: absolute; color: #aaa6a1; bottom: 10px;">Published On : 10-09-2021</p>    
                         </div>
                         </div>
                 </div>
@@ -106,11 +114,10 @@
                 <td>
                     <div style="position: relative;">
                         <div class="event">
-                            <h2 class="center">Pet Adoption Day</h2>
-                            <img class="center-image" src="../../../assets\images\org/adoption_day.jpg" style="width: 400px; height: 200px; border-radius: 0.5 rem;">
-                            <h3>Description</h3>
-                            <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>    
-                            <p style="color: #aaa6a1; bottom: 20px;">Published On : 10-09-2021</p>    
+                            <h2 class="center">Stray Feeding Campaign</h2>
+                            <div class="event-content"><img class="event-image" src="/assets\images\org/stray_feeding.jpg"></div>
+                            <div class="event-content"><p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>    
+                            <p class="flex" style="position: absolute; color: #aaa6a1; bottom: 10px;">Published On : 10-09-2021</p>    
                         </div>
                         </div>
                 </div>

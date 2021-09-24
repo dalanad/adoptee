@@ -72,7 +72,7 @@ $org_rescues = array(
 
     .rescue{
         border-radius: 6px;
-        background: #fafafa;
+        background: white;
         box-shadow: var(--shadow-light);
         display: grid;
         min-height: 3rem;
@@ -86,33 +86,26 @@ $org_rescues = array(
 
 
 <div class="container" style="top: 200px;">
-    <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
-        Rescues
-    </h3>
-    <div class="overflow-auto" style="height: calc(100vh - 200px)">
-        <table class="table">
-            <tr>
-                <th>TYPE</th>
-                <th>DATE RESCUED</th>
-                <th>CONTACT NUMBER</th>
-                <th>DESCRIPTION</th>
-                <th>LOCATION</th>
-                <th>PHOTOS</th>
-                <th>INFO</th>
-                <th></th>
-            </tr>
-
+    <div class="overflow-auto" style="height:550px">
+    <div class="rescue" style="display:flex;">
+                    <div style="width: 100px;">TYPE</div>
+                    <div style="width: 220px;">DATE RESCUED</div>
+                    <div style="width: 270px;">CONTACT NUMBER</div>
+                    <div style="width: 180px;">DESCRIPTION</div>
+                    <div style="width: 180px;">LOCATION</div>
+                    <div style="width: 100px;">INFO</div>
+    </div>
             <?php foreach ($org_rescues as $org_rescue) { ?>
-                <tr style="font-size: 0.8rem;">
-                    <div class="rescue">
-                    <td><?= $org_rescue["type"] ?></td>
-                    <td><?= $org_rescue["date_rescued"] ?></td>
-                    <td><?= $org_rescue["contact_number"] ?></td>
-                    <td><?= $org_rescue["description"] ?></td>
-                    <td><?= $org_rescue["location"] ?></td>
-                    <td><?= $org_rescue["photo"] ?></td>
-                    <td>
-                        <button onclick="showModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                    <div class="rescue" style="display:flex;">
+                    <div style="width: 100px;"><?= $org_rescue["type"] ?></div>
+                    <div style="width: 220px;"><?= $org_rescue["date_rescued"] ?></div>
+                    <div style="width: 270px;"><?= $org_rescue["contact_number"] ?></div>
+                    <div style="width: 180px;"><?= $org_rescue["description"] ?></div>
+                    <div style="width: 180px;"><?= $org_rescue["location"] ?></div>
+                    <div style="width: 100px;"><?= $org_rescue["photo"] ?></div>
+                    
+                    <div style="width: 60px;">
+                    <button onclick="showModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
                         <div id="popupModal<?= $org_rescue["org_rescue_id"] ?>" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="hideModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')">&times;</span>
@@ -121,15 +114,12 @@ $org_rescues = array(
                             </div>
 
                         </div>
-                    </td>
-                    <td><a href="/OrgManagement/add_rescue_update" title="Add Update" class="btn btn-link btn-icon"><i class="fas fa-plus-circle"></i></a></td>
+                    </div>
+                    <div style="width: 50px;"><a href="/OrgManagement/add_rescue_update" title="Add Update" class="btn btn-link btn-icon"><i class="fas fa-plus-circle"></i></a></div>
                 
 
                     </div>
-                    </tr>
             <?php } ?>
-
-        </table>
     </div>
 </div>
 
