@@ -61,7 +61,7 @@ class User extends BaseModel
 
     static function getAdoptions($user_id)
     {
-        $query = "SELECT animal.name, dob, organization.name, date_adopted
+        $query = "SELECT animal.name 'a_name', animal.animal_id 'a_id', DATEDIFF(CURRENT_DATE, animal.dob)/365 'age', organization.name 'name', date_adopted
         FROM `animal`, `animal_for_adoption`, `organization`, `user`
         WHERE animal.animal_id=animal_for_adoption.animal_id
         AND organization.org_id=animal_for_adoption.org_id

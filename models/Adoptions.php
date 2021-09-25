@@ -21,4 +21,11 @@ class Adoptions extends BaseModel
         ";
         return self::select($query);
     }
+
+    static function adopteeUpdate($userId, $animalId, $type, $desc, $photo)
+    {
+        $query = "INSERT INTO routine_updates(user_id, animal_id, type, description, photo, update_date) 
+        VALUES('$userId', '$animalId', '$type', '$desc', '$photo', CURRENT_DATE);";
+        self::insert($query);
+    }
 }

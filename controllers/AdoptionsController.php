@@ -12,4 +12,10 @@ class AdoptionsController extends Controller
         ];
         View::render("public/adoptions/adoption_listing", $data);
     }
+
+    function adopteeUpdate()
+    {
+        Adoptions::adopteeUpdate($_SESSION['user']['user_id'], $_POST['animalId'], $_POST['type'], $_POST['desc'], $_POST['photo']);
+        $this->redirect("/Profile/adoptions");
+    }
 }

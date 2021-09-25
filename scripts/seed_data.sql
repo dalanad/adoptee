@@ -56,25 +56,24 @@ INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) VALUES
 ('Cat', 'Maggie', 'Female', '2013-10-01', 'Grey','/assets/data/cats/9.jpg'),
 ('Cat', 'Nova',   'Female', '2013-10-01', 'Grey','/assets/data/cats/10.jpg');
 
-INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`) VALUES 
-('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'ADOPTED', '2021-09-03', '1'),
-('21', 'Playful and a joy to be around, weaned', '2021-08-26', 'LISTED', NULL, '3'),
-('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2'),
-('3', 'jade-green eyes not vaccinated','2021-09-01', 'LISTED', NULL, '1'),
-('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2'),
-('4', 'Playful and affectionate, vaccinated', '2021-08-26', 'LISTED', NULL, '1'),
-('5', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2'),
-('25', 'Healthy and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2'),
-('6', 'Loves cuddles and needs attention, vaccinated', '2021-08-26', 'LISTED', NULL, '3'),
-('23', 'Independent and friendly, vaccinated', '2021-08-26', 'LISTED', NULL, '3'),
-('15', 'Has tiny, hedgehog paws, not vaccinated', '2021-09-02', 'LISTED', NULL, '1');
-
-
 INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_verified`, `telephone_verified`) VALUES
 ('Dr. Weerasinghe', 'doctor@example.com', '0761236547', 'doctor address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
 ('Ms. Org User', 'orguser@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
 ('Mr. Reg. User', 'user@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
 ('Mr. Reg. User2', 'user2@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 0, 0);
+
+INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`) VALUES 
+('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'ADOPTED', '2021-09-03', '1', 3),
+('21', 'Playful and a joy to be around, weaned', '2021-08-26', 'LISTED', NULL, '3', NULL),
+('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2', NULL),
+('3', 'jade-green eyes not vaccinated','2021-09-01', 'LISTED', NULL, '1',NULL),
+('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL),
+('4', 'Playful and affectionate, vaccinated', '2021-08-26', 'LISTED', NULL, '1',NULL),
+('5', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL),
+('25', 'Healthy and a joy to be around, vaccinated', '2021-08-26', 'ADOPTED', '2021-01-14', '2', 3),
+('6', 'Loves cuddles and needs attention, vaccinated', '2021-08-26', 'LISTED', NULL, '3', NULL),
+('23', 'Independent and friendly, vaccinated', '2021-08-26', 'LISTED', NULL, '3',NULL),
+('15', 'Has tiny, hedgehog paws, not vaccinated', '2021-09-02', 'LISTED', NULL, '1',NULL);
 
 INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(5,3),(6,3),(7,3),(8,4),(9,4); 
 
