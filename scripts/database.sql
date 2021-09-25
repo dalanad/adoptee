@@ -47,7 +47,9 @@ create table org_user (
 create table routine_updates (
     animal_id int(10),
     user_id int(10),
+    type enum('HEALTH', 'FOOD', 'OTHER'),
     description varchar(100) ,
+    photo varchar(100),
     update_date date
 );
 
@@ -56,7 +58,7 @@ create table animal (
     type varchar(10),
     other varchar(10), 
     name varchar(50),
-    gender varchar(10),
+    gender enum('MALE', 'FEMALE', 'UNKNOWN') default 'UNKNOWN',
     dob date,
     color varchar(50),
     photo varchar(100),

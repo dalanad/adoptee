@@ -25,6 +25,20 @@
         top: 40%;
         left: 35%;
     }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>
 
 <h3 style="margin-left:1rem;">My Pets</h3>
