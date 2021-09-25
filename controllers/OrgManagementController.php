@@ -2,6 +2,11 @@
 
 class OrgManagementController extends Controller{
 
+    public function __construct() 
+    {
+        $this->isLoggedIn(["org_normal","org_admin"]);
+    }
+
     function org_adoption_listing()
     {
         $data = [
@@ -101,5 +106,3 @@ class OrgManagementController extends Controller{
     }
 
 }
-
-?>
