@@ -43,10 +43,10 @@
     }
 </style>
 
-<div class="container">
+<div>
 
 
-    <div class="overflow-auto" style="height:550px">
+    <div class="overflow-auto" style="height:550px; padding-top: 2rem;">
         <table class="table">
             <tr>
                 <th>ADOPTEE</th>

@@ -6,7 +6,14 @@ $org_rescues = array(
     array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
     array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
     array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
     array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC")
+
 );
 
 ?>
@@ -70,84 +77,35 @@ $org_rescues = array(
         cursor: pointer;
     }
 
-    .rescue{
-        border-radius: 6px;
-        background: white;
-        box-shadow: var(--shadow-light);
-        display: grid;
-        min-height: 3rem;
-        padding-top: 1em;
-        padding-left: 1em;
-        margin-bottom: 1em;
-    }
-
-    .rescue-card {
-         text-align: center;
-         padding: 1rem;
-         border: 3px solid var(--gray-3);
-         border-radius: 8px;
-         cursor: pointer;
-         position: relative;
+    .card-size {
         width: 95%;
         height: 20px;
-        top: 10px;
-        left: 10px;
-        border-radius: 0.5rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        padding-top: 1rem;
-     }
-
-     .rescue-card:hover {
-         transition: border-color .2s ease-in-out;
-         border-color: var(--primary);
-     }
-
-     .rescue-card .btn {
-         opacity: .2;
-         transition: opacity .2s ease-in-out;
-     }
-
-     .rescue-card:hover .btn {
-         opacity: 1;
-     }
-
-     .rescue-card .icon {
-         font-size: 2em;
-     }
-
-     .rescue-card .title {
-         font-size: 1.2rem;
-         font-weight: 500;
-         line-height: 1em;
-     }
-     
+     }  
 </style>
 
 
 
 
-<div class="container" style="top: 200px;">
+<div style="top: 200px; padding-top: 0.5rem;">
     <div class="overflow-auto" style="height:550px">
-    <div class="rescue-card" style="display:flex; font-size: 0.8rem; font-weight: 500; border: none;">
-                    <div style="width: 100px;">TYPE</div>
-                    <div style="width: 220px;">DATE RESCUED</div>
-                    <div style="width: 270px;">CONTACT NUMBER</div>
-                    <div style="width: 180px;">DESCRIPTION</div>
-                    <div style="width: 180px;">LOCATION</div>
-                    <div style="width: 100px;">INFO</div>
+    <div class="mouse-over-card card-size" style="display:flex; font-size: 0.8rem; font-weight: 500; border: none;">
+                    <div style="width: 150px;">TYPE</div>
+                    <div style="width: 180px;">DATE RESCUED</div>
+                    <div style="width: 180px;">CONTACT NUMBER</div>
+                    <div style="width: 250px;">DESCRIPTION</div>
+                    <div style="width: 200px;">LOCATION</div>
+                    <div style="width: 150px;">INFO</div>
+                    <div style="width: 100px;"></div>
     </div>
-    <br>
             <?php foreach ($org_rescues as $org_rescue) { ?>
-                    <div class="rescue-card" style="display:flex;">
-                    <div style="width: 100px;"><?= $org_rescue["type"] ?></div>
-                    <div style="width: 220px;"><?= $org_rescue["date_rescued"] ?></div>
-                    <div style="width: 270px;"><?= $org_rescue["contact_number"] ?></div>
-                    <div style="width: 180px;"><?= $org_rescue["description"] ?></div>
-                    <div style="width: 180px;"><?= $org_rescue["location"] ?></div>
-                    <div style="width: 100px;"><?= $org_rescue["photo"] ?></div>
+                    <div class="mouse-over-card card-size" style="display:flex;">
+                    <div style="width: 150px;"><?= $org_rescue["type"] ?></div>
+                    <div style="width: 180px;"><?= $org_rescue["date_rescued"] ?></div>
+                    <div style="width: 180px;"><?= $org_rescue["contact_number"] ?></div>
+                    <div style="width: 250px;"><?= $org_rescue["description"] ?></div>
+                    <div style="width: 200px;"><?= $org_rescue["location"] ?></div>
                     
-                    <div style="width: 60px;">
+                    <div style="width: 150px;">
                     <button onclick="showModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
                         <div id="popupModal<?= $org_rescue["org_rescue_id"] ?>" class="modal">
                             <div class="modal-content">
@@ -158,7 +116,7 @@ $org_rescues = array(
 
                         </div>
                     </div>
-                    <div style="width: 50px;"><a href="/OrgManagement/add_rescue_update" title="Add Update" class="btn btn-link btn-icon"><i class="fas fa-plus-circle"></i></a></div>
+                    <div style="width: 100px;"><a href="/OrgManagement/add_rescue_update" title="Add Update" class="btn btn-link btn-icon"><i class="fas fa-plus-circle"></i></a></div>
                 
 
                     </div>

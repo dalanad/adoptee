@@ -22,7 +22,6 @@
 
 
 <div class='container px2'>
-    <div class='placeholder-box mr1' style='height:50px; width:100px;'>Logo</div>
     <div>
         <a href="/OrgManagement/org_news_events" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
     </div>
