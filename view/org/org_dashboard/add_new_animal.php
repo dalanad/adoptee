@@ -64,55 +64,12 @@
   }
 </style>
 
-<script>
-  $(document).ready(function() {
-    $("select").change(function() {
-      $(this).find("option:selected").each(function() {
-        var optionValue = $(this).attr("value");
-        if (optionValue) {
-          $(".box").not("." + optionValue).hide();
-          $("." + optionValue).show();
-        } else {
-          $(".box").hide();
-        }
-      });
-    }).change();
-  });
-
-  function ageCalculator() {
-    var userinput = document.getElementById("dob").value;
-    var dob = new Date(userinput);
-    if (userinput == null || userinput == '') {
-      document.getElementById("message").innerHTML = "Please select a date";
-      return false;
-    } else {
-
-      //calculate month difference from current date in time  
-      var month_diff = Date.now() - dob.getTime();
-
-      //convert the calculated difference in date format  
-      var age_dt = new Date(month_diff);
-
-      //extract year from date      
-      var year = age_dt.getUTCFullYear();
-
-      //now calculate the age of the user  
-      var age = Math.abs(year - 1970);
-
-      //display the calculated age  
-      return document.getElementById("result").innerHTML =
-        "Age: " + age + " years. ";
-    }
-  }
-</script>
-
 <div class='container px2'>
-  <div class='placeholder-box mr1' style='height:50px; width:100px;'>Logo</div>
   <div>
     <a href="/OrgManagement/org_adoption_listing" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
   </div>
   <h3 class='mt1 txt-clr'>Add New Animal for Adoption</h3>
-  <form action="/OrgManagement/process_add_new_animal" method="post">
+  <form action="/OrgManagement/process_add_new_animal" method="post" enctype="multipart/form-data">
 
     <div class="row">
       <div class='field column'>
@@ -158,7 +115,8 @@
       </div>
     </div>
 
-    <div class='field'>
+    <div class="row">
+    <div class='field column'>
       <div>
         <label for='color'>Color</label>
         <input class="ctrl" type="text" name="color" required />
@@ -168,24 +126,78 @@
       </div>
     </div>
 
-    <div class="field">
+    <div class="field column">
       <label>Description</label>
       <textarea rows="6" class="ctrl" name="description"></textarea>
       <span class="field-msg"> </span>
     </div>
+    </div>
 
-    <div class="field ">
-      <label>Upload Photo</label>
+    <div class="row">
+    <div class="field column">
+      <label>Upload Photo for Avatar</label>
       <div class="ctrl-group">
-        <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-        <input type="file" name="photo[]" class="ctrl" multiple accept="image/*" required>
+        <span class="ctrl static"><i class="fa fa-image"></i></span>
+        <input type="file" name="avatar_photo" class="ctrl" accept="image/*" required>
       </div>
-      <span class="field-msg">Upload a photo of the animal</span>
+      <span class="field-msg">Upload photo for profile image</span>
+    </div>
+   
+    <div class="field column">
+      <label>Upload Other Photos</label>
+      <div class="ctrl-group">
+        <span class="ctrl static"><i class="fa fa-images"></i></span>
+        <input type="file" name="adoptee_photo[]" class="ctrl" multiple accept="image/*" required>
+      </div>
+      <span class="field-msg">Upload a photos of the animal</span>
+    </div>
+
     </div>
     <br>
-
     <button class='btn mr2' type='reset'>Clear</button>
     <button class='btn mr2' type="submit">Add</button>
   </form>
 
 </div>
+
+<!-- <script>
+  $(document).ready(function() {
+    $("select").change(function() {
+      $(this).find("option:selected").each(function() {
+        var optionValue = $(this).attr("value");
+        if (optionValue) {
+          $(".box").not("." + optionValue).hide();
+          $("." + optionValue).show();
+        } else {
+          $(".box").hide();
+        }
+      });
+    }).change();
+  });
+
+  function ageCalculator() {
+    var userinput = document.getElementById("dob").value;
+    var dob = new Date(userinput);
+    if (userinput == null || userinput == '') {
+      document.getElementById("message").innerHTML = "Please select a date";
+      return false;
+    } else {
+
+      //calculate month difference from current date in time  
+      var month_diff = Date.now() - dob.getTime();
+
+      //convert the calculated difference in date format  
+      var age_dt = new Date(month_diff);
+
+      //extract year from date      
+      var year = age_dt.getUTCFullYear();
+
+      //now calculate the age of the user  
+      var age = Math.abs(year - 1970);
+
+      //display the calculated age  
+      return document.getElementById("result").innerHTML =
+        "Age: " + age + " years. ";
+    }
+  }
+</script> -->

@@ -2,15 +2,15 @@
 
 class OrgManagement extends BaseModel
 {
-    static function createNewAnimal($org_id, $name, $type, $other, $gender, $dob, $color, $description, $photo)
+    static function createNewAnimal($org_id, $name, $type, $other, $gender, $dob, $color, $description, $avatar_photo, $adoptee_photo)
     {
-        $query = " INSERT INTO `animal` (name, type, gender, dob, color, photo) VALUES ('$name', '$type', '$gender', '$dob', '$color', '$photo')";
+        $query = " INSERT INTO `animal` (name, type, gender, dob, color, photo) VALUES ('$name', '$type', '$gender', '$dob', '$color', '$avatar_photo')";
         echo($query);
         BaseModel::insert($query);
         $animal_ID = BaseModel::lastInsertId();
 
-        $query = "INSERT INTO `animal_for_adoption` (animal_id, org_id, description)
-                  VALUES ('$animal_ID', '$org_id', '$description')";
+        $query = "INSERT INTO `animal_for_adoption` (animal_id, org_id, description, photos)
+                  VALUES ('$animal_ID', '$org_id', '$description', '$adoptee_photo')";
         return BaseModel::insert($query);
 
         if ($type == 'other') {
@@ -64,16 +64,15 @@ class OrgManagement extends BaseModel
         INNER JOIN animal ON
             animal.animal_id = adoption_request.animal_id
         INNER JOIN user ON
-            user.user_id = adoption_request.user_id";
+            user.user_id = adoption_request.user_id
+        WHERE org_id = '$_SESSION[org_id]'";
         return BaseModel::select($query);
     }
 
     static function accept_adoption_request($animal_id)
     {
-        $today = 'date("m-d-Y")'; 
-        $query = "UPDATE `adoption_request` SET status = 'ADOPTED' WHERE animal_id='$animal_id';
-        UPDATE `animal_for_adoption` SET status ='ADOPTED' WHERE animal_id='$animal_id';
-        UPDATE `animal_for_adoption` SET date_adopted ='$today' WHERE animal_id='$animal_id'";
+        $query = "UPDATE `adoption_request` SET status = 'ADOPTED', status ='ADOPTED' WHERE animal_id='$animal_id';
+        UPDATE `animal_for_adoption` SET date_adopted = curdate() WHERE animal_id='$animal_id'";
 
         return BaseModel::insert($query);
     }

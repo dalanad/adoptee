@@ -544,7 +544,7 @@ header .logo img {
 /* SCROLLBAR START*/
 
 ::-webkit-scrollbar {
-	width: 10px;
+	width: 2px;
 }
 
 ::-webkit-scrollbar-track {
@@ -683,3 +683,45 @@ header .logo img {
 	margin: 0 -1.5rem;
 }
 /* END ALERT */
+
+/* START MOUSE OVER DIV */
+
+.mouse-over-card {
+	text-align: center;
+	padding: 1rem;
+	border: 3px solid var(--gray-3);
+	cursor: pointer;
+	position: relative;
+	top: 10px;
+	left: 10px;
+	border-radius: 0.5rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	padding-top: 1rem;
+ }
+
+ .mouse-over-card:hover {
+	 transition: border-color .2s ease-in-out;
+	 border-color: var(--primary);
+ }
+
+ .mouse-over-card .btn {
+	 opacity: .2;
+	 transition: opacity .2s ease-in-out;
+ }
+
+ .mouse-over-card:hover .btn {
+	 opacity: 1;
+ }
+
+ .mouse-over-card .icon {
+	 font-size: 2em;
+ }
+
+ .mouse-over-card .title {
+	 font-size: 1.2rem;
+	 font-weight: 500;
+	 line-height: 1em;
+ }
+
+/* END MOUSE OVER DIV */
