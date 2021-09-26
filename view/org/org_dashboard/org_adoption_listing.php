@@ -88,7 +88,7 @@
         ADOPTEE
         <a href="/OrgManagement/add_new_animal" class="btn right outline"> Add New Animal </a>
     </h3>
-    <div class=" overflow-auto" style="height:550px">
+    <div class="overflow-auto" style="height:550px">
             <table class="table">
                 <tr>
                     <th>PET</th>
@@ -107,7 +107,7 @@
                         <td>
                             <table>
                                 <tr>
-                                    <td><img src="<?= $animal["photo"] ?>" style="width: 30px; height: 30px; border-radius: 50%;"></td>
+                                    <td><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 30px; height: 30px; border-radius: 50%;"></td>
                                     <td><?= $animal["name"] ?></td>
                                 </tr>
                             </table>
@@ -132,12 +132,12 @@
 
                         <td>
                             <button onclick="showModel('popupModal-2<?= $animal["animal_id"] ?>')" title="Update Details" class="btn btn-link btn-icon"><i class="fas fa-pen"></i></button>
-                            <div id="popupModal-2<?= $animal["animal_id"] ?>" class="modal">
+                            <div id="popupModal-2<?= $animal["animal_id"] ?>" class="modal overflow-auto">
                                 <div class="update-form">
                                     <span class="close" onclick="hideModel('popupModal-2<?= $animal["animal_id"] ?>')">&times;</span>
                                     <h3 class='mt1 txt-clr'>Update Adoptee Details</h3>
 
-                                    <form action="/OrgManagement/process_edit_animal_for_adoption" method="post">
+                                    <form action="/OrgManagement/edit_animal_for_adoption" method="post">
                                     
                                     <div class="row">
                                         <div class='field column'>
