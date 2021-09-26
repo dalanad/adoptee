@@ -2,9 +2,9 @@
 
 class OrgManagement extends BaseModel
 {
-    static function createNewAnimal($org_id, $type, $other, $gender, $dob, $color, $description, $photo)
+    static function createNewAnimal($org_id, $name, $type, $other, $gender, $dob, $color, $description, $photo)
     {
-        $query = " INSERT INTO `animal` (type, other, gender, dob, color, photo) VALUES ('$type', '$other', '$gender', '$dob', '$color', '$photo')";
+        $query = " INSERT INTO `animal` (name, type, gender, dob, color, photo) VALUES ('$name', '$type', '$gender', '$dob', '$color', '$photo')";
         echo($query);
         BaseModel::insert($query);
         $animal_ID = BaseModel::lastInsertId();
@@ -12,6 +12,11 @@ class OrgManagement extends BaseModel
         $query = "INSERT INTO `animal_for_adoption` (animal_id, org_id, description)
                   VALUES ('$animal_ID', '$org_id', '$description')";
         return BaseModel::insert($query);
+
+        if ($type == 'other') {
+            $type = $other;
+        }
+        return $type;
     }
 
     static function findAnimalsByOrgId()
@@ -31,10 +36,10 @@ class OrgManagement extends BaseModel
         BaseModel::insert($query);
 
         $query = "UPDATE `animal_for_adoption` SET status = '$status' WHERE isset($status);
-        UPDATE `animal_for_adoption` SET name = '$name' WHERE isset($name);
-        UPDATE `animal_for_adoption` SET type = $type WHERE isset($type);
-        UPDATE `animal_for_adoption` SET gender = '$gender' WHERE isset($gender);
-        UPDATE `animal_for_adoption` SET dob = '$dob' WHERE isset($dob);
+        UPDATE `animal` SET name = '$name' WHERE isset($name);
+        UPDATE `animal` SET type = $type WHERE isset($type);
+        UPDATE `animal` SET gender = '$gender' WHERE isset($gender);
+        UPDATE `animal` SET dob = '$dob' WHERE isset($dob);
         UPDATE `animal` SET color = '$color' WHERE isset($color);
         UPDATE `animal_for_adoption` SET description = '$description' WHERE isset($description)";
 
@@ -44,7 +49,7 @@ class OrgManagement extends BaseModel
     static function findRequestsByOrgId($org_id)
     {
         $query = "SELECT 
-        animal.name, 
+        animal.name as animal_name, 
         animal.type, 
         user.name,
         request_date,
@@ -65,9 +70,10 @@ class OrgManagement extends BaseModel
 
     static function accept_adoption_request($animal_id)
     {
-        $today = date("m-d-y"); 
+        $today = 'date("m-d-Y")'; 
         $query = "UPDATE `adoption_request` SET status = 'ADOPTED' WHERE animal_id='$animal_id';
-        UPDATE `animal_for_adoption` SET adopted_date =$today WHERE animal_id='$animal_id';";
+        UPDATE `animal_for_adoption` SET status ='ADOPTED' WHERE animal_id='$animal_id';
+        UPDATE `animal_for_adoption` SET date_adopted ='$today' WHERE animal_id='$animal_id'";
 
         return BaseModel::insert($query);
     }

@@ -129,7 +129,7 @@ $org_rescues = array(
 
 <div class="container" style="top: 200px;">
     <div class="overflow-auto" style="height:550px">
-    <div class="rescue" style="display:flex;">
+    <div class="rescue-card" style="display:flex; font-size: 0.8rem; font-weight: 500; border: none;">
                     <div style="width: 100px;">TYPE</div>
                     <div style="width: 220px;">DATE RESCUED</div>
                     <div style="width: 270px;">CONTACT NUMBER</div>
@@ -137,6 +137,7 @@ $org_rescues = array(
                     <div style="width: 180px;">LOCATION</div>
                     <div style="width: 100px;">INFO</div>
     </div>
+    <br>
             <?php foreach ($org_rescues as $org_rescue) { ?>
                     <div class="rescue-card" style="display:flex;">
                     <div style="width: 100px;"><?= $org_rescue["type"] ?></div>

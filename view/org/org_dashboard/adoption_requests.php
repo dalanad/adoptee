@@ -65,7 +65,7 @@
                         <table>
                             <tr>
                                 <td><img src="/assets\images\dogs/placeholder2.jpg" style="width: 30px; height: 30px; border-radius: 50%;"></td>
-                                <td><?= $adoption_request["name"] ?></td>
+                                <td><?= $adoption_request["animal_name"] ?></td>
                             </tr>
                         </table>
                     </td>

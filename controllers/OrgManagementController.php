@@ -24,7 +24,7 @@ class OrgManagementController extends Controller{
 
     function process_add_new_animal(){
         $photo =  image::multi("photo");
-        OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $photo);
+        OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['name'], $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $photo);
         
 
     }  

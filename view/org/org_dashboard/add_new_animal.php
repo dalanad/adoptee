@@ -152,7 +152,7 @@
       <div class='field column'>
         <label for='dob'>Approximate DOB</label>
         <div>
-          <input class="ctrl2" type="date" name="dob" id="dob" onclick="ageCalculator()" required />
+          <input class="ctrl2" type="date" max="<?= getdate()['date']?>-<?= getdate()['month']?>-<?= getdate()['year']?>" name="dob" id="dob" onclick="ageCalculator()" required />
           <p id="result"></p>
         </div>
       </div>
