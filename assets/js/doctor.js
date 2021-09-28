@@ -428,30 +428,5 @@ function showOverlay(html) {
 	});
 }
 
-function uploadFile() {
-	let input = document.createElement("input");
-	input.setAttribute("type", "file");
-	// input.setAttribute("multiple", true);
-	input.setAttribute("accept", "image/*");
-	input.click();
 
-	let res = new Promise((resolve, reject) => {
-		input.addEventListener("change", () => {
-			let formData = new FormData();
-			for (const file of input.files) {
-				formData.append(file.name, file);
-			}
-			fetch("/doctor/upload", { method: "POST", body: formData })
-				.then((r) => r.json())
-				.then((e) => {
-					console.log(e);
-					input.remove();
-					resolve(e);
-				})
-				.catch(reject);
-		});
-	});
-
-	return res;
-}
 

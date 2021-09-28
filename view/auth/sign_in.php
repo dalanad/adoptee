@@ -43,11 +43,11 @@
                 <div class="title-text">Sign In</div>
                 <div class="field">
                     <label>Email Address</label>
-                    <input class="ctrl" type="email" name="email" required />
+                    <input class="ctrl" type="email" name="email" autocomplete="email" required />
                 </div>
                 <div class="field">
                     <label>Password</label>
-                    <input class="ctrl" type="password" name="password" required />
+                    <input class="ctrl" type="password" autocomplete="current-password" name="password" required />
                 </div>
                 <a href="/auth/request_link" class="field-msg"> Forgot Password ? </a>
                 <?php if (isset($_GET["error"])) { ?>

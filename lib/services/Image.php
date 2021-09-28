@@ -13,7 +13,7 @@ class Image
     {
         $this->file_name = $file_name;
 
-        $this->file_path = $this->target_dir . time() . "_" . rand(1, 100) . "." .  pathinfo($_FILES[$file_name]["name"], PATHINFO_EXTENSION);
+        $this->file_path = self::$target_dir . time() . "_" . rand(1, 100) . "." .  pathinfo($_FILES[$file_name]["name"], PATHINFO_EXTENSION);
 
         $file_ext = strtolower(pathinfo($this->file_path, PATHINFO_EXTENSION));
 

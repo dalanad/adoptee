@@ -64,7 +64,103 @@
   }
 </style>
 
-<script>
+<div class='container px2'>
+  <div>
+    <a href="/OrgManagement/org_adoption_listing" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
+  </div>
+  <h3 class='mt1 txt-clr'>Add New Animal for Adoption</h3>
+  <form action="/OrgManagement/process_add_new_animal" method="post" enctype="multipart/form-data">
+
+    <div class="row">
+      <div class='field column'>
+        <label for='name'>Name</label>
+        <input class="ctrl" type="text" name="name" required />
+      </div>
+
+      <div class='field column'>
+        <label for='type'>Type</label>
+        <select class="ctrl" name='type' required>
+          <option selected='true' disabled='disabled'>Select</option>
+          <option value='dog'>Dog</option>
+          <option value='cat'>Cat</option>
+          <option value='other'>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class='column'>
+      </div>
+      <div class='field other box column'>
+        <label for='type'>Other</label>
+        <input class="ctrl" type="text" name="other"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class='field column'>
+        <label for='gender'>Gender</label>
+        <select class="ctrl" name='gender' required>
+          <option selected='true' disabled='disabled'>Select</option>
+          <option value='male'>Male</option>
+          <option value='female'>Female</option>
+        </select>
+      </div>
+
+      <div class='field column'>
+        <label for='dob'>Approximate DOB</label>
+        <div>
+          <input class="ctrl2" type="date" max="<?= getdate()['date']?>-<?= getdate()['month']?>-<?= getdate()['year']?>" name="dob" id="dob" onclick="ageCalculator()" required />
+          <p id="result"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+    <div class='field column'>
+      <div>
+        <label for='color'>Color</label>
+        <input class="ctrl" type="text" name="color" required />
+      </div>
+      <div>
+        <span class="field-msg">Use commas to seperate colors</span>
+      </div>
+    </div>
+
+    <div class="field column">
+      <label>Description</label>
+      <textarea rows="6" class="ctrl" name="description"></textarea>
+      <span class="field-msg"> </span>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="field column">
+      <label>Upload Photo for Avatar</label>
+      <div class="ctrl-group">
+        <span class="ctrl static"><i class="fa fa-image"></i></span>
+        <input type="file" name="avatar_photo" class="ctrl" accept="image/*" required>
+      </div>
+      <span class="field-msg">Upload photo for profile image</span>
+    </div>
+   
+    <div class="field column">
+      <label>Upload Other Photos</label>
+      <div class="ctrl-group">
+        <span class="ctrl static"><i class="fa fa-images"></i></span>
+        <input type="file" name="adoptee_photo[]" class="ctrl" multiple accept="image/*" required>
+      </div>
+      <span class="field-msg">Upload a photos of the animal</span>
+    </div>
+
+    </div>
+    <br>
+    <button class='btn mr2' type='reset'>Clear</button>
+    <button class='btn mr2' type="submit">Add</button>
+  </form>
+
+</div>
+
+<!-- <script>
   $(document).ready(function() {
     $("select").change(function() {
       $(this).find("option:selected").each(function() {
@@ -104,83 +200,4 @@
         "Age: " + age + " years. ";
     }
   }
-</script>
-
-<div class='container px2'>
-  <div class='placeholder-box mr1' style='height:50px; width:100px;'>Logo</div>
-  <div>
-    <a href="/OrgManagement/org_adoption_listing" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
-  </div>
-  <h3 class='mt1 txt-clr'>Add New Animal for Adoption</h3>
-  <form action="/OrgManagement/process_add_new_animal" method="post">
-
-    <div class="row">
-      <div class='field column'>
-        <label for='name'>Name</label>
-        <input class="ctrl field-font" type="text" name="name" placeholder="Name" required />
-      </div>
-
-      <div class='field column'>
-        <label for='type'>Type</label>
-        <select class="ctrl field-font" name='type' required>
-          <option selected='true' disabled='disabled'>Select</option>
-          <option value='dog'>Dog</option>
-          <option value='cat'>Cat</option>
-          <option value='other'>Other</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class='column'>
-      </div>
-      <div class='field other box column'>
-        <label for='type'>Other</label>
-        <input class="ctrl field-font" type="text" name="other" placeholder="Hamster" />
-      </div>
-    </div>
-    
-    <div class="row">
-      <div class='field column'>
-        <label for='gender'>Gender</label>
-        <select class="ctrl field-font" name='gender' required>
-          <option selected='true' disabled='disabled'>Select</option>
-          <option value='male'>Male</option>
-          <option value='female'>Female</option>
-        </select>
-      </div>
-
-      <div class='field column'>
-        <label for='dob'>Approximate DOB</label>
-        <div>
-          <input class="ctrl2 field-font" type="date" name="dob" id="dob" onclick="ageCalculator()" required />
-          <p id="result"></p>
-        </div>
-      </div>
-    </div>
-
-    <div class='field'>
-      <label for='color'>Color</label>
-      <input class="ctrl field-font" type="text" name="color" placeholder="Use commas to seperate colors" required />
-    </div>
-
-    <div class="field">
-      <label>Description</label>
-      <textarea rows="6" class="ctrl field-font" name="description"></textarea>
-      <span class="field-msg"> </span>
-    </div>
-
-    <div class="field ">
-      <label>Upload Photo</label>
-      <div class="ctrl-group field-font">
-        <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-        <input class="ctrl field-font" type="file" name="photo" multiple />
-      </div>
-      <span class="field-msg"> </span>
-    </div>
-    <br>
-
-    <button class='btn mr2' type='reset'>Clear</button>
-    <button class='btn mr2' type="submit">Add</button>
-  </form>
-
-</div>
+</script> -->

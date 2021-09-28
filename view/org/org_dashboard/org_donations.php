@@ -9,7 +9,7 @@ $org_donations = array(
 
 ?>
 
-<div class="container">
+<div>
     <div class="overflow-auto" style="height:550px">
         <table class="table">
             <tr>
