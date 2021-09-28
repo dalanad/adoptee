@@ -1,6 +1,11 @@
 <?php require __DIR__ . "/../../_layout/header.php"; ?>
 
 <style>
+    .logo{
+        height:6.1rem;
+        width:6.1rem;
+        border-radius: 8px;
+    }
     .profile-links {
         display: flex;
     }
@@ -29,27 +34,33 @@
 </style>
 <div class="container" style="max-width: 900px;">
     <div style="display:flex;margin: 1em;align-items:center">
-        <div class="placeholder-box mr1" style=" height: 100px; width:100px; "><?php foreach($details as $key=>$value){print_r($value['logo']);} ?></div>
+        <div class="placeholder-box mr1" style=" height: 100px; width:100px; ">
+            <?php foreach ($details as $key => $value) { ?> <img class="logo" src= "<?= $value['logo'] ?>"> <?php } ?>
+        </div>
         <div class="flex-auto">
-            <div style = "font-weight:500;font-size:1.5rem;"><?php foreach($details as $key=>$value){print_r($value['name']);} ?></div>
-            <div style = "font-size:medium;"><?php foreach($details as $key=>$value){print_r($value['tagline']);} ?></div>
+            <div style="font-weight:500;font-size:1.5rem;"><?php foreach ($details as $key => $value) {
+                                                                print_r($value['name']);
+                                                            } ?></div>
+            <div style="font-size:medium;"><?php foreach ($details as $key => $value) {
+                                                print_r($value['tagline']);
+                                            } ?></div>
         </div>
         <div>
-            <a class='btn green' href='/Organization/view_donation_page?org_id=<?=$_GET['org_id']?>' style='margin-left :20px;'>Donate</a>
+            <a class='btn green' href='/Organization/view_donation_page?org_id=<?= $_GET['org_id'] ?>' style='margin-left :20px;'>Donate</a>
         </div>
         <div>
-            <a class='btn green' href='/Organization/view_review_page?org_id=<?=$_GET['org_id']?>'' style='margin-left :20px;'>Review</a>
+            <a class='btn green' href='/Organization/view_review_page?org_id=<?= $_GET['org_id'] ?>' style='margin-left :20px;'>Review</a>
         </div>
     </div>
     <div class="m2 profile-links">
-        <a class="prof-sec-link <?= $active == "timeline" ? 'active' : '' ?>" href="/organization/get_org_timeline&org_id=<?=$_GET['org_id']?>">Timeline</a>
-        <a class="prof-sec-link <?= $active == "adoption" ? 'active' : '' ?>" href="/organization/get_org_adoption&org_id=<?=$_GET['org_id']?>">For Adoption</a>
-        <a class="prof-sec-link <?= $active == "merchandise" ? 'active' : '' ?>" href="/organization/get_org_merchandise&org_id=<?=$_GET['org_id']?>">Merchandise</a>
-        <a class="prof-sec-link <?= $active == "sponsorships" ? 'active' : '' ?>" href="/organization/get_org_sponsorships&org_id=<?=$_GET['org_id']?>">Sponsorships</a>
-        <a class="prof-sec-link <?= $active == "about" ? 'active' : '' ?>" href="/organization/get_org_about&org_id=<?=$_GET['org_id']?>">About</a>
+        <a class="prof-sec-link <?= $active == "timeline" ? 'active' : '' ?>" href="/organization/get_org_timeline&org_id=<?= $_GET['org_id'] ?>">Timeline</a>
+        <a class="prof-sec-link <?= $active == "adoption" ? 'active' : '' ?>" href="/organization/get_org_adoption&org_id=<?= $_GET['org_id'] ?>">For Adoption</a>
+        <a class="prof-sec-link <?= $active == "merchandise" ? 'active' : '' ?>" href="/organization/get_org_merchandise&org_id=<?= $_GET['org_id'] ?>">Merchandise</a>
+        <a class="prof-sec-link <?= $active == "sponsorships" ? 'active' : '' ?>" href="/organization/get_org_sponsorships&org_id=<?= $_GET['org_id'] ?>">Sponsorships</a>
+        <a class="prof-sec-link <?= $active == "about" ? 'active' : '' ?>" href="/organization/get_org_about&org_id=<?= $_GET['org_id'] ?>">About</a>
     </div>
-    
+
     <div class="m2">
-        <?php include $active . ".php"?>
+        <?php include $active . ".php" ?>
     </div>
 </div>

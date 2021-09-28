@@ -1,6 +1,6 @@
 <style>
     .item{
-        width:40rem;
+        width:50rem;
         padding: 1rem;
         border-radius:8px;
         box-shadow:var(--shadow);
@@ -19,7 +19,7 @@
     img{
         max-width: 100%;
         max-height: 100%;
-        margin-right: 0.5rem;
+        margin-right: 1rem;
         border-radius: 5px;
     }
 
@@ -45,7 +45,7 @@
 <?php
 foreach ($content as $key => $value) { ?>
     <div class="item">
-        <div class="image-column"><img src=".././../../assets/images/org/adoption_day.jpg"></div>
+        <div class="image-column"><img src="<?= $value['photo']?>"></div>
         <div class="content-column">
             <div class="heading"><?= $value['heading']; ?></div>
             <div class="time"><?= explode(" ",$value['created_time'])[0]; ?></div>

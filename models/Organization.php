@@ -50,7 +50,7 @@ class Organization extends BaseModel
 
     static function getOrgMerchandise($orgId)
     {
-        $query = "SELECT * FROM `sponsorship` WHERE sponsorship.org_id = $orgId";
+        $query = "SELECT * FROM `org_merch_item` WHERE org_merch_item.org_id = $orgId";
         return BaseModel::select($query);
     }
 

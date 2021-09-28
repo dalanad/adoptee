@@ -16,7 +16,7 @@
 
 <div class="box">
     <div style="display: flex;">
-        <div><img src="../../../assets\images\shelter_animal.jpg" class="rounded"></div>
+        <div><img src="<?= $details[0]['about_photo']?>" class="rounded"></div>
         <div style="margin:0.5rem;margin-top:10%;"><?= $details[0]['about']; ?></div>
     </div>
     <div class="rounded" style="min-height: 200px;margin:auto;margin-top:3rem;" id="googleMap"></div>
