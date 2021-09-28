@@ -1,21 +1,26 @@
 use adoptee;
 START TRANSACTION;
-INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`, `about`) 
-VALUES ('Pet Haven', '0112345678', 'No. 58', '5th Lane', 'Battaramulla', 'Help an animal in need', 'LOGO', 'Pet Haven is a 
-nonprofit organization that finds homes for abandoned cats and dogs and improves chances of adoption. We conduct clinics, adoption days and events to raise awareness, free of charge');
-INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`, `about`) 
-VALUES ('Animal Shelter', '0334567891', 'No.14/A', 'Temple Road', 'Colombo 8', 'Save a Pet', 'LOGO', 'Animal Shelter is a 
-nonprofit organization that finds homes for abandoned cats and dogs and improves chances of adoption. We conduct clinics, adoption days and events to raise awareness, free of charge');
-INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`, `about`) 
-VALUES ('Animal Welfare Centre', '0114567891', 'No. 120', 'Circular Road', 'Dehiwala', 'Give a pet a home', 'LOGO', 'Animal Welfare Center is a 
-nonprofit organization that finds homes for abandoned cats and dogs and improves chances of adoption. We conduct clinics, adoption days and events to raise awareness, free of charge');
+INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`, `about`, `about_photo`) 
+VALUES ('Pet Haven', '0112345678', 'No. 58', '5th Lane', 'Battaramulla', 'Help an animal in need', "/assets/images/org/pethaven.jpeg", 'Pet Haven is a 
+nonprofit organization that finds homes for abandoned cats and dogs and improves chances of adoption. We conduct clinics, adoption days and events to 
+raise awareness, free of charge', '/assets/images/org/about1.jpg');
+INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`, `about`, `about_photo`) 
+VALUES ('Animal Shelter', '0334567891', 'No.14/A', 'Temple Road', 'Colombo 8', 'Save a Pet', "/assets/images/org/animalshelter.png", 'Animal Shelter is a 
+nonprofit organization that finds homes for abandoned cats and dogs and improves chances of adoption. We conduct clinics, adoption days and events to 
+raise awareness, free of charge',  '/assets/images/org/about2.jpg');
+INSERT INTO `organization` (`name`, `telephone`, `address_line_1`, `address_line_2`, `city`, `tagline`, `logo`, `about`, `about_photo`) 
+VALUES ('Animal Welfare Centre', '0114567891', 'No. 120', 'Circular Road', 'Dehiwala', 'Give a pet a home', "/assets/images/org/animalwelfarecentre.png", 
+'Animal Welfare Center is a nonprofit organization that finds homes for abandoned cats and dogs and improves chances of adoption. We conduct clinics, 
+adoption days and events to raise awareness, free of charge', '/assets/images/org/about3.png');
 
  
 INSERT INTO `org_content` (`org_id`, `heading`, `description`, `photo`)
-VALUES ('1', 'Clinic', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO'),
-  ('1', 'Vaccination Program', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO'),
-  ('2', 'Volunteer', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO'),
-  ('3', 'Adoption Day', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', 'PHOTO');
+VALUES ('1', 'Clinic', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/clinic.jpg'),
+  ('1', 'Vaccination Program', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/kittenvaccination.jpg'),
+  ('2', 'Volunteer', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/volunteer.jpg'),
+  ('2', 'Awareness Program', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/awareness.jpg'),
+  ('3', 'Adoption Day', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/adoption.jpg'),
+ ('3', 'Feeding Strays', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/strayfeeding2.jpg');
  
 INSERT INTO `sponsorship_tier` (`org_id`, `name`, `amount`, `recurring_days`, `description`)
 VALUES ('1','Gold',5000.00,'30','Funds are allocated for veterinary needs'),
@@ -163,5 +168,16 @@ VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
 
 INSERT INTO `consultation_message` (`consultation_id`,  `created_at`, `sender`, `message`) 
 VALUES ('3', CURRENT_TIMESTAMP,   '1', 'testestset'), ('3', '2021-09-13 00:00:00',  '3', 'Hello 1234567'), ('14', CURRENT_TIMESTAMP,   '1', 'Home treatment advised'), ('15', '2021-09-13 00:00:00',  '1', 'Advised to take prescribed medicine'), ('16', CURRENT_TIMESTAMP,   '1', 'Prescription given');
+
+INSERT INTO `org_merch_item` (`org_id`, `name`, `sku`, `price`, `stock`, `photos`) VALUES 
+(1, 'T-Shirt', '1-1', 1000.00, 30, '/assets/images/org/tshirt.png'),
+(1, 'Cat Collar', '1-2', 700.00, 30, '/assets/images/org/collar.png'),
+(1, 'Dog Food Bowl', '1-3', 850.00, 30, '/assets/images/org/bowl.png'),
+(2, 'Cage', '2-1', 12000.00, 30, '/assets/images/org/cage.png'),
+(2, 'T-Shirt', '2-2', 1000.00, 30, '/assets/images/org/tshirt.png'),
+(2, 'Pet Grooming Brush', '2-3', 900.00, 30, '/assets/images/org/brush.jpg'),
+(3, 'Toy', '3-1', 600.00, 30, '/assets/images/org/toy.jpg'),
+(3, 'T-Shirt', '3-2', 1000.00, 30, '/assets/images/org/tshirt.png'),
+(3, 'Cat Collar', '3-3', 700.00, 30, '/assets/images/org/collar.png');
 
 COMMIT;

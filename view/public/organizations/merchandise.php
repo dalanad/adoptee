@@ -23,6 +23,7 @@
         background-size: cover;
         height: 160px;
         border-radius: 8px 8px 0px 0px;
+        align-items:center;
     }
 
     .merch-card-details {
@@ -32,14 +33,14 @@
 </style>
 
 <div class="merch-grid">
-    <?php for ($i = 0; $i < 3; $i++) { ?>
+    <?php foreach ($merchandise as $key=>$value) { ?>
         <a class="merch-card" onclick="location.href=''">
-            <div class="merch-card-image" style="background-image: url('/assets/images/tshirt.png');"></div>
+            <div class="merch-card-image"style="background-image: url('<?= $value['photos']; ?>');"></div>
             <div class="merch-card-details">
                 <div style="padding:.5rem 1rem;align-items: center;">
-                    <div>Adopted Me | T-Shirt</div>
+                    <div><?= $value['name'] ?></div>
                     <div style="display:flex;">
-                        <div style="font-weight:bold;">Rs. 2000</div>
+                        <div style="font-weight:bold;">Rs.&nbsp <?= $value['price'] ?></div>
                         <div class="btn outline green" style="margin-left:1rem;float:right;">
                             <i class="fas fa-cart-plus"></i>Add
                         </div>

@@ -33,6 +33,12 @@
         font-weight: 300;
         margin: 0.6rem;
     }
+    
+    img{
+        max-width: 11rem;
+        max-height:11rem;
+        border-radius: 8px;;
+    }
 </style>
 
 <div class="container">
@@ -41,9 +47,9 @@
     foreach ($orgs as $key => $value) { ?>
     
         <div class="tier-card">
-            <div class="title"><?php print_r($value['name']); ?></div>
-            <div class="subtitle"><?php print_r($value['tagline']); ?></div>
-            <div class="logo"><?php print_r($value['logo']); ?></div>
+            <div class="title"><?= ($value['name']); ?></div>
+            <div class="subtitle"><?= ($value['tagline']); ?></div>
+            <div class="logo"><img src=<?= ($value['logo']); ?>></div>
             <a class="btn" href="get_org_timeline?org_id=<?php echo($value['org_id']) ?>">View Profile</a>
     </div>
     <?php } ?>
