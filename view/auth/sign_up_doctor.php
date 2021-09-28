@@ -9,16 +9,17 @@
                 <div style="font-size:1.5rem">Register As A Doctor </div>
             </div>
         </div>
-        <div>
-            <ul style="font-size: .8rem;color:red">
-                <?php if (isset($_SESSION['form_errors'])) {
-                    foreach ($_SESSION['form_errors'] as  $error) {
-                ?>
+
+        <?php if (isset($_SESSION['form_errors'])) { ?>
+            <div class="alert red">
+                <ul>
+                    <?php foreach ($_SESSION['form_errors'] as  $error) { ?>
                         <li><?= $error ?></li>
-                <? }
-                }  ?>
-            </ul>
-        </div>
+                    <?php } ?>
+                </ul>
+            </div>
+        <?php  }  ?>
+
         <div class="form-grid">
             <div class="separator body-text"><i class="far fa-user"></i> &nbsp; User Information</div>
             <div class="field">
@@ -61,7 +62,6 @@
                 <label>Address</label>
                 <input class="ctrl" type="text" name="address">
             </div>
-
             <div class="field" style="grid-column: 1 / -1;">
                 <label>Credentials / Qualifications</label>
                 <textarea class="ctrl" type="text" rows="5" name="credentials"></textarea>

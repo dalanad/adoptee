@@ -257,7 +257,7 @@ header .logo img {
 	color: var(--color);
 	font-size: 1rem;
 	border: 0.1rem solid var(--muted);
-	background: var(--gray-1);
+	background: #fafafa;
 	width: 100%;
 	box-sizing: border-box;
 }
@@ -319,10 +319,10 @@ header .logo img {
 
 .ctrl-group .static {
 	white-space: nowrap;
-	background: var(--gray-2);
+	background: var(--gray-3);
 	font-weight: 500;
 	display: flex;
-	align-items: flex-end;
+	align-items: center;
 	min-width: auto !important;
 	flex: 0 !important;
 	width: auto !important;
@@ -544,7 +544,7 @@ header .logo img {
 /* SCROLLBAR START*/
 
 ::-webkit-scrollbar {
-	width: 10px;
+	width: 2px;
 }
 
 ::-webkit-scrollbar-track {
@@ -616,3 +616,112 @@ header .logo img {
 	}
 }
 /* ANIMATIONS END */
+
+/* PHOTO PICKER */
+.photo-picker {
+	min-height: 4rem;
+	display: grid;
+	grid-gap: 0.2rem;
+	grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
+}
+
+.photo-picker div {
+	background-size: cover;
+	border-radius: 0.3rem;
+	min-height: 4rem;
+	position: relative;
+}
+
+.photo-picker div::before {
+	position: absolute;
+	content: "";
+	display: none;
+	background: #ffffffaa;
+	cursor: pointer;
+	color: red;
+	font-family: "Font Awesome 5 Pro";
+	height: 100%;
+	width: 100%;
+	font-weight: 600;
+	align-items: center;
+	justify-content: center;
+}
+
+.photo-picker div:hover::before {
+	animation: fadeIn 0.5s;
+	display: flex;
+}
+/* END PHOTO PICKER */
+
+/* START ALERT */
+.alert {
+	border-radius: 0.2rem;
+	display: block;
+	font-size: 0.9rem;
+	margin: 0.5rem 0;
+	padding: 0.6rem 1rem;
+	position: relative;
+	word-wrap: break-word;
+	color: var(--primary);
+	position: relative;
+	border: 0.06rem solid currentColor;
+}
+
+.alert::before {
+	content: " ";
+	background: currentColor;
+	opacity: 0.1;
+	display: block;
+	height: 100%;
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+
+.alert ul {
+	margin: 0 -1.5rem;
+}
+/* END ALERT */
+
+/* START MOUSE OVER DIV */
+
+.mouse-over-card {
+	text-align: center;
+	padding: 1rem;
+	border: 3px solid var(--gray-3);
+	cursor: pointer;
+	position: relative;
+	top: 10px;
+	left: 10px;
+	border-radius: 0.5rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	padding-top: 1rem;
+ }
+
+ .mouse-over-card:hover {
+	 transition: border-color .2s ease-in-out;
+	 border-color: var(--primary);
+ }
+
+ .mouse-over-card .btn {
+	 opacity: .2;
+	 transition: opacity .2s ease-in-out;
+ }
+
+ .mouse-over-card:hover .btn {
+	 opacity: 1;
+ }
+
+ .mouse-over-card .icon {
+	 font-size: 2em;
+ }
+
+ .mouse-over-card .title {
+	 font-size: 1.2rem;
+	 font-weight: 500;
+	 line-height: 1em;
+ }
+
+/* END MOUSE OVER DIV */

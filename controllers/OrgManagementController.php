@@ -2,6 +2,11 @@
 
 class OrgManagementController extends Controller{
 
+    public function __construct() 
+    {
+        $this->isLoggedIn(["org_normal","org_admin"]);
+    }
+
     function org_adoption_listing()
     {
         $data = [
@@ -18,7 +23,10 @@ class OrgManagementController extends Controller{
     }
 
     function process_add_new_animal(){
-        OrgManagement::createNewAnimal(1, $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['photo']);
+        $avatar_photo =  image::single("avatar_photo");
+        $adoptee_photo =  image::multi("adoptee_photo");
+        OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['name'], $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $avatar_photo, $adoptee_photo);
+        
 
     }  
 
@@ -30,13 +38,19 @@ class OrgManagementController extends Controller{
     {
         $data = [
             "active" => "adoption_requests",
-            "adoption_requests"=>OrgManagement::findRequestsByOrgId(1)
+            "adoption_requests"=>OrgManagement::findRequestsByOrgId($_SESSION['org_id'])
     ];
         View::render("org/dashboard", $data);
     }
 
     function accept_adoption_request(){
-        OrgManagement::accept_adoption_request($animal_id);
+        OrgManagement::accept_adoption_request($_GET['animal_id']);
+        $this->redirect('/OrgManagement/adoption_requests');
+    }
+
+    function reject_adoption_request(){
+        OrgManagement::reject_adoption_request($_GET['animal_id']);
+        $this->redirect('/OrgManagement/adoption_requests');
     }
 
     function reported_cases()
@@ -93,5 +107,3 @@ class OrgManagementController extends Controller{
     }
 
 }
-
-?>

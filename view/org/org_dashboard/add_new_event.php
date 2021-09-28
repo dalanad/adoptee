@@ -22,7 +22,6 @@
 
 
 <div class='container px2'>
-    <div class='placeholder-box mr1' style='height:50px; width:100px;'>Logo</div>
     <div>
         <a href="/OrgManagement/org_news_events" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
     </div>
@@ -30,22 +29,27 @@
     <form action="/OrgManagement/add_new_event" method="post">
         <div class="field">
             <label for='name'>Event Name</label>
-            <input class="ctrl field-font" type="text" name="name" placeholder="Name" required/>
+            <input class="ctrl field-font" type="text" name="name" required/>
         </div>
         <div class="field">
+            <div>
             <label for='description'>Description</label>
-            <textarea rows="6" class="ctrl field-font" name="description" placeholder="Update Description" required></textarea>
-            <span class="field-msg"> </span>
+            <textarea rows="6" class="ctrl field-font" name="description" required></textarea>
+            </div>
+            <div>
+            <span class="field-msg">Update Description</span>
+            </div>
         </div>
 
         <div class="field ">
-            <label>Upload Photo</label>
-            <div class="ctrl-group field-font">
-                <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-                <input class="ctrl field-font" type="file" name="photo" multiple />
-            </div>
-            <span class="field-msg"> </span>
-        </div>
+      <label>Upload Photo</label>
+      <div class="ctrl-group">
+        <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
+        <input type="file" name="photo[]" class="ctrl" multiple accept="image/*" required>
+      </div>
+      <span class="field-msg">Upload a photo of the event</span>
+    </div>
+    <br>
         <br>
 
         <button class='btn mr2' type='reset'>Clear</button>

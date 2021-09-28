@@ -4,7 +4,7 @@ class DoctorController extends Controller
 {
     public function __construct()
     {
-        $this->isLoggedIn(["doctor"]);
+       // $this->isLoggedIn(["doctor"]);
     }
 
     function index()
@@ -90,8 +90,8 @@ class DoctorController extends Controller
     {
         $links = [];
         foreach ($_FILES as $fileName => $value) {
-            $uploaded_file = new Image($fileName);
-            array_push($links, $uploaded_file->getURL());
+            $uploaded_file = Image::single($fileName);
+            array_push($links, $uploaded_file);
         }
         View::json($links);
     }
