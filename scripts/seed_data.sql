@@ -65,7 +65,8 @@ INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_
 ('Dr. Weerasinghe', 'doctor@example.com', '0761236547', 'doctor address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
 ('Ms. Org User', 'orguser@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
 ('Mr. Reg. User', 'user@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
-('Mr. Reg. User2', 'user2@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 0, 0);
+('Mr. Reg. User2', 'user2@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 0, 0),
+('Dr. Rathnayake', 'doctor2@example.com', '0761236547', 'doctor address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1);
 
 INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`) VALUES 
 ('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'ADOPTED', '2021-09-03', '1', 3),
@@ -85,7 +86,8 @@ INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(5,3),(6,3),(7,3),(8,4),(9,
 INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL');
 
 INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `proof_image`) 
-VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_63.png"]') ;
+VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_63.png"]'),
+ (5, '0748345654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_64.png"]');
 
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `date_reported`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
 VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.', '2021-08-27', current_timestamp(), '0761236547', 'Anuradhapura', NULL, 'RESCUED', '');

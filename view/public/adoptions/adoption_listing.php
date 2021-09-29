@@ -57,7 +57,7 @@
     .check input {
         display: none;
     }
-    
+
     .check label {
         padding: 1rem;
         border: 2px solid var(--gray-3);
@@ -69,11 +69,10 @@
         margin-bottom: .3rem;
     }
 
-    .check input:checked + label {
-        opacity:0.5;  
+    .check input:checked+label {
+        opacity: 0.5;
         border-color: var(--primary);
     }
-
 </style>
 
 <div class="container" style="padding:1rem 2rem;">
@@ -100,7 +99,7 @@
                 <label> Animal Type </label>
                 <div class="radio-box">
                     <div style="margin: .5rem;display:flex">
-                        <input name="animal_type" class="ctrl-check" id="dog" type="checkbox">
+                        <input name="animal_type" class="ctrl-check" id="dog" type="checkbox" onselect="filter()">
                         <!--onselect="filterCall()">-->
                         <label for="dog">&nbsp; <i class="far fa-dog"></i>&nbsp; Dog</label>
                     </div>
@@ -168,7 +167,7 @@
             <div class="adoption-grid">
                 <!--grid-->
                 <?php foreach ($animals as $animal) { ?>
-                    <a class="adoption-card" onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal['animal_id'] ?>&org_id=<?= $animal['org_id'] ?>'">
+                    <a class="adoption-card" id=<?= $animal['type'] ?> onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal['animal_id'] ?>&org_id=<?= $animal['org_id'] ?>'">
                         <div class="adoption-card-image" style="background-image: url('<?= $animal['photo'] ?>');"></div>
                         <div class="adoption-card-details">
                             <div class="adoption-card-action">ADOPT</div>
@@ -187,27 +186,50 @@
                 <?php } ?>
             </div>
         </div>
-        <!-- <script>
-                            //DOG / CAT
-            function display(_type){ // an option
-                var all = document.getElementsByClassName("type");// all animals
-                for(var i=0; i<all.length; i++){                    // for each animal
-                    if(_type == toLowerCase(all[i].innerHTML.startsWith("Dog"))){
-                        all[i].style.display = "block";
-                    }
-                    else{
-                        all[i].style.display = "none";
-                    }
+        <script>
+            //DOG / CAT
+            // function display(_type){ // an option
+            //     var all = document.getElementsByClassName("type");// all animals
+            //     for(var i=0; i<all.length; i++){                    // for each animal
+            //         if(_type == toLowerCase(all[i].innerHTML.startsWith("Dog"))){
+            //             all[i].style.display = "block";
+            //         }
+            //         else{
+            //             all[i].style.display = "none";
+            //         }
+            //     }
+            // }
+
+            // function filter() {
+            //     var types = document.getElementsByName('animal_type');//list of options
+            //     for(var i=0; i<type.length; i++){
+            //         types[i].addEventListener("select", display(types[i].id)); //event listener for each option
+            //     }                                               //eg-id=DOG / CAT
+            // }
+
+            //---------------------------------------------------------------------------------------
+            // function display(type) {
+            //     var all = document.getElementsByClassName("adoption-card");
+            //     for (var i = 0; i < all.length; i++) {
+            //         if (toUppserCase(all[i].id) != type) {
+            //             all[i].style.display = 'none';
+            //         }
+            //     }
+
+            // }
+
+            // function filter() {
+            //     var selection = document.getElementsByName('animal_type');
+            //     selection.addEventListener("click", display(toUpperCase(selection.id)));
+            // }
+            //------------------------------------------------------------------------
+            var n = document.getElementsByName('animal_type');
+            var eles = document.getElementsByClassName('adoption-card');
+            for (var i = 0; i < eles.length; i++) {
+                if (eles[i].id.toUpperCase != n[0].id.toUpperCase) {
+                    eles[i].style.display = 'none';
                 }
             }
-
-            function filterCall() {
-                var types = document.getElementsByName('animal_type');//list of options
-                for(var i=0; i<type.length; i++){
-                    types[i].addEventListener("select", display(types[i].id)); //event listener for each option
-                }                                               //eg-id=DOG / CAT
-            }
-
-        </script> -->
+        </script>
     </div>
 </div>
