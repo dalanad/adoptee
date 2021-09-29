@@ -2,10 +2,19 @@
 class Consultation extends BaseModel
 {
 
-    public static function bookConsultation($doctorId, $userId, $animalId, $date, $time, $type)
+    public static function bookConsultationPet($doctorId, $userId, $type, $date, $time,  $animalId)
     {
-        $query = " INSERT INTO `consultation` ( `consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
-        VALUES ('2021-09-08', '10:30:00', '4', '1', '3', 'PENDING', 'LIVE', NULL);";
+        $query = "INSERT INTO `consultation` (`consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
+        VALUES ('$date', '$time', '$animalId', '$doctorId', '$userId', 'PENDING', '$type', NULL);";
+        return BaseModel::insert($query);
+    }
+
+    public static function bookConsultationNewPet($doctorId, $userId, $type, $date, $time,  $name, $gender, $animal_type, $dob)
+    {
+        $query = "INSERT INTO `animal` (type, name, gender, dob) VALUES ('$animal_type','$name', '$gender', '$dob');";
+        BaseModel::insert($query);
+        $animalId = self::lastInsertId();
+        return self::bookConsultationPet($doctorId, $userId, $type, $date, $time, $animalId);
     }
 
     public static function getBookingsCalender($doctorId, $start_date, $end_date)
@@ -51,5 +60,15 @@ class Consultation extends BaseModel
 
 
         return $consultations;
+    }
+
+    public static function getPetConsultation()
+    {
+        $query = "SELECT c.*, cm.consultation_id, cm.message, user_pet.animal_id
+        FROM consultation c, consultation_message cm, user_pet
+        WHERE c.animal_id=user_pet.animal_id
+        AND c.status='COMPLETED'
+        AND cm.consultation_id=c.consultation_id";
+        return BaseModel::select($query);
     }
 }

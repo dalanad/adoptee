@@ -23,7 +23,12 @@
         #details {
             grid-column: 1;
             grid-row: 10 / span 10;
-            height: 50%;
+            height: fit-content;
+            width:75%;
+            padding:1rem;
+            margin:1 1 1 0rem;
+            border:5px solid #C5C5C5;
+            border-radius: 8px;
         }
     }
 
@@ -97,28 +102,28 @@
 
             <div class='field'>
                 <div class="row">
-                    <div class="column">Name of adopter:</div>
+                    <div class="column bold">Name of adopter:</div>
                     <div class="column"><?php print_r($_SESSION['user']['name']); ?></div>
                 </div>
             </div>
 
             <div class='field'>
                 <div class="row">
-                    <div class="column">Contact Number:</div>
+                    <div class="column bold">Contact Number:</div>
                     <div class="column"><?php print_r($_SESSION['user']['telephone']); ?></div>
                 </div>
             </div>
 
             <div class='field'>
                 <div class="row">
-                    <div class="column">Email:</div>
+                    <div class="column bold">Email:</div>
                     <div class="column"><?php print_r($_SESSION['user']['email']); ?></div>
                 </div>
             </div>
 
             <div class='field'>
                 <div class="row">
-                    <div class="column">Address:</div>
+                    <div class="column bold">Address:</div>
                     <div class="column"><?php print_r($_SESSION['user']['address']); ?></div>
                 </div>
             </div>
