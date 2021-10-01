@@ -686,11 +686,10 @@ header .logo img {
 
 /* START MOUSE OVER DIV */
 
-.mouse-over-card {
+.mouse-over-div {
 	text-align: center;
 	padding: 1rem;
 	border: 3px solid var(--gray-3);
-	cursor: pointer;
 	position: relative;
 	top: 10px;
 	left: 10px;
@@ -700,25 +699,20 @@ header .logo img {
 	padding-top: 1rem;
  }
 
- .mouse-over-card:hover {
+ .mouse-over-div:hover {
 	 transition: border-color .2s ease-in-out;
-	 border-color: var(--primary);
+	 border-color: var(--gray-3);
  }
 
- .mouse-over-card .btn {
-	 opacity: .2;
-	 transition: opacity .2s ease-in-out;
- }
-
- .mouse-over-card:hover .btn {
+ .mouse-over-div:hover .btn {
 	 opacity: 1;
  }
 
- .mouse-over-card .icon {
+ .mouse-over-div .icon {
 	 font-size: 2em;
  }
 
- .mouse-over-card .title {
+ .mouse-over-div .title {
 	 font-size: 1.2rem;
 	 font-weight: 500;
 	 line-height: 1em;

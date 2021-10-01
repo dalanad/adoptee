@@ -46,7 +46,7 @@
 <div>
 
 
-    <div class="overflow-auto" style="height:550px; padding-top: 2rem;">
+    <div class="overflow-auto" style="height:550px; padding: 1rem; padding-top: 2rem;">
         <table class="table">
             <tr>
                 <th>ADOPTEE</th>
@@ -73,17 +73,17 @@
                     <td><?= $adoption_request["name"] ?></td>
                     <td><span class="tag <?= $adoption_request["has_pets"] ? 'green' : 'pink' ?>"><?= $adoption_request["has_pets"] ? "YES" : "NO" ?> </span></td>
                     <td><span class="tag <?= $adoption_request["children"] ? 'green' : 'pink' ?>"><?= $adoption_request["children"] ? "YES" : "NO" ?> </span></td>
-                    <td><span class="tag <?= $adoption_request["status"] == "PENDING" ? 'orange' :($adoption_request["status"] == "ADOPTED" ? 'green' : 'red')  ?>"> <?= $adoption_request["status"] ?> </span></td>
+                    <td><span class="tag <?= $adoption_request["status"] == "PENDING" ? 'orange' :($adoption_request["status"] == "ADOPTED" ? 'green' : 'pink')  ?>"> <?= $adoption_request["status"] ?> </span></td>
                     <td>
                         <a href="/OrgManagement/accept_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" title="Accept" class="btn btn-link btn-icon green"><i class="fas fa-check-circle"></i> </a>
                         &nbsp;
                         <a href="/OrgManagement/reject_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" title="Reject" class="btn btn-link btn-icon pink"><i class="fas fa-times-circle"></i></a>
                     </td>
                     <td>
-                        <button  onclick="showModel('popupModal<?= $adoption_request["animal_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                        <button  onclick="showModel('popupModal<?= $adoption_request["animal_id"] ?>')" title="More Details" class="tag btn btn-link">Details</button>
                         <div id="popupModal<?= $adoption_request["animal_id"] ?>" class="modal">
                             <div class="modal-content">
-                                <span class="close" onclick="hideModel('popupModal<?= $animal["animal_id"] ?>')">&times;</span>
+                                <span class="close" onclick="hideModel('popupModal<?= $adoption_request["animal_id"] ?>')">&times;</span>
                                 <h3>More Details</h3>
                                 <div style="padding: 5px;"><button title="Adoptor Name" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-user"></i></button><?= $adoption_request["user_name"] ?></div>
                                 <div style="padding: 5px;"><button title="Adoptor Mobile" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-phone"></i></button><?= $adoption_request["contact"] ?></div>

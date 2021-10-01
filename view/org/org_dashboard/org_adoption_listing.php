@@ -83,7 +83,7 @@
 
 
 
-<div style="top: 100px; padding-top: 1rem;">
+<div style="top: 100px; padding: 1rem;">
     <div style="margin-left: 1070px;"><a href="/OrgManagement/add_new_animal" class="btn right outline"> Add New Animal </a></div>
     <div class="overflow-auto" style="height:550px;">
         <table class="table">
@@ -117,7 +117,7 @@
                     <td><span class="tag <?= $animal["status"] == "ADOPTED" ? 'green' : 'pink' ?>"> <?= $animal["status"] ?> </span></td>
                     <td><?= $animal["date_adopted"] ?></td>
                     <td>
-                        <button onclick="showModel('popupModal-1<?= $animal["animal_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                        <button onclick="showModel('popupModal-1<?= $animal["animal_id"] ?>')" title="More Details" class="tag btn btn-link">Details</button>
                         <div id="popupModal-1<?= $animal["animal_id"] ?>" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="hideModel('popupModal-1<?= $animal["animal_id"] ?>')">&times;</span>

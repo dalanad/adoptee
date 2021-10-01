@@ -92,7 +92,7 @@
       </div>
       <div class='field other box column'>
         <label for='type'>Other</label>
-        <input class="ctrl" type="text" name="other"/>
+        <input class="ctrl" type="text" name="other" />
       </div>
     </div>
 
@@ -109,48 +109,48 @@
       <div class='field column'>
         <label for='dob'>Approximate DOB</label>
         <div>
-          <input class="ctrl2" type="date" max="<?= getdate()['date']?>-<?= getdate()['month']?>-<?= getdate()['year']?>" name="dob" id="dob" onclick="ageCalculator()" required />
+          <input class="ctrl2" type="date" max="<?= getdate()['date'] ?>-<?= getdate()['month'] ?>-<?= getdate()['year'] ?>" name="dob" id="dob" onclick="ageCalculator()" required />
           <p id="result"></p>
         </div>
       </div>
     </div>
 
     <div class="row">
-    <div class='field column'>
-      <div>
-        <label for='color'>Color</label>
-        <input class="ctrl" type="text" name="color" required />
+      <div class='field column'>
+        <div>
+          <label for='color'>Color</label>
+          <input class="ctrl" type="text" name="color" required />
+        </div>
+        <div>
+          <span class="field-msg">Use commas to seperate colors</span>
+        </div>
       </div>
-      <div>
-        <span class="field-msg">Use commas to seperate colors</span>
-      </div>
-    </div>
 
-    <div class="field column">
-      <label>Description</label>
-      <textarea rows="6" class="ctrl" name="description"></textarea>
-      <span class="field-msg"> </span>
-    </div>
+      <div class="field column">
+        <label>Description</label>
+        <textarea rows="6" class="ctrl" name="description" id="editor"></textarea>
+        <span class="field-msg"> </span>
+      </div>
     </div>
 
     <div class="row">
-    <div class="field column">
-      <label>Upload Photo for Avatar</label>
-      <div class="ctrl-group">
-        <span class="ctrl static"><i class="fa fa-image"></i></span>
-        <input type="file" name="avatar_photo" class="ctrl" accept="image/*" required>
+      <div class="field column">
+        <label>Upload Photo for Avatar</label>
+        <div class="ctrl-group">
+          <span class="ctrl static"><i class="fa fa-image"></i></span>
+          <input type="file" name="avatar_photo" class="ctrl" accept="image/*" required>
+        </div>
+        <span class="field-msg">Upload photo for profile image</span>
       </div>
-      <span class="field-msg">Upload photo for profile image</span>
-    </div>
-   
-    <div class="field column">
-      <label>Upload Other Photos</label>
-      <div class="ctrl-group">
-        <span class="ctrl static"><i class="fa fa-images"></i></span>
-        <input type="file" name="adoptee_photo[]" class="ctrl" multiple accept="image/*" required>
+
+      <div class="field column">
+        <label>Upload Other Photos</label>
+        <div class="ctrl-group">
+          <span class="ctrl static"><i class="fa fa-images"></i></span>
+          <input type="file" name="adoptee_photo[]" class="ctrl" multiple accept="image/*" required>
+        </div>
+        <span class="field-msg">Upload a photos of the animal</span>
       </div>
-      <span class="field-msg">Upload a photos of the animal</span>
-    </div>
 
     </div>
     <br>
@@ -160,7 +160,7 @@
 
 </div>
 
-<!-- <script>
+<script>
   $(document).ready(function() {
     $("select").change(function() {
       $(this).find("option:selected").each(function() {
@@ -175,29 +175,37 @@
     }).change();
   });
 
-  function ageCalculator() {
-    var userinput = document.getElementById("dob").value;
-    var dob = new Date(userinput);
-    if (userinput == null || userinput == '') {
-      document.getElementById("message").innerHTML = "Please select a date";
-      return false;
-    } else {
+  ClassicEditor
+    .create( document.querySelector( '#editor' ), {
+      toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'link', '|', 'numberedList', 'bulletedList' ]
+    } )
+    .catch( error => {
+        console.log( error );
+    } );
 
-      //calculate month difference from current date in time  
-      var month_diff = Date.now() - dob.getTime();
+  /*  function ageCalculator() {
+     var userinput = document.getElementById("dob").value;
+     var dob = new Date(userinput);
+     if (userinput == null || userinput == '') {
+       document.getElementById("message").innerHTML = "Please select a date";
+       return false;
+     } else {
 
-      //convert the calculated difference in date format  
-      var age_dt = new Date(month_diff);
+       //calculate month difference from current date in time  
+       var month_diff = Date.now() - dob.getTime();
 
-      //extract year from date      
-      var year = age_dt.getUTCFullYear();
+       //convert the calculated difference in date format  
+       var age_dt = new Date(month_diff);
 
-      //now calculate the age of the user  
-      var age = Math.abs(year - 1970);
+       //extract year from date      
+       var year = age_dt.getUTCFullYear();
 
-      //display the calculated age  
-      return document.getElementById("result").innerHTML =
-        "Age: " + age + " years. ";
-    }
-  }
-</script> -->
+       //now calculate the age of the user  
+       var age = Math.abs(year - 1970);
+
+       //display the calculated age  
+       return document.getElementById("result").innerHTML =
+         "Age: " + age + " years. ";
+     }
+   } */
+</script>

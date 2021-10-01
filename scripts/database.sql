@@ -194,7 +194,7 @@ create table report_rescue(
     time_reported timestamp DEFAULT CURRENT_TIMESTAMP,
     contact_number int(10),
     location varchar(100) not null,
-    location_coordinates varchar(100) ,
+    location_coordinates POINT,
     status enum('PENDING','ACCETPED','RESCUED') not null default 'PENDING',
     org_response enum('RESCUE','ACCEPTED','RESCUED') not null default 'RESCUE',
     photo varchar(100) not null, -- JSON ?

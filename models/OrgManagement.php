@@ -85,7 +85,7 @@ class OrgManagement extends BaseModel
     }
     
     static function findReportedCases(){
-        $query = "SELECT type, description, contact_number,location, status, photo, time_reported,org_response from report_rescue";
+        $query = "SELECT type, description, contact_number,location, st_y(location_coordinates) as longi, st_x(location_coordinates) as lat, status, photo, time_reported,org_response from report_rescue";
         return BaseModel::select($query);
     }
 
