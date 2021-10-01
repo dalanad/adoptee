@@ -76,7 +76,7 @@
         border-radius: 0.5rem;
     }
 
-    .card-size {
+    .div-size {
         width: 500px;
         height: 450px;
         min-height: 3rem;
@@ -85,14 +85,14 @@
 </style>
 
 
-<div style="padding-top: 1rem;">
+<div style="padding: 1rem;">
     <div style="margin-left: 1070px;"><a href="/OrgManagement/add_new_event" class="btn right outline"> Add New Event </a></div>
     <div class="overflow-auto" style="height:550px;">
         <table class="table">
             <tr>
                 <td>
                     <div style="position: relative;">
-                        <div class="mouse-over-card card-size">
+                        <div class="mouse-over-div div-size">
                             <h2 class="center">Pet Adoption Day</h2>
                             <div class="event-content"><img class="event-image" src="/assets\images\org/adoption_day.jpg"></div>
                             <div class="event-content">
@@ -106,7 +106,7 @@
 
     <td>
         <div style="position: relative;">
-            <div class="mouse-over-card card-size">
+            <div class="mouse-over-div div-size">
                 <h2 class="center">Stray Feeding Campaign</h2>
                 <div class="event-content"><img class="event-image" src="/assets\images\org/stray_feeding.jpg"></div>
                 <div class="event-content">

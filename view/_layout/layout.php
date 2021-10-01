@@ -18,6 +18,7 @@
     <link href="/assets/css/util.css" rel="stylesheet" type="text/css" />
     <script src="/assets/vendor/jquery-3.6.0.min.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/vendor/ckeditor.js"></script>
     <script>
         // Check that service workers are supported
         if ('serviceWorker' in navigator) {

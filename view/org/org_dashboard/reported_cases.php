@@ -21,10 +21,10 @@
 
     .cases_list {
         position: absolute;
-        width: 250px;
+        width: 300px;
         height: 250px;
-        top: 10px;
-        left: 10px;
+        top: 8px;
+        left: 8px;
         background: white;
         box-shadow: var(--shadow);
         z-index: 100;
@@ -102,6 +102,14 @@
             zoom: 12,
         };
         map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+        <?php foreach ($reported_cases as $reported_case) { ?>
+        new google.maps.Marker({
+            position: new google.maps.LatLng(<?= $reported_case["lat"] ?>,<?= $reported_case["longi"] ?>),
+            map,
+            title: 'Rescue Location',
+        });
+        <?php } ?>
     };
 
     var x = document.getElementById("demo");
@@ -145,7 +153,7 @@
                         <td><?= $reported_case["type"] ?></td>
                         <td><button title="location" class="btn btn-link btn-icon"><i class="fas fa-map-marker-alt"></i></button></td>
                         <td>
-                            <button onclick="showModel('popupModal<?= $reported_case["report_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                            <button onclick="showModel('popupModal<?= $reported_case["report_id"] ?>')" title="More Details" class="tag btn btn-link">Details</button>
                             <div id="popupModal<?= $reported_case["report_id"] ?>" class="modal">
                                 <div class="modal-content">
                                     <span class="close" onclick="hideModel('popupModal<?= $animal["animal_id"] ?>')">&times;</span>
@@ -189,7 +197,7 @@
 </div>
 </td>
 <td>
-    <div><a class="btn btn-link btn-icon" style="font-size: 0.8rem;" href="/OrgManagement/updateRescueReportStatus"><span class="tag <?= $reported_case["org_response"] == "RESCUE" ? 'pink' : 'green' ?>"> <?= $reported_case["org_response"] ?> </span></a></div>
+    <div><a class="btn btn-link btn-icon" href="/OrgManagement/updateRescueReportStatus"><span class="tag <?= $reported_case["org_response"] == "RESCUE" ? 'pink' : 'green' ?>"> <?= $reported_case["org_response"] ?> </span></a></div>
 </td>
 </tr>
 <?php } ?>

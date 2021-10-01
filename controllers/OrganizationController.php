@@ -2,10 +2,6 @@
 
 class OrganizationController extends Controller
 {
-    public function __construct() 
-    {
-        $this->isLoggedIn(["org_admin"]);
-    }
 
     function view_profile()
     {

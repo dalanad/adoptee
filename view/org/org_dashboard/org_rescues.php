@@ -77,7 +77,7 @@ $org_rescues = array(
         cursor: pointer;
     }
 
-    .card-size {
+    .div-size {
         width: 95%;
         height: 20px;
      }  
@@ -86,19 +86,20 @@ $org_rescues = array(
 
 
 
-<div style="top: 200px; padding-top: 0.5rem;">
-    <div class="overflow-auto" style="height:550px">
-    <div class="mouse-over-card card-size" style="display:flex; font-size: 0.8rem; font-weight: 500; border: none;">
+<div style="top: 200px; padding: 1rem; padding-top: 0.5rem;">
+    <divstyle="height:550px">
+    <div class="mouse-over-div div-size" style="display:flex; font-size: 0.8rem; font-weight: 500; border: none;">
                     <div style="width: 150px;">TYPE</div>
                     <div style="width: 180px;">DATE RESCUED</div>
                     <div style="width: 180px;">CONTACT NUMBER</div>
                     <div style="width: 250px;">DESCRIPTION</div>
                     <div style="width: 200px;">LOCATION</div>
                     <div style="width: 150px;">INFO</div>
-                    <div style="width: 100px;"></div>
+                    <div style="padding-right: 0.5rem; width: 100px;"></div>
     </div>
+    <div class="overflow-auto" style="height:525px">
             <?php foreach ($org_rescues as $org_rescue) { ?>
-                    <div class="mouse-over-card card-size" style="display:flex;">
+                    <div class="mouse-over-div div-size" style="display:flex;">
                     <div style="width: 150px;"><?= $org_rescue["type"] ?></div>
                     <div style="width: 180px;"><?= $org_rescue["date_rescued"] ?></div>
                     <div style="width: 180px;"><?= $org_rescue["contact_number"] ?></div>
@@ -106,7 +107,7 @@ $org_rescues = array(
                     <div style="width: 200px;"><?= $org_rescue["location"] ?></div>
                     
                     <div style="width: 150px;">
-                    <button onclick="showModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                    <button onclick="showModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')" title="More Details" class="tag btn btn-link">Details</button>
                         <div id="popupModal<?= $org_rescue["org_rescue_id"] ?>" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="hideModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')">&times;</span>
@@ -116,12 +117,13 @@ $org_rescues = array(
 
                         </div>
                     </div>
-                    <div style="width: 100px;"><a href="/OrgManagement/add_rescue_update" title="Add Update" class="btn btn-link btn-icon"><i class="fas fa-plus-circle"></i></a></div>
+                    <div style="padding-right: 0.5rem; width: 100px;"><a href="/OrgManagement/add_rescue_update" title="Add Update" class="btn btn-link" style="border-radius: 0.4rem; border: 0.1rem solid var(--primary);">Add Update</a></div>
                 
 
                     </div>
                     <br>
             <?php } ?>
+    </div>
     </div>
 </div>
 
