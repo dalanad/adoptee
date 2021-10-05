@@ -25,7 +25,17 @@ class OrgManagementController extends Controller{
     function process_add_new_animal(){
         $avatar_photo =  image::single("avatar_photo");
         $adoptee_photo =  image::multi("adoptee_photo");
-        OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['name'], $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $avatar_photo, $adoptee_photo);
+
+        $anti_rabies = isset($_POST['anti_rabies']) ? true : false;
+        $dhl = isset($_POST['dhl']) ? true : false;
+        $parvo = isset($_POST['parvo']) ? true : false;
+        $tricat = isset($_POST['tricat']) ? true : false;
+        $anti_rabies_booster = isset($_POST['anti_rabies_booster']) ? true : false;
+        $dhl_booster = isset($_POST['dhl_booster']) ? true : false;
+        $parvo_booster = isset($_POST['parvo_booster']) ? true : false;
+        $tricat_booster = isset($_POST['tricat_booster']) ? true : false;
+        
+        OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['name'], $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['anti_rabies'], $_POST['dhl'], $_POST['parvo'], $_POST['tricat'], $_POST['anti_rabies_booster'], $_POST['dhl_booster'], $_POST['parvo_booster'], $_POST['tricat_booster'], $_POST['dewormed'], $avatar_photo, $adoptee_photo);
         
 
     }  

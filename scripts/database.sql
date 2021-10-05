@@ -71,9 +71,23 @@ create table animal_for_adoption (
     date_listed date,
     status enum('LISTED','ADOPTED') not null default 'LISTED',
     date_adopted date,
+    dewormed boolean,
     org_id int(10),
     user_id int(10),
     photos JSON,
+    primary key(animal_id)
+);
+
+create table animal_vaccines (
+    animal_id int(10) not null,
+    anti_rabies boolean,
+    dhl boolean,
+    parvo boolean,
+    tricat boolean,
+    anti_rabies_booster boolean,
+    dhl_booster boolean,
+    parvo_booster boolean,
+    tricat_booster boolean,
     primary key(animal_id)
 );
 
@@ -280,6 +294,9 @@ add foreign key(animal_id) references animal(animal_id);
 
 alter table animal_for_adoption
 add foreign key(org_id) references organization(org_id),
+add foreign key(animal_id) references animal(animal_id);
+
+alter table animal_vaccines
 add foreign key(animal_id) references animal(animal_id);
 
 alter table rescued_animal
