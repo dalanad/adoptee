@@ -78,6 +78,12 @@
         width: 50%;
         box-sizing: border-box;
     }
+    .div-size {
+        width: 100px;
+        height: 100px;
+        min-height: 3rem;
+        margin-bottom: 1em;
+    }
 </style>
 
 
@@ -140,11 +146,7 @@
                                     <div class="row">
                                         <div class='field column'>
                                             <label for='status'>Adoption Status</label>
-                                            <select class="ctrl field-font" name='status' required>
-                                                <option selected='true' disabled='disabled'><?= $animal["status"] ?></option>
-                                                <option value='adopted'>Adopted</option>
-                                                <option value='listed'>Listed</option>
-                                            </select>
+                                            <input class="ctrl field-font" type="text" name="status" value="<?= $animal["status"] ?>" readonly />
                                         </div>
                                         <div class='column'></div>
                                         <div class='column'></div>
@@ -189,7 +191,7 @@
                                         <div class='field column'>
                                             <label for='dob'>Approximate DOB</label>
                                             <div>
-                                                <input style="width: 100%" class="ctrl2 field-font" type="date" name="dob" id="dob" value="<?= $animal["dob"] ?>" required />
+                                                <input style="width: 100%" class="ctrl2 field-font" type="date" name="dob" id="datefield" value="<?= $animal["dob"] ?>" required />
                                                 <p id="result"></p>
                                             </div>
                                         </div>
@@ -205,15 +207,18 @@
 
                                     <div class="field">
                                         <label>Description</label>
-                                        <textarea rows="6" class="ctrl field-font" name="description" value="<?= $animal["description"] ?>"></textarea>
+                                        <textarea rows="6" class="ctrl field-font" name="description"><?= $animal["description"] ?></textarea>
                                         <span class="field-msg"> </span>
                                     </div>
 
                                     <div class="field ">
-                                        <label>Upload Photo</label>
-                                        <div class="ctrl-group field-font">
-                                            <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-                                            <input class="ctrl field-font" type="file" name="photo" multiple />
+                                        <label>Photo</label>
+                                        <div style="display: flex;">
+                                        <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
+                                        <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
+                                        <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
+                                        <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
+                                        
                                         </div>
                                         <span class="field-msg"> </span>
                                     </div>
@@ -228,6 +233,7 @@
                         </div>
                     </td>
                 </tr>
+
             <?php } ?>
 
         </table>
@@ -267,4 +273,19 @@
             });
         }).change();
     });
+
+      //Max Date input
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1;
+  var yyyy = today.getFullYear();
+  if (dd < 10) {
+    dd = '0' + dd
+  }
+  if (mm < 10) {
+    mm = '0' + mm
+  }
+
+  today = yyyy + '-' + mm + '-' + dd;
+  document.getElementById("datefield").setAttribute("max", today);
 </script>
