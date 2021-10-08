@@ -9,6 +9,7 @@
         height: 0;
     }
 
+
     .expandable:target {
         height: 100%;
     }
@@ -33,11 +34,11 @@
         </tr>
 
         <?php foreach ($adoptions as $key => $value) { ?>
-            <tr style="font-size: 0.8rem;">
+            <tr style="font-size: 1rem;">
                 <td>
                     <table>
                         <tr>
-                            <td rowspan="2"><img src="../../../assets/images/dogs/placeholder2.jpg" style="width:40px;height:40px;border-radius:50%;margin-left:0px;"></td>
+                            <td rowspan="2"><img src="../../../<?= $value['photo'] ?>" style="width:50px;height:50px;border-radius:50%;margin-left:0px;"></td>
                             <td><?= $value["a_name"] ?></td>
                         </tr>
                         <tr>
@@ -72,9 +73,12 @@
                             </div>
                             <div class="field">
                                 <label for="photo">Photo:</label>
-                                <input name="photo" type="file" class="ctrl"/>
+                                <input name="photo" type="file" class="ctrl" />
                             </div>
-                            <button type="submit" class="btn mt2" style="height:2rem;">Send update</button>
+                            <div style="display:flex;">
+                                <button type="submit" class="btn mt2" style="height:2rem;">Send update</button>
+                                <a href='' type="reset" class="btn mt2 ml2" style="height:2rem;">Cancel</a>
+                            </div>
                         </form>
                     </div>
                 </td>
