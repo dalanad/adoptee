@@ -5,10 +5,20 @@ class AdoptionsController extends Controller
 
     function index()
     {
+        $filter = ["gender" => $_GET["gender"] ?? "ANY",
+                    "age" => $_GET["age"] ?? "",
+                    "animal_type" => $_GET["animal_type"] ?? [],
+                    "color" => $_GET["color"] ?? [],
+                    "organization" => $_GET["organization"] ?? [],
+                    "sort" => $_GET['sort'] ?? "date-listed",
+                    "order" => $_GET['order'] ?? "desc"
+        ];
+
         $org = new Organization();
         $data = [
-            "animals" => Adoptions::searchAnimals(),
-            "organizations" => $org->getOrgListing()
+            "organizations" => $org->getOrgListing(),
+            "animals" => Adoptions::searchAnimals($filter),
+            "filter" => $filter
         ];
         View::render("public/adoptions/adoption_listing", $data);
     }

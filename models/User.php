@@ -61,7 +61,7 @@ class User extends BaseModel
 
     static function getAdoptions($user_id)
     {
-        $query = "SELECT animal.name 'a_name', animal.animal_id 'a_id', DATEDIFF(CURRENT_DATE, animal.dob)/365 'age', organization.name 'name', date_adopted
+        $query = "SELECT animal.name 'a_name', animal.animal_id 'a_id',animal.photo 'photo', DATEDIFF(CURRENT_DATE, animal.dob)/365 'age', organization.name 'name', date_adopted
         FROM `animal`, `animal_for_adoption`, `organization`, `user`
         WHERE animal.animal_id=animal_for_adoption.animal_id
         AND organization.org_id=animal_for_adoption.org_id
@@ -72,11 +72,12 @@ class User extends BaseModel
 
     static function getUserPets($user_id)
     {
-        $query = "SELECT user_pet.*, animal.*, user.user_id, round(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age'
-        FROM user_pet, animal, user
-        WHERE $user_id=user.user_id
-        AND user_pet.user_id=user.user_id
-        AND user_pet.animal_id=animal.animal_id";
+        $query = "SELECT animal.*, round(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age'
+        FROM user_pet, animal
+        WHERE ($user_id = user_pet.user_id AND user_pet.animal_id=animal.animal_id)
+        UNION SELECT animal.*, round(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age'
+        FROM animal, animal_for_adoption afa
+        WHERE ($user_id = afa.user_id AND afa.animal_id = animal.animal_id)";
         return BaseModel::select($query);
     }
 }

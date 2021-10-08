@@ -72,7 +72,7 @@ INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `s
 ('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'ADOPTED', '2021-09-03', '1', 3),
 ('21', 'Playful and a joy to be around, weaned', '2021-08-26', 'LISTED', NULL, '3', NULL),
 ('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2', NULL),
-('3', 'jade-green eyes not vaccinated','2021-09-01', 'LISTED', NULL, '1',NULL),
+('3', 'jade-green eyes, not vaccinated','2021-09-01', 'LISTED', NULL, '1',NULL),
 ('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL),
 ('4', 'Playful and affectionate, vaccinated', '2021-08-26', 'LISTED', NULL, '1',NULL),
 ('5', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL),
@@ -81,7 +81,7 @@ INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `s
 ('23', 'Independent and friendly, vaccinated', '2021-08-26', 'LISTED', NULL, '3',NULL),
 ('15', 'Has tiny, hedgehog paws, not vaccinated', '2021-09-02', 'LISTED', NULL, '1',NULL);
 
-INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(5,3),(6,3),(7,3),(8,4),(9,4); 
+INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(5,3),(7,3),(8,4),(9,4); 
 
 INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL');
 
