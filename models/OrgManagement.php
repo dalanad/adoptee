@@ -2,17 +2,21 @@
 
 class OrgManagement extends BaseModel
 {
-    static function createNewAnimal($org_id, $name, $type, $other, $gender, $dob, $color, $description, $anti_rabies,$dhl, $parvo, $tricat, $anti_rabies_booster, $dhl_booster, $parvo_booster, $tricat_booster, $dewormed, $avatar_photo, $adoptee_photo)
+    static function createNewAnimal($org_id, $name, $type, $other, $gender, $dob, $color_white, $color_grey, $color_orange, $color_brown, $color_black, $description, $anti_rabies, $dhl, $parvo, $tricat, $anti_rabies_booster, $dhl_booster, $parvo_booster, $tricat_booster, $dewormed, $avatar_photo, $adoptee_photo)
     {
-        $query = " INSERT INTO `animal` (name, type, gender, dob, color, photo) VALUES ('$name', '$type', '$gender', '$dob', '$color', '$avatar_photo')";
-        echo($query);
+        $query = " INSERT INTO `animal` (name, type, gender, dob, photo) VALUES ('$name', '$type', '$gender', '$dob', '$avatar_photo')";
+        echo ($query);
         BaseModel::insert($query);
         $animal_ID = BaseModel::lastInsertId();
 
+        $query = "INSERT INTO `animal_color` (animal_id, color_white, color_grey, color_orange, color_brown, color_black)
+        VALUES ('$animal_ID', '$color_white', '$color_grey', '$color_orange', '$color_brown', '$color_black')";
+        echo ($query);
+        BaseModel::insert($query);
 
         $query = "INSERT INTO `animal_vaccines` (animal_id, anti_rabies, dhl, parvo, tricat, anti_rabies_booster, dhl_booster, parvo_booster, tricat_booster)
                   VALUES ('$animal_ID', '$anti_rabies', '$dhl', '$parvo', '$tricat', '$anti_rabies_booster', '$dhl_booster', '$parvo_booster', '$tricat_booster')";
-        echo($query);
+        echo ($query);
         BaseModel::insert($query);
 
         $query = "INSERT INTO `animal_for_adoption` (animal_id, org_id, description, date_listed, dewormed, photos)
@@ -27,16 +31,16 @@ class OrgManagement extends BaseModel
 
     static function findAnimalsByOrgId()
     {
-        $org_id=$_SESSION['org_id'];
-        $query = "SELECT animal.animal_id, name,type, other, dob,gender,date_listed,status,date_adopted,description, color from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id";
+        $org_id = $_SESSION['org_id'];
+        $query = "SELECT animal.animal_id, name,type, other, dob,gender,date_listed,status,date_adopted,description, animal.photo as avatar_photo from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id";
         return BaseModel::select($query);
     }
 
-    
-    static function editAnimalData($status, $name, $type, $gender, $dob, $color, $description, $photo)
+
+    static function editAnimalData($status, $name, $type, $gender, $dob, $description, $photo)
     {
-        
-/*         $query = "INSERT INTO `animal_for_adoption` (photo)
+
+        /*         $query = "INSERT INTO `animal_for_adoption` (photo)
         VALUES ('$photo')";
         echo($query);
         BaseModel::insert($query); */
@@ -46,7 +50,6 @@ class OrgManagement extends BaseModel
         UPDATE `animal` SET type = $type WHERE isset($type);
         UPDATE `animal` SET gender = '$gender' WHERE isset($gender);
         UPDATE `animal` SET dob = '$dob' WHERE isset($dob);
-        UPDATE `animal` SET color = '$color' WHERE isset($color);
         UPDATE `animal_for_adoption` SET description = '$description' WHERE isset($description)";
 
         return BaseModel::insert($query);
@@ -89,13 +92,15 @@ class OrgManagement extends BaseModel
 
         return BaseModel::insert($query);
     }
-    
-    static function findReportedCases(){
+
+    static function findReportedCases()
+    {
         $query = "SELECT type, description, contact_number,location, st_y(location_coordinates) as longi, st_x(location_coordinates) as lat, status, photo, time_reported,org_response from report_rescue";
         return BaseModel::select($query);
     }
 
-    static function findRescuedAnimalsByOrgId(){
+    static function findRescuedAnimalsByOrgId()
+    {
         $query = "SELECT * from report_rescue";
         return BaseModel::select($query);
     }

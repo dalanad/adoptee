@@ -19,6 +19,7 @@
     <script src="/assets/vendor/jquery-3.6.0.min.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/vendor/ckeditor.js"></script>
+    <script src="/assets/vendor/charts.js"></script>
     <script>
         // Check that service workers are supported
         if ('serviceWorker' in navigator) {

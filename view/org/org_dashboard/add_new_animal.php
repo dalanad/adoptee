@@ -27,6 +27,31 @@
     display: none;
   }
 
+  .check {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .check input {
+    display: none;
+  }
+
+  .check label {
+    padding: 1rem;
+    border: 2px solid var(--gray-3);
+    display: block;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: .3rem;
+    text-align: center;
+    margin-bottom: .3rem;
+  }
+
+  .check input:checked+label {
+    opacity: 0.5;
+    border-color: var(--primary);
+  }
+
   .tooltip {
     position: relative;
     display: inline-block;
@@ -117,10 +142,18 @@
 
     <div class="row">
       <div class='field column'>
-        <label for='color'>Color</label>
-        <input class="ctrl" type="text" name="color" required />
-        <div>
-          <span class="field-msg">Use commas to seperate colors</span>
+        <label for="color"> Color </label>
+        <div class="check">
+          <input id="white" name="color_white" type="checkbox" value="white">
+          <label for="white" style="background:cornsilk;"></label>
+          <input id="grey" name="color_grey" type="checkbox" value="grey">
+          <label for="grey" style="background:grey;"></label>
+          <input id="orange" name="color_orange" type="checkbox" value="orange">
+          <label for="orange" style="background:darkgoldenrod;"></label>
+          <input id="brown" name="color_brown" type="checkbox" value="brown">
+          <label for="brown" style="background:brown;"></label>
+          <input id="black" name="color_black" type="checkbox" value="black">
+          <label for="black" style="background:black;color:white;"></label>
         </div>
       </div>
 
