@@ -15,7 +15,7 @@
             <a class="link" href="/Organization/get_org_listing">Organizations</a>
             <a class="link" href="/Consultation">Veterinary Consultations</a>
         </nav>
-        <?=notif_btn()?>
+        <?= notif_btn() ?>
         <?= user_btn() ?>
         <button class="btn btn-link more-btn black" onclick="document.querySelector('.main-nav').classList.toggle('shown')">
             <i class="fa fa-bars"></i>

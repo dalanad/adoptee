@@ -1,9 +1,9 @@
-
-
+# apache server configuration for the application
 RewriteEngine On
 RewriteBase /
 
-<FilesMatch "\.(html|htm|js|css|php)$">
+# disable caching for js, css, php files -- remove for when deploying
+<FilesMatch "\.(js|css|php)$">
   FileETag None
   <IfModule mod_headers.c>
     Header unset ETag
@@ -13,13 +13,14 @@ RewriteBase /
   </IfModule>
 </FilesMatch>
 
+# cache image, font files
 <FilesMatch "\.(svg|jpg|jpeg|png|woff2)$">
   <IfModule mod_headers.c>
     Header set Cache-Control "public, max-age=604800, immutable"
   </IfModule>
 </FilesMatch>
 
-# GZIP compression for text files: HTML, CSS, JS, Text, XML, fonts
+# add GZIP compression for text files: HTML, CSS, JS, Text, XML, fonts
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE application/javascript
   AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
@@ -37,6 +38,9 @@ RewriteBase /
   AddOutputFilterByType DEFLATE text/javascript
   AddOutputFilterByType DEFLATE text/plain
 </IfModule>
+
+# allows PWA service worker to register 
+Header set Service-Worker-Allowed '/'
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

@@ -109,16 +109,17 @@ create table consultation (
     animal_id int(10) not null,
     doctor_user_id int(10),
     user_id int(10),
-    status enum('CANCELLED','PENDING','ACCEPTED','COMPLETED') not null default 'PENDING', 
+    status enum('CANCELLED','PENDING','ACCEPTED','COMPLETED','EXPIRED') not null default 'PENDING', 
     type enum('LIVE','ADVISE') not null default 'ADVISE',
     payment_txn_id varchar(50) 
 );
 
 create table consultation_schedule (
-    doctor_user_id int(10),
+    doctor_user_id int(10) not null,
     day_of_week int(1),
-    time_slot time,
-    available boolean default 0
+    time_slot time not null,
+    charge int not null,
+    primary key (doctor_user_id, day_of_week, time_slot) 
 );
 
 alter table consultation   
@@ -129,6 +130,7 @@ create table consultation_message (
      consultation_id int(10),
      created_at timestamp DEFAULT CURRENT_TIMESTAMP,
      medical_record_id int(10),
+     attachments JSON,
      sender int(10) not null,
      message varchar(128),
      primary key (consultation_id, created_at)

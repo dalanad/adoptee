@@ -142,7 +142,7 @@
 
 .timeline-column.active::before {
 	content: " ";
-	background: var(--primary);
+	background: var(--gray-5);
 	opacity: 0.08;
 	display: block;
 	height: 100%;
@@ -182,7 +182,7 @@
 }
 
 .cell:not(:first-child) {
-	border-top: 1px solid var(--gray-2);
+	border-top: 1px solid var(--gray-3);
 }
 
 .heading.cell {
@@ -211,6 +211,7 @@
 	border-right: 1px solid var(--gray-3);
 	height: 600px;
 	overflow-y: auto;
+	scroll-snap-type: y mandatory;
 }
 
 ::-webkit-scrollbar {
@@ -223,6 +224,8 @@
 	align-items: center;
 	transition: background-color 0.2s ease-in-out, border-left-color 0.2s ease-in-out;
 	border-left: 0.2rem solid transparent;
+	scroll-snap-align: end;    
+	box-sizing: border-box;
 }
 
 .chat-animal:hover {
@@ -377,7 +380,7 @@
 }
 
 .overlay > div {
-	max-width: 600px;
+	max-width: 80vw;
 	margin: 0 auto;
 	box-shadow: var(--shadow-heavy);
 	border-radius: 0.4rem;

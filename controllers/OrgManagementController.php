@@ -124,6 +124,13 @@ class OrgManagementController extends Controller{
         View::render("org/dashboard", $data);
     }
 
+    function feedback_list()
+    {
+        $data = [
+            "active" => "feedback_list"
+        ];
+        View::render("org/dashboard", $data);
+    }
     function add_new_event()
     {
         View::render("org/org_dashboard/add_new_event");

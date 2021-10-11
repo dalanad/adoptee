@@ -42,12 +42,12 @@ class Doctor extends BaseModel
         // clear current schedule
         self::insert('DELETE FROM `consultation_schedule` WHERE doctor_user_id = :user_id', ["user_id" => $doc_id]);
 
-        $query = "INSERT INTO `consultation_schedule` (`doctor_user_id`, `day_of_week`, `time_slot`, `available`) VALUES (:doctor_user_id, :day_of_week, :time_slot, :available)";
+        $query = "INSERT INTO `consultation_schedule` (`doctor_user_id`, `day_of_week`, `time_slot`, `charge`) VALUES (:doctor_user_id, :day_of_week, :time_slot, :charge)";
         $i = 0;
         foreach ($schedule as $date => $slots) {
-            foreach ($slots as $slot => $status) {
-                if ($status == "AVAILABLE") {
-                    $data = ["doctor_user_id" => $doc_id, "day_of_week" => $i, "time_slot" => $slot, "available" => 1];
+            foreach ($slots as $slot => $charge) {
+                if (!is_null($charge)) {
+                    $data = ["doctor_user_id" => $doc_id, "day_of_week" => $i, "time_slot" => $slot, "charge" => $charge];
                     self::insert($query, $data);
                 }
             }
@@ -68,7 +68,7 @@ class Doctor extends BaseModel
         $result = self::select('select * FROM `consultation_schedule` WHERE doctor_user_id = :user_id', ["user_id" => $doc_id]);
 
         foreach ($result as $res) {
-            $schedule[$res["day_of_week"]][$res["time_slot"]] = 1;
+            $schedule[$res["day_of_week"]][$res["time_slot"]] = $res["charge"];
         }
         return $schedule;
     }
@@ -93,12 +93,48 @@ class Doctor extends BaseModel
     }
 
 
-    public static function getConsultedAnimals($doctorId)
+    public static function getConsultedAnimals($doctorId, $filter)
     {
-        $query = "SELECT c.*,u.name 'owner_name' ,a.*, ROUND(DATEDIFF(CURRENT_DATE, a.dob) / 365) 'age' FROM 
-         (SELECT DISTINCT animal_id, user_id FROM consultation WHERE consultation.doctor_user_id = :doctor_id ) c, animal a,user u
-         WHERE a.animal_id = c.animal_id and u.user_id = c.user_id";
 
-        return self::select($query, ["doctor_id" => $doctorId]);
+        $query = "SELECT SQL_CALC_FOUND_ROWS  c.*, u.name 'owner_name', a.*, ROUND( DATEDIFF(CURRENT_DATE, a.dob) / 365 ) 'age' FROM 
+        ( SELECT DISTINCT animal_id, user_id, MAX(consultation.consultation_date) 'last_consultation' FROM consultation
+         WHERE consultation.doctor_user_id = :doctor_id  and consultation.status='COMPLETED' GROUP BY consultation.animal_id, consultation.user_id ) c, 
+         animal a, USER u WHERE a.animal_id = c.animal_id AND u.user_id = c.user_id";
+
+        // filter by gender
+        $gender =  $filter["gender"];
+        if ($gender != "Any") {
+            $query = $query . " AND a.gender = '$gender' ";
+        }
+
+        // filter by type
+        $type =  $filter["type"];
+        if (sizeof($type) > 0) {
+            $query = $query . " AND a.type IN ('" . implode("','", $type) . "') ";
+        }
+
+        // search keyword
+        $search =  $filter["search"];
+        if ($search != "") {
+            $query = $query . " AND ( a.name like '%$search%' OR u.name like '%$search%' )";
+        }
+
+        // sort
+        $sort =  $filter["sort"];
+        if (isset($sort) && sizeof($sort) > 0) {
+            $directions = [];
+            foreach ($sort as $column => $direction) {
+                array_push($directions, " $column $direction ");
+            }
+            $query = $query . " ORDER BY " . implode(",", $directions);
+        }
+
+        // pagination
+        $query = $query . " LIMIT " . $filter['size'] . " OFFSET " . (intval($filter['size']) * intval($filter['page']));
+
+        return [
+            "items" => self::select($query, ["doctor_id" => $doctorId]),
+            "count" => self::selectOne("SELECT FOUND_ROWS() total ")["total"]
+        ];
     }
 }

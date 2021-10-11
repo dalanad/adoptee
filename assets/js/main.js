@@ -1,3 +1,8 @@
+// registers the service worker required for the PWA
+if ('serviceWorker' in navigator) {
+	window.addEventListener('load', () => navigator.serviceWorker.register('/assets/js/service-worker.js', { scope: '/' }));
+}
+
 // wait for a given duration in milliseconds
 function sleep(ms) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
@@ -127,7 +132,7 @@ function uploadFile() {
 				formData.append(file.name, file);
 			}
 
-			fetch("/doctor/upload", { method: "POST", body: formData })
+			fetch("/main/upload", { method: "POST", body: formData })
 				.then((r) => r.json())
 				.then((e) => {
 					console.log(e[0]);

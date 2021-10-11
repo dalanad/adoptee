@@ -5,7 +5,7 @@ require_once  __DIR__ . '/_nav.php';
 <div style="max-width: 900px;margin:0 auto">
     <h3 style="text-align:right;margin-bottom:0rem;font-weight:300">Account Balance : <b>Rs.5500</b> </h3>
     <div style="text-align: right;">
-        <button class="btn outline green" style=" margin:.5rem 0;"><i class="fas fa-dollar-sign"></i>&nbsp; Payout</button>
+        <button class="btn outline green" style=" margin:.5rem 0;"><i class="far fa-credit-card"></i>&nbsp; Payout</button>
 
     </div>
     <h3 style="margin-left: 1rem;margin-bottom:0rem;margin-top:1rem">Transaction History</h3>

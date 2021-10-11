@@ -10,26 +10,22 @@ class AuthController extends Controller
 
     function process_sign_in()
     {
-        $email = $_POST['email'];
+        $email = is_email($_POST['email']);
         $password = $_POST['password'];
 
-        try {
-            $user = User::findUserByEmail($email);
+        $user = User::findUserByEmail($email);
 
-            if (!isset($user)) {
-                $this->redirect("/auth/sign_in?error=true");
-            }
+        if (!isset($user)) {
+            $this->redirect("/auth/sign_in?error=true");
+        }
 
-            if ($user['email_verified'] == 0 || $user['telephone_verified'] == 0) {
-                $this->redirect('/auth/verify?email=' . $user["email"]);
-            }
+        if ($user['email_verified'] == 0 || $user['telephone_verified'] == 0) {
+            $this->redirect('/auth/verify?email=' . $user["email"]);
+        }
 
-            if (Crypto::verify($password, $user["password"])) {
-                $this->sendToHomePage($user);
-            } else {
-                $this->redirect("/auth/sign_in?error=true");
-            }
-        } catch (Exception $e) {
+        if (Crypto::verify($password, $user["password"])) {
+            $this->sendToHomePage($user);
+        } else {
             $this->redirect("/auth/sign_in?error=true");
         }
     }
@@ -109,7 +105,7 @@ class AuthController extends Controller
             throw new Exception("User with email '$email' not found", 400);
         }
 
-        // if both email & telephone is already verified 
+        // if both email & telephone is already verified
         if ($user['email_verified'] == 1 && $user['telephone_verified'] == 1) {
             throw new Exception("Both User email & telephone is already verified ", 400);
         }
@@ -117,26 +113,25 @@ class AuthController extends Controller
         $status = "";
 
         if (!isset($_GET["action"]) && $user['email_verified'] == 0) {
-
+        
             $email = new EmailService();
             $token = Crypto::encrypt($user["email"]);
             $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email&token=$token'> Verify Email </a> ";
             $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
             $status = "email_sent";
-        } else if (isset($_GET["action"]) && $_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
-
+        
+        } elseif (isset($_GET["action"]) && $_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
+        
             User::verifyEmail($user["email"]);
             $status = "email_verified";
-        } else if (isset($_GET["action"]) && $_GET["action"] == "send_sms") {
-
+        
+        } elseif (isset($_GET["action"]) && $_GET["action"] == "send_sms") {
             $notification = new EmailService();
             $otp = rand(100000, 999999);
             $_SESSION["otp"] = $otp;
-
-            # $notification->sendSMS("94769972727", "OTP : $otp"); // set $user["telephone"]
+            $notification->sendSMS("94" . (int) $user["telephone"], "Adoptee OTP : $otp");
             $status = "sms_sent";
-        } else if ($_GET["action"] == "validate_sms") {
-
+        } elseif ($_GET["action"] == "validate_sms") {
             if ($_SESSION["otp"] == $_POST['otp']) {
                 User::verifySMS($user["email"]); // TODO:
                 $status = "sms_verified";

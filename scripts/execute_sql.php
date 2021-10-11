@@ -4,7 +4,9 @@ $query = file_get_contents($_GET["script"] ?? "database.sql");
 
 $conn = new mysqli("localhost", "root", "root");
 
+
 $conn->multi_query($query);
+
 $success = true;
 $i = 1;
 $lines = explode(";", $query);
@@ -16,6 +18,10 @@ while ($conn->more_results()) {
         echo $lines[$i];
     }
     $i++;
+}
+
+if ($_GET["script"] == "seed_data.sql") {
+    require './seed.php';
 }
 
 if ($success) {
