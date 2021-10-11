@@ -16,12 +16,12 @@
         justify-content: center;
     }
 
-    img{
+    .image{
+        margin-right: 1rem;
         max-width: 100%;
         max-height: 100%;
-        margin-right: 1rem;
         border-radius: 5px;
-    }
+    }    
 
     .item .content-column{
         flex:75%;
@@ -45,7 +45,7 @@
 <?php
 foreach ($content as $key => $value) { ?>
     <div class="item">
-        <div class="image-column"><img src="<?= $value['photo']?>"></div>
+        <div class="image-column"><img class="image" src="<?= $value['photo']?>"></div>
         <div class="content-column">
             <div class="heading"><?= $value['heading']; ?></div>
             <div class="time"><?= explode(" ",$value['created_time'])[0]; ?></div>
