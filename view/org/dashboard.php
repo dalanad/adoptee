@@ -117,7 +117,7 @@ $administration_menu = array(
             <div style="text-align: center;margin-top: 1rem;margin-bottom:.5rem">
                 <img src="/assets/images/logo_vector_filled.svg" style="height:40px;margin-right: 1rem;">
             </div>
-            <a class="side-nav-link <?= "stats" == $active ? 'active' : '' ?>" href="/OrgManagement/org_adoption_listing">
+            <a class="side-nav-link <?= "stats" == $active ? 'active' : '' ?>" href="/OrgManagement/org_analytics">
                 <i class="far fa-chart-line"></i> &nbsp; Dashboard
             </a>
             <div>
@@ -157,7 +157,7 @@ $administration_menu = array(
         <div class="content" style="width: 100%;">
         <div class="admin-header">
             <div style="font-weight: 500;font-size:1.3rem">
-                <i class="fal fa-<?= $management_menu[$active]["icon"] ?> txt-clr <?= $management_menu[$active]["color"] ?>" style="font-size: 1.2em;"></i>
+                <i class="fal fa-<?= $management_menu[$active]["icon"] ?> txt-clr <?= $management_menu[$active]["icon"] ?>" style="font-size: 1.2em;"></i>
                 &nbsp;
                 <?= $management_menu[$active]["name"] ?>
             </div>

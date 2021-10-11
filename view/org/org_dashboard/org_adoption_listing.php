@@ -111,7 +111,7 @@
                     <td>
                         <table>
                             <tr>
-                                <td><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 30px; height: 30px; border-radius: 50%;"></td>
+                                <td><div style="width: 40px; height: 40px; border-radius: 50%; background-image: url('<?= $animal["avatar_photo"] ?> '); background-size: contain;"></div></td>
                                 <td><?= $animal["name"] ?></td>
                             </tr>
                         </table>
