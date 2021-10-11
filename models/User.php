@@ -30,14 +30,14 @@ class User extends BaseModel
 
     static function findUserByEmail($email)
     {
-        $query = "select *  from `user` where email= '$email'";
-        return BaseModel::select($query)[0];
+        $query = "select *  from `user` where email = :email";
+        return self::selectOne($query, ['email' => $email]);
     }
 
     static function findUserById($user_id)
     {
         $query = "select *  from `user` where user_id= :user_id";
-        return BaseModel::select($query, ["user_id" => $user_id])[0];
+        return self::selectOne($query, ["user_id" => $user_id]);
     }
 
     static function verifyEmail($email)

@@ -7,8 +7,7 @@
     <div class="chat-container" style="grid-template-columns:auto  280px  ">
         <div class="chat-conversations" style="height: unset;overflow:hidden;position:relative">
             <video id="speakerVideo" style="width:100%;" muted autoplay></video>
-            <div style="top: 0;position: absolute;width:160px;height:90px; overflow:hidden; left: 0;margin: 0.6rem;
-    border-radius: .2rem;    box-shadow: var(--shadow);    border: 2px solid white;">
+            <div style="top: 0;position: absolute;width:160px;height:90px; overflow:hidden; left: 0;margin: 0.6rem; border-radius: .2rem; box-shadow: var(--shadow); border: 2px solid white;">
                 <video id="yourVideo" style="width: 100%;" muted autoplay></video>
             </div>
             <div class="chat-footer" style=" justify-content:center">

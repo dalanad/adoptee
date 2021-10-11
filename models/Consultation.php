@@ -6,19 +6,21 @@ class Consultation extends BaseModel
     {
         $query = "INSERT INTO `consultation` (`consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
         VALUES ('$date', '$time', '$animalId', '$doctorId', '$userId', 'PENDING', '$type', NULL);";
-        return BaseModel::insert($query);
+        return self::insert($query);
     }
 
     public static function bookConsultationNewPet($doctorId, $userId, $type, $date, $time,  $name, $gender, $animal_type, $dob)
     {
         $query = "INSERT INTO `animal` (type, name, gender, dob) VALUES ('$animal_type','$name', '$gender', '$dob');";
-        BaseModel::insert($query);
+        self::insert($query);
         $animalId = self::lastInsertId();
         return self::bookConsultationPet($doctorId, $userId, $type, $date, $time, $animalId);
     }
 
     public static function getBookingsCalender($doctorId, $start_date, $end_date)
     {
+        assert(isset($doctorId) && isset($start_date) && isset($end_date) && $doctorId != "" && $start_date != "" && $end_date != "");
+
         $bookings = [];
 
         $result = self::select(
@@ -26,20 +28,23 @@ class Consultation extends BaseModel
             ["user_id" => $doctorId, "start_date" => $start_date, "end_date" => $end_date]
         );
 
-        foreach ($result as $res) {
-            $res["animal"] =  Animal::getAnimalById($res["animal_id"]);
-            $bookings[$res["consultation_date"]][$res["consultation_time"]] = $res;
+        foreach ($result as $item) {
+            $item["animal"] =  Animal::getAnimalById($item["animal_id"]);
+            $item["user"] =  User::findUserById($item["user_id"]);
+            $bookings[$item["consultation_date"]][$item["consultation_time"]] = $item;
         }
         return $bookings;
     }
 
-    public static function getConsultationById($consultationId)
+    public static function findConsultationById($consultationId)
     {
+        assert(isset($consultationId) && $consultationId != "");
 
         $consultations = self::select("SELECT * FROM `consultation` WHERE consultation_id = :consultation_id limit 1 ", ["consultation_id" => $consultationId]);
 
         $consultations = array_map(function ($item) {
             $item["animal"] =  Animal::getAnimalById($item["animal_id"]);
+            $item["user"] =  User::findUserById($item["user_id"]);
             return $item;
         }, $consultations);
 
@@ -47,7 +52,7 @@ class Consultation extends BaseModel
         return $consultations[0];
     }
 
-    public static function getConsultations($doctorId)
+    public static function findConsultationsByDoctorId($doctorId)
     {
 
         $consultations = self::select("SELECT * FROM `consultation` WHERE doctor_user_id = :user_id and status in ('ACCEPTED','COMPLETED')", ["user_id" => $doctorId]);
@@ -59,6 +64,13 @@ class Consultation extends BaseModel
         }, $consultations);
 
 
+        return $consultations;
+    }
+
+
+    public static function findConsultationsByPetId($animal_id)
+    {
+        $consultations = self::select("SELECT * FROM `consultation` WHERE animal_id = :animal_id and status in ('ACCEPTED','PENDING','COMPLETED')", ["animal_id" => $animal_id]);
         return $consultations;
     }
 

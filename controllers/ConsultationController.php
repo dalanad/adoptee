@@ -28,9 +28,15 @@ class ConsultationController extends Controller
         require __DIR__ . "/../lib/vendor/stripe-php-7.97.0/init.php";
         \Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
 
-        $YOUR_DOMAIN = 'http://localhost';
+        $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
+        $YOUR_DOMAIN = $protocol . $_SERVER['HTTP_HOST'];
 
         $checkout_session = \Stripe\Checkout\Session::create([
+            'locale' => 'sl',
+            'client_reference_id' => 'test_sssssqeqwe',
+            'metadata' => ['dalana' => "ee"],
+            'customer_email' => 'test@example.com',
+            'submit_type' => 'pay',
             'line_items' => [[
                 'price_data' => [
                     "currency" => "lkr",
@@ -45,7 +51,7 @@ class ConsultationController extends Controller
                 'card',
             ],
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/success.html',
+            'success_url' => $YOUR_DOMAIN . '/Consultation/success?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
         ]);
 
@@ -68,5 +74,16 @@ class ConsultationController extends Controller
         }
         unset($_SESSION['doctor'], $_SESSION['consultation_type'], $_SESSION['date'], $_SESSION['time']);
         $this->redirect("/consultation/index");
+    }
+
+    public function success()
+    {
+        require __DIR__ . "/../lib/vendor/stripe-php-7.97.0/init.php";
+        \Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
+
+        $session = \Stripe\Checkout\Session::retrieve($_GET['session_id']);
+
+        echo "<pre>";
+        echo json_encode($session, JSON_PRETTY_PRINT);
     }
 }

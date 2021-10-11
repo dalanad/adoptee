@@ -9,12 +9,15 @@ class Calender {
 
 	constructor(hostElement) {
 		this._el = hostElement;
+		this.init();
+	}
+
+	init() {
 		let url = new URL(window.location.href);
 		this.setDate(url.searchParams.get("calender_date") || new Date());
 	}
 
 	setDate(dt) {
-		console.log(dt);
 		this._date = new Date(dt);
 		params({ calender_date: this._date.toISOString().substr(0, 10) }, false);
 		this.show();
@@ -147,20 +150,14 @@ class AppointmentsTimeline {
 			current_date.setDate(current_date.getDate() + Number(day));
 
 			for (const slot in slots) {
-				this.markCellAvailable(current_date.toISOString().substr(0, 10), slot);
+				this.markCellAvailable(current_date.toISOString().substr(0, 10), slot, slots[slot]);
 				await sleep(30);
 			}
 		}
 	}
 
 	async saveSchedule() {
-		fetch("/doctor/update_schedule", {
-			method: "post",
-			body: JSON.stringify({ schedule: this._data }),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
+		fetch("/doctor/update_schedule", { method: "post", body: JSON.stringify({ schedule: this._data }) })
 			.then((res) => res.json())
 			.then(console.log);
 	}
@@ -190,16 +187,53 @@ class AppointmentsTimeline {
 	}
 
 	markBookingCell(date_str, time_str, data) {
+		let current_date = this.start_date;
+
+		for (let i = 0; i < 7; i++) {
+			let cell = this._cells[current_date.toISOString().substr(0, 10)][time_str];
+			cell.style.minHeight = "6em";
+			current_date.setDate(current_date.getDate() + 1);
+		}
+
+		let time_el = document.querySelector(`[data-time='${parseInt(time_str.substr(0, 2))}']`);
+		if (time_str.substr(3, 2) == "00" && time_el.dataset["1f"] != 1) {
+			time_el.dataset["1f"] = 1;
+			time_el.style.height = parseInt(time_el.style.height || "4") + 4 + "em";
+		}
+
+		if (time_str.substr(3, 2) == "30" && time_el.dataset["2f"] != 1) {
+			time_el.dataset["2f"] = 1;
+			time_el.style.height = parseInt(time_el.style.height || "4") + 4 + "em";
+		}
+
 		let cell = this._cells[date_str][time_str];
+
+		let end_time = new Date("2021-08-01T" + time_str + "Z");
+		end_time.setMinutes(end_time.getMinutes() + 30);
+
 		if (data) {
-			let { status, animal_type } = data;
+			let { status, animal, user } = data;
 			let status_colors = {
 				PENDING: "orange",
 				ACCEPTED: "-",
 				CANCELLED: "red",
+				COMPLETED: "green",
+				EXPIRED: "orange",
 			};
-			cell.classList.add("has-data", "txt-clr", status_colors[status]);
-			cell.innerHTML = `<i class="fa fa-${String(animal_type).toLowerCase()}"></i>&nbsp;${status}`;
+			cell.classList.add("booking", status_colors[status]);
+			cell.innerHTML = `
+			<div class="status">${status}</div>
+			<div class="content">
+			  	<div style="display:flex;align-items:center">
+				  <img src="${animal.photo}" class="pet-img" > 
+				  <b > &nbsp; ${animal.name} </b> 
+				  <span style="flex:1 1 0"></span>
+				  <i class="fa fa-${String(animal.type).toLowerCase()}"></i>
+				</div>
+				<div style="margin: 0.2em 0;">${user.name} </div>
+				<small>${time_str.substr(0, 5)} - ${end_time.toISOString().substr(11, 5)}</small>
+			</div>
+			`;
 		}
 		return cell;
 	}
@@ -230,7 +264,7 @@ class AppointmentsTimeline {
 		this.createCell("<i class='far fa-clock'></i>", "cell heading", time_col);
 
 		for (let i = 8; i < 22; i++) {
-			this.createCell(`${i}.00`, "heading cell", time_col);
+			this.createCell(`${i}.00`, "heading cell", time_col).dataset["time"] = i;
 		}
 
 		// date headers
@@ -269,7 +303,7 @@ class AppointmentsTimeline {
 
 				slot.addEventListener("click", (ev) => {
 					if (this.isSchedule && this.canEdit) {
-						if (this._data[date_str][time_str] !== "AVAILABLE") {
+						if (!this._data[date_str][time_str]) {
 							this.markCellAvailable(date_str, time_str);
 						} else {
 							this.clearCell(date_str, time_str);
@@ -283,10 +317,10 @@ class AppointmentsTimeline {
 		}
 	}
 
-	markCellAvailable(date_str, time_str) {
+	markCellAvailable(date_str, time_str, charge = null) {
 		let slot = this._cells[date_str][time_str];
-		this._data[date_str][time_str] = "AVAILABLE";
-		slot.innerText = "AVAILABLE";
+		this._data[date_str][time_str] = charge != null ? charge : this.charge;
+		slot.innerText = "Rs. " + this._data[date_str][time_str];
 		slot.style.background = "var(--green)";
 		slot.style.color = "white";
 		slot.classList.add("fade");
@@ -325,9 +359,9 @@ function InitSortHeaders() {
 				e.dataset.dir = e.dataset.dir == "ASC" ? "DESC" : "ASC";
 			}
 			if (e.dataset.dir) {
-				params({ [`sort[${e.dataset.field}]`]: e.dataset.dir });
+				params({ [`sort[${e.dataset.field}]`]: e.dataset.dir, page: 0 });
 			} else {
-				params({ [`sort[${e.dataset.field}]`]: null });
+				params({ [`sort[${e.dataset.field}]`]: null, page: 0 });
 			}
 		});
 	}
@@ -342,8 +376,8 @@ async function initChat(id) {
 		<div style="font-weight: 500;" id="animal-name">&nbsp;</div>
 		<div style="flex:1 1 0"></div>
 		<div>
-			<button class="btn btn-link black"><i class="far fa-phone"></i></button>
-			<button class="btn btn-faded green"><i class="fa fa-check"></i></button>
+			<!--button class="btn btn-link black"><i class="far fa-phone"></i></button-->
+			<button class="btn btn-faded green" id="btn-complete"><i class="fa fa-check"></i></button>
 		</div>
 	</div>
 	<div class="chat-body">
@@ -367,7 +401,7 @@ async function initChat(id) {
 	const con = await fetch("/doctor/get_consultation_by_id?consultation_id=" + id).then((e) => e.json());
 
 	chat_header.classList.remove("fade");
-	chat_window.querySelector(".animal-image").style.backgroundImage = `url('/assets/data/${con.animal.type.toLowerCase()}s/${con.animal.animal_id}.jpg')`;
+	chat_window.querySelector(".animal-image").style.backgroundImage = `url('${con.animal.photo}')`;
 	chat_window.querySelector("#animal-name").innerHTML = `&nbsp; ${con.animal.name}`;
 	chat_header.classList.add("fade");
 
@@ -377,25 +411,39 @@ async function initChat(id) {
 		chat_body.innerHTML = "";
 
 		for (const msg of messages) {
-			let msg_template = `<div class="msg ${msg.is_sender == "1" && "sent"}">${msg.message}</div>`;
+			let msg_template = `<div class="msg ${msg.is_sender == "1" && "sent"}">
+									${msg.message}
+									${JSON.parse(msg.attachments || "[]").map((e) => `<img src='${e}' height="80px" onclick="showOverlay(\'<img src=\\'${e}\\' style=\\'max-height:80vh;max-width:80vw\\'\')">`)}
+								</div>`;
 			chat_body.insertAdjacentHTML("beforeend", msg_template);
 		}
 	}
 
 	chat_window.querySelector("#btn-prescribe").addEventListener("click", addPrescription);
-	chat_window.querySelector("#btn-upload").addEventListener("click", uploadFile);
+	chat_header.querySelector("#btn-complete").addEventListener("click", completeConsultation);
+
+	chat_window.querySelector("#btn-upload").addEventListener("click", async () => {
+		let files = await uploadFile();
+		await postMessage(id, "", [files]);
+	});
 
 	async function addPrescription() {
 		let html = await fetch("/view/doctor/prescription.php").then((e) => e.text());
 		showOverlay(`<div style='width:500px;height:600px;overflow:auto'>${html}</div>`);
 	}
 
-	async function postMessage(consultationId, message) {
+	async function completeConsultation() {
+		let html = await fetch("/view/doctor/complete_consultation.php").then((e) => e.text());
+		showOverlay(`<div style='width:200px;overflow:auto'>${html}</div>`);
+	}
+
+	async function postMessage(consultationId, message, attachments = []) {
 		return fetch("/doctor/post_message", {
 			method: "post",
 			body: JSON.stringify({
 				consultation_id: consultationId,
 				message,
+				attachments,
 			}),
 			headers: {
 				"Content-Type": "application/json",
@@ -427,6 +475,3 @@ function showOverlay(html) {
 		if (e.target == div) div.remove();
 	});
 }
-
-
-

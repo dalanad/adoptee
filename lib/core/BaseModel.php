@@ -15,14 +15,13 @@ class BaseModel
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
 
-
         return $db;
     }
 
-    public static function select($query, $params = [])
+    protected static function select($query, $params = [])
     {
 
-        $db = BaseModel::getDB();
+        $db = self::getDB();
         $stmt = $db->prepare($query);
         $stmt->execute($params);
 
@@ -31,22 +30,30 @@ class BaseModel
         return  $result;
     }
 
-    public static function insert($query, $params = [])
+    protected static function selectOne($query, $params = [])
     {
+        $db = self::getDB();
+        $stmt = $db->prepare($query . " LIMIT 1");
+        $stmt->execute($params);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result == false ? null : $result;
+    }
 
-        $db = BaseModel::getDB();
+    protected static function insert($query, $params = [])
+    {
+        $db = self::getDB();
         $stmt = $db->prepare($query);
         return $stmt->execute($params);
     }
 
-    public static function update($query, $params = [])
+    protected static function update($query, $params = [])
     {
-        $db = BaseModel::getDB();
+        $db = self::getDB();
         $stmt = $db->prepare($query);
         return $stmt->execute($params);
     }
 
-    public static function lastInsertId($var = null)
+    protected static function lastInsertId($var = null)
     {
         return self::getDB()->lastInsertId($var);
     }
