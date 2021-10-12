@@ -8,6 +8,7 @@ class Image
 {
     private static $target_dir = "uploads/";
     private $file_path = "";
+    private static $file_number = 0;
 
     public function __construct(string $file_name)
     {
@@ -55,15 +56,16 @@ class Image
 
     private static function processFile($file_data)
     {
-        $dst_path = self::$target_dir . time() . "_" . rand(1, 100) . "." .  pathinfo($file_data["name"], PATHINFO_EXTENSION);
-        $file_ext = strtolower(pathinfo($dst_path, PATHINFO_EXTENSION));
+
+        $file_ext = strtolower(pathinfo($file_data["name"], PATHINFO_EXTENSION));
+        $dst_path = self::$target_dir . time() . "_" . (self::$file_number++) . rand(1, 100) . "." .  $file_ext;
 
         $check = getimagesize($file_data["tmp_name"]);
 
         if ($check == false) {
             throw new Exception("File is not an image.", 400);
         }
-        
+
         if (file_exists($dst_path)) {
             throw new  Exception("Sorry, file already exists.", 400);
         }
@@ -93,7 +95,8 @@ class Image
     public static function multi(string $field_name)
     {
         $urls = [];
-
+        echo "<pre>";
+        print_r($_FILES);
         $file_count = sizeof($_FILES[$field_name]["name"]);
 
         for ($i = 0; $i < $file_count; $i++) {

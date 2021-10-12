@@ -245,6 +245,13 @@ header .logo img {
 	.logo {
 		flex: 1;
 	}
+
+	header .logo img {
+		height: 40px;
+	}
+	.user-info {
+		display: none;
+	}
 }
 
 /* header end */
@@ -263,7 +270,7 @@ header .logo img {
 }
 
 .ctrl.sm {
-	padding: 0.1rem .3rem;
+	padding: 0.1rem 0.3rem;
 }
 
 .ctrl select {
@@ -697,25 +704,25 @@ header .logo img {
 	padding-left: 1rem;
 	padding-right: 1rem;
 	padding-top: 1rem;
- }
+}
 
- .mouse-over-div:hover {
-	 transition: border-color .2s ease-in-out;
-	 border-color: var(--gray-3);
- }
+.mouse-over-div:hover {
+	transition: border-color 0.2s ease-in-out;
+	border-color: var(--gray-3);
+}
 
- .mouse-over-div:hover .btn {
-	 opacity: 1;
- }
+.mouse-over-div:hover .btn {
+	opacity: 1;
+}
 
- .mouse-over-div .icon {
-	 font-size: 2em;
- }
+.mouse-over-div .icon {
+	font-size: 2em;
+}
 
- .mouse-over-div .title {
-	 font-size: 1.2rem;
-	 font-weight: 500;
-	 line-height: 1em;
- }
+.mouse-over-div .title {
+	font-size: 1.2rem;
+	font-weight: 500;
+	line-height: 1em;
+}
 
 /* END MOUSE OVER DIV */
