@@ -286,7 +286,7 @@
 
 <script>
   function confirm() {
-    alert('Your appointment has been made!');
+    // alert('Your appointment has been made!');
   }
 
   var dis1 = document.getElementById("dis_rm");

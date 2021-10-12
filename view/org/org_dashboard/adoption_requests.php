@@ -52,6 +52,7 @@
                 <th>ADOPTEE</th>
                 <th>ADOPTEE TYPE</th>
                 <th>ADOPTER</th>
+                <th>REQUEST DATE</th>
                 <th>HAVE PETS</th>
                 <th>HAVE CHILDREN</th>
                 <th>STATUS</th>
@@ -64,13 +65,14 @@
                     <td>
                         <table>
                             <tr>
-                                <td><img src="/assets\images\dogs/placeholder2.jpg" style="width: 30px; height: 30px; border-radius: 50%;"></td>
+                                <td><img src="<?= $adoption_request["photo"]?>" style="width: 30px; height: 30px; border-radius: 50%;"></td>
                                 <td><?= $adoption_request["animal_name"] ?></td>
                             </tr>
                         </table>
                     </td>
                     <td><?= $adoption_request["type"] ?></td>
                     <td><?= $adoption_request["name"] ?></td>
+                    <td><?= $adoption_request["request_date"] ?></td>
                     <td><span class="tag <?= $adoption_request["has_pets"] ? 'green' : 'pink' ?>"><?= $adoption_request["has_pets"] ? "YES" : "NO" ?> </span></td>
                     <td><span class="tag <?= $adoption_request["children"] ? 'green' : 'pink' ?>"><?= $adoption_request["children"] ? "YES" : "NO" ?> </span></td>
                     <td><span class="tag <?= $adoption_request["status"] == "PENDING" ? 'orange' :($adoption_request["status"] == "ADOPTED" ? 'green' : 'pink')  ?>"> <?= $adoption_request["status"] ?> </span></td>

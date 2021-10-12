@@ -4,6 +4,7 @@
 require_once  __DIR__ . '/../_layout/layout.php';
 
 $management_menu = array(
+
     "org_adoption_listing" => array("name" => "Adoption Listing", "icon" => "paw"),
     "adoption_requests" =>  array("name" =>  "Adoption Requests", "icon" => "dog"),
     "reported_cases" =>  array("name" =>  "Reported Cases", "icon" => "exclamation-circle"),
@@ -19,18 +20,17 @@ $administration_menu = array(
     "help" =>  array("name" =>  "Help", "icon" => "question-circle"),
 );
 
-
-
+$active_item = isset($management_menu[$active]) ? $management_menu[$active] : (isset($administration_menu[$active]) ? $administration_menu[$active] :  array("name" => "Dashboard", "icon" => "chart-line"))
 
 ?>
 
 <style>
     .admin-header {
-	padding: 1rem 1rem;
-	display: flex;
-	box-sizing: border-box;
-	align-items: center;
-}
+        padding: 1rem 1rem;
+        display: flex;
+        box-sizing: border-box;
+        align-items: center;
+    }
 
     .settings-container {
         display: flex;
@@ -155,25 +155,25 @@ $administration_menu = array(
         </div>
 
         <div class="content" style="width: 100%;">
-        <div class="admin-header">
-            <div style="font-weight: 500;font-size:1.3rem">
-                <i class="fal fa-<?= $management_menu[$active]["icon"] ?> txt-clr <?= $management_menu[$active]["icon"] ?>" style="font-size: 1.2em;"></i>
-                &nbsp;
-                <?= $management_menu[$active]["name"] ?>
+            <div class="admin-header">
+                <div style="font-weight: 500;font-size:1.3rem">
+                    <i class="fal fa-<?= $active_item["icon"] ?> txt-clr <?= $active_item["icon"] ?>" style="font-size: 1.2em;"></i>
+                    &nbsp;
+                    <?= $active_item["name"] ?>
+                </div>
+                <div style="flex: 1 1 0;"></div>
+                <?= user_btn() ?>
             </div>
-            <div style="flex: 1 1 0;"></div>
-            <?= user_btn() ?>
-        </div>
-        <div style="padding: 1rem;">
-            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem; height: 600px; width: 1250PX;">
+            <div style="padding: 1rem;">
+                <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem; height: 600px; width: 1250PX;">
 
-                <?php include __DIR__ . "/org_dashboard/" . $active . ".php" ?>
+                    <?php include __DIR__ . "/org_dashboard/" . $active . ".php" ?>
+                </div>
             </div>
+
         </div>
 
     </div>
-
-</div>
 
 
 </div>

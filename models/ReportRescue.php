@@ -29,7 +29,7 @@ class ReportRescue extends BaseModel
 
     static function getRescuedPets($user_id)
     {
-        $query = "SELECT o.name 'o_name', type, location, photo, ra.*, rr.*
+        $query = "SELECT o.name 'o_name', type, location, photos, ra.*, rr.*
         FROM organization o, report_rescue rr, user, rescued_animal ra
         WHERE o.org_id=rr.org_id 
         AND rr.contact_number=user.telephone

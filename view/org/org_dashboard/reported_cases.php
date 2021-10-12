@@ -107,7 +107,7 @@
         new google.maps.Marker({
             position: new google.maps.LatLng(<?= $reported_case["lat"] ?>,<?= $reported_case["longi"] ?>),
             map,
-            title: 'Rescue Location',
+            title: 'Rescue Location'
         });
         <?php } ?>
     };
