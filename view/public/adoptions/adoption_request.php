@@ -1,48 +1,68 @@
 <?php require __DIR__ . "/../../_layout/header.php" ?>
 
 <style>
-    .report {
-        display: grid;
-        margin: 0rem 1rem 3rem 1rem;
-        overflow: scroll;
+    .adoption-request {
+        display: flex;
+        padding: 0 1rem;
+        max-width: 1000px;
+        box-sizing: border-box;
+        justify-content: space-around;
     }
 
-    @media (min-width:780px) {
-        .report {
-            grid-template-columns: 1fr 1fr;
-            column-gap: 1rem;
-            margin: 2rem;
-        }
+    @media (max-width:768px) {
+        .adoption-request {
+            flex-wrap: wrap;
 
-        #image {
-            grid-column: 1;
-            grid-row: 1 / span 10;
-            height: 50%;
-        }
-
-        #details {
-            grid-column: 1;
-            grid-row: 10 / span 10;
-            height: fit-content;
-            width:75%;
-            padding:1rem;
-            margin:1 1 1 0rem;
-            border:5px solid #C5C5C5;
-            border-radius: 8px;
         }
     }
 
-    @media (min-width:1200px) {
-        .ctx {
-            height: calc(100% - 150px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    .images {
+        max-width: 400px;
+    }
+
+    .thumbnails {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .thumbnail {
+        border-radius: 8px;
+        background-size: cover;
+        background-position: center;
+        width: 60px;
+        height: 70px;
+        margin: .5rem .25rem;
+        display: inline-block;
+        border: var(--border);
+    }
+
+    .thumbnail:hover {
+        transform: scale(1.1);
+    }
+
+    .images .avatar {
+        border: var(--border);
+        border-radius: 50%;
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+    }
+
+    .images .preview {
+        border-radius: 8px;
+        background-size: cover;
+        width: 100%;
+        border: var(--border);
+        padding-top: 80%;
+        background-position: center;
     }
 
     .row {
         display: flex;
+        margin-bottom: .5rem;
+        align-items: center;
     }
 
     .column {
@@ -51,137 +71,138 @@
 
     .message {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: 10px;
-        margin-left: -50px;
-        color: var(--primary);
+        width: 100%;
+        height: 100%;
+        background: #ffffffcc;
+        top: 0;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
     }
 </style>
-
-<form class="container ctx" action="/AdoptionRequest/submit" method="POST">
-
-    <div class="report">
-
-        <div class="rounded" id="image">
-            <img style="border-radius:8px;max-height: 350px;margin:0 auto" src="<?= $petdata[0]['photo'] ?>" />
+<?php $pet = $petdata[0] ?>
+<div class="container adoption-request">
+    <div style="margin: 0 1rem;flex:1">
+        <button class="btn btn-faded black" style="margin-bottom: 1rem;" onclick="history.back()"><i class="fa fa-chevron-left"></i>&nbsp; Back</button>
+        <div class="images">
+            <div style="margin-bottom: .5rem;display:flex">
+                <img class="avatar" style="background-image: url(<?= $pet['photo'] ?>);">
+                <div style="margin-left: .5rem;flex:1">
+                    <div>
+                        <b><?= $pet['name'] ?></b> &nbsp; <i class="txt-clr fa fa-<?= $pet['gender'] == "male" ? 'mars blue' : 'venus pink' ?>"></i>
+                    </div>
+                    <div style="font-size: .8em;">
+                        <?= round($pet['age']) ?> Years old - <?= $pet['color'] ?> &nbsp;- <?= strtoupper($pet['type']) ?>
+                    </div>
+                    <div><small><span style="color: var(--gray-5);">Organization : </span> <?= $org[0]['name'] ?></small></div>
+                </div>
+            </div>
+            <div class="preview" style="background-image: url(<?= $pet['photo'] ?>);"> </div>
+            <div class="thumbnails">
+                <div class="thumbnail" style="background-image: url(<?= $pet['photo'] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                <?php for ($i = 'a'; $i < 'd'; $i++) {
+                    $image = explode("/", $pet['photo'])[4]; ?>
+                    <div class="thumbnail" style="background-image: url(../../../assets/data/<?= strtolower($pet['type']) ?>s/<?= explode(".", $image)[0] . $i ?>.<?= explode(".", $image)[1] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                <?php } ?>
+            </div>
         </div>
-
-        <div id="details">
-            <?php
-            foreach ($petdata as $key => $value) { ?>
-                <div class="row">
-                    <div class="column">Type:</div>
-                    <div class="column"><?= $value['type'] ?></div>
-                </div>
-                <div class="row">
-                    <div class="column">Name:</div>
-                    <div class="column"><?= $value['name'] ?></div>
-                </div>
-                <div class="row">
-                    <div class="column">Born on:</div>
-                    <div class="column"><?= $value['dob'] ?></div>
-                </div>
-                <div class="row">
-                    <div class="column">Gender:</div>
-                    <div class="column"><?= $value['gender'] ?></div>
-                </div>
-                <div class="row">
-                    <div class="column">Colour:</div>
-                    <div class="column"><?= $value['color'] ?></div>
-                </div>
-                <div class="row">
-                    <div class="column">Description:</div>
-                    <div class="column"><?= $value['description'] ?></div>
-                </div>
-
-            <?php } ?>
+        <div>
+            <h4 style="margin: 0.5rem 0;">Description</h4>
+            <?= $pet['description'] ?>
         </div>
+    </div>
 
-        <?php if (isset($_SESSION['user'])) { ?>
-
-            <div class='field'>
-                <div class="row">
-                    <div class="column bold">Name of adopter:</div>
-                    <div class="column"><?php print_r($_SESSION['user']['name']); ?></div>
-                </div>
-            </div>
-
-            <div class='field'>
-                <div class="row">
-                    <div class="column bold">Contact Number:</div>
-                    <div class="column"><?php print_r($_SESSION['user']['telephone']); ?></div>
-                </div>
-            </div>
-
-            <div class='field'>
-                <div class="row">
-                    <div class="column bold">Email:</div>
-                    <div class="column"><?php print_r($_SESSION['user']['email']); ?></div>
-                </div>
-            </div>
-
-            <div class='field'>
-                <div class="row">
-                    <div class="column bold">Address:</div>
-                    <div class="column"><?php print_r($_SESSION['user']['address']); ?></div>
-                </div>
-            </div>
-
-            <p style="color:#ff0000; font-size:15px;">*If your personal details are incorrect,
-                please visit your profile and update them</p>
-
-            <div class='field'>
-                <div class="row">
-                    <div class="column">
-                        <label for="has_pets">Do you own any pets?</label>
+    <div style="position: relative;margin: 0 1rem;">
+        <h3><i class="far fa-dog-leashed"></i>&nbsp; Adoption Request</h3>
+        <?php if (isset($_SESSION['user'])) {
+            if (!$submitted) { ?> <!--signed in but not submitted-->
+                <div class="user-info">
+                    <div class="row">
+                        <div class="column bold">Name of adopter:</div>
+                        <div class="column"><?= isset($_SESSION['user']) ? $_SESSION['user']['name']  : ""; ?></div>
                     </div>
-                    <div class="column">
-                        Yes <input class="ctrl-check" type="radio" value="1" name="has_pets" />
-                        No <input class="ctrl-check" type="radio" value="0" name="has_pets" />
+                    <div class="row">
+                        <div class="column bold">Contact Number:</div>
+                        <div class="column"><?= isset($_SESSION['user']) ? $_SESSION['user']['telephone'] : "" ?></div>
                     </div>
-                </div>
-            </div>
-
-            <div class='field'>
-                <div>
-                    </br>
-                    <label for="petsafety">If "Yes", what are the any safety concerns with adopting the requested pet, if any?
-                    </label>
-                </div>
-                <div>
-                    <textarea rows="4" class="ctrl" name="petsafety"></textarea>
-                </div>
-            </div>
-
-            </br>
-
-            <div class='field'>
-                <div class="row">
-                    <div class="column">
-                        <label for="children">Are there children living in the same household?</label>
+                    <div class="row">
+                        <div class="column bold">Email:</div>
+                        <div class="column"><?= isset($_SESSION['user']) ? $_SESSION['user']['email'] : "" ?></div>
                     </div>
-                    <div class="column">
-                        Yes <input class="ctrl-check" type="radio" value="1" name="children" />
-                        No <input class="ctrl-check" type="radio" value="0" name="children" />
+                    <div class="row">
+                        <div class="column bold">Address:</div>
+                        <div class="column"><?= isset($_SESSION['user']) ? $_SESSION['user']['address'] : "" ?></div>
                     </div>
+                    <p style="color:#ff0000;">If your personal details are incorrect, you can update them<a class="btn btn-link" href="/profile/user_profile">here</a></p>
                 </div>
+                <form action="/AdoptionRequest/submit?animal_id=<?= $_GET['animal_id'] ?>&org_id=<?= $_GET['org_id'] ?>" method="POST">
+                    <div class='row'>
+                        <label class="column" for="has_pets">Q. Do you own any pets?</label>
+                        <div class="column ">
+                            <label><input class="ctrl-radio" type="radio" value="1" name="has_pets" required onchange="displayPetSafety(this)" /> &nbspYes</label>
+                            <label><input class="ctrl-radio" type="radio" value="0" name="has_pets" required onchange="displayPetSafety(this)" /> &nbspNo</label>
+                        </div>
+                    </div>
+                    <div class='field' style="margin: 1rem 0;">
+                        <label for="petsafety">If "Yes", what are the any safety concerns with adopting the requested pet, if any? </label>
+                        <textarea rows="3" class="ctrl" name="petsafety" id="petsafety" disabled></textarea>
+                    </div>
+                    <div class='row'>
+                        <div class="column">Q. Are there children living in the same household?</div>
+                        <div class="column">
+                            <label><input class="ctrl-radio" type="radio" value="1" name="children" required onchange="displayChildSafety(this)" /> &nbspYes &nbsp;</label>
+                            <label><input class="ctrl-radio" type="radio" value="0" name="children" required onchange="displayChildSafety(this)" /> &nbspNo</label>
+                        </div>
+                    </div>
+                    <div class='field' style="margin: 1rem 0;">
+                        <label for="childsafety">If "Yes", what are the any safety concerns with adopting the requested pet, if any? </label>
+                        <textarea rows="3" class="ctrl" name="childsafety" disabled></textarea>
+                    </div>
+                    <button style="margin-bottom: 1rem;" class='btn' type="submit">Request to Adopt</button>
+                </form>
+                <?php if ($req == "requested") { ?> <!--signed in, not submitted but requested by someone else-->
+                    <div class="message">
+                        <div style="font-weight: 600;"> This pet has already been requested for adoption</div> <br>
+                    </div>
+                <?php } 
+            }else{ ?> <!--signed in and submitted-->
+                    <!--SUBMITTED FORM DATA-->
+            <?php }
+        } else { ?>   <!--signed out-->
+            <div class="message">
+                <i class="far fa-user-lock fa-5x txt-clr orange"></i> <br>
+                <div style="font-weight: 600;"> Sign In Required</div> <br>
+                <a class="btn green" href="/auth/sign_in">Sign In</a>
             </div>
-
-            <div class='field'>
-                <div>
-                    </br>
-                    <label for="childsafety">If "Yes", what are the any safety concerns with adopting the requested pet, if any?
-                    </label>
-                </div>
-                <div>
-                    <textarea rows="4" class="ctrl" name="childsafety"></textarea>
-                </div>
-            </div>
-
-            <div><button class='btn mr2'>Send request</button></div>
-        <?php } else { ?>
-            <div class="message">Please login to continue</div>
         <?php } ?>
     </div>
-</form>
+</div>
+
+<script>
+    function displayPetSafety(_this) {
+        var text = document.getElementsByName('petsafety')[0];
+        if (_this.value == "1") {
+            text.disabled = false;
+        } else {
+            text.value = "";
+            text.disabled = true;
+        }
+    }
+
+    function displayChildSafety(_this) {
+        var text = document.getElementsByName('childsafety')[0];
+        if (_this.value == "1") {
+            text.disabled = false;
+        } else {
+            text.value = "";
+            text.disabled = true;
+        }
+    }
+
+    function displayPreview(_this) {
+        var prev = document.getElementsByClassName('preview')[0];
+        var thumb = _this.style.backgroundImage;
+        prev.style.backgroundImage = thumb;
+    }
+</script>

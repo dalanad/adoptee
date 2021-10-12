@@ -75,7 +75,7 @@
     }
 </style>
 
-<form class="container" style="padding:1rem 2rem;" name="_form" action="" method="get"><?php print_r($filter) ?>
+<form class="container" style="padding:1rem 2rem;" name="_form" action="" method="get">
     <h2> Pet Adoption</h2>
     <div style="display: flex;">
         <div style="width: 200px;" >
@@ -184,7 +184,7 @@
                             <div class="adoption-card-action">ADOPT</div>
                             <div style="display:flex; padding:.5rem 1rem;align-items: center;">
                                 <div style="flex:1 1 0">
-                                    <div style="font-weight: 500;">     <?= $animal["name"] ?></div><?= count(explode("," ,$animal['color']));?>
+                                    <div style="font-weight: 500;">     <?= $animal["name"] ?></div>
                                     <div class="type" style="font-size:small"><?= $animal["type"] ?> - <?= round($animal["age"]) ?> years</div>
                                 </div>
                                 <div style="font-size: 1.5em;">

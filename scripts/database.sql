@@ -60,7 +60,7 @@ create table animal (
     name varchar(50),
     gender enum('MALE', 'FEMALE', 'UNKNOWN') default 'UNKNOWN',
     dob date,
-    color varchar(50),
+    color JSON,
     photo varchar(100),
     primary key(animal_id)
 );

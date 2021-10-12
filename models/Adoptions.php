@@ -37,7 +37,7 @@ class Adoptions extends BaseModel
         //color
         $colors = $filter['color'];
         if(sizeof($colors) > 0){
-            $query = $query . " AND JSON_CONTAINS(a.color, '[\"" . implode('","', $colors) . "\"]' )";print_r($query);
+            $query = $query . " AND JSON_CONTAINS(a.color, '[\"" . implode('","', $colors) . "\"]' )";
         }
         
 
@@ -55,6 +55,12 @@ class Adoptions extends BaseModel
         }
 
         return self::select($query);
+    }
+
+    
+    static function hidePet($animalId)
+    {
+        
     }
 
     static function adopteeUpdate($userId, $animalId, $type, $desc, $photo)
