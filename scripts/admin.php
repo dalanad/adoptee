@@ -1,4 +1,4 @@
-<? include "./../view/_layout/layout.php"?><button onclick="resetDB()">Reset DB</button>
+<?php include "./../view/_layout/layout.php"?><button onclick="resetDB()">Reset DB</button>
 <button onclick="seed()">Seed Data</button>
 
 <div id="result">

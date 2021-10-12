@@ -10,7 +10,7 @@
 	--primary: #0d6efd;
 	--red: red;
 	--blue: #0ebbff;
-	--orange: orange;
+	--orange: rgb(255, 166, 0);
 	--green: #08d5a2;
 	--shadow: rgba(67, 90, 111, 0.3) 0px 0px 1px, rgba(67, 90, 111, 0.47) 0px 5px 8px -4px;
 	--shadow-light: rgba(67, 90, 111, 0.3) 0px 0px 1px, rgba(67, 90, 111, 0.47) 0px 2px 4px -2px;
@@ -245,6 +245,13 @@ header .logo img {
 	.logo {
 		flex: 1;
 	}
+
+	header .logo img {
+		height: 40px;
+	}
+	.user-info {
+		display: none;
+	}
 }
 
 /* header end */
@@ -263,7 +270,7 @@ header .logo img {
 }
 
 .ctrl.sm {
-	padding: 0.1rem;
+	padding: 0.1rem 0.3rem;
 }
 
 .ctrl select {
@@ -373,7 +380,7 @@ header .logo img {
 .ctrl-radio[type="radio"] {
 	font-size: 1.3em;
 	position: relative;
-	width: 0.8em;
+	width: 1em;
 	height: 0.8em;
 }
 
@@ -387,7 +394,7 @@ header .logo img {
 	font-family: "Font Awesome 5 Pro";
 	position: absolute;
 	top: -0.1em;
-	line-height: 1;
+	line-height: 1.3em;
 }
 
 .ctrl-check[type="checkbox"]:checked::before,
@@ -697,25 +704,25 @@ header .logo img {
 	padding-left: 1rem;
 	padding-right: 1rem;
 	padding-top: 1rem;
- }
+}
 
- .mouse-over-div:hover {
-	 transition: border-color .2s ease-in-out;
-	 border-color: var(--gray-3);
- }
+.mouse-over-div:hover {
+	transition: border-color 0.2s ease-in-out;
+	border-color: var(--gray-3);
+}
 
- .mouse-over-div:hover .btn {
-	 opacity: 1;
- }
+.mouse-over-div:hover .btn {
+	opacity: 1;
+}
 
- .mouse-over-div .icon {
-	 font-size: 2em;
- }
+.mouse-over-div .icon {
+	font-size: 2em;
+}
 
- .mouse-over-div .title {
-	 font-size: 1.2rem;
-	 font-weight: 500;
-	 line-height: 1em;
- }
+.mouse-over-div .title {
+	font-size: 1.2rem;
+	font-weight: 500;
+	line-height: 1em;
+}
 
 /* END MOUSE OVER DIV */
