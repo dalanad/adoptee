@@ -80,7 +80,7 @@
                                 </div>
                             </div>
 
-                        <? } ?>
+                        <?php } ?>
                         <?php if ($status == 'email_verified') { ?>
 
                             <div class="verify-card">
@@ -99,7 +99,7 @@
                                 </div>
                             </form>
 
-                        <? } ?>
+                        <?php } ?>
                         <?php if ($status == 'sms_sent' || $status == 'otp_invalid') { ?>
 
                             <form action="?email=<?= $user["email"] ?>&action=validate_sms" method="POST" class="verify-card">
@@ -109,7 +109,7 @@
                                 <div class="field">
                                     <div style="font-weight: 600;text-align:center;margin:.5rem 0">OTP</div>
                                     <input type="text" name="otp" inputmode="numeric" required pattern="\d{6}" autocomplete="one-time-code" class="ctrl">
-                                    <?php if ($status == 'otp_invalid') { ?><div class="field-msg" style="color: red;">Invalid OTP</div><? } ?>
+                                    <?php if ($status == 'otp_invalid') { ?><div class="field-msg" style="color: red;">Invalid OTP</div><?php } ?>
                                 </div>
                                 <div style="margin-top: 1rem; text-align:center">
                                     <button type="submit" class="btn outline green">Verify</button>
@@ -117,7 +117,7 @@
                                 <?= $_SESSION["otp"] ?>
                             </form>
 
-                        <? } ?>
+                        <?php } ?>
                         <?php if ($status == 'sms_verified') { ?>
 
                             <div style="white-space: pre-wrap; margin: 1rem 0; text-align: center;">Verification Complete</div>
@@ -125,7 +125,7 @@
                                 <a href="/auth/sign_in" class="btn outline">Continue to Login</a>
                             </div>
 
-                        <? } ?>
+                        <?php } ?>
                     </div>
 
                 </div>

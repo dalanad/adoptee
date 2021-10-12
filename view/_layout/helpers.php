@@ -7,7 +7,7 @@ function user_btn()
         "<div class='dropdown' style='display:flex;align-items: center;line-height: 1;'>
 
             <i class='far fa-user-circle' style='font-size:1.2em'> </i>
-            <div style='margin-left:.5rem'>" . $_SESSION['user']['name'] .
+            <div style='margin-left:.5rem' class='user-info'>" . $_SESSION['user']['name'] .
             (isset($_SESSION['org']) ? ("<br><div> <small style='font-weight: 300;'>" . $_SESSION['org']['name'] . "</small></div>") : "") .
             "</div>
              <div class='dropdown-content'>
@@ -46,9 +46,9 @@ function pagination($current_page, $page_size, $total_items)
         <div>
             <div style="display: flex; align-items:baseline;margin-top:.5rem">
                 <select class="ctrl sm" onchange="params({size:this.value,page:0})">
-                    <? foreach ([5, 10, 25, 50, 100] as $i) { ?>
+                    <?php foreach ([5, 10, 25, 50, 100] as $i) { ?>
                         <option value="<?= $i ?>" <?= $i == $page_size ? "selected" : "" ?>><?= $i ?></option>
-                    <? } ?>
+                    <?php } ?>
                 </select>
                 <span style="white-space: nowrap;">&nbsp; Per Page</span>
             </div>

@@ -1,11 +1,13 @@
 <?php
 
-function is_email($value, &$errors)
+function is_email($value, &$errors = null)
 {
     if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-        array_push($errors, "Invalid email");
+        if ($errors)
+            array_push($errors, "Invalid email");
+        else
+            throw new Exception("Invalid email");
     }
 
     return $value;
 }
-

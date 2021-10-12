@@ -28,7 +28,7 @@
                 <input type="submit" class="btn" value="Register" />
 
                 <div class="body-text" style="margin-top: 1rem;">
-                    Alreaday have an account ? <a class="btn btn-link" style="font-size:1em;padding:0" onclick="SignIn()">Sign In </a>
+                    Already have an account ? <a class="btn btn-link" style="font-size:1em;padding:0" onclick="SignIn()">Sign In </a>
                 </div>
                 <div style="margin-top: 1rem;">
                     <div class="body-text">Register as</div>

@@ -17,17 +17,8 @@
     <link href="/assets/css/styles.css?w=<?= rand(1, 100) ?>" rel="stylesheet" type="text/css" />
     <link href="/assets/css/util.css" rel="stylesheet" type="text/css" />
     <script src="/assets/vendor/jquery-3.6.0.min.js"></script>
-    <script src="/assets/js/main.js"></script>
     <script src="/assets/vendor/ckeditor.js"></script>
     <script src="/assets/vendor/charts.js"></script>
-    <script>
-        // Check that service workers are supported
-        if ('serviceWorker' in navigator) {
-            // Use the window load event to keep the page load performant
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/assets/js/service-worker.js');
-            });
-        }
-    </script>
+    <script src="/assets/js/main.js"></script>
 </head>
 <?php require __DIR__ . '/helpers.php' ?>
