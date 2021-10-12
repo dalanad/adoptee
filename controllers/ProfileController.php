@@ -36,9 +36,14 @@ class ProfileController extends Controller
     }
 
     static function consultations()
-    {
+    {                                               //backend not connected
+        $user = new User;
+        $petdata = $user->getUserPets($_SESSION['user']['user_id']);
+        foreach($petdata as $key=>$value){
+            $value["consultations"] = Consultation::getUpcomingConsultations($value['animal_id']);
+        }
         $data = ["active" => "consultations"];
-        View::render("auth/profile/user_profile", $data); //backend not connected
+        View::render("auth/profile/user_profile", $data); 
     }
 
     static function adoptions()
@@ -60,7 +65,7 @@ class ProfileController extends Controller
         $user = new User;
         $petdata = $user->getUserPets($_SESSION['user']['user_id']);
         for($i=0; $i < sizeof($petdata); $i++){
-            $petdata[$i]["consultdata"] = Consultation::getPetConsultation($petdata[$i]['animal_id']);
+            $petdata[$i]["consultdata"] = Consultation::getConsultationByPet($petdata[$i]['animal_id']);
         }
         $data = [
             "active" => "my_pets",

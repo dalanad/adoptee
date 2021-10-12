@@ -62,13 +62,23 @@ class Consultation extends BaseModel
         return $consultations;
     }
 
-    public static function getPetConsultation()
+    public static function getConsultationByPet($animalId)
     {
         $query = "SELECT c.*, cm.consultation_id, cm.message, user_pet.animal_id
         FROM consultation c, consultation_message cm, user_pet
         WHERE c.animal_id=user_pet.animal_id
         AND c.status='COMPLETED'
-        AND cm.consultation_id=c.consultation_id";
-        return BaseModel::select($query);
+        AND cm.consultation_id=c.consultation_id
+        AND user_pet.animal_id = $animalId";
+        return self::select($query);
+    }
+
+    public static function getUpcomingConsultations($animalId)
+    {
+        $query = "SELECT c.*
+        FROM consultation c
+        WHERE animal_id = $animalId
+        AND (status = 'PENDING'
+        OR status = 'ACCEPTED');";
     }
 }

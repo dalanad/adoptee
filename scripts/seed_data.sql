@@ -30,36 +30,36 @@ VALUES ('1','Gold',5000.00,'30','Funds are allocated for veterinary needs'),
 ('3','Basic',2000.00,'30','Funds are allocated for food');
 
 INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) VALUES
-('Dog', 'Tigger', 'Male',   '2021-07-01', 'Black','/assets/data/dogs/1.jpg'),
-('Dog', 'Leo',    'Male',   '2016-01-15', 'Orange','/assets/data/dogs/2.jpg'),
-('Dog', 'Oliver', 'Female', '2021-12-16', 'White','/assets/data/dogs/3.jpg'),
-('Dog', 'Milo',   'Female', '2020-02-10', 'Golden Brown','/assets/data/dogs/4.jpg'),
-('Dog', 'Simba',  'Male',   '2015-10-01', 'Grey','/assets/data/dogs/5.jpg'),
-('Dog', 'Luna',   'Female', '2017-10-01', 'Grey','/assets/data/dogs/6.jpg'),
-('Dog', 'Riley',  'Male',   '2014-10-01', 'Grey','/assets/data/dogs/7.jpg'),
-('Dog', 'Nala',   'Female', '2015-10-01', 'Orange','/assets/data/dogs/8.jpg'),
-('Dog', 'Duke',   'Male',   '2015-10-01', 'Grey','/assets/data/dogs/9.jpg'),
-('Dog', 'Bear',   'Male',   '2013-10-01', 'Grey','/assets/data/dogs/10.jpg'),
-('Cat', 'Sophie', 'Female', '2015-10-01', 'Grey','/assets/data/dogs/11.jpg'),
-('Dog', 'Oliver', 'Male',   '2010-10-01', 'White','/assets/data/dogs/12.jpg'),
-('Dog', 'Lucy',   'Male',   '2012-10-01', 'Grey','/assets/data/dogs/13.jpg'),
-('Dog', 'Max',    'Male',   '2011-10-01', 'Grey','/assets/data/dogs/14.jpg'),
-('Dog', 'Bailey', 'Female', '2015-10-01', 'Golden Brown','/assets/data/dogs/15.jpg'),
-('Dog', 'Daisy',  'Female', '2015-10-01', 'Grey','/assets/data/dogs/16.jpg'),
-('Dog', 'Cooper', 'Male',   '2017-10-01', 'Grey','/assets/data/dogs/17.jpg'),
-('Dog', 'Chloe',  'Female', '2015-10-01', 'Grey','/assets/data/dogs/18.jpg'),
-('Dog', 'Jack',   'Male',   '2018-10-01', 'Black','/assets/data/dogs/19.jpg'),
-('Dog', 'Duke',   'Male',   '2019-10-01', 'Grey','/assets/data/dogs/20.jpg'),
-('Cat', 'Tom',    'Male',   '2013-10-01', 'Grey','/assets/data/cats/1.jpg'),
-('Cat', 'Otis',   'Male',   '2013-10-01', 'Grey','/assets/data/cats/2.jpg'),
-('Cat', 'Benny',  'Male',   '2013-10-01', 'Grey','/assets/data/cats/3.jpg'),
-('Cat', 'Frank',  'Male',   '2013-10-01', 'Grey','/assets/data/cats/4.jpg'),
-('Cat', 'Garfield','Male',   '2013-10-01', 'Grey','/assets/data/cats/5.jpg'),
-('Cat', 'Penny',  'Female', '2013-10-01', 'Grey','/assets/data/cats/6.jpg'),
-('Cat', 'Lily',   'Female', '2013-10-01', 'Grey','/assets/data/cats/7.jpg'),
-('Cat', 'Rosie',  'Female', '2013-10-01', 'Grey','/assets/data/cats/8.jpg'),
-('Cat', 'Maggie', 'Female', '2013-10-01', 'Grey','/assets/data/cats/9.jpg'),
-('Cat', 'Nova',   'Female', '2013-10-01', 'Grey','/assets/data/cats/10.jpg');
+('Dog', 'Tigger', 'Male',   '2021-07-01', '["Brown"]','/assets/data/dogs/1.jpg'),
+('Dog', 'Leo',    'Male',   '2016-01-15', '["Orange"]','/assets/data/dogs/2.jpg'),
+('Dog', 'Oliver', 'Female', '2021-10-06', '["White"]','/assets/data/dogs/3.jpg'),
+('Dog', 'Milo',   'Female', '2020-02-10', '["Golden Brown"]','/assets/data/dogs/4.jpg'),
+('Dog', 'Simba',  'Male',   '2015-10-01', '["Grey"]','/assets/data/dogs/5.jpg'),
+('Dog', 'Luna',   'Female', '2017-10-01', '["Grey"]','/assets/data/dogs/6.jpg'),
+('Dog', 'Riley',  'Male',   '2014-10-01', '["Grey"]','/assets/data/dogs/7.jpg'),
+('Dog', 'Nala',   'Female', '2015-10-01', '["Orange"]','/assets/data/dogs/8.jpg'),
+('Dog', 'Duke',   'Male',   '2015-10-01', '["Grey"]','/assets/data/dogs/9.jpg'),
+('Dog', 'Bear',   'Male',   '2013-10-01', '["Grey"]','/assets/data/dogs/10.jpg'),
+('Cat', 'Sophie', 'Female', '2015-10-01', '["Grey"]','/assets/data/dogs/11.jpg'),
+('Dog', 'Oliver', 'Male',   '2010-10-01', '["White"]','/assets/data/dogs/12.jpg'),
+('Dog', 'Lucy',   'Male',   '2012-10-01', '["Grey"]','/assets/data/dogs/13.jpg'),
+('Dog', 'Max',    'Male',   '2011-10-01', '["Grey"]','/assets/data/dogs/14.jpg'),
+('Dog', 'Bailey', 'Female', '2015-10-01', '["Golden Brown"]','/assets/data/dogs/15.jpg'),
+('Dog', 'Daisy',  'Female', '2015-10-01', '["Grey"]','/assets/data/dogs/16.jpg'),
+('Dog', 'Cooper', 'Male',   '2017-10-01', '["Grey"]','/assets/data/dogs/17.jpg'),
+('Dog', 'Chloe',  'Female', '2015-10-01', '["Grey"]','/assets/data/dogs/18.jpg'),
+('Dog', 'Jack',   'Male',   '2018-10-01', '["Black"]','/assets/data/dogs/19.jpg'),
+('Dog', 'Duke',   'Male',   '2019-10-01', '["Grey"]','/assets/data/dogs/20.jpg'),
+('Cat', 'Tom',    'Male',   '2013-10-01', '["Grey"]','/assets/data/cats/1.jpg'),
+('Cat', 'Otis',   'Male',   '2013-10-01', '["Grey"]','/assets/data/cats/2.jpg'),
+('Cat', 'Benny',  'Male',   '2013-10-01', '["Grey"]','/assets/data/cats/3.jpg'),
+('Cat', 'Frank',  'Male',   '2013-10-01', '["Grey"]','/assets/data/cats/4.jpg'),
+('Cat', 'Garfield','Male',   '2013-10-01', '["Grey"]','/assets/data/cats/5.jpg'),
+('Cat', 'Penny',  'Female', '2013-10-01', '["Grey"]','/assets/data/cats/6.jpg'),
+('Cat', 'Lily',   'Female', '2013-10-01', '["Grey"]','/assets/data/cats/7.jpg'),
+('Cat', 'Rosie',  'Female', '2013-10-01', '["Grey"]','/assets/data/cats/8.jpg'),
+('Cat', 'Maggie', 'Female', '2013-10-01', '["Grey"]','/assets/data/cats/9.jpg'),
+('Cat', 'Nova',   'Female', '2013-10-01', '["Grey"]','/assets/data/cats/10.jpg');
 
 INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_verified`, `telephone_verified`) VALUES
 ('Dr. Weerasinghe', 'doctor@example.com', '0761236547', 'doctor address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
@@ -68,18 +68,18 @@ INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_
 ('Mr. Reg. User2', 'user2@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 0, 0),
 ('Dr. Rathnayake', 'doctor2@example.com', '0761236547', 'doctor address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1);
 
-INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`) VALUES 
-('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'ADOPTED', '2021-09-03', '1', 3),
-('21', 'Playful and a joy to be around, weaned', '2021-08-26', 'LISTED', NULL, '3', NULL),
-('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2', NULL),
-('3', 'jade-green eyes, not vaccinated','2021-09-01', 'LISTED', NULL, '1',NULL),
-('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL),
-('4', 'Playful and affectionate, vaccinated', '2021-08-26', 'LISTED', NULL, '1',NULL),
-('5', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL),
-('25', 'Healthy and a joy to be around, vaccinated', '2021-08-26', 'ADOPTED', '2021-01-14', '2', 3),
-('6', 'Loves cuddles and needs attention, vaccinated', '2021-08-26', 'LISTED', NULL, '3', NULL),
-('23', 'Independent and friendly, vaccinated', '2021-08-26', 'LISTED', NULL, '3',NULL),
-('15', 'Has tiny, hedgehog paws, not vaccinated', '2021-09-02', 'LISTED', NULL, '1',NULL);
+INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`, `photos`) VALUES 
+('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'ADOPTED', '2021-09-03', '1', 3, NULL),
+('21', 'Playful and a joy to be around, weaned', '2021-08-26', 'LISTED', NULL, '3', NULL, NULL),
+('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2', NULL, NULL),
+('3', 'jade-green eyes, not vaccinated','2021-09-01', 'LISTED', NULL, '1',NULL, NULL),
+('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, NULL),
+('4', 'Playful and affectionate, vaccinated', '2021-08-26', 'LISTED', NULL, '1',NULL, NULL),
+('5', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, NULL),
+('25', 'Healthy and a joy to be around, vaccinated', '2021-08-26', 'ADOPTED', '2021-01-14', '2', 3, NULL),
+('6', 'Loves cuddles and needs attention, vaccinated', '2021-08-26', 'LISTED', NULL, '3', NULL, NULL),
+('23', 'Independent and friendly, vaccinated', '2021-08-26', 'LISTED', NULL, '3',NULL, NULL),
+('15', 'Has tiny, hedgehog paws, not vaccinated', '2021-09-02', 'LISTED', NULL, '1',NULL, NULL);
 
 INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(5,3),(7,3),(8,4),(9,4); 
 
@@ -90,9 +90,9 @@ VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599
  (5, '0748345654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_64.png"]');
 
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `date_reported`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
-VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.', '2021-08-27', current_timestamp(), '0761236547', 'Anuradhapura', NULL, 'RESCUED', '');
+VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.', '2021-08-27', current_timestamp(), '0761236547', 'Anuradhapura', NULL, 'RESCUED', '/assets/data/dogs/18.jpg');
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `date_reported`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
-VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.', '2021-09-10', current_timestamp(), '0761236547', 'Anuradhapura', NULL, 'PENDING', '');
+VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.', '2021-09-10', current_timestamp(), '0761236547', 'Anuradhapura', NULL, 'PENDING', '/assets/data/cats/10.jpg');
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`, `date_reported`, `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photo`) 
 VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency', '2021-09-14', current_timestamp(), '0771234567', 'Anuradhapura', NULL, 'PENDING', '');
 
