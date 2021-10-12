@@ -6,7 +6,7 @@ class AdoptionRequestController extends Controller{
     {
         $request = new AdoptionRequest;
         $org = new Organization;
-        $petData = ["petdata" => $request->getPetData($_GET['animal_id']), "org" => $org->getOrgDetails($_GET['org_id']), "req" => $request->getRequestsForPet($_GET['animal_id'])];
+        $petData = ["submitted" => false,"petdata" => $request->getPetData($_GET['animal_id']), "org" => $org->getOrgDetails($_GET['org_id']), "req" => $request->getRequestsForPet($_GET['animal_id'])];
         View::render("public/adoptions/adoption_request", $petData);
     }
 
@@ -20,5 +20,3 @@ class AdoptionRequestController extends Controller{
         // Adoptions::hidePet($_GET['animal_id']); //backend incomplete
     }   
 }
-
-?>

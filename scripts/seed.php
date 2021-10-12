@@ -43,11 +43,12 @@ for ($i = 1; $i < 30; $i++) {
         $uid = $conn->insert_id;
 
         $type = ['dog', 'cat', 'dog', 'dog'][rand(0, 3)];
+        
 
         // pet
         $query = "INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) 
         VALUES ('$type', '" . $pet_names[rand(0, sizeof($pet_names) - 1)] . "', '" . ['Male', 'Female'][rand(0, 1)] . "',   '20" . rand(14, 21) . "-0" . rand(1, 9) . "-01', 
-        'Black','/assets/data/" . $type . "s/" . rand(1, $type == 'cat' ? 10 : 20) . ".jpg');";
+        '[\"Black\"]','/assets/data/" . $type . "s/" . rand(1, $type == 'cat' ? 10 : 20) . ".jpg');";
         execute($query);
         $animal_id = $conn->insert_id;
 
@@ -69,7 +70,7 @@ for ($i = 1; $i < 30; $i++) {
         // pet
         $query = "INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) 
             VALUES ('$type', '" . $pet_names[rand(0, sizeof($pet_names) - 1)] . "', '" . ['Male', 'Female'][rand(0, 1)] . "',   '20" . rand(14, 21) . "-0" . rand(1, 9) . "-01', 
-            'Black','/assets/data/" . $type . "s/" . rand(1, $type == 'cat' ? 10 : 20) . ".jpg');";
+            '[\"Black\"]','/assets/data/" . $type . "s/" . rand(1, $type == 'cat' ? 10 : 20) . ".jpg');";
         execute($query);
         $animal_id = $conn->insert_id;
 

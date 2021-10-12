@@ -21,52 +21,49 @@
 
     h4 {
         text-align: center;
-        margin: 5px; 
+        margin: 5px;
     }
 </style>
 
-<div style="padding-top: 10px; padding-bottom: 30px; padding-left: 50px; padding-right: 50px;">
-    <!-- <i class="far fa-chart-line"> -->
-    <h2>Organization Analytics</h2>
-
+<div style="padding:0 1rem;">
     <div class="row">
         <div class="column">
-            <div class="chart-block" style="width: 400px; height: 32%; padding: 0.5rem; margin: 10px;">
-            <h4>Adoptees</h4>
+            <div class="chart-block" style="  padding: 0.5rem; margin: 10px;">
+                <h4>Adoptees</h4>
                 <canvas id="myChart1"></canvas>
             </div>
 
-            <div class="chart-block" style="width: 400px; height: 30%; padding: 0.5rem; margin: 10px;">
-            <h4>Merchandiese Orders</h4>
+            <div class="chart-block" style="  padding:0.5rem; margin: 10px;">
+                <h4>Merchandiese Orders</h4>
                 <canvas id="myChart2"></canvas>
             </div>
 
-            <div class="chart-block" style="width: 400px; height: 30%; padding: 0.5rem; margin: 10px;">
-            <h4>Sponsorships</h4>
+            <div class="chart-block" style=" padding: 0.5rem; margin: 10px;">
+                <h4>Sponsorships</h4>
                 <canvas id="myChart3"></canvas>
             </div>
         </div>
 
         <div class="column">
-            <div class="chart-block" style="width: 400px; height: 35%; padding: 0.5rem; margin: 10px;">
-            <h4>Donations</h4>
+            <div class="chart-block" style="  padding: 0.5rem; margin: 10px;">
+                <h4>Donations</h4>
                 <canvas id="myChart4"></canvas>
             </div>
 
-            <div class="chart-block" style="width: 400px; height: 60%; padding: 0.5rem; margin: 10px;">
-            <h4>Rescues</h4>
+            <div class="chart-block" style=" padding: 0.5rem; margin: 10px;">
+                <h4>Rescues</h4>
                 <canvas id="myChart5"></canvas>
             </div>
         </div>
 
         <div class="column">
-            <div class="chart-block" style="width: 400px; height: 60%; padding: 0.5rem; margin: 10px;">
-            <h4>Adoption Requests</h4>
+            <div class="chart-block" style="  padding: 0.5rem; margin: 10px;">
+                <h4>Adoption Requests</h4>
                 <canvas id="myChart6"></canvas>
             </div>
 
-            <div class="chart-block" style="width: 400px; height: 35%; padding: 0.5rem; margin: 10px;">
-            <h4>Annual Feedback Rating</h4>
+            <div class="chart-block" style="   padding: 0.5rem; margin: 10px;">
+                <h4>Annual Feedback Rating</h4>
                 <canvas id="myChart7"></canvas>
             </div>
         </div>
@@ -76,7 +73,8 @@
 
     <script>
         /*Chart 1*/
-
+        Chart.defaults.font.family = "Roboto, sans-serif"
+        Chart.defaults.color = '#000000'
         let labels1 = [
             'Dogs',
             'Cats',
@@ -108,25 +106,32 @@
                 }]
             },
             options: {
-                indexAxis: 'y'
+                indexAxis: 'y',
+                aspectRatio: 2.5,
+
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
             }
         });
 
         /*Chart 2*/
 
         let labels2 = [
-            'January',
-            'February',
-            'March',
-            'April',
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
             'May',
             'June',
             'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
         ];
 
         let data2 = [
@@ -152,40 +157,47 @@
                     backgroundColor: colors2
                 }]
             },
+
             options: {
-       scales: {
-            xAxes: [{
-               gridLines: {
-                  display: false
-               }
-            }],
-            yAxes: [{
-               ticks: {
-                  beginAtZero: true, 
-               },
-               gridLines: {
-                  display: false
-               }
-            }]
-       }
-    }
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                },
+                aspectRatio: 2.5,
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        },
+                        gridLines: {
+                            display: false
+                        }
+                    }]
+                }
+            }
         });
 
         /*Chart 3*/
 
         let labels3 = [
-            'January',
-            'February',
-            'March',
-            'April',
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
             'May',
             'June',
             'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
         ];
 
         let data3 = [
@@ -206,28 +218,35 @@
                 fill: false,
                 tension: 0.1,
                 datasets: [{
-                    label: 'Sponsorships',
                     data: data3,
                     backgroundColor: colors3
                 }]
             },
+            options: {
+                aspectRatio: 2.5,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                }
+            }
         });
 
         /*Chart 4*/
 
         let labels4 = [
-            'January',
-            'February',
-            'March',
-            'April',
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
             'May',
             'June',
             'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
         ];
 
         let data4 = [
@@ -252,6 +271,14 @@
                     data: data4,
                     backgroundColor: colors4
                 }]
+            },
+            options: {
+                aspectRatio: 2.5,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
             }
         });
 
@@ -283,6 +310,9 @@
                     data: data5,
                     backgroundColor: colors5
                 }]
+            },
+            options: {
+                aspectRatio: 1.1,
             }
         });
 
@@ -320,12 +350,15 @@
                     text: "Rescues",
                     display: true
                 }
+            },
+            options: {
+                aspectRatio: 1.2,
             }
         });
 
-          /*Chart 7*/
+        /*Chart 7*/
 
-          let labels7 = [
+        let labels7 = [
             '2019',
             '2020',
             '2021'
@@ -354,5 +387,4 @@
                 }]
             },
         });
-
     </script>

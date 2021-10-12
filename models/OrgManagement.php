@@ -67,8 +67,9 @@ class OrgManagement extends BaseModel
         petsafety,
         children,
         childsafety,
-        animal.animal_id
-
+        animal.animal_id,
+        animal.photo,
+        request_date
         from adoption_request
         INNER JOIN animal ON
             animal.animal_id = adoption_request.animal_id
