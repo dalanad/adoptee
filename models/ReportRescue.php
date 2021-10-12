@@ -3,20 +3,28 @@
 class ReportRescue extends BaseModel
 {
 
-    static function createReportRescue($description, $location, $telephone, $type, Image $photo)
+    static function createReportRescue($description, $location, $telephone, $type, $photos, $lat, $lang)
     {
-        $query = "INSERT INTO `report_rescue` (description, location, contact_number, type, photo) 
-                   VALUES (:description, :location, :telephone, :type, :photo )";
+        $query = "INSERT INTO `report_rescue` (description, location, contact_number, type, photos,location_coordinates) 
+                   VALUES (:description, :location, :telephone, :type, :photos , POINT(:lat ,:lang))";
 
         $params = [
             "description" => $description,
             "location" => $location,
             "telephone" => $telephone,
             "type" => $type,
-            "photo" => $photo->getURL()
+            "lat" => $lat,
+            "lang" => $lang,
+            "photos" => $photos
         ];
+        self::insert($query, $params);
+        return self::lastInsertId();
+    }
 
-        return self::insert($query, $params);
+    static function getRescueReportById($report_id)
+    {
+        $query = "select *  from `report_rescue` where report_id= :report_id";
+        return self::selectOne($query, ["report_id" => $report_id]);
     }
 
     static function getRescuedPets($user_id)
@@ -27,6 +35,6 @@ class ReportRescue extends BaseModel
         AND rr.contact_number=user.telephone
         AND user.user_id=$user_id
         AND rr.report_id=ra.report_id";
-        return BaseModel::select($query);
+        return self::select($query);
     }
 }

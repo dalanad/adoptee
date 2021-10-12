@@ -46,7 +46,7 @@ $_SESSION['email'] = $_POST["email"] ?? ""; ?>
             <div class="field column" style="width:50%;">
                 <label>Mobile Phone Number</label>
                 <input class="ctrl" type="text" name="telephone" pattern="07[0-9]{8}" required>
-                <span class="field-msg">Format : 07XXXXXXXX</span>
+                <small>Format : 07XXXXXXXX</small>
             </div>
 
             <div class="field column">

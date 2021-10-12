@@ -204,16 +204,15 @@ create table sponsorship (
 create table report_rescue(
     org_id int(10),
     report_id int(10) AUTO_INCREMENT primary key,
-    type varchar(50), -- animal type
+    type varchar(50), 
     description varchar(200),
-    date_reported date ,
     time_reported timestamp DEFAULT CURRENT_TIMESTAMP,
     contact_number int(10),
     location varchar(100) not null,
     location_coordinates POINT,
     status enum('PENDING','ACCETPED','RESCUED') not null default 'PENDING',
     org_response enum('RESCUE','ACCEPTED','RESCUED') not null default 'RESCUE',
-    photo varchar(100) not null, -- JSON ?
+    photos JSON not null,
     foreign key(org_id) references organization(org_id)
 );
 

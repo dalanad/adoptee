@@ -1,36 +1,37 @@
 <?php require __DIR__ . "/../../_layout/header.php"; ?>
 
 <style>
-     .radio-box {
-    display: flex;
-    flex-wrap: wrap;
-  }
+    .radio-box {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-  .radio-box input {
-    display: none;
-  }
-  
-  .radio-box label {
-    padding: .5rem 1rem;
-    border: 2px solid var(--gray-3);
-    display: block;
-    border-radius: .4rem;
-    cursor: pointer;
-    margin-right: .3rem;
-    text-align: center;
-    margin-bottom: .3rem;
-  }
-  
-  input:checked+label {
-    border: 2px solid currentColor;
-    color: var(--primary);
-    font-weight: 500;
-    box-shadow: var(--shadow-light);
-  }
+    .radio-box input {
+        display: none;
+    }
 
-  input:checked+label i {
-    font-weight: 900;
-  }
+    .radio-box label {
+        padding: .5rem 1rem;
+        border: 2px solid var(--gray-3);
+        display: block;
+        border-radius: .4rem;
+        cursor: pointer;
+        margin-right: .3rem;
+        text-align: center;
+        margin-bottom: .3rem;
+    }
+
+    input:checked+label {
+        border: 2px solid currentColor;
+        color: var(--primary);
+        font-weight: 500;
+        box-shadow: var(--shadow-light);
+    }
+
+    input:checked+label i {
+        font-weight: 900;
+    }
+
     #googleMap {
         margin-bottom: 1rem;
     }
@@ -45,7 +46,7 @@
             grid-template-columns: 1fr 1fr;
             column-gap: 1rem;
             margin: 2rem;
-            padding-top:40px;
+            padding-top: 40px;
         }
 
         #googleMap {
@@ -67,22 +68,25 @@
 
 <form class="container ctx" action="/ReportRescues/report" method="POST" enctype="multipart/form-data">
     <div class="report ">
-        <h2 class="mt1">Report Injured Animals 
+        <h2 class="mt1">Report Injured Animals
             <a class="btn red outline" style="float: right;" href="/view/public/rescues/emergency.php"><i class="fas fa-ambulance"></i>&nbsp; Emergency </a>
         </h2>
         <div class="field">
             <label>Description</label>
-            <textarea rows="6" class="ctrl" name="description"></textarea>
+            <textarea rows="6" required class="ctrl" name="description"></textarea>
             <span class="field-msg"> </span>
         </div>
         <div class="field ">
             <label>Where can we find this animal ? </label>
             <div class="ctrl-group">
                 <span class="ctrl static"><i class="fa fa-map-marked-alt"></i></span>
-                <input class="ctrl" type="location" name="location" />
-                <button class="btn outline" onclick="getLocation()">Set Location</button>
+                <input class="ctrl" type="text" required name="location" />
+                <input type="hidden" name="lat" />
+                <input type="hidden" name="lang" />
+                <button class="btn outline" type="button" onclick="getLocation()">Current Location</button>
             </div>
-            <span class="field-msg"> </span>
+            <small> * use the marker in the map to give exact location</small>
+            <small id="location_coordinates"> </small>
         </div>
         <div class="rounded" style="min-height: 250px;" id="googleMap"></div>
 
@@ -90,31 +94,30 @@
             <label>Contact Number </label>
             <div class="ctrl-group">
                 <span class="ctrl static"><i class="fa fa-phone"></i></span>
-                <input class="ctrl" type="text" name="telephone"  />
+                <input class="ctrl" required type="text" name="telephone" pattern="07[0-9]{8}" required>
             </div>
-            <span class="field-msg"> </span>
+            <small>Format : 07XXXXXXXX</small>
         </div>
 
         <div class="field ">
             <label>Animal type</label>
-           <div class="radio-box ">
-            <input name="type" id="dog" type="radio">
-            <label for="dog"><i class="far fa-dog"></i><br>Dog</label>
-            <input name="type" id="cat" type="radio">
-            <label for="cat"><i class="far fa-cat"></i><br> Cat </label>
-            <input name="type" id="bird" type="radio">
-            <label for="bird"><i class="far fa-dove"></i><br> Bird</label>
-            <input name="type" id="other" type="radio">
-            <label for="other"><i class="far fa-paw"></i><br>Other </label>
+            <div class="radio-box ">
+                <input required name="type" id="dog" type="radio" value="dog">
+                <label for="dog"><i class="far fa-dog"></i><br>Dog</label>
+                <input name="type" id="cat" type="radio" value="cat">
+                <label for="cat"><i class="far fa-cat"></i><br> Cat </label>
+                <input name="type" id="bird" type="radio">
+                <label for="bird"><i class="far fa-dove"></i><br> Bird</label>
+                <input name="type" id="other" type="radio">
+                <label for="other"><i class="far fa-paw"></i><br>Other </label>
             </div>
-            <span class="field-msg"> </span>
         </div>
 
         <div class="field ">
             <label>Photos</label>
             <div class="ctrl-group">
                 <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-                <input class="ctrl" type="file" name="photo" multiple />
+                <input class="ctrl" type="file" name="photos[]" accept="image/*" required multiple />
             </div>
             <span class="field-msg"> </span>
         </div>
@@ -126,38 +129,60 @@
 
 <script>
     var map
+    var marker
 
     function myMap() {
         var mapProp = {
             center: new google.maps.LatLng(6.9038086, 79.9110850),
             zoom: 12,
+            disableDefaultUI: true,
+            zoomControl: true,
+            scaleControl: true,
+            fullscreenControl: true,
+            mapId: '3343eee879d42b9f'
         };
         map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(6.9038086, 79.9110850),
+            draggable: true,
+        });
+
+        // To add the marker to the map, call setMap();
+        marker.setMap(map);
+        map.setZoom(15)
+
+        marker.addListener("dragend", (event) => {
+            updateInputValues();
+        })
+
+        getLocation()
+
     };
 
     var x = document.getElementById("demo");
 
+
     function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition((position) => {
+                var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                marker.setPosition(latlng)
+                map.setCenter(latlng);
+                updateInputValues();
+            });
+
         } else {
             x.innerHTML = "Geolocation is not supported by this browser.";
         }
     }
 
-    function showPosition(position) {
+    function updateInputValues() {
+        console.log(marker)
+        document.querySelector("[name=lat]").value = marker.getPosition().lat()
+        document.querySelector("[name=lang]").value = marker.getPosition().lng()
 
-        var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            title: "Hello World!"
-        });
-
-        // To add the marker to the map, call setMap();
-        marker.setMap(map);
-        map.setCenter(myLatlng);
-        map.setZoom(15)
+        // document.getElementById("location_coordinates").innerText = 'Coordinates: ' + marker.getPosition().lat() + ', ' + marker.getPosition().lng()
     }
 </script>
 

@@ -1,6 +1,6 @@
 // registers the service worker required for the PWA
-if ('serviceWorker' in navigator) {
-	window.addEventListener('load', () => navigator.serviceWorker.register('/assets/js/service-worker.js', { scope: '/' }));
+if ("serviceWorker" in navigator) {
+	window.addEventListener("load", () => navigator.serviceWorker.register("/assets/js/service-worker.js", { scope: "/" }));
 }
 
 // wait for a given duration in milliseconds
@@ -46,7 +46,7 @@ function formValidations() {
 			let valid = true;
 
 			// validate field
-			form.querySelectorAll("input, select").forEach((field) => {
+			form.querySelectorAll("input, select, textarea").forEach((field) => {
 				let is_field_valid = validateField(field);
 				if (!is_field_valid) {
 					valid = false;
@@ -152,7 +152,7 @@ function photoInput(input) {
 	container.innerHTML = "<button class='btn outline green' type='button'><i class='fa fa-plus'></i></button>";
 
 	input.insertAdjacentElement("beforeBegin", container);
-	input.type = "hidden";
+	input.style.display = "none";
 
 	//
 	let add_btn = container.querySelector("button");
@@ -167,9 +167,9 @@ function photoInput(input) {
 		let url = await uploadFile();
 		add_btn.innerHTML = "<i class='fa fa-plus'></i>";
 		if (url) {
-			let current_array = JSON.parse(input.value)
-			current_array.push(url)
-			input.value = JSON.stringify(current_array)
+			let current_array = JSON.parse(input.value || "[]");
+			current_array.push(url);
+			input.value = JSON.stringify(current_array);
 			addPhoto(url);
 		}
 	}
