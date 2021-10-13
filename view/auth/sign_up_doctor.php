@@ -32,12 +32,13 @@
             </div>
             <div class="field">
                 <label>Password</label>
-                <input class="ctrl" type="password" autocomplete="new-password" name="password" required>
+                <input class="ctrl" type="password" autocomplete="new-password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$" name="password" required>
             </div>
             <div class="field">
                 <label>Confirm Password</label>
                 <input class="ctrl" type="password" autocomplete="new-password" name="confirm-password" onkeyup="validateForm(event)" required>
             </div>
+            <small class="field-hint" style="grid-column: 1/ span 2;">* Include upper & lower case letters, numbers and special characters </small>
         </div>
         <div class="form-grid">
             <div class="separator body-text"> <i class="far fa-stethoscope"></i> &nbsp; Doctor Details</div>
