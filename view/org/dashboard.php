@@ -12,6 +12,7 @@ $management_menu = array(
     "org_donations" =>  array("name" =>  "Donations", "icon" => "hand-holding-usd"),
     "org_news_events" =>  array("name" =>  "News & Events", "icon" => "calendar-alt"),
     "store" =>  array("name" =>  "Store", "icon" => "store-alt"),
+    "org_analytics" =>  array("name" =>  "Analytics Dashboard", "icon" => "chart-line"),
 );
 
 $administration_menu = array(
@@ -113,16 +114,13 @@ $active_item = isset($management_menu[$active]) ? $management_menu[$active] : (i
 
 <div>
     <div class="settings-container ">
-        <div class="side-nav" style="font-size: 0.9em">
-            <div style="text-align: center;margin-top: 1rem;margin-bottom:.5rem">
-                <img src="/assets/images/logo_vector_filled.svg" style="height:40px;margin-right: 1rem;">
+        <div class="side-nav" style="font-size: 0.9em;">
+            <div style="text-align: center; margin: 2rem 0;">
+                <img src="/assets/images/logo_vector_filled.svg" style="height:45px; margin-right: 1rem;">
             </div>
-            <a class="side-nav-link <?= "stats" == $active ? 'active' : '' ?>" href="/OrgManagement/org_analytics">
-                <i class="far fa-chart-line"></i> &nbsp; Dashboard
-            </a>
             <div>
                 <div class="mx1">
-                    <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
+                    <h4 class="mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400; letter-spacing: 1px">
                         MANAGEMENT
                     </h4>
                 </div>
@@ -135,7 +133,7 @@ $active_item = isset($management_menu[$active]) ? $management_menu[$active] : (i
             </div>
             <div style="position:fixed; bottom: 20px; min-width: 12rem; max-width: 12rem;">
                 <div class="mx1">
-                    <h4 class="items-center mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400">
+                    <h4 class="mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400; letter-spacing: 1px">
                         ADMINISTRATION
                     </h4>
                 </div>
@@ -165,7 +163,7 @@ $active_item = isset($management_menu[$active]) ? $management_menu[$active] : (i
                 <?= user_btn() ?>
             </div>
             <div style="padding: 1rem;">
-                <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem; height: 600px; width: 1250PX;">
+                <div class="flex-auto mx2 " style=" height: 600px; width: 1250PX;">
 
                     <?php include __DIR__ . "/org_dashboard/" . $active . ".php" ?>
                 </div>
