@@ -375,6 +375,13 @@ header .logo img {
 	margin-left: 0.2rem;
 }
 
+.field-hint {
+	font-size: 0.7em;
+	padding: 0.2em 0.5em;
+	color: var(--gray-5);
+	padding-bottom: 0;
+}
+
 /* checkbox & radio box */
 .ctrl-check[type="checkbox"],
 .ctrl-radio[type="radio"] {

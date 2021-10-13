@@ -16,4 +16,9 @@ class MainController extends Controller
         }
         View::json($links);
     }
+
+    function faq()
+    {
+        View::render("public/faq");
+    }
 }

@@ -32,15 +32,16 @@
             <div class="separator body-text"><i class="far fa-file-alt"></i> &nbsp; Basic Information</div>
             <div class="field" style="grid-column: span 2;">
                 <label>Organization Name</label>
-                <input class="ctrl" type="text" name="name" required/>
+                <input class="ctrl" type="text" name="name" required />
             </div>
             <div class="field">
                 <label>Mobile Phone Number</label>
                 <input class="ctrl" type="telephone" name="telephone" required />
+                <small class="field-hint">Format : 07XXXXXXXX</small>
             </div>
             <div class="field">
                 <label>Address Line 1</label>
-                <input class="ctrl" type="text" name="address_line_1" required/>
+                <input class="ctrl" type="text" name="address_line_1" required />
             </div>
             <div class="field">
                 <label>Address Line 2</label>
@@ -57,13 +58,14 @@
             </div>
             <div class="field">
                 <label>Password</label>
-                <input class="ctrl" type="password" name="password" required/>
+                <input class="ctrl" type="password" autocomplete="new-password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$" name="password" required>
+                <small class="field-hint">Include upper & lower case letters,<br> numbers and special characters </small>
             </div>
             <div class="field">
                 <label>Confirm Password</label>
-                <input class="ctrl" type="password" name="confirm-password" onkeyup="validateForm(event)"  required />
+                <input class="ctrl" type="password" name="confirm-password" onkeyup="validateForm(event)" required />
             </div>
-           
+
             <div style="grid-column: 1 / -1; margin-top:1rem;display:flex;justify-content:space-between">
                 <a class="btn btn-faded pink" href="/view/auth/sign_in.php?active=signup">Go Back</a>
                 <button class="btn" type="submit">Register</button>

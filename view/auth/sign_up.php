@@ -20,6 +20,7 @@ $_SESSION['email'] = $_POST["email"] ?? ""; ?>
 <form class="centered-container" action="/Auth/process_sign_up" method="POST">
     <div class="card-container">
         <div>
+            <img src="/assets/images/logo_vector_filled.svg" style='max-width:150px; margin-bottom:1rem' />
 
             <div class="body-text">
                 <p class="m0">Welcome to Adoptee</p>
@@ -33,39 +34,35 @@ $_SESSION['email'] = $_POST["email"] ?? ""; ?>
                 <div class="field column">
                     <label>Name</label>
                     <input class="ctrl" type="text" value="<?php echo ($_SESSION['name']); ?>" name="name" required>
-                    <span class="field-msg"></span>
                 </div>
 
                 <div class="field column">
                     <label>Email Address</label>
                     <input class="ctrl" type="email" value="<?php echo ($_SESSION['email']); ?>" name="email" required>
-                    <span class="field-msg"></span>
                 </div>
             </div>
 
             <div class="field column" style="width:50%;">
                 <label>Mobile Phone Number</label>
                 <input class="ctrl" type="text" name="telephone" pattern="07[0-9]{8}" required>
-                <small>Format : 07XXXXXXXX</small>
+                <small class="field-hint">Format : 07XXXXXXXX</small>
             </div>
 
             <div class="field column">
                 <label>Home Address</label>
                 <input class="ctrl" type="text" name="address" required>
-                <span class="field-msg"></span>
             </div>
 
             <div class="row">
                 <div class="field column">
                     <label>Password</label>
-                    <input class="ctrl" type="password" name="password" required>
-                    <span class="field-msg"></span>
+                    <input class="ctrl" type="password" autocomplete="new-password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$" name="password" required>
+                    <small class="field-hint">Include upper & lower case letters,<br> numbers and special characters </small>
                 </div>
 
                 <div class="field column">
                     <label>Confirm Password</label>
                     <input class="ctrl" type="password" name="confirmPassword" required>
-                    <span class="field-msg"></span>
                 </div>
 
                 <?php if (isset($_GET["error"])) { ?>
@@ -74,10 +71,11 @@ $_SESSION['email'] = $_POST["email"] ?? ""; ?>
                     </div>
                 <?php } ?>
             </div>
-
-            <div class="field" style="display:inline; font-size:0.8rem">
-                <input class="ctrl-check mb2" type="checkbox">&nbsp Accept
-                <a class="btn-link bold mb2" href="">Terms and Conditions</a>
+            <div class="field" style="margin:.5rem 0rem;">
+                <div style="display:inline; font-size:0.8rem;">
+                    <input class="ctrl-check" required type="checkbox">&nbsp Accept
+                    <a class="btn-link bold" href="">Terms and Conditions</a>
+                </div>
             </div>
 
             <div><button class="btn">Sign Up</button></div>
@@ -87,10 +85,6 @@ $_SESSION['email'] = $_POST["email"] ?? ""; ?>
                     <a class="btn-link bold text-decoration-none" href="/auth/sign_in">Sign in</a>
                 </p>
             </div>
+            </>
         </div>
-    </div>
 </form>
-
-<script>
-
-</script>
