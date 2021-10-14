@@ -1,5 +1,4 @@
-<?php require __DIR__ . "/../../_layout/header.php"; 
-?>
+<?php require __DIR__ . "/../../_layout/layout.php"; ?>
 <style>
   
 
@@ -39,6 +38,13 @@ padding-top:30px;
 
 </style>
 <br><br>
+<div style="padding: 1rem 1rem;display: flex;max-width:900px;margin:0 auto">
+        <?php if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        } ?>
+        <div style="flex: 1 1 0;"></div>
+        <?= user_btn() ?>
+    </div>
 <div class="section">
 <h3>Organization User - Actions</h3><br>
 <div class="fieldm">
