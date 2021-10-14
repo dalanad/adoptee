@@ -4,15 +4,13 @@
 require_once  __DIR__ . '/../_layout/layout.php';
 
 $management_menu = array(
-
+    "org_analytics" =>  array("name" =>  "Analytics Dashboard", "icon" => "chart-line"),
     "org_adoption_listing" => array("name" => "Adoption Listing", "icon" => "paw"),
     "adoption_requests" =>  array("name" =>  "Adoption Requests", "icon" => "dog"),
     "reported_cases" =>  array("name" =>  "Reported Cases", "icon" => "exclamation-circle"),
     "org_rescues" =>  array("name" =>  "Rescues", "icon" => "ambulance"),
     "org_donations" =>  array("name" =>  "Donations", "icon" => "hand-holding-usd"),
     "org_news_events" =>  array("name" =>  "News & Events", "icon" => "calendar-alt"),
-    "store" =>  array("name" =>  "Store", "icon" => "store-alt"),
-    "org_analytics" =>  array("name" =>  "Analytics Dashboard", "icon" => "chart-line"),
 );
 
 $administration_menu = array(
@@ -131,25 +129,24 @@ $active_item = isset($management_menu[$active]) ? $management_menu[$active] : (i
                     </a>
                 <?php  } ?>
             </div>
+            <?php if($_SESSION["user_role"] == "org_admin") { ?>
             <div style="position:fixed; bottom: 20px; min-width: 12rem; max-width: 12rem;">
                 <div class="mx1">
                     <h4 class="mr1" style="color: #aaa6a1; font-size: 1em; font-weight: 400; letter-spacing: 1px">
                         ADMINISTRATION
                     </h4>
                 </div>
-
-
-                <a class="side-nav-link <?= $active == "feedback"  ? 'active' : '' ?>" href="#">
+                <a class="side-nav-link <?= $active == "feedback_list"  ? 'active' : '' ?>" href="feedback_list">
                     <i class="far fa-smile"></i> &nbsp; Feedback
                 </a>
-                <a class="side-nav-link <?= $active == "setting"  ? 'active' : '' ?>" href="/view/org/settings.php?menu=users">
+                <a class="side-nav-link <?= $active == "setting"  ? 'active' : '' ?>" href="/view/org/settings.php?menu=general">
                     <i class="far fa-cog"></i> &nbsp; Settings
                 </a>
-                <a class="side-nav-link <?= $active == "help" ? 'active' : '' ?>" href="#">
+                <a class="side-nav-link <?= $active == "help" ? 'active' : '' ?>" href="/main/faq">
                     <i class="far fa-question-circle"></i> &nbsp; Help
                 </a>
-
             </div>
+            <?php } ?>
         </div>
 
         <div class="content" style="width: 100%;">
@@ -164,7 +161,6 @@ $active_item = isset($management_menu[$active]) ? $management_menu[$active] : (i
             </div>
             <div style="padding: 1rem;">
                 <div class="flex-auto mx2 " style=" height: 600px; width: 1250PX;">
-
                     <?php include __DIR__ . "/org_dashboard/" . $active . ".php" ?>
                 </div>
             </div>
@@ -172,6 +168,4 @@ $active_item = isset($management_menu[$active]) ? $management_menu[$active] : (i
         </div>
 
     </div>
-
-
 </div>

@@ -46,7 +46,7 @@
              </div>
              <div class="bold">Rs <?= $i * 5000 ?></div>
              <div class="mt1">
-                 <button title="Modify Tier" class="btn btn-link btn-icon orange"><i class="fas fa-pen"></i></button>
+                 <a href="/view/org/org_settings/sponsorship_tier.php" class="btn btn-link btn-icon orange"><i class="fas fa-pen"></i></a>
                  &nbsp;
                  <button title="Delete Tier" class="btn btn-link btn-icon red"><i class="fas fa-trash"></i></button>
              </div>

@@ -1,8 +1,5 @@
 <?php
-$data["header"]["nav"] = false;
-$data["user"] = "Dalana";
-
-require __DIR__ . "/../_layout/header.php";
+require __DIR__ . "/../_layout/layout.php";
 
 $menu_items = array(
     "general" => array("name" => "General", "icon" => "building"),
@@ -98,9 +95,16 @@ $active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["me
 </style>
 
 <div class="container">
+    <div style="padding: 1rem 1rem;display: flex;">
+        <?php if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        } ?>
+        <div style="flex: 1 1 0;"></div>
+        <?= user_btn() ?>
+    </div>
     <div class="mx2 txt-clr">
         <h2 class="flex items-center">
-            <a href="/OrgNavigation/org_adoption_listing" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
+            <a href="/OrgManagement/org_adoption_listing" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
             Organization Settings
         </h2>
     </div>

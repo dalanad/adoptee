@@ -16,8 +16,7 @@
 
     ); ?>
  <div class="flex-auto   mx2 " style="padding:5px">
-     <br>
-     <span style="font-size:22px">Sponsorships</span>
+     <h3>Sponsorships</h3>
      <table class="table">
          <tr>
              <th>Name</th>
