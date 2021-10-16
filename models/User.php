@@ -15,7 +15,7 @@ class User extends BaseModel
     {
         $hashed_password = Crypto::hash($password);
         $query = "INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`) VALUES ('$name', '$email', '$telephone', '$address', '$hashed_password')";
-        BaseModel::insert($query);
+        self::insert($query);
         return self::lastInsertId();
     }
 
@@ -25,7 +25,7 @@ class User extends BaseModel
         UPDATE `user` SET email = '$email' WHERE isset($email);
         UPDATE `user` SET telephone = $telephone WHERE isset($telephone);
         UPDATE `user` SET address = '$address' WHERE isset($address)";
-        return BaseModel::insert($query);
+        return self::insert($query);
     }
 
     static function findUserByEmail($email)
@@ -43,20 +43,20 @@ class User extends BaseModel
     static function verifyEmail($email)
     {
         $query = "update `user` set email_verified = 1 where email= '$email'";
-        return BaseModel::update($query);
+        return self::update($query);
     }
 
     static function verifySMS($email)
     {
         $query = "update `user` set telephone_verified = 1 where email= '$email'";
-        return BaseModel::update($query);
+        return self::update($query);
     }
 
     static function changePassword($email, $new)
     {
         $hashed_password = Crypto::hash($new);
         $query = "UPDATE user set password= '$hashed_password' WHERE email = '$email'";
-        return BaseModel::update($query);
+        return self::update($query);
     }
 
     static function getAdoptions($user_id)
@@ -67,7 +67,7 @@ class User extends BaseModel
         AND organization.org_id=animal_for_adoption.org_id
         AND user.user_id=animal_for_adoption.user_id
         AND user.user_id=$user_id";
-        return BaseModel::select($query);
+        return self::select($query);
     }
 
     static function getUserPets($user_id)
@@ -78,6 +78,17 @@ class User extends BaseModel
         UNION SELECT animal.*, round(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age'
         FROM animal, animal_for_adoption afa
         WHERE ($user_id = afa.user_id AND afa.animal_id = animal.animal_id)";
-        return BaseModel::select($query);
+        return self::select($query);
+    }
+
+    static function getUpcomingConsultations($user_id)
+    {
+        $query = "SELECT c.consultation_date 'date', c.consultation_time 'time', c.status, c.type, a.name 'pet', u.name 'doctor'
+        FROM consultation c, animal a, user u
+        WHERE c.user_id = $user_id
+        AND c.doctor_user_id = u.user_id
+        AND a.animal_id = c.animal_id
+        AND (status='PENDING' OR status='ACCEPTED')";
+        return self::select($query);
     }
 }

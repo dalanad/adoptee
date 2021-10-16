@@ -74,7 +74,7 @@ class Consultation extends BaseModel
         return $consultations;
     }
 
-    public static function getPetConsultation()
+    public static function getPetConsultation($animalId)
     {
         $query = "SELECT c.*, cm.consultation_id, cm.message, user_pet.animal_id
         FROM consultation c, consultation_message cm, user_pet
