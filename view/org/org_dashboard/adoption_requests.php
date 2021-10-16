@@ -65,7 +65,7 @@
                     <td>
                         <table>
                             <tr>
-                                <td><img src="<?= $adoption_request["photo"]?>" style="width: 30px; height: 30px; border-radius: 50%;"></td>
+                                <td><img src="<?= $adoption_request["photo"]?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
                                 <td><?= $adoption_request["animal_name"] ?></td>
                             </tr>
                         </table>

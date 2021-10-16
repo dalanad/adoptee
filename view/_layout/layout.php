@@ -14,7 +14,7 @@
     <link href="/assets/vendor/normalize.css" rel="stylesheet" type="text/css" />
     <link href="/assets/vendor/fontawesome.css" rel="stylesheet" type="text/css">
     <link href="/assets/vendor/roboto.css" rel="stylesheet" type="text/css">
-    <link href="/assets/css/styles.css?w=<?= rand(1, 100) ?>" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/styles.css" rel="stylesheet" type="text/css" />
     <link href="/assets/css/util.css" rel="stylesheet" type="text/css" />
     <script src="/assets/vendor/jquery-3.6.0.min.js"></script>
     <script src="/assets/vendor/ckeditor.js"></script>
