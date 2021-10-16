@@ -1,11 +1,11 @@
-<?php require __DIR__ . "/../../_layout/header.php"; 
+<?php require __DIR__ . "/../../_layout/layout.php"; 
 ?>
 <style>
 
 .page{
     padding-left:300px;
     padding-right:300px;
-    padding-top:80px;
+    
 }
 
 .column {
@@ -27,7 +27,13 @@
 }
 </style>
 <div class="row page">
-  
+<div style="padding: 1rem 1rem;display: flex;">
+        <?php if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        } ?>
+        <div style="flex: 1 1 0;"></div>
+        <?= user_btn() ?>
+    </div>
 <div class="column">
     <strong>Create Organization User</strong><br><br>
     <div class="field">

@@ -31,11 +31,7 @@ class OrgManagementController extends Controller{
         $avatar_photo =  image::single("avatar_photo");
         $adoptee_photo =  image::multi("adoptee_photo");
 
-        $color_white = isset($_POST['color_white']) ? true : false;
-        $color_grey = isset($_POST['color_grey']) ? true : false;
-        $color_orange = isset($_POST['color_orange']) ? true : false;
-        $color_brown = isset($_POST['color_brown']) ? true : false;
-        $color_black = isset($_POST['color_black']) ? true : false;
+        $color = isset($_POST['color']) ? true : false;
 
         $anti_rabies = isset($_POST['anti_rabies']) ? true : false;
         $dhl = isset($_POST['dhl']) ? true : false;
@@ -48,7 +44,7 @@ class OrgManagementController extends Controller{
 
         $dewormed = isset($_POST['dewormed']) ? true : false;
         
-        OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['name'], $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $color_white, $color_grey, $color_orange, $color_brown, $color_black, $_POST['description'], $anti_rabies, $dhl, $parvo, $tricat, $anti_rabies_booster, $dhl_booster, $parvo_booster, $tricat_booster, $dewormed, $avatar_photo, $adoptee_photo);
+        OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['name'], $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $color, $_POST['description'], $anti_rabies, $dhl, $parvo, $tricat, $anti_rabies_booster, $dhl_booster, $parvo_booster, $tricat_booster, $dewormed, $avatar_photo, $adoptee_photo);
         
 
     }  

@@ -146,15 +146,15 @@
         <div class='field'>
           <label for="color"> Color </label>
           <div class="check">
-            <input id="white" name="color" type="checkbox" value="white">
+            <input id="white" name="color[]" type="checkbox" value="white">
             <label for="white" style="background:cornsilk;"></label>
-            <input id="grey" name="color" type="checkbox" value="grey">
+            <input id="grey" name="color[]" type="checkbox" value="grey">
             <label for="grey" style="background:grey;"></label>
-            <input id="orange" name="color" type="checkbox" value="orange">
+            <input id="orange" name="color[]" type="checkbox" value="orange">
             <label for="orange" style="background:darkgoldenrod;"></label>
-            <input id="brown" name="color" type="checkbox" value="brown">
+            <input id="brown" name="color[]" type="checkbox" value="brown">
             <label for="brown" style="background:brown;"></label>
-            <input id="black" name="color" type="checkbox" value="black">
+            <input id="black" name="color[]" type="checkbox" value="black">
             <label for="black" style="background:black;color:white;"></label>
           </div>
         </div>
