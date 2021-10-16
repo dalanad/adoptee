@@ -108,19 +108,19 @@ VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
 
  INSERT INTO `consultation` ( `consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
  VALUES 
- ('2021-10-18', '10:30:00', '10', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
- ('2021-10-18', '11:30:00', '9', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
- ('2021-10-18', '12:30:00', '8', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
- ('2021-10-18', '13:30:00', '7', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
- ('2021-10-18', '14:30:00', '6', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
- ('2021-10-18', '11:00:00', '5', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
- ('2021-10-18', '12:00:00', '4', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
- ('2021-10-18', '13:00:00', '1', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
- ('2021-10-19', '09:00:00', '2', '1', '2', 'COMPLETED', 'ADVISE', NULL),
- ('2021-10-19', '09:30:00', '2', '1', '2', 'COMPLETED', 'ADVISE', NULL),
- ('2021-10-19', '10:00:00', '5', '1', '3', 'COMPLETED', 'ADVISE', NULL),
- ('2021-10-19', '12:00:00', '6', '1', '3', 'COMPLETED', 'ADVISE', NULL),
- ('2021-10-19', '13:00:00', '7', '1', '3', 'COMPLETED', 'ADVISE', NULL)
+ ('2021-10-28', '10:30:00', '10', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
+ ('2021-10-28', '11:30:00', '9', '1', '3', 'PENDING', 'LIVE', NULL),
+ ('2021-10-30', '12:30:00', '8', '1', '2', 'ACCEPTED', 'ADVISE', NULL),
+ ('2021-10-30', '13:30:00', '7', '1', '2', 'ACCEPTED', 'LIVE', NULL),
+ ('2021-10-30', '14:30:00', '6', '1', '2', 'ACCEPTED', 'ADVISE', NULL),
+ ('2021-10-30', '11:00:00', '5', '1', '4', 'ACCEPTED', 'LIVE', NULL),
+ ('2021-11-04', '12:00:00', '4', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
+ ('2021-11-07', '13:00:00', '1', '1', '3', 'ACCEPTED', 'LIVE', NULL),
+ ('2021-11-10', '09:00:00', '2', '1', '2', 'COMPLETED', 'ADVISE', NULL),
+ ('2021-11-13', '09:30:00', '2', '1', '2', 'COMPLETED', 'LIVE', NULL),
+ ('2021-11-14', '10:00:00', '5', '1', '2', 'COMPLETED', 'ADVISE', NULL),
+ ('2021-11-14', '12:00:00', '6', '1', '4', 'COMPLETED', 'ADVISE', NULL),
+ ('2021-11-16', '13:00:00', '7', '1', '3', 'COMPLETED', 'ADVISE', NULL)
  ;
 
 
