@@ -4,14 +4,24 @@ class ConsultationController extends Controller
     public function index()
     {
         if (isset($_SESSION['user'])) {
+            $selections = [
+                "doctor" => $_POST['doctor'] ?? "",
+                "date" => $_POST['date'] ?? ""
+            ];
             $data = [
                 "doctors" => Doctor::getDoctors(),
-                "slots" => Doctor::getSlots(1, '2021-09-08'),
+                "slots" => (isset($_POST['doctor']) && isset($_POST['date'])? Doctor::getSlots((int)$_POST['doctor'], $_POST['date']) : NULL),
                 "pets" => User::getUserPets($_SESSION['user']['user_id']),
-                "step" => 1
+                "step" => 1,
+                "selections" => $selections
                 // "petdata" => isset($_SESSION['existing_pet'])? Animal::getAnimalById($_SESSION['existing_pet']) : ''
             ];
-
+            if($_POST['step']=="Make Consultation"){
+                $data['step'] = 2;
+            }
+            elseif($_POST['step']=="Continue"){
+                $data['step'] = 3;
+            }
             view::render('public/consultations/consultation_request', $data);
         } else {
             view::render('public/consultations/consultation_request');

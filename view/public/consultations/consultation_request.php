@@ -1,5 +1,4 @@
 <?php require __DIR__ . "/../../_layout/header.php"; ?>
-<?php $step = isset($_GET["step"]) ? $_GET["step"] : 1; ?>
 <style>
   .radio-box {
     display: flex;
@@ -78,7 +77,7 @@
   </div>
   <?php if (isset($_SESSION['user'])) {
     if ($step == 1) { ?>
-      <form action='/Consultation?step=2' method='POST'>
+      <form action='/Consultation/index' method='POST' name="form1">
         <div style="display: grid; grid-gap:1rem; grid-template-columns: 1fr 2fr;margin-top:1rem">
           <div>
             <div class="field">
@@ -87,7 +86,7 @@
             </div>
             <div class="radio-box" style="display: grid;">
               <?php foreach ($doctors as $doctor) { ?>
-                <input name="doctor" id="doctor<?= $doctor["user_id"] ?>" type="radio" value="<?= $doctor["user_id"] ?>" <?php if ($_SESSION['doctor'] == $doctor["user_id"]) { ?>checked<?php } ?> required>
+                <input name="doctor" id="doctor<?= $doctor["user_id"] ?>" type="radio" value="<?= $doctor["user_id"] ?>" <?= ($selections['doctor'])  == $doctor["user_id"] ? "checked" : "" ?> required onclick="form1.submit()">
                 <label for="doctor<?= $doctor["user_id"] ?>" style="text-align:left">
                   <div style="display: flex;align-items:center">
                     <div>
@@ -118,17 +117,18 @@
               </div>
               <div class="field" style="max-width: 180px;margin-left:.5rem">
                 <label>Date</label>
-                <input class="ctrl" name="date" type="date" id="date" min="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" <?php if (isset($_SESSION['date'])) { ?> value=<?= $_SESSION['date'];
-                                                                                                                                                                                                                                                                  } ?> onchange="dispTime()" required>
+                <input class="ctrl" name="date" type="date" id="date" min="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" <?php if (isset($selections['date'])) { ?> value="<?= $selections['date'];
+                                                                                                                                                                                                                                                                    } ?>" onchange="form1.submit()" required>
               </div>
             </div>
             <div class="field">
               <label>Available Times</label>
-              <div class="radio-box " id="time" style="display: grid; grid-template-columns: repeat(auto-fill,minmax(7rem,1fr));visibility:hidden;">
-                <?php foreach ($slots as $slot) { ?>
+              <div class="radio-box " id="time" style="display: grid; grid-template-columns: repeat(auto-fill,minmax(7rem,1fr));">
+                <?php if(isset($slots)){
+                foreach ($slots as $slot) { ?>
                   <input name="time" id="time_<?= $slot["time_slot"] ?>" value="<?= $slot["time_slot"] ?>" <?= isset($slot["consultation_id"]) ? "disabled" : "" ?> type="radio" <?php if ($_SESSION['time'] == $slot["time_slot"]) { ?>checked<?php } ?> required>
                   <label for="time_<?= $slot["time_slot"] ?>"><?= $slot["time_slot"] ?></label>
-                <?php } ?>
+                <?php }} ?>
               </div>
             </div>
           </div>
@@ -136,15 +136,15 @@
         <div style="text-align: center;margin:2rem;">
           <input class="btn green" type="submit" value="Make Consultation" name="step" />
         </div>
-        <!-- <script>document.getElementsByName("consultation_type").required = true;</script> -->
       </form>
+
     <?php } else if ($step == 2) {
       $_SESSION['consultation_type'] = $_POST['consultation_type'];
       $_SESSION['date'] = $_POST['date'];
       $_SESSION['time'] = $_POST['time'];
       $_SESSION['doctor'] = $_POST['doctor'] ?>
 
-      <form action='/Consultation?step=3' method='POST'>
+      <form action='/Consultation' method='POST'>
         <div style="display: grid;grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));grid-gap:3rem;margin-top:1rem">
           <div class="field" id="old_pet">
             <label>Your Pets</label>
@@ -168,7 +168,7 @@
               <?php } ?>
             </div>
           </div>
-          <div id="new_pet" >
+          <div id="new_pet">
             <h4 style="margin:0;margin-bottom:.5rem">A New Pet</h4>
             <div style="display: grid;grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); grid-column-gap:1rem">
               <div class="field">
@@ -214,7 +214,7 @@
         </div>
         <div style="display:flex;justify-content:space-between;margin:2rem;">
           <a class="btn btn-faded pink" href="?step=1">Back<a>
-              <input type="submit" class="btn" href="?step=3" value="Continue">
+              <input type="submit" class="btn" href="?step=3" value="Continue" name="step">
         </div>
       </form>
     <?php
@@ -275,7 +275,7 @@
         </table>
         <div style="display:flex;justify-content:space-between;margin:2rem;">
           <a class="btn btn-faded pink" href="?step=2">Back</a>
-          <form method="post" action="/consultation/create_request"><button class="btn green" onclick="confirm()">Continue to Payment</button></form>
+          <form method="post" action="/consultation/create_request"><button class="btn green">Continue to Payment</button></form>
         </div>
       </div>
     <?php }
@@ -285,19 +285,10 @@
 </div>
 
 <script>
-  function confirm() {
-    // alert('Your appointment has been made!');
-  }
-
   var dis1 = document.getElementById("dis_rm");
   dis1.onchange = function() {
     if (this.value != "" || this.value.length > 0) {
       document.getElementById("dis_per").disabled = true;
     }
-  }
-
-  function dispTime()
-  {
-    document.getElementById("time").style.visibility = "visible";
   }
 </script>

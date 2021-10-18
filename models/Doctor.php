@@ -79,7 +79,7 @@ class Doctor extends BaseModel
         return self::select(
             "SELECT
                 s.doctor_user_id,
-                ('2021-09-08') 'date',
+                $date 'date',
                 s.time_slot,
                 c.consultation_id
             FROM
