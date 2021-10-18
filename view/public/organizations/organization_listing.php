@@ -41,7 +41,7 @@
     }
 </style>
 
-<div class="container">
+<div class="container" style="text-align:center;">
 
     <?php
     foreach ($orgs as $key => $value) { ?>
