@@ -16,7 +16,7 @@
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	margin: 0 0.5rem;
+	padding: 0 0.5rem;
 }
 
 .side-nav .side-link {
@@ -74,6 +74,43 @@
 	letter-spacing: 1px;
 }
 
+.logo,
+.logo-mini {
+	height: 45px;
+	margin-right: 1rem;
+}
+
+.logo-mini {
+	display: none;
+	margin-right: 0;
+}
+
+.side-nav.folded {
+	width: unset;
+	border-right: 1px solid var(--gray-2);
+}
+
+.side-nav.folded .side-link {
+	text-align: center;
+}
+
+.side-nav.folded .side-link-text {
+	display: none;
+}
+
+.side-nav.folded .section-heading {
+	display: none;
+}
+.side-nav.folded .logo-mini {
+	display: inline;
+}
+.side-nav.folded .logo {
+	display: none;
+}
+
+.side-nav.folded .side-link .link-icon {
+	width: unset;
+}
 /* live_consultation */
 /* calender */
 .cal-month {
@@ -224,7 +261,7 @@
 	align-items: center;
 	transition: background-color 0.2s ease-in-out, border-left-color 0.2s ease-in-out;
 	border-left: 0.2rem solid transparent;
-	scroll-snap-align: end;    
+	scroll-snap-align: end;
 	box-sizing: border-box;
 }
 

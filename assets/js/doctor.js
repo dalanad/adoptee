@@ -218,7 +218,7 @@ class AppointmentsTimeline {
 				ACCEPTED: "-",
 				CANCELLED: "red",
 				COMPLETED: "green",
-				EXPIRED: "orange",
+				EXPIRED: "pink",
 			};
 			cell.classList.add("booking", status_colors[status]);
 			cell.innerHTML = `
