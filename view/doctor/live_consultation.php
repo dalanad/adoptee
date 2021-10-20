@@ -1,15 +1,31 @@
 <?php
 $active = "live_consultation";
 require_once  __DIR__ . '/_nav.php';
+if(!isset($_GET["view"])){
+    $_GET["view"] = "day";
+}
 ?>
 
 <div style="display: grid;grid-template-columns:auto minmax(250px,300px);grid-gap:1rem">
     <div style="display: flex;align-items: center; font-size: 1.2em;">
         Current Appointments
         <span style="flex: 1 1 0"></span>
+        <div class='dropdown'>
+            <button class="btn btn-faded black">
+                <?php if ($_GET["view"] == "day") { ?>
+                    <i class='far fa-calendar-day'></i>&nbsp; Day
+                <?php } else { ?>
+                    <i class='far fa-calendar-week'></i>&nbsp; Week
+                <?php } ?>
+            </button>
+            <div class='dropdown-content'>
+                <a class='btn black btn-link' href='#' onclick="params({view:'day'})"><i class='fal fa-calendar-day'></i>&nbsp; Day</a>
+                <a class='btn black btn-link' href='#' onclick="params({view:'week'})"><i class='fal fa-calendar-week'></i>&nbsp; Week</a>
+            </div>
+        </div>
     </div>
     <div class="timeline-container" style="grid-column: 1;">
-        <div id="appointments-timeline"> </div>
+        <div class="<?= $_GET["view"] ?>-view" id="appointments-timeline"></div>
     </div>
 
     <div>
@@ -42,13 +58,15 @@ require_once  __DIR__ . '/_nav.php';
     });
 
     cal.init();
+
     let status_colors = {
         PENDING: "orange",
         ACCEPTED: "-",
         CANCELLED: "red",
         COMPLETED: "green",
-        EXPIRED: "orange",
+        EXPIRED: "pink",
     };
+
     timeline.onCellSelected((date, time, data) => {
         document.querySelector("#consultation-blank").style.display = 'none'
         document.querySelector("#consultation-info").innerHTML = `
@@ -62,10 +80,12 @@ require_once  __DIR__ . '/_nav.php';
             <div>Owner : ${data.user.name} </div>
         </div>
         <div style="text-align:center;margin-top:1rem">
+
         ${ (data.status == "PENDING")?
             `<a class="btn green" href="#">Accept</a> <a class="btn red btn-link" href="#">Cancel</a>`
             : ``
         }
+
         ${ (data.status == "ACCEPTED"/*  && date == (new Date()).toISOString().substr(0,10) */ )?
             `<a class="btn pink" href="/doctor/consult_conference/${data.consultation_id}">
                 <i class="fa fa-video"></i> &nbsp; Consult
@@ -128,5 +148,18 @@ require_once  __DIR__ . '/_nav.php';
 
     .booking .content {
         padding: .4em;
+    }
+
+
+    .day-view .timeline-column:not(.active):not(:first-child) {
+        display: none;
+    }
+
+    .day-view#appointments-timeline {
+        grid-template-columns: 80px 1fr;
+    }
+
+    .day-view .timeline-column.active::before {
+        background: none !important;
     }
 </style>

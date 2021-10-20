@@ -7,8 +7,6 @@ class Pay
         require __DIR__ . "/../vendor/stripe-php-7.97.0/init.php";
         \Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
 
-        $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
-        $YOUR_DOMAIN = $protocol . $_SERVER['HTTP_HOST'];
 
         $checkout_session = \Stripe\Checkout\Session::create([
             'client_reference_id' => 'test_sssssqeqwe',
@@ -29,8 +27,8 @@ class Pay
                 'card',
             ],
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . "$success?session_id={CHECKOUT_SESSION_ID}",
-            'cancel_url' => $YOUR_DOMAIN . '/Consultation',
+            'success_url' => Config::get('domain') . "$success?session_id={CHECKOUT_SESSION_ID}",
+            'cancel_url' => Config::get('domain') . '/Consultation',
         ]);
 
         return $checkout_session->url;

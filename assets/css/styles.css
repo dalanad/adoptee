@@ -484,7 +484,7 @@ header .logo img {
 	font-weight: 500;
 	letter-spacing: 0;
 	display: inline;
-	padding: 0.2em 0.3em;
+	padding: 0.2em 0.4em;
 	border-radius: 0.5em;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -493,6 +493,7 @@ header .logo img {
 	background-color: var(--primary);
 	vertical-align: middle;
 	font-size: 0.8em;
+	line-height: 0.1em;
 }
 
 .tag.stale {

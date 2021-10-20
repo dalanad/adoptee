@@ -74,7 +74,7 @@ $_SESSION['email'] = $_POST["email"] ?? ""; ?>
             <div class="field" style="margin:.5rem 0rem;">
                 <div style="display:inline; font-size:0.8rem;">
                     <input class="ctrl-check" required type="checkbox">&nbsp Accept
-                    <a class="btn-link bold" href="">Terms and Conditions</a>
+                    <a class="btn-link bold" target="_blank" href="/main/terms">Terms and Conditions</a>
                 </div>
             </div>
 
@@ -88,3 +88,42 @@ $_SESSION['email'] = $_POST["email"] ?? ""; ?>
             </>
         </div>
 </form>
+
+<script>
+    let password = document.querySelector("[name='password']")
+    let confirm_password = document.querySelector("[name='confirmPassword']")
+
+    const form = document.querySelector('form');
+
+    form.addEventListener("submit", validateForm)
+
+    function validateForm(event) {
+
+        form.querySelectorAll(".field-error").forEach(e => {
+            e.remove()
+        })
+
+        form.querySelectorAll(".field").forEach(e => {
+            e.classList.remove("invalid")
+        })
+
+        let valid = password.value === confirm_password.value;
+
+
+        if (!valid) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            let error_msg = document.createElement("small")
+            error_msg.classList.add('field-error')
+            error_msg.innerText = 'Password Not Matching'
+            error_msg.style.color = 'var(--red)'
+            console.log( confirm_password.parentElement)
+            confirm_password.parentElement.append(error_msg)
+            confirm_password.parentElement.classList.add("invalid")
+        }
+
+    }
+</script>
