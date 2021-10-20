@@ -1,8 +1,13 @@
 <?php
 
+define('domain_name', (stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://') . $_SERVER['HTTP_HOST']);
+
 class Config
 {
     private static $configuration_data = array(
+        // server properties
+        "domain" => domain_name,
+
         // database credentials
         "db.dsn" => "mysql:host=;dbname=adoptee;charset=utf8",
         "db.user" => "root",
@@ -26,7 +31,7 @@ class Config
 
         // Payment Gateway credentials
         "stripe.secret" => "sk_test_51JBINKEu3mtzXdk1hnpQNEAIMfA93QrzvlckDFM5y6xI0JDLptM8k13RF0MTBhTzDUkZG4lMxli88h54SwKp0VeZ00csMtwzQJ",
-        "stripe.publishable"=>"pk_test_51JBINKEu3mtzXdk1RZaQ4mqJoyuHQS7ZL9UdpSrR3oDcRgkbNmCTl9dEKTK5KigEoeDBwO89lCtyQKydIBL7Mf2q00POFEpI41"
+        "stripe.publishable" => "pk_test_51JBINKEu3mtzXdk1RZaQ4mqJoyuHQS7ZL9UdpSrR3oDcRgkbNmCTl9dEKTK5KigEoeDBwO89lCtyQKydIBL7Mf2q00POFEpI41"
     );
 
 

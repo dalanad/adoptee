@@ -10,30 +10,50 @@ $menu_items = array(
     "settings" => array("title" => "SETTINGS", "space_before" => true), //sub heading -> Settings
     "schedule" => array("name" => "Appointment Schedule", "icon" => "calendar-alt"),
     "payments" => array("name" => "Payments", "icon" => "file-invoice-dollar"),
-
 );
-
 ?>
 <div class="side-nav-container">
     <div class="side-nav">
-        <div style="text-align: center;margin : 2rem 0; ">
-            <img src="/assets/images/logo_vector_filled.svg" style="height:45px;margin-right: 1rem;">
+        <div style="text-align: center;margin : 1rem 0; ">
+            <img src="/assets/images/logo_vector_filled.svg" class="logo">
+            <img src="/assets/images/logo_icon.png" class="logo-mini">
         </div>
         <?php foreach ($menu_items as $key => $value) { ?>
+
             <?php if (isset($value["title"])) {
 
                 if (isset($value["space_before"])) { ?> <div style="flex:1 1 0"></div><?php } ?>
-
                 <div class="section-heading"><?= $value["title"] ?></div>
 
             <?php } else { ?>
-                <a class="side-link  <?= $key == $active ? 'active' : '' ?> <?= $value["color"] ?? "" ?>" href="/Doctor/<?= $key ?>">
+
+                <a title="<?= $value["name"] ?>" class="side-link  <?= $key == $active ? 'active' : '' ?> <?= $value["color"] ?? "" ?>" href="/Doctor/<?= $key ?>">
                     <i class="link-icon far fa-<?= $value["icon"] ?>"></i>
                     <span class="side-link-text"><?= $value["name"] ?></span>
                 </a>
-        <?php }
-        } ?>
-        <div style="height:2em"></div>
+
+            <?php } ?>
+
+        <?php } ?>
+        <div style="height:.5em"></div>
+        <a class="side-link" href="#" id="fold_toggle" onclick="toggle()"></a>
+        <div style="height:.5em"></div>
+        <script>
+            function setIcon() {
+                if (document.querySelector('.side-nav').classList.contains('folded')) {
+                    fold_toggle.innerHTML = '<i class="link-icon far fa-chevron-right"></i>'
+                } else {
+                    fold_toggle.innerHTML = '<i style="float:right" class="link-icon far fa-chevron-left"></i>'
+                }
+            }
+
+            setIcon()
+
+            function toggle() {
+                document.querySelector('.side-nav').classList.toggle('folded');
+                setIcon()
+            }
+        </script>
     </div>
     <div class="content" style="width: 100%;">
         <div class="admin-header">
@@ -47,4 +67,3 @@ $menu_items = array(
         </div>
         <div style="padding: 1rem;">
             <script src="/assets/js/doctor.js"></script>
-           
