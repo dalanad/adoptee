@@ -6,7 +6,8 @@ class AdoptionRequest extends BaseModel
     {
         $query = "INSERT INTO `adoption_request` ( `animal_id`, `user_id`, `org_id`, `request_date`, `has_pets`, `petsafety`, `children`, `childsafety`)
                   VALUES ('$animal_id', '$user_id', $org_id, CURDATE(), $has_pets, '$petsafety', $children, '$childsafety');";
-        return self::insert($query);
+        self::insert($query);
+        return self::getUserRequest($animal_id,$user_id);
     }
 
     public function getPetData($animal_id)
@@ -18,14 +19,26 @@ class AdoptionRequest extends BaseModel
         return self::select($query);
     }
 
-    public function getRequestsForPet($animal_id)
+    public function checkRequestsForPet($animal_id)
     {
         $query = "SELECT `animal_id`
         FROM  `adoption_request`
-        WHERE adoption_request.animal_id = $animal_id";
+        WHERE animal_id = $animal_id
+        AND status = 'PENDING'";
         $result =  self::select($query);
-        if($result!=NULL){return "requested";}
+        if($result!=NULL){
+            return "true"; //requests exist
+        }
+        else{
+            return "false";
+        }
     }
+
+    static function getUserRequest($animalId, $userId)
+    {
+        $query = "SELECT * FROM `adoption_request` WHERE animal_id = $animalId AND user_id = $userId";
+        return self::select($query);
+    }    
 
     function validateForm()
     {
