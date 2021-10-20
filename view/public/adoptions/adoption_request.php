@@ -93,7 +93,7 @@
                         <b><?= $pet['name'] ?></b> &nbsp; <i class="txt-clr fa fa-<?= $pet['gender'] == "male" ? 'mars blue' : 'venus pink' ?>"></i>
                     </div>
                     <div style="font-size: .8em;">
-                        <?= round($pet['age']) ?> Years old - <?= $pet['color'] ?> &nbsp;- <?= strtoupper($pet['type']) ?>
+                        <?= round($pet['age']) ?> Years old - <?= str_replace(array('[', ']', '"'), '', $pet['color']); ?> &nbsp;- <?= strtoupper($pet['type']) ?>
                     </div>
                     <div><small><span style="color: var(--gray-5);">Organization : </span> <?= $org[0]['name'] ?></small></div>
                 </div>
@@ -115,27 +115,63 @@
 
     <div style="position: relative;margin: 0 1rem;">
         <h3><i class="far fa-dog-leashed"></i>&nbsp; Adoption Request</h3>
+        <div class="user-info">
+            <div class="row">
+                <div class="column bold">Name of adopter:</div>
+                <div class="column"><?= isset($_SESSION['user']) ? $_SESSION['user']['name']  : ""; ?></div>
+            </div>
+            <div class="row">
+                <div class="column bold">Contact Number:</div>
+                <div class="column"><?= isset($_SESSION['user']) ? $_SESSION['user']['telephone'] : "" ?></div>
+            </div>
+            <div class="row">
+                <div class="column bold">Email:</div>
+                <div class="column"><?= isset($_SESSION['user']) ? $_SESSION['user']['email'] : "" ?></div>
+            </div>
+            <div class="row">
+                <div class="column bold">Address:</div>
+                <div class="column"><?= isset($_SESSION['user']) ? $_SESSION['user']['address'] : "" ?></div>
+            </div>
+            <p style="color:#ff0000;">If your personal details are incorrect, you can update them<a class="btn btn-link" href="/profile/user_profile">here</a></p>
+        </div>
         <?php if (isset($_SESSION['user'])) {
-            if (!$submitted) { ?> <!--signed in but not submitted-->
-                <div class="user-info">
-                    <div class="row">
-                        <div class="column bold">Name of adopter:</div>
-                        <div class="column"><?= isset($_SESSION['user']) ? $_SESSION['user']['name']  : ""; ?></div>
+            if ($req == "true") { //signed in; pet requested already
+                if ($submission!=NULL && ($submission[0]['user_id'] == $_SESSION['user']['user_id'])) { ?>
+                    <!--signed in; pet requested by same user-->
+                    <br>
+                    <h3 style="text-align:center;">Your request is pending approval</h3>
+                    <br>
+                    <h4>Copy of your adoption request-</h4>
+                    <?php foreach ($submission as $key => $value) { ?>
+                        <div class="row">
+                            <div class="column bold">Are there other pets living in the same household? </div>
+                            <div class="column"><?= $value['has_pets'] == '1' ? "Yes" : "No" ?></div>
+                        </div>
+                        <?php if ($value['has_pets'] == '1') { ?>
+                            <div class="row">
+                                <div class="column bold">Safety concerns regarding current pet(s) and adoptee:</div>
+                                <div class="column"><?= $value['petsafety'] ?></div>
+                            </div>
+                        <?php } ?>
+                        <div class="row">
+                            <div class="column bold">Are there children living in the same household?</div>
+                            <div class="column"><?= $value['children'] == '1' ? "Yes" : "No" ?></div>
+                        </div>
+                        <?php if ($value['children'] == '1') { ?>
+                            <div class="row">
+                                <div class="column bold">Safety concerns regarding children and adoptee:</div>
+                                <div class="column"><?= $value['childsafety'] ?></div>
+                            </div>
+                        <?php } ?>
+                    <?php }
+                } else { ?>
+                    <!--signed in; pet req by another user-->
+                    <div class="message">
+                        <div style="font-weight: 600;"> Pending Adoption</div> <br>
                     </div>
-                    <div class="row">
-                        <div class="column bold">Contact Number:</div>
-                        <div class="column"><?= isset($_SESSION['user']) ? $_SESSION['user']['telephone'] : "" ?></div>
-                    </div>
-                    <div class="row">
-                        <div class="column bold">Email:</div>
-                        <div class="column"><?= isset($_SESSION['user']) ? $_SESSION['user']['email'] : "" ?></div>
-                    </div>
-                    <div class="row">
-                        <div class="column bold">Address:</div>
-                        <div class="column"><?= isset($_SESSION['user']) ? $_SESSION['user']['address'] : "" ?></div>
-                    </div>
-                    <p style="color:#ff0000;">If your personal details are incorrect, you can update them<a class="btn btn-link" href="/profile/user_profile">here</a></p>
-                </div>
+                <?php }
+            } else { ?>
+                <!--not req at all-->
                 <form action="/AdoptionRequest/submit?animal_id=<?= $_GET['animal_id'] ?>&org_id=<?= $_GET['org_id'] ?>" method="POST">
                     <div class='row'>
                         <label class="column" for="has_pets">Q. Do you own any pets?</label>
@@ -161,15 +197,9 @@
                     </div>
                     <button style="margin-bottom: 1rem;" class='btn' type="submit">Request to Adopt</button>
                 </form>
-                <?php if ($req == "requested") { ?> <!--signed in, not submitted but requested by someone else-->
-                    <div class="message">
-                        <div style="font-weight: 600;"> This pet has already been requested for adoption</div> <br>
-                    </div>
-                <?php } 
-            }else{ ?> <!--signed in and submitted-->
-                    <!--SUBMITTED FORM DATA-->
             <?php }
-        } else { ?>   <!--signed out-->
+        } else { ?>
+            <!--signed out-->
             <div class="message">
                 <i class="far fa-user-lock fa-5x txt-clr orange"></i> <br>
                 <div style="font-weight: 600;"> Sign In Required</div> <br>
