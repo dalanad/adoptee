@@ -1,5 +1,5 @@
 <?php require_once __DIR__ . "/../_layout/layout.php" ?>
-<?php $step = isset($_GET["step"]) ? $_GET["step"] : 1; ?>
+<!-- ?php $step = isset($_GET["step"]) ? $_GET["step"] : 1; ?> -->
 
 <style>
     .title-text {
@@ -17,8 +17,23 @@
         color: red;
     }
 
-    .fa-trash:hover{
-        cursor:pointer;
+    .fa-trash:hover {
+        cursor: pointer;
+    }
+
+    .form-box {
+        border: 1px solid var(--gray-4);
+        border-radius: .5rem;
+        padding: 1rem;
+    }
+
+    .shipping {
+        width: 25%;
+    }
+
+    .shipping-details {
+        display: flex;
+        flex-direction: row
     }
 </style>
 
@@ -48,8 +63,9 @@
 <?php if ($step == 1) {
     $items = array("tshirt.png", "collar.png", "bowl.png");
     $names = array("Cute Tshirt", "Dog Collar", "Feeding Bowl") ?>
+
     <div class="container" style="display:flex;">
-        <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;padding:1rem;">
+        <form action="/Merchandise/cart" href="?step=2" method="post" class="flex-auto mx2 form-box">
             <div style="display:block;">
                 <table class="table">
                     <?php for ($i = 0; $i < 3; $i++) { ?>
@@ -60,7 +76,7 @@
                             <td></td>
                             <td class="bold">Rs. 750</td>
                             <td><input type="number" class="ctrl" style="max-width:3rem;" value=1 min=0></td>
-                            <td><i class="fa fa-trash" ></i></td>
+                            <td><i class="fa fa-trash"></i></td>
                         </tr>
                         <tr>
                             <td colspan="3" style="font-size:small;">Pet Haven</td>
@@ -70,8 +86,9 @@
                     <?php } ?>
                 </table>
             </div>
+            <input type="submit" name="step" class="btn green m2" value="Proceed to Shipping" style="float:right">
             <a href='/main/index' class="btn btn-link m2 bold"><i class="fas fa-arrow-left"></i>&nbspBack to site</a>
-        </div>
+        </form>
         <div style="display:block;">
             <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;padding:1rem;">
                 <div class="bold mb2">Order Summary</div>
@@ -90,7 +107,33 @@
                     </tr>
                 </table>
             </div>
-            <a href='' class="btn green m2">Proceed to Checkout&nbsp<i class="fas fa-arrow-right"></i></a>
-            <div>
+        </div>
+    </div>
+
+<?php } elseif ($step == 2) { ?>
+    <div class="container">
+        <form action="/Merchandise/pay" method="post" class="flex-auto mx2 form-box" style="padding:2rem;">
+
+            <div class="field shipping-details">
+                <label for="total" class="shipping">Total Amount: &nbsp</label>
+                <div id="total" style="width:50%">Rs. 2,375.00</div>
             </div>
-        <?php } ?>
+            <div class="field shipping-details">
+                <label for="address" class="shipping">Delivery Address: &nbsp</label>
+                <input type="text" name="address" value="<?= $_SESSION['user']['address'] ?>" class="ctrl" id="address" style="width:50%">
+            </div>
+
+            <button type="submit" class="btn green m2" style="float:right">Continue to Payment</button>
+            <button class="btn btn-link m2 bold"><i class="fas fa-arrow-left" onclick="history.back()"></i>&nbspBack</button>
+        </form>
+    </div>
+<?php } elseif ($step == 4) { ?>
+    <div class="container">
+        <div>
+            <div class="field shipping-details">
+                <label for="total" class="shipping">Approximate time for delivery:</label>
+                <div id="total" style="width:50%">4-5 working days from date of purchase</div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
