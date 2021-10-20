@@ -31,11 +31,11 @@ VALUES ('1','Gold',5000.00,'30','Funds are allocated for veterinary needs'),
 
 INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) VALUES
 ('Dog', 'Tigger', 'Male',   '2021-07-01', '["Brown"]','/assets/data/dogs/1.jpg'),
-('Dog', 'Leo',    'Male',   '2016-01-15', '["Orange"]','/assets/data/dogs/2.jpg'),
+('Dog', 'Leo',    'Male',   '2016-01-15', '["Brown", "Black", "White"]','/assets/data/dogs/2.jpg'),
 ('Dog', 'Oliver', 'Female', '2021-10-06', '["White"]','/assets/data/dogs/3.jpg'),
 ('Dog', 'Milo',   'Female', '2020-02-10', '["Golden Brown"]','/assets/data/dogs/4.jpg'),
-('Dog', 'Simba',  'Male',   '2015-10-01', '["Grey"]','/assets/data/dogs/5.jpg'),
-('Dog', 'Luna',   'Female', '2017-10-01', '["Grey"]','/assets/data/dogs/6.jpg'),
+('Dog', 'Simba',  'Male',   '2015-10-01', '["White", "Brown"]','/assets/data/dogs/5.jpg'),
+('Dog', 'Luna',   'Female', '2017-10-01', '["Black", "Brown"]','/assets/data/dogs/6.jpg'),
 ('Dog', 'Riley',  'Male',   '2014-10-01', '["Grey"]','/assets/data/dogs/7.jpg'),
 ('Dog', 'Nala',   'Female', '2015-10-01', '["Orange"]','/assets/data/dogs/8.jpg'),
 ('Dog', 'Duke',   'Male',   '2015-10-01', '["Grey"]','/assets/data/dogs/9.jpg'),
@@ -44,17 +44,17 @@ INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) VALUES
 ('Dog', 'Oliver', 'Male',   '2010-10-01', '["White"]','/assets/data/dogs/12.jpg'),
 ('Dog', 'Lucy',   'Male',   '2012-10-01', '["Grey"]','/assets/data/dogs/13.jpg'),
 ('Dog', 'Max',    'Male',   '2011-10-01', '["Grey"]','/assets/data/dogs/14.jpg'),
-('Dog', 'Bailey', 'Female', '2015-10-01', '["Golden Brown"]','/assets/data/dogs/15.jpg'),
+('Dog', 'Bailey', 'Female', '2015-10-01', '["White"]','/assets/data/dogs/15.jpg'),
 ('Dog', 'Daisy',  'Female', '2015-10-01', '["Grey"]','/assets/data/dogs/16.jpg'),
 ('Dog', 'Cooper', 'Male',   '2017-10-01', '["Grey"]','/assets/data/dogs/17.jpg'),
 ('Dog', 'Chloe',  'Female', '2015-10-01', '["Grey"]','/assets/data/dogs/18.jpg'),
 ('Dog', 'Jack',   'Male',   '2018-10-01', '["Black"]','/assets/data/dogs/19.jpg'),
 ('Dog', 'Duke',   'Male',   '2019-10-01', '["Grey"]','/assets/data/dogs/20.jpg'),
-('Cat', 'Tom',    'Male',   '2013-10-01', '["Grey"]','/assets/data/cats/1.jpg'),
-('Cat', 'Otis',   'Male',   '2013-10-01', '["Grey"]','/assets/data/cats/2.jpg'),
-('Cat', 'Benny',  'Male',   '2013-10-01', '["Grey"]','/assets/data/cats/3.jpg'),
+('Cat', 'Tom',    'Male',   '2013-10-01', '["Black", "Orange", "White"]','/assets/data/cats/1.jpg'),
+('Cat', 'Otis',   'Male',   '2013-10-01', '["Orange", "Black"]','/assets/data/cats/2.jpg'),
+('Cat', 'Benny',  'Male',   '2013-10-01', '["Black", "White"]','/assets/data/cats/3.jpg'),
 ('Cat', 'Frank',  'Male',   '2013-10-01', '["Grey"]','/assets/data/cats/4.jpg'),
-('Cat', 'Garfield','Male',   '2013-10-01', '["Grey"]','/assets/data/cats/5.jpg'),
+('Cat', 'Garfield','Male',   '2013-10-01', '["Grey", "White", "Black"]','/assets/data/cats/5.jpg'),
 ('Cat', 'Penny',  'Female', '2013-10-01', '["Grey"]','/assets/data/cats/6.jpg'),
 ('Cat', 'Lily',   'Female', '2013-10-01', '["Grey"]','/assets/data/cats/7.jpg'),
 ('Cat', 'Rosie',  'Female', '2013-10-01', '["Grey"]','/assets/data/cats/8.jpg'),
@@ -62,12 +62,12 @@ INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) VALUES
 ('Cat', 'Nova',   'Female', '2013-10-01', '["Grey"]','/assets/data/cats/10.jpg');
 
 INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_verified`, `telephone_verified`) VALUES
-('Dr. Weerasinghe', 'doctor@example.com', '0761236547', 'doctor address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
-('Ms. Org User', 'orguser@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
-('Mr. Reg. User', 'user@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
-('Mr. Reg. User2', 'user2@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 0, 0),
-('Dr. Rathnayake', 'doctor2@example.com', '0761236547', 'doctor address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
-('Ms. Org Admin', 'admin1@example.com', '0761236547', 'user address', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1);
+('Dr. Weerasinghe', 'doctor@example.com', '0761236547', 'No 129/A, Temple Lane, Gampaha', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
+('Ms. Org User', 'orguser@example.com', '0761236547', 'No. 58, 5th Lane, Battaramulla', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
+('Mr. Reg. User', 'user@example.com', '0761236547', 'No 14/2, Flower Street, Colombo 07', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
+('Mr. Reg. User2', 'user2@example.com', '0761236547', 'No 65, 3rd Lane, Dehiwala', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 0, 0),
+('Dr. Rathnayake', 'doctor2@example.com', '0761236547', 'No 79/A, Circular Road, Kandy', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
+('Ms. Org Admin', 'admin1@example.com', '0761236547', 'No. 58, 5th Lane, Battaramulla', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1);
 
 INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL'), ('6', '1', 'ADMIN');
 
@@ -104,9 +104,9 @@ VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
  INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
  VALUES ('1', '3', '1', '2021-08-01', 'PENDING', '1', 'The dog that I already have is easy going and bond well with other animals.', '1', 'Used to pets');
  INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
- VALUES ('2', '3', '1', '2021-09-02', 'REJECTED', '0', '', '1', 'Used to pets');
+ VALUES ('2', '4', '1', '2021-09-02', 'PENDING', '0', '', '1', 'Used to pets');
  INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
- VALUES ('3', '3', '1', '2021-09-12', 'ADOPTED', '0', '', '1', 'Used to pets');
+ VALUES ('3', '4', '1', '2021-09-12', 'ADOPTED', '0', '', '1', 'Used to pets');
 
  INSERT INTO `consultation` ( `consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
  VALUES 
@@ -134,7 +134,14 @@ VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
 (1, 5, '12:30:00', 1000),(1, 5, '13:00:00', 1000),(1, 5, '18:00:00', 1000),(1, 5, '18:30:00', 1000),(1, 5, '19:00:00', 1000),(1, 5, '19:30:00', 1000),
 (1, 5, '20:00:00', 1000),(1, 5, '20:30:00', 1000),(1, 6, '10:00:00', 1000),(1, 6, '10:30:00', 1000),(1, 6, '11:00:00', 1000),(1, 6, '11:30:00', 1000),
 (1, 6, '12:00:00', 1000),(1, 6, '12:30:00', 1000),(1, 6, '13:00:00', 1000),(1, 6, '18:00:00', 1000),(1, 6, '18:30:00', 1000),(1, 6, '19:00:00', 1000),
-(1, 6, '19:30:00', 1000),(1, 6, '20:00:00', 1000),(1, 6, '20:30:00', 1000);
+(1, 6, '19:30:00', 1000),(1, 6, '20:00:00', 1000),(1, 6, '20:30:00', 1000),
+(5, 0, '08:30:00', 1000),(5, 0, '09:00:00', 1000),(5, 0, '09:30:00', 1000),(5, 2, '09:30:00', 1000),(5, 2, '10:00:00', 1000),(5, 2, '10:30:00', 1000),
+(5, 2, '11:00:00', 1000),(5, 2, '11:30:00', 1000),(5, 4, '08:30:00', 1000),(5, 4, '09:00:00', 1000),(5, 4, '09:30:00', 1000),(5, 4, '10:00:00', 1000),
+(5, 4, '10:30:00', 1000),(5, 5, '10:00:00', 1000),(5, 5, '10:30:00', 1000),(5, 5, '11:00:00', 1000),(5, 5, '11:30:00', 1000),(5, 5, '12:00:00', 1000),
+(5, 5, '12:30:00', 1000),(5, 5, '13:00:00', 1000),(5, 5, '18:00:00', 1000),(5, 5, '18:30:00', 1000),(5, 5, '19:00:00', 1000),(5, 5, '19:30:00', 1000),
+(5, 5, '20:00:00', 1000),(5, 5, '20:30:00', 1000),(5, 6, '10:00:00', 1000),(5, 6, '10:30:00', 1000),(5, 6, '11:00:00', 1000),(5, 6, '11:30:00', 1000),
+(5, 6, '12:00:00', 1000),(5, 6, '12:30:00', 1000),(5, 6, '13:00:00', 1000),(5, 6, '18:00:00', 1000),(5, 6, '18:30:00', 1000),(5, 6, '19:00:00', 1000),
+(5, 6, '19:30:00', 1000),(5, 6, '20:00:00', 1000),(5, 6, '20:30:00', 1000);
 
 INSERT INTO `consultation_message` (`consultation_id`,  `created_at`, `sender`, `message`) 
 VALUES ('3', CURRENT_TIMESTAMP,   '1', 'testestset'), ('3', '2021-09-13 00:00:00',  '3', 'Hello 1234567'), 
