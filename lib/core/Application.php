@@ -8,6 +8,7 @@ class Application
         ini_set("file_uploads", "On");
 
         if (session_status() == PHP_SESSION_NONE) {
+            // session_set_cookie_params(5400);
             session_start();
         }
 

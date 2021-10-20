@@ -21,4 +21,9 @@ class MainController extends Controller
     {
         View::render("public/faq");
     }
+
+    function terms()
+    {
+        View::render("public/terms");
+    }
 }

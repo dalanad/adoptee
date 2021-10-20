@@ -53,7 +53,8 @@
             </div>
             <div class="field">
                 <label>Contact Number (Mobile)</label>
-                <input class="ctrl" type="number" minlength="10" name="telephone" required>
+                <input class="ctrl" pattern="07[0-9]{8}" name="telephone" required>
+                <small class="field-hint">Format : 07XXXXXXXX</small>
             </div>
             <div class="field">
                 <label>Contact Number (Fixed)</label>

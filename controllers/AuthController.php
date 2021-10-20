@@ -113,18 +113,16 @@ class AuthController extends Controller
         $status = "";
 
         if (!isset($_GET["action"]) && $user['email_verified'] == 0) {
-        
+
             $email = new EmailService();
             $token = Crypto::encrypt($user["email"]);
-            $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='http://localhost/auth/verify?email=" . $_GET["email"] . "&action=verify_email&token=$token'> Verify Email </a> ";
+            $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='" . config::get('domain') . "/auth/verify?email=" . $_GET["email"] . "&action=verify_email&token=$token'> Verify Email </a> ";
             $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
             $status = "email_sent";
-        
         } elseif (isset($_GET["action"]) && $_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
-        
+
             User::verifyEmail($user["email"]);
             $status = "email_verified";
-        
         } elseif (isset($_GET["action"]) && $_GET["action"] == "send_sms") {
             $notification = new EmailService();
             $otp = rand(100000, 999999);
@@ -168,7 +166,7 @@ class AuthController extends Controller
 
         $body = "Dear " . $user["name"] . ", 
         Click the link below to reset your password <br> 
-        <a href='http://localhost/auth/set_password?email=" . $user["email"] . "'> Reset Password </a> ";
+        <a href='" . config::get('domain') . "/auth/set_password?email=" . $user["email"] . "'> Reset Password </a> ";
 
         $email->sendMail($user["email"], $user["name"], "Reset Password", $body);
         $this->redirect("/auth/request_link?sent=true");
@@ -209,7 +207,7 @@ class AuthController extends Controller
             $telephone = $_POST["telephone"];
             $telephone_fixed = $_POST["telephone_fixed"];
             $credentials = $_POST["credentials"];
- 
+
 
             $proofImage =  Image::multi("proof_image");
 
