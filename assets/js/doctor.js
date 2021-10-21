@@ -320,7 +320,7 @@ class AppointmentsTimeline {
 	markCellAvailable(date_str, time_str, charge = null) {
 		let slot = this._cells[date_str][time_str];
 		this._data[date_str][time_str] = charge != null ? charge : this.charge;
-		slot.innerText = "Rs. " + this._data[date_str][time_str];
+		slot.innerText = "AVAILABLE";
 		slot.style.background = "var(--green)";
 		slot.style.color = "white";
 		slot.classList.add("fade");
@@ -433,7 +433,8 @@ async function initChat(id) {
 	}
 
 	async function completeConsultation() {
-		let html = await fetch("/view/doctor/complete_consultation.php").then((e) => e.text());
+		console.log(con)
+		let html = await fetch("/view/doctor/complete_consultation.php?return=" + (con.type == "ADVISE" ? "/doctor/medical_advise/" : "/doctor/live_consultation")).then((e) => e.text());
 		showOverlay(`<div style='width:200px;overflow:auto'>${html}</div>`);
 	}
 

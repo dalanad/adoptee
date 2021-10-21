@@ -99,7 +99,7 @@ class Doctor extends BaseModel
         $query = "SELECT SQL_CALC_FOUND_ROWS  c.*, u.name 'owner_name', a.*, ROUND( DATEDIFF(CURRENT_DATE, a.dob) / 365 ) 'age' FROM 
         ( SELECT DISTINCT animal_id, user_id, MAX(consultation.consultation_date) 'last_consultation' FROM consultation
          WHERE consultation.doctor_user_id = :doctor_id  and consultation.status='COMPLETED' GROUP BY consultation.animal_id, consultation.user_id ) c, 
-         animal a, USER u WHERE a.animal_id = c.animal_id AND u.user_id = c.user_id";
+         animal a, user u WHERE a.animal_id = c.animal_id AND u.user_id = c.user_id";
 
         // filter by gender
         $gender =  $filter["gender"];
