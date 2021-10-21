@@ -82,7 +82,7 @@ require_once  __DIR__ . '/../_layout/layout.php';
                                     <div style="font-size: .8em;">
                                         <?= $consultation["animal"]['age'] ?> Years old -
                                     </div>
-                                    <div><small><?= $consultation["animal"]['color'] ?> &nbsp;- <?= strtoupper($consultation["animal"]['type']) ?></small></div>
+                                    <div><small><?= str_replace(array('[', ']', '"'), '', $consultation["animal"]['color']);  ?> &nbsp;- <?= strtoupper($consultation["animal"]['type']) ?></small></div>
                                 </div>
                             </div>
                         </div>

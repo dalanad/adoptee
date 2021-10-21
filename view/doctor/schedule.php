@@ -3,9 +3,38 @@ $active = "schedule";
 require_once  __DIR__ . '/_nav.php';
 ?>
 
-<div style="display: grid;grid-template-columns:auto;grid-gap:1rem;max-width:900px;margin:0 auto">
-    <div style="display: flex;align-items: center; ">
-        <span style="font-size: 1.2em;"> Weekly Schedule</span>
+<div style="display: grid;grid-template-columns:auto;grid-gap:0rem;max-width:900px;margin:0 auto">
+    <div >
+        <div style="font-size: 1.1em;margin-bottom:.5rem">Charges</div>
+        <div style="display: flex;max-width:30rem">
+            <div class="field">
+                <label>Appointment - Live</label>
+                <div class="ctrl-group">
+                    <span class="ctrl static">Rs.</span>
+                    <input class="ctrl" type="number" style="text-align: right;" value="2500">
+                    <span class="ctrl static">.00</span>
+                </div>
+            </div>
+            &nbsp;
+            &nbsp;
+            <div class="field">
+                <label>Chat / Advise</label>
+                <div class="ctrl-group">
+                    <span class="ctrl static">Rs.</span>
+                    <input class="ctrl" type="number" style="text-align: right;" value="1000">
+                    <span class="ctrl static">.00</span>
+                </div>
+            </div>
+            &nbsp;
+            &nbsp;
+            <div class="field">
+                <label>&nbsp;</label>
+                <button class="btn">Update</button>
+            </div>
+        </div>
+    </div>
+    <div style="display: flex;align-items: center; margin-bottom:.5rem ">
+        <span style="font-size: 1.1em;"> Weekly Schedule</span>
         <span style="flex: 1 1 0"></span>
         <span id="msg" class="txt-clr orange" style="font-size: .8em;"></span>&nbsp;
         <span style="flex: 1 1 0"></span>
@@ -22,9 +51,7 @@ require_once  __DIR__ . '/_nav.php';
     <div class="timeline-container" style="grid-column: 1;">
         <div id="appointments-timeline"> </div>
     </div>
-    <div>
-    </div>
-    <div></div>
+
 </div>
 <script>
     let appointments_timeline = document.getElementById("appointments-timeline");
@@ -39,7 +66,7 @@ require_once  __DIR__ . '/_nav.php';
         schedule.enableEditing()
         save_button.style.display = 'inline-flex'
         discard_button.style.display = 'inline-flex'
-        charge_input.style.display = 'inline-flex'
+        // charge_input.style.display = 'inline-flex'
         document.getElementById("btn-edit").style.display = 'none'
     }
 
