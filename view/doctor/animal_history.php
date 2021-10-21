@@ -64,7 +64,7 @@ require_once  __DIR__ . '/_nav.php';
                 <div style="font-size: .8em;">
                     <?= $animal['age'] ?> Years old -
                 </div>
-                <div><small><?= $animal['color'] ?> &nbsp;- <?= strtoupper($animal['type']) ?></small></div>
+                <div><small><?=  str_replace(array('[', ']', '"'), '', $animal['color']); ?> &nbsp;- <?= strtoupper($animal['type']) ?></small></div>
             </div>
         </div>
         <div style="margin: 0 1rem;;flex:50%">
@@ -112,8 +112,8 @@ require_once  __DIR__ . '/_nav.php';
 <?php } ?>
 <?php if ($active == "media") { ?>
     <div class="thumbnails">
-        <?php for ($i = 1; $i < 6; $i++) { ?>
-            <div class="thumbnail" style="background-image: url(/assets/data/dogs/<?= $i ?>.jpg);" onclick="showOverlay('<img src=\'/assets/data/dogs/<?= $i ?>.jpg\' style=\'max-height:80vh;max-width:80vw\'')"> </div>
+        <?php for ($i = 1; $i < 3; $i++) { ?>
+            <div class="thumbnail" style="background-image: url(/assets/images/dogs/wounded<?= $i ?>.jpg);" onclick="showOverlay('<img src=\'/assets/images/dogs/wounded<?= $i ?>.jpg\' style=\'max-height:80vh;max-width:80vw\'')"> </div>
         <?php } ?>
     </div>
 <?php } ?>
