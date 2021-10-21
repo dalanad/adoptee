@@ -135,8 +135,8 @@
             <p style="color:#ff0000;">If your personal details are incorrect, you can update them<a class="btn btn-link" href="/profile/user_profile">here</a></p>
         </div>
         <?php if (isset($_SESSION['user'])) {
-            if ($req == "true") { //signed in; pet requested already
-                if ($submission!=NULL && ($submission[0]['user_id'] == $_SESSION['user']['user_id'])) { ?>
+            if (isset($req) && ($req == "true")) { //signed in; pet requested already
+                if ($submission != NULL && ($submission[0]['user_id'] == $_SESSION['user']['user_id'])) {?>
                     <!--signed in; pet requested by same user-->
                     <br>
                     <h3 style="text-align:center;">Your request is pending approval</h3>
@@ -166,9 +166,36 @@
                     <?php }
                 } else { ?>
                     <!--signed in; pet req by another user-->
+                    <form action="/AdoptionRequest/submit?animal_id=<?= $_GET['animal_id'] ?>&org_id=<?= $_GET['org_id'] ?>" method="POST">
+                        <div class='row'>
+                            <label class="column" for="has_pets">Q. Do you own any pets?</label>
+                            <div class="column ">
+                                <label><input class="ctrl-radio" type="radio" value="1" name="has_pets" required onchange="displayPetSafety(this)" /> &nbspYes</label>
+                                <label><input class="ctrl-radio" type="radio" value="0" name="has_pets" required onchange="displayPetSafety(this)" /> &nbspNo</label>
+                            </div>
+                        </div>
+                        <div class='field' style="margin: 1rem 0;">
+                            <label for="petsafety">If "Yes", what are the any safety concerns with adopting the requested pet, if any? </label>
+                            <textarea rows="3" class="ctrl" name="petsafety" id="petsafety" disabled></textarea>
+                        </div>
+                        <div class='row'>
+                            <div class="column">Q. Are there children living in the same household?</div>
+                            <div class="column">
+                                <label><input class="ctrl-radio" type="radio" value="1" name="children" required onchange="displayChildSafety(this)" /> &nbspYes &nbsp;</label>
+                                <label><input class="ctrl-radio" type="radio" value="0" name="children" required onchange="displayChildSafety(this)" /> &nbspNo</label>
+                            </div>
+                        </div>
+                        <div class='field' style="margin: 1rem 0;">
+                            <label for="childsafety">If "Yes", what are the any safety concerns with adopting the requested pet, if any? </label>
+                            <textarea rows="3" class="ctrl" name="childsafety" disabled></textarea>
+                        </div>
+                        <button style="margin-bottom: 1rem;" class='btn' type="submit">Request to Adopt</button>
+                    </form>
+
                     <div class="message">
-                        <div style="font-weight: 600;"> Pending Adoption</div> <br>
+                        <div style="font-weight: 600;"><i class="fas fa-hourglass"></i> &nbsp Pending Adoption</div> <br>
                     </div>
+
                 <?php }
             } else { ?>
                 <!--not req at all-->
