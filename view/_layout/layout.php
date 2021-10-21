@@ -20,5 +20,6 @@
     <script src="/assets/vendor/ckeditor.js"></script>
     <script src="/assets/vendor/charts.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script src="/path/to/flash.min.js"></script>
 </head>
 <?php require __DIR__ . '/helpers.php' ?>
