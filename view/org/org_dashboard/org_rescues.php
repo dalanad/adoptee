@@ -86,8 +86,8 @@ $org_rescues = array(
 
 
 
-<div style="top: 200px; padding: 1rem; padding-top: 0.5rem;">
-    <divstyle="height:550px">
+<div style="padding-top: 2rem;">
+    <div style="height:600px">
     <div class="mouse-over-div div-size" style="display:flex; font-size: 0.8rem; font-weight: 500; border: none;">
                     <div style="width: 150px;">TYPE</div>
                     <div style="width: 180px;">DATE RESCUED</div>

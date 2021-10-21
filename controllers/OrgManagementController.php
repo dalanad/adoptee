@@ -31,8 +31,6 @@ class OrgManagementController extends Controller{
         $avatar_photo =  image::single("avatar_photo");
         $adoptee_photo =  image::multi("adoptee_photo");
 
-        $color = isset($_POST['color']) ? true : false;
-
         $anti_rabies = isset($_POST['anti_rabies']) ? true : false;
         $dhl = isset($_POST['dhl']) ? true : false;
         $parvo = isset($_POST['parvo']) ? true : false;
@@ -44,8 +42,9 @@ class OrgManagementController extends Controller{
 
         $dewormed = isset($_POST['dewormed']) ? true : false;
         
-        OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['name'], $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $color, $_POST['description'], $anti_rabies, $dhl, $parvo, $tricat, $anti_rabies_booster, $dhl_booster, $parvo_booster, $tricat_booster, $dewormed, $avatar_photo, $adoptee_photo);
+        OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['name'], $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $anti_rabies, $dhl, $parvo, $tricat, $anti_rabies_booster, $dhl_booster, $parvo_booster, $tricat_booster, $dewormed, $avatar_photo, $adoptee_photo);
         
+        print_r($_POST);
 
     }  
 
@@ -81,10 +80,11 @@ class OrgManagementController extends Controller{
         View::render("org/dashboard", $data);
     }
 
-    function updateRescueReportStatus()
+    function rescue_animal()
     {
         $report_id = $_POST['report_id'];
-        OrgManagement::updateRescueReportStatus($report_id);
+        $type = $_POST['type'];
+        OrgManagement::rescue_animal($report_id, $type);
     }
 
     function org_rescues()
