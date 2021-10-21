@@ -51,11 +51,14 @@
 
   .message {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: 10px;
-    margin-left: -50px;
-    color: var(--primary);
+    width: 50%;
+    height: 100%;
+    background: #ffffffcc;
+    top: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
   }
 </style>
 
@@ -77,7 +80,7 @@
   </div>
   <?php if (isset($_SESSION['user'])) {
     if ($step == 1) { ?>
-      <form action='/Consultation/index' method='POST' name="form1">
+      <form action='/Consultation' href="?step=2" method='POST' name="form1">
         <div style="display: grid; grid-gap:1rem; grid-template-columns: 1fr 2fr;margin-top:1rem">
           <div>
             <div class="field">
@@ -86,7 +89,7 @@
             </div>
             <div class="radio-box" style="display: grid;">
               <?php foreach ($doctors as $doctor) { ?>
-                <input name="doctor" id="doctor<?= $doctor["user_id"] ?>" type="radio" value="<?= $doctor["user_id"] ?>" <?= ($selections['doctor'])  == $doctor["user_id"] ? "checked" : "" ?> required onclick="form1.submit()">
+                <input name="doctor" id="doctor<?= $doctor["user_id"] ?>" type="radio" value="<?= $doctor["user_id"] ?>" <?= ($_SESSION['doctor'])  == $doctor["user_id"] ? "checked" : "" ?> required onclick="form1.submit()">
                 <label for="doctor<?= $doctor["user_id"] ?>" style="text-align:left">
                   <div style="display: flex;align-items:center">
                     <div>
@@ -109,26 +112,27 @@
               <div class="field">
                 <label> Consultation Type </label>
                 <div class="radio-box ">
-                  <input name="consultation_type" id="live" type="radio" value="Live" <?php if ($_SESSION['consultation_type'] == 'live') { ?>checked<?php } ?> required>
+                  <input name="consultation_type" id="live" type="radio" value="live" <?php if ($_SESSION['consultation_type'] == 'live') { ?>checked<?php } ?> onselect="displayTimes(this)" required>
                   <label for="live"><i class="far fa-webcam"></i> &nbsp; Video</label>
-                  <input name="consultation_type" id="advise" type="radio" value="Advise" <?php if ($_SESSION['consultation_type'] == 'advise') { ?>checked<?php } ?>>
+                  <input name="consultation_type" id="advise" type="radio" value="advise" <?php if ($_SESSION['consultation_type'] == 'advise') { ?>checked<?php } ?> onselect="displayTimes(this)">
                   <label for="advise"><i class="far fa-comments-alt"></i> &nbsp; Chat </label>
                 </div>
               </div>
               <div class="field" style="max-width: 180px;margin-left:.5rem">
                 <label>Date</label>
-                <input class="ctrl" name="date" type="date" id="date" min="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" <?php if (isset($selections['date'])) { ?> value="<?= $selections['date'];
-                                                                                                                                                                                                                                                                    } ?>" onchange="form1.submit()" required>
+                <input class="ctrl" name="date" type="date" id="date" min="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" <?php if (isset($_SESSION['date'])) { ?> value="<?= $_SESSION['date'];
+                                                                                                                                                                                                                                                                  } ?>" onchange="form1.submit()" required>
               </div>
             </div>
             <div class="field">
               <label>Available Times</label>
               <div class="radio-box " id="time" style="display: grid; grid-template-columns: repeat(auto-fill,minmax(7rem,1fr));">
-                <?php if(isset($slots)){
-                foreach ($slots as $slot) { ?>
-                  <input name="time" id="time_<?= $slot["time_slot"] ?>" value="<?= $slot["time_slot"] ?>" <?= isset($slot["consultation_id"]) ? "disabled" : "" ?> type="radio" <?php if ($_SESSION['time'] == $slot["time_slot"]) { ?>checked<?php } ?> required>
-                  <label for="time_<?= $slot["time_slot"] ?>"><?= $slot["time_slot"] ?></label>
-                <?php }} ?>
+                <?php if (isset($slots)) {
+                  foreach ($slots as $slot) { ?>
+                    <input name="time" id="time_<?= $slot["time_slot"] ?>" value="<?= $slot["time_slot"] ?>" <?= isset($slot["consultation_id"]) ? "disabled" : "" ?> type="radio" <?php if ($_SESSION['time'] == $slot["time_slot"]) { ?>checked<?php } ?> required>
+                    <label for="time_<?= $slot["time_slot"] ?>"><?= substr($slot["time_slot"], 0, 5) ?></label>
+                <?php }
+                } ?>
               </div>
             </div>
           </div>
@@ -138,26 +142,22 @@
         </div>
       </form>
 
-    <?php } else if ($step == 2) {
-      $_SESSION['consultation_type'] = $_POST['consultation_type'];
-      $_SESSION['date'] = $_POST['date'];
-      $_SESSION['time'] = $_POST['time'];
-      $_SESSION['doctor'] = $_POST['doctor'] ?>
+    <?php } else if ($step == 2) { isset($_POST['step'])?>
 
-      <form action='/Consultation' method='POST'>
+      <form action='/Consultation' href="?step=3" method='POST'>
         <div style="display: grid;grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));grid-gap:3rem;margin-top:1rem">
           <div class="field" id="old_pet">
             <label>Your Pets</label>
             <div class="radio-box" style="display: grid;">
               <?php foreach ($pets as $pet) { ?>
-                <input name="existing_pet" id="pet<?= $pet['animal_id'] ?>" type="radio" value=<?= $pet['animal_id'] ?> checked>
+                <input name="existing_pet" id="pet<?= $pet['animal_id'] ?>" type="radio" value=<?= $pet['animal_id'] ?> <?php if ($_SESSION['id'] == $pet['animal_id']) { ?>checked<?php } ?> onchange="hideNewPet()">
                 <label for="pet<?= $pet['animal_id'] ?>" style="text-align:left">
                   <div style="display: flex;align-items:center">
                     <div style="background:url(<?= $pet['photo']; ?>) center center;border-radius:50%;height:60px;width:60px;background-size:cover">
                     </div>
                     <div style="margin-left: 1rem;">
                       <div style="font-weight: 500;"><?= $pet['name'] ?></div>
-                      <div style="font-weight: 300;"><?= $pet['dob'] ?>Years Old</div>
+                      <div style="font-weight: 300;"><?= $pet['age'] ?>Years Old</div>
                     </div>
                     <div style="flex:auto"></div>
                     <div style="margin-left: 1rem;">
@@ -173,8 +173,8 @@
             <div style="display: grid;grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); grid-column-gap:1rem">
               <div class="field">
                 <label>Name </label>
-                <input class="ctrl" type="text" name="name" style="max-width: 200px;" <?php if (isset($_SESSION['pet_name'])) { ?>value=<?= $_SESSION['pet_name'];
-                                                                                                                                      } ?> onchange="dis()">
+                <input class="ctrl" type="text" href="?step=2" name="name" style="max-width: 200px;" <?php if (isset($_SESSION['pet_name'])) { ?>value=<?= $_SESSION['pet_name'];
+                                                                                                                                      } ?> onchange="hidePets()">
                 <!--required-->
               </div>
               <div class="field">
@@ -219,18 +219,7 @@
       </form>
     <?php
     } else if ($step == 3) {
-      if (isset($_POST['existing_pet'])) {
-        $petdata = Animal::getAnimalById($_POST['existing_pet']);
-        $_SESSION['pet_name'] = $petdata['name'];
-        $_SESSION['gender'] = $petdata['gender'];
-        $_SESSION['animal_type'] = $petdata['type'];
-        $_SESSION['dob'] = $petdata['dob'];
-      } else {
-        $_SESSION['pet_name'] = $_POST['name'];
-        $_SESSION['gender'] = $_POST['gender'];
-        $_SESSION['animal_type'] = $_POST['animal_type'];
-        $_SESSION['dob'] = $_POST['dob'];
-      }
+
       $doc = Doctor::findByUID($_SESSION['doctor']); ?>
 
       <div style="text-align: center;">
@@ -280,15 +269,41 @@
       </div>
     <?php }
   } else { ?>
-    <div class="message">Please login to continue</div>
+    <div class="message">
+      <i class="far fa-user-lock fa-5x txt-clr orange"></i> <br>
+      <div style="font-weight: 600;"> Sign In Required</div> <br>
+      <a class="btn green" href="/auth/sign_in">Sign In</a>
+    </div>
   <?php } ?>
 </div>
 
 <script>
-  var dis1 = document.getElementById("dis_rm");
-  dis1.onchange = function() {
-    if (this.value != "" || this.value.length > 0) {
-      document.getElementById("dis_per").disabled = true;
-    }
+  function hideNewPet() {
+    var fields = document.getElementById('new_pet').querySelectorAll('input');
+    fields.forEach(function(fields) {
+      if(fields.type == 'text'){fields.value = '';}
+      else{fields.checked = 'false';}
+      fields.disabled = true;
+    });
   }
+
+  function hidePets()
+  {
+    var pets = document.getElementsByName('existing_pet');
+    pets.forEach(function(pets){
+      pets.checked = false;
+      pets.disabled = true;
+    });
+  }
+
+  function displayTimes()
+  {
+    
+  }
+  // var dis1 = document.getElementById("dis_rm");
+  // dis1.onchange = function() {
+  //   if (this.value != "" || this.value.length > 0) {
+  //     document.getElementById("dis_per").disabled = true;
+  //   }
+  // }
 </script>

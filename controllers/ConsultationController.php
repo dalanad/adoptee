@@ -4,28 +4,52 @@ class ConsultationController extends Controller
     public function index()
     {
         if (isset($_SESSION['user'])) {
-            $selections = [
-                "doctor" => $_POST['doctor'] ?? "",
-                "date" => $_POST['date'] ?? ""
-            ];
+
+            $_SESSION['consultation_type'] = $_POST['consultation_type'] ?? "live";
+
+            if (isset($_POST['doctor']) && isset($_POST['date'])) {
+                $_SESSION['doctor'] = $_POST['doctor'];
+                $_SESSION['date'] = $_POST['date'];
+            }
+
             $data = [
                 "doctors" => Doctor::getDoctors(),
-                "slots" => (isset($_POST['doctor']) && isset($_POST['date'])? Doctor::getSlots((int)$_POST['doctor'], $_POST['date']) : NULL),
+                "slots" => ((isset($_POST['doctor']) && isset($_POST['date'])) ? Doctor::getSlots((int)$_POST['doctor'], $_POST['date']) : NULL),
                 "pets" => User::getUserPets($_SESSION['user']['user_id']),
-                "step" => 1,
-                "selections" => $selections
+                "step" => $_GET['step'] ?? 1,
                 // "petdata" => isset($_SESSION['existing_pet'])? Animal::getAnimalById($_SESSION['existing_pet']) : ''
             ];
-            if($_POST['step']=="Make Consultation"){
-                $data['step'] = 2;
-            }
-            elseif($_POST['step']=="Continue"){
-                $data['step'] = 3;
+
+            if (isset($_POST['step'])) {
+
+                if ($_POST['step'] == "Make Consultation") {
+                    $data['step'] = 2;
+                    $_SESSION['time'] = $_POST['time'];
+                    $_SESSION['consultation_type'] = $_POST['consultation_type'];
+                }
+
+                elseif ($_POST['step'] == "Continue") {
+                    $data['step'] = 3;
+                    if (isset($_POST['existing_pet'])) {
+                        $petdata = Animal::getAnimalById($_POST['existing_pet']);
+                        $_SESSION['id'] = $petdata['animal_id'];
+                        $_SESSION['pet_name'] = $petdata['name'];
+                        $_SESSION['gender'] = $petdata['gender'];
+                        $_SESSION['animal_type'] = $petdata['type'];
+                        $_SESSION['dob'] = $petdata['dob'];
+                    }
+
+                    else{
+                        $_SESSION['pet_name'] = $_POST['name'];
+                        $_SESSION['gender'] = $_POST['gender'];
+                        $_SESSION['animal_type'] = $_POST['animal_type'];
+                        $_SESSION['dob'] = $_POST['dob'];
+                    }
+                }
             }
             view::render('public/consultations/consultation_request', $data);
-        } else {
-            view::render('public/consultations/consultation_request');
         }
+        view::render('public/consultations/consultation_request');
     }
 
     public function consult_advise()
