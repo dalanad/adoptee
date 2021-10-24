@@ -98,7 +98,7 @@
 
 <div style="padding-top: 0.5rem;">
 
-    <div class="overflow-auto" style="height: 575px; padding-top: 2rem;"">
+    <div class="overflow-auto" style="height: 555px; padding-top: 2rem;">
     
     <!-- Filters - Start -->
     <div style="padding-left: 1rem;">
@@ -136,7 +136,6 @@
                 <th>PET</th>
                 <th>TYPE</th>
                 <th>AGE</th>
-                <th>GENDER</th>
                 <th>DATE LISTED</th>
                 <th>STATUS</th>
                 <th>DATE ADOPTED</th>
@@ -151,13 +150,15 @@
                         <table>
                             <tr>
                                 <td><img src="<?= $animal["avatar_photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
-                                <td><?= $animal["name"] ?></td>
+                                <td><div>
+                                    <div style="padding: 3px;"><?= $animal["name"] ?></div>
+                                    <div style="padding: 3px;"><i class="txt-clr fa fa-lg fa-<?= $animal['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i></div>
+                                </div></td>
                             </tr>
                         </table>
                     </td>
                     <td><?= $animal["type"] ?></td>
                     <td><?= $animal["age"] ?> years</td>
-                    <td><?= $animal["gender"] ?></td>
                     <td><?= $animal["date_listed"] ?></td>
                     <td><span class="tag <?= $animal["status"] == "ADOPTED" ? 'green' : 'pink' ?>"> <?= $animal["status"] ?> </span></td>
                     <td><?= $animal["date_adopted"] ?></td>

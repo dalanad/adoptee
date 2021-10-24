@@ -137,78 +137,78 @@
                 </tr>
 
                 <?php foreach ($reported_cases as $reported_case) { ?>
-                <tr>
-                    <td><?= $reported_case["type"] ?></td>
-                    <td>
-                        <button onclick="showModel('popupModal<?= $reported_case["report_id"] ?>')" title="More Details" class="tag btn btn-link">Details</button>
+                    <tr>
+                        <td><?= $reported_case["type"] ?></td>
+                        <td>
+                            <button onclick="showModel('popupModal<?= $reported_case["report_id"] ?>')" title="More Details" class="tag btn btn-link">Details</button>
                             <div id="popupModal<?= $reported_case["report_id"] ?>" class="modal">
-                            <div class="modal-content">
-                            <span class="close" onclick="hideModel('popupModal<?= $reported_case["report_id"] ?>')">&times;</span>
-                            <h3>More Details</h3>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <div style="padding: 5px;"><button title="Time Reported" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-clock"></i>
-                                    </td>
-                                    <td><?= $reported_case["time_reported"] ?>&nbsp;<span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="padding: 5px;"><button title="Description" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-file-alt"></i></button>
-                                    </td>
-                                    <td><?= $reported_case["description"] ?></i> </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="padding: 5px;"><button title="Contact Number" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-phone"></i></button>
-                                    </td>
-                                    <td><?= $reported_case["contact_number"] ?>
-                                    </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="padding: 5px;"><button title="Location" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-map-marker-alt"></i></button>
-                                    </td>
-                                    <td><?= $reported_case["location"] ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-            
-                            <div style="padding: 5px;" class="center"><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;"></div>
-                            </div>
-                            </div>
-                    </td>
-                    <td>
-                        <div><button class="btn btn-link btn-icon"><span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span></button></div>
-                    </td>
-                    <td>
-                        <div><button onclick="showModel('popupModal-confirm<?= $reported_case["report_id"] ?>')" class="tag btn btn-link"> RESCUE</button></div>
-                            <div id="popupModal-confirm<?= $reported_case["report_id"] ?>" class="modal">
-                            <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
-                            <span class="close" onclick="hideModel('popupModal-confirm<?= $reported_case["report_id"] ?>')">&times;</span>
-                            <h3 style="text-align: center;">Are you sure you want to confirm rescue?</h3>
-                            <button onclick="" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</button>
-                            <button class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-confirm<?= $reported_case["report_id"] ?>')">Cancel</button>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <?php } ?>
-            </table>
+                                <div class="modal-content">
+                                    <span class="close" onclick="hideModel('popupModal<?= $reported_case["report_id"] ?>')">&times;</span>
+                                    <h3>More Details</h3>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div style="padding: 5px;"><button title="Time Reported" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-clock"></i>
+                                            </td>
+                                            <td><?= $reported_case["time_reported"] ?>&nbsp;<span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span>
+                                </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding: 5px;"><button title="Description" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-file-alt"></i></button>
+                        </td>
+                        <td><?= $reported_case["description"] ?></i> </button>
+        </div>
+        </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="padding: 5px;"><button title="Contact Number" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-phone"></i></button>
+            </td>
+            <td><?= $reported_case["contact_number"] ?>
+    </div>
+    </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="padding: 5px;"><button title="Location" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-map-marker-alt"></i></button>
+        </td>
+        <td><?= $reported_case["location"] ?>
+</div>
+</td>
+</tr>
+</table>
+
+<div style="padding: 5px;" class="center"><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;"></div>
+</div>
+</div>
+</td>
+<td>
+    <div class="btn btn-link"><span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span></div>
+</td>
+<td>
+    <div><button onclick="showModel('popupModal-confirm<?= $reported_case["report_id"] ?>')" class="tag btn btn-link"> RESCUE</button></div>
+    <div id="popupModal-confirm<?= $reported_case["report_id"] ?>" class="modal">
+        <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
+            <span class="close" onclick="hideModel('popupModal-confirm<?= $reported_case["report_id"] ?>')">&times;</span>
+            <h3 style="text-align: center;">Are you sure you want to confirm rescue?</h3>
+            <button onclick="" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</button>
+            <button class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-confirm<?= $reported_case["report_id"] ?>')">Cancel</button>
         </div>
     </div>
-    
-    <div class="rounded" style="height: 600px; width: 1250px; border-radius: .5rem;" id="googleMap"></div>
-    <div>
+</td>
+</tr>
+<?php } ?>
+</table>
+</div>
+</div>
+
+<div class="rounded" style="height: 600px; width: 1250px; border-radius: .5rem;" id="googleMap"></div>
+<div>
     <script src="https://maps.googleapis.com/maps/api/js?key=<?= config::get("maps.key") ?>&callback=myMap"></script>
-    </div>
-    </div>
+</div>
+</div>
 </div>
 
 <script>
