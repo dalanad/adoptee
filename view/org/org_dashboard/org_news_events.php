@@ -80,19 +80,42 @@
         width: 500px;
         height: 450px;
         min-height: 3rem;
-        margin-bottom: 1em;
+        margin-bottom: 1rem;
     }
 </style>
 
 
-<div style="padding: 1rem;">
-    <div style="margin-left: 1070px;"><a href="/OrgManagement/add_new_event" class="btn right outline"> Add New Event </a></div>
-    <div class="overflow-auto" style="height:550px;">
+<div style="padding-top: 0.5rem;">
+    <div class="overflow-auto" style="height:575px;">
+
+        <!-- Filters - Start -->
+        <div style="padding-left: 1rem;">
+        <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
+            <div>
+            <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
+            <button class="btn outline button-hover">Search</button>
+            </div> &nbsp; | &nbsp;
+            <div style="white-space: nowrap;">
+                <b>Sort by :</b> &nbsp;
+                <select class="ctrl field-font" style="width: 65%;" required>
+                    <option selected='true' disabled='disabled'>- Select -</option>
+                    <option value='name'>Event Name</option>
+                    <option value='date'>Date Published</option>
+                </select>
+            </div> &nbsp;
+            <div style="white-space: nowrap;">
+                <input class="ctrl-radio" type="radio" onchange="" name="order" value="asc" /> Asc
+                <input class="ctrl-radio" type="radio" onchange="" name="order" value="desc" /> Desc
+            </div>
+        </form>
+    </div>
+    <!-- Filters - End -->
+
         <table class="table">
             <tr>
                 <td>
                     <div style="position: relative;">
-                        <div class="mouse-over-div div-size">
+                        <div class="mouse-over-div div-size" style="left: 0px;">
                             <h2 class="center">Pet Adoption Day</h2>
                             <div class="event-content"><img class="event-image" src="/assets\images\org/adoption_day.jpg"></div>
                             <div class="event-content">
@@ -106,7 +129,7 @@
 
     <td>
         <div style="position: relative;">
-            <div class="mouse-over-div div-size">
+            <div class="mouse-over-div div-size" style="right: 0px;">
                 <h2 class="center">Stray Feeding Campaign</h2>
                 <div class="event-content"><img class="event-image" src="/assets\images\org/stray_feeding.jpg"></div>
                 <div class="event-content">
@@ -123,6 +146,7 @@
 </table>
 </div>
 </div>
+<div style="margin-left: 1200px; padding-bottom: 0px"><a href="/OrgManagement/add_new_event" class="btn right outline button-hover" style="width: 60px; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Event"><i class="fas fa-plus"></i></a></div>
 
 <script>
     function showModel(id) {

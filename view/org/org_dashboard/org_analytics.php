@@ -19,51 +19,51 @@
         flex: 30%;
     }
 
-    h4 {
+    .chart-heading {
         text-align: center;
         margin: 5px;
     }
 </style>
 
-<div style="padding:0 1rem;">
+<div style="padding-top: 2rem;">
     <div class="row">
         <div class="column">
-            <div class="chart-block" style="  padding: 0.5rem; margin: 10px;">
-                <h4>Adoptees</h4>
+            <div style="  padding: 0.5rem; margin: 10px;">
+                <h4 class="chart-heading">Adoptees</h4>
                 <canvas id="myChart1"></canvas>
             </div>
 
-            <div class="chart-block" style="  padding:0.5rem; margin: 10px;">
-                <h4>Merchandiese Orders</h4>
+            <div style="  padding:0.5rem; margin: 10px;">
+                <h4 class="chart-heading">Merchandiese Orders</h4>
                 <canvas id="myChart2"></canvas>
             </div>
 
-            <div class="chart-block" style=" padding: 0.5rem; margin: 10px;">
-                <h4>Sponsorships</h4>
+            <div style=" padding: 0.5rem; margin: 10px;">
+                <h4 class="chart-heading">Sponsorships</h4>
                 <canvas id="myChart3"></canvas>
             </div>
         </div>
 
         <div class="column">
-            <div class="chart-block" style="  padding: 0.5rem; margin: 10px;">
-                <h4>Donations</h4>
+            <div style="  padding: 0.5rem; margin: 10px;">
+                <h4 class="chart-heading">Donations</h4>
                 <canvas id="myChart4"></canvas>
             </div>
 
-            <div class="chart-block" style=" padding: 0.5rem; margin: 10px;">
-                <h4>Rescues</h4>
+            <div style=" padding: 0.5rem; margin: 10px;">
+                <h4 class="chart-heading">Rescues</h4>
                 <canvas id="myChart5"></canvas>
             </div>
         </div>
 
         <div class="column">
-            <div class="chart-block" style="  padding: 0.5rem; margin: 10px;">
-                <h4>Adoption Requests</h4>
+            <div style="  padding: 0.5rem; margin: 10px;">
+                <h4 class="chart-heading">Adoption Requests</h4>
                 <canvas id="myChart6"></canvas>
             </div>
 
-            <div class="chart-block" style="   padding: 0.5rem; margin: 10px;">
-                <h4>Annual Feedback Rating</h4>
+            <div style="   padding: 0.5rem; margin: 10px;">
+                <h4 class="chart-heading">Annual Feedback Rating</h4>
                 <canvas id="myChart7"></canvas>
             </div>
         </div>

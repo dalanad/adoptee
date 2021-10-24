@@ -78,20 +78,59 @@
         width: 50%;
         box-sizing: border-box;
     }
+
     .div-size {
         width: 100px;
         height: 100px;
         min-height: 3rem;
         margin-bottom: 1em;
     }
+
+    .button-hover:hover {
+        background-color: var(--primary);
+        color: white;
+        transition: opacity 0.2s ease-in;
+    }
 </style>
 
 
 
 
-<div style="top: 100px; padding: 1rem;">
-    <div style="margin-left: 1070px;"><a href="/OrgManagement/add_new_animal" class="btn right outline"> Add New Animal </a></div>
-    <div class="overflow-auto" style="height:550px;">
+<div style="padding-top: 0.5rem;">
+
+    <div class="overflow-auto" style="height: 575px; padding-top: 2rem;"">
+    
+    <!-- Filters - Start -->
+    <div style="padding-left: 1rem;">
+        <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
+            <div>
+            <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
+            <button class="btn outline button-hover">Search</button>
+            </div> &nbsp; | &nbsp;
+            <div style="white-space: nowrap;">
+                <b>View :</b> &nbsp;
+                <input class="ctrl-radio" type="radio" onchange="" name="status" value="Listed" /> Listed
+                <input class="ctrl-radio" type="radio" onchange="" name="status" value="Adopted" /> Adopted
+                <input class="ctrl-radio" type="radio" onchange="" name="status" value="Any" /> Any
+            </div> &nbsp; | &nbsp;
+            <div style="white-space: nowrap;">
+                <b>Sort by :</b> &nbsp;
+                <select class="ctrl field-font" style="width: 65%;" required>
+                    <option selected='true' disabled='disabled'>- Select -</option>
+                    <option value='name'>Adoptee Name</option>
+                    <option value='type'>Adoptee Type</option>
+                    <option value='gender'>Gender</option>
+                    <option value='age'>Age</option>
+                </select>
+            </div> &nbsp;
+            <div style="white-space: nowrap;">
+                <input class="ctrl-radio" type="radio" onchange="" name="order" value="asc" /> Asc
+                <input class="ctrl-radio" type="radio" onchange="" name="order" value="desc" /> Desc
+            </div>
+        </form>
+    </div>
+    <!-- Filters - End -->
+
         <table class="table">
             <tr>
                 <th>PET</th>
@@ -111,13 +150,13 @@
                     <td>
                         <table>
                             <tr>
-                            <td><img src="<?= $animal["avatar_photo"]?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
+                                <td><img src="<?= $animal["avatar_photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
                                 <td><?= $animal["name"] ?></td>
                             </tr>
                         </table>
                     </td>
                     <td><?= $animal["type"] ?></td>
-                    <td><?= $animal["dob"] ?></td>
+                    <td><?= $animal["age"] ?> years</td>
                     <td><?= $animal["gender"] ?></td>
                     <td><?= $animal["date_listed"] ?></td>
                     <td><span class="tag <?= $animal["status"] == "ADOPTED" ? 'green' : 'pink' ?>"> <?= $animal["status"] ?> </span></td>
@@ -189,9 +228,9 @@
 
                                     <div class="row">
                                         <div class='field column'>
-                                            <label for='dob'>Approximate DOB</label>
+                                            <label for='age'>Approximate age</label>
                                             <div>
-                                                <input style="width: 100%" class="ctrl2 field-font" type="date" name="dob" id="datefield" value="<?= $animal["dob"] ?>" required />
+                                                <input style="width: 100%" class="ctrl2 field-font" type="date" name="age" id="datefield" value="<?= $animal["age"] ?>" required />
                                                 <p id="result"></p>
                                             </div>
                                         </div>
@@ -214,11 +253,11 @@
                                     <div class="field ">
                                         <label>Photo</label>
                                         <div style="display: flex;">
-                                        <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
-                                        <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
-                                        <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
-                                        <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
-                                        
+                                            <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
+                                            <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
+                                            <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
+                                            <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
+
                                         </div>
                                         <span class="field-msg"> </span>
                                     </div>
@@ -239,6 +278,7 @@
         </table>
     </div>
 </div>
+<div style="margin-left: 1200px; padding-bottom: 0px"><a href="/OrgManagement/add_new_animal" class="btn right outline button-hover" style="width: 60px; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Animal"><i class="fas fa-plus"></i></a></div>
 
 <script>
     function showModel(id) {
@@ -274,18 +314,18 @@
         }).change();
     });
 
-      //Max Date input
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth() + 1;
-  var yyyy = today.getFullYear();
-  if (dd < 10) {
-    dd = '0' + dd
-  }
-  if (mm < 10) {
-    mm = '0' + mm
-  }
+    //Max Date input
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
 
-  today = yyyy + '-' + mm + '-' + dd;
-  document.getElementById("datefield").setAttribute("max", today);
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("datefield").setAttribute("max", today);
 </script>
