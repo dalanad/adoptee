@@ -38,6 +38,7 @@ $active_item = isset($management_menu[$active]) ? $management_menu[$active] : (i
     .side-nav {
         flex: 1 1 0;
         margin-left: 1rem;
+        margin-right: .5rem;
         min-width: 12rem;
         max-width: 12rem;
         display: flex;
@@ -149,7 +150,7 @@ $active_item = isset($management_menu[$active]) ? $management_menu[$active] : (i
             <?php } ?>
         </div>
 
-        <div class="content" style="width: 100%;">
+        <div class="content" style="width: 100%; margin-left: .5rem">
             <div class="admin-header">
                 <div style="font-weight: 500;font-size:1.3rem">
                     <i class="fal fa-<?= $active_item["icon"] ?> txt-clr <?= $active_item["icon"] ?>" style="font-size: 1.2em;"></i>
@@ -159,8 +160,8 @@ $active_item = isset($management_menu[$active]) ? $management_menu[$active] : (i
                 <div style="flex: 1 1 0;"></div>
                 <?= user_btn() ?>
             </div>
-            <div style="padding: 1rem;">
-                <div class="flex-auto mx2 " style=" height: 600px; width: 1250PX;">
+            <div>
+                <div class="flex-auto" style=" height: 600px; width: 97%;">
                     <?php include __DIR__ . "/org_dashboard/" . $active . ".php" ?>
                 </div>
             </div>

@@ -43,10 +43,43 @@
     }
 </style>
 
-<div>
 
+<div style="padding-top: 0.5rem;">
+    <div class="overflow-auto" style="height:600px; padding-top: 2rem;">
 
-    <div class="overflow-auto" style="height:550px; padding: 1rem; padding-top: 2rem;">
+        <!-- Filters - Start -->
+        <div style="padding-left: 1rem;">
+        <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
+            <div>
+            <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
+            <button class="btn outline button-hover">Search</button>
+            </div> &nbsp; | &nbsp;
+            <div style="white-space: nowrap;">
+                <b>View :</b> &nbsp;
+                <input class="ctrl-radio" type="radio" onchange="" name="status" value="Adopted" /> Adopted
+                <input class="ctrl-radio" type="radio" onchange="" name="status" value="Pending" /> Pending
+                <input class="ctrl-radio" type="radio" onchange="" name="status" value="Pending" /> Rejected
+                <input class="ctrl-radio" type="radio" onchange="" name="status" value="Any" /> Any
+            </div> &nbsp; | &nbsp;
+            <div style="white-space: nowrap;">
+                <b>Sort by :</b> &nbsp;
+                <select class="ctrl field-font" style="width: 65%;" required>
+                    <option selected='true' disabled='disabled'>- Select -</option>
+                    <option value='name'>Adoptee Name</option>
+                    <option value='name'>Adoptor Name</option>
+                    <option value='type'>Adoptee Type</option>
+                    <option value='gender'>Gender</option>
+                    <option value='age'>Requested Date</option>
+                </select>
+            </div> &nbsp;
+            <div style="white-space: nowrap;">
+                <input class="ctrl-radio" type="radio" onchange="" name="order" value="asc" /> Asc
+                <input class="ctrl-radio" type="radio" onchange="" name="order" value="desc" /> Desc
+            </div>
+        </form>
+    </div>
+    <!-- Filters - End -->
+
         <table class="table">
             <tr>
                 <th>ADOPTEE</th>
@@ -77,9 +110,26 @@
                     <td><span class="tag <?= $adoption_request["children"] ? 'green' : 'pink' ?>"><?= $adoption_request["children"] ? "YES" : "NO" ?> </span></td>
                     <td><span class="tag <?= $adoption_request["status"] == "PENDING" ? 'orange' :($adoption_request["status"] == "ADOPTED" ? 'green' : 'pink')  ?>"> <?= $adoption_request["status"] ?> </span></td>
                     <td>
-                        <a href="/OrgManagement/accept_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" title="Accept" class="btn btn-link btn-icon green"><i class="fas fa-check-circle"></i> </a>
+                        <button onclick="showModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon green"><i class="fas fa-check-circle"></i> </button>
+                        <div id="popupModal-accept<?= $adoption_request["animal_id"] ?>" class="modal">
+                            <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
+                                <span class="close" onclick="hideModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')">&times;</span>
+                                <h3 style="text-align: center;">Are you sure you want to accept request?</h3>
+                                <a href="/OrgManagement/accept_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                <button  class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')">Cancel</button>
+                            </div>
+
+                        </div>
                         &nbsp;
-                        <a href="/OrgManagement/reject_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" title="Reject" class="btn btn-link btn-icon pink"><i class="fas fa-times-circle"></i></a>
+                        <button onclick="showModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon pink"><i class="fas fa-times-circle"></i></button>
+                        <div id="popupModal-reject<?= $adoption_request["animal_id"] ?>" class="modal">
+                            <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
+                                <span class="close" onclick="hideModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')">&times;</span>
+                                <h3 style="text-align: center;">Are you sure you want to reject request?</h3>
+                                <a href="/OrgManagement/reject_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')">Cancel</a>
+                            </div>
+
                     </td>
                     <td>
                         <button  onclick="showModel('popupModal<?= $adoption_request["animal_id"] ?>')" title="More Details" class="tag btn btn-link">Details</button>
@@ -120,4 +170,9 @@
         document.getElementById(id).style.display = "none";
         document.getElementById(id).onclick = null
     }
+
+    function showFlash() {
+        window.FlashMessage.success('This is a successs flash message !');
+    }
+
 </script>

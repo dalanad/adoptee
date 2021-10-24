@@ -30,9 +30,9 @@ VALUES ('1','Gold',5000.00,'30','Funds are allocated for veterinary needs'),
 ('3','Basic',2000.00,'30','Funds are allocated for food');
 
 INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) VALUES
-('Dog', 'Tigger', 'Male',   '2021-07-01', '["Brown"]','/assets/data/dogs/1.jpg'),
-('Dog', 'Leo',    'Male',   '2016-01-15', '["Brown", "Black", "White"]','/assets/data/dogs/2.jpg'),
-('Dog', 'Oliver', 'Female', '2021-10-06', '["White"]','/assets/data/dogs/3.jpg'),
+('Dog', 'Tigger', 'Male',   '2015-07-01', '["Brown"]','/assets/data/dogs/1.jpg'),
+('Dog', 'Leo',    'Male',   '2016-01-15', '["Orange"]','/assets/data/dogs/2.jpg'),
+('Dog', 'Oliver', 'Female', '2020-10-06', '["White"]','/assets/data/dogs/3.jpg'),
 ('Dog', 'Milo',   'Female', '2020-02-10', '["Golden Brown"]','/assets/data/dogs/4.jpg'),
 ('Dog', 'Simba',  'Male',   '2015-10-01', '["White", "Brown"]','/assets/data/dogs/5.jpg'),
 ('Dog', 'Luna',   'Female', '2017-10-01', '["Black", "Brown"]','/assets/data/dogs/6.jpg'),

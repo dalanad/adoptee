@@ -146,16 +146,16 @@
         <div class='field'>
           <label for="color"> Color </label>
           <div class="check">
-            <input id="white" name="color[]" type="checkbox" value="white">
-            <label for="white" style="background:cornsilk;"></label>
-            <input id="grey" name="color[]" type="checkbox" value="grey">
-            <label for="grey" style="background:grey;"></label>
-            <input id="orange" name="color[]" type="checkbox" value="orange">
-            <label for="orange" style="background:darkgoldenrod;"></label>
-            <input id="brown" name="color[]" type="checkbox" value="brown">
-            <label for="brown" style="background:brown;"></label>
-            <input id="black" name="color[]" type="checkbox" value="black">
-            <label for="black" style="background:black;color:white;"></label>
+            <input id="white" name="color[]" type="checkbox" value="White">
+            <label for="white" style="background:cornsilk;" title="White"></label>
+            <input id="grey" name="color[]" type="checkbox" value="Grey">
+            <label for="grey" style="background:grey;" title="Grey"></label>
+            <input id="orange" name="color[]" type="checkbox" value="Orange">
+            <label for="orange" style="background:darkgoldenrod;" title="Orange"></label>
+            <input id="brown" name="color[]" type="checkbox" value="Brown">
+            <label for="brown" style="background:brown;" title="Brown"></label>
+            <input id="black" name="color[]" type="checkbox" value="Black">
+            <label for="black" style="background:black;color:white;" title="Black"></label>
           </div>
         </div>
         <div class='field column'>
