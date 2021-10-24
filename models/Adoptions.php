@@ -57,12 +57,6 @@ class Adoptions extends BaseModel
         return self::select($query);
     }
 
-    
-    static function hidePet($animalId)
-    {
-        
-    }
-
     static function adopteeUpdate($userId, $animalId, $type, $desc, $photo)
     {
         $query = "INSERT INTO routine_updates(user_id, animal_id, type, description, photo, update_date) 

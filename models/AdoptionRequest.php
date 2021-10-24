@@ -21,17 +21,10 @@ class AdoptionRequest extends BaseModel
 
     public function checkRequestsForPet($animal_id)
     {
-        $query = "SELECT `animal_id`
+        $query = "SELECT `status`
         FROM  `adoption_request`
-        WHERE animal_id = $animal_id
-        AND status = 'PENDING'";
-        $result =  self::select($query);
-        if($result!=NULL){
-            return "true"; //requests exist
-        }
-        else{
-            return "false";
-        }
+        WHERE animal_id = $animal_id";
+        return  self::select($query);
     }
 
     static function getUserRequest($animalId, $userId)
