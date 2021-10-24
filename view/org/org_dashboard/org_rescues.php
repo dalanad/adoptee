@@ -1,18 +1,11 @@
 <?php
 
 $org_rescues = array(
-    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
-    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
-    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
-    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
-    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
-    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
-    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
-    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
-    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
-    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
-    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC"),
-    array("type" => "Dog", "date_rescued" => "01-01-2021", "contact_number" => "0771234567", "description" => "Injured Leg", "location" => "Anuradhapura", "photo" => "ABC")
+    array("type" => "Dog", "date_rescued" => "21-10-2021", "contact_number" => "0762457684", "description" => "Injured Leg", "location" => "12/1, Jayathilake Road, Anuradhapura", "photo" => "ABC"),
+    array("type" => "Cat", "date_rescued" => "11-06-2021", "contact_number" => "0775467215", "description" => "Severe skin rash", "location" => "77/7, Silva Lane, Colombo 02", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "01-06-2019", "contact_number" => "0722247568", "description" => "Malnutritioned", "location" => "44/A, Bishop Road, Nugegoda", "photo" => "ABC"),
+    array("type" => "Hamster", "date_rescued" => "26-10-2019", "contact_number" => "0771234567", "description" => "Spine Injurey", "location" => "151/3, Gregary Lane, Dehiwala", "photo" => "ABC"),
+    array("type" => "Dog", "date_rescued" => "24-06-2018", "contact_number" => "071275645", "description" => "Abandoned near a highway", "location" => "Piliyandala, close to main road", "photo" => "ABC")
 
 );
 
@@ -88,23 +81,23 @@ $org_rescues = array(
 
 <div style="padding-top: 2rem;">
     <div style="height:600px">
-    <div class="mouse-over-div div-size" style="display:flex; font-size: 0.8rem; font-weight: 500; border: none;">
+    <div class="div-size" style="display:flex; font-size: 0.8rem; font-weight: 500; border: none; padding-left: 1rem; padding-bottom: 1rem; padding-top:.5rem;">
                     <div style="width: 150px;">TYPE</div>
                     <div style="width: 180px;">DATE RESCUED</div>
                     <div style="width: 180px;">CONTACT NUMBER</div>
                     <div style="width: 250px;">DESCRIPTION</div>
-                    <div style="width: 200px;">LOCATION</div>
+                    <div style="width: 250px;">LOCATION</div>
                     <div style="width: 150px;">INFO</div>
                     <div style="padding-right: 0.5rem; width: 100px;"></div>
     </div>
     <div class="overflow-auto" style="height:525px">
             <?php foreach ($org_rescues as $org_rescue) { ?>
-                    <div class="mouse-over-div div-size" style="display:flex;">
-                    <div style="width: 150px;"><?= $org_rescue["type"] ?></div>
+                    <div class="div-size" style="display:flex; padding-left: 1rem; padding-bottom: .5rem; padding-top:.5rem;">
+                    <div style="width: 150px;"><i class="txt-clr fa fa-lg fa-<?= $org_rescue['type'] == "Dog" ? 'dog blue' : ($org_rescue['type'] == "Cat" ? 'cat pink' : 'paw green' ) ?>"></i>&nbsp;&nbsp; <?= $org_rescue["type"] ?></div>
                     <div style="width: 180px;"><?= $org_rescue["date_rescued"] ?></div>
                     <div style="width: 180px;"><?= $org_rescue["contact_number"] ?></div>
                     <div style="width: 250px;"><?= $org_rescue["description"] ?></div>
-                    <div style="width: 200px;"><?= $org_rescue["location"] ?></div>
+                    <div style="width: 250px;"><?= $org_rescue["location"] ?></div>
                     
                     <div style="width: 150px;">
                     <button onclick="showModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')" title="More Details" class="tag btn btn-link">Details</button>

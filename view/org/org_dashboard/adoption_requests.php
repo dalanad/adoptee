@@ -79,6 +79,7 @@
         </form>
     </div>
     <!-- Filters - End -->
+    <br>
 
         <table class="table">
             <tr>

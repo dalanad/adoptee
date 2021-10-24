@@ -78,15 +78,21 @@
 
     .div-size {
         width: 500px;
-        height: 450px;
+        height: 425px;
         min-height: 3rem;
         margin-bottom: 1rem;
+    }
+
+    .button-hover:hover {
+        background-color: var(--primary);
+        color: white;
+        transition: opacity 0.2s ease-in;
     }
 </style>
 
 
 <div style="padding-top: 0.5rem;">
-    <div class="overflow-auto" style="height:575px;">
+    <div class="overflow-auto" style="height: 555px; padding-top: 2rem;">
 
         <!-- Filters - Start -->
         <div style="padding-left: 1rem;">
