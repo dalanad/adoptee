@@ -69,7 +69,7 @@ padding-top:30px;
 <button class="btn btn-pink" type="submit"><i class="fa fa-trash"></i> Delete User</button>
 </div>
 <div class="sec">
-<a class=" btn btn-faded pink" href="/view/org/settings.php?menu=users">Go Back</a>
+<a class=" btn btn-faded pink" href="/OrgSettings/users">Go Back</a>
 
 </div>
 

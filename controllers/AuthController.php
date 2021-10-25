@@ -81,11 +81,7 @@ class AuthController extends Controller
 
         if (User::matchPasswords($_POST['password'], $_POST['confirm-password'])) {
 
-            // TODO: insert to org user
-
-            User::createUser($_POST['name'], $_POST['email'], $_POST['telephone'], "", $_POST['password']);
-            Organization::createOrganization($_POST['name'], $_POST['telephone'], $_POST['address_line_1'], $_POST['address_line_2'], $_POST['city']);
-
+            Organization::registerOrganization($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address_line_1'], $_POST['address_line_2'], $_POST['city'], $_POST['password']);
             $this->redirect('/auth/verify?email=' . $_POST['email']);
         } else {
             $this->redirect("/auth/organizationRegistration?error=true");

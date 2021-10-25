@@ -2,11 +2,24 @@
 
 class Organization extends BaseModel
 {
-    public static function createOrganization($name, $telephone, $address_line_1, $address_line_2, $city)
+    public static function registerOrganization($name, $email, $telephone, $address_line_1, $address_line_2, $city, $password)
     {
-        $query = "INSERT INTO `organization` (  `name`, `telephone`, `address_line_1`, `address_line_2`, `city`) 
-                VALUES ( '$name', $telephone, '$address_line_1', '$address_line_2', '$city')";
-        return BaseModel::insert($query);
+        User::createUser($name,  $email, $telephone, $address_line_1 . " " . $address_line_2,  $password);
+        $user_id = self::lastInsertId();
+
+        $query = "INSERT INTO organization (name, telephone, address_line_1, address_line_2, city) 
+                  VALUES ('$name', $telephone, '$address_line_1', '$address_line_2', '$city')";
+        self::insert($query);
+        $org_id = self::lastInsertId();
+
+        $query = "INSERT INTO org_user (user_id, org_id, role) VALUES ('$user_id', '$org_id', 'ADMIN');";
+        self::insert($query);
+    }
+
+    public static function getOrgUsers($orgId)
+    {
+        $query = "SELECT u.*, ou.role FROM user u, org_user ou WHERE u.user_id=ou.user_id AND ou.org_id = $orgId";
+        return self::select($query);
     }
 
     public function getOrgListing()
@@ -62,5 +75,4 @@ class Organization extends BaseModel
         AND o.org_id = $orgId";
         return BaseModel::select($query);
     }
-
 }

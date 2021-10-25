@@ -11,9 +11,9 @@ function user_btn()
             (isset($_SESSION['org']) ? ("<br><div> <small style='font-weight: 300;'>" . $_SESSION['org']['name'] . "</small></div>") : "") .
             "</div>
              <div class='dropdown-content'>
-                <a class='btn black btn-link' href='/profile/user_profile'><i class='fa fa-user'></i>&nbsp; Profile</a>
-                <a class='btn black btn-link' href='/merchandise/cart'> <i class='fas fa-shopping-cart'></i></i>&nbsp; Cart</a>
-                <a class='btn black btn-link' href='/main/faq'> <i class='fa fa-question'></i>&nbsp; Help</a>
+                <a class='btn black btn-link' href='/profile/user_profile'><i class='fa fa-user'></i>&nbsp; Profile</a>"
+            . ($_SESSION['user_role'] == "reg_user" ? "<a class='btn black btn-link' href='/merchandise/cart'> <i class='fas fa-shopping-cart'></i></i>&nbsp; Cart</a>" : "") .
+            "<a class='btn black btn-link' href='/main/faq'> <i class='fa fa-question'></i>&nbsp; Help</a>
                 <a class='btn black btn-link' href='/auth/sign_out'> <i class='fa fa-sign-out'></i>&nbsp; Sign Out</a>
             </div>
         </div>";

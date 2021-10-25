@@ -1,55 +1,56 @@
-<?php require __DIR__ . "/../../_layout/layout.php"; 
+<?php require __DIR__ . "/../../_layout/layout.php";
 ?>
 <style>
+    .page {
+        max-width: 500px;
+        margin: 0 auto;
+    }
 
-.page{
-    padding-left:300px;
-    padding-right:300px;
-    
-}
+    .column {
+        float: left;
+        width: 40%;
+        margin: .5rem;
+    }
 
-.column {
-  float: left;
-  width: 30%;
-  padding: 10px;
-  height: 300px;
-  font-size:20px ;
-  font-family:Calibri,sans serif;
-}
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.btn-blue {
-	background-color: blue;
-	border: 1px solid blue;
-}
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 </style>
-<div class="row page">
-<div style="padding: 1rem 1rem;display: flex;">
+<form class="row page" action="/OrgSettings/process_create_user" method="POST">
+    <div style="padding: 1rem 1rem;display: flex;">
         <?php if (session_status() == PHP_SESSION_NONE) {
             session_start();
         } ?>
         <div style="flex: 1 1 0;"></div>
         <?= user_btn() ?>
     </div>
-<div class="column">
-    <strong>Create Organization User</strong><br><br>
-    <div class="field">
-    <label for="name"><strong>Name</strong></label>
-
-<input class="ctrl" type="text"  name="name" id="name" required>
-<span class="field-msg">Name</span>
-</div>
-
-<button class="btn btn-blue" type="submit">Submit</button><br><br>
-
-<a class=" btn btn-faded pink" href="/view/org/settings.php?menu=users"><strong>Go Back</strong></a>
-</div>
-
-<div class="column"><br><br>
-<div class="field">
-    <label for="name"><strong>Email Adress</strong></label>
-<input class="ctrl" type="text"  name="email" id="email" required>
-<span class="field-msg">Email Adress</span>
+    <h3 style="margin: 1rem .5rem;">Create Organization User</h3>
+    <div class="row">
+        <div class="column">
+            <div class="field">
+                <label for="name">Name</label>
+                <input class="ctrl" type="text" name="name" id="name" required>
+                <span class="field-msg">Name</span>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input class="ctrl" type="password" autocomplete="new-password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$" name="password" required>
+                <small class="field-hint">Include upper & lower case letters,<br> numbers and special characters </small>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+                <label for="name">Email Address</label>
+                <input class="ctrl" type="text" name="email" id="email" required>
+                <span class="field-msg">Email Address</span>
+            </div>
+            <div class="field"> </div>
+        </div>
+    </div>
+    <div style="margin:.5rem">
+        <button class="btn" type="submit">Submit</button><br><br>
+        <a class="btn btn-faded pink" href="/OrgSettings/users">Go Back</a>
+    </div>
+</form>

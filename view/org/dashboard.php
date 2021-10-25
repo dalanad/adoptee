@@ -140,7 +140,7 @@ $active_item = isset($management_menu[$active]) ? $management_menu[$active] : (i
                 <a class="side-nav-link <?= $active == "feedback_list"  ? 'active' : '' ?>" href="feedback_list">
                     <i class="far fa-smile"></i> &nbsp; Feedback
                 </a>
-                <a class="side-nav-link <?= $active == "setting"  ? 'active' : '' ?>" href="/view/org/settings.php?menu=general">
+                <a class="side-nav-link <?= $active == "setting"  ? 'active' : '' ?>" href="/OrgSettings/general">
                     <i class="far fa-cog"></i> &nbsp; Settings
                 </a>
                 <a class="side-nav-link <?= $active == "help" ? 'active' : '' ?>" href="/main/faq">
