@@ -1,25 +1,37 @@
 <?php require_once  __DIR__ . '/../../_layout/layout.php'; ?>
 
 <style>
-    .chart-block {
-        background: white;
-        box-shadow: var(--shadow);
-        border-radius: 0.5rem;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        border-color: black;
-    }
-
     .row {
         display: flex;
     }
 
-    .column {
+    .column1 {
         margin-right: 1rem;
         flex: 30%;
     }
 
-    .chart-heading {
+    .column2 {
+        margin-right: 1rem;
+        flex: 50%;
+    }
+
+    .div-totals{
+        padding: 0.5rem; 
+        margin: 20px; 
+        width: 250px; 
+        height: 50px;
+        border-radius: 0.2rem;
+        display: flex;
+        font-weight: 1000;
+        font-size: 1.5rem;
+        
+    }
+
+    .div-totals:hover {
+	opacity: .84;
+}
+
+    .div-heading {
         text-align: center;
         margin: 5px;
     }
@@ -27,44 +39,50 @@
 
 <div style="padding-top: 2rem;">
     <div class="row">
-        <div class="column">
-            <div style="  padding: 0.5rem; margin: 10px;">
-                <h4 class="chart-heading">Adoptees</h4>
+        <div class="column1">
+            <div style="padding: 0.5rem; margin: 10px;">
                 <canvas id="myChart1"></canvas>
             </div>
 
-            <div style="  padding:0.5rem; margin: 10px;">
-                <h4 class="chart-heading">Merchandiese Orders</h4>
-                <canvas id="myChart2"></canvas>
-            </div>
-
-            <div style=" padding: 0.5rem; margin: 10px;">
-                <h4 class="chart-heading">Sponsorships</h4>
-                <canvas id="myChart3"></canvas>
-            </div>
-        </div>
-
-        <div class="column">
-            <div style="  padding: 0.5rem; margin: 10px;">
-                <h4 class="chart-heading">Donations</h4>
-                <canvas id="myChart4"></canvas>
-            </div>
-
-            <div style=" padding: 0.5rem; margin: 10px;">
-                <h4 class="chart-heading">Rescues</h4>
+            <div style="padding:0.5rem; margin: 10px;">
                 <canvas id="myChart5"></canvas>
             </div>
         </div>
 
-        <div class="column">
-            <div style="  padding: 0.5rem; margin: 10px;">
-                <h4 class="chart-heading">Adoption Requests</h4>
-                <canvas id="myChart6"></canvas>
+        <div class="column2">
+            <div class="row">
+                <div class="column1" style="flex: 70%;">
+                    <div style="padding: 0.5rem; margin: 10px;">
+                        <canvas id="myChart6"></canvas>
+                    </div>
+                </div>
+                <div class="column1" style="padding: .5rem; flex: 30%">
+                    <div class="div-totals" style="background-color:#e2f5f5; justify-items:center; align-items:center;padding-left: 1rem;">
+                        <div style="justify-items:center; align-items:center; display:flex; font-size:1rem; width: 50px; height:50px; border-radius: 5rem; background-color:#6fcdcd; padding-left: 1rem;"><i class="fa fa-2x fa-hand-holding-usd"></i></div>&nbsp;&nbsp;
+                        <div>
+                            <div>Rs. 41,200</div>
+                            <div style="font-size: 0.7rem; font-weight: 400;">All time donations received</div>
+                        </div>
+                    </div>
+                    <div class="div-totals" style="background-color:#ffe6eb;justify-items:center; align-items:center;padding-left: 1rem;">
+                        <div style="justify-items:center; align-items:center; display:flex; font-size:1rem; width: 50px; height:50px; border-radius: 5rem; background-color:#ff829d; padding-left: 1rem;"><i class="fa fa-2x fa-donate"></i></div>&nbsp;&nbsp;
+                        <div>
+                            <div>Rs. 140,200</div>
+                            <div style="font-size: 0.7rem; font-weight: 400;">All time sponsorships received</div>
+                        </div>
+                    </div>
+                    <div class="div-totals" style="background-color:#fff3d7; justify-items:center; align-items:center;padding-left: 1rem;">
+                        <div style="justify-items:center; align-items:center; display:flex; font-size:1rem; width: 50px; height:50px; border-radius: 5rem; background-color:#ffd778; padding-left: 1rem;"><i class="fa fa-2x fa-shopping-cart"></i></div>&nbsp;&nbsp;
+                        <div>
+                            <div>151</div>
+                            <div style="font-size: 0.7rem; font-weight: 400;">Completed merchandise orders</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div style="   padding: 0.5rem; margin: 10px;">
-                <h4 class="chart-heading">Annual Feedback Rating</h4>
-                <canvas id="myChart7"></canvas>
+            
+            <div style="padding: 0.5rem; margin: 10px;">
+                <canvas id="myChart2"></canvas>
             </div>
         </div>
 
@@ -72,17 +90,14 @@
 
 
     <script>
-        /*Chart 1*/
         Chart.defaults.font.family = "Roboto, sans-serif"
         Chart.defaults.color = '#000000'
+
+        /*Chart 1*/
         let labels1 = [
             'Dogs',
             'Cats',
             'Other'
-        ];
-
-        let data1 = [
-            60, 50, 50
         ];
 
         let colors1 = [
@@ -100,24 +115,52 @@
                 axis: 'y',
                 fill: true,
                 datasets: [{
-                    label: 'Male',
-                    data: data1,
-                    backgroundColor: colors1
-                }]
+                        label: 'Male',
+                        backgroundColor: '#5eb5ef',
+                        borderColor: '#5eb5ef',
+                        data: Array.from({
+                            length: 6
+                        }, (_, i) => Math.round(Math.random() * 30))
+                    },
+                    {
+                        label: 'Female',
+                        backgroundColor: '#ff829d',
+                        borderColor: '#ff829d',
+                        data: Array.from({
+                            length: 6
+                        }, (_, i) => Math.round(Math.random() * 30))
+                    }
+                ]
             },
             options: {
                 indexAxis: 'y',
-                aspectRatio: 2.5,
-
                 plugins: {
-                    legend: {
-                        display: false
+                    title: {
+                        display: true,
+                        text: 'Adoptees'
+                    },
+                    subtitle: {
+                        display: true,
+                        text: 'By Gender'
+                    }
+                },
+                aspectRatio: 2.5,
+                responsive: true,
+                interaction: {
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true
                     }
                 }
             }
         });
 
-        /*Chart 2*/
+        /* Chart 2 */
 
         let labels2 = [
             'Jan',
@@ -134,153 +177,54 @@
             'Dec'
         ];
 
-        let data2 = [
-            10, 30, 50, 75, 20, 50, 30, 80, 100, 40, 50, 70
-        ];
-
-        let colors2 = [
-            'rgb(255, 99, 132)'
-        ];
-
         let myChart2 = document.getElementById("myChart2").getContext('2d');
 
         let chart2 = new Chart(myChart2, {
             type: 'line',
             data: {
                 labels: labels2,
-                axis: 'y',
-                fill: false,
-                tension: 0.1,
                 datasets: [{
-                    label: 'Merchandise Orders',
-                    data: data2,
-                    backgroundColor: colors2
-                }]
-            },
-
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
+                        label: 'Donations',
+                        backgroundColor: '#ff829d',
+                        borderColor: '#ff829d',
+                        cubicInterpolationMode: 'monotone',
+                        data: Array.from({
+                            length: 30
+                        }, (_, i) => Math.round(Math.random() * 8))
                     },
-                },
-                aspectRatio: 2.5,
-                scales: {
-                    xAxes: [{
-                        gridLines: {
-                            display: false
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                        },
-                        gridLines: {
-                            display: false
-                        }
-                    }]
-                }
-            }
-        });
-
-        /*Chart 3*/
-
-        let labels3 = [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'June',
-            'July',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ];
-
-        let data3 = [
-            10, 30, 50, 75, 20, 50, 30, 80, 100, 40, 50, 70
-        ];
-
-        let colors3 = [
-            'rgb(54, 162, 235)'
-        ];
-
-        let myChart3 = document.getElementById("myChart3").getContext('2d');
-
-        let chart3 = new Chart(myChart3, {
-            type: 'line',
-            data: {
-                labels: labels3,
-                axis: 'y',
-                fill: false,
-                tension: 0.1,
-                datasets: [{
-                    data: data3,
-                    backgroundColor: colors3
-                }]
-            },
-            options: {
-                aspectRatio: 2.5,
-                plugins: {
-                    legend: {
-                        display: false
+                    {
+                        label: 'Sponsorships',
+                        backgroundColor: '#6fcdcd',
+                        borderColor: '#6fcdcd',
+                        cubicInterpolationMode: 'monotone',
+                        data: Array.from({
+                            length: 30
+                        }, (_, i) => Math.round(Math.random() * 12))
                     },
-                }
-            }
-        });
-
-        /*Chart 4*/
-
-        let labels4 = [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'June',
-            'July',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ];
-
-        let data4 = [
-            10, 30, 50, 75, 20, 50, 30, 80, 100, 40, 50, 70
-        ];
-
-        let colors4 = [
-            'rgb(255, 205, 86)'
-        ];
-
-        let myChart4 = document.getElementById("myChart4").getContext('2d');
-
-        let chart4 = new Chart(myChart4, {
-            type: 'line',
-            data: {
-                labels: labels4,
-                axis: 'y',
-                fill: true,
-                tension: 0.1,
-                datasets: [{
-                    label: 'Donations',
-                    data: data4,
-                    backgroundColor: colors4
-                }]
+                ]
             },
             options: {
-                aspectRatio: 2.5,
                 plugins: {
-                    legend: {
-                        display: false
+                    title: {
+                        display: true,
+                        text: 'Donations and Sponsorships'
+                    },
+                    subtitle: {
+                        display: true,
+                        text: 'Past 12 Months'
                     }
+                },
+                aspectRatio: 2.6,
+                responsive: true,
+                interaction: {
+                    intersect: false,
                 }
+
             }
+
         });
+
+        
 
         /*Chart 5*/
 
@@ -295,9 +239,9 @@
         ];
 
         let colors5 = [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
+            'rgb(255, 130, 157)',
+            'rgb(255, 215, 120)',
+            'rgb(111, 205, 205)'
         ];
 
         let myChart5 = document.getElementById("myChart5").getContext('2d');
@@ -312,7 +256,17 @@
                 }]
             },
             options: {
-                aspectRatio: 1.1,
+                aspectRatio: 1.15,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Rescues'
+                    },
+                    subtitle: {
+                        display: true,
+                        text: 'By Animal Type'
+                    }
+                }
             }
         });
 
@@ -329,9 +283,9 @@
         ];
 
         let colors6 = [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
+            'rgb(255, 130, 157)',
+            'rgb(255, 215, 120)',
+            'rgb(94, 181, 239)'
         ];
 
         let myChart6 = document.getElementById("myChart6").getContext('2d');
@@ -346,45 +300,17 @@
                 }]
             },
             options: {
-                title: {
-                    text: "Rescues",
-                    display: true
-                }
-            },
-            options: {
                 aspectRatio: 1.2,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Adoption Requests'
+                    },
+                    subtitle: {
+                        display: true,
+                        text: 'By Animal Type'
+                    }
+                }
             }
-        });
-
-        /*Chart 7*/
-
-        let labels7 = [
-            '2019',
-            '2020',
-            '2021'
-        ];
-
-        let data7 = [
-            4, 3.7, 5
-        ];
-
-        let colors7 = [
-            'rgb(255, 99, 132)'
-        ];
-
-        let myChart7 = document.getElementById("myChart7").getContext('2d');
-
-        let chart7 = new Chart(myChart7, {
-            type: 'bar',
-            data: {
-                labels: labels7,
-                axis: 'y',
-                fill: true,
-                datasets: [{
-                    label: 'Annual Client Rating',
-                    data: data7,
-                    backgroundColor: colors7
-                }]
-            },
         });
     </script>

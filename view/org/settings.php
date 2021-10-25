@@ -10,7 +10,9 @@ $menu_items = array(
     "payments" =>  array("name" =>  "Payments", "icon" => "money-check-alt"),
 );
 
-$active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["menu"] : "general";
+if (!isset($active)) {
+    $active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["menu"] : "general";
+}
 
 ?>
 
@@ -22,7 +24,6 @@ $active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["me
     .side-nav {
         flex: 1 1 0;
         margin-left: 1rem;
-        min-width: 10rem;
         max-width: 15rem;
         display: flex;
         flex-direction: column;
@@ -95,30 +96,27 @@ $active = isset($_GET["menu"]) && isset($menu_items[$_GET["menu"]])  ? $_GET["me
 </style>
 
 <div class="container">
-    <div style="padding: 1rem 1rem;display: flex;">
-        <?php if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        } ?>
+    <div style="padding: 1rem 1rem;padding-bottom:0;display: flex;">
         <div style="flex: 1 1 0;"></div>
         <?= user_btn() ?>
     </div>
     <div class="mx2 txt-clr">
-        <h2 class="flex items-center">
+        <h2 class="flex items-center" style="margin-top: 0;">
             <a href="/OrgManagement/org_adoption_listing" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
             Organization Settings
         </h2>
     </div>
     <div class="container">
-        <div class="settings-container ">
+        <div class="settings-container">
             <div class="side-nav">
                 <?php foreach ($menu_items as $key => $value) { ?>
-                    <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="?menu=<?= $key ?>">
+                    <a class="side-nav-link <?= $key == $active ? 'active' : '' ?>" href="/OrgSettings/<?= $key ?>">
                         <i class="fa fa-<?= $value["icon"] ?>"></i> &nbsp; <?= $value["name"] ?>
                     </a>
                 <?php  } ?>
             </div>
             <div class="flex-auto   mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem">
-                <?php include "./org_settings/" . $active . ".php" ?>
+                <?php include __DIR__ . "./org_settings/" . $active . ".php" ?>
             </div>
         </div>
     </div>
