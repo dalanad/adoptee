@@ -135,8 +135,8 @@
             <p style="color:#ff0000;">If your personal details are incorrect, you can update them<a class="btn btn-link" href="/profile/user_profile">here</a></p>
         </div>
         <?php if (isset($_SESSION['user'])){
-            if (isset($req) && ($req[0]['status'] == "PENDING")) { //signed in; pet requested already
-                if ($submission != NULL && ($submission[0]['user_id'] == $_SESSION['user']['user_id'])) { ?>
+            if (($req!=NULL) && ($req[0]['status'] == "PENDING")) { //signed in; pet requested already
+                if (($submission!=NULL) && ($submission[0]['user_id'] == $_SESSION['user']['user_id'])) { ?>
                     <!--signed in; pet requested by same user-->
                     <br>
                     <h3 style="text-align:center;">Your request is pending approval</h3>
@@ -197,7 +197,7 @@
                     </div>
 
                 <?php }
-            } elseif (isset($req) && ($req[0]['status'] == 'ADOPTED')) { ?>
+            } elseif (($req!=NULL) && ($req[0]['status'] == 'ADOPTED')) { ?>
                 <div class="message">
                 <div style="font-weight: 600;">It looks like this pet has already found a home</div></br>
                     <a href="/Adoptions" class="btn btn-link">Continue Browsing &nbsp <i class="fas fa-paw"></i></a>
