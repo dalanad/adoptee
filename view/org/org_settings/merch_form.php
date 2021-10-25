@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./../../_layout/layout.php";?>
+<?php require __DIR__ . "./../../_layout/layout.php"; ?>
 <style>
     .br {
         border: 2px solid var(--gray-4);
@@ -72,6 +72,6 @@
         </div>
     <?php } ?>
     <div class="sec">
-        <a class=" btn btn-faded pink" href="/view/org/settings.php?menu=merchandise"><b> Go Back</b></a>
+        <a class=" btn btn-faded pink" href="/OrgSettings/merchandise"><b> Go Back</b></a>
     </div>
 </form>

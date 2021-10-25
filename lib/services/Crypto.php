@@ -19,7 +19,7 @@ class Crypto
         $iv = openssl_random_pseudo_bytes(16);
         $encrypted = openssl_encrypt($plaintext, self::$algo, self::$key, 0, $iv);
 
-        return base64_encode($iv . $encrypted);
+        return urlencode(base64_encode($iv . $encrypted));
     }
 
     public static function decrypt(string $cipher_text)
