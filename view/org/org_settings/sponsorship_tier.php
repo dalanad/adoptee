@@ -59,6 +59,6 @@
         </div>
     </div>
     <div class="sec">
-        <a class=" btn btn-faded pink" href="/view/org/settings.php?menu=sponsorships"><b> Go Back</b></a>
+        <a class=" btn btn-faded pink" href="/OrgSettings/sponsorships"><b> Go Back</b></a>
     </div>
 </form>
