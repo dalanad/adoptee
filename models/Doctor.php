@@ -29,6 +29,19 @@ class Doctor extends BaseModel
         return self::select($query, ["id" => $user_id]);
     }
 
+    public static function updateCharges($doctor_id, $live_charge, $advise_charge)
+    {
+        $query = "UPDATE `doctor` SET advise_charge = :advise_charge, live_charge = :live_charge WHERE user_id = :doctor_id ";
+
+        $params = [
+            "doctor_id" => $doctor_id,
+            "advise_charge" => $advise_charge,
+            "live_charge" => $live_charge,
+        ];
+
+        return self::update($query, $params);
+    }
+
     /** 
      * Updates the doctors schedule with the given data 
      * 
