@@ -5,6 +5,7 @@ class DoctorController extends Controller
     public function __construct()
     {
         $this->isLoggedIn(["doctor"]);
+        $this->doctor_id = $_SESSION["user"]["user_id"];
     }
 
     function index()
@@ -26,7 +27,7 @@ class DoctorController extends Controller
 
     function get_live_bookings()
     {
-        $bookings = Consultation::getBookingsCalender($_SESSION["user"]["user_id"], $_GET["start_date"], $_GET["end_date"]);
+        $bookings = Consultation::getBookingsCalender($this->doctor_id, $_GET["start_date"], $_GET["end_date"]);
         View::json($bookings);
     }
 
@@ -46,7 +47,7 @@ class DoctorController extends Controller
 
     function get_consultations()
     {
-        $consultations = Consultation::findConsultationsByDoctorId($_SESSION["user"]["user_id"]);
+        $consultations = Consultation::findConsultationsByDoctorId($this->doctor_id);
         View::json($consultations);
     }
 
@@ -60,8 +61,7 @@ class DoctorController extends Controller
     function get_messages()
     {
         $consultationId = $_GET["consultation_id"];
-        $userId = $_SESSION["user"]["user_id"];
-        $messages = Message::getMessagesOfConsultation($consultationId, $userId);
+        $messages = Message::getMessagesOfConsultation($consultationId, $this->doctor_id);
         View::json($messages);
     }
 
@@ -73,9 +73,8 @@ class DoctorController extends Controller
         $consultationId = $_POST["consultation_id"];
         $message = $_POST["message"];
         $attachments = $_POST["attachments"];
-        $userId =  $_SESSION["user"]["user_id"];
 
-        $messages = Message::postMessage($consultationId, $userId, $message, NULL, $attachments);
+        $messages = Message::postMessage($consultationId, $this->doctor_id, $message, NULL, $attachments);
         View::json($messages);
     }
 
@@ -83,7 +82,6 @@ class DoctorController extends Controller
 
     function consulted_animals()
     {
-        $userId =  $_SESSION["user"]["user_id"];
         $filter = [
             "gender" =>  $_GET["gender"] ?? "Any",
             "type" => $_GET["type"] ?? [],
@@ -92,7 +90,7 @@ class DoctorController extends Controller
             "page" => $_GET["page"] ?? 0,
             "size" => $_GET["size"] ?? 10,
         ];
-        $result = Doctor::getConsultedAnimals($userId, $filter);
+        $result = Doctor::getConsultedAnimals($this->doctor_id, $filter);
         $data = [
             "animals" => $result["items"],
             "count" => $result["count"],
@@ -116,20 +114,27 @@ class DoctorController extends Controller
 
     public function schedule()
     {
-        View::render("doctor/schedule");
+        View::render("doctor/schedule", ["doctor" => Doctor::findByUID($this->doctor_id)[0]]);
+    }
+
+    public function update_pricing()
+    {
+        $live = $_POST["live"];
+        $advise = $_POST["advise"];
+        Doctor::updateCharges($this->doctor_id, $live, $advise);
+        $this->redirect("schedule");
     }
 
     public function update_schedule()
     {
         $_POST = json_decode(file_get_contents('php://input'), true);
-
-        Doctor::updateSchedule($_SESSION["user"]["user_id"], $_POST["schedule"]);
+        Doctor::updateSchedule($this->doctor_id, $_POST["schedule"]);
         View::json($_POST["schedule"]);
     }
 
     public function get_schedule()
     {
-        View::json(Doctor::getSchedule($_SESSION["user"]["user_id"]));
+        View::json(Doctor::getSchedule($this->doctor_id));
     }
 
     #endregion : Doctor Schedule  
