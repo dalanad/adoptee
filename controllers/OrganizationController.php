@@ -68,9 +68,51 @@ class OrganizationController extends Controller
 
     static function view_donation_page()
     {
+        if(isset($_GET['org_id'])){
+            $org_id = $_GET['org_id'];
+        }
+        else{
+            $org_id = $_SESSION['donation_org_id'];
+            unset($_SESSION['donation_org_id']);
+        }
         $organization = new Organization;
-        $data=["details" => $organization->getOrgDetails($_GET['org_id'])];
+        $data=["details" => $organization->getOrgDetails($org_id)];
         View::render("public/organizations/donations", $data);
+    }
+
+    static function make_donation()
+    {
+        $_SESSION['donation_org_id'] = $_POST['org_id'];
+        $amount = $_POST['amount']*100;        
+        $payment_link = Pay::payment("Donation", $amount, "/Organization/success");
+
+        $org= new OrganizationController;
+        $org->redirect($payment_link);
+
+        // $name = $_POST['displayName']?? "";
+        // $subscriptionId = $_POST['subscribe']?? "";
+        // $receipt = (isset($_POST['sendReceipt']))? 'true':'false';
+        // $email = $_POST['sendReceipt']?? "";
+        // Organization::makeDonation($name, $email, $receipt, $subscriptionId);     // 
+    }
+
+    public function success()
+    {
+        $this->redirect("/Organization/view_donation_success");
+        die();
+
+        require __DIR__ . "/../lib/vendor/stripe-php-7.97.0/init.php";
+        \Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
+
+        $session = \Stripe\Checkout\Session::retrieve($_GET['session_id']);
+
+        echo "<pre>";
+        echo json_encode($session, JSON_PRETTY_PRINT);
+    }
+
+    public function view_donation_success()
+    {
+        View::render("public/organizations/donation_success");
     }
 }
 

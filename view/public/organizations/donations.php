@@ -20,9 +20,15 @@
     }
 
     .message {
-        text-align: center;
-        margin-top: 15%;
-        color: var(--primary);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #ffffffcc;
+        top: 0;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
     }
 
     #logo {
@@ -47,17 +53,27 @@
     </div>
 
     <?php if (isset($_SESSION['user'])) { ?>
-        <form action="" method="POST">
-            <div class='field'>
-                <label for="amount">Amount</label>
-                <input class="ctrl" type="number" name="amount" step="1.00" min="0.00" placeholder="0.00" style="width:8rem;" required>
+        <form action="/Organization/make_donation" method="POST">
+
+            <div style="display:flex;">
+                <div class='field'>
+                    <label for="amount">Amount</label>
+                    <input class="ctrl" type="number" name="amount" step="0.01" min="105.00" placeholder="0.00" style="width:8rem;" required>
+                </div>
+
+                <div class="field" style="display:flex;">
+                    </br></br>
+                    <div><input type="checkbox" value="NULL" name="subscribe" class="ctrl-check ml2" />&nbsp Subscribe</div>
+                </div>
             </div>
 
+            <p style="font-size:15px;">If you subscribe, the amount entered above will be donated to <?= $details[0]['name'] ?> periodically.
+                The first donation will be made immediately, and monthly thereafter.</p>
 
             <div class='field'>
                 <p>I would like to,</p>
                 <div class="row">
-                    <div class="column"><input type="checkbox" value="yes" name="displayName">&nbsp Display my name:</div>
+                    <div class="column"><input type="checkbox" value="<?= $_SESSION['user']['name'] ?>" name="displayName" class="ctrl-check">&nbsp Display my name:</div>
                     <div class="column">
                         <?= $_SESSION['user']['name'] ?>
                     </div>
@@ -66,7 +82,7 @@
 
             <div class='field'>
                 <div class="row">
-                    <div class="column"><input type="checkbox" value="yes" name="sendReceipt">&nbsp Receive an emailed receipt:</div>
+                    <div class="column"><input type="checkbox" value="<?= $_SESSION['user']['email'] ?>" name="sendReceipt" class="ctrl-check">&nbsp Receive an emailed receipt:</div>
                     <div class="column">
                         <?= $_SESSION['user']['email'] ?>
                     </div>
@@ -76,13 +92,18 @@
             <p style="color:#ff0000; font-size:15px;">*If your personal details are incorrect, please visit your profile and update them
                 <a class="btn btn-link" href="/profile/user_profile">here</a>
             </p>
+            
+            <input type="text" name="org_id" value="<?=$_GET['org_id']?>" style="display:none;">
 
-            <p>If you subscribe, the first donation will be made immediately, and monthly thereafter</p>
             <button class='btn mr2' type="submit">Donate</button>
             <button class='btn mr2 btn-faded' type='reset'>Cancel</button>
         </form>
     <?php } else { ?>
-        <div class="message">Please login to continue</div>
+        <div class="message">
+            <i class="far fa-user-lock fa-5x txt-clr orange"></i> <br>
+            <div style="font-weight: 600;"> Sign In Required</div> <br>
+            <a class="btn green" href="/auth/sign_in">Sign In</a>
+        </div>
     <?php } ?>
 
 
