@@ -75,4 +75,11 @@ class Organization extends BaseModel
         AND o.org_id = $orgId";
         return BaseModel::select($query);
     }
+
+    static function makeDonation($name, $email, $receipt, $subscriptionId) //changes to be made
+    {
+        $query = "INSERT INTO `donation` (`name`, `email`, `receipt`)
+                  VALUES('$name', '$email', $receipt);";
+        self::insert($query);
+    }
 }
