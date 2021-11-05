@@ -10,19 +10,19 @@
             <th>Status</th>
             <th> </th>
         </tr>
-        <?php foreach($consultations as $key=>$value){ ?>
+        <?php foreach ($consultations as $key => $value) { ?>
             <tr>
                 <td style="font-size:0.9rem;"><?= $value['date'] ?></td>
                 <td style="font-size:0.9rem;"><?= substr($value['time'], 0, 5) ?></td>
                 <td><?= $value['pet'] ?></td>
                 <td><?= $value['doctor'] ?></td>
-                <td><span class="tag <?= $value['type']=='ADVISE'? "green" : "orange" ?>"><?= $value['type'] ?></span></td>
+                <td><span class="tag <?= $value['type'] == 'ADVISE' ? "green" : "orange" ?>"><?= $value['type'] ?></span></td>
                 <td><?= $value['status'] ?></td>
                 <td style="text-align: center;">
-                    <?php if($value['type']=='LIVE') { ?>
-                        <a class="btn outline" href="<?=$value['status']=='ACCEPTED'? "/Consultation/consult_live" : "" ?>"><i class="far fa-webcam"></i>&nbsp;Consult </a>
-                    <?php }else{ ?>
-                        <a class="btn outline" href="<?=$value['status']=='ACCEPTED'? "/Consultation/consult_advise" : "" ?>"><i class="far fa-comments"></i> &nbsp; Chat</a>
+                    <?php if ($value['type'] == 'LIVE') { ?>
+                        <a class="btn outline" href="<?= $value['status'] == 'ACCEPTED' ? "/Consultation/consult_live/" : "" ?><?= $value["consultation_id"] ?>"><i class="far fa-webcam"></i>&nbsp;Consult </a>
+                    <?php } else { ?>
+                        <a class="btn outline" href="<?= $value['status'] == 'ACCEPTED' ? "/Consultation/consult_advise/" : "" ?><?= $value["consultation_id"] ?>"><i class="far fa-comments"></i> &nbsp; Chat</a>
                     <?php } ?>
                 </td>
             </tr>

@@ -117,7 +117,7 @@ require_once  __DIR__ . '/../_layout/layout.php';
     ZujoSDK.config(token);
 
     const meeting = ZujoSDK.initMeeting({
-        meetingId: "7ewh-ve15-16uf",
+        meetingId: "<?= $consultation["meeting_id"] ?>",
         name: "<?= $_SESSION['user']['name'] ?>",
         webcamEnabled: false
     });
@@ -152,9 +152,9 @@ require_once  __DIR__ . '/../_layout/layout.php';
                     speakerVideo.play();
                 };
             } else if (stream.kind === "audio") {
-                yourAudio.srcObject = new MediaStream([stream.track]);
-                yourAudio.onloadedmetadata = (e) => {
-                    yourAudio.play();
+                speakerAudio.srcObject = new MediaStream([stream.track]);
+                speakerAudio.onloadedmetadata = (e) => {
+                    speakerAudio.play();
                 };
             }
         });
