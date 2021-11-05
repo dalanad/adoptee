@@ -45,6 +45,7 @@ class Consultation extends BaseModel
         $consultations = array_map(function ($item) {
             $item["animal"] =  Animal::getAnimalById($item["animal_id"]);
             $item["user"] =  User::findUserById($item["user_id"]);
+            $item["doctor"] =  User::findUserById($item["doctor_user_id"]);
             return $item;
         }, $consultations);
 
@@ -67,6 +68,15 @@ class Consultation extends BaseModel
         return $consultations;
     }
 
+    public function complete_user($consultation_id, $doctor_rating)
+    {
+        # code...
+    }
+
+    public function complete_doctor($consultation_id, $user_rating)
+    {
+        # code...
+    }
 
     public static function findConsultationsByPetId($animal_id)
     {

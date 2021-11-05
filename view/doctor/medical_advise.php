@@ -36,7 +36,7 @@ require_once  __DIR__ . '/_nav.php';
     }
 
     async function showConversationsList() {
-        let consultations = await fetch("/doctor/get_consultations").then(r => r.json())
+        let consultations = await fetch("/api/get_consultations").then(r => r.json())
 
         for (const con of consultations) {
             let template = `

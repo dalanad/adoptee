@@ -22,7 +22,7 @@ create table doctor (
     telephone_fixed char(10),
     credentials varchar(50),
     proof_image JSON,
-    advise_charge int(10) default 1000,
+    advise_charge int(10) default 500,
     live_charge int(10) default 1000
 );
 
@@ -114,7 +114,9 @@ create table consultation (
     user_id int(10),
     status enum('CANCELLED','PENDING','ACCEPTED','COMPLETED','EXPIRED') not null default 'PENDING', 
     type enum('LIVE','ADVISE') not null default 'ADVISE',
-    payment_txn_id varchar(50) 
+    payment_txn_id varchar(50),
+    doctor_rating int(5),
+    meeting_id varchar(50) default '7ewh-ve15-16uf'
 );
 
 create table consultation_schedule (
@@ -273,6 +275,12 @@ create table adoption_request (
     children boolean,
     childsafety varchar(100) ,
     primary key(animal_id, user_id)
+);
+
+create table notifications (
+    user_id int(10),
+    created_at timestamp CURRENT_TIMESTAMP,
+    message varchar(100)
 );
 
 alter table adoption_request

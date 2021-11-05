@@ -1,22 +1,17 @@
 <?php
 $active = "live_consultation";
 require_once  __DIR__ . '/_nav.php';
-if(!isset($_GET["view"])){
+if (!isset($_GET["view"])) {
     $_GET["view"] = "day";
 }
 ?>
 
 <div style="display: grid;grid-template-columns:auto minmax(250px,300px);grid-gap:1rem">
-    <div style="display: flex;align-items: center; font-size: 1.2em;">
-        Current Appointments
+    <div style="display: flex;align-items: center; font-size: 1.2em;margin-top:-.5rem">
         <span style="flex: 1 1 0"></span>
-        <div class='dropdown'>
+        <div class='dropdown' style="padding: 0;">
             <button class="btn btn-faded black">
-                <?php if ($_GET["view"] == "day") { ?>
-                    <i class='far fa-calendar-day'></i>&nbsp; Day
-                <?php } else { ?>
-                    <i class='far fa-calendar-week'></i>&nbsp; Week
-                <?php } ?>
+                <i class='far fa-calendar-<?= $_GET["view"] ?>'></i>&nbsp; <?= ucfirst($_GET["view"]) ?>
             </button>
             <div class='dropdown-content'>
                 <a class='btn black btn-link' href='#' onclick="params({view:'day'})"><i class='fal fa-calendar-day'></i>&nbsp; Day</a>
@@ -25,16 +20,23 @@ if(!isset($_GET["view"])){
         </div>
     </div>
     <div class="timeline-container" style="grid-column: 1;">
-        <div class="<?= $_GET["view"] ?>-view" id="appointments-timeline"></div>
+        <?php if ($_GET["view"] == "day") { ?>
+            <div id="day-timeline"  ></div>
+        <?php } else { ?>
+            <div class="<?= $_GET["view"] ?>-view" id="appointments-timeline"></div>
+        <?php } ?>
     </div>
 
     <div>
         <div style="box-shadow:var(--shadow);padding:1rem;aspect-ratio:1/1;margin-bottom:1rem;border-radius:.4rem;">
             <div style="text-align:center;" id="consultation-blank">
-                <b>
-                    Please Select an Appointment <br>
-                    from the Timeline
-                </b><br><br>
+                <?php if ($_GET["view"] != "day") { ?>   
+                    <b>
+                        Please Select an Appointment <br>
+                        from the Timeline
+                    </b>
+                <?}?>
+                <br><br>
                 <img src="/assets/images/graphics/caring.svg" style="max-width: 200px;opacity:.4">
             </div>
             <div id="consultation-info"></div>
@@ -46,15 +48,29 @@ if(!isset($_GET["view"])){
 <script>
     let cal_el = document.querySelector(".calender");
     let cal = new Calender(cal_el);
+    let view = '<?= $_GET["view"] ?>'
 
     let appointments_timeline = document.getElementById("appointments-timeline");
 
     let timeline = new AppointmentsTimeline(appointments_timeline);
 
     cal.onChange(async () => {
-        timeline._date = cal._date;
-        await timeline.render();
-        await timeline.showBookings();
+
+        if (view == 'day') {
+
+            let url = new URL(window.location.href);
+            let current_date = new Date(url.searchParams.get("calender_date") || new Date()).toISOString().substr(0, 10);
+            let data = await fetch(`/doctor/get_live_bookings?start_date=${current_date}&end_date=${current_date}`).then((res) => res.json());
+            showDayTimeline(current_date,data[current_date] ?? {})
+
+        } else {
+
+
+            timeline._date = cal._date;
+            await timeline.render();
+            await timeline.showBookings();
+
+        }
     });
 
     cal.init();
@@ -67,34 +83,108 @@ if(!isset($_GET["view"])){
         EXPIRED: "pink",
     };
 
-    timeline.onCellSelected((date, time, data) => {
+    timeline.onCellSelected(async (date, time, id) => populateInfoCard(id))
+
+    async function populateInfoCard(consultation_id) {
+        let data = await fetch("/api/get_consultation_by_id?consultation_id=" + consultation_id).then((e) => e.json());
+
         document.querySelector("#consultation-blank").style.display = 'none'
         document.querySelector("#consultation-info").innerHTML = `
-        <h4 style='margin-top:0'>Consultation</h4>
-        <div style="line-height:1.7em"> 
-            <div>Date & Time : ${date} - ${time} </div>
-            <div>Status : <span class="tag ${status_colors[data.status]}">${data.status}</span> </div>
-            <div>Animal Name : ${data.animal.name} </div>
-            <div>Animal Age : ${data.animal.age} Years  </div>
-            <div>Animal Type : ${data.animal.type} </div>
-            <div>Owner : ${data.user.name} </div>
-        </div>
-        <div style="text-align:center;margin-top:1rem">
+            <h4 style='margin-top:0'>Consultation</h4>
+            <div style="line-height:1.7em"> 
+                <div>Date & Time : ${data.consultation_date} - ${data.consultation_time} </div>
+                <div>Status : <span class="tag ${status_colors[data.status]}">${data.status}</span> </div>
+                <div>Animal Name : ${data.animal.name} </div>
+                <div>Animal Age : ${data.animal.age} Years  </div>
+                <div>Animal Type : ${data.animal.type} </div>
+                <div>Owner : ${data.user.name} </div>
+            </div>
+            ${ consultationActions(data) }
+            `
+    }
 
-        ${ (data.status == "PENDING")?
-            `<a class="btn green" href="#">Accept</a> <a class="btn red btn-link" href="#">Cancel</a>`
-            : ``
+    function showDayTimeline(date,consultations) {
+
+        let day_timeline = document.getElementById("day-timeline");
+        
+        day_timeline.innerHTML = `
+            <h3 style="margin: 1rem; margin-bottom: 0.3rem;font-weight: 500;"><i class='far fa-poll-people'></i>&nbsp;Appointments on : ${date}</h3>
+            <div style="max-height: calc(100vh - 13rem)">
+                ${Object.values(consultations).map(single_consultation).join("")}
+            </div>`
+
+        function single_consultation(con) {
+
+            let {
+                status,
+                animal,
+                user
+            } = con;
+
+            let end_time = new Date("2021-08-01T" + con.consultation_time + "Z");
+            end_time.setMinutes(end_time.getMinutes() + 30);
+
+            return `<div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;padding:.5rem 1rem;border-bottom:1px solid var(--gray-3)" >
+                            <img src="${animal.photo}"  style ="height:80px;border-radius:.3rem"> 
+                            <div style="width:10rem;margin-left:.5rem"> 
+                                <b>${animal.name}</b>  <i class="far fa-${String(animal.type).toLowerCase()}"></i>
+                                <div style="margin: 0.2em 0;" class="owner-name">${user.name} </div>
+                                <small>${con.consultation_date} : ${con.consultation_time.substr(0, 5)} - ${end_time.toISOString().substr(11, 5)}</small>
+                            </div>
+                            <span style="flex:1 1 0"></span>
+                               <div style="width:6rem;text-align:center">
+                                <span class="tag ${status_colors[status]}">${status}</span>
+                            </div>
+                            <span style="flex:1 1 0"></span>
+                            ${ consultationActions(con) }
+                        </div>
+                    </div>
+                    `
         }
 
-        ${ (data.status == "ACCEPTED"/*  && date == (new Date()).toISOString().substr(0,10) */ )?
-            `<a class="btn pink" href="/doctor/consult_conference/${data.consultation_id}">
-                <i class="fa fa-video"></i> &nbsp; Consult
-            </a>`
-            : ``
-        }
-        </div>
-        `
-    })
+    }
+
+
+
+    function consultationActions(con){
+        return `<div style="text-align:center;min-width:10rem">
+
+                ${ (con.status == "PENDING")?
+                    `<a class="btn green" onclick="accept_request(${con.consultation_id})">Accept</a> 
+                     <a class="btn red  outline" onclick="reject_request(${con.consultation_id})">Cancel</a>`
+                    : ``
+                }
+
+                ${ (con.status == "ACCEPTED"/*  && date == (new Date()).toISOString().substr(0,10) */ )?
+                    `<a class="btn pink" href="/doctor/consult_conference/${con.consultation_id}">
+                        <i class="fa fa-video"></i> &nbsp; Consult
+                    </a>`
+                    : ``
+                }
+                </div>`
+    }
+
+    function accept_request(id) {
+        showOverlay(`
+            <h3 style='margin-top:0'>Accept Consultation ? &nbsp; &nbsp; &nbsp;</h3>
+            <div style="display:flex;justify-content:space-between">
+                <button class="btn red btn-faded overlay-close">Cancel</button>
+                <a class="btn green" href="/doctor/accept_request?consultation_id=${id}">Accept</a> 
+            </div>
+        `)
+    }
+
+    function reject_request(id) {
+        showOverlay(`
+            <h3 style='margin-top:0'>Cancel Consultation ? &nbsp; &nbsp; &nbsp;</h3>
+            <div style="display:flex;justify-content:space-between">
+                <button class="btn black btn-faded overlay-close">Cancel</button>
+                <a class="btn red" href="/doctor/reject_request?consultation_id=${id}">Cancel</a> 
+            </div>
+        `)
+    }
+
 </script>
 <style>
     .booking {
@@ -149,7 +239,6 @@ if(!isset($_GET["view"])){
     .booking .content {
         padding: .4em;
     }
-
 
     .day-view .timeline-column:not(.active):not(:first-child) {
         display: none;

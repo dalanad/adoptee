@@ -29,6 +29,31 @@ class Doctor extends BaseModel
         return self::select($query, ["id" => $user_id]);
     }
 
+    public static function accept_consultation_request($doctor_id, $consultation_id)
+    {
+        $query = "UPDATE `consultation` SET status = 'ACCEPTED', meeting_id = :meeting_id WHERE doctor_user_id = :doctor_id and consultation_id = :consultation_id";
+
+        $params = [
+            "doctor_id" => $doctor_id,
+            "consultation_id" => $consultation_id,
+            "meeting_id" => VideoConference::createMeetingId()
+        ];
+
+        return self::update($query, $params);
+    }
+
+    public static function cancel_consultation_request($doctor_id, $consultation_id)
+    {
+        $query = "UPDATE `consultation` SET status = 'CANCELLED' WHERE doctor_user_id = :doctor_id and consultation_id = :consultation_id";
+
+        $params = [
+            "doctor_id" => $doctor_id,
+            "consultation_id" => $consultation_id,
+        ];
+
+        return self::update($query, $params);
+    }
+
     public static function updateCharges($doctor_id, $live_charge, $advise_charge)
     {
         $query = "UPDATE `doctor` SET advise_charge = :advise_charge, live_charge = :live_charge WHERE user_id = :doctor_id ";
