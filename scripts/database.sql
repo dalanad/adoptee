@@ -279,7 +279,7 @@ create table adoption_request (
 
 create table notifications (
     user_id int(10),
-    created_at timestamp CURRENT_TIMESTAMP,
+    created_at timestamp default CURRENT_TIMESTAMP,
     message varchar(100)
 );
 

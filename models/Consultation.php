@@ -68,14 +68,27 @@ class Consultation extends BaseModel
         return $consultations;
     }
 
-    public function complete_user($consultation_id, $doctor_rating)
+    public static function complete_user($consultation_id, $doctor_rating)
     {
-        # code...
+        $query = "UPDATE `consultation` SET status = 'COMPLETED' and doctor_rating =:doctor_rating WHERE consultation_id = :consultation_id ";
+
+        $params = [
+            "consultation_id" => $consultation_id,
+            "doctor_rating" => $doctor_rating
+        ];
+
+        return self::update($query, $params);
     }
 
-    public function complete_doctor($consultation_id, $user_rating)
+    public static function complete_doctor($consultation_id, $user_rating)
     {
-        # code...
+        $query = "UPDATE `consultation` SET status = 'COMPLETED' WHERE consultation_id = :consultation_id ";
+
+        $params = [
+            "consultation_id" => $consultation_id,
+        ];
+
+        return self::update($query, $params);
     }
 
     public static function findConsultationsByPetId($animal_id)

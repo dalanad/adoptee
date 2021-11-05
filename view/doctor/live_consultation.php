@@ -21,7 +21,7 @@ if (!isset($_GET["view"])) {
     </div>
     <div class="timeline-container" style="grid-column: 1;">
         <?php if ($_GET["view"] == "day") { ?>
-            <div id="day-timeline"  ></div>
+            <div id="day-timeline"></div>
         <?php } else { ?>
             <div class="<?= $_GET["view"] ?>-view" id="appointments-timeline"></div>
         <?php } ?>
@@ -30,12 +30,12 @@ if (!isset($_GET["view"])) {
     <div>
         <div style="box-shadow:var(--shadow);padding:1rem;aspect-ratio:1/1;margin-bottom:1rem;border-radius:.4rem;">
             <div style="text-align:center;" id="consultation-blank">
-                <?php if ($_GET["view"] != "day") { ?>   
+                <?php if ($_GET["view"] != "day") { ?>
                     <b>
                         Please Select an Appointment <br>
                         from the Timeline
                     </b>
-                <?}?>
+                <?php } ?>
                 <br><br>
                 <img src="/assets/images/graphics/caring.svg" style="max-width: 200px;opacity:.4">
             </div>
@@ -61,7 +61,7 @@ if (!isset($_GET["view"])) {
             let url = new URL(window.location.href);
             let current_date = new Date(url.searchParams.get("calender_date") || new Date()).toISOString().substr(0, 10);
             let data = await fetch(`/doctor/get_live_bookings?start_date=${current_date}&end_date=${current_date}`).then((res) => res.json());
-            showDayTimeline(current_date,data[current_date] ?? {})
+            showDayTimeline(current_date, data[current_date] ?? {})
 
         } else {
 
@@ -103,10 +103,10 @@ if (!isset($_GET["view"])) {
             `
     }
 
-    function showDayTimeline(date,consultations) {
+    function showDayTimeline(date, consultations) {
 
         let day_timeline = document.getElementById("day-timeline");
-        
+
         day_timeline.innerHTML = `
             <h3 style="margin: 1rem; margin-bottom: 0.3rem;font-weight: 500;"><i class='far fa-poll-people'></i>&nbsp;Appointments on : ${date}</h3>
             <div style="max-height: calc(100vh - 13rem)">
@@ -145,9 +145,7 @@ if (!isset($_GET["view"])) {
 
     }
 
-
-
-    function consultationActions(con){
+    function consultationActions(con) {
         return `<div style="text-align:center;min-width:10rem">
 
                 ${ (con.status == "PENDING")?
@@ -184,7 +182,6 @@ if (!isset($_GET["view"])) {
             </div>
         `)
     }
-
 </script>
 <style>
     .booking {
