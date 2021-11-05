@@ -42,7 +42,11 @@ class ApiController extends Controller
     public function complete_consultation()
     {
         $consultationId = $_POST["consultation_id"];
-        Consultation::complete_user();
+        if (isset($_POST["rating"])) {
+            Consultation::complete_user($consultationId, $_POST["rating"]);
+        } else {
+            Consultation::complete_doctor($consultationId, $_POST["rating"]);
+        }
         $this->redirect($_POST["return_url"]);
     }
 }
