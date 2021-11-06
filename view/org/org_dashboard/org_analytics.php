@@ -18,8 +18,8 @@
     .div-totals{
         padding: 0.5rem; 
         margin: 20px; 
-        width: 250px; 
-        height: 50px;
+        width: 275px; 
+        height: 40px;
         border-radius: 0.2rem;
         display: flex;
         font-weight: 1000;
@@ -56,26 +56,26 @@
                         <canvas id="myChart6"></canvas>
                     </div>
                 </div>
-                <div class="column1" style="padding: .5rem; flex: 30%">
-                    <div class="div-totals" style="background-color:#e2f5f5; justify-items:center; align-items:center;padding-left: 1rem;">
-                        <div style="justify-items:center; align-items:center; display:flex; font-size:1rem; width: 50px; height:50px; border-radius: 5rem; background-color:#6fcdcd; padding-left: 1rem;"><i class="fa fa-2x fa-hand-holding-usd"></i></div>&nbsp;&nbsp;
+                <div class="column1" style="padding: .5rem;">
+                    <div class="div-totals" style="background-color:#e2f5f5; justify-items:center; align-items:center; padding-left: .5rem;">
+                        <div style="justify-items:center; align-items:center; display:flex; font-size:0.7rem; width: 90px; height:20px; border-radius: 5rem; background-color:#6fcdcd; padding-left: .6rem;"><i class="fa fa-hand-holding-usd"></i>&nbsp;Donations</div>&nbsp;&nbsp;
                         <div>
-                            <div>Rs. 41,200</div>
-                            <div style="font-size: 0.7rem; font-weight: 400;">All time donations received</div>
+                            <div style="font-size: 1.5rem; padding-top:5px;">Rs. 41,200</div>
+                            <div style="font-size: 0.7rem; font-weight: 400; padding-bottom:5px;">All time donations received</div>
                         </div>
                     </div>
-                    <div class="div-totals" style="background-color:#ffe6eb;justify-items:center; align-items:center;padding-left: 1rem;">
-                        <div style="justify-items:center; align-items:center; display:flex; font-size:1rem; width: 50px; height:50px; border-radius: 5rem; background-color:#ff829d; padding-left: 1rem;"><i class="fa fa-2x fa-donate"></i></div>&nbsp;&nbsp;
+                    <div class="div-totals" style="background-color:#ffe6eb; justify-items:center; align-items:center;padding-left: .5rem;">
+                        <div style="justify-items:center; align-items:center; display:flex; font-size:0.7rem; width: 90px; height:20px; border-radius: 5rem; background-color:#ff829d; padding-left: .6rem;"><i class="fa fa-donate"></i>&nbsp;Sponsorships</div>&nbsp;&nbsp;
                         <div>
-                            <div>Rs. 140,200</div>
-                            <div style="font-size: 0.7rem; font-weight: 400;">All time sponsorships received</div>
+                            <div style="font-size: 1.5rem; padding-top:5px;">Rs. 140,200</div>
+                            <div style="font-size: 0.7rem; font-weight: 400;  padding-bottom:5px;">All time sponsorships received</div>
                         </div>
                     </div>
-                    <div class="div-totals" style="background-color:#fff3d7; justify-items:center; align-items:center;padding-left: 1rem;">
-                        <div style="justify-items:center; align-items:center; display:flex; font-size:1rem; width: 50px; height:50px; border-radius: 5rem; background-color:#ffd778; padding-left: 1rem;"><i class="fa fa-2x fa-shopping-cart"></i></div>&nbsp;&nbsp;
+                    <div class="div-totals" style="background-color:#fff3d7; justify-items:center; align-items:center;padding-left: .5rem;">
+                        <div style="justify-items:center; align-items:center; display:flex; font-size:0.7rem; width: 90px; height:20px; border-radius: 5rem; background-color:#ffd778; padding-left: .8rem;"><i class="fa fa-tshirt"></i>&nbsp;Orders</div>&nbsp;&nbsp;
                         <div>
-                            <div>151</div>
-                            <div style="font-size: 0.7rem; font-weight: 400;">Completed merchandise orders</div>
+                            <div style="font-size: 1.5rem; padding-top:5px;">151</div>
+                            <div style="font-size: 0.7rem; font-weight: 400;  padding-bottom:5px;">Completed orders</div>
                         </div>
                     </div>
                 </div>

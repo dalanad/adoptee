@@ -105,7 +105,7 @@
                         </table>
                     </td>
                     <td><?= $adoption_request["type"] ?></td>
-                    <td><?= $adoption_request["name"] ?></td>
+                    <td><?= $adoption_request["user_name"] ?></td>
                     <td><?= $adoption_request["request_date"] ?></td>
                     <td><span class="tag <?= $adoption_request["has_pets"] ? 'green' : 'pink' ?>"><?= $adoption_request["has_pets"] ? "YES" : "NO" ?> </span></td>
                     <td><span class="tag <?= $adoption_request["children"] ? 'green' : 'pink' ?>"><?= $adoption_request["children"] ? "YES" : "NO" ?> </span></td>
