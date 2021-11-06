@@ -108,7 +108,9 @@ if (!isset($_GET["view"])) {
         let day_timeline = document.getElementById("day-timeline");
 
         day_timeline.innerHTML = `
-            <h3 style="margin: 1rem; margin-bottom: 0.3rem;font-weight: 500;"><i class='far fa-poll-people'></i>&nbsp;Appointments on : ${date}</h3>
+            <div style="margin: 1rem; margin-bottom: 0.3rem;font-weight: 400;">
+                <i class='fal fa-poll-people'></i> &nbsp; APPOINTMENTS ON : ${date}
+            </div>
             <div style="max-height: calc(100vh - 13rem)">
                 ${Object.values(consultations).map(single_consultation).join("")}
             </div>`
