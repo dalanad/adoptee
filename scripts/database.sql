@@ -82,14 +82,14 @@ create table animal_for_adoption (
 
 create table animal_vaccines (
     animal_id int(10) not null,
-    anti_rabies boolean,
-    dhl boolean,
-    parvo boolean,
-    tricat boolean,
-    anti_rabies_booster boolean,
-    dhl_booster boolean,
-    parvo_booster boolean,
-    tricat_booster boolean,
+    anti_rabies date,
+    dhl date,
+    parvo date,
+    tricat date,
+    anti_rabies_booster date,
+    dhl_booster date,
+    parvo_booster date,
+    tricat_booster date,
     primary key(animal_id)
 );
 
@@ -225,7 +225,7 @@ create table org_content (
     created_time timestamp  DEFAULT CURRENT_TIMESTAMP,
     heading varchar(50),
     description varchar(200),
-    photo varchar(200) -- JSON ?
+    photos JSON not null
 );
 
 create table org_feedback (

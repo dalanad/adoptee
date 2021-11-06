@@ -58,7 +58,10 @@ class OrgManagement extends BaseModel
         $query = "SELECT 
         animal.name as animal_name, 
         animal.type, 
-        user.name,
+        user.name as user_name,
+        user.address as address,
+        user.email as email,
+        user.telephone as contact,
         request_date,
         status,
         has_pets,
@@ -123,6 +126,23 @@ class OrgManagement extends BaseModel
         return BaseModel::select($query);
     }
 
+    static function add_rescue_update($report_id, $description, $photos)
+    {
+        $report_id = $_SESSION[$report_id];
+
+        $query = "UPDATE `report_rescue` SET description = '$description' WHERE report_id='$report_id';
+        UPDATE `report_rescue` SET photos = '$photos' WHERE report_id='$report_id'";
+        return BaseModel::insert($query);
+        
+    }
+
+    static function add_new_event($org_id, $heading, $description, $photos)
+    {
+        $query = "INSERT INTO `org_content` (org_id, created_time, heading, description, photos)
+        VALUES ('$org_id', CURRENT_TIMESTAMP, '$heading', '$description', '$photos')";
+
+        return BaseModel::insert($query);
+    }
 
     public static function searchAnimals()
     {

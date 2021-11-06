@@ -29,7 +29,7 @@
     <form action="/OrgManagement/add_new_event" method="post">
         <div class="field">
             <label for='name'>Event Name</label>
-            <input class="ctrl field-font" type="text" name="name" required/>
+            <input class="ctrl field-font" type="text" name="heading" required/>
         </div>
         <div class="field">
             <div>
@@ -45,7 +45,7 @@
       <label>Upload Photo</label>
       <div class="ctrl-group">
         <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-        <input type="file" name="photo[]" class="ctrl" multiple accept="image/*" required>
+        <input type="file" name="photos[]" class="ctrl" multiple accept="image/*" required>
       </div>
       <span class="field-msg">Upload a photo of the event</span>
     </div>

@@ -10,7 +10,7 @@
     font-size: 1rem;
     border: 0.1rem solid var(--muted);
     background: var(--gray-1);
-    width: 50%;
+    width: 70%;
     box-sizing: border-box;
   }
 
@@ -106,9 +106,9 @@
         <label for='type'>Type</label>
         <select class="ctrl" name='type' required>
           <option selected='true' disabled='disabled'>Select</option>
-          <option value='dog'>Dog</option>
-          <option value='cat'>Cat</option>
-          <option value='other'>Other</option>
+          <option value='Dog'>Dog</option>
+          <option value='Cat'>Cat</option>
+          <option value='Other'>Other</option>
         </select>
       </div>
     </div>
@@ -163,59 +163,59 @@
             <div class="field column">
               <label style="margin-top: 1rem; margin-bottom: 1rem;">Initial Vaccine</label>
               <br>
-              <div style="margin: 0.25rem; display: flex;">
-                <input class="ctrl-check" type="checkbox" name="anti_rabies" id="anti_rabies">&nbsp;
+              <div style="margin: 0.5rem;">
                 <label for='anti_rabies'>Anti Rabies</label>
+                <div><input class="ctrl2" type="date" name="anti_rabies" max="" id="datefield"></div>
               </div>
-              <div style="margin: 0.25rem; display: flex;">
-                <input class="ctrl-check" type="checkbox" name="dhl" id="dhl">&nbsp;
-                <label for='dhl'>DHL</label>
+              <div style="margin: 0.5rem;">
+              <label for='dhl'>DHL</label>
+              <div><input class="ctrl2" type="date" name="dhl" max="" id="datefield"></div>
               </div>
-              <div style="margin: 0.25rem; display: flex;">
-                <input class="ctrl-check" type="checkbox" name="parvo" id="parvo">&nbsp;
-                <label for='parvo'>Parvo</label>
+              <div style="margin: 0.5rem;">
+              <label for='parvo'>Parvo</label>
+              <div><input class="ctrl2" type="date" name="parvo" max="" id="datefield"></div>
               </div>
-              <div style="margin: 0.25rem; display: flex;">
-                <input class="ctrl-check" type="checkbox" name="tricat" id="tricat">&nbsp;
-                <label for='tricat'>Tricat</label>
+              <div style="margin: 0.5rem;">
+              <label for='tricat'>Tricat</label>
+              <div><input class="ctrl2" type="date" name="tricat" max="" id="datefield"></div>
               </div>
               <div>
-                <span class="field-msg">Tick only if vaccinated</span>
+                <span class="field-msg">Select date only if vaccinated</span>
                 <br>
               </div>
             </div>
             <div class="field column">
               <label style="margin-top: 1rem; margin-bottom: 1rem;">Yearly Booster</label>
               <br>
-              <div style="margin: 0.25rem; display: flex;">
-                <input class="ctrl-check" type="checkbox" name="anti_rabies_booster" id="anti_rabies_booster">&nbsp;
-                <label for='anti_rabies_booster'>Anti Rabies Booster</label>
+              <div style="margin: 0.5rem;">
+              <label for='anti_rabies_booster'>Anti Rabies Booster</label>
+              <div><input class="ctrl2" type="date" name="anti_rabies_booster" max="" id="datefield"></div>
               </div>
-              <div style="margin: 0.25rem; display: flex;">
-                <input class="ctrl-check" type="checkbox" name="dhl_booster" id="dhl_booster">&nbsp;
-                <label for='dhl_booster'>DHL Booster</label>
+              <div style="margin: 0.5rem;">
+              <label for='dhl_booster'>DHL Booster</label>
+              <div><input class="ctrl2" type="date" name="dhl_booster" max="" id="datefield"></div>
               </div>
-              <div style="margin: 0.25rem; display: flex;">
-                <input class="ctrl-check" type="checkbox" name="parvo_booster" id="parvo_booster">&nbsp;
-                <label for='parvo_booster'>Parvo Booster</label>
+              <div style="margin: 0.5rem;">
+              <label for='parvo_booster'>Parvo Booster</label>
+              <div><input class="ctrl2" type="date" name="parvo_booster" max="" id="datefield"></div>
               </div>
-              <div style="margin: 0.25rem; display: flex;">
-                <input class="ctrl-check" type="checkbox" name="tricat_booster" id="tricat_booster">&nbsp;
-                <label for='tricat_booster'>Tricat Booster</label>
+              <div style="margin: 0.5rem;">
+              <label for='tricat_booster'>Tricat Booster</label>
+              <div><input class="ctrl2" type="date" name="tricat_booster" max="" id="datefield"></div>
               </div>
               <div>
-                <span class="field-msg">Tick only if vaccinated this year</span>
+                <span class="field-msg">Select date only if vaccinated this year</span>
                 <br>
               </div>
             </div>
           </div>
           <div class='field'>
             <div>
-              <input class="ctrl-check" type="checkbox" name="dewormed" id="dewormed">&nbsp;
-              <label for='dewormed'>Dewormed</label>
+            <label for='dewormed'>Dewormed</label>
+            <div><input class="ctrl2" type="date" name="dewormed" max="" id="datefield"></div>
             </div>
             <div>
-              <span class="field-msg">Tick only if dewormed within the past 6 months</span>
+              <span class="field-msg">Select date only if dewormed within the past 6 months</span>
             </div>
           </div>
         </div>
