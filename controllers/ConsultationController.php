@@ -60,8 +60,11 @@ class ConsultationController extends Controller
 
     public function consult_live($consultation_id)
     {
-        $data = ["consultation" => Consultation::findConsultationById($consultation_id)];
-        View::render("public/consultations/consult_live", $data);
+        $data = [
+            "consultation" => Consultation::findConsultationById($consultation_id),
+            "user" => true
+        ];
+        View::render("doctor/consult_conference", $data);
     }
 
     public function create_request()
