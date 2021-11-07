@@ -101,9 +101,10 @@
             <div class="preview" style="background-image: url(<?= $pet['photo'] ?>);"> </div>
             <div class="thumbnails">
                 <div class="thumbnail" style="background-image: url(<?= $pet['photo'] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
-                <?php for ($i = 'a'; $i < 'd'; $i++) {
-                    $image = explode("/", $pet['photo'])[4]; ?>
-                    <div class="thumbnail" style="background-image: url(../../../assets/data/<?= strtolower($pet['type']) ?>s/<?= explode(".", $image)[0] . $i ?>.<?= explode(".", $image)[1] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                <?php
+                $photos = explode(",",$pet['photos']);                
+                for ($i = 0; $i < sizeof($photos); $i++){ ?>
+                    <div class="thumbnail" style="background-image: url(../../..<?=str_replace("[","",str_replace("\"","",str_replace(" ","/",str_replace("]","",$photos[$i]))))?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
                 <?php } ?>
             </div>
         </div>
