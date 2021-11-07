@@ -178,7 +178,7 @@ class AppointmentsTimeline {
 				let cell = this.markBookingCell(date, time, data[date][time]);
 				cell.addEventListener("click", (ev) => {
 					this._activeCell ? this._activeCell.classList.remove("selected") : null;
-					this._onCellSelected(date, time, data[date][time]);
+					this._onCellSelected(date, time, data[date][time]["consultation_id"]);
 					this._activeCell = cell;
 					this._activeCell.classList.add("selected");
 				});
@@ -230,7 +230,7 @@ class AppointmentsTimeline {
 				  <span style="flex:1 1 0"></span>
 				  <i class="fa fa-${String(animal.type).toLowerCase()}"></i>
 				</div>
-				<div style="margin: 0.2em 0;">${user.name} </div>
+				<div style="margin: 0.2em 0;" class="owner-name">${user.name} </div>
 				<small>${time_str.substr(0, 5)} - ${end_time.toISOString().substr(11, 5)}</small>
 			</div>
 			`;
@@ -367,7 +367,7 @@ function InitSortHeaders() {
 	}
 }
 
-async function initChat(id) {
+async function initChat(id, is_user = false) {
 	let chat_window = document.querySelector(".chat-window");
 
 	chat_window.innerHTML = `
@@ -389,7 +389,7 @@ async function initChat(id) {
 		<div class="msg shine" style="width:3rem">&nbsp;</div>
 	</div>
 	<div class="chat-footer">
-		<button class="btn btn-link black" id="btn-prescribe"><i class="far fa-file-prescription"></i></button>
+		<button class="btn btn-link black ${is_user && " hidden "}" id="btn-prescribe" ><i class="far fa-file-prescription"></i></button>
 		<button class="btn btn-link black" id="btn-upload"><i class="fa fa-paperclip"></i></button>
 		<input name="message" class="ctrl" placeholder="Your Message ...">
 		<button id="send-message" class="btn btn-link black"><i class="fa fa-paper-plane"></i></button>
@@ -398,15 +398,15 @@ async function initChat(id) {
 	let chat_body = document.querySelector(".chat-body");
 	let chat_header = document.querySelector(".chat-header");
 
-	const con = await fetch("/doctor/get_consultation_by_id?consultation_id=" + id).then((e) => e.json());
+	const con = await fetch("/api/get_consultation_by_id?consultation_id=" + id).then((e) => e.json());
 
 	chat_header.classList.remove("fade");
-	chat_window.querySelector(".animal-image").style.backgroundImage = `url('${con.animal.photo}')`;
-	chat_window.querySelector("#animal-name").innerHTML = `&nbsp; ${con.animal.name}`;
+	chat_window.querySelector(".animal-image").style.backgroundImage = `url('${is_user ? "/assets/images/doctor_avatar.jpg" : con.animal.photo}')`;
+	chat_window.querySelector("#animal-name").innerHTML = `&nbsp; ${is_user ? con.doctor.name : con.animal.name}`;
 	chat_header.classList.add("fade");
 
 	async function displayMessages() {
-		let messages = await fetch(`/doctor/get_messages?consultation_id=${id}`).then((r) => r.json());
+		let messages = await fetch(`/api/get_messages?consultation_id=${id}`).then((r) => r.json());
 
 		chat_body.innerHTML = "";
 
@@ -433,13 +433,13 @@ async function initChat(id) {
 	}
 
 	async function completeConsultation() {
-		console.log(con)
-		let html = await fetch("/view/doctor/complete_consultation.php?return=" + (con.type == "ADVISE" ? "/doctor/medical_advise/" : "/doctor/live_consultation")).then((e) => e.text());
-		showOverlay(`<div style='width:200px;overflow:auto'>${html}</div>`);
+		console.log(con);
+		let html = await fetch("/Consultation/complete?id=" + id).then((e) => e.text());
+		showOverlay(`<div style='width:300px;overflow:auto'>${html}</div>`);
 	}
 
 	async function postMessage(consultationId, message, attachments = []) {
-		return fetch("/doctor/post_message", {
+		return fetch("/api/post_message", {
 			method: "post",
 			body: JSON.stringify({
 				consultation_id: consultationId,
@@ -474,5 +474,8 @@ function showOverlay(html) {
 	div.addEventListener("click", (e) => {
 		div.classList.remove("fade");
 		if (e.target == div) div.remove();
+	});
+	div.querySelectorAll(".overlay-close").forEach((e) => {
+		e.addEventListener("click", (e) => div.remove());
 	});
 }

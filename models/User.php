@@ -83,7 +83,7 @@ class User extends BaseModel
 
     static function getUpcomingConsultations($user_id)
     {
-        $query = "SELECT c.consultation_date 'date', c.consultation_time 'time', c.status, c.type, a.name 'pet', u.name 'doctor'
+        $query = "SELECT c.consultation_id, c.consultation_date 'date', c.consultation_time 'time', c.status, c.type, a.name 'pet', u.name 'doctor'
         FROM consultation c, animal a, user u
         WHERE c.user_id = $user_id
         AND c.doctor_user_id = u.user_id

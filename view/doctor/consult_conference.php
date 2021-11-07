@@ -1,5 +1,6 @@
 <?php
 require_once  __DIR__ . '/../_layout/layout.php';
+$user = isset($user) ? $user : false;
 ?>
 <script src="https://sdk.zujonow.com/zujo-sdk-2.0.0.min.js"></script>
 <script src="/assets/js/doctor.js"></script>
@@ -87,8 +88,13 @@ require_once  __DIR__ . '/../_layout/layout.php';
                             </div>
                         </div>
                         <div style="margin: 1rem;text-align:center">
+                        <?php if($user){ ?> 
+                            <div style="white-space: nowrap;"><b>Doctor</b> <br> <span><?= $consultation["doctor"]["name"] ?></span></div>
+                            <small> <?= $consultation["doctor"]["email"] ?><br><?= $consultation["doctor"]["telephone"] ?></small> 
+                        <?php } else { ?>  
                             <div style="white-space: nowrap;"><b>Owner</b> <br> <span><?= $consultation["user"]["name"] ?></span></div>
-                            <small> <?= $consultation["user"]["email"] ?><br><?= $consultation["user"]["telephone"] ?></small>
+                            <small> <?= $consultation["user"]["email"] ?><br><?= $consultation["user"]["telephone"] ?></small> 
+                        <?php }?>
                         </div>
                     </div>
                 </div>
@@ -117,7 +123,7 @@ require_once  __DIR__ . '/../_layout/layout.php';
     ZujoSDK.config(token);
 
     const meeting = ZujoSDK.initMeeting({
-        meetingId: "7ewh-ve15-16uf",
+        meetingId: "<?= $consultation["meeting_id"] ?>",
         name: "<?= $_SESSION['user']['name'] ?>",
         webcamEnabled: false
     });
@@ -152,9 +158,9 @@ require_once  __DIR__ . '/../_layout/layout.php';
                     speakerVideo.play();
                 };
             } else if (stream.kind === "audio") {
-                yourAudio.srcObject = new MediaStream([stream.track]);
-                yourAudio.onloadedmetadata = (e) => {
-                    yourAudio.play();
+                speakerAudio.srcObject = new MediaStream([stream.track]);
+                speakerAudio.onloadedmetadata = (e) => {
+                    speakerAudio.play();
                 };
             }
         });
@@ -167,7 +173,7 @@ require_once  __DIR__ . '/../_layout/layout.php';
         btn_join.style.display = 'none';
         await meeting.join();
         document.querySelector(".chat-container").style.gridTemplateColumns = 'auto  280px'
-        initChat(<?= $consultation["consultation_id"] ?>)
+        initChat(<?= $consultation["consultation_id"] ?>,<?=$user?>)
         await startCam();
         await startMic()
         loading_msg.style.display = 'none';

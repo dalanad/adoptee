@@ -37,7 +37,7 @@
             <label>Upload Photo</label>
             <div class="ctrl-group field-font">
                 <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-                <input class="ctrl field-font" type="file" name="photo" multiple />
+                <input class="ctrl field-font" type="file" name="photos[]" multiple />
             </div>
             <span class="field-msg"> </span>
         </div>

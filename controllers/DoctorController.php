@@ -37,45 +37,26 @@ class DoctorController extends Controller
         View::render("doctor/consult_conference", ["consultation" => $consultation]);
     }
 
+    function accept_request()
+    {
+        $consultationId = $_GET["consultation_id"];
+        Doctor::accept_consultation_request($this->doctor_id, $consultationId);
+        $this->redirect($_SERVER["HTTP_REFERER"]);
+    }
+
+    function reject_request()
+    {
+        $consultationId = $_GET["consultation_id"];
+        Doctor::cancel_consultation_request($this->doctor_id, $consultationId);
+        $this->redirect($_SERVER["HTTP_REFERER"]);
+    }
+
     #endregion  : Live Consultations  
 
     #region : Medical Advise
     function medical_advise()
     {
         View::render("doctor/medical_advise");
-    }
-
-    function get_consultations()
-    {
-        $consultations = Consultation::findConsultationsByDoctorId($this->doctor_id);
-        View::json($consultations);
-    }
-
-    function get_consultation_by_id()
-    {
-        $consultationId = $_GET["consultation_id"];
-        $consultation = Consultation::findConsultationById($consultationId);
-        View::json($consultation);
-    }
-
-    function get_messages()
-    {
-        $consultationId = $_GET["consultation_id"];
-        $messages = Message::getMessagesOfConsultation($consultationId, $this->doctor_id);
-        View::json($messages);
-    }
-
-    /** Saves the message and returns the updated messages list */
-    function post_message()
-    {
-        $_POST = json_decode(file_get_contents('php://input'), true);
-
-        $consultationId = $_POST["consultation_id"];
-        $message = $_POST["message"];
-        $attachments = $_POST["attachments"];
-
-        $messages = Message::postMessage($consultationId, $this->doctor_id, $message, NULL, $attachments);
-        View::json($messages);
     }
 
     #endregion : Medical Advise  
