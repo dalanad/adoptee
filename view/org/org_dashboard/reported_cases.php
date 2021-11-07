@@ -131,7 +131,7 @@
             <table class="table" style="text-align: center;">
                 <tr>
                     <th>TYPE</th>
-                    <th>DETAILS</th>
+                    <th>INFO</th>
                     <th>STATUS</th>
                     <th>RESCUE</th>
                 </tr>
@@ -140,7 +140,7 @@
                     <tr>
                         <td><?= $reported_case["type"] ?></td>
                         <td>
-                            <button onclick="showModel('popupModal<?= $reported_case["report_id"] ?>')" title="More Details" class="tag btn btn-link">Details</button>
+                            <button onclick="showModel('popupModal<?= $reported_case["report_id"] ?>')" title="More Details" class="btn btn-link">Details</button>
                             <div id="popupModal<?= $reported_case["report_id"] ?>" class="modal">
                                 <div class="modal-content">
                                     <span class="close" onclick="hideModel('popupModal<?= $reported_case["report_id"] ?>')">&times;</span>

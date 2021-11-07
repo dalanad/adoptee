@@ -98,14 +98,14 @@
 
 <div style="padding-top: 2.5rem;">
 
-    
-    
+
+
     <!-- Filters - Start -->
     <div style="padding-left: 1rem;">
         <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
             <div>
-            <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
-            <button class="btn outline button-hover">Search</button>
+                <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
+                <button class="btn outline button-hover">Search</button>
             </div> &nbsp; | &nbsp;
             <div style="white-space: nowrap;">
                 <b>View :</b> &nbsp;
@@ -150,10 +150,12 @@
                         <table>
                             <tr>
                                 <td><img src="<?= $animal["avatar_photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
-                                <td><div>
-                                    <div style="padding: 3px;"><?= $animal["name"] ?></div>
-                                    <div style="padding: 3px;"><i class="txt-clr fa fa-lg fa-<?= $animal['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i></div>
-                                </div></td>
+                                <td>
+                                    <div>
+                                        <div style="padding: 3px;"><?= $animal["name"] ?></div>
+                                        <div style="padding: 3px;"><i class="txt-clr fa fa-lg fa-<?= $animal['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i></div>
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                     </td>
@@ -163,7 +165,7 @@
                     <td><span class="tag <?= $animal["status"] == "ADOPTED" ? 'green' : 'pink' ?>"> <?= $animal["status"] ?> </span></td>
                     <td><?= $animal["date_adopted"] ?></td>
                     <td>
-                        <button onclick="showModel('popupModal-1<?= $animal["animal_id"] ?>')" title="More Details" class="tag btn btn-link">Details</button>
+                        <button onclick="showModel('popupModal-1<?= $animal["animal_id"] ?>')" title="More Details" class="btn btn-link">Details</button>
                         <div id="popupModal-1<?= $animal["animal_id"] ?>" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="hideModel('popupModal-1<?= $animal["animal_id"] ?>')">&times;</span>
@@ -175,102 +177,109 @@
                     </td>
 
                     <td>
-                        <div><button onclick="showModel('popupModal-2<?= $animal["animal_id"] ?>')" title="Update Details" class="btn btn-link btn-icon"><i class="fas fa-pen"></i></button></div>
-                        <div id="popupModal-2<?= $animal["animal_id"] ?>" class="modal overflow-auto">
-                            <div class="update-form">
-                                <span class="close" onclick="hideModel('popupModal-2<?= $animal["animal_id"] ?>')">&times;</span>
-                                <h3 class='mt1 txt-clr'>Update Adoptee Details</h3>
+                        <div style="display: flex;">
+                            <div><button onclick="showModel('popupModal-2<?= $animal["animal_id"] ?>')" title="Update Details" class="btn btn-link btn-icon"><i class="fas fa-pen"></i></button></div>
+                            <div id="popupModal-2<?= $animal["animal_id"] ?>" class="modal overflow-auto">
+                                <div class="update-form">
+                                    <span class="close" onclick="hideModel('popupModal-2<?= $animal["animal_id"] ?>')">&times;</span>
+                                    <h3 class='mt1 txt-clr'>Update Adoptee Details</h3>
 
-                                <form action="/OrgManagement/edit_animal_for_adoption" method="post">
+                                    <form action="/OrgManagement/edit_animal_for_adoption" method="post">
 
-                                    <div class="row">
-                                        <div class='field column'>
-                                            <label for='status'>Adoption Status</label>
-                                            <input class="ctrl field-font" type="text" name="status" value="<?= $animal["status"] ?>" readonly />
-                                        </div>
-                                        <div class='column'></div>
-                                        <div class='column'></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class='field column'>
-                                            <label for='name'>Name</label>
-                                            <input class="ctrl field-font" type="text" name="name" value="<?= $animal["name"] ?>" required />
-                                        </div>
-
-                                        <div class='field column'>
-                                            <label for='type'>Type</label>
-                                            <select class="ctrl field-font" name='type' required>
-                                                <option selected='true' disabled='disabled'><?= $animal["type"] ?></option>
-                                                <option value='dog'>Dog</option>
-                                                <option value='cat'>Cat</option>
-                                                <option value='other'>Other</option>
-                                            </select>
-                                        </div>
-
-                                        <div class='field column'>
-                                            <label for='gender'>Gender</label>
-                                            <select class="ctrl field-font" name='gender' required>
-                                                <option selected='true' disabled='disabled'><?= $animal["gender"] ?></option>
-                                                <option value='male'>Male</option>
-                                                <option value='female'>Female</option>
-                                            </select>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class='column'></div>
-                                        <div class='field other box column'>
-                                            <label for='type'>Other</label>
-                                            <input class="ctrl field-font" type="text" name="other" value="<?= $animal["other"] ?>" />
-                                        </div>
-                                        <div class='column'></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class='field column'>
-                                            <label for='age'>Approximate age</label>
-                                            <div>
-                                                <input style="width: 100%" class="ctrl2 field-font" type="date" name="age" id="datefield" value="<?= $animal["age"] ?>" required />
-                                                <p id="result"></p>
+                                        <div class="row">
+                                            <div class='field column'>
+                                                <label for='status'>Adoption Status</label>
+                                                <input class="ctrl field-font" type="text" name="status" value="<?= $animal["status"] ?>" readonly />
                                             </div>
+                                            <div class='column'></div>
+                                            <div class='column'></div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class='field column'>
+                                                <label for='name'>Name</label>
+                                                <input class="ctrl field-font" type="text" name="name" value="<?= $animal["name"] ?>" required />
+                                            </div>
+
+                                            <div class='field column'>
+                                                <label for='type'>Type</label>
+                                                <select class="ctrl field-font" name='type' required>
+                                                    <option selected='true' disabled='disabled'><?= $animal["type"] ?></option>
+                                                    <option value='dog'>Dog</option>
+                                                    <option value='cat'>Cat</option>
+                                                    <option value='other'>Other</option>
+                                                </select>
+                                            </div>
+
+                                            <div class='field column'>
+                                                <label for='gender'>Gender</label>
+                                                <select class="ctrl field-font" name='gender' required>
+                                                    <option selected='true' disabled='disabled'><?= $animal["gender"] ?></option>
+                                                    <option value='male'>Male</option>
+                                                    <option value='female'>Female</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class='column'></div>
+                                            <div class='field other box column'>
+                                                <label for='type'>Other</label>
+                                                <input class="ctrl field-font" type="text" name="other" value="<?= $animal["other"] ?>" />
+                                            </div>
+                                            <div class='column'></div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class='field column'>
+                                                <label for='age'>Approximate age</label>
+                                                <div>
+                                                    <input style="width: 100%" class="ctrl2 field-font" type="date" name="age" id="datefield" value="<?= $animal["age"] ?>" required />
+                                                    <p id="result"></p>
+                                                </div>
+                                            </div>
+
+
+                                            <div class='field column'>
+                                                <label for='color'>Color</label>
+                                                <input class="ctrl field-font" type="text" name="color[]" value="Brown" required />
+                                            </div>
+
                                         </div>
 
 
-                                        <div class='field column'>
-                                            <label for='color'>Color</label>
-                                            <input class="ctrl field-font" type="text" name="color" value="<?= $animal["color"] ?>" required />
+                                        <div class="field">
+                                            <label>Description</label>
+                                            <textarea rows="6" class="ctrl field-font" name="description"><?= $animal["description"] ?></textarea>
+                                            <span class="field-msg"> </span>
                                         </div>
 
-                                    </div>
+                                        <div class="field ">
+                                            <label>Photo</label>
+                                            <div style="padding: 5px;"><img src="../../../assets\images\dogs/wounded2.jpg" style="width: 10%; height: 10%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder0.jpg" style="width: 10%; height: 10%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 10%; height: 10%; border-radius: 5%;"></div>&nbsp;
 
-
-                                    <div class="field">
-                                        <label>Description</label>
-                                        <textarea rows="6" class="ctrl field-font" name="description"><?= $animal["description"] ?></textarea>
-                                        <span class="field-msg"> </span>
-                                    </div>
-
-                                    <div class="field ">
-                                        <label>Photo</label>
-                                        <div style="display: flex;">
-                                            <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
-                                            <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
-                                            <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
-                                            <div class="mouse-over-div div-size" style="background-image: url('<?= $animal['photo'] ?>');"></div>&nbsp;
-
+                                            <span class="field-msg"> </span>
                                         </div>
-                                        <span class="field-msg"> </span>
+                                        <br>
+
+                                        <button class='btn mr2' type='reset'>Discard Changes</button>
+                                        <button class='btn mr2' type="submit">Update</button>
+                                    </form>
+
+                                </div>
+
+                            </div>&nbsp;
+                            <div>
+                                <button onclick="showModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon red"><i class="fas fa-trash-alt"></i></button>
+                                <div id="popupModal-delete<?= $adoption_request["animal_id"] ?>" class="modal">
+                                    <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 50%">
+                                        <span class="close" onclick="hideModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')">&times;</span>
+                                        <h3 style="text-align: center;">Are you sure you want to delete record?</h3>
+                                        <a href="/OrgManagement/delete_animal?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                        <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')">Cancel</a>
                                     </div>
-                                    <br>
-
-                                    <button class='btn mr2' type='reset'>Discard Changes</button>
-                                    <button class='btn mr2' type="submit">Update</button>
-                                </form>
-
-                            </div>
-
-                        </div>
+                                </div>
+                            <div>
                     </td>
                 </tr>
 

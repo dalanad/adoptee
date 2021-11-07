@@ -127,13 +127,13 @@
                             <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
                                 <span class="close" onclick="hideModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')">&times;</span>
                                 <h3 style="text-align: center;">Are you sure you want to reject request?</h3>
-                                <a href="/OrgManagement/reject_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                <a href="/OrgManagement/reject_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
                                 <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')">Cancel</a>
                             </div>
 
                     </td>
                     <td>
-                        <button  onclick="showModel('popupModal<?= $adoption_request["animal_id"] ?>')" title="More Details" class="tag btn btn-link">Details</button>
+                        <button  onclick="showModel('popupModal<?= $adoption_request["animal_id"] ?>')" title="More Details" class="btn btn-link">Details</button>
                         <div id="popupModal<?= $adoption_request["animal_id"] ?>" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="hideModel('popupModal<?= $adoption_request["animal_id"] ?>')">&times;</span>

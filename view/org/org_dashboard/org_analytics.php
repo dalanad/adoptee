@@ -15,21 +15,27 @@
         flex: 50%;
     }
 
-    .div-totals{
-        padding: 0.5rem; 
-        margin: 20px; 
-        width: 275px; 
+    .div-totals {
+        padding: 0.5rem;
+        margin: 20px;
+        width: 275px;
         height: 40px;
         border-radius: 0.2rem;
         display: flex;
         font-weight: 1000;
         font-size: 1.5rem;
-        
+
+    }
+
+    .div-edge {
+        height: 40px;
+        width: 5px;
+        border-radius: 0.2rem;
     }
 
     .div-totals:hover {
-	opacity: .84;
-}
+        opacity: .84;
+    }
 
     .div-heading {
         text-align: center;
@@ -80,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div style="padding: 0.5rem; margin: 10px;">
                 <canvas id="myChart2"></canvas>
             </div>
@@ -224,7 +230,7 @@
 
         });
 
-        
+
 
         /*Chart 5*/
 

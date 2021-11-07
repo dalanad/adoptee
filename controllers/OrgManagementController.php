@@ -40,6 +40,11 @@ class OrgManagementController extends Controller{
         if(isset($_POST['submit'])){OrgManagement::editAnimalData($_POST['status'], $_POST['name'], $_POST['type'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['descripion'], $_POST['photo']);}
     }
 
+    function delete_animal(){
+        OrgManagement::delete_animal($_GET['animal_id']);
+        $this->redirect('/OrgManagement/org_adoption_listing');
+    }
+
     function adoption_requests()
     {
         $data = [
@@ -120,6 +125,7 @@ class OrgManagementController extends Controller{
         ];
         View::render("org/dashboard", $data);
     }
+
     function add_new_event()
     {
         View::render("org/org_dashboard/add_new_event");
@@ -127,6 +133,14 @@ class OrgManagementController extends Controller{
         $photos =  image::multi("photos");
         
         OrgManagement::add_new_event($_SESSION['org_id'], $_POST['heading'], $_POST['description'], $photos);
+    }
+
+    function merch_orders()
+    {
+        $data = [
+            "active" => "merch_orders"
+        ];
+        View::render("org/dashboard", $data);
     }
 
 }
