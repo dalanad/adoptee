@@ -30,7 +30,7 @@ class OrgManagement extends BaseModel
     static function findAnimalsByOrgId()
     {
         $org_id = $_SESSION['org_id'];
-        $query = "SELECT animal.animal_id, name,type, other, FLOOR(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', gender,date_listed,status,date_adopted,description, animal.photo as avatar_photo from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id";
+        $query = "SELECT animal.animal_id, name,type, other, color, FLOOR(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', gender,date_listed,status,date_adopted,description, animal.photo as avatar_photo from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id";
         return BaseModel::select($query);
     }
 
@@ -49,6 +49,13 @@ class OrgManagement extends BaseModel
         UPDATE `animal` SET gender = '$gender' WHERE isset($gender);
         UPDATE `animal` SET dob = '$dob' WHERE isset($dob);
         UPDATE `animal_for_adoption` SET description = '$description' WHERE isset($description)";
+
+        return BaseModel::insert($query);
+    }
+
+    static function delete_animal($animal_id)
+    {
+        $query = "DELETE FROM animal_for_adoption WHERE animal_id='$animal_id'";
 
         return BaseModel::insert($query);
     }

@@ -1,19 +1,4 @@
 <style>
-    .updates {
-        position: absolute;
-        width: 250px;
-        height: 250px;
-        top: 10px;
-        left: 10px;
-        background: white;
-        box-shadow: var(--shadow);
-        z-index: 100;
-        border-radius: 0.5rem;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        border-color: black;
-    }
-
     .modal {
         display: none;
         position: fixed;
@@ -88,6 +73,35 @@
         color: white;
         transition: opacity 0.2s ease-in;
     }
+
+    .div-edit-delete {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        cursor: pointer;
+        text-align: center;
+        padding: 2px;
+        border-right: 3px solid var(--gray-3);
+        border-top: 3px solid var(--gray-3);
+        border-bottom: 3px solid var(--gray-3);
+    }
+
+    .div-edit-delete:hover {
+        transition: border-color .2s ease-in-out;
+        border-color: var(--primary);
+    }
+
+    .div-edit-delete .btn {
+        opacity: .2;
+        transition: opacity .2s ease-in-out;
+    }
+
+    .div-edit-delete:hover .btn {
+        opacity: 1;
+    }
+
+    .div-edit-delete .icon {
+        font-size: 2em;
+    }
 </style>
 
 
@@ -96,61 +110,90 @@
 
         <!-- Filters - Start -->
         <div style="padding-left: 1rem;">
-        <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
-            <div>
-            <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
-            <button class="btn outline button-hover">Search</button>
-            </div> &nbsp; | &nbsp;
-            <div style="white-space: nowrap;">
-                <b>Sort by :</b> &nbsp;
-                <select class="ctrl field-font" style="width: 65%;" required>
-                    <option selected='true' disabled='disabled'>- Select -</option>
-                    <option value='name'>Event Name</option>
-                    <option value='date'>Date Published</option>
-                </select>
-            </div> &nbsp;
-            <div style="white-space: nowrap;">
-                <input class="ctrl-radio" type="radio" onchange="" name="order" value="asc" /> Asc
-                <input class="ctrl-radio" type="radio" onchange="" name="order" value="desc" /> Desc
-            </div>
-        </form>
-    </div>
-    <!-- Filters - End -->
+            <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
+                <div>
+                    <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
+                    <button class="btn outline button-hover">Search</button>
+                </div> &nbsp; | &nbsp;
+                <div style="white-space: nowrap;">
+                    <b>Sort by :</b> &nbsp;
+                    <select class="ctrl field-font" style="width: 65%;" required>
+                        <option selected='true' disabled='disabled'>- Select -</option>
+                        <option value='name'>Event Name</option>
+                        <option value='date'>Date Published</option>
+                    </select>
+                </div> &nbsp;
+                <div style="white-space: nowrap;">
+                    <input class="ctrl-radio" type="radio" onchange="" name="order" value="asc" /> Asc
+                    <input class="ctrl-radio" type="radio" onchange="" name="order" value="desc" /> Desc
+                </div>
+            </form>
+        </div>
+        <!-- Filters - End -->
 
         <table class="table">
             <tr>
                 <td>
-                    <div style="position: relative;">
+                    <div class="" style="position: relative; justify-items:center; align-items:center; display:flex;">
                         <div class="mouse-over-div div-size" style="left: 0px;">
                             <h2 class="center">Pet Adoption Day</h2>
                             <div class="event-content"><img class="event-image" src="/assets\images\org/adoption_day.jpg"></div>
                             <div class="event-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>The Colombo Puppy Adoption Day was held on the 29th of August from 2.30 pm – 5.00 pm at the Race course, Good Market. This was the first program at the Good Market and there was a good turnout for our adoption day. 10 pups found their forever homes on the day and the team will be following up within the week.
+                                </p>
                             </div>
                             <p style="position: absolute; color: #aaa6a1; bottom: 0px;font-size:0.8rem;">Published On : 10-09-2021</p>
                         </div>
-                    </div>
+                        <div class="div-edit-delete" style="justify-items:center; align-items:center; display:flex;">
+                            <div>
+                                <div><button onclick="showModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon"><i class="fas fa-pen"></i></button></div>
+                                <button onclick="showModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon red"><i class="fas fa-trash-alt"></i></button>
+                                <div id="popupModal-delete<?= $adoption_request["animal_id"] ?>" class="modal">
+                                    <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
+                                        <span class="close" onclick="hideModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')">&times;</span>
+                                        <h3 style="text-align: center;">Are you sure you want to delete event?</h3>
+                                        <a href="/OrgManagement/delete_animal?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                        <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')">Cancel</a>
+                                    </div>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                </td>
+
+                <td>
+                    <div style="position: relative; justify-items:center; align-items:center; display:flex;">
+                        <div class="mouse-over-div div-size" style="right: 0px;">
+                            <h2 class="center">Stray Feeding Campaign</h2>
+                            <div class="event-content"><img class="event-image" src="/assets\images\org/stray_feeding.jpg"></div>
+                            <div class="event-content">
+                                <p>The PAWS feeding program is organized to help alleviate the problem of food shortages in our shelter. It also allows the shelter animals to add something different to their diet other than their daily kibble.</p>
+                            </div>
+                            <p class="flex" style="position: absolute; color: #aaa6a1; bottom: 0px;font-size:0.8rem;">Published On : 10-09-2021</p>
+                        </div>
+                        <div class="div-edit-delete" style="justify-items:center; align-items:center; display:flex;">
+                            <div>
+                                <div><button onclick="showModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon"><i class="fas fa-pen"></i></button></div>
+                                <button onclick="showModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon red"><i class="fas fa-trash-alt"></i></button>
+                                <div id="popupModal-delete<?= $adoption_request["animal_id"] ?>" class="modal">
+                                    <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
+                                        <span class="close" onclick="hideModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')">&times;</span>
+                                        <h3 style="text-align: center;">Are you sure you want to delete event?</h3>
+                                        <a href="/OrgManagement/delete_animal?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                        <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')">Cancel</a>
+                                    </div>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                </td>
+            </tr>
+
+
+        </table>
     </div>
-    </td>
-
-    <td>
-        <div style="position: relative;">
-            <div class="mouse-over-div div-size" style="right: 0px;">
-                <h2 class="center">Stray Feeding Campaign</h2>
-                <div class="event-content"><img class="event-image" src="/assets\images\org/stray_feeding.jpg"></div>
-                <div class="event-content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </div>
-                <p class="flex" style="position: absolute; color: #aaa6a1; bottom: 0px;font-size:0.8rem;">Published On : 10-09-2021</p>
-            </div>
-        </div>
-</div>
-</td>
-</tr>
-
-
-</table>
-</div>
 </div>
 <div style="margin-left: 1200px; padding-bottom: 0px"><a href="/OrgManagement/add_new_event" class="btn right outline button-hover" style="width: 60px; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Event"><i class="fas fa-plus"></i></a></div>
 

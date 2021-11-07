@@ -80,6 +80,29 @@ $org_rescues = array(
 
 
 <div style="padding-top: 2rem;">
+<!-- Filters - Start -->
+<div style="padding-left: 1rem;">
+        <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
+            <div>
+                <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
+                <button class="btn outline button-hover">Search</button>
+            </div> &nbsp; | &nbsp;
+            <div style="white-space: nowrap;">
+                <b>Sort by :</b> &nbsp;
+                <select class="ctrl field-font" style="width: 65%;" required>
+                    <option selected='true' disabled='disabled'>- Select -</option>
+                    <option value='name'>Animal Type</option>
+                    <option value='type'>Date Rescued</option>
+                </select>
+            </div> &nbsp;
+            <div style="white-space: nowrap;">
+                <input class="ctrl-radio" type="radio" onchange="" name="order" value="asc" /> Asc
+                <input class="ctrl-radio" type="radio" onchange="" name="order" value="desc" /> Desc
+            </div>
+        </form>
+    </div>
+    <!-- Filters - End -->
+
     <div style="height:600px">
     <div class="div-size" style="display:flex; font-size: 0.8rem; font-weight: 500; border: none; padding-left: 1rem; padding-bottom: 1rem; padding-top:.5rem;">
                     <div style="width: 150px;">TYPE</div>
@@ -93,14 +116,14 @@ $org_rescues = array(
     <div class="overflow-auto" style="height:525px">
             <?php foreach ($org_rescues as $org_rescue) { ?>
                     <div class="div-size" style="display:flex; padding-left: 1rem; padding-bottom: .5rem; padding-top:.5rem;">
-                    <div style="width: 150px;"><i class="txt-clr fa fa-lg fa-<?= $org_rescue['type'] == "Dog" ? 'dog blue' : ($org_rescue['type'] == "Cat" ? 'cat pink' : 'paw green' ) ?>"></i>&nbsp;&nbsp; <?= $org_rescue["type"] ?></div>
+                    <div style="width: 150px;"><i class="txt-clr fa fa-lg fa-<?= $org_rescue['type'] == "Dog" ? 'dog' : ($org_rescue['type'] == "Cat" ? 'cat' : 'paw' ) ?>"></i>&nbsp;&nbsp; <?= $org_rescue["type"] ?></div>
                     <div style="width: 180px;"><?= $org_rescue["date_rescued"] ?></div>
                     <div style="width: 180px;"><?= $org_rescue["contact_number"] ?></div>
                     <div style="width: 250px;"><?= $org_rescue["description"] ?></div>
                     <div style="width: 250px;"><?= $org_rescue["location"] ?></div>
                     
                     <div style="width: 150px;">
-                    <button onclick="showModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')" title="More Details" class="tag btn btn-link">Details</button>
+                    <button onclick="showModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')" title="More Details" class="btn btn-link">Details</button>
                         <div id="popupModal<?= $org_rescue["org_rescue_id"] ?>" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="hideModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')">&times;</span>
