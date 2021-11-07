@@ -73,12 +73,12 @@ INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL')
 
 
 INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`, `photos`) VALUES 
-('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'ADOPTED', '2021-09-03', '1', 3, '["/assets/data/dogs/1a.jpg","/assets/data/dogs/1b.jpg","/assets/data/dogs/1c.jpg"]'),
+('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/1a.jpg","/assets/data/dogs/1b.jpg","/assets/data/dogs/1c.jpg"]'),
 ('21', 'Playful and a joy to be around, weaned', '2021-08-26', 'LISTED', NULL, '3', NULL, '["/assets/data/cats/1a.jpg","/assets/data/cats/1b.jpg","/assets/data/cats/1c.jpg"]'),
 ('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2', NULL, '["/assets/data/dogs/2a.jpg","/assets/data/dogs/2b.jpg","/assets/data/dogs/2c.jpg"]'),
 ('3', 'jade-green eyes, not vaccinated','2021-09-01', 'LISTED', NULL, '1',NULL, '["/assets/data/dogs/3a.jpg","/assets/data/dogs/3b.jpg","/assets/data/dogs/3c.jpg"]'),
 ('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/cats/2a.jpg","/assets/data/cats/2b.jpg","/assets/data/cats/2c.jpg"]'),
-('4', 'Playful and affectionate, vaccinated', '2021-08-26', 'LISTED', NULL, '1',NULL, '["/assets/data/dogs/4a.jpg","/assets/data/dogs/4b.jpg"]'),
+('4', 'Playful and affectionate, vaccinated', '2021-08-26', 'ADOPTED', '2021-09-03', '1',3, '["/assets/data/dogs/4a.jpg","/assets/data/dogs/4b.jpg"]'),
 ('5', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/dogs/5a.jpg","/assets/data/dogs/5b.jpg","/assets/data/dogs/5c.jpg"]'),
 ('25', 'Healthy and a joy to be around, vaccinated', '2021-08-26', 'ADOPTED', '2021-01-14', '2', 3, '["/assets/data/cats/5a.jpg","/assets/data/cats/5b.jpg","/assets/data/cats/5c.jpg"]'),
 ('6', 'Loves cuddles and needs attention, vaccinated', '2021-08-26', 'LISTED', NULL, '3', NULL, '["/assets/data/dogs/6a.jpg","/assets/data/dogs/6b.jpeg","/assets/data/dogs/6c.jpg"]'),
