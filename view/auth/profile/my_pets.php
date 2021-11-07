@@ -65,7 +65,50 @@
 
     .field {
         display: flex;
-        margin-right:1rem;
+        margin-right: 1rem;
+    }
+
+    .check {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .check input {
+        display: none;
+    }
+
+    .check label {
+        padding: 1rem;
+        border: 2px solid var(--gray-3);
+        display: block;
+        border-radius: 50%;
+        cursor: pointer;
+        margin-right: .3rem;
+        text-align: center;
+        margin-bottom: .3rem;
+    }
+
+    .check input:checked+label {
+        opacity: 0.5;
+        border-color: var(--primary);
+    }
+
+    .vax {
+        display: flex;
+        height: 2rem;
+        margin-bottom:0.2rem;
+    }
+
+    .vax>label{
+        width:12rem;
+    }
+
+    input[type="date"] {
+        width: 11rem;
+    }
+
+    .fa-trash{
+        color:red;
     }
 </style>
 
@@ -77,7 +120,7 @@
         <div style="display: flex;">
             <div class="field">
                 <label for="name">Name</label>
-                <input class="ctrl ctrl2" type="text" name="name" id="name" required/>
+                <input class="ctrl ctrl2" type="text" name="name" id="name" required />
             </div>
 
             <div class="field">
@@ -90,27 +133,108 @@
                 </select>
             </div>
 
+            <div class="field">
+                <label for='other'>If Other:</label>
+                <input class="ctrl" type="text" name="other" id="other" placeholder="Type" style="width:5rem;" />
+            </div>
 
-            <div class="field" style="display:flex;" id="gender">
+        </div>
+        <div style="display: flex;">
+            <div class="field" style="flex:40%">
                 <label for="gender">Gender</label>
-                <select name="gender" class="ctrl ctrl2" required>
-                    <option value="m">Male</option>
-                    <option value="f">Female</option>
-                </select>
+                <div>
+                    <input type="radio" name="gender" value="M" id="gender" class="ctrl-radio" required />&nbsp Male
+                    <input type="radio" name="gender" value="F" id="gender" class="ctrl-radio" required />&nbsp Female
+                </div>
+            </div>
+
+            <div class='field' style="flex:60%">
+                <label for='dob'>Approximate DOB</label>
+                <div>
+                    <input class="ctrl" type="date" style="width:11rem;" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" name="dob" id="dob" onclick="ageCalculator()" required />
+                    <p id="result"></p>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex">
+            <div class='field'>
+                <label for="color"> Color </label>
+                <div class="check">
+                    <input id="white" name="color[]" type="checkbox" value="White">
+                    <label for="white" style="background:cornsilk;" title="White"></label>
+                    <input id="grey" name="color[]" type="checkbox" value="Grey">
+                    <label for="grey" style="background:grey;" title="Grey"></label>
+                    <input id="orange" name="color[]" type="checkbox" value="Orange">
+                    <label for="orange" style="background:darkgoldenrod;" title="Orange"></label>
+                    <input id="brown" name="color[]" type="checkbox" value="Brown">
+                    <label for="brown" style="background:brown;" title="Brown"></label>
+                    <input id="black" name="color[]" type="checkbox" value="Black">
+                    <label for="black" style="background:black;color:white;" title="Black"></label>
+                </div>
+            </div>
+
+            <div class="field" style="width:15rem;">
+                <label for="photo">Photo:</label>
+                <input class="ctrl" name="photo" type="file" required />
             </div>
         </div>
 
+        <!-- <div style="display:flex;line-height:100%;"> -->
         <div class='field'>
-            <label for='dob'>Approximate DOB</label>
-            <div>
-                <input class="ctrl" type="date" max="<?= getdate()['date'] ?>-<?= getdate()['month'] ?>-<?= getdate()['year'] ?>" name="dob" id="dob" onclick="ageCalculator()" required />
-                <p id="result"></p>
+            <label style="margin-top: 1rem; margin-bottom: 0.5rem;">Initial Vaccine</label>
+            <div class="vax">
+                <label for='anti_rabies'>Anti Rabies</label>&nbsp;
+                <input class="ctrl" type="date" name="anti_rabies" id="anti_rabies" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>">
+            </div>
+            <div class="vax">
+                <label for='dhl'>DHL</label>&nbsp;
+                <input class="ctrl" type="date" name="dhl" id="dhl" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>">
+            </div>
+            <div class="vax">
+                <label for='parvo'>Parvo</label>&nbsp;
+                <input class="ctrl" type="date" name="parvo" id="parvo" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>">
+            </div>
+            <div class="vax">
+                <label for='tricat'>Tricat</label>&nbsp;
+                <input class="ctrl" type="date" name="tricat" id="tricat" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>">
+            </div>
+            <div style="height:min-content">
+                <span class="field-msg">Select date only if vaccinated</span>
             </div>
         </div>
 
         <div class="field">
-            <label for="photo">Photo:</label>
-            <input class="ctrl" name="photo" type="file" required/>
+            <label style="margin-top: 1rem; margin-bottom: 0.5rem;">Yearly Booster</label>
+            <div class="vax">
+                <label for='anti_rabies_booster'>Anti Rabies Booster</label>&nbsp;
+                <input class="ctrl" type="date" name="anti_rabies_booster" id="anti_rabies_booster" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>">
+            </div>
+            <div class="vax">
+                <label for='dhl_booster'>DHL Booster</label>&nbsp;
+                <input class="ctrl" type="date" name="dhl_booster" id="dhl_booster" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>">
+            </div>
+            <div class="vax">
+                <label for='parvo_booster'>Parvo Booster</label>&nbsp;
+                <input class="ctrl" type="date" name="parvo_booster" id="parvo_booster" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>">
+            </div>
+            <div class="vax">
+                <label for='tricat_booster'>Tricat Booster</label>&nbsp;
+                <input class="ctrl" type="date" name="tricat_booster" id="tricat_booster" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>">
+            </div>
+            <div>
+                <span class="field-msg">Select date only if vaccinated this year</span>
+            </div>
+        </div>
+        <!-- </div> -->
+
+        <div class='field' style="line-height:100%;">
+            <div>
+                <label for='dewormed'>Dewormed</label>&nbsp;
+                <input class="ctrl" type="date" name="dewormed" id="dewormed" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>">
+            </div>
+            <div>
+                <span class="field-msg">Fill only if dewormed within the past 6 months</span>
+            </div>
         </div>
 
         <button type="submit" class="btn mt2" style="height:2rem;">Add Pet</button>
@@ -139,20 +263,26 @@ foreach ($petdata as $key => $value) { ?>
                                     <div id="popupModal<?= $value["animal_id"] ?>" class="modal">
                                         <div class="modal-content">
                                             <span class="close" onclick="hideModel('popupModal<?= $value['animal_id'] ?>')">&times;</span>
-                                            <table class="table">
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>Time</th>
-                                                    <th>Doctor's Message</th>
-                                                </tr>
-                                                <?php foreach ($value['consultdata'] as $consultation) { ?>
+                                            <!--add vaccination history-->
+                                            <?php if ($value['consultdata'] == NULL) { ?>
+                                                <div style="text-align:center;font-size:medium;">No consultation history to show</div>
+                                            <?php } else { ?>
+                                                <table class="table">
                                                     <tr>
-                                                        <td><?= $consultation['consultation_date'] ?></td>
-                                                        <td><?= $consultation['consultation_time'] ?></td>
-                                                        <td><?= $consultation['message'] ?></td>
+                                                        <th>Date</th>
+                                                        <th>Time</th>
+                                                        <th>Doctor's Message</th>
                                                     </tr>
-                                                <?php } ?>
-                                            </table>
+
+                                                    <?php foreach ($value['consultdata'] as $consultation) { ?>
+                                                        <tr>
+                                                            <td><?= $consultation['consultation_date'] ?></td>
+                                                            <td><?= $consultation['consultation_time'] ?></td>
+                                                            <td><?= $consultation['message'] ?></td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </table>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </td>
@@ -161,7 +291,7 @@ foreach ($petdata as $key => $value) { ?>
                     </td>
                 </tr>
             </table>
-            <div class="btn btn-link" title="Remove Pet"><i class="far fa-trash" style="color:red;"></i></div>
+            <div class="btn btn-link" title="Remove Pet"><i class="far fa-trash"></i></div>
         </div>
     </div>
 <?php } ?>

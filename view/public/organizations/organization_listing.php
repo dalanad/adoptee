@@ -33,11 +33,20 @@
         font-weight: 300;
         margin: 0.6rem;
     }
-    
-    img{
+
+    img {
         max-width: 11rem;
-        max-height:11rem;
-        border-radius: 8px;;
+        max-height: 11rem;
+        border-radius: 8px;
+        ;
+    }
+
+    .fa-star {
+        color: var(--gray-3);
+    }
+
+    .checked{
+        color:orange;
     }
 </style>
 
@@ -45,13 +54,20 @@
 
     <?php
     foreach ($orgs as $key => $value) { ?>
-    
+
         <div class="tier-card">
             <div class="title"><?= ($value['name']); ?></div>
             <div class="subtitle"><?= ($value['tagline']); ?></div>
             <div class="logo"><img src=<?= ($value['logo']); ?>></div>
-            <a class="btn" href="get_org_timeline?org_id=<?php echo($value['org_id']) ?>">View Profile</a>
-    </div>
+            <div style="font-size: .9rem; margin-top:.3rem; margin-bottom:1rem;">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="far fa-star"></span>
+                <span class="far fa-star"></span>
+            </div>
+            <a class="btn" href="get_org_timeline?org_id=<?php echo ($value['org_id']) ?>">View Profile</a>
+        </div>
     <?php } ?>
 
 </div>
