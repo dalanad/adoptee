@@ -73,12 +73,38 @@
         opacity: 0.5;
         border-color: var(--primary);
     }
+
+    @media (max-width: 600px) {
+        .filters {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--bg);
+            height: calc(100vh);
+            z-index: 100;
+            width: calc(100vw);
+            margin: -0.5em;
+            padding: 1em;
+            box-sizing: border-box;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+    }
+
+
 </style>
 
 <form class="container" style="padding:1rem 2rem;" name="_form" action="" method="get">
     <h2> Pet Adoption</h2>
+    <div class="flex justify-between" style="width:100%">
+        <button class="btn btn-link more-btn" onclick="//show_filters">
+            <i class="fas fa-filter"></i>Filters
+        </button>
+    </div>
     <div style="display: flex;">
-        <div style="width: 200px;" >
+        <div style="width: 200px;" class="filters">
             <div class="field">
                 <!--Gender-->
                 <label>Gender</label>
@@ -157,7 +183,9 @@
         </div>
 
         <div style="flex: 1 1 0;">
-            <div style="display: flex;margin:0 1rem;align-items:center">
+            <div style="margin:0 1rem;align-items:center" class="filters">
+                <!--display: flex;-->
+                <!--move out avail pets msg -->
                 <!--sorting filters-->
                 <span>Available Pets - Page 1 of 1</span> <span style="flex: 1 1 0;"></span>
                 <span style="white-space: nowrap;"><i class="far fa-sort-size-up" style="font-size: 1.2em;"></i> &nbsp; Sort By : </span> &nbsp; &nbsp;
@@ -184,7 +212,7 @@
                             <div class="adoption-card-action">ADOPT</div>
                             <div style="display:flex; padding:.5rem 1rem;align-items: center;">
                                 <div style="flex:1 1 0">
-                                    <div style="font-weight: 500;">     <?= $animal["name"] ?></div>
+                                    <div style="font-weight: 500;"> <?= $animal["name"] ?></div>
                                     <div class="type" style="font-size:small"><?= $animal["type"] ?> - <?= round($animal["age"]) ?> years</div>
                                 </div>
                                 <div style="font-size: 1.5em;">
@@ -198,4 +226,5 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
+</form>

@@ -289,10 +289,7 @@ create table notifications (
 );
 
 alter table notifications
-add foreign key(receiver_id) references user(user_id);
-
-    
-);
+add foreign key(user_id) references user(user_id);
 
 alter table adoption_request
 add foreign key(org_id) references organization(org_id),
