@@ -96,9 +96,9 @@
 
 
 
-<div style="padding-top: 0.5rem;">
+<div style="padding-top: 2.5rem;">
 
-    <div class="overflow-auto" style="height: 555px; padding-top: 2rem;">
+    
     
     <!-- Filters - Start -->
     <div style="padding-left: 1rem;">
@@ -130,7 +130,7 @@
         </form>
     </div>
     <!-- Filters - End -->
-
+    <div class="overflow-auto" style="height: 500px;">
         <table class="table">
             <tr>
                 <th>PET</th>

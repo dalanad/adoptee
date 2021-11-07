@@ -7,17 +7,17 @@ class VideoConference
             [
                 "apikey" => Config::get("videosdk.key"),
                 "permissions" => ["allow_join", "allow_mod", "ask_join"],
-                "iat" => time() ,
-                "exp" => time() + 1000
+                "iat" => time(),
+                "exp" => time() + 5000
             ],
             Config::get("videosdk.secret")
         );
     }
 
 
-    public function createMeetingId()
+    public static function createMeetingId()
     {
-        $authorization_token = $this->createAuthToken();
+        $authorization_token = self::createAuthToken();
 
         $ch = curl_init('https://api.zujonow.com/v1/meetings');
 

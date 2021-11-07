@@ -45,6 +45,7 @@ class Consultation extends BaseModel
         $consultations = array_map(function ($item) {
             $item["animal"] =  Animal::getAnimalById($item["animal_id"]);
             $item["user"] =  User::findUserById($item["user_id"]);
+            $item["doctor"] =  User::findUserById($item["doctor_user_id"]);
             return $item;
         }, $consultations);
 
@@ -67,6 +68,28 @@ class Consultation extends BaseModel
         return $consultations;
     }
 
+    public static function complete_user($consultation_id, $doctor_rating)
+    {
+        $query = "UPDATE `consultation` SET status = 'COMPLETED' and doctor_rating =:doctor_rating WHERE consultation_id = :consultation_id ";
+
+        $params = [
+            "consultation_id" => $consultation_id,
+            "doctor_rating" => $doctor_rating
+        ];
+
+        return self::update($query, $params);
+    }
+
+    public static function complete_doctor($consultation_id, $user_rating)
+    {
+        $query = "UPDATE `consultation` SET status = 'COMPLETED' WHERE consultation_id = :consultation_id ";
+
+        $params = [
+            "consultation_id" => $consultation_id,
+        ];
+
+        return self::update($query, $params);
+    }
 
     public static function findConsultationsByPetId($animal_id)
     {

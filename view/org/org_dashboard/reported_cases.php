@@ -185,10 +185,10 @@
 </div>
 </td>
 <td>
-    <div class="btn btn-link"><span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span></div>
+    <div ><span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span></div>
 </td>
 <td>
-    <div><button onclick="showModel('popupModal-confirm<?= $reported_case["report_id"] ?>')" class="tag btn btn-link"> RESCUE</button></div>
+    <div><a onclick="showModel('popupModal-confirm<?= $reported_case["report_id"] ?>')"> <span class="tag"> RESCUE </span></a></div>
     <div id="popupModal-confirm<?= $reported_case["report_id"] ?>" class="modal">
         <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
             <span class="close" onclick="hideModel('popupModal-confirm<?= $reported_case["report_id"] ?>')">&times;</span>

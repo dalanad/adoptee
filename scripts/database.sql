@@ -22,7 +22,7 @@ create table doctor (
     telephone_fixed char(10),
     credentials varchar(50),
     proof_image JSON,
-    advise_charge int(10) default 1000,
+    advise_charge int(10) default 500,
     live_charge int(10) default 1000
 );
 
@@ -83,14 +83,14 @@ create table animal_for_adoption (
 
 create table animal_vaccines (
     animal_id int(10) not null,
-    anti_rabies boolean,
-    dhl boolean,
-    parvo boolean,
-    tricat boolean,
-    anti_rabies_booster boolean,
-    dhl_booster boolean,
-    parvo_booster boolean,
-    tricat_booster boolean,
+    anti_rabies date,
+    dhl date,
+    parvo date,
+    tricat date,
+    anti_rabies_booster date,
+    dhl_booster date,
+    parvo_booster date,
+    tricat_booster date,
     primary key(animal_id)
 );
 
@@ -116,7 +116,8 @@ create table consultation (
     status enum('CANCELLED','PENDING','ACCEPTED','COMPLETED','EXPIRED') not null default 'PENDING', 
     type enum('LIVE','ADVISE') not null default 'ADVISE',
     payment_txn_id varchar(50),
-    meeting_id int(10)
+    doctor_rating int(5),
+    meeting_id varchar(50) default '7ewh-ve15-16uf'
 );
 
 create table consultation_schedule (
@@ -227,7 +228,7 @@ create table org_content (
     created_time timestamp  DEFAULT CURRENT_TIMESTAMP,
     heading varchar(50),
     description varchar(200),
-    photo varchar(200) -- JSON ?
+    photos JSON not null
 );
 
 create table org_feedback (
@@ -281,13 +282,17 @@ create table adoption_request (
 
 create table notifications (
     notif_id int(10),
-    content varchar (200),
-    receiver_id int(10),
+    user_id int(10),
+    created_at timestamp default CURRENT_TIMESTAMP,
+    message varchar(100),
     type enum("SMS","EMAIL")
 );
 
 alter table notifications
 add foreign key(receiver_id) references user(user_id);
+
+    
+);
 
 alter table adoption_request
 add foreign key(org_id) references organization(org_id),

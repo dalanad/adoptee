@@ -52,14 +52,19 @@ class ConsultationController extends Controller
         view::render('public/consultations/consultation_request');
     }
 
-    public function consult_advise()
+    public function consult_advise($consultation_id)
     {
-        View::render("public/consultations/consult_advise");
+        $data = ["consultation" => Consultation::findConsultationById($consultation_id)];
+        View::render("public/consultations/consult_advise", $data);
     }
 
-    public function consult_live()
+    public function consult_live($consultation_id)
     {
-        View::render("public/consultations/consult_live");
+        $data = [
+            "consultation" => Consultation::findConsultationById($consultation_id),
+            "user" => true
+        ];
+        View::render("doctor/consult_conference", $data);
     }
 
     public function create_request()
@@ -91,4 +96,11 @@ class ConsultationController extends Controller
         echo "<pre>";
         echo json_encode($session, JSON_PRETTY_PRINT);
     }
+
+    public function complete() {
+        $consultation = Consultation::findConsultationById($_GET["id"]);
+        View::render("doctor/complete_consultation", ["consultation" => $consultation]);
+    }
+
+
 }
