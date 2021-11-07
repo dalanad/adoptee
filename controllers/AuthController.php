@@ -139,12 +139,12 @@ class AuthController extends Controller
 
     function change_password()
     {
-        $user = $_SESSION['user'];
+        $user = $_SESSION['user'];print_r($_POST);
         if (Crypto::verify($_POST['current'], $user["password"])) {
 
             if (User::matchPasswords($_POST['new'], $_POST['confirm'])) {
-                User::changePassword($user, $_POST['new']);
-                $this->redirect("/auth/profile/change_password");
+                User::changePassword($user['email'], $_POST['new']);
+                $this->redirect("/auth/change_password");
             }
         }
     }

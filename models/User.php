@@ -56,7 +56,7 @@ class User extends BaseModel
     {
         $hashed_password = Crypto::hash($new);
         $query = "UPDATE user set password= '$hashed_password' WHERE email = '$email'";
-        return self::update($query);
+        if(self::update($query)){print_r("hello");};
     }
 
     static function getAdoptions($user_id)

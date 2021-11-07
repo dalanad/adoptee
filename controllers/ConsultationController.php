@@ -78,7 +78,7 @@ class ConsultationController extends Controller
         }
         unset($_SESSION['doctor'], $_SESSION['consultation_type'], $_SESSION['date'], $_SESSION['time']);
 
-        $payment_link = Pay::payment("Doctor Consultation", 100000, "/Consultation/success");
+        $payment_link = Pay::payment("Doctor Consultation", 100000, "/Consultation/success", "/Consultation/index");//set charge by type
         $this->redirect($payment_link);
     }
 

@@ -45,7 +45,7 @@
 <?php
 foreach ($content as $key => $value) { ?>
     <div class="item">
-        <div class="image-column"><img class="image" src="<?= $value['photo']?>"></div>
+        <div class="image-column"><img class="image" src="<?= str_replace("[\"","",str_replace(" ","/",str_replace("\"]","",$value['photos'])))?>"></div>
         <div class="content-column">
             <div class="heading"><?= $value['heading']; ?></div>
             <div class="time"><?= explode(" ",$value['created_time'])[0]; ?></div>

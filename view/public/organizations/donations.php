@@ -58,7 +58,7 @@
             <div style="display:flex;">
                 <div class='field'>
                     <label for="amount">Amount</label>
-                    <input class="ctrl" type="number" name="amount" step="0.01" min="105.00" placeholder="0.00" style="width:8rem;" required>
+                    <input class="ctrl" type="number" name="amount" step="0.01" min="105.00" placeholder="Rs. 0.00" style="width:8rem;" required>
                 </div>
 
                 <div class="field" style="display:flex;">
