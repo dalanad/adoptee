@@ -11,7 +11,7 @@ class Pay
         $checkout_session = \Stripe\Checkout\Session::create([
             'client_reference_id' => 'test_sssssqeqwe',
             'metadata' => ['user_id' => $_SESSION["user"]["user_id"]],
-            'customer_email' =>  $_SESSION["user"]["user_id"],
+            'customer_email' =>  $_SESSION["user"]["email"],
             'submit_type' => 'pay',
             'line_items' => [[
                 'price_data' => [
