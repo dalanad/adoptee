@@ -36,7 +36,8 @@ create table organization (
     tagline varchar(50),
     logo varchar(50),
     about varchar(500),
-    about_photo varchar(50)
+    about_photo varchar(50),
+    rating int
 );
 
 create table org_user (
@@ -114,7 +115,8 @@ create table consultation (
     user_id int(10),
     status enum('CANCELLED','PENDING','ACCEPTED','COMPLETED','EXPIRED') not null default 'PENDING', 
     type enum('LIVE','ADVISE') not null default 'ADVISE',
-    payment_txn_id varchar(50) 
+    payment_txn_id varchar(50),
+    meeting_id int(10)
 );
 
 create table consultation_schedule (
@@ -180,8 +182,10 @@ create table payment (
 create table donation (
     org_id int(10),
     txn_id varchar(50) primary key,
-    message varchar(200),
-    subscription_id int(10) 
+    name varchar(50),
+    email varchar(50),
+    receipt boolean,
+    subscription_id int(10)
 );
 
 create table sponsorship_tier(
@@ -274,6 +278,16 @@ create table adoption_request (
     childsafety varchar(100) ,
     primary key(animal_id, user_id)
 );
+
+create table notifications (
+    notif_id int(10),
+    content varchar (200),
+    receiver_id int(10),
+    type enum("SMS","EMAIL")
+);
+
+alter table notifications
+add foreign key(receiver_id) references user(user_id);
 
 alter table adoption_request
 add foreign key(org_id) references organization(org_id),
