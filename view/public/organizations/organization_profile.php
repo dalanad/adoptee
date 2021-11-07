@@ -1,11 +1,12 @@
 <?php require __DIR__ . "/../../_layout/header.php"; ?>
 
 <style>
-    .logo{
-        height:6.1rem;
-        width:6.1rem;
+    .logo {
+        height: 6.1rem;
+        width: 6.1rem;
         border-radius: 8px;
     }
+
     .profile-links {
         display: flex;
     }
@@ -31,11 +32,19 @@
         background: var(--gray-1);
         font-weight: 500;
     }
+
+    .fa-star {
+        color: var(--gray-3);
+    }
+
+    .checked {
+        color: orange;
+    }
 </style>
 <div class="container" style="max-width: 900px;">
     <div style="display:flex;margin: 1em;align-items:center">
         <div class="placeholder-box mr1" style=" height: 100px; width:100px; ">
-            <?php foreach ($details as $key => $value) { ?> <img class="logo" src= "<?= $value['logo'] ?>"> <?php } ?>
+            <?php foreach ($details as $key => $value) { ?> <img class="logo" src="<?= $value['logo'] ?>"> <?php } ?>
         </div>
         <div class="flex-auto">
             <div style="font-weight:500;font-size:1.5rem;"><?php foreach ($details as $key => $value) {
@@ -44,6 +53,13 @@
             <div style="font-size:medium;"><?php foreach ($details as $key => $value) {
                                                 print_r($value['tagline']);
                                             } ?></div>
+            <div style="font-size: .9rem; margin-top:.3rem; margin-bottom:1rem;">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="far fa-star"></span>
+                <span class="far fa-star"></span>
+            </div>
         </div>
         <div>
             <a class='btn green' href='/Organization/view_donation_page?org_id=<?= $_GET['org_id'] ?>' style='margin-left :20px;'>Donate</a>
