@@ -35,6 +35,16 @@
         display: flex;
         flex-direction: row
     }
+
+    .fa-check-circle {
+        color: var(--green);
+    }
+
+    .success {
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
 </style>
 
 <div class="title-text">
@@ -68,6 +78,17 @@
         <form action="/Merchandise/cart" href="?step=2" method="post" class="flex-auto mx2 form-box">
             <div style="display:block;">
                 <table class="table">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Item name</th>
+                        <th></th>
+                        <th></th>
+                        <th>Unit Price</th>
+                        <th>Amount</th>
+                        <th></th>
+                    </tr>
                     <?php for ($i = 0; $i < 3; $i++) { ?>
                         <tr>
                             <td rowspan="2" colspan="3"><img src="../../assets/images/org/<?= $items[$i] ?>"></td>
@@ -111,29 +132,74 @@
     </div>
 
 <?php } elseif ($step == 2) { ?>
-    <div class="container">
+    <div class="container" style="display:flex;">
         <form action="/Merchandise/pay" method="post" class="flex-auto mx2 form-box" style="padding:2rem;">
 
             <div class="field shipping-details">
                 <label for="total" class="shipping">Total Amount: &nbsp</label>
                 <div id="total" style="width:50%">Rs. 2,375.00</div>
             </div>
-            <div class="field shipping-details">
-                <label for="address" class="shipping">Delivery Address: &nbsp</label>
-                <input type="text" name="address" value="<?= $_SESSION['user']['address'] ?>" class="ctrl" id="address" style="width:50%">
+            <div style="display:flex;margin-top:1rem;">
+                <div class="field mr2">
+                    <label for="fname" class="">First Name: &nbsp</label>
+                    <input type="text" name="fname" class="ctrl" id="fname" required>
+                </div>
+                <div class="field mr2">
+                    <label for="lname" class="">Last Name: &nbsp</label>
+                    <input type="text" name="lname" class="ctrl" id="lname" required>
+                </div>
+                <div class="field">
+                    <label for="address" class="">Address: &nbsp</label>
+                    <input type="text" name="address" value="<?= $_SESSION['user']['address'] ?>" class="ctrl" id="address" style="width:25rem" required>
+                </div>
             </div>
-
+            <div style="display:flex;margin-top:1rem;">
+                <div class="field mr2">
+                    <label for="city" class="">City: &nbsp</label>
+                    <input type="text" name="city" class="ctrl" id="city" required>
+                </div>
+                <div class="field ">
+                    <label for="postalcode" class="">Postal Code: &nbsp</label>
+                    <input type="text" name="postalcode" class="ctrl" id="postalcode" required>
+                </div>
+            </div>
             <button type="submit" class="btn green m2" style="float:right">Continue to Payment</button>
-            <button class="btn btn-link m2 bold"><i class="fas fa-arrow-left" onclick="history.back()"></i>&nbspBack</button>
+            <div class="btn btn-link"><i class="fas fa-arrow-left"></i><a class="btn btn-link m2 bold" href="/Merchandise/cart?step=1">Back</a></div>
         </form>
+        <div style="display:block;">
+            <div class="flex-auto mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem;padding:1rem;">
+                <div class="bold mb2">Order Summary</div>
+                <table>
+                    <tr>
+                        <td>Price</td>
+                        <td class="bold">Rs. 2250.00</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping</td>
+                        <td>Rs. 125</td>
+                    </tr>
+                    <tr>
+                        <td>Total Price</td>
+                        <td class="bold">Rs. 2375</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 <?php } elseif ($step == 4) { ?>
     <div class="container">
-        <div>
-            <div class="field shipping-details">
-                <label for="total" class="shipping">Approximate time for delivery:</label>
-                <div id="total" style="width:50%">4-5 working days from date of purchase</div>
-            </div>
+        <div class="field success">
+            </br>
+            <i class="fas fa-check-circle fa-5x mb2"></i>
+            <h2>Your order has been placed successfully</h2>
+            </br></br>
+            <p style="color:var(--blue)" class="bold">Please check your email for a copy of the receipt</p>
+            </br>
+            <div>Approximate time for delivery: 4-5 working days</div>
+            </br>
+            <p>
+                <a class="btn btn-faded" style="color:(--primary)" href="/">Go to Home </a>
+            </p>
         </div>
     </div>
 <?php } ?>

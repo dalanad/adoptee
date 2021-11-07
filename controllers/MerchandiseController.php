@@ -20,7 +20,7 @@ class MerchandiseController extends Controller{
     public function pay()
     {
         //process purchase details
-        $payment_link = Pay::payment("Merchandise Purchase", 237500, "/Merchandise?step=4");
+        $payment_link = Pay::payment("Merchandise Purchase", 237500, "/Merchandise/cart?step=4", "/Merchandise/cart");
         $this->redirect($payment_link);
     }
 }

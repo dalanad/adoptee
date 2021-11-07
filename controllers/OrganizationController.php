@@ -84,7 +84,7 @@ class OrganizationController extends Controller
     {
         $_SESSION['donation_org_id'] = $_POST['org_id'];
         $amount = $_POST['amount']*100;        
-        $payment_link = Pay::payment("Donation", $amount, "/Organization/success");
+        $payment_link = Pay::payment("Donation", $amount, "/Organization/success", "/Organization/view_donation_page");
 
         $org= new OrganizationController;
         $org->redirect($payment_link);

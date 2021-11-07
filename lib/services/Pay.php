@@ -2,7 +2,7 @@
 
 class Pay
 {
-    public static function payment($reason, $amount, $success)
+    public static function payment($reason, $amount, $success, $cancel)
     {
         require __DIR__ . "/../vendor/stripe-php-7.97.0/init.php";
         \Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
@@ -28,7 +28,7 @@ class Pay
             ],
             'mode' => 'payment',
             'success_url' => Config::get('domain') . "$success?session_id={CHECKOUT_SESSION_ID}",
-            'cancel_url' => Config::get('domain') . '/Consultation',
+            'cancel_url' => Config::get('domain') . $cancel,
         ]);
 
         return $checkout_session->url;
