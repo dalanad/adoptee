@@ -118,11 +118,11 @@ VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
  ('2021-10-30', '11:00:00', '5', '1', '4', 'ACCEPTED', 'LIVE', NULL),
  ('2021-11-04', '12:00:00', '4', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
  ('2021-11-07', '13:00:00', '1', '1', '3', 'ACCEPTED', 'LIVE', NULL),
- ('2021-11-10', '09:00:00', '2', '1', '2', 'COMPLETED', 'ADVISE', NULL),
- ('2021-11-13', '09:30:00', '2', '1', '2', 'COMPLETED', 'LIVE', NULL),
- ('2021-11-14', '10:00:00', '5', '1', '2', 'COMPLETED', 'ADVISE', NULL),
- ('2021-11-14', '12:00:00', '6', '1', '4', 'COMPLETED', 'ADVISE', NULL),
- ('2021-11-16', '13:00:00', '7', '1', '3', 'COMPLETED', 'ADVISE', NULL)
+ ('2021-11-08', '09:00:00', '2', '1', '2', 'COMPLETED', 'ADVISE', NULL),
+ ('2021-11-08', '09:30:00', '2', '1', '2', 'COMPLETED', 'LIVE', NULL),
+ ('2021-11-03', '10:00:00', '5', '1', '2', 'COMPLETED', 'ADVISE', NULL),
+ ('2021-11-02', '12:00:00', '6', '1', '4', 'COMPLETED', 'ADVISE', NULL),
+ ('2021-11-01', '13:00:00', '7', '1', '3', 'COMPLETED', 'ADVISE', NULL)
  ;
 
 
@@ -146,7 +146,8 @@ VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
 INSERT INTO `consultation_message` (`consultation_id`,  `created_at`, `sender`, `message`) 
 VALUES ('3', CURRENT_TIMESTAMP,   '1', 'testestset'), ('3', '2021-09-13 00:00:00',  '3', 'Hello 1234567'), 
 ('6', CURRENT_TIMESTAMP,   '1', 'Home treatment advised'), ('2', '2021-09-13 00:00:00',  '1', 'Advised to take prescribed medicine'), 
-('5', CURRENT_TIMESTAMP,   '1', 'Prescription given');
+('5', CURRENT_TIMESTAMP,   '1', 'Prescription given'),('11',CURRENT_TIMESTAMP, '1','Home treatment advised'),
+('13',CURRENT_TIMESTAMP,   '1', 'Prescription given');
 
 INSERT INTO `org_merch_item` (`org_id`, `name`, `sku`, `price`, `stock`, `photos`) VALUES 
 (1, 'T-Shirt', '1-1', 1000.00, 30, '/assets/images/org/tshirt.png'),

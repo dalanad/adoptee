@@ -96,20 +96,30 @@
     .vax {
         display: flex;
         height: 2rem;
-        margin-bottom:0.2rem;
+        margin-bottom: 0.2rem;
     }
 
-    .vax>label{
-        width:12rem;
+    .vax>label {
+        width: 12rem;
     }
 
     input[type="date"] {
         width: 11rem;
     }
 
-    .fa-trash{
-        color:red;
+    .fa-trash {
+        color: red;
     }
+
+    th{
+        color:var(--green);
+    }
+
+    caption{
+        color:deeppink;
+        font: bold;
+    }
+
 </style>
 
 <h3 style="margin-left:1rem;">My Pets</h3>
@@ -268,6 +278,7 @@ foreach ($petdata as $key => $value) { ?>
                                                 <div style="text-align:center;font-size:medium;">No consultation history to show</div>
                                             <?php } else { ?>
                                                 <table class="table">
+                                                    <caption>CONSULTATION HISTORY</caption>
                                                     <tr>
                                                         <th>Date</th>
                                                         <th>Time</th>
@@ -283,6 +294,25 @@ foreach ($petdata as $key => $value) { ?>
                                                     <?php } ?>
                                                 </table>
                                             <?php } ?>
+                                            </br></br>
+                                            <table class="table">
+                                                <caption>GENERAL</caption> <!--not taken from database-->
+                                                <tr>
+                                                    <th>Anti Rabies Vaccination</th>
+                                                    <th>Deworming</th>
+                                                    <th>DHL Vaccination</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>2020-06-28</td>
+                                                    <td>2020-08-14</td>
+                                                    <td>2020-12-23</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2021-06-03</td>
+                                                    <td>2021-02-10</td>
+                                                    <td></td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                 </td>
@@ -291,7 +321,17 @@ foreach ($petdata as $key => $value) { ?>
                     </td>
                 </tr>
             </table>
-            <div class="btn btn-link" title="Remove Pet"><i class="far fa-trash"></i></div>
+            <div onclick="showModel('popupModal-delete')" class="btn btn-link" title="Remove Pet"><i class="far fa-trash"></i></div>
+            <div id="popupModal-delete" class="modal">
+                <div class="modal-content" style="width:20rem;text-align:center;">
+                    <span class="close" onclick="hideModel('popupModal-delete')">&times;</span>
+                    <h3>Are you sure you want to remove this pet from your pets list?</h3>
+                    <div style="display:flex;justify-content:center;">
+                        <button class="btn btn-faded red mr2" onclick="hideModel('popupModal-delete')">Remove Pet</button>
+                        <button class="btn btn-faded blue" onclick="hideModel('popupModal-delete')">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 <?php } ?>

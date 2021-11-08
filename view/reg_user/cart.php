@@ -45,6 +45,47 @@
         flex-direction: column;
         justify-content: center;
     }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        box-shadow: var(--shadow);
+        border-radius: 0.5rem;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        position: fixed;
+        top: 40%;
+        left: 31%;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>
 
 <div class="title-text">
@@ -97,7 +138,17 @@
                             <td></td>
                             <td class="bold">Rs. 750</td>
                             <td><input type="number" class="ctrl" style="max-width:3rem;" value=1 min=0></td>
-                            <td><i class="fa fa-trash"></i></td>
+                            <td><div onclick="showModel('popupModalDelete')" title="Remove Item" class="btn btn-link btn-icon"><i class="fa fa-trash"></i></div></td>
+                            <div id="popupModalDelete" class="modal">
+                                <div class="modal-content" style="width:20rem;text-align:center;">
+                                    <span class="close" onclick="hideModel('popupModalDelete')">&times;</span>
+                                    <h3>Are you sure you want to remove this item from your cart?</h3>
+                                    <div style="display:flex;justify-content:center;">
+                                        <button class="btn btn-faded red mr2" onclick="hideModel('popupModalDelete')">Remove Item</button>
+                                        <button class="btn btn-faded blue" onclick="hideModel('popupModalDelete')">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
                         </tr>
                         <tr>
                             <td colspan="3" style="font-size:small;">Pet Haven</td>
@@ -203,3 +254,24 @@
         </div>
     </div>
 <?php } ?>
+
+<script>
+    function showModel(id) {
+        document.getElementById(id).classList.add("shown")
+        document.getElementById(id).style.display = "block";
+        document.getElementById(id).onclick = function(event) {
+            if (event.target.classList.contains('modal') && !event.target.classList.contains('modal-content')) {
+                let model = document.querySelector('.modal.shown');
+                model.style.display = "none"
+                model.classList.remove("shown")
+                document.getElementById(id).onclick = null
+            }
+        }
+    }
+
+    function hideModel(id) {
+        document.getElementById(id).classList.remove("shown")
+        document.getElementById(id).style.display = "none";
+        document.getElementById(id).onclick = null
+    }
+</script>
