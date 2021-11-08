@@ -291,6 +291,9 @@ create table notifications (
 alter table notifications
 add foreign key(user_id) references user(user_id);
 
+alter table consultation_schedule
+add foreign key(doctor_user_id) references user(user_id);
+
 alter table adoption_request
 add foreign key(org_id) references organization(org_id),
 add foreign key(animal_id) references animal(animal_id),
