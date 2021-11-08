@@ -157,7 +157,7 @@ if (!isset($_GET["view"])) {
                 }
 
                 ${ (con.status == "ACCEPTED"/*  && date == (new Date()).toISOString().substr(0,10) */ )?
-                    `<a class="btn pink" href="/doctor/consult_conference/${con.consultation_id}">
+                    `<a class="btn btn-faded pink" href="/doctor/consult_conference/${con.consultation_id}">
                         <i class="fa fa-video"></i> &nbsp; Consult
                     </a>`
                     : ``
