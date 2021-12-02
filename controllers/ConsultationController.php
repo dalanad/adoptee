@@ -70,23 +70,24 @@ class ConsultationController extends Controller
     public function create_request()
     {
         if (isset($_SESSION['pet_name'])) {
-            Consultation::bookConsultationNewPet($_SESSION['doctor'], $_SESSION['user']['user_id'], $_SESSION['consultation_type'], $_SESSION['date'], $_SESSION['time'], $_SESSION['pet_name'], $_SESSION['gender'], $_SESSION['animal_type'], $_SESSION['dob']);
+            $record = Consultation::bookConsultationNewPet($_SESSION['doctor'], $_SESSION['user']['user_id'], $_SESSION['consultation_type'], $_SESSION['date'], $_SESSION['time'], $_SESSION['pet_name'], $_SESSION['gender'], $_SESSION['animal_type'], $_SESSION['dob']);
             unset($_SESSION['pet_name'], $_SESSION['gender'], $_SESSION['animal_type'], $_SESSION['dob']);
         } else {
-            Consultation::bookConsultationPet($_SESSION['doctor'], $_SESSION['user']['user_id'], $_SESSION['consultation_type'], $_SESSION['date'], $_SESSION['time'], $_SESSION['existing_pet']);
+            $record = Consultation::bookConsultationPet($_SESSION['doctor'], $_SESSION['user']['user_id'], $_SESSION['consultation_type'], $_SESSION['date'], $_SESSION['time'], $_SESSION['existing_pet']);
             unset($_SESSION['existing_pet']);
         }
         unset($_SESSION['doctor'], $_SESSION['consultation_type'], $_SESSION['date'], $_SESSION['time']);
 
         $payment_link = Pay::payment("Doctor Consultation", 100000, "/Consultation/success", "/Consultation/index");//set charge by type
-        $this->redirect($payment_link);
+        // $this->redirect($payment_link);
+        View::render($payment_link);
     }
 
     public function success()
     {
 
         $this->redirect("/profile/consultations");
-        die();
+        // die();
 
         require __DIR__ . "/../lib/vendor/stripe-php-7.97.0/init.php";
         \Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
@@ -95,6 +96,8 @@ class ConsultationController extends Controller
 
         echo "<pre>";
         echo json_encode($session, JSON_PRETTY_PRINT);
+
+        Consultation::recordPayment($session);
     }
 
     public function complete() {

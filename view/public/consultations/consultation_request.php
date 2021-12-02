@@ -134,6 +134,9 @@
                 <?php }
                 } ?>
               </div>
+              <?php if (empty($slots)) { ?>
+                  <p>All time slots for this date are fully booked</p>
+                <?php } ?>
             </div>
           </div>
         </div>
@@ -142,11 +145,14 @@
         </div>
       </form>
 
-    <?php } else if ($step == 2) { isset($_POST['step'])?>
+    <?php } else if ($step == 2) {
+      isset($_POST['step']) ?>
 
       <form action='/Consultation' href="?step=3" method='POST'>
         <div style="display: grid;grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));grid-gap:3rem;margin-top:1rem">
-          <div class="field" id="old_pet">
+        
+        <!-- Choose an existing pet -->
+        <div class="field" id="old_pet">
             <label>Your Pets</label>
             <div class="radio-box" style="display: grid;">
               <?php foreach ($pets as $pet) { ?>
@@ -168,13 +174,15 @@
               <?php } ?>
             </div>
           </div>
+
+          <!-- Add new pet -->
           <div id="new_pet">
             <h4 style="margin:0;margin-bottom:.5rem">A New Pet</h4>
             <div style="display: grid;grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); grid-column-gap:1rem">
               <div class="field">
                 <label>Name </label>
                 <input class="ctrl" type="text" href="?step=2" name="name" style="max-width: 200px;" <?php if (isset($_SESSION['pet_name'])) { ?>value=<?= $_SESSION['pet_name'];
-                                                                                                                                      } ?> onchange="hidePets()">
+                                                                                                                                                      } ?> onchange="hidePets()">
                 <!--required-->
               </div>
               <div class="field">
@@ -226,10 +234,6 @@
         <h3>Confirmation & Payment</h3>
         <table class="table">
           <tr>
-            <td>Amount:</td>
-            <td>Rs. 1200.00</td>
-          </tr>
-          <tr>
             <td>Doctor:</td>
             <td><?= $doc[0]['name'] ?></td>
           </tr>
@@ -261,6 +265,10 @@
             <td>Date of Birth:</td>
             <td><?= $_SESSION['dob'] ?></td>
           </tr>
+          <tr>
+            <td>Doctor's Fee:</td>
+            <td>Rs. <?= $_SESSION['consultation_type']=="live"? $doc[0]["live_charge"]:$doc[0]["advise_charge"]?>.00</td>
+          </tr>
         </table>
         <div style="display:flex;justify-content:space-between;margin:2rem;">
           <a class="btn btn-faded pink" href="?step=2">Back</a>
@@ -281,25 +289,33 @@
   function hideNewPet() {
     var fields = document.getElementById('new_pet').querySelectorAll('input');
     fields.forEach(function(fields) {
-      if(fields.type == 'text'){fields.value = '';}
-      else{fields.checked = 'false';}
+      if (fields.type == 'text') {
+        fields.value = '';
+      } else {
+        fields.checked = 'false';
+      }
       fields.disabled = true;
     });
   }
 
-  function hidePets()
-  {
+  function hidePets() {
     var pets = document.getElementsByName('existing_pet');
-    pets.forEach(function(pets){
+    pets.forEach(function(pets) {
       pets.checked = false;
       pets.disabled = true;
     });
   }
 
-  function displayTimes()
-  {
-    
+  function displayTimes(_this) {
+    // times=document.getElementById('time');
+    // date=document.getElementById("date");
+    // if(_this.value=='live'){
+    //   date.disabled=true;
+    // } else{
+    //   date.disabled=false;
+    // }
   }
+
   // var dis1 = document.getElementById("dis_rm");
   // dis1.onchange = function() {
   //   if (this.value != "" || this.value.length > 0) {
