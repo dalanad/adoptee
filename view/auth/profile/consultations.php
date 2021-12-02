@@ -19,10 +19,12 @@
                 <td><span class="tag <?= $value['type'] == 'ADVISE' ? "green" : "orange" ?>"><?= $value['type'] ?></span></td>
                 <td><?= $value['status'] ?></td>
                 <td style="text-align: center;">
-                    <?php if ($value['type'] == 'LIVE') { ?>
-                        <a class="btn outline" href="<?= $value['status'] == 'ACCEPTED' ? "/Consultation/consult_live/" : "" ?><?= $value["consultation_id"] ?>"><i class="far fa-webcam"></i>&nbsp;Consult </a>
-                    <?php } else { ?>
-                        <a class="btn outline" href="<?= $value['status'] == 'ACCEPTED' ? "/Consultation/consult_advise/" : "" ?><?= $value["consultation_id"] ?>"><i class="far fa-comments"></i> &nbsp; Chat</a>
+                    <?php if ($value['status'] == 'ACCEPTED') {
+                        if ($value['type'] == 'LIVE') { ?>
+                            <a class="btn outline" href="/Consultation/consult_live/<?= $value["consultation_id"] ?>"><i class="far fa-webcam"></i>&nbsp;Consult </a>
+                        <?php } else { ?>
+                            <a class="btn outline" href="/Consultation/consult_advise/<?= $value["consultation_id"] ?>"><i class="far fa-comments"></i> &nbsp; Chat</a>
+                        <?php } ?>
                     <?php } ?>
                 </td>
             </tr>

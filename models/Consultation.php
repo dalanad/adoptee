@@ -6,7 +6,8 @@ class Consultation extends BaseModel
     {
         $query = "INSERT INTO `consultation` (`consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
         VALUES ('$date', '$time', '$animalId', '$doctorId', '$userId', 'PENDING', '$type', NULL);";
-        return self::insert($query);
+        self::insert($query);
+        return self::lastInsertId(); //to insert the txn_id into consultation table later
     }
 
     public static function bookConsultationNewPet($doctorId, $userId, $type, $date, $time,  $name, $gender, $animal_type, $dob)
@@ -15,6 +16,19 @@ class Consultation extends BaseModel
         self::insert($query);
         $animalId = self::lastInsertId();
         return self::bookConsultationPet($doctorId, $userId, $type, $date, $time, $animalId);
+    }
+
+    public static function recordPayment($session)
+    {
+        //insert into payment table
+        $id = $session['id'];
+        $amount = $session['amount'];
+        $query = "INSERT INTO `payment`(txn_id,amount,txn_date) VALUES('$id', $amount, CURDATE());";        
+        self::insert($query);
+
+        //insert into consultation table??
+        $query = "INSERT INTO `consultation`(payment_txn_id) VALUES($id) WHERE ;";
+        self::insert($query);
     }
 
     public static function getBookingsCalender($doctorId, $start_date, $end_date)
