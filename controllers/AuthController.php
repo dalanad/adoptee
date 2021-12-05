@@ -139,13 +139,19 @@ class AuthController extends Controller
 
     function change_password()
     {
-        $user = $_SESSION['user'];print_r($_POST);
+        $user = $_SESSION['user'];
         if (Crypto::verify($_POST['current'], $user["password"])) {
 
             if (User::matchPasswords($_POST['new'], $_POST['confirm'])) {
                 User::changePassword($user['email'], $_POST['new']);
-                $this->redirect("/auth/change_password");
+                $this->redirect("/profile/change_password?successful=true");
             }
+            else{
+                $this->redirect("/profile/change_password?error=nomatch");
+            }
+        }
+        else{
+            $this->redirect("/profile/change_password?error=wrongpassword");
         }
     }
 
@@ -180,6 +186,8 @@ class AuthController extends Controller
         if (User::matchPasswords($_POST['pass1'], $_POST['pass2'])) {
             User::changePassword($user["email"], $_POST['pass1']);
             $this->redirect("/auth/sign_in");
+        } else {
+            $this->redirect("/auth/set_password?error=true");
         }
     }
 

@@ -16,6 +16,7 @@
             <a class="link" href="/Consultation">Veterinary Consultations</a>
         </nav>
         <?= notif_btn() ?>
+        <?= cart_btn() ?>
         <?= user_btn() ?>
         <button class="btn btn-link more-btn black" onclick="document.querySelector('.main-nav').classList.toggle('shown')">
             <i class="fa fa-bars"></i>

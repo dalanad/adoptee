@@ -86,6 +86,16 @@
         text-decoration: none;
         cursor: pointer;
     }
+
+    @keyframes zoom-in {
+        50%{
+            transform: scale(1.3, 1.3);
+        }
+    }
+
+    .fa-check-circle {
+        animation: zoom-in 1s;
+    }
 </style>
 
 <div class="title-text">
@@ -137,8 +147,10 @@
                             <td></td>
                             <td></td>
                             <td class="bold">Rs. 750</td>
-                            <td><input type="number" class="ctrl" style="max-width:3rem;" value=1 min=0></td>
-                            <td><div onclick="showModel('popupModalDelete')" title="Remove Item" class="btn btn-link btn-icon"><i class="fa fa-trash"></i></div></td>
+                            <td><input type="number" class="ctrl" style="max-width:3rem;" step=1 value=1 min=0 max=5></td> <!--adjust max to stock-->
+                            <td>
+                                <div onclick="showModel('popupModalDelete')" title="Remove Item" class="btn btn-link btn-icon"><i class="fa fa-trash"></i></div>
+                            </td>
                             <div id="popupModalDelete" class="modal">
                                 <div class="modal-content" style="width:20rem;text-align:center;">
                                     <span class="close" onclick="hideModel('popupModalDelete')">&times;</span>

@@ -18,8 +18,8 @@
                 <div>
                     <div class="field">
                         <label>New Password</label>
-                        <input class="ctrl" type="password" name="pass1">
-                        <span class="field-msg"></span>
+                        <input class="ctrl" type="password" name="pass1" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$" required>
+                        <small class="field-hint">Include upper & lower case letters,<br> numbers and special characters </small>
                     </div>
 
                     <div class="field">
@@ -29,7 +29,13 @@
                     </div>
                 </div>
 
-                <div class="field center mt1"><button class="btn">Change Pasword</btn>
+                <?php if(isset($_GET["error"])) { ?>
+                    <div style="color:red;font-weight:bold;size:1rem;text-align:center;">
+                        Passwords do not match
+                    </div>
+                <?php } ?>
+
+                <div class="field center mt1"><button class="btn">Change Password</btn>
                 </div>
 
             </form>
