@@ -38,6 +38,7 @@
         var mapProp = {
             center: new google.maps.LatLng(6.9038086, 79.9110850),
             zoom: 12,
+            mapId: '3343eee879d42b9f'
         };
         map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 

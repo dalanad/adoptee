@@ -11,9 +11,8 @@ function user_btn()
             (isset($_SESSION['org']) ? ("<br><div> <small style='font-weight: 300;'>" . $_SESSION['org']['name'] . "</small></div>") : "") .
             "</div>
              <div class='dropdown-content'>
-                <a class='btn black btn-link' href='/profile/user_profile'><i class='fa fa-user'></i>&nbsp; Profile</a>"
-            . ($_SESSION['user_role'] == "reg_user" ? "<a class='btn black btn-link' href='/merchandise/cart'> <i class='fas fa-shopping-cart'></i></i>&nbsp; Cart</a>" : "") .
-            "<a class='btn black btn-link' href='/main/faq'> <i class='fa fa-question'></i>&nbsp; Help</a>
+                <a class='btn black btn-link' href='/profile/user_profile'><i class='fa fa-user'></i>&nbsp; Profile</a>
+                <a class='btn black btn-link' href='/main/faq'> <i class='fa fa-question'></i>&nbsp; Help</a>
                 <a class='btn black btn-link' href='/auth/sign_out'> <i class='fa fa-sign-out'></i>&nbsp; Sign Out</a>
             </div>
         </div>";
@@ -36,6 +35,16 @@ function notif_btn()
                 <div class='m2' style='font-size:small;'>Your pet Tina needs to be vaccinated by 10-10-2021</div></div>
             </div>
         </div>";
+    }
+}
+
+function cart_btn()
+{
+    if (isset($_SESSION['user'])) {
+        echo
+        "<a class='btn black btn-link' href='/merchandise/cart'>
+            <i class='far fa-shopping-cart'></i></i>&nbsp; Cart
+        </a>";
     }
 }
 
