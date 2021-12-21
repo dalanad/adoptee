@@ -144,7 +144,7 @@ VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
 (5, 6, '19:30:00', 1000),(5, 6, '20:00:00', 1000),(5, 6, '20:30:00', 1000);
 
 INSERT INTO `consultation_message` (`consultation_id`,  `created_at`, `sender`, `message`) 
-VALUES ('3', CURRENT_TIMESTAMP,   '1', 'testestset'), ('3', '2021-09-13 00:00:00',  '3', 'Hello 1234567'), 
+VALUES ('3', CURRENT_TIMESTAMP,   '1', 'How about the water intake ?'), ('3', '2021-09-13 00:00:00',  '3', 'My pet have not eaten much in the recent days'), 
 ('6', CURRENT_TIMESTAMP,   '1', 'Home treatment advised'), ('2', '2021-09-13 00:00:00',  '1', 'Advised to take prescribed medicine'), 
 ('5', CURRENT_TIMESTAMP,   '1', 'Prescription given'),('11',CURRENT_TIMESTAMP, '1','Home treatment advised'),
 ('13',CURRENT_TIMESTAMP,   '1', 'Prescription given');
