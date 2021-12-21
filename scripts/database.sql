@@ -281,11 +281,26 @@ create table adoption_request (
 );
 
 create table notifications (
-    notif_id int(10),
+    notif_id int(10) AUTO_INCREMENT primary key,
     user_id int(10),
     created_at timestamp default CURRENT_TIMESTAMP,
-    message varchar(100),
-    type enum("SMS","EMAIL")
+    message varchar(500),
+    type enum("SMS","EMAIL","NOTIFICATION") default 'NOTIFICATION',
+    sent boolean default false -- whether the sms or email is sent
+);
+
+create table vaccines (
+    vacine_id int(10) AUTO_INCREMENT primary key,
+    name varchar(50) not null,
+    type enum("ONE-TIME","RECURRING") not null default "RECURRING",
+    inter int(5)   
+);
+
+create table animal_vaccinations (
+    animal_id int(10),
+    vacine_id int(10),
+    given_date date,
+    primary key(animal_id, vacine_id, given_date)
 );
 
 alter table notifications
