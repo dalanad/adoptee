@@ -23,7 +23,7 @@ class Consultation extends BaseModel
         //insert into payment table
         $id = $session['id'];
         $amount = $session['amount'];
-        $query = "INSERT INTO `payment`(txn_id,amount,txn_date) VALUES('$id', $amount, CURDATE());";        
+        $query = "INSERT INTO `payment`(txn_id,amount,txn_date) VALUES('$id', $amount, CURDATE());";
         self::insert($query);
 
         //insert into consultation table??
@@ -67,11 +67,18 @@ class Consultation extends BaseModel
         return $consultations[0];
     }
 
-    public static function findConsultationsByDoctorId($doctorId)
+    public static function findConsultationsByDoctorId($doctorId, $type, $search)
     {
 
-        $consultations = self::select("SELECT * FROM `consultation` WHERE doctor_user_id = :user_id and status in ('ACCEPTED','COMPLETED')", ["user_id" => $doctorId]);
+        $query =  "SELECT c.* FROM `consultation` c
+                    inner join animal a on a.animal_id = c.animal_id
+                    WHERE c.doctor_user_id = $doctorId
+                    and status in ('ACCEPTED','COMPLETED')"
+            . (isset($type) && $type != "ANY" ? " and c.type = '$type' " : "")
+            . (isset($search) && $search != "" ? " and a.name like '%$search%' " : "");
 
+        $consultations = self::select($query);
+        //print_r($query);
         $consultations = array_map(function ($item) {
             $item["animal"] =  Animal::getAnimalById($item["animal_id"]);
             $item["user"] =  User::findUserById($item["user_id"]);
