@@ -1,7 +1,17 @@
 <?php
 $active = "home";
 require_once  __DIR__ . '/_nav.php';
+
+$months = [];
+$dt = strtotime(date('Y-m-01'));
+for ($j = 0; $j <= 5; $j++) {
+    array_push($months, date("F", strtotime(" -$j month", $dt)));
+}
+
+$months = array_reverse($months);
+
 ?>
+
 <style>
 </style>
 <div class="hed">
@@ -18,47 +28,25 @@ require_once  __DIR__ . '/_nav.php';
         <script>
             Chart.defaults.font.family = "Roboto, sans-serif"
             Chart.defaults.color = '#000000'
-            const labels = [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-            ];
+            const labels = <?= json_encode($months) ?>;
             const data = {
                 labels: labels,
                 datasets: [{
                         label: 'Cats',
                         backgroundColor: '#ff829d',
                         borderColor: '#ff829d',
-                        data: Array.from({
-                            length: 6
-                        }, (_, i) => Math.round(Math.random() * 30))
+                        data: <?= json_encode($monthly["cats"]) ?>
                     },
                     {
                         label: 'Dogs',
                         backgroundColor: '#ffd778',
                         borderColor: '#ffd778',
-                        data: Array.from({
-                            length: 6
-                        }, (_, i) => Math.round(Math.random() * 30))
-                    },
-                    {
-                        label: 'Birds',
-                        backgroundColor: '#6fcdcd',
-                        borderColor: '#6fcdcd',
-                        data: Array.from({
-                            length: 6
-                        }, (_, i) => Math.round(Math.random() * 30))
-                    },
-                    {
+                        data: <?= json_encode($monthly["dogs"]) ?>
+                    }, {
                         label: 'Other',
                         backgroundColor: '#5eb5ef',
                         borderColor: '#5eb5ef',
-                        data: Array.from({
-                            length: 6
-                        }, (_, i) => Math.round(Math.random() * 30))
+                        data: <?= json_encode($monthly["other"]) ?>
                     }
                 ]
             };
@@ -76,7 +64,7 @@ require_once  __DIR__ . '/_nav.php';
                             text: 'By Animal Type'
                         }
                     },
-                    aspectRatio: 1.05   ,
+                    aspectRatio: 1.05,
                     responsive: true,
                     interaction: {
                         intersect: false,
@@ -101,7 +89,7 @@ require_once  __DIR__ . '/_nav.php';
                     type: 'line',
                     data: {
                         labels: Array.from({
-                            length: 30
+                            length: 31
                         }, (_, i) => {
                             let date = new Date()
                             date.setDate(date.getDate() - 30 + i)
@@ -110,18 +98,16 @@ require_once  __DIR__ . '/_nav.php';
                         datasets: [{
                                 label: 'Live Consultations',
                                 backgroundColor: '#5eb5ef',
-                                borderColor: '#5eb5ef', cubicInterpolationMode: 'monotone',
-                                data: Array.from({
-                                    length: 30
-                                }, (_, i) => Math.round(Math.random() * 8))
+                                borderColor: '#5eb5ef',
+                                cubicInterpolationMode: 'monotone',
+                                data: <?= json_encode($consultations["live"]) ?>
                             },
                             {
                                 label: 'Medical Advice',
                                 backgroundColor: '#ffd778',
-                                borderColor: '#ffd778', cubicInterpolationMode: 'monotone',
-                                data: Array.from({
-                                    length: 30
-                                }, (_, i) => Math.round(Math.random() * 12))
+                                borderColor: '#ffd778',
+                                cubicInterpolationMode: 'monotone',
+                                data: <?= json_encode($consultations["advise"]) ?>
                             },
                         ]
                     },

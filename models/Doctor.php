@@ -67,13 +67,13 @@ class Doctor extends BaseModel
         return self::update($query, $params);
     }
 
-    /** 
-     * Updates the doctors schedule with the given data 
-     * 
+    /**
+     * Updates the doctors schedule with the given data
+     *
      * @param int $doc_id user Id of the doctor
-     * @param array 
+     * @param array
      * @return boolean true if success
-     * 
+     *
      * */
     public static function updateSchedule(int $doc_id, array $schedule)
     {
@@ -93,12 +93,12 @@ class Doctor extends BaseModel
         }
     }
 
-    /** 
-     * Retrieves the doctors schedule with the given doctorId 
-     * 
+    /**
+     * Retrieves the doctors schedule with the given doctorId
+     *
      * @param int $doc_id user Id of the doctor
      * @return array containing the schedule
-     * 
+     *
      * */
     public static function getSchedule(int $doc_id)
     {
@@ -133,7 +133,6 @@ class Doctor extends BaseModel
 
     public static function getConsultedAnimals($doctorId, $filter)
     {
-
         $query = "SELECT SQL_CALC_FOUND_ROWS  c.*, u.name 'owner_name', a.*, ROUND( DATEDIFF(CURRENT_DATE, a.dob) / 365 ) 'age' FROM 
         ( SELECT DISTINCT animal_id, user_id, MAX(consultation.consultation_date) 'last_consultation' FROM consultation
          WHERE consultation.doctor_user_id = :doctor_id  and consultation.status='COMPLETED' GROUP BY consultation.animal_id, consultation.user_id ) c, 
@@ -174,5 +173,74 @@ class Doctor extends BaseModel
             "items" => self::select($query, ["doctor_id" => $doctorId]),
             "count" => self::selectOne("SELECT FOUND_ROWS() total ")["total"]
         ];
+    }
+
+    public static function MonthlyConsultationsByType()
+    {
+        $monthly = ["cats" => [], "dogs" => [], "other" => []];
+
+        $query = "SELECT
+            month(consultation_date) mon,
+            COUNT(IF(animal.TYPE = 'DOG', 1, NULL)) dogs,
+            COUNT(IF(animal.TYPE = 'CAT', 1, NULL)) cats,
+            COUNT(IF(animal.TYPE != 'CAT' and animal.type != 'DOG', 1, NULL)) other
+        FROM
+            consultation inner join animal on consultation.animal_id = animal.animal_id 
+        WHERE
+            consultation_date BETWEEN NOW() - INTERVAL 6 MONTH AND NOW()
+        GROUP BY
+            month(consultation_date) order by mon ";
+
+        $result = self::select($query);
+
+
+        $j = 0;
+
+        for ($i = 5; $i >= 0; $i--) {
+            $date = date("m", strtotime("-$i month"));
+
+            if ($date == $result[$j]["mon"]) {
+                array_push($monthly["cats"], $result[$j]["cats"]);
+                array_push($monthly["dogs"], $result[$j]["dogs"]);
+                array_push($monthly["other"], $result[$j]["other"]);
+                $j++;
+            } else {
+                array_push($monthly["cats"], 0);
+                array_push($monthly["dogs"], 0);
+                array_push($monthly["other"], 0);
+            }
+        }
+
+        return  $monthly;
+    }
+
+    public static function DailyConsultationsByMode()
+    {
+        $consultations = ["live" => [], "advise" => []];
+
+        $query = "SELECT  
+                    consultation_date, 
+                    COUNT(if(type='LIVE',1,null)) live, 
+                    COUNT(if(type='ADVISE',1,null)) advise
+                FROM consultation 
+                    WHERE consultation_date BETWEEN NOW() - INTERVAL 30 DAY AND NOW() 
+                GROUP BY consultation_date";
+
+        $result = self::select($query);
+
+        $j = 0;
+        for ($i = 30; $i >= 0; $i--) {
+            $date = date("Y-m-d", strtotime("-$i days"));
+            if ($date == $result[$j]["consultation_date"]) {
+                array_push($consultations["live"], $result[$j]["live"]);
+                array_push($consultations["advise"], $result[$j]["advise"]);
+                $j++;
+            } else {
+                array_push($consultations["live"], 0);
+                array_push($consultations["advise"], 0);
+            }
+        }
+
+        return  $consultations;
     }
 }
