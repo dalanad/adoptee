@@ -15,7 +15,10 @@ class DoctorController extends Controller
 
     function home()
     {
-        View::render("doctor/home");
+        View::render("doctor/home", [
+            "monthly" => Doctor::MonthlyConsultationsByType(),
+            "consultations" => Doctor::DailyConsultationsByMode(),
+        ]);
     }
 
     #region : Live Consultations 
