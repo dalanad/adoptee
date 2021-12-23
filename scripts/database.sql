@@ -72,7 +72,7 @@ create table animal_for_adoption (
     animal_id int(10) not null,
     description varchar(1000),
     date_listed date,
-    status enum('LISTED','ADOPTED') not null default 'LISTED',
+    status enum('LISTED','ADOPTED', 'DELETED') not null default 'LISTED',
     date_adopted date,
     dewormed boolean,
     org_id int(10),
@@ -91,6 +91,7 @@ create table animal_vaccines (
     dhl_booster date,
     parvo_booster date,
     tricat_booster date,
+    vacc_proof JSON,
     primary key(animal_id)
 );
 

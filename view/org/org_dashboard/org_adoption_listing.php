@@ -111,6 +111,7 @@
                 <b>View :</b> &nbsp;
                 <input class="ctrl-radio" type="radio" onchange="" name="status" value="Listed" /> Listed
                 <input class="ctrl-radio" type="radio" onchange="" name="status" value="Adopted" /> Adopted
+                <input class="ctrl-radio" type="radio" onchange="" name="status" value="Deleted" /> Deleted
                 <input class="ctrl-radio" type="radio" onchange="" name="status" value="Any" /> Any
             </div> &nbsp; | &nbsp;
             <div style="white-space: nowrap;">
@@ -133,7 +134,7 @@
     <div class="overflow-auto" style="height: 500px;">
         <table class="table">
             <tr>
-                <th>PET</th>
+                <th>animal</th>
                 <th>TYPE</th>
                 <th>AGE</th>
                 <th>DATE LISTED</th>
@@ -255,30 +256,36 @@
                                         </div>
 
                                         <div class="field ">
-                                            <label>Photo</label>
-                                            <div style="padding: 5px;"><img src="../../../assets\images\dogs/wounded2.jpg" style="width: 10%; height: 10%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder0.jpg" style="width: 10%; height: 10%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 10%; height: 10%; border-radius: 5%;"></div>&nbsp;
-
-                                            <span class="field-msg"> </span>
-                                        </div>
-                                        <br>
-
-                                        <button class='btn mr2' type='reset'>Discard Changes</button>
-                                        <button class='btn mr2' type="submit">Update</button>
-                                    </form>
-
+                                            <div class="preview" style="background-image: url(<?= $animal['photo'] ?>);"> </div>
+                                            <div class="thumbnails">
+                                                <div class="thumbnail" style="background-image: url(<?= $animal['photo'] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                                                <?php
+                                                $photos = explode(",", $animal['photos']);
+                                                for ($i = 0; $i < sizeof($photos); $i++) { ?>
+                                                    <div class="thumbnail" style="background-image: url(../../..<?= str_replace("[", "", str_replace("\"", "", str_replace(" ", "/", str_replace("]", "", $photos[$i])))) ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                                                <?php } ?>
+                                            </div>
+                                       
                                 </div>
+                                <br>
 
-                            </div>&nbsp;
-                            <div>
-                                <button onclick="showModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon red"><i class="fas fa-trash-alt"></i></button>
-                                <div id="popupModal-delete<?= $adoption_request["animal_id"] ?>" class="modal">
-                                    <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 50%">
-                                        <span class="close" onclick="hideModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')">&times;</span>
-                                        <h3 style="text-align: center;">Are you sure you want to delete record?</h3>
-                                        <a href="/OrgManagement/delete_animal?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
-                                        <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')">Cancel</a>
-                                    </div>
+                                <button class='btn mr2' type='reset'>Discard Changes</button>
+                                <button class='btn mr2' type="submit">Update</button>
+                                </form>
+
+                            </div>
+
+                        </div>&nbsp;
+                        <div>
+                            <button onclick="showModel('popupModal-delete<?= $animal["animal_id"] ?>')" class="btn btn-link btn-icon red"><i class="fas fa-trash-alt"></i></button>
+                            <div id="popupModal-delete<?= $animal["animal_id"] ?>" class="modal">
+                                <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 50%">
+                                    <span class="close" onclick="hideModel('popupModal-delete<?= $animal["animal_id"] ?>')">&times;</span>
+                                    <h3 style="text-align: center;">Are you sure you want to delete record?</h3>
+                                    <a href="/OrgManagement/delete_animal?animal_id=<?= $animal["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                    <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-delete<?= $animal["animal_id"] ?>')">Cancel</a>
                                 </div>
+                            </div>
                             <div>
                     </td>
                 </tr>
@@ -291,6 +298,12 @@
 <div style="margin-left: 1200px; padding-bottom: 0px"><a href="/OrgManagement/add_new_animal" class="btn right outline button-hover" style="width: 60px; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Animal"><i class="fas fa-plus"></i></a></div>
 
 <script>
+    function displayPreview(_this) {
+        var prev = document.getElementsByClassName('preview')[0];
+        var thumb = _this.style.backgroundImage;
+        prev.style.backgroundImage = thumb;
+    }
+    
     function showModel(id) {
         document.getElementById(id).classList.add("shown")
         document.getElementById(id).style.display = "block";

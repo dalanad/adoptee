@@ -2,14 +2,14 @@
 
 class OrgManagement extends BaseModel
 {
-    static function createNewAnimal($org_id, $name, $type, $other, $gender, $dob, $color, $description, $anti_rabies, $dhl, $parvo, $tricat, $anti_rabies_booster, $dhl_booster, $parvo_booster, $tricat_booster, $dewormed, $avatar_photo, $adoptee_photo)
+    static function createNewAnimal($org_id, $name, $type, $gender, $dob, $color, $description, $anti_rabies, $dhl, $parvo, $tricat, $anti_rabies_booster, $dhl_booster, $parvo_booster, $tricat_booster, $dewormed, $vacc_proof, $avatar_photo, $adoptee_photo)
     {
         $org_id = $_SESSION['org_id'];
 
  /*        if ($type == 'other') {
             $type = $other;
         } */
-        $type = ($type == 'other')? $other: $type;
+        /* $type = ($type == 'other')? $other: $type; */
         $color = json_encode($color);
 
         $query = " INSERT INTO `animal` (name, type, gender, color, dob, photo) VALUES ('$name', '$type', '$gender', '$color', '$dob', '$avatar_photo')";
@@ -17,8 +17,8 @@ class OrgManagement extends BaseModel
         BaseModel::insert($query);
         $animal_ID = BaseModel::lastInsertId();
 
-        $query = "INSERT INTO `animal_vaccines` (animal_id, anti_rabies, dhl, parvo, tricat, anti_rabies_booster, dhl_booster, parvo_booster, tricat_booster)
-                  VALUES ('$animal_ID', '$anti_rabies', '$dhl', '$parvo', '$tricat', '$anti_rabies_booster', '$dhl_booster', '$parvo_booster', '$tricat_booster')";
+        $query = "INSERT INTO `animal_vaccines` (animal_id, anti_rabies, dhl, parvo, tricat, anti_rabies_booster, dhl_booster, parvo_booster, tricat_booster, vacc_proof)
+                  VALUES ('$animal_ID', '$anti_rabies', '$dhl', '$parvo', '$tricat', '$anti_rabies_booster', '$dhl_booster', '$parvo_booster', '$tricat_booster', '$vacc_proof')";
         echo ($query);
         BaseModel::insert($query);
 
@@ -30,12 +30,12 @@ class OrgManagement extends BaseModel
     static function findAnimalsByOrgId()
     {
         $org_id = $_SESSION['org_id'];
-        $query = "SELECT animal.animal_id, name,type, other, color, FLOOR(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', gender,date_listed,status,date_adopted,description, animal.photo as avatar_photo from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id";
+        $query = "SELECT animal.animal_id, name,type, other, color, FLOOR(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', gender,date_listed,status,date_adopted,description, animal.photo as avatar_photo from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id and animal_for_adoption.status<>'DELETED'";
         return BaseModel::select($query);
     }
 
 
-    static function editAnimalData($status, $name, $type, $gender, $dob, $description, $photo)
+    static function editAnimalData($status, $name, $type, $gender, $dob, $description, $photos)
     {
 
         /*         $query = "INSERT INTO `animal_for_adoption` (photo)
@@ -55,7 +55,7 @@ class OrgManagement extends BaseModel
 
     static function delete_animal($animal_id)
     {
-        $query = "DELETE FROM animal_for_adoption WHERE animal_id='$animal_id'";
+        $query = "UPDATE `animal_for_adoption` SET status = 'DELETED' WHERE animal_id='$animal_id'";
 
         return BaseModel::insert($query);
     }
