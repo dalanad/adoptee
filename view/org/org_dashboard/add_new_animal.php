@@ -108,19 +108,10 @@
           <option selected='true' disabled='disabled'>Select</option>
           <option value='Dog'>Dog</option>
           <option value='Cat'>Cat</option>
-          <option value='Other'>Other</option>
         </select>
       </div>
     </div>
-    <div class="row">
-      <div class='column'>
-      </div>
-      <div class='field other box column'>
-        <label for='type'>Other</label>
-        <input class="ctrl" type="text" name="other" />
-      </div>
-    </div>
-
+    
     <div class="row">
       <div class='field column'>
         <label for='gender'>Gender</label>
@@ -167,7 +158,7 @@
                 <label for='anti_rabies'>Anti Rabies</label>
                 <div><input class="ctrl2" type="date" name="anti_rabies" max="" id="datefield"></div>
               </div>
-              <div style="margin: 0.5rem;">
+              <div class="Dog box" style="margin: 0.5rem;">
               <label for='dhl'>DHL</label>
               <div><input class="ctrl2" type="date" name="dhl" max="" id="datefield"></div>
               </div>
@@ -175,7 +166,7 @@
               <label for='parvo'>Parvo</label>
               <div><input class="ctrl2" type="date" name="parvo" max="" id="datefield"></div>
               </div>
-              <div style="margin: 0.5rem;">
+              <div  class="Cat box" style="margin: 0.5rem;">
               <label for='tricat'>Tricat</label>
               <div><input class="ctrl2" type="date" name="tricat" max="" id="datefield"></div>
               </div>
@@ -191,7 +182,7 @@
               <label for='anti_rabies_booster'>Anti Rabies Booster</label>
               <div><input class="ctrl2" type="date" name="anti_rabies_booster" max="" id="datefield"></div>
               </div>
-              <div style="margin: 0.5rem;">
+              <div  class="Dog box" style="margin: 0.5rem;">
               <label for='dhl_booster'>DHL Booster</label>
               <div><input class="ctrl2" type="date" name="dhl_booster" max="" id="datefield"></div>
               </div>
@@ -199,7 +190,7 @@
               <label for='parvo_booster'>Parvo Booster</label>
               <div><input class="ctrl2" type="date" name="parvo_booster" max="" id="datefield"></div>
               </div>
-              <div style="margin: 0.5rem;">
+              <div  class="Cat box" style="margin: 0.5rem;">
               <label for='tricat_booster'>Tricat Booster</label>
               <div><input class="ctrl2" type="date" name="tricat_booster" max="" id="datefield"></div>
               </div>
@@ -231,6 +222,20 @@
 
     <div class="row">
       <div class="field column">
+        <label>Upload Proof Documents of Vaccination</label>
+        <div class="ctrl-group">
+          <span class="ctrl static"><i class="fa fa-image"></i></span>
+          <input type="file" name="vacc_proof[]" class="ctrl" multiple accept="image/*" required>
+        </div>
+        <span class="field-msg">Upload a photo of the vaccination report / a letter from a medical official</span>
+      </div>
+      <div class="field column"">
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="field column">
         <label>Upload Photo for Avatar</label>
         <div class="ctrl-group">
           <span class="ctrl static"><i class="fa fa-image"></i></span>
@@ -245,7 +250,7 @@
           <span class="ctrl static"><i class="fa fa-images"></i></span>
           <input type="file" name="adoptee_photo[]" class="ctrl" multiple accept="image/*" required>
         </div>
-        <span class="field-msg">Upload a photos of the animal</span>
+        <span class="field-msg">Upload other photos of the animal</span>
       </div>
 
     </div>

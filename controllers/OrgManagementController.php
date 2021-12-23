@@ -28,16 +28,18 @@ class OrgManagementController extends Controller{
     }
 
     function process_add_new_animal(){
+        $vacc_proof =  image::multi("vacc_proof");
         $avatar_photo =  image::single("avatar_photo");
         $adoptee_photo =  image::multi("adoptee_photo");
+
         
-        OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['name'], $_POST['type'], $_POST['other'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['anti_rabies'], $_POST['dhl'], $_POST['parvo'], $_POST['tricat'], $_POST['anti_rabies_booster'], $_POST['dhl_booster'], $_POST['parvo_booster'], $_POST['tricat_booster'], $_POST['dewormed'], $avatar_photo, $adoptee_photo);
+        OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['name'], $_POST['type'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['anti_rabies'], $_POST['dhl'], $_POST['parvo'], $_POST['tricat'], $_POST['anti_rabies_booster'], $_POST['dhl_booster'], $_POST['parvo_booster'], $_POST['tricat_booster'], $_POST['dewormed'], $vacc_proof, $avatar_photo, $adoptee_photo);
         $this->redirect('/OrgManagement/org_adoption_listing');
 
     }  
 
     function edit_animal_for_adoption(){
-        if(isset($_POST['submit'])){OrgManagement::editAnimalData($_POST['status'], $_POST['name'], $_POST['type'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['descripion'], $_POST['photo']);}
+        if(isset($_POST['submit'])){OrgManagement::editAnimalData($_POST['status'], $_POST['name'], $_POST['type'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['descripion'], $_POST['photos']);}
     }
 
     function delete_animal(){
