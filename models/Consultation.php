@@ -21,13 +21,16 @@ class Consultation extends BaseModel
     public static function recordPayment($session)
     {
         //insert into payment table
+        $user = $_SESSION["user"]["user_id"];
         $id = $session['id'];
-        $amount = $session['amount'];
-        $query = "INSERT INTO `payment`(txn_id,amount,txn_date) VALUES('$id', $amount, CURDATE());";
+        $amount = $session['amount_total'] / 100;
+        $consultation_id = $session["client_reference_id"];
+
+        $query = "INSERT INTO `payment`(txn_id,amount,user) VALUES('$id', $amount, $user);";
         self::insert($query);
 
-        //insert into consultation table??
-        $query = "INSERT INTO `consultation`(payment_txn_id) VALUES($id) WHERE ;";
+        // update consultation table with the payment
+        $query = "UPDATE `consultation` set payment_txn_id = '$id' WHERE consultation_id = $consultation_id;";
         self::insert($query);
     }
 

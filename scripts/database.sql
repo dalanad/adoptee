@@ -116,7 +116,7 @@ create table consultation (
     user_id int(10),
     status enum('CANCELLED','PENDING','ACCEPTED','COMPLETED','EXPIRED') not null default 'PENDING', 
     type enum('LIVE','ADVISE') not null default 'ADVISE',
-    payment_txn_id varchar(50),
+    payment_txn_id varchar(100),
     doctor_rating int(5),
     meeting_id varchar(50) default '7ewh-ve15-16uf'
 );
@@ -176,9 +176,12 @@ create table medicine (
 );
 
 create table payment (
-    txn_id varchar(50) primary key,
+    txn_id varchar(100) primary key,
     amount float,
-    txn_date date 
+    txn_time timestamp default CURRENT_TIMESTAMP,
+    user int(10) not null,
+    status enum('PAID','REFUNDED') DEFAULT 'PAID',
+    type enum('PAYMENT','WITHDRAWAL') default 'PAYMENT'
 );
 
 create table donation (
@@ -257,7 +260,7 @@ create table merch_purchase(
     address_line_1 varchar(50)   ,
     address_line_2 varchar(50)  ,
     city varchar(20) ,
-    payment_txn_id varchar(50)
+    payment_txn_id varchar(100)
 );
 
 create table merch_purchase_item (
@@ -285,7 +288,8 @@ create table notifications (
     notif_id int(10) AUTO_INCREMENT primary key,
     user_id int(10),
     created_at timestamp default CURRENT_TIMESTAMP,
-    message varchar(500),
+    title varchar(200),
+    message varchar(500) not null,
     type enum("SMS","EMAIL","NOTIFICATION") default 'NOTIFICATION',
     sent boolean default false -- whether the sms or email is sent
 );
@@ -306,6 +310,9 @@ create table animal_vaccinations (
 
 alter table notifications
 add foreign key(user_id) references user(user_id);
+
+alter table payment
+add foreign key(user) references user(user_id);
 
 alter table consultation_schedule
 add foreign key(doctor_user_id) references user(user_id);
@@ -396,3 +403,13 @@ alter table merch_purchase_item
 add foreign key(org_id) references organization(org_id),
 add foreign key(order_id) references merch_purchase(order_id);
 
+-- EVENTS
+SET GLOBAL event_scheduler="ON";
+
+CREATE EVENT `SEND_VACCINE_REMINDERS` ON SCHEDULE EVERY 1 HOUR ENABLE
+DO
+BEGIN
+    SELECT * FROM animal_vaccines;
+    INSERT INTO `notifications`(`user_id`, `message`) VALUES(1, 'OOPS1');
+    INSERT INTO `notifications`(`user_id`, `message`) VALUES(1, 'OOPS2');
+END;
