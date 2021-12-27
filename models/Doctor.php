@@ -50,7 +50,7 @@ class Doctor extends BaseModel
             "doctor_id" => $doctor_id,
             "consultation_id" => $consultation_id,
         ];
-
+        // TODO: refund payment, send notification
         return self::update($query, $params);
     }
 
@@ -175,7 +175,7 @@ class Doctor extends BaseModel
         ];
     }
 
-    public static function MonthlyConsultationsByType()
+    public static function MonthlyConsultationsByType($doctor_id)
     {
         $monthly = ["cats" => [], "dogs" => [], "other" => []];
 
@@ -187,11 +187,12 @@ class Doctor extends BaseModel
         FROM
             consultation inner join animal on consultation.animal_id = animal.animal_id 
         WHERE
-            consultation_date BETWEEN NOW() - INTERVAL 6 MONTH AND NOW()
+            consultation_date BETWEEN NOW() - INTERVAL 6 MONTH AND NOW() 
+            AND doctor_user_id = :doctor_id
         GROUP BY
             month(consultation_date) order by mon ";
 
-        $result = self::select($query);
+        $result = self::select($query, ["doctor_id" => $doctor_id]);
 
 
         $j = 0;
@@ -214,7 +215,7 @@ class Doctor extends BaseModel
         return  $monthly;
     }
 
-    public static function DailyConsultationsByMode()
+    public static function DailyConsultationsByMode($doctor_id)
     {
         $consultations = ["live" => [], "advise" => []];
 
@@ -224,9 +225,10 @@ class Doctor extends BaseModel
                     COUNT(if(type='ADVISE',1,null)) advise
                 FROM consultation 
                     WHERE consultation_date BETWEEN NOW() - INTERVAL 30 DAY AND NOW() 
+                    AND doctor_user_id = :doctor_id
                 GROUP BY consultation_date";
 
-        $result = self::select($query);
+        $result = self::select($query, ["doctor_id" => $doctor_id]);
 
         $j = 0;
         for ($i = 30; $i >= 0; $i--) {
@@ -242,5 +244,33 @@ class Doctor extends BaseModel
         }
 
         return  $consultations;
+    }
+
+    public static function getPaymentHistory($doctor_id)
+    {
+        $query = "SELECT p.*,
+                      CONCAT('Payment for Consultation - ', c.type, ' - #', c.consultation_id) description
+                  FROM payment p
+                      LEFT JOIN consultation c ON p.txn_id = c.payment_txn_id
+                  WHERE c.doctor_user_id = :doctor_id OR p.user = :doctor_id
+                  ORDER BY p.txn_time desc ";
+
+        return self::select($query, ["doctor_id" => $doctor_id]);
+    }
+
+    public static function getPaymentBalance($doctor_id)
+    {
+        $payments_query = "SELECT SUM(amount) total FROM payment p JOIN consultation c ON p.txn_id = c.payment_txn_id WHERE c.doctor_user_id = :doctor_id";
+        $total_payments = self::select($payments_query, ["doctor_id" => $doctor_id])[0]["total"];
+
+        $withdrawal_query = "SELECT SUM(amount) total FROM payment p WHERE p.user = :doctor_id AND p.type = 'WITHDRAWAL'";
+        $total_withdrawals = self::select($withdrawal_query, ["doctor_id" => $doctor_id])[0]["total"];
+        return $total_payments - $total_withdrawals;
+    }
+
+    public static function recordWithdrawal($doctor_id, $amount, $txn_id)
+    {
+        $query = "INSERT INTO `payment` (`txn_id`,`amount`,`user`,`type`) VALUES (:txn_id, :amount, :doctor_id, 'WITHDRAWAL')";
+        self::insert($query, ["doctor_id" => $doctor_id, "txn_id" => $txn_id, "amount" => $amount]);
     }
 }
