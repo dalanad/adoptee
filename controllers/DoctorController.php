@@ -16,8 +16,8 @@ class DoctorController extends Controller
     function home()
     {
         View::render("doctor/home", [
-            "monthly" => Doctor::MonthlyConsultationsByType(),
-            "consultations" => Doctor::DailyConsultationsByMode(),
+            "monthly" => Doctor::MonthlyConsultationsByType($this->doctor_id),
+            "consultations" => Doctor::DailyConsultationsByMode($this->doctor_id),
         ]);
     }
 
@@ -125,6 +125,35 @@ class DoctorController extends Controller
 
     public function payments()
     {
-        View::render("doctor/payments");
+        View::render("doctor/payments", [
+            "pay_history" => Doctor::getPaymentHistory($this->doctor_id),
+            "balance" => Doctor::getPaymentBalance($this->doctor_id)
+        ]);
+    }
+
+    public function withdraw()
+    {
+        $amount = Doctor::getPaymentBalance($this->doctor_id);
+        $this->redirect("/lib/vendor/withdrawal_sandbox.php?amount=$amount");
+    }
+
+    public function withdraw_callback()
+    {
+        $amount = $_GET['amount'];
+        $txn_id = $_GET["txn_id"];
+        $status = $_GET['status'];
+
+        if ($status == 'SUCCESS') {
+            Doctor::recordWithdrawal($this->doctor_id, $amount, $txn_id);
+            $this->redirect("/Doctor/payments");
+        }
+
+        if ($status == 'CANCELED') {
+            $this->redirect("/Doctor/payments");
+        }
+
+        if ($status == 'ERROR') {
+            $this->redirect("/Doctor/payments");
+        }
     }
 }

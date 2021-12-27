@@ -2,14 +2,14 @@
 
 class Pay
 {
-    public static function payment($reason, $amount, $success, $cancel)
+    public static function payment($reason, $amount, $success, $cancel, $ref = NULL)
     {
         require __DIR__ . "/../vendor/stripe-php-7.97.0/init.php";
         \Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
 
 
         $checkout_session = \Stripe\Checkout\Session::create([
-            'client_reference_id' => 'test_sssssqeqwe',
+            'client_reference_id' => "$ref",
             'metadata' => ['user_id' => $_SESSION["user"]["user_id"]],
             'customer_email' =>  $_SESSION["user"]["email"],
             'submit_type' => 'pay',
