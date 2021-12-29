@@ -61,24 +61,40 @@ class User extends BaseModel
 
     static function getAdoptions($user_id)
     {
-        $query = "SELECT animal.name 'a_name', animal.animal_id 'a_id',animal.photo 'photo', DATEDIFF(CURRENT_DATE, animal.dob)/365 'age', organization.name 'name', date_adopted
+        $query = "SELECT animal.name 'a_name', animal.animal_id 'a_id',animal.photo 'photo', DATEDIFF(CURRENT_DATE, animal.dob)/365 'age', organization.name 'o_name', date_adopted
         FROM `animal`, `animal_for_adoption`, `organization`, `user`
         WHERE animal.animal_id=animal_for_adoption.animal_id
         AND organization.org_id=animal_for_adoption.org_id
         AND user.user_id=animal_for_adoption.user_id
-        AND user.user_id=$user_id";
+        AND animal_for_adoption.user_id=$user_id";
         return self::select($query);
     }
 
     static function getUserPets($user_id)
     {
-        $query = "SELECT animal.*, round(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age'
-        FROM user_pet, animal
-        WHERE ($user_id = user_pet.user_id AND user_pet.animal_id=animal.animal_id)
-        UNION SELECT animal.*, round(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age'
-        FROM animal, animal_for_adoption afa
-        WHERE ($user_id = afa.user_id AND afa.animal_id = animal.animal_id)";
+        // $query = "SELECT animal.*, round(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', user_pet.status
+        // FROM user_pet, animal
+        // WHERE ($user_id = user_pet.user_id AND user_pet.animal_id=animal.animal_id)
+        // UNION SELECT animal.*, round(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', NULL 'NullCol'
+        // FROM animal, animal_for_adoption afa
+        // WHERE ($user_id = afa.user_id AND afa.animal_id = animal.animal_id)";
+        // return self::select($query);
+
+        $query = "SELECT DISTINCT animal.*, round(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', user_pet.status
+        FROM user_pet, animal, animal_for_adoption afa
+        WHERE ($user_id = user_pet.user_id AND user_pet.animal_id=animal.animal_id AND $user_id=afa.user_id)";
         return self::select($query);
+    }
+
+    static function addNewPet($name,$type,$other,$gender,$dob,$color,$photo)
+    {
+        
+    }
+
+    static function deletePet($petid)
+    {
+        $query = "UPDATE `user_pet` SET `status`='REMOVED' WHERE animal_id = $petid;";
+        self::update($query);
     }
 
     static function getUpcomingConsultations($user_id)

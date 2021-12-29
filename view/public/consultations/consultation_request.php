@@ -135,8 +135,8 @@
                 } ?>
               </div>
               <?php if (empty($slots)) { ?>
-                  <p>All time slots for this date are fully booked</p>
-                <?php } ?>
+                <p>All time slots for this date are fully booked</p>
+              <?php } ?>
             </div>
           </div>
         </div>
@@ -150,28 +150,30 @@
 
       <form action='/Consultation' href="?step=3" method='POST'>
         <div style="display: grid;grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));grid-gap:3rem;margin-top:1rem">
-        
-        <!-- Choose an existing pet -->
-        <div class="field" id="old_pet">
+
+          <!-- Choose an existing pet -->
+          <div class="field" id="old_pet">
             <label>Your Pets</label>
             <div class="radio-box" style="display: grid;">
-              <?php foreach ($pets as $pet) { ?>
-                <input name="existing_pet" id="pet<?= $pet['animal_id'] ?>" type="radio" value=<?= $pet['animal_id'] ?> <?php if ($_SESSION['id'] == $pet['animal_id']) { ?>checked<?php } ?> onchange="hideNewPet()">
-                <label for="pet<?= $pet['animal_id'] ?>" style="text-align:left">
-                  <div style="display: flex;align-items:center">
-                    <div style="background:url(<?= $pet['photo']; ?>) center center;border-radius:50%;height:60px;width:60px;background-size:cover">
+              <?php foreach ($pets as $pet) {
+                if ($pet['status'] == 'ACTIVE') { ?>
+                  <input name="existing_pet" id="pet<?= $pet['animal_id'] ?>" type="radio" value=<?= $pet['animal_id'] ?> <?php if ($_SESSION['id'] == $pet['animal_id']) { ?>checked<?php } ?> onchange="hideNewPet()">
+                  <label for="pet<?= $pet['animal_id'] ?>" style="text-align:left">
+                    <div style="display: flex;align-items:center">
+                      <div style="background:url(<?= $pet['photo']; ?>) center center;border-radius:50%;height:60px;width:60px;background-size:cover">
+                      </div>
+                      <div style="margin-left: 1rem;">
+                        <div style="font-weight: 500;"><?= $pet['name'] ?></div>
+                        <div style="font-weight: 300;"><?= $pet['age'] ?>Years Old</div>
+                      </div>
+                      <div style="flex:auto"></div>
+                      <div style="margin-left: 1rem;">
+                        <div><?= $pet['gender'] ?> &nbsp; <span class="tag green"><?= $pet['type'] ?></span></div>
+                      </div>
                     </div>
-                    <div style="margin-left: 1rem;">
-                      <div style="font-weight: 500;"><?= $pet['name'] ?></div>
-                      <div style="font-weight: 300;"><?= $pet['age'] ?>Years Old</div>
-                    </div>
-                    <div style="flex:auto"></div>
-                    <div style="margin-left: 1rem;">
-                      <div><?= $pet['gender'] ?> &nbsp; <span class="tag green"><?= $pet['type'] ?></span></div>
-                    </div>
-                  </div>
-                </label>
-              <?php } ?>
+                  </label>
+              <?php }
+              } ?>
             </div>
           </div>
 
@@ -267,7 +269,7 @@
           </tr>
           <tr>
             <td>Doctor's Fee:</td>
-            <td>Rs. <?= $_SESSION['consultation_type']=="live"? $doc[0]["live_charge"]:$doc[0]["advise_charge"]?>.00</td>
+            <td>Rs. <?= $_SESSION['consultation_type'] == "live" ? $doc[0]["live_charge"] : $doc[0]["advise_charge"] ?>.00</td>
           </tr>
         </table>
         <div style="display:flex;justify-content:space-between;margin:2rem;">
