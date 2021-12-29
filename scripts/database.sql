@@ -50,7 +50,7 @@ create table org_user (
 create table routine_updates (
     animal_id int(10),
     user_id int(10),
-    type enum('HEALTH', 'FOOD', 'OTHER'),
+    type enum('HEALTH', 'NUTRITION', 'OTHER'),
     description varchar(100) ,
     photo varchar(100),
     update_date date
@@ -104,7 +104,8 @@ create table rescued_animal (
 
 create table user_pet (
     animal_id int(10) primary key,
-    user_id int(10)
+    user_id int(10),
+    status enum("ACTIVE","REMOVED")
 );
 
 create table consultation (
@@ -248,6 +249,7 @@ create table org_merch_item (
     sku varchar(50),
     price float,
     stock int(10),
+    description varchar(200),
     photos varchar(200), -- JSON ?,
     primary key(org_id,sku)
 );
@@ -306,6 +308,20 @@ create table animal_vaccinations (
     vacine_id int(10),
     given_date date,
     primary key(animal_id, vacine_id, given_date)
+);
+
+create table breeds (
+    breedId int(11) primary key auto_increment,
+    type enum("CAT","DOG"),
+    breed varchar(20),
+    height double,
+    weight double,
+    life_expectancy int,
+    color json,
+    photo varchar(200),
+    child_friendly varchar(10),
+    pet_friendly varchar(200),
+    health varchar(200)
 );
 
 alter table notifications

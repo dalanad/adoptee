@@ -85,18 +85,19 @@ INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `s
 ('23', 'Independent and friendly, vaccinated', '2021-08-26', 'LISTED', NULL, '3',NULL, '["/assets/data/cats/3a.png","/assets/data/cats/3b.jpg","/assets/data/cats/3c.jpg"]'),
 ('15', 'Has tiny, hedgehog paws, not vaccinated', '2021-09-02', 'LISTED', NULL, '1',NULL, '["/assets/data/dogs/15a.jpg","/assets/data/dogs/15b.jpg","/assets/data/dogs/15c.jpg"]');
 
-INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES(5,3),(7,3),(8,4),(9,4); 
+INSERT INTO `user_pet`(`animal_id`, `user_id`, `status`)
+VALUES(4,3,"ACTIVE"),(7,3,"ACTIVE"),(25,3,"ACTIVE"),(8,4,"ACTIVE"),(9,4,"ACTIVE"); 
 
 INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `proof_image`) 
 VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_63.png"]'),
  (5, '0748345654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_64.png"]');
 
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  current_timestamp(), '0761236547', 'Anuradhapura', POINT(6.8929, 79.9187), 'RESCUED', '["/assets/data/cats/10.jpg"]');
+VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  current_timestamp(), '0761236547', 'Anuradhapura', POINT(6.8929, 79.9187), 'RESCUED', '["/assets/data/dogs/10.jpg"]');
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.',   current_timestamp(), '0761236547', 'Anuradhapura', POINT(6.8999, 79.9167), 'PENDING', '["/assets/data/cats/10.jpg"]');
+VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.',   current_timestamp(), '0761236547', 'Anuradhapura', POINT(6.8999, 79.9167), 'PENDING', '["/assets/data/cats/8.jpg"]');
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency',   current_timestamp(), '0771234567', 'Anuradhapura', POINT(6.8969, 79.9137), 'PENDING', '["/assets/data/cats/10.jpg"]');
+VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency',   current_timestamp(), '0771234567', 'Anuradhapura', POINT(6.8969, 79.9137), 'PENDING', '["/assets/data/cats/9.jpg"]');
 
 INSERT INTO `rescued_animal`(`animal_id`,`report_id`,`rescued_date`)
 VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
@@ -149,15 +150,15 @@ VALUES ('3', CURRENT_TIMESTAMP,   '1', 'How about the water intake ?'), ('3', '2
 ('5', CURRENT_TIMESTAMP,   '1', 'Prescription given'),('11',CURRENT_TIMESTAMP, '1','Home treatment advised'),
 ('13',CURRENT_TIMESTAMP,   '1', 'Prescription given');
 
-INSERT INTO `org_merch_item` (`org_id`, `name`, `sku`, `price`, `stock`, `photos`) VALUES 
-(1, 'T-Shirt', '1-1', 1000.00, 30, '/assets/images/org/tshirt.png'),
-(1, 'Cat Collar', '1-2', 700.00, 30, '/assets/images/org/collar.png'),
-(1, 'Dog Food Bowl', '1-3', 850.00, 30, '/assets/images/org/bowl.png'),
-(2, 'Cage', '2-1', 12000.00, 30, '/assets/images/org/cage.png'),
-(2, 'T-Shirt', '2-2', 1000.00, 30, '/assets/images/org/tshirt.png'),
-(2, 'Pet Grooming Brush', '2-3', 900.00, 30, '/assets/images/org/brush.jpg'),
-(3, 'Toy', '3-1', 600.00, 30, '/assets/images/org/toy.jpg'),
-(3, 'T-Shirt', '3-2', 1000.00, 30, '/assets/images/org/tshirt.png'),
-(3, 'Cat Collar', '3-3', 700.00, 30, '/assets/images/org/collar.png');
+INSERT INTO `org_merch_item` (`org_id`, `name`, `sku`, `price`, `stock`, `description`, `photos`) VALUES 
+(1, 'T-Shirt', '1-1', 1000.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/tshirt.png'),
+(1, 'Cat Collar', '1-2', 700.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/collar.png'),
+(1, 'Dog Food Bowl', '1-3', 850.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/bowl.png'),
+(2, 'Cage', '2-1', 12000.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/cage.png'),
+(2, 'T-Shirt', '2-2', 1000.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/tshirt.png'),
+(2, 'Pet Grooming Brush', '2-3', 900.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/brush.jpg'),
+(3, 'Toy', '3-1', 600.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/toy.jpg'),
+(3, 'T-Shirt', '3-2', 1000.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/tshirt.png'),
+(3, 'Cat Collar', '3-3', 700.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/collar.png');
 
 COMMIT;
