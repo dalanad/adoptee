@@ -10,9 +10,16 @@
     }
 
     .message {
-        text-align: center;
-        margin-top: 15%;
-        color: var(--primary);
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        background: #ffffffcc;
+        top: 10%;
+        left: 30%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
     }
 
     #logo {
@@ -37,8 +44,25 @@
         color: var(--primary);
     }
 
-    .rate-box:hover {
+    .label {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .label:hover {
         cursor: pointer;
+    }
+
+    .label:hover>i {
+        display: block;
+        opacity: 0.3;
+        transform: none;
+    }
+
+    input:checked+.label>i {
+        display: block;
     }
 </style>
 
@@ -67,12 +91,14 @@
     <?php if (isset($_SESSION['user'])) {
         $rating = array("Very Low", "Low", "Neutral", "Good", "Very Good");
         $criteria = array("Pet Living Conditions", "Pet Healthcare", "Rescue Report Response", "Adoption Request Handling", "Resource Allocation"); ?>
-        <div class="field" style="margin-top:01rem;">
+        <form action='/Organization/makeReview' method="post">
+            <div class="field" style="margin-top:01rem;">
                 <label>Satisfaction with organization-</label>
                 <table class="table">
+                    <!-- Rating headings -->
                     <tr>
                         <th style="border:none;"></th>
-                        <?php for ($i = 0; $i < 4; $i++) { ?>
+                        <?php for ($i = 0; $i < 5; $i++) { ?>
                             <th>
                                 <?= $rating[$i] ?>
                             </th>
@@ -80,14 +106,18 @@
                     </tr>
                     <?php for ($i = 0; $i < 5; $i++) { ?>
                         <tr>
+                            <!-- Criteria headings -->
                             <td><?= $criteria[$i] ?></td>
-                            <?php for ($j = 0; $j < 4; $j++) { ?>
-                                <label for="<?= $criteria[$i] . " " . $rating[$j] ?>">
-                                    <td onclick="dispChecked(this)" class="rate-box">
+                            <!-- Radio boxes -->
+                            <?php for ($j = 1; $j < 6; $j++) { ?>
+                                <td class="rate_box" style="padding:0;">
+                                    <input type="radio" name="<?= $criteria[$i] ?>" class="rate-check" value="<?= $criteria[$i] . " " . $j ?>" id="<?= $criteria[$i] . " " . $rating[$j] ?>" />
+
+                                    <label for="<?= $criteria[$i] . " " . $rating[$j] ?>" class="label">
                                         <i class="fas fa-check" style="text-align:center;"></i>
-                                    </td>
-                                </label>
-                                <input type="radio" name="<?= $criteria[$i] ?>" class="rate-check" value="<?= $criteria[$i] . " " . $rating[$j] ?>" id="<?= $criteria[$i] . " " . $rating[$j] ?>" />
+                                    </label>
+                                </td>
+
                             <?php } ?>
                         </tr>
                     <?php } ?>
@@ -102,14 +132,14 @@
             <div class='field' style="margin-top:01rem;">
                 <label>I would like to,</label>
                 <div class="row">
-                    <div class="column"><input type="checkbox" class="ctrl-check" value="yes" name="displayName">&nbsp Display my name:</div>
+                    <div class="column"><input type="checkbox" class="ctrl-check" value="1" name="name">&nbsp Display my name:</div>
                     <div class="column"><?= $_SESSION['user']['name'] ?></div>
                 </div>
             </div>
 
             <div class='field'>
                 <div class="row">
-                    <div class="column"><input type="checkbox" class="ctrl-check" value="yes" name="sendReply">&nbsp Be contacted by the organization via email:</div>
+                    <div class="column"><input type="checkbox" class="ctrl-check" value="1" name="email">&nbsp Be contacted by the organization via email:</div>
                     <div class="column"><?= $_SESSION['user']['email'] ?></div>
                 </div>
             </div>
@@ -118,20 +148,28 @@
                 <a class="btn btn-link" href="/profile/user_profile">here</a>
             </p>
 
-            <a href="" class='btn mr2'>Submit Review</a>
+            <input type="text" name="org_id" value="<?=$details[0]['org_id']?>" hidden />
+
+            <button type="submit" class='btn mr2'>Submit Review</button>
+
+        </form>
     <?php } else { ?>
-        <div class="message">Please login to continue</div>
+        <div class="message">
+            <i class="far fa-user-lock fa-5x txt-clr orange"></i> <br>
+            <div style="font-weight: 600;"> Sign In Required</div> <br>
+            <a class="btn green" href="/auth/sign_in">Sign In</a>
+        </div>
     <?php } ?>
 </div>
 
 <script>
     function dispChecked(_this) {
-        if (_this.children[0].style.display == '') {
+        if (_this.nextElementSibling.checked = true) { //children[0].style.display == ''
             _this.children[0].style.display = "block";
-            _this.children[1].checked = true;
-        } else {
+            // _this.;
+        } else if (_this.nextElementSibling.checked = false) {
             _this.children[0].style.display = "none";
-            _this.children[1].checked = false;
+            // _this.nextElementSibling.checked = false;
         }
     }
 
