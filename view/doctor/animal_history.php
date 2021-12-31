@@ -64,7 +64,7 @@ require_once  __DIR__ . '/_nav.php';
                 <div style="font-size: .8em;">
                     <?= $animal['age'] ?> Years old -
                 </div>
-                <div><small><?=  str_replace(array('[', ']', '"'), '', $animal['color']); ?> &nbsp;- <?= strtoupper($animal['type']) ?></small></div>
+                <div><small><?= str_replace(array('[', ']', '"'), '', $animal['color']); ?> &nbsp;- <?= strtoupper($animal['type']) ?></small></div>
             </div>
         </div>
         <div style="margin: 0 1rem;;flex:50%">
@@ -102,10 +102,10 @@ require_once  __DIR__ . '/_nav.php';
             <th>Date & Time</th>
             <th></th>
         </tr>
-        <?php foreach ($consultations as $consultation) { ?>
+        <?php foreach ($prescriptions as $prescription) { ?>
             <tr>
-                <td><?= $consultation["consultation_date"] ?> <?= substr($consultation["consultation_time"], 0, 5) ?></td>
-                <td><button class="btn btn-faded" onclick="viewPrescription()"><i class="fas fa-eye"></i>&nbsp; View</button></td>
+                <td><?= $prescription["created_at"] ?> </td>
+                <td><button class="btn btn-faded" onclick="viewPrescription(<?= $prescription["medical_record_id"] ?>)"><i class="fas fa-eye"></i>&nbsp; View</button></td>
             </tr>
         <?php } ?>
     </table>
@@ -117,10 +117,3 @@ require_once  __DIR__ . '/_nav.php';
         <?php } ?>
     </div>
 <?php } ?>
-
-<script>
-    async function viewPrescription() {
-        let html = await fetch("/view/doctor/prescription.php?view=true").then((e) => e.text());
-        showOverlay(`<div style='width:500px;height:600px;overflow:auto'>${html}</div>`);
-    }
-</script>

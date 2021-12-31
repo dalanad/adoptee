@@ -89,7 +89,8 @@ class DoctorController extends Controller
         $data = [
             "animal" => Animal::getAnimalById($animal_id),
             "owner" => User::findUserById($animal_id),
-            "consultations" => Consultation::findConsultationsByPetId($animal_id)
+            "consultations" => Consultation::findConsultationsByPetId($animal_id),
+            "prescriptions" => MedicalRecord::getPrescriptionsByAnimalId($animal_id)
         ];
         View::render("doctor/animal_history", $data);
     }

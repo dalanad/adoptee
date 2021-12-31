@@ -200,7 +200,7 @@ class Doctor extends BaseModel
         for ($i = 5; $i >= 0; $i--) {
             $date = date("m", strtotime("-$i month"));
 
-            if ($date == $result[$j]["mon"]) {
+            if (isset($result[$j]) && $date == $result[$j]["mon"]) {
                 array_push($monthly["cats"], $result[$j]["cats"]);
                 array_push($monthly["dogs"], $result[$j]["dogs"]);
                 array_push($monthly["other"], $result[$j]["other"]);
@@ -233,7 +233,7 @@ class Doctor extends BaseModel
         $j = 0;
         for ($i = 30; $i >= 0; $i--) {
             $date = date("Y-m-d", strtotime("-$i days"));
-            if ($date == $result[$j]["consultation_date"]) {
+            if (isset($result[$j]) && $date == $result[$j]["consultation_date"]) {
                 array_push($consultations["live"], $result[$j]["live"]);
                 array_push($consultations["advise"], $result[$j]["advise"]);
                 $j++;

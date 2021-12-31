@@ -30,20 +30,21 @@
         <div class="rounded" style="height:40px;width:40px;" id="googleMap"></div>
     </div>
 </div>
-
 <script>
     var map
+    var lat = '<?= $details[0]['location_lat'] ?>'.length > 2 ? parseFloat('<?= $details[0]['location_lat'] ?>') : 6.9038086
+    var lang = '<?= $details[0]['location_lang'] ?>'.length > 2 ? parseFloat('<?= $details[0]['location_lang'] ?>') : 79.9110850
 
     function myMap() {
         var mapProp = {
-            center: new google.maps.LatLng(6.9038086, 79.9110850),
+            center: new google.maps.LatLng(lat,lang),
             zoom: 12,
             mapId: '3343eee879d42b9f'
         };
         map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
         new google.maps.Marker({
-            position: new google.maps.LatLng(6.9038086, 79.9110850),
+            position: new google.maps.LatLng(lat,lang),
             map,
             title: '<?= $details[0]['name'] ?>',
         });

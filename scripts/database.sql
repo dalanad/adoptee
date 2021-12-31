@@ -37,7 +37,8 @@ create table organization (
     logo varchar(50),
     about varchar(500),
     about_photo varchar(50),
-    rating decimal(7,1)
+    rating decimal(7,1),
+    location_coordinates POINT
 );
 
 create table org_user (
@@ -164,7 +165,7 @@ create table prescription (
 
 create table prescription_item (
     medical_record_id int(10),
-    dose int(20),
+    dose varchar(20),
     duration varchar(20),
     direction varchar(20),
     medicine_id int (10)
