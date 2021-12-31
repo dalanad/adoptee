@@ -133,7 +133,14 @@ function uploadFile() {
 			}
 
 			fetch("/main/upload", { method: "POST", body: formData })
-				.then((r) => r.json())
+				.then((response) => {
+					if (response.ok) {
+						return response.json();
+					} else {
+						let responses = { 413: "Photo Too Large (5Mb Max)", 400: "Invalid Photo", 500: "Processing Failed" };
+						throw new Error(responses[response.status]);
+					}
+				})
 				.then((e) => {
 					console.log(e[0]);
 					input.remove();
@@ -147,6 +154,8 @@ function uploadFile() {
 }
 
 function photoInput(input) {
+	let isMultiple = !!input.getAttribute("multiple");
+
 	let container = document.createElement("div");
 	container.classList.add("photo-picker");
 	container.innerHTML = "<button class='btn outline green' type='button'><i class='fa fa-plus'></i></button>";
@@ -158,20 +167,30 @@ function photoInput(input) {
 	let add_btn = container.querySelector("button");
 	add_btn.onclick = uploadPhoto;
 
-	//
-	JSON.parse(input.value || "[]").forEach(addPhoto);
-
+	if (isMultiple) {
+		JSON.parse(input.value || "[]").forEach(addPhoto);
+	} else if (input.value && input.value.length > 5) {
+		addPhoto(input.value);
+	}
 	//
 	async function uploadPhoto() {
-		add_btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-		let url = await uploadFile();
-		add_btn.innerHTML = "<i class='fa fa-plus'></i>";
-		if (url) {
-			let current_array = JSON.parse(input.value || "[]");
-			current_array.push(url);
-			input.value = JSON.stringify(current_array);
-			addPhoto(url);
+		try {
+			add_btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+			let url = await uploadFile();
+			if (url) {
+				if (isMultiple) {
+					let current_array = JSON.parse(input.value || "[]");
+					current_array.push(url);
+					input.value = JSON.stringify(current_array);
+				} else {
+					input.value = url;
+				}
+				addPhoto(url);
+			}
+		} catch (e) {
+			alert("𝗨𝗽𝗹𝗼𝗮𝗱 𝗙𝗮𝗶𝗹𝗲𝗱 : " + e.message);
 		}
+		add_btn.innerHTML = "<i class='fa fa-plus'></i>";
 	}
 
 	//
@@ -180,15 +199,23 @@ function photoInput(input) {
 		photo.style.backgroundImage = `url(${url})`;
 		add_btn.insertAdjacentElement("beforebegin", photo);
 		photo.onclick = () => removePhoto(photo, url);
+		if (!isMultiple) {
+			add_btn.style.display = "none";
+		}
 	}
 
 	// remove photo update input
 	function removePhoto(photo, url) {
 		if (confirm("Are you sure that, you want to delete this photo?")) {
 			photo.remove();
-			let urls = JSON.parse(input.value || "[]") || [];
-			urls.splice(urls.indexOf(url), 1);
-			input.value = JSON.stringify(urls);
+			if (isMultiple) {
+				let urls = JSON.parse(input.value || "[]") || [];
+				urls.splice(urls.indexOf(url), 1);
+				input.value = JSON.stringify(urls);
+			} else if (!isMultiple) {
+				input.value = "";
+				add_btn.style.display = "block";
+			}
 		}
 	}
 }

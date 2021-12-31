@@ -17,6 +17,12 @@ class OrgSettingsController extends Controller
         View::render("org/settings", $data);
     }
 
+    public function update_organization_info()
+    {
+        Organization::updateOrgInfo($_SESSION['org_id'], $_POST);
+        $this->redirect("general");
+    }
+
     public function users()
     {
         $data = [

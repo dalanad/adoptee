@@ -57,12 +57,8 @@ class Application
     public function handleException($exception)
     {
         $code = $exception->getCode();
-
-        if ($code != 404) {
-            $code = 500;
-        }
-
-        http_response_code($code);
+        if (isset($code))
+            http_response_code(intval($code));
 
         View::render("_layout/error", ["exception" => $exception]);
     }
