@@ -28,8 +28,8 @@ class Image
             throw new  Exception("Sorry, file already exists.", 400);
         }
 
-        if ($_FILES[$file_name]["size"] > 5000000) {
-            throw new  Exception("Sorry, your file is too large.", 413);
+        if ($_FILES[$file_name]["size"] > 5500000) {
+            throw new  Exception("Sorry, your file is too large. (5Mb max)", 413);
         }
 
         if (!in_array(strtolower($file_ext), array("jpg", "png", "jpeg", "gif"))) {

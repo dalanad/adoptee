@@ -58,10 +58,6 @@ class Application
     {
         $code = $exception->getCode();
 
-        if ($code != 404) {
-            $code = 500;
-        }
-
         http_response_code($code);
 
         View::render("_layout/error", ["exception" => $exception]);
@@ -71,7 +67,7 @@ class Application
     {
         if (error_reporting() !== 0) {
             echo  $message;
-            // throw new \ErrorException($message, 0, $level, $file, $line);
+            throw new \ErrorException($message, 0, $level, $file, $line);
         }
     }
 }
