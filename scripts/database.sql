@@ -37,7 +37,7 @@ create table organization (
     logo varchar(50),
     about varchar(500),
     about_photo varchar(50),
-    rating int
+    rating decimal(7,1)
 );
 
 create table org_user (
@@ -240,7 +240,14 @@ create table org_feedback (
     org_id int(10),
     user_id int(10),
     created_time timestamp  DEFAULT CURRENT_TIMESTAMP,
-    content varchar(200)
+    living_conditions int,
+    healthcare int,
+    rescue_response int,
+    adoptions int,
+    resource_allocation int,
+    comments varchar(200),
+    name boolean default 0, 
+    email boolean default 0 
 );
 
 create table org_merch_item (

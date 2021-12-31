@@ -96,6 +96,22 @@ class OrganizationController extends Controller
         // Organization::makeDonation($name, $email, $receipt, $subscriptionId);     // 
     }
 
+    static function makeReview()
+    {
+        $living_conditions = isset($_POST['Pet_Living_Conditions'])? (int)substr($_POST['Pet_Living_Conditions'],-1):0;
+        $healthcare = isset($_POST['Pet_Healthcare'])? (int)substr($_POST['Pet_Healthcare'],-1):0;
+        $rescue_response = isset($_POST['Rescue_Report_Response'])? (int)substr($_POST['Rescue_Report_Response'],-1):0;
+        $adoptions = isset($_POST['Adoption_Request_Handling'])? (int)substr($_POST['Adoption_Request_Handling'],-1):0;
+        $resource_allocation = isset($_POST['Resource_Allocation'])? (int)substr($_POST['Resource_Allocation'],-1):0;
+        $name = $_POST['name']?? 0;
+        $email = $_POST['email']?? 0;
+
+        Organization::writeReview($living_conditions,$healthcare,$rescue_response,$adoptions,$resource_allocation, $_POST['comment'], $name, $email, $_POST['org_id'],$_SESSION['user']['user_id']);
+        $organization = new Organization;
+        $data=["details" => $organization->getOrgDetails($_POST['org_id'])];
+        View::render("public/organizations/review_organization", $data);
+    }
+
     public function success()
     {
         $this->redirect("/Organization/view_donation_success");

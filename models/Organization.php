@@ -82,4 +82,21 @@ class Organization extends BaseModel
                   VALUES('$name', '$email', $receipt);";
         self::insert($query);
     }
+
+    static function writeReview($living_conditions,$healthcare,$rescue_response,$adoptions,$resource_allocation,$comment,$name,$email,$org_id,$userid)
+    {
+        $query = "INSERT INTO 
+        org_feedback(org_id,user_id,living_conditions,healthcare,rescue_response,adoptions,resource_allocation,comments,name,email)
+        VALUES($org_id,$userid,$living_conditions,$healthcare,$rescue_response,$adoptions,$resource_allocation,'$comment',$name,$email)";
+        self::insert($query);
+
+        $rating = (self::select("SELECT rating FROM organization WHERE org_id=$org_id"))[0]['rating'];
+        $count = (self::select("SELECT COUNT(*) FROM org_feedback WHERE org_id=$org_id"))[0]['COUNT(*)'];
+        $add_rate = ($living_conditions+$healthcare+$rescue_response+$adoptions+$resource_allocation)/5;
+        $rating = ( ($rating*($count-1) ) + $add_rate)/$count;
+
+        $query = "UPDATE organization SET rating = $rating WHERE org_id = $org_id";
+        return self::insert($query);
+        // print_r($query);
+    }
 }

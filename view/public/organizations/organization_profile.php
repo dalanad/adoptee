@@ -37,7 +37,8 @@
         color: var(--gray-3);
     }
 
-    .checked {
+    .checked,
+    .fa-star-half {
         color: orange;
     }
 </style>
@@ -54,11 +55,15 @@
                                                 print_r($value['tagline']);
                                             } ?></div>
             <div style="font-size: .9rem; margin-top:.3rem; margin-bottom:1rem;">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="far fa-star"></span>
-                <span class="far fa-star"></span>
+                <?php for ($i = 0; $i < round($value['rating']); $i++) { ?>
+                    <span class="fa fa-star checked"></span>
+                <?php }
+                if ($value['rating'] - round($value['rating']) > 0) { ?>
+                    <span class="fas fa-star-half"></span>
+                <?php }
+                for ($i = 0; $i < 5 - ceil($value['rating']); $i++) { ?>
+                    <span class="far fa-star"></span>
+                <?php } ?>
             </div>
         </div>
         <div>
