@@ -37,7 +37,8 @@ create table organization (
     logo varchar(50),
     about varchar(500),
     about_photo varchar(50),
-    rating int
+    rating int,
+    location_coordinates POINT
 );
 
 create table org_user (

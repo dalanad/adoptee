@@ -16,6 +16,37 @@ class Organization extends BaseModel
         self::insert($query);
     }
 
+    public static function updateOrgInfo($orgId, $data)
+    {
+        $updateQuery = "UPDATE `organization` 
+            SET `name` = :name,
+                `telephone` = :telephone,
+                `address_line_1` = :address_line_1,
+                `address_line_2` = :address_line_2,
+                `city` = :city,
+                `tagline` = :tagline,
+                `logo` = :logo,
+                `about` = :about,
+                `about_photo` = :about_photo,
+                `location_coordinates` = POINT(:lat ,:lang)
+            WHERE `organization`.`org_id` = :org_id
+        ";
+        self::update($updateQuery, [
+            "org_id" => $orgId,
+            "name" => $data["name"],
+            "telephone" => $data["telephone"],
+            "address_line_1" => $data["address_line_1"],
+            "address_line_2" => $data["address_line_2"],
+            "city" => $data["city"],
+            "tagline" => $data["tagline"],
+            "logo" => $data["logo"],
+            "about" => $data["about"],
+            "about_photo" => $data["about_photo"],
+            "lat" => $data["location_lat"],
+            "lang" => $data["location_lang"],
+        ]);
+    }
+
     public static function getOrgUsers($orgId)
     {
         $query = "SELECT u.*, ou.role FROM user u, org_user ou WHERE u.user_id=ou.user_id AND ou.org_id = $orgId";
@@ -30,7 +61,11 @@ class Organization extends BaseModel
 
     public function getOrgDetails($orgId)
     {
-        $query = "SELECT * FROM `organization` WHERE org_id = $orgId";
+        $query = "SELECT 
+                        o.*, 
+                        st_y(location_coordinates) as location_lang, 
+                        st_x(location_coordinates) as location_lat 
+                    FROM `organization` o WHERE org_id = $orgId";
         return BaseModel::select($query);
     }
 
@@ -43,7 +78,11 @@ class Organization extends BaseModel
 
     static function findOrgById($orgId)
     {
-        $query = "SELECT * FROM `organization` WHERE org_id = $orgId";
+        $query = "SELECT 
+                    o.*, 
+                    st_y(location_coordinates) as location_lang, 
+                    st_x(location_coordinates) as location_lat 
+                  FROM `organization` o WHERE org_id = $orgId";
         return BaseModel::select($query);
     }
 
