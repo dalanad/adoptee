@@ -165,7 +165,7 @@ create table prescription (
 
 create table prescription_item (
     medical_record_id int(10),
-    dose int(20),
+    dose varchar(20),
     duration varchar(20),
     direction varchar(20),
     medicine_id int (10)

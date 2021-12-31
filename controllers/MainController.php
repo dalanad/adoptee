@@ -26,4 +26,9 @@ class MainController extends Controller
     {
         View::render("public/terms");
     }
+
+    function send_notifications()
+    {
+        Notification::processQueue();
+    }
 }
