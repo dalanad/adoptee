@@ -367,6 +367,15 @@ function InitSortHeaders() {
 	}
 }
 
+async function viewPrescription(prescription_id) {
+	showOverlay(`
+	<div style='width:500px;height:600px;overflow:auto;position:relative'>
+		<i style="float:right;position: absolute;right: 0;top: 0;cursor:pointer" class="fa fa-times" onclick="closeOverlays()"></i>
+		<iframe style='width: 100%;box-sizing: border-box;height: inherit;border:none;height: 99%;' 
+		src="/prescription/view_prescription?id=${prescription_id}" seamless></iframe>
+	</div>`);
+}
+
 async function initChat(id, is_user = false) {
 	let chat_window = document.querySelector(".chat-window");
 
@@ -414,6 +423,7 @@ async function initChat(id, is_user = false) {
 			let msg_template = `<div class="msg ${msg.is_sender == "1" && "sent"}">
 									${msg.message}
 									${JSON.parse(msg.attachments || "[]").map((e) => `<img src='${e}' height="80px" onclick="showOverlay(\'<img src=\\'${e}\\' style=\\'max-height:80vh;max-width:80vw\\'\')">`)}
+									${msg.medical_record_id ? `<button class='btn btn-link ' onclick="viewPrescription(${msg.medical_record_id})">VIEW</button>` : ""}
 								</div>`;
 			chat_body.insertAdjacentHTML("beforeend", msg_template);
 		}
@@ -428,8 +438,12 @@ async function initChat(id, is_user = false) {
 	});
 
 	async function addPrescription() {
-		let html = await fetch("/view/doctor/prescription.php").then((e) => e.text());
-		showOverlay(`<div style='width:500px;height:600px;overflow:auto'>${html}</div>`);
+		showOverlay(`
+		<div style='width:500px;height:600px;overflow:auto;position:relative'>
+			<i style="float:right;position: absolute;right: 0;top: 0;cursor:pointer" class="fa fa-times" onclick="closeOverlays()"></i>
+			<iframe style='width: 100%;box-sizing: border-box;height: inherit;border:none;height: 99%;' 
+			src="/prescription/consultation_prescription?consultation_id=${id}" seamless></iframe>
+		</div>`);
 	}
 
 	async function completeConsultation() {
@@ -478,4 +492,8 @@ function showOverlay(html) {
 	div.querySelectorAll(".overlay-close").forEach((e) => {
 		e.addEventListener("click", (e) => div.remove());
 	});
+}
+
+function closeOverlays() {
+	document.querySelectorAll(".overlay").forEach((e) => e.remove());
 }

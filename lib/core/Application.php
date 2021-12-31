@@ -57,8 +57,8 @@ class Application
     public function handleException($exception)
     {
         $code = $exception->getCode();
-
-        http_response_code($code);
+        if (isset($code))
+            http_response_code(intval($code));
 
         View::render("_layout/error", ["exception" => $exception]);
     }
@@ -67,7 +67,7 @@ class Application
     {
         if (error_reporting() !== 0) {
             echo  $message;
-            throw new \ErrorException($message, 0, $level, $file, $line);
+            // throw new \ErrorException($message, 0, $level, $file, $line);
         }
     }
 }
