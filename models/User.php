@@ -109,4 +109,10 @@ class User extends BaseModel
         AND (status='PENDING' OR status='ACCEPTED')";
         return self::select($query);
     }
+
+    static function getNotifications($user_id, $limit_to = 3)
+    {
+        $query = "SELECT * FROM `notifications` WHERE user_id = :user_id LIMIT  $limit_to";
+        return self::select($query, ["user_id" => $user_id ]);
+    }
 }

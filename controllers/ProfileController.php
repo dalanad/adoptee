@@ -31,7 +31,7 @@ class ProfileController extends Controller
 
     static function notifications()
     {
-        $data = ["active" => "notifications"];
+        $data = ["active" => "notifications", "notifications" => User::getNotifications($_SESSION['user']['user_id'], 200)];
         View::render("auth/profile/user_profile", $data); //backend not connected
     }
 
@@ -40,7 +40,7 @@ class ProfileController extends Controller
         $user = new User;
         $consultations = $user->getUpcomingConsultations($_SESSION['user']['user_id']);
         $data = ["active" => "consultations", "consultations" => $consultations];
-        View::render("auth/profile/user_profile", $data); 
+        View::render("auth/profile/user_profile", $data);
     }
 
     static function adoptions()
@@ -61,7 +61,7 @@ class ProfileController extends Controller
     {
         $user = new User;
         $petdata = $user->getUserPets($_SESSION['user']['user_id']);
-        for($i=0; $i < sizeof($petdata); $i++){
+        for ($i = 0; $i < sizeof($petdata); $i++) {
             $petdata[$i]["consultdata"] = Consultation::getPetConsultation($petdata[$i]['animal_id']);
         }
         $data = [

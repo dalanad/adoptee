@@ -24,17 +24,23 @@ function user_btn()
 function notif_btn()
 {
     if (isset($_SESSION['user'])) {
-        echo
-        "<div class='dropdown' style='display:flex;align-items: center;line-height: 1;'>
+        $notifications = User::getNotifications($_SESSION['user']['user_id']); ?>
 
+        <div class='dropdown' style='display:flex;align-items: center;line-height: 1;'>
             <i class='far fa-bell' style='font-size:1.2em'> </i>
-             <div class='dropdown-content'>
-                <div href=''><a  class='btn black btn-link'>&nbsp; Adoption Request Update</a>
-                <div class='m2' style='font-size:small;'>Your request to adopt Tigger has been accepted</div></div>
-                <div href=''><a class='btn black btn-link'>&nbsp; Vaccination Reminder</a>
-                <div class='m2' style='font-size:small;'>Your pet Tina needs to be vaccinated by 10-10-2021</div></div>
+            <div class='dropdown-content' style="padding: 0;">
+                <?php if (sizeof($notifications) == 0) { ?>
+                    <div style="padding: 1rem;text-align:center"> No New Notifications Available</div>
+                <?php } ?>
+                <?php foreach ($notifications as $notification) { ?>
+                    <div class="notification-item">
+                        <b style="padding: .5rem  1rem"> <i class="far fa-envelope"></i> &nbsp; <?= $notification['title'] ?></b>
+                        <div style='padding: .5rem 1rem;font-size:.9em;'><?= $notification['message'] ?></div>
+                    </div>
+                <?php } ?>
             </div>
-        </div>";
+        </div>
+    <?php
     }
 }
 
@@ -50,7 +56,7 @@ function cart_btn()
 
 function pagination($current_page, $page_size, $total_items)
 {
-?>
+    ?>
     <div style="display:flex;justify-content:space-between;align-items:center;margin:1rem">
         <div>
             <div style="display: flex; align-items:baseline;margin-top:.5rem">
