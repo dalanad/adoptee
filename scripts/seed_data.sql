@@ -86,7 +86,8 @@ INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `s
 ('15', 'Has tiny, hedgehog paws, not vaccinated', '2021-09-02', 'LISTED', NULL, '1',NULL, '["/assets/data/dogs/15a.jpg","/assets/data/dogs/15b.jpg","/assets/data/dogs/15c.jpg"]');
 
 INSERT INTO `user_pet`(`animal_id`, `user_id`, `status`)
-VALUES(4,3,"ACTIVE"),(7,3,"ACTIVE"),(25,3,"ACTIVE"),(8,4,"ACTIVE"),(9,4,"ACTIVE"); 
+VALUES ('10','3',"ACTIVE"), ('9', '3',"ACTIVE"), ('8', '2',"ACTIVE"), ('7', '3',"ACTIVE"), ('6', '2',"ACTIVE"), ('5', '4',"ACTIVE"), 
+       ('4', '3',"ACTIVE"), ('1', '3',"ACTIVE"), ('2', '2',"ACTIVE");
 
 INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `proof_image`) 
 VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_63.png"]'),
@@ -114,15 +115,15 @@ VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
  ('2021-10-28', '10:30:00', '10', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
  ('2021-10-28', '11:30:00', '9', '1', '3', 'PENDING', 'LIVE', NULL),
  ('2021-10-30', '12:30:00', '8', '1', '2', 'ACCEPTED', 'ADVISE', NULL),
- ('2021-10-30', '13:30:00', '7', '1', '2', 'ACCEPTED', 'LIVE', NULL),
+ ('2021-10-30', '13:30:00', '7', '1', '3', 'ACCEPTED', 'LIVE', NULL),
  ('2021-10-30', '14:30:00', '6', '1', '2', 'ACCEPTED', 'ADVISE', NULL),
  ('2021-10-30', '11:00:00', '5', '1', '4', 'ACCEPTED', 'LIVE', NULL),
  ('2021-11-04', '12:00:00', '4', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
  ('2021-11-07', '13:00:00', '1', '1', '3', 'ACCEPTED', 'LIVE', NULL),
  ('2021-11-08', '09:00:00', '2', '1', '2', 'COMPLETED', 'ADVISE', NULL),
  ('2021-11-08', '09:30:00', '2', '1', '2', 'COMPLETED', 'LIVE', NULL),
- ('2021-11-03', '10:00:00', '5', '1', '2', 'COMPLETED', 'ADVISE', NULL),
- ('2021-11-02', '12:00:00', '6', '1', '4', 'COMPLETED', 'ADVISE', NULL),
+ ('2021-11-03', '10:00:00', '5', '1', '4', 'COMPLETED', 'ADVISE', NULL),
+ ('2021-11-02', '12:00:00', '6', '1', '2', 'COMPLETED', 'ADVISE', NULL),
  ('2021-11-01', '13:00:00', '7', '1', '3', 'COMPLETED', 'ADVISE', NULL)
  ;
 

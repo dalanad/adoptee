@@ -112,8 +112,8 @@ require_once  __DIR__ . '/_nav.php';
 <?php } ?>
 <?php if ($active == "media") { ?>
     <div class="thumbnails">
-        <?php for ($i = 1; $i < 3; $i++) { ?>
-            <div class="thumbnail" style="background-image: url(/assets/images/dogs/wounded<?= $i ?>.jpg);" onclick="showOverlay('<img src=\'/assets/images/dogs/wounded<?= $i ?>.jpg\' style=\'max-height:80vh;max-width:80vw\'')"> </div>
+        <?php foreach ($media as $m) { ?>
+            <div class="thumbnail" style="background-image: url(<?= $m ?>);" onclick="showOverlay('<img src=\'<?= $m ?>\' style=\'max-height:80vh;max-width:80vw\'')"> </div>
         <?php } ?>
     </div>
 <?php } ?>
