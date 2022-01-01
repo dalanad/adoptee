@@ -380,9 +380,10 @@ add foreign key(user_id) references user(user_id);
 
 alter table consultation
 add foreign key(user_id) references user(user_id),
-add foreign key(user_id) references user_pet(user_id),
-add foreign key(animal_id) references user_pet(animal_id),
 add foreign key(animal_id) references animal(animal_id);
+
+-- add foreign key(user_id) references user_pet(user_id),
+-- add foreign key(animal_id) references user_pet(animal_id),
 
 alter table consultation_message
 add foreign key(consultation_id) references consultation(consultation_id);
