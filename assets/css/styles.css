@@ -734,3 +734,17 @@ header .logo img {
 }
 
 /* END MOUSE OVER DIV */
+
+/* START NOTIFICATIONS */
+
+.notification-item {
+	min-width: 15rem;
+	margin-top: 0.5rem;
+	font-size: 0.9rem;
+}
+
+.notification-item:not(:last-child) {
+	border-bottom: 1px solid #eee;
+}
+
+/* END NOTIFICATIONS */

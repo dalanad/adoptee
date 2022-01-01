@@ -69,6 +69,10 @@ INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_
 ('Dr. Rathnayake', 'doctor2@example.com', '0761236547', 'No 79/A, Circular Road, Kandy', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
 ('Tharani Perera', 'admin1@example.com', '0761236547', 'No. 58, 5th Lane, Battaramulla', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1);
 
+INSERT INTO `notifications` (`notif_id`, `user_id`, `title`, `message` ) 
+VALUES (NULL, '3',  'Vaccination Reminder', 'Your pet Tina needs to be vaccinated by 10-10-2021'  ), 
+(NULL, '3', 'Adoption Request Update', 'Your request to adopt Tigger has been accepted' );
+
 INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL'), ('6', '1', 'ADMIN');
 
 
