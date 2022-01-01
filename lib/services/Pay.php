@@ -1,13 +1,11 @@
 <?php
+require __DIR__ . "/../vendor/stripe-php-7.97.0/init.php";
+\Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
 
 class Pay
 {
-    public static function payment($reason, $amount, $success, $cancel, $ref = NULL)
+    public static function payment($reason, $amount, $success, $cancel, $ref = null)
     {
-        require __DIR__ . "/../vendor/stripe-php-7.97.0/init.php";
-        \Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
-
-
         $checkout_session = \Stripe\Checkout\Session::create([
             'client_reference_id' => "$ref",
             'metadata' => ['user_id' => $_SESSION["user"]["user_id"]],
@@ -32,5 +30,13 @@ class Pay
         ]);
 
         return $checkout_session->url;
+    }
+
+    public static function refundPayment($session_id)
+    {
+        $session = \Stripe\Checkout\Session::retrieve($session_id);
+        \Stripe\Refund::create([
+            'payment_intent' => $session['payment_intent']
+        ]);
     }
 }

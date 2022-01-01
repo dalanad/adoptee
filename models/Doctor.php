@@ -50,8 +50,12 @@ class Doctor extends BaseModel
             "doctor_id" => $doctor_id,
             "consultation_id" => $consultation_id,
         ];
-        // TODO: refund payment, send notification
-        return self::update($query, $params);
+        
+        self::update($query, $params);
+        $consultation =  Consultation::findConsultationById($consultation_id);
+        Pay::refundPayment($consultation["payment_txn_id"]);
+
+        // TODO: send notification
     }
 
     public static function updateCharges($doctor_id, $live_charge, $advise_charge)
