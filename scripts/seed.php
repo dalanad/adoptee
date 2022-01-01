@@ -43,7 +43,7 @@ for ($i = 1; $i < 30; $i++) {
         $uid = $conn->insert_id;
 
         $type = ['dog', 'cat', 'dog', 'dog'][rand(0, 3)];
-        
+
 
         // pet
         $query = "INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) 
@@ -51,9 +51,11 @@ for ($i = 1; $i < 30; $i++) {
         '[\"Black\"]','/assets/data/" . $type . "s/" . rand(1, $type == 'cat' ? 10 : 20) . ".jpg');";
         execute($query);
         $animal_id = $conn->insert_id;
+        $query = "INSERT INTO `user_pet` (`animal_id`, `user_id`, `status`) VALUES ($animal_id, $uid, 'ACTIVE')";
+        execute($query);
 
         $query = "INSERT INTO `consultation` ( `consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
-            VALUES ('2021-" . str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) . "-" . str_pad($i, 2, "0", STR_PAD_LEFT) . "', 
+            VALUES ('2022-" . str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) . "-" . str_pad($i, 2, "0", STR_PAD_LEFT) . "', 
             '" . str_pad($j, 2, "0", STR_PAD_LEFT) . ":00:00', '" .  $animal_id . "', '1', '" . $uid . "', '" . $status[rand(0, sizeof($status) - 1)] . "', 'LIVE', NULL)";
         execute($query);
 
@@ -74,8 +76,11 @@ for ($i = 1; $i < 30; $i++) {
         execute($query);
         $animal_id = $conn->insert_id;
 
+        $query = "INSERT INTO `user_pet` (`animal_id`, `user_id`, `status`) VALUES ($animal_id, $uid, 'ACTIVE')";
+        execute($query);
+
         $query = "INSERT INTO `consultation` ( `consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
-                VALUES ('2021-" . str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) . "-" . str_pad($i, 2, "0", STR_PAD_LEFT) . "', 
+                VALUES ('2022-" . str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) . "-" . str_pad($i, 2, "0", STR_PAD_LEFT) . "', 
                 '" . str_pad($j, 2, "0", STR_PAD_LEFT) . ":30:00', '" .  $animal_id . "', '1', '" . $uid . "', '" . $status[rand(0, sizeof($status) - 1)] . "', 'LIVE', NULL)";
         execute($query);
     }

@@ -59,4 +59,23 @@ class MedicalRecord extends BaseModel
 
         return $prescriptions;
     }
+
+    public static function getMediaByAnimalId($animal_id)
+    {
+        $query = "SELECT cm.* 
+                  FROM consultation_message cm, 
+                    consultation c 
+                  WHERE c.consultation_id = cm.consultation_id 
+                    AND attachments is not NULL 
+                    AND c.animal_id = :animal_id";
+        $messages = self::select($query, ["animal_id" => $animal_id]);
+
+        $attachments = [];
+
+        foreach ($messages as $message) {
+            array_push($attachments, ...json_decode($message["attachments"]));
+        }
+
+        return $attachments;
+    }
 }

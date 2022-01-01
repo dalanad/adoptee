@@ -10,4 +10,11 @@ class Animal extends BaseModel
         }
         return $animals[0];
     }
+
+    public static function getOwner($animal_id)
+    {
+        $query = "SELECT * FROM user u, user_pet up WHERE up.user_id = u.user_id AND up.animal_id = :animal_id";
+        $user = self::selectOne($query, ['animal_id' => $animal_id]);
+        return $user;
+    }
 }

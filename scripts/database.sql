@@ -104,9 +104,11 @@ create table rescued_animal (
 );
 
 create table user_pet (
-    animal_id int(10) primary key,
+    animal_id int(10) ,
     user_id int(10),
-    status enum("ACTIVE","REMOVED")
+    status enum("ACTIVE","REMOVED"),
+    primary key (animal_id),
+    unique (animal_id, user_id)
 );
 
 create table consultation (
@@ -378,6 +380,8 @@ add foreign key(user_id) references user(user_id);
 
 alter table consultation
 add foreign key(user_id) references user(user_id),
+add foreign key(user_id) references user_pet(user_id),
+add foreign key(animal_id) references user_pet(animal_id),
 add foreign key(animal_id) references animal(animal_id);
 
 alter table consultation_message
