@@ -138,4 +138,17 @@ class Organization extends BaseModel
         return self::insert($query);
         // print_r($query);
     }
+
+    public static function getAllFeedback($orgId)
+    {
+        $query = "SELECT * FROM `org_feedback`, user WHERE user.user_id = org_feedback.user_id AND org_id = :org_id";
+        return self::select($query, ["org_id" => $orgId]);
+    }
+
+    public static function acknowledgeFeedback($orgId, $userId, $time)
+    {
+        $query = "UPDATE `org_feedback` SET acknowledged = 1 WHERE user_id =:user_id AND org_id = :org_id AND created_time = :time";
+        return self::select($query, ["org_id" => $orgId, "time" => $time, "user_id" => $userId]);
+    }
+
 }

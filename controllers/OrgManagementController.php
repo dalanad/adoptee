@@ -123,9 +123,16 @@ class OrgManagementController extends Controller{
     function feedback_list()
     {
         $data = [
-            "active" => "feedback_list"
+            "active" => "feedback_list",
+            "feedback" => Organization::getAllFeedback($_SESSION['org_id'])
         ];
         View::render("org/dashboard", $data);
+    }
+
+    function acknowledge_feedback()
+    {
+        Organization::acknowledgeFeedback($_SESSION['org_id'],$_GET["user_id"],$_GET["time"]);
+        $this->redirect("feedback_list");
     }
 
     function add_new_event()

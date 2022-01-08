@@ -253,38 +253,9 @@ create table org_feedback (
     adoptions int,
     resource_allocation int,
     comments varchar(200),
+    acknowledged boolean default 0, 
     name boolean default 0, 
     email boolean default 0 
-);
-
-create table org_merch_item (
-    org_id int(10),
-    name varchar(100),
-    sku varchar(50),
-    price float,
-    stock int(10),
-    description varchar(200),
-    photos varchar(200), -- JSON ?,
-    primary key(org_id,sku)
-);
-
-create table merch_purchase(
-    order_id int(10) AUTO_INCREMENT primary key,
-    user_id int(10),
-    created_time timestamp  DEFAULT CURRENT_TIMESTAMP,
-    status enum('CANCELLED','SHIPPED','PENDING') not null default 'PENDING',
-    address_line_1 varchar(50)   ,
-    address_line_2 varchar(50)  ,
-    city varchar(20) ,
-    payment_txn_id varchar(100)
-);
-
-create table merch_purchase_item (
-    order_id int(10),
-    org_id int(10),  
-    sku varchar(50),
-    quantity int(10),
-    primary key (order_id,org_id,sku)
 );
 
 create table adoption_request (
@@ -425,16 +396,6 @@ add foreign key(org_id) references organization(org_id);
 
 alter table org_feedback
 add foreign key(org_id) references organization(org_id);
-
-alter table org_merch_item
-add foreign key(org_id) references organization(org_id);
-
-alter table merch_purchase
-add foreign key(user_id) references user(user_id);
-
-alter table merch_purchase_item
-add foreign key(org_id) references organization(org_id),
-add foreign key(order_id) references merch_purchase(order_id);
 
 -- EVENTS
 SET GLOBAL event_scheduler="ON";
