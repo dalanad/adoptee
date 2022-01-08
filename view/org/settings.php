@@ -5,9 +5,7 @@ $menu_items = array(
     "general" => array("name" => "General", "icon" => "building"),
     "users" =>  array("name" =>  "Users", "icon" => "users"),
     "sponsorship" =>  array("name" =>  "Sponsorships", "icon" => "donate"),
-    "sponsorships" =>  array("name" =>  "Sponsorships Tiers", "icon" => "donate"),
-    "merchandise" =>  array("name" =>  "Merchandise", "icon" => "hat-wizard"),
-    "payments" =>  array("name" =>  "Payments", "icon" => "money-check-alt"),
+    "sponsorship_tiers" =>  array("name" =>  "Sponsorships Tiers", "icon" => "donate"),
 );
 
 if (!isset($active)) {
@@ -24,7 +22,7 @@ if (!isset($active)) {
     .side-nav {
         flex: 1 1 0;
         margin-left: 1rem;
-        max-width: 15rem;
+        max-width: 12rem;
         display: flex;
         flex-direction: column;
     }
@@ -96,16 +94,15 @@ if (!isset($active)) {
 </style>
 
 <div class="container">
-    <div style="padding: 1rem 1rem;padding-bottom:0;display: flex;">
+    <div style="padding: 1rem;align-items: flex-start;display: flex;">
+        <div>
+            <a href="/OrgManagement/org_adoption_listing" class="btn btn-faded black"><i class="fa fa-arrow-left"></i> &nbsp; Back</a>
+            <h2 class="flex items-center"> <i class="far fa-cogs"></i> &nbsp; Organization Settings </h2>
+        </div>
         <div style="flex: 1 1 0;"></div>
         <?= user_btn() ?>
     </div>
-    <div class="mx2 txt-clr">
-        <h2 class="flex items-center" style="margin-top: 0;">
-            <a href="/OrgManagement/org_adoption_listing" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
-            Organization Settings
-        </h2>
-    </div>
+
     <div class="container">
         <div class="settings-container">
             <div class="side-nav">
@@ -115,7 +112,7 @@ if (!isset($active)) {
                     </a>
                 <?php  } ?>
             </div>
-            <div class="flex-auto   mx2 " style="border: 1px solid var(--gray-4);border-radius: .5rem">
+            <div class="flex-auto   mx2 ">
                 <?php include __DIR__ . "./org_settings/" . $active . ".php" ?>
             </div>
         </div>

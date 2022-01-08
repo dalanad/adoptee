@@ -49,7 +49,7 @@ class Organization extends BaseModel
 
     public static function getOrgUsers($orgId)
     {
-        $query = "SELECT u.*, ou.role FROM user u, org_user ou WHERE u.user_id=ou.user_id AND ou.org_id = $orgId";
+        $query = "SELECT u.*, ou.* FROM user u, org_user ou WHERE u.user_id=ou.user_id AND ou.org_id = $orgId";
         return self::select($query);
     }
 
@@ -111,7 +111,7 @@ class Organization extends BaseModel
         $query = "SELECT sponsorship_tier.*, o.org_id
         FROM `sponsorship_tier`, `organization` o 
         WHERE sponsorship_tier.org_id = $orgId
-        AND o.org_id = $orgId";
+        AND o.org_id = $orgId AND sponsorship_tier.status = 'ACTIVE'";
         return BaseModel::select($query);
     }
 

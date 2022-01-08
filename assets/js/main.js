@@ -219,3 +219,21 @@ function photoInput(input) {
 		}
 	}
 }
+
+function showOverlay(html) {
+	let div = document.createElement("div");
+	div.classList.add("overlay", "fade");
+	div.insertAdjacentHTML("afterbegin", "<div>" + html + "</div>");
+	document.body.appendChild(div);
+	div.addEventListener("click", (e) => {
+		div.classList.remove("fade");
+		if (e.target == div) div.remove();
+	});
+	div.querySelectorAll(".overlay-close").forEach((e) => {
+		e.addEventListener("click", (e) => div.remove());
+	});
+}
+
+function closeOverlays() {
+	document.querySelectorAll(".overlay").forEach((e) => e.remove());
+}

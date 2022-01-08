@@ -61,7 +61,10 @@
                         <button name="action" value="ADD" class="btn">Add</button>
                     </div>
                 </fieldset>
-                <textarea name="remarks"><?= $prescription['remarks'] ?? "" ?></textarea>
+                Remarks
+                <textarea class="ctrl" name="remarks"><?= $prescription['remarks'] ?? "" ?></textarea>
+                <br>
+                <br>
                 <div style="display: flex;justify-content:space-between">
                     <!-- <button type='button' class="btn btn-faded pink" onclick="document.querySelector('.overlay').remove()">Cancel</button> -->
                     <button class="btn green" name="action" value="SEND">Send</button>

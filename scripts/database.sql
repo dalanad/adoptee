@@ -1,7 +1,9 @@
 
 DROP DATABASE IF EXISTS adoptee;
 
-CREATE DATABASE adoptee;
+-- charset is set to utf8mb4_unicode_ci to support UNICODE such as emoji
+
+CREATE DATABASE adoptee DEFAULT CHARSET = utf8mb4 DEFAULT COLLATE = utf8mb4_unicode_ci;
 
 use adoptee;
 
@@ -45,6 +47,7 @@ create table org_user (
     user_id int(10) ,
     org_id  int(10),
     role enum('ADMIN','NORMAL') not null default 'NORMAL',
+    status enum('ACTIVE','DISABLED') not null default 'ACTIVE',
     primary key(user_id,org_id)
 );
 
@@ -202,7 +205,8 @@ create table sponsorship_tier(
   name varchar(50),
   amount int(10) not null,
   recurring_days int(10) not null,
-  description varchar(100),
+  description varchar(500),
+  status enum('ACTIVE','INACTIVE') not null default 'ACTIVE',
   primary key(org_id,name)
 );
 
@@ -438,7 +442,30 @@ SET GLOBAL event_scheduler="ON";
 CREATE EVENT `SEND_VACCINE_REMINDERS` ON SCHEDULE EVERY 1 HOUR ENABLE
 DO
 BEGIN
-    SELECT * FROM animal_vaccines;
-    INSERT INTO `notifications`(`user_id`, `message`) VALUES(1, 'OOPS1');
-    INSERT INTO `notifications`(`user_id`, `message`) VALUES(1, 'OOPS2');
+
+    SELECT CONCAT('Your pet ', a.name,' needs to be vaccinated with ',
+            IF(v.anti_rabies < DATE_SUB(NOW(), INTERVAL 1 YEAR) OR v.anti_rabies_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR),' "Anti-Rabies", ','' ),
+            IF(v.dhl < DATE_SUB(NOW(), INTERVAL 1 YEAR) OR v.dhl_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR),' "DHL", ','' ),
+            IF(v.parvo < DATE_SUB(NOW(), INTERVAL 1 YEAR) OR v.parvo_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR),' "PARVO", ','' ),
+            IF(v.tricat < DATE_SUB(NOW(), INTERVAL 1 YEAR) OR v.tricat_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR),' "TRICAT", ','' )
+        ) message,
+        'Vaccination Reminder' title,
+        v.*, up.user_id 
+    FROM animal_vaccines v 
+        INNER JOIN animal a ON a.animal_id = v.animal_id   
+        INNER JOIN user_pet up ON up.animal_id = v.animal_id
+    WHERE
+        a.animal_id = v.animal_id
+    AND (
+        v.anti_rabies < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+        OR v.dhl < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+        OR v.parvo < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+        OR v.tricat < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+        OR v.anti_rabies_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+        OR v.dhl_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+        OR v.parvo_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+        OR v.tricat_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+    );
+
+
 END;
