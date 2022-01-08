@@ -13,6 +13,9 @@ class BaseModel
 
             $db = new PDO($dsn, $user, $pass);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // charset is set to utf8mb4_unicode_ci to support UNICODE such as emoji 🐕‍🦺
+            $db->exec("set names utf8mb4");
         }
 
         return $db;

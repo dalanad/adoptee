@@ -407,24 +407,6 @@
 	}
 }
 
-.overlay {
-	position: absolute;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	background-color: #0000002b;
-}
 
-.overlay > div {
-	max-width: 80vw;
-	margin: 0 auto;
-	box-shadow: var(--shadow-heavy);
-	border-radius: 0.4rem;
-	background-color: white;
-	padding: 1rem;
-}
 
 /* ANIMATIONS */
