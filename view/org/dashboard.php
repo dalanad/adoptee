@@ -15,7 +15,7 @@ $management_menu = array(
 );
 
 $administration_menu = array(
-    "feedback" => array("name" => "Feedback", "icon" => "smile"),
+    "feedback_list" => array("name" => "User Feedback", "icon" => "smile"),
     "organization_settings" =>  array("name" =>  "Settings", "icon" => "cog"),
     "help" =>  array("name" =>  "Help", "icon" => "question-circle"),
 );
@@ -153,7 +153,7 @@ $active_item = isset($management_menu[$active]) ? $management_menu[$active] : (i
 
         <div class="content" style="width: 100%; margin-left: .5rem">
             <div class="admin-header">
-                <div style="font-weight: 500;font-size:1.3rem">
+                <div style="font-weight: 500;font-size:1.3rem;display:flex">
                     <i class="fal fa-<?= $active_item["icon"] ?> txt-clr <?= $active_item["icon"] ?>" style="font-size: 1.2em;"></i>
                     &nbsp;
                     <?= $active_item["name"] ?>

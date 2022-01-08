@@ -75,6 +75,10 @@ VALUES (NULL, '3',  'Vaccination Reminder', 'Your pet Tina needs to be vaccinate
 
 INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL'), ('6', '1', 'ADMIN');
 
+INSERT INTO `org_feedback` (`org_id`, `user_id`, `living_conditions`, `healthcare`, `rescue_response`, `adoptions`, `resource_allocation`, `comments`, `name`, `email`) 
+       VALUES ('1', '2', '3', '4', '3', '4', '3', 'Good Work Keep Up', '1', '1'),
+       ('1', '3', '2', '4', '2', '3', '4', 'Fast Response to Rescue', '1', '1'),
+       ('1', '1', '3', '2', '1', '2', '1', 'Great', '1', '1');
 
 INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`, `photos`) VALUES 
 ('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/1a.jpg","/assets/data/dogs/1b.jpg","/assets/data/dogs/1c.jpg"]'),
@@ -154,16 +158,5 @@ VALUES ('3', CURRENT_TIMESTAMP,   '1', 'How about the water intake ?'), ('3', '2
 ('6', CURRENT_TIMESTAMP,   '1', 'Home treatment advised'), ('2', '2021-09-13 00:00:00',  '1', 'Advised to take prescribed medicine'), 
 ('5', CURRENT_TIMESTAMP,   '1', 'Prescription given'),('11',CURRENT_TIMESTAMP, '1','Home treatment advised'),
 ('13',CURRENT_TIMESTAMP,   '1', 'Prescription given');
-
-INSERT INTO `org_merch_item` (`org_id`, `name`, `sku`, `price`, `stock`, `description`, `photos`) VALUES 
-(1, 'T-Shirt', '1-1', 1000.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/tshirt.png'),
-(1, 'Cat Collar', '1-2', 700.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/collar.png'),
-(1, 'Dog Food Bowl', '1-3', 850.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/bowl.png'),
-(2, 'Cage', '2-1', 12000.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/cage.png'),
-(2, 'T-Shirt', '2-2', 1000.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/tshirt.png'),
-(2, 'Pet Grooming Brush', '2-3', 900.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/brush.jpg'),
-(3, 'Toy', '3-1', 600.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/toy.jpg'),
-(3, 'T-Shirt', '3-2', 1000.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/tshirt.png'),
-(3, 'Cat Collar', '3-3', 700.00, 30, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '/assets/images/org/collar.png');
 
 COMMIT;
