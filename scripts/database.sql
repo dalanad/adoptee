@@ -213,10 +213,10 @@ create table sponsorship_tier(
 create table sponsorship (
   subscription_id int(10) AUTO_INCREMENT primary key,
   org_id int(10),
-  name varchar(50),
+  name varchar(50), -- subscription tier name
   user_id int(10),
   amount_at_subscription int(10) not null,
-  start_date date,
+  start_date date not null,
   end_date date,
   status enum('ACTIVE','CANCELLED') not null default 'ACTIVE'
 );

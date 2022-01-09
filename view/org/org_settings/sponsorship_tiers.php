@@ -7,8 +7,8 @@
     $durations = [
         "7" => "Weekly",
         "30" => "Monthly",
-        "180" => "Annual",
-        "365" => "Bi-Annual"
+        "180" => "Bi-Annual",
+        "365" => "Annual"
     ];
     ?>
  <style>
