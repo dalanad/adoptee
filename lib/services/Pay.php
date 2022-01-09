@@ -32,6 +32,34 @@ class Pay
         return $checkout_session->url;
     }
 
+    public static function subscribe($reason, $amount, $success, $cancel, $subscription_id)
+    {
+        $checkout_session = \Stripe\Checkout\Session::create([
+            'client_reference_id' => "$subscription_id",
+            'metadata' => ['user_id' => $_SESSION["user"]["user_id"]],
+            'customer_email' =>  $_SESSION["user"]["email"],
+            'submit_type' => 'pay',
+            'line_items' => [[
+                'price_data' => [
+                    "currency" => "lkr",
+                    "product_data" => [
+                        "name" => $reason
+                    ],
+                    "unit_amount" => $amount
+                ],
+                'quantity' => 1,
+            ]],
+            'payment_method_types' => [
+                'card',
+            ],
+            'mode' => 'payment',
+            'success_url' => Config::get('domain') . "$success?session_id={CHECKOUT_SESSION_ID}",
+            'cancel_url' => Config::get('domain') . $cancel,
+        ]);
+
+        return $checkout_session->url;
+    }
+
     public static function refundPayment($session_id)
     {
         $session = \Stripe\Checkout\Session::retrieve($session_id);
