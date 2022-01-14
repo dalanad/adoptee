@@ -46,7 +46,12 @@ class OrganizationController extends Controller
     static function get_org_sponsorships()
     {
         $organization = new Organization;
-        $orgData = ["sponsorship" => $organization->getOrgSponsorships($_GET['org_id']), "active"=>"sponsorships", "details" => $organization->getOrgDetails($_GET['org_id'])];
+        $orgData = [
+            "tiers" => $organization->getOrgSponsorships($_GET['org_id']), 
+            "sponsorships" => $organization->getUserSponsorships($_GET['org_id'],$_SESSION['user']['user_id']), 
+            "active"=>"sponsorships", 
+            "details" => $organization->getOrgDetails($_GET['org_id'])
+        ];
         
         View::render("public/organizations/organization_profile", $orgData);
     }
@@ -55,6 +60,14 @@ class OrganizationController extends Controller
     {
         $organization = new Organization;
         $orgData = ["active"=>"about", "details" => $organization->getOrgDetails($_GET['org_id'])];
+        
+        View::render("public/organizations/organization_profile", $orgData);
+    }
+
+    static function get_org_reviews()
+    {
+        $organization = new Organization;
+        $orgData = ["active"=>"reviews", "reviews" => $organization->getOrgReviews($_GET['org_id']), "details" => $organization->getOrgDetails($_GET['org_id'])];
         
         View::render("public/organizations/organization_profile", $orgData);
     }
@@ -130,6 +143,8 @@ class OrganizationController extends Controller
     {
         View::render("public/organizations/donation_success");
     }
+
+    
 }
 
 ?>
