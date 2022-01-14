@@ -10,6 +10,7 @@
     .adoption-card {
         transition: background-color .5s ease-out;
         cursor: pointer;
+        position: relative;
     }
 
     .adoption-card-image,
@@ -92,8 +93,6 @@
             align-items: center;
         }
     }
-
-
 </style>
 
 <form class="container" style="padding:1rem 2rem;" name="_form" action="" method="get">
@@ -161,7 +160,7 @@
                         <input id="orange" name="color[]" type="checkbox" value="Orange" onchange='_form.submit()' <?= in_array('Orange', $filter['color']) ? "checked" : ""; ?>>
                         <label for="orange" style="background:darkgoldenrod;" title="Orange"></label>
                         <input id="brown" name="color[]" type="checkbox" value="Brown" onchange='_form.submit()' <?= in_array('Brown', $filter['color']) ? "checked" : ""; ?>>
-                        <label for="brown" style="background:brown;" title="Brown"></label>
+                        <label for="brown" style="background:saddlebrown;" title="Brown"></label>
                         <input id="black" name="color[]" type="checkbox" value="Black" onchange='_form.submit()' <?= in_array('Black', $filter['color']) ? "checked" : ""; ?>>
                         <label for="black" style="background:black;color:white;" title="Black"></label>
                     </div>
@@ -189,7 +188,7 @@
                 <!--sorting filters-->
                 <span>Available Pets - Page 1 of 1</span> <span style="flex: 1 1 0;"></span>
                 <span style="white-space: nowrap;"><i class="far fa-sort-size-up" style="font-size: 1.2em;"></i> &nbsp; Sort By : </span> &nbsp; &nbsp;
-                <select class="ctrl sm" style="max-width: 7em;" name="sort" onchange='_form.submit()'>
+                <select class="ctrl sm" style="max-width: 8em;" name="sort" onchange='_form.submit()'>
                     <option value="date-listed" <?= $filter['sort'] == 'date-listed' ? "selected" : "" ?>>Date Listed</option>
                     <option value="age" <?= $filter['sort'] == 'age' ? "selected" : "" ?>>Age</option>
                     <option value="type" <?= $filter['sort'] == 'type' ? "selected" : "" ?>>Type</option>
@@ -201,6 +200,8 @@
                     <option value="desc" <?= $filter['sort'] == 'desc' ? "selected" : "" ?>>DESC</option>
                     <option value="asc" <?= $filter['sort'] == 'asc' ? "selected" : "" ?>>ASC</option>
                 </select>
+
+                <a class="btn btn-link btn-faded primary" style="padding: 0.5rem; float:right;" href="Adoptions/viewBreeds">View Breeds</a>
             </div>
 
             <div class="adoption-grid">
@@ -209,7 +210,7 @@
                     <a class="adoption-card" id=<?= $animal['type'] ?> onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal['animal_id'] ?>&org_id=<?= $animal['org_id'] ?>'">
                         <div class="adoption-card-image" style="background-image: url('<?= $animal['photo'] ?>');"></div>
                         <div class="adoption-card-details">
-                            <div class="adoption-card-action">ADOPT</div>
+                            <div class="adoption-card-action" <?= $animal['status']=='ADOPTED'?'style="background-color:deeppink"':''?> ><?= $animal['status']=='ADOPTED'?'ADOPTED':'ADOPT'?></div>
                             <div style="display:flex; padding:.5rem 1rem;align-items: center;">
                                 <div style="flex:1 1 0">
                                     <div style="font-weight: 500;"> <?= $animal["name"] ?></div>

@@ -306,7 +306,8 @@ create table breeds (
     photo varchar(200),
     child_friendly varchar(10),
     pet_friendly varchar(200),
-    health varchar(200)
+    health varchar(200),
+    problems varchar(200)
 );
 
 alter table notifications
