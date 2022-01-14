@@ -64,6 +64,22 @@
     input:checked+.label>i {
         display: block;
     }
+
+    .rate_org {
+        width: 10rem;
+        height: auto;
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+
+    .fa-star {
+        color: var(--gray-3);
+    }
+
+    .checked,
+    .fa-star-half{
+        color: orange;
+    }
 </style>
 
 <div class="container" style="max-width: 900px;">
@@ -84,7 +100,19 @@
                     print_r($value['tagline']);
                 } ?>
             </div>
+            <div style="font-size: .9rem; margin-top:.3rem; margin-bottom:1rem;">
+                <?php for ($i = 0; $i < round($value['rating']); $i++) { ?>
+                    <span class="fa fa-star checked"></span>
+                <?php }
+                if ($value['rating'] - round($value['rating']) > 0) { ?>
+                    <span class="fas fa-star-half"></span>
+                <?php }
+                for ($i = 0; $i < 5 - ceil($value['rating']); $i++) { ?>
+                    <span class="far fa-star"></span>
+                <?php } ?>
+            </div>
         </div>
+        
 
     </div>
 
@@ -94,34 +122,36 @@
         <form action='/Organization/makeReview' method="post">
             <div class="field" style="margin-top:01rem;">
                 <label>Satisfaction with organization-</label>
-                <table class="table">
-                    <!-- Rating headings -->
-                    <tr>
-                        <th style="border:none;"></th>
-                        <?php for ($i = 0; $i < 5; $i++) { ?>
-                            <th>
-                                <?= $rating[$i] ?>
-                            </th>
-                        <?php } ?>
-                    </tr>
-                    <?php for ($i = 0; $i < 5; $i++) { ?>
+                <div style="display:flex;">
+                    <table class="table">
+                        <!-- Rating headings -->
                         <tr>
-                            <!-- Criteria headings -->
-                            <td><?= $criteria[$i] ?></td>
-                            <!-- Radio boxes -->
-                            <?php for ($j = 1; $j < 6; $j++) { ?>
-                                <td class="rate_box" style="padding:0;">
-                                    <input type="radio" name="<?= $criteria[$i] ?>" class="rate-check" value="<?= $criteria[$i] . " " . $j ?>" id="<?= $criteria[$i] . " " . $rating[$j] ?>" />
-
-                                    <label for="<?= $criteria[$i] . " " . $rating[$j] ?>" class="label">
-                                        <i class="fas fa-check" style="text-align:center;"></i>
-                                    </label>
-                                </td>
-
+                            <th style="border:none;"></th>
+                            <?php for ($i = 0; $i < 5; $i++) { ?>
+                                <th>
+                                    <?= $rating[$i] ?>
+                                </th>
                             <?php } ?>
                         </tr>
-                    <?php } ?>
-                </table>
+                        <?php for ($i = 0; $i < 5; $i++) { ?>
+                            <tr>
+                                <!-- Criteria headings -->
+                                <td><?= $criteria[$i] ?></td>
+                                <!-- Radio boxes -->
+                                <?php for ($j = 1; $j < 6; $j++) { ?>
+                                    <td class="rate_box" style="padding:0;">
+                                        <input type="radio" name="<?= $criteria[$i] ?>" class="rate-check" value="<?= $criteria[$i] . " " . $j ?>" id="<?= $criteria[$i] . " " . $rating[$j] ?>" />
+
+                                        <label for="<?= $criteria[$i] . " " . $rating[$j] ?>" class="label">
+                                            <i class="fas fa-check" style="text-align:center;"></i>
+                                        </label>
+                                    </td>
+                                <?php } ?>
+                            </tr>
+                        <?php } ?>
+                    </table>
+                    <img src="/assets/images/org/rate_org.jpg" class="rate_org"/>
+                </div>
             </div>
 
             <div class="field" style="margin-top:01rem;">
@@ -148,7 +178,7 @@
                 <a class="btn btn-link" href="/profile/user_profile">here</a>
             </p>
 
-            <input type="text" name="org_id" value="<?=$details[0]['org_id']?>" hidden />
+            <input type="text" name="org_id" value="<?= $details[0]['org_id'] ?>" hidden />
 
             <button type="submit" class='btn mr2'>Submit Review</button>
 
@@ -172,9 +202,4 @@
             // _this.nextElementSibling.checked = false;
         }
     }
-
-    // var check = document.getElementsByClassName('fa-check');
-    // check.foreach(function(){
-    //     check.AddEventL
-    // })
 </script>

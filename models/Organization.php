@@ -56,7 +56,7 @@ class Organization extends BaseModel
     public function getOrgListing()
     {
         $query = "SELECT * FROM `organization`";
-        return BaseModel::select($query);
+        return self::select($query);
     }
 
     public function getOrgDetails($orgId)
@@ -66,14 +66,14 @@ class Organization extends BaseModel
                         st_y(location_coordinates) as location_lang, 
                         st_x(location_coordinates) as location_lat 
                     FROM `organization` o WHERE org_id = $orgId";
-        return BaseModel::select($query);
+        return self::select($query);
     }
 
     public function getOrgAnimalsForAdoption()   //function not used
     {
         $query = "SELECT animal_id, type, gender FROM `animal_for_adoption`, `organization`
         WHERE `animal_for_adoption`.org_id = `organization`.org_id";
-        return BaseModel::select($query);
+        return self::select($query);
     }
 
     static function findOrgById($orgId)
@@ -83,13 +83,13 @@ class Organization extends BaseModel
                     st_y(location_coordinates) as location_lang, 
                     st_x(location_coordinates) as location_lat 
                   FROM `organization` o WHERE org_id = $orgId";
-        return BaseModel::select($query);
+        return self::select($query);
     }
 
     static function getOrgContent($orgId)
     {
         $query = "SELECT * FROM `org_content` WHERE org_id = $orgId";
-        return BaseModel::select($query);
+        return self::select($query);
     }
 
     static function getOrgAdoptions($orgId)
@@ -97,22 +97,23 @@ class Organization extends BaseModel
         $query = "SELECT *, DATEDIFF(CURRENT_DATE, animal.dob)/365 'age'
         FROM `animal_for_adoption`, `animal` WHERE animal_for_adoption.org_id = $orgId
         AND animal.animal_id = animal_for_adoption.animal_id";
-        return BaseModel::select($query);
+        return self::select($query);
     }
 
     static function getOrgMerchandise($orgId)
     {
         $query = "SELECT * FROM `org_merch_item` WHERE org_merch_item.org_id = $orgId";
-        return BaseModel::select($query);
+        return self::select($query);
     }
 
-    static function getOrgSponsorships($orgId)
+    
+    static function getOrgReviews($orgId)
     {
-        $query = "SELECT sponsorship_tier.*, o.org_id
-        FROM `sponsorship_tier`, `organization` o 
-        WHERE sponsorship_tier.org_id = $orgId
-        AND o.org_id = $orgId AND sponsorship_tier.status = 'ACTIVE'";
-        return BaseModel::select($query);
+        $query = "SELECT of.*,user.name as u_name
+        from org_feedback of,user 
+        where of.org_id=$orgId 
+        and of.user_id=user.user_id";
+        return self::select($query);
     }
 
     static function makeDonation($name, $email, $receipt, $subscriptionId) //changes to be made
@@ -149,6 +150,31 @@ class Organization extends BaseModel
     {
         $query = "UPDATE `org_feedback` SET acknowledged = 1 WHERE user_id =:user_id AND org_id = :org_id AND created_time = :time";
         return self::select($query, ["org_id" => $orgId, "time" => $time, "user_id" => $userId]);
+    }
+
+    public static function subscribe($tier,$orgId,$user)
+    {
+        $query="SELECT * from sponsorship_tier st
+        where st.org_id=$orgId
+        and st.name='$tier'";
+        $data=self::select($query);
+
+        $amount=$data[0]['amount'];
+        $query="INSERT INTO sponsorship(`org_id`,`name`,`user_id`,`amount_at_subscription`,`start_date`,`status`)
+        VALUES($orgId,'$tier',$user,$amount,CURDATE(),'ACTIVE')";
+        return self::insert($query);
+    }
+
+    public static function unsubscribe($tier,$orgId,$user)
+    {
+        $query = "UPDATE sponsorship
+        SET status='CANCELLED',
+        end_date=CURDATE()
+        WHERE user_id=$user
+        AND org_id=$orgId
+        AND name='$tier'";
+
+        return self::update($query);
     }
 
 }
