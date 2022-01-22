@@ -62,8 +62,8 @@
     }
 
     .div-size {
-        width: 500px;
-        height: 425px;
+        width: 1150px;
+        height: 400px;
         min-height: 3rem;
         margin-bottom: 1rem;
     }
@@ -106,7 +106,7 @@
 
 
 <div style="padding-top: 0.5rem;">
-    <div class="overflow-auto" style="height: 555px; padding-top: 2rem;">
+    <div style="height: 555px; padding-top: 2rem;">
 
         <!-- Filters - Start -->
         <div style="padding-left: 1rem;">
@@ -130,58 +130,39 @@
             </form>
         </div>
         <!-- Filters - End -->
-
+        <div class="overflow-auto" style="height: 480px;">
         <table class="table">
+        <?php foreach ($org_news_events as $org_news_event) { ?>
             <tr>
                 <td>
                     <div class="" style="position: relative; justify-items:center; align-items:center; display:flex;">
                         <div class="mouse-over-div div-size" style="left: 0px;">
-                            <h2 class="center">Pet Adoption Day</h2>
-                            <div class="event-content"><img class="event-image" src="/assets\images\org/adoption_day.jpg"></div>
+                            <h2 class="center"><?= $org_news_event["heading"] ?></h2>
+                            <table>
+                                <tr>
+                                    <td>
+                            <div class="event-content"><img class="event-image" src="<?= str_replace("[\"","",str_replace(" ","/",str_replace("\"]","",$org_news_event['photos'])))?>"></div>
+                            </td>
+                            <td>
                             <div class="event-content">
-                                <p>The Colombo Puppy Adoption Day was held on the 29th of August from 2.30 pm – 5.00 pm at the Race course, Good Market. This was the first program at the Good Market and there was a good turnout for our adoption day. 10 pups found their forever homes on the day and the team will be following up within the week.
-                                </p>
+                                <p><?= $org_news_event["description"] ?></p>
                             </div>
-                            <p style="position: absolute; color: #aaa6a1; bottom: 0px;font-size:0.8rem;">Published On : 10-09-2021</p>
+                            </td>
+                            </tr>
+                            </table>
+                            <p style="position: absolute; color: #aaa6a1; bottom: 0px;font-size:0.8rem;">Published On : <?= $org_news_event["created_time"] ?></p>
                         </div>
-                        <div class="div-edit-delete" style="justify-items:center; align-items:center; display:flex;">
-                            <div>
-                                <div><button onclick="showModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon"><i class="fas fa-pen"></i></button></div>
-                                <button onclick="showModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon red"><i class="fas fa-trash-alt"></i></button>
-                                <div id="popupModal-delete<?= $adoption_request["animal_id"] ?>" class="modal">
-                                    <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
-                                        <span class="close" onclick="hideModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')">&times;</span>
-                                        <h3 style="text-align: center;">Are you sure you want to delete event?</h3>
-                                        <a href="/OrgManagement/delete_animal?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
-                                        <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')">Cancel</a>
-                                    </div>
-                                </div>
-                                <div>
-                                </div>
-                            </div>
-                        </div>
-                </td>
 
-                <td>
-                    <div style="position: relative; justify-items:center; align-items:center; display:flex;">
-                        <div class="mouse-over-div div-size" style="right: 0px;">
-                            <h2 class="center">Stray Feeding Campaign</h2>
-                            <div class="event-content"><img class="event-image" src="/assets\images\org/stray_feeding.jpg"></div>
-                            <div class="event-content">
-                                <p>The PAWS feeding program is organized to help alleviate the problem of food shortages in our shelter. It also allows the shelter animals to add something different to their diet other than their daily kibble.</p>
-                            </div>
-                            <p class="flex" style="position: absolute; color: #aaa6a1; bottom: 0px;font-size:0.8rem;">Published On : 10-09-2021</p>
-                        </div>
                         <div class="div-edit-delete" style="justify-items:center; align-items:center; display:flex;">
                             <div>
-                                <div><button onclick="showModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon"><i class="fas fa-pen"></i></button></div>
-                                <button onclick="showModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon red"><i class="fas fa-trash-alt"></i></button>
-                                <div id="popupModal-delete<?= $adoption_request["animal_id"] ?>" class="modal">
+                                <div><button onclick="showModel('popupModal-delete<?= $org_news_event["item_id"] ?>')" class="btn btn-link btn-icon"><i class="fas fa-pen"></i></button></div>
+                                <button onclick="showModel('popupModal-delete<?= $org_news_event["item_id"] ?>')" class="btn btn-link btn-icon red"><i class="fas fa-trash-alt"></i></button>
+                                <div id="popupModal-delete<?= $org_news_event["item_id"] ?>" class="modal">
                                     <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
-                                        <span class="close" onclick="hideModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')">&times;</span>
+                                        <span class="close" onclick="hideModel('popupModal-delete<?= $org_news_event["item_id"] ?>')">&times;</span>
                                         <h3 style="text-align: center;">Are you sure you want to delete event?</h3>
-                                        <a href="/OrgManagement/delete_animal?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
-                                        <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-delete<?= $adoption_request["animal_id"] ?>')">Cancel</a>
+                                        <a href="/OrgManagement/delete_animal?item_id=<?= $org_news_event["item_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                        <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-delete<?= $org_news_event["item_id"] ?>')">Cancel</a>
                                     </div>
                                 </div>
                                 <div>
@@ -191,9 +172,11 @@
                 </td>
             </tr>
 
-
+            <?php } ?>
         </table>
     </div>
+    </div>
+
 </div>
 <div style="margin-left: 1200px; padding-bottom: 0px"><a href="/OrgManagement/add_new_event" class="btn right outline button-hover" style="width: 60px; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Event"><i class="fas fa-plus"></i></a></div>
 
