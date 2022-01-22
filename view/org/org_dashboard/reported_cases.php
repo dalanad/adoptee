@@ -34,6 +34,22 @@
         border-color: black;
     }
 
+    .details {
+        position: absolute;
+        width: 300px;
+        height: 200px;
+        top: 20rem;
+        left: 8px;
+        background: white;
+        box-shadow: var(--shadow);
+        z-index: 50;
+        border-radius: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 0.5rem;
+        border-color: black;
+    }
+
+
     .btn-link2 {
         color: #313636;
         background: no-repeat;
@@ -127,19 +143,19 @@
 
 <div style="position: relative;padding-top: 2rem;">
     <div class="cases_list">
-        <div style="height:600px; overflow-x:hidden; overflow-y: auto;">
+        <div style="height:230px; overflow-x:hidden; overflow-y: auto;">
             <table class="table" style="text-align: center;">
                 <tr>
                     <th>TYPE</th>
-                    <th>INFO</th>
+                    <!-- <th>INFO</th> -->
                     <th>STATUS</th>
-                    <th>RESCUE</th>
+                    <th></th>
                 </tr>
 
                 <?php foreach ($reported_cases as $reported_case) { ?>
                     <tr>
                         <td><?= $reported_case["type"] ?></td>
-                        <td>
+<!--                         <td>
                             <button onclick="showModel('popupModal<?= $reported_case["report_id"] ?>')" title="More Details" class="btn btn-link">Details</button>
                             <div id="popupModal<?= $reported_case["report_id"] ?>" class="modal">
                                 <div class="modal-content">
@@ -183,12 +199,12 @@
 <div style="padding: 5px;" class="center"><img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;">&nbsp;<img src="../../../assets\images\dogs/placeholder2.jpg" style="width: 25%; height: 25%; border-radius: 5%;"></div>
 </div>
 </div>
+</td> -->
+<td>
+    <div><span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : ($reported_case["status"] == "RESCUED" ? 'green' : 'orange') ?>"> <?= $reported_case["status"] ?> </span></div>
 </td>
 <td>
-    <div ><span class="tag <?= $reported_case["status"] == "PENDING" ? 'pink' : 'green' ?>"> <?= $reported_case["status"] ?> </span></div>
-</td>
-<td>
-    <div><a onclick="showModel('popupModal-confirm<?= $reported_case["report_id"] ?>')"> <span class="tag"> RESCUE </span></a></div>
+    <div><button onclick="showModel('popupModal-confirm<?= $reported_case["report_id"] ?>')" class="btn btn-link green"><i class="<?= $reported_case["status"] == "PENDING" ? 'fas fa-check' : ''?>"></i>&nbsp;<?= $reported_case["status"] == "PENDING" ? 'Accept' : ''?></button></div>
     <div id="popupModal-confirm<?= $reported_case["report_id"] ?>" class="modal">
         <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
             <span class="close" onclick="hideModel('popupModal-confirm<?= $reported_case["report_id"] ?>')">&times;</span>
@@ -202,6 +218,14 @@
 <?php } ?>
 </table>
 </div>
+</div>
+
+<div class="details">
+    <div style="height:180px; overflow-y: auto;">
+        <h4>More Details</h4>
+        <p style="font-size: small;"><?= $reported_case["description"] ?></p>
+        <div style=""></div>
+    </div>
 </div>
 
 <div class="rounded" style="height: 600px; width: 1250px; border-radius: .5rem;" id="googleMap"></div>

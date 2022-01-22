@@ -116,7 +116,7 @@ $org_rescues = array(
     <div class="overflow-auto" style="height:525px">
             <?php foreach ($org_rescues as $org_rescue) { ?>
                     <div class="div-size" style="display:flex; padding-left: 1rem; padding-bottom: .5rem; padding-top:.5rem;">
-                    <div style="width: 150px;"><i class="txt-clr fa fa-lg fa-<?= $org_rescue['type'] == "Dog" ? 'dog' : ($org_rescue['type'] == "Cat" ? 'cat' : 'paw' ) ?>"></i>&nbsp;&nbsp; <?= $org_rescue["type"] ?></div>
+                    <div style="width: 150px;"><i class="txt-clr fa fa-lg fa-<?= $org_rescue['type'] == "Dog" ? 'dog' : ($org_rescue['type'] == "Cat" ? 'cat' : 'paw' ) ?>"></i>&nbsp;&nbsp; <?= $org_rescue['type'] ?></div>
                     <div style="width: 180px;"><?= $org_rescue["date_rescued"] ?></div>
                     <div style="width: 180px;"><?= $org_rescue["contact_number"] ?></div>
                     <div style="width: 250px;"><?= $org_rescue["description"] ?></div>
@@ -124,9 +124,9 @@ $org_rescues = array(
                     
                     <div style="width: 150px;">
                     <button onclick="showModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')" title="More Details" class="btn btn-link">Details</button>
-                        <div id="popupModal<?= $org_rescue["org_rescue_id"] ?>" class="modal">
+                        <div id="popupModal<?= $org_rescue["report_id"] ?>" class="modal">
                             <div class="modal-content">
-                                <span class="close" onclick="hideModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')">&times;</span>
+                                <span class="close" onclick="hideModel('popupModal<?= $org_rescue["report_id"] ?>')">&times;</span>
                                 <h3>Description</h3>
                                 <?= $org_rescue["description"] ?>
                             </div>
