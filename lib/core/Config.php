@@ -1,7 +1,7 @@
 <?php
 
 define('domain_name', (stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://') . $_SERVER['HTTP_HOST']);
-
+define('db_host', getenv("DB_HOST") ?? "");
 class Config
 {
     private static $configuration_data = array(
@@ -9,17 +9,17 @@ class Config
         "domain" => domain_name,
 
         // database credentials
-        "db.dsn" => "mysql:host=;dbname=adoptee;charset=utf8",
+        "db.dsn" => "mysql:host=" . db_host . ";dbname=adoptee;charset=utf8",
         "db.user" => "root",
         "db.pass" => "root",
 
         // email credentials
         "email.host" => "smtp.sendgrid.net",
         "email.user" => "apikey",
-        "email.pass" => "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",
+        "email.pass" => "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",
 
         // GMaps credentials
-        "maps.key" => "AIzaSyAN2HxM42eIrEG1e5b9ar2H_2_V6bMRjWk",
+        "maps.key" => "AIzaSyBSB7zeeAI3QC42UmxHEFqS715ulfPFASc",
 
         // sms (Notify.lk) credentials
         "sms.user" => "13947",
