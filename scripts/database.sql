@@ -100,9 +100,8 @@ create table animal_vaccines (
 );
 
 create table rescued_animal (
-    animal_id int(10) primary key,
     org_id  int(10),
-    report_id int(10),
+    report_id int(10) primary key,
     rescued_date date
 );
 
@@ -230,7 +229,7 @@ create table report_rescue(
     contact_number int(10),
     location varchar(100) not null,
     location_coordinates POINT,
-    status enum('PENDING','RESCUED') not null default 'PENDING',
+    status enum('PENDING', 'IN PROGRESS','RESCUED') not null default 'PENDING',
     photos JSON not null    
 );
 
@@ -239,7 +238,7 @@ create table org_content (
     org_id int(10),
     created_time timestamp  DEFAULT CURRENT_TIMESTAMP,
     heading varchar(50),
-    description varchar(200),
+    description varchar(2000),
     photos JSON not null
 );
 
@@ -263,7 +262,7 @@ create table adoption_request (
     user_id int(10),
     org_id int(10),
     request_date date,
-    status enum('PENDING','ADOPTED','REJECTED') not null default 'PENDING',
+    status enum('PENDING','ACCEPTED','REJECTED') not null default 'PENDING',
     has_pets boolean,
     petsafety varchar(100) ,
     children boolean,
@@ -347,8 +346,7 @@ add foreign key(animal_id) references animal(animal_id);
 
 alter table rescued_animal
 add foreign key(report_id) references report_rescue(report_id),
-add foreign key(org_id) references organization(org_id),
-add foreign key(animal_id) references animal(animal_id);
+add foreign key(org_id) references organization(org_id);
 
 alter table user_pet
 add foreign key(animal_id) references animal(animal_id),
