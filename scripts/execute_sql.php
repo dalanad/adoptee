@@ -2,7 +2,7 @@
 <?php
 $query = file_get_contents($_GET["script"] ?? "database.sql");
 
-$conn = new mysqli("localhost", "root", "root");
+$conn = new mysqli(getenv("DB_HOST") ?? "", "root", "root");
 
 
 $conn->multi_query($query);

@@ -40,8 +40,9 @@ RewriteBase /
 </IfModule>
 
 # allows PWA service worker to register 
-Header set Service-Worker-Allowed '/'
-
+<IfModule mod_headers.c>
+  Header set Service-Worker-Allowed '/'
+</IfModule>
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 #RewriteCond %{REQUEST_URI} !^(/assets/(.*)\.(.*))$
