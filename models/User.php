@@ -74,23 +74,10 @@ class User extends BaseModel
 
     static function getUserPets($user_id)
     {
-        // $query = "SELECT animal.*, round(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', user_pet.status
-        // FROM user_pet, animal
-        // WHERE ($user_id = user_pet.user_id AND user_pet.animal_id=animal.animal_id)
-        // UNION SELECT animal.*, round(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', NULL 'NullCol'
-        // FROM animal, animal_for_adoption afa
-        // WHERE ($user_id = afa.user_id AND afa.animal_id = animal.animal_id)";
-        // return self::select($query);
-
         $query = "SELECT DISTINCT animal.*, round(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', user_pet.status
         FROM user_pet, animal, animal_for_adoption afa
         WHERE ($user_id = user_pet.user_id AND user_pet.animal_id=animal.animal_id AND $user_id=afa.user_id)";
         return self::select($query);
-    }
-
-    static function addNewPet($name,$type,$other,$gender,$dob,$color,$photo)
-    {
-        
     }
 
     static function deletePet($petid)
@@ -114,5 +101,18 @@ class User extends BaseModel
     {
         $query = "SELECT * FROM `notifications` WHERE user_id = :user_id LIMIT  $limit_to";
         return self::select($query, ["user_id" => $user_id ]);
+    }
+
+    static function getSubscriptions()
+    {
+        $user_id = $_SESSION['user']['user_id'];
+        $query = "SELECT s.*, st.*, o.name as org
+        FROM `sponsorship` s,`sponsorship_tier` st,  `organization` o
+        WHERE s.user_id = $user_id
+        AND s.org_id = st.org_id
+        AND s.name = st.name
+        AND o.org_id = s.org_id";
+
+        return self::select($query);
     }
 }

@@ -106,6 +106,23 @@ class Organization extends BaseModel
         return self::select($query);
     }
 
+    static function getOrgSponsorships($orgId)
+    {
+        $query = "SELECT st.*
+        FROM sponsorship_tier st
+        WHERE st.org_id=$orgId
+        AND st.status='ACTIVE'";
+        return self::select($query);
+    }
+
+    static function getUserSponsorships($orgId,$userId)
+    {
+        $query = "SELECT * FROM sponsorship 
+        WHERE user_id=$userId 
+        and org_id=$orgId
+        and status='ACTIVE'";
+        return self::select($query);
+    }
     
     static function getOrgReviews($orgId)
     {

@@ -26,7 +26,7 @@ class ProfileController extends Controller
     static function change_password()
     {
         $data = ["active" => "change_password"];
-        View::render("auth/profile/user_profile", $data); //backend not connected
+        View::render("auth/profile/user_profile", $data);
     }
 
     static function notifications()
@@ -46,14 +46,16 @@ class ProfileController extends Controller
     static function adoptions()
     {
         $user = new User;
-        $data = ["active" => "adoptions", "adoptions" => $user->getAdoptions($_SESSION['user']['user_id'])];
+        $updates = Adoptions::getUpdates($_SESSION['user']['user_id']);
+        $adoptions = $user->getAdoptions($_SESSION['user']['user_id']);
+        $data = ["active" => "adoptions", "adoptions" => $adoptions, "updates" => $updates];
         View::render("auth/profile/user_profile", $data);
     }
 
     static function rescues()
     {
         $report = new ReportRescue;
-        $data = ["active" => "rescues", "data" => $report->getRescuedPets($_SESSION['user']['user_id'])];
+        $data = ["active" => "rescues", "rescues" => $report->getRescuedPets($_SESSION['user']['user_id'])];
         View::render("auth/profile/user_profile", $data);
     }
 
@@ -71,19 +73,42 @@ class ProfileController extends Controller
         View::render("auth/profile/user_profile", $data);
     }
 
+    function add_pet()
+    {
+        $vacc_proof =  image::multi("vacc_proof");
+        $photo =  image::single("photo");
+        
+        $_POST['anti_rabies']?? '';
+        $_POST['parvo']?? '';
+        $_POST['dhl']?? '';
+        $_POST['tricat']?? '';
+        $_POST['anti_rabies_booster']?? '';
+        $_POST['parvo_booster']?? '';
+        $_POST['dhl_booster']?? '';
+        $_POST['tricat_booster']?? '';
+        $dewormed = isset($_POST['dewormed'])? '1':'0';
+        Adoptions::addNewPet($_POST['name'],$_POST['type'],$_POST['gender'],$_POST['dob'],$_POST['color'],$_POST['anti_rabies'],$_POST['parvo'],$_POST['dhl'],$_POST['tricat'],$_POST['anti_rabies_booster'],$_POST['parvo_booster'],$_POST['dhl_booster'],$_POST['tricat_booster'],$dewormed,$photo,$vacc_proof,$_SESSION['user']['user_id']);
+        $this->redirect("/Profile/my_pets");
+    }
+
+    static function delete_pet()
+    {
+        User::deletePet($_POST['delete']);
+        self::my_pets();
+    }
+
     static function sponsorships()
     {
-        $data = ["active" => "sponsorships"];
-        View::render("auth/profile/user_profile", $data); //backend not connected
+        $data = [
+            "active" => "sponsorships",
+            "subscriptions" => User::getSubscriptions()
+        ];
+        View::render("auth/profile/user_profile", $data);
     }
 
     static function payments()
     {
         $data = ["active" => "payments"];
         View::render("auth/profile/user_profile", $data); //backend not connected
-    }
-
-    static function add_pet()
-    {
     }
 }

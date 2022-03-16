@@ -104,5 +104,24 @@ class Adoptions extends BaseModel
         return self::select("SELECT breeds.type,breed FROM breeds;");
     }
 
-    
+    static function addNewPet($name,$type,$gender,$dob,$color,$antirabies,$parvo,$dhl,$tricat,$antirabies_booster,$parvo_booster,$dhl_booster,$tricat_booster,$dewormed,$photo,$vaccproof,$user)
+    {
+        $color = json_encode($color);
+
+        $query = "INSERT INTO animal(`type`,`name`,`gender`,`dob`,`color`,`photo`) 
+        VALUES('$type','$name','$gender','$dob','$color','$photo')";
+        
+        self::insert($query);
+
+        $animal_id = self::lastInsertId();
+        
+
+        $query = "INSERT INTO animal_vaccines(`animal_id`,`anti_rabies`,`dhl`,`parvo`,`tricat`,`anti_rabies_booster`,`dhl_booster`,`parvo_booster`,`tricat_booster`,`vacc_proof`)
+        VALUES($animal_id,'$antirabies','$dhl','$parvo','$tricat','$antirabies_booster','$dhl_booster','$parvo_booster','$tricat_booster','$vaccproof')";
+        self::insert($query);
+
+        $query = "INSERT INTO user_pet(`animal_id`,`user_id`,`status`,`dewormed`) 
+        VALUES($animal_id,$user,'ACTIVE',$dewormed)";
+        self::insert($query);        
+    }
 }

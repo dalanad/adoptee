@@ -83,8 +83,8 @@ INSERT INTO `org_feedback` (`org_id`, `user_id`, `living_conditions`, `healthcar
 INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`, `photos`) VALUES 
 ('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/1a.jpg","/assets/data/dogs/1b.jpg","/assets/data/dogs/1c.jpg"]'),
 ('21', 'Playful and a joy to be around, weaned', '2021-08-26', 'LISTED', NULL, '3', NULL, '["/assets/data/cats/1a.jpg","/assets/data/cats/1b.jpg","/assets/data/cats/1c.jpg"]'),
-('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/2a.jpg","/assets/data/dogs/2b.jpg","/assets/data/dogs/2c.jpg"]'),
-('3', 'jade-green eyes, not vaccinated','2021-09-01', 'ADOPTED', '2021-09-03', '1',3, '["/assets/data/dogs/3a.jpg","/assets/data/dogs/3b.jpg","/assets/data/dogs/3c.jpg"]'),
+('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2', NULL, '["/assets/data/dogs/2a.jpg","/assets/data/dogs/2b.jpg","/assets/data/dogs/2c.jpg"]'),
+('3', 'jade-green eyes, not vaccinated','2021-09-01', 'ADOPTED', '2021-09-13', '1','4', '["/assets/data/dogs/3a.jpg","/assets/data/dogs/3b.jpg","/assets/data/dogs/3c.jpg"]'),
 ('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/cats/2a.jpg","/assets/data/cats/2b.jpg","/assets/data/cats/2c.jpg"]'),
 ('4', 'Playful and affectionate, vaccinated', '2021-08-26', 'ADOPTED', '2021-09-03', '1',3, '["/assets/data/dogs/4a.jpg","/assets/data/dogs/4b.jpg"]'),
 ('5', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/dogs/5a.jpg","/assets/data/dogs/5b.jpg","/assets/data/dogs/5c.jpg"]'),
@@ -126,13 +126,12 @@ INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`)
 VALUES ('1', '4', '2021-12-28');
 
  INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
- VALUES ('1', '3', '1', '2021-08-01', 'PENDING', '1', 'The dog that I already have is easy going and bond well with other animals.', '1', 'Used to pets');
- INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
- VALUES ('2', '4', '1', '2021-09-02', 'PENDING', '0', '', '1', 'Used to pets');
- INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
- VALUES ('3', '4', '1', '2021-09-12', 'ACCEPTED', '0', '', '1', 'Used to pets');
- INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
- VALUES ('4', '3', '1', '2021-08-30', 'ACCEPTED', '1', 'Safe', '1', 'Safe');
+ VALUES 
+ ('1', '3', '1', '2021-08-01', 'PENDING', '1', 'The dog that I already have is easy going and bond well with other animals.', '1', 'Used to pets'),
+ ('2', '4', '1', '2021-09-02', 'PENDING', '0', '', '1', 'Used to pets'),
+ ('3', '4', '1', '2021-09-12', 'ADOPTED', '0', '', '1', 'Used to pets'),
+ ('4', '3', '1', '2021-09-02', 'ADOPTED', '0', '', '1', 'Used to pets'),
+ ('25', '3', '2', '2021-01-11', 'ADOPTED', '0', '', '1', 'Used to pets');
 
  INSERT INTO `consultation` ( `consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
  VALUES 
