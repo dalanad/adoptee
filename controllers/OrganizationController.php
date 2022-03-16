@@ -144,7 +144,22 @@ class OrganizationController extends Controller
         View::render("public/organizations/donation_success");
     }
 
-    
+    public function subscribe()
+    {
+        $organization = new Organization;
+        $organization->subscribe($_POST['tier'],$_POST['org'],$_SESSION['user']['user_id']);
+        $orgData = ["sponsorship" => $organization->getOrgSponsorships($_POST['org'],$_SESSION['user']['user_id']), "active"=>"sponsorships", "details" => $organization->getOrgDetails($_POST['org'])];
+        print_r($orgData);
+        // View::render("public/organizations/organization_profile", $orgData);
+    }
+
+    public function unsubscribe()
+    {
+        $organization = new Organization;
+        $organization->unsubscribe($_POST['tier'],$_POST['org'],$_SESSION['user']['user_id']);
+        $orgData = ["sponsorship" => $organization->getOrgSponsorships($_POST['org'],$_SESSION['user']['user_id']), "active"=>"sponsorships", "details" => $organization->getOrgDetails($_POST['org'])];
+        print_r($orgData);
+    }    
 }
 
 ?>

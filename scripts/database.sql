@@ -109,6 +109,7 @@ create table user_pet (
     animal_id int(10) ,
     user_id int(10),
     status enum("ACTIVE","REMOVED"),
+    dewormed boolean,
     primary key (animal_id),
     unique (animal_id, user_id)
 );
@@ -297,7 +298,7 @@ create table animal_vaccinations (
 create table breeds (
     breedId int(11) primary key auto_increment,
     type enum("CAT","DOG"),
-    breed varchar(20),
+    breed varchar(20) unique,
     height double,
     weight double,
     life_expectancy int,

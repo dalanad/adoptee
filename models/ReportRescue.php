@@ -23,7 +23,7 @@ class ReportRescue extends BaseModel
 
     static function getRescueReportById($report_id)
     {
-        $query = "select *  from `report_rescue` where report_id= :report_id";
+        $query = "SELECT *  from `report_rescue` where report_id= :report_id";
         return self::selectOne($query, ["report_id" => $report_id]);
     }
 
@@ -36,5 +36,10 @@ class ReportRescue extends BaseModel
         AND user.user_id=$user_id
         AND rr.report_id=ra.report_id";
         return self::select($query);
+    }
+
+    static function getRescueUpdates()
+    {
+        // $query = "SELECT "
     }
 }
