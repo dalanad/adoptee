@@ -96,8 +96,12 @@ if (!isset($active)) {
 <div class="container">
     <div style="padding: 1rem;align-items: flex-start;display: flex;">
         <div>
-            <a href="/OrgManagement/org_adoption_listing" class="btn btn-faded black"><i class="fa fa-arrow-left"></i> &nbsp; Back</a>
-            <h2 class="flex items-center"> <i class="far fa-cogs"></i> &nbsp; Organization Settings </h2>
+            <img style="max-height:50px" src="/assets/images/logo_vector_filled.svg" alt="Adoptee Logo" />
+            <br>
+            <div style="display:flex;align-items:center">
+                <a href="/OrgManagement/org_adoption_listing" class="btn btn-faded black"><i class="fa fa-arrow-left"></i> &nbsp; Back</a>
+                <h2 class="flex items-center">  &nbsp; <i class="far fa-cogs"></i> &nbsp; Organization Settings </h2>
+            </div>
         </div>
         <div style="flex: 1 1 0;"></div>
         <?= user_btn() ?>
@@ -113,7 +117,7 @@ if (!isset($active)) {
                 <?php  } ?>
             </div>
             <div class="flex-auto   mx2 ">
-                <?php include __DIR__ . "./org_settings/" . $active . ".php" ?>
+                <?php include __DIR__ . "/org_settings/" . $active . ".php" ?>
             </div>
         </div>
     </div>

@@ -57,7 +57,7 @@ class OrgManagementController extends Controller{
     }
 
     function accept_adoption_request(){
-        OrgManagement::accept_adoption_request($_GET['animal_id']);
+        OrgManagement::accept_adoption_request($_GET['animal_id'],$_GET['user_id']);
         $this->redirect('/OrgManagement/adoption_requests');
     }
 
@@ -87,7 +87,7 @@ class OrgManagementController extends Controller{
         $data = [
             "active" => "org_rescues",
 
-            "org_rescues"=>OrgManagement::findRescuedAnimalsByOrgId(1)
+            "org_rescues"=>OrgManagement::findRescuedAnimalsByOrgId()
     ];
         View::render("org/dashboard", $data);
     }
@@ -114,8 +114,8 @@ class OrgManagementController extends Controller{
     function org_news_events()
     {
         $data = [
-            "active" => "org_news_events"
-
+            "active" => "org_news_events",
+            "org_news_events"=>OrgManagement::findOrgContentByOrgId()
     ];
         View::render("org/dashboard", $data);
     }
@@ -152,4 +152,9 @@ class OrgManagementController extends Controller{
         View::render("org/dashboard", $data);
     }
 
+    function animals_report()
+    {
+        View::render("org/org_dashboard/animals_report");
+        
+    }
 }

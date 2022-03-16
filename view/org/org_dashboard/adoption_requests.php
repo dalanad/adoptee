@@ -90,7 +90,6 @@
                 <th>HAVE PETS</th>
                 <th>HAVE CHILDREN</th>
                 <th>STATUS</th>
-                <th>RESPOND REQUEST</th>
                 <th>INFO</th>
             </tr>
 
@@ -99,39 +98,22 @@
                     <td>
                         <table>
                             <tr>
-                                <td><img src="<?= $adoption_request["photo"]?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
-                                <td><?= $adoption_request["animal_name"] ?></td>
+                                <td><img src="<?= $adoption_request["photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
+                                <td>
+                                    <div>
+                                        <div style="padding: 3px;"><?= $adoption_request["animal_name"] ?></div>
+                                        <div style="padding: 3px;"><i class="txt-clr fa fa-lg fa-<?= $adoption_request['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i></div>
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                     </td>
                     <td><?= $adoption_request["type"] ?></td>
                     <td><?= $adoption_request["user_name"] ?></td>
                     <td><?= $adoption_request["request_date"] ?></td>
-                    <td><span class="tag <?= $adoption_request["has_pets"] ? 'green' : 'pink' ?>"><?= $adoption_request["has_pets"] ? "YES" : "NO" ?> </span></td>
-                    <td><span class="tag <?= $adoption_request["children"] ? 'green' : 'pink' ?>"><?= $adoption_request["children"] ? "YES" : "NO" ?> </span></td>
-                    <td><span class="tag <?= $adoption_request["status"] == "PENDING" ? 'orange' :($adoption_request["status"] == "ADOPTED" ? 'green' : 'pink')  ?>"> <?= $adoption_request["status"] ?> </span></td>
-                    <td>
-                        <button onclick="showModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon green"><i class="fas fa-check-circle"></i> </button>
-                        <div id="popupModal-accept<?= $adoption_request["animal_id"] ?>" class="modal">
-                            <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
-                                <span class="close" onclick="hideModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')">&times;</span>
-                                <h3 style="text-align: center;">Are you sure you want to accept request?</h3>
-                                <a href="/OrgManagement/accept_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
-                                <button  class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')">Cancel</button>
-                            </div>
-
-                        </div>
-                        &nbsp;
-                        <button onclick="showModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon pink"><i class="fas fa-times-circle"></i></button>
-                        <div id="popupModal-reject<?= $adoption_request["animal_id"] ?>" class="modal">
-                            <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
-                                <span class="close" onclick="hideModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')">&times;</span>
-                                <h3 style="text-align: center;">Are you sure you want to reject request?</h3>
-                                <a href="/OrgManagement/reject_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
-                                <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')">Cancel</a>
-                            </div>
-
-                    </td>
+                    <td><span class="tag <?= $adoption_request["has_pets"] ? 'green' : 'red' ?>"><?= $adoption_request["has_pets"] ? "YES" : "NO" ?> </span></td>
+                    <td><span class="tag <?= $adoption_request["children"] ? 'green' : 'red' ?>"><?= $adoption_request["children"] ? "YES" : "NO" ?> </span></td>
+                    <td><span class="tag <?= $adoption_request["status"] == "PENDING" ? 'orange' :($adoption_request["status"] == "ACCEPTED" ? 'green' : 'red')  ?>" title="<?= $adoption_request["status"] == "ACCEPTED" ? 'fas fa-check' : ''?>"> <?= $adoption_request["status"] ?> </span></td>
                     <td>
                         <button  onclick="showModel('popupModal<?= $adoption_request["animal_id"] ?>')" title="More Details" class="btn btn-link">Details</button>
                         <div id="popupModal<?= $adoption_request["animal_id"] ?>" class="modal">
@@ -145,6 +127,29 @@
                             </div>
                         </div>
                     </td>
+                    <td>
+                        <button onclick="showModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon green"><i class="<?= $adoption_request["status"] == "PENDING" ? 'fas fa-check' : ''?>"></i>&nbsp;<?= $adoption_request["status"] == "PENDING" ? 'Accept' : ''?> </button>
+                        <div id="popupModal-accept<?= $adoption_request["animal_id"] ?>" class="modal">
+                            <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
+                                <span class="close" onclick="hideModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')">&times;</span>
+                                <h3 style="text-align: center;">Are you sure you want to accept request?</h3>
+                                <a href="/OrgManagement/accept_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>&user_id=<?= $adoption_request["user_id"] ?>" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                <button  class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')">Cancel</button>
+                            </div>
+
+                        </div>
+                        &nbsp;
+                        <button onclick="showModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon red"><i class="<?= $adoption_request["status"] == "PENDING" ? 'fas fa-times' : ''?>"></i>&nbsp;<?= $adoption_request["status"] == "PENDING" ? 'Reject' : ''?></button>
+                        <div id="popupModal-reject<?= $adoption_request["animal_id"] ?>" class="modal">
+                            <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
+                                <span class="close" onclick="hideModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')">&times;</span>
+                                <h3 style="text-align: center;">Are you sure you want to reject request?</h3>
+                                <a href="/OrgManagement/reject_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')">Cancel</a>
+                            </div>
+
+                    </td>
+                    
                 </tr>
             <?php } ?>
 

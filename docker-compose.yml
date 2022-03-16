@@ -3,11 +3,13 @@ services:
   www:
     build: .
     ports:
-      - "8080:80"
+      - "80:80"
     networks:
       - default
     environment:
-      - DB_HOST=db
+      - DB_HOST=db 
+    volumes:
+      - ".:/var/www"       
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
@@ -16,4 +18,3 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - "./scripts/database.sql:/docker-entrypoint-initdb.d/1.sql"
-      - "./scripts/seed_data.sql:/docker-entrypoint-initdb.d/2.sql"

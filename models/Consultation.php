@@ -5,7 +5,7 @@ class Consultation extends BaseModel
     public static function bookConsultationPet($doctorId, $userId, $type, $date, $time,  $animalId)
     {
         $query = "INSERT INTO `consultation` (`consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
-        VALUES ('$date', '$time', '$animalId', '$doctorId', '$userId', 'PENDING', '$type', NULL);";
+        VALUES ('$date', '$time', '$animalId', '$doctorId', '$userId', $type=='ADVISE'?'ACCEPTED':'PENDING', '$type', NULL);";
         self::insert($query);
         return self::lastInsertId(); //to insert the txn_id into consultation table later
     }
@@ -70,7 +70,7 @@ class Consultation extends BaseModel
         return $consultations[0];
     }
 
-    public static function findConsultationsByDoctorId($doctorId, $type, $search)
+    public static function findConsultationsByDoctorId($doctorId, $type, $search, $status = "ALL")
     {
 
         $query =  "SELECT c.* FROM `consultation` c
@@ -78,6 +78,7 @@ class Consultation extends BaseModel
                     WHERE c.doctor_user_id = $doctorId
                     and status in ('ACCEPTED','COMPLETED')"
             . (isset($type) && $type != "ANY" ? " and c.type = '$type' " : "")
+            . ($status != "ALL" ? " and c.status = '$status' " : "")
             . (isset($search) && $search != "" ? " and a.name like '%$search%' " : "");
 
         $consultations = self::select($query);

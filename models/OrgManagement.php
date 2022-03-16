@@ -30,7 +30,7 @@ class OrgManagement extends BaseModel
     static function findAnimalsByOrgId()
     {
         $org_id = $_SESSION['org_id'];
-        $query = "SELECT animal.animal_id, name,type, other, color, FLOOR(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', gender,date_listed,status,date_adopted,description, animal.photo as avatar_photo from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id and animal_for_adoption.status<>'DELETED'";
+        $query = "SELECT animal.animal_id, name,type, other, color, dob, FLOOR(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', gender,date_listed,status,date_adopted,description, animal.photo as avatar_photo from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id and animal_for_adoption.status<>'DELETED'";
         return BaseModel::select($query);
     }
 
@@ -60,11 +60,13 @@ class OrgManagement extends BaseModel
         return BaseModel::insert($query);
     }
 
-    static function findRequestsByOrgId($org_id)
+    static function findRequestsByOrgId()
     {
         $query = "SELECT 
         animal.name as animal_name, 
-        animal.type, 
+        animal.type,
+        animal.gender as gender, 
+        user.user_id,
         user.name as user_name,
         user.address as address,
         user.email as email,
@@ -87,10 +89,12 @@ class OrgManagement extends BaseModel
         return BaseModel::select($query);
     }
 
-    static function accept_adoption_request($animal_id)
+    static function accept_adoption_request($animal_id,$user_id)
     {
-        $query = "UPDATE `adoption_request` SET status = 'ADOPTED' WHERE animal_id='$animal_id';
-        UPDATE `animal_for_adoption` SET date_adopted = curdate() WHERE animal_id='$animal_id'";
+    
+        $query = "UPDATE `adoption_request` SET status = 'ACCEPTED' WHERE animal_id='$animal_id' AND user_id = '$user_id';
+        INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES('$animal_id','$user_id');
+        UPDATE `animal_for_adoption` SET status = 'ADOPTED', date_adopted = curdate(), user_id = '$user_id' WHERE animal_id='$animal_id'";
 
         return BaseModel::insert($query);
     }
@@ -129,7 +133,9 @@ class OrgManagement extends BaseModel
 
     static function findRescuedAnimalsByOrgId()
     {
-        $query = "SELECT * from report_rescue";
+        $org_id = $_SESSION['org_id'];
+
+        $query = "SELECT * from report_rescue,rescued_animal WHERE rescued_animal.org_id = '$org_id'";
         return BaseModel::select($query);
     }
 
@@ -141,6 +147,14 @@ class OrgManagement extends BaseModel
         UPDATE `report_rescue` SET photos = '$photos' WHERE report_id='$report_id'";
         return BaseModel::insert($query);
         
+    }
+
+    static function findOrgContentByOrgId()
+    {
+        $org_id = $_SESSION['org_id'];
+
+        $query = "SELECT * from org_content WHERE org_id = '$org_id'";
+        return BaseModel::select($query);
     }
 
     static function add_new_event($org_id, $heading, $description, $photos)
@@ -167,5 +181,13 @@ class OrgManagement extends BaseModel
             o.org_id = afa.org_id    
         ";
         return self::select($query);
+    }
+
+    static function animals_report()
+    {
+        $org_id = $_SESSION['org_id'];
+
+        $query = "SELECT * from animal_for_adoption WHERE org_id = '$org_id'";
+        return BaseModel::select($query);
     }
 }

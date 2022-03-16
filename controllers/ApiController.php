@@ -8,7 +8,7 @@ class ApiController extends Controller
 
     function get_consultations()
     {
-        $consultations = Consultation::findConsultationsByDoctorId($_SESSION["user"]["user_id"],$_GET["type"],$_GET["search"]);
+        $consultations = Consultation::findConsultationsByDoctorId($_SESSION["user"]["user_id"],$_GET["type"],$_GET["search"],$_GET['status']);
         View::json($consultations);
     }
 
