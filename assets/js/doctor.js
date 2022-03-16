@@ -115,8 +115,8 @@ class AppointmentsTimeline {
 	_date = new Date();
 	_cells = {};
 	_data = {};
-	_onDataChanged = () => {};
-	_onCellSelected = () => {};
+	_onDataChanged = () => { };
+	_onCellSelected = () => { };
 	_activeCell = null;
 
 	isSchedule = false;
@@ -408,6 +408,12 @@ async function initChat(id, is_user = false) {
 	let chat_header = document.querySelector(".chat-header");
 
 	const con = await fetch("/api/get_consultation_by_id?consultation_id=" + id).then((e) => e.json());
+
+	if (['COMPLETED', 'CANCELED', 'EXPIRED'].includes(con.status)) {
+		chat_window.querySelector('.chat-footer').style.display = 'none';
+		chat_header.querySelector("#btn-complete").parentElement.insertAdjacentHTML('afterbegin', con.status)
+		chat_header.querySelector("#btn-complete").style.display = 'none'
+	}
 
 	chat_header.classList.remove("fade");
 	chat_window.querySelector(".animal-image").style.backgroundImage = `url('${is_user ? "/assets/images/doctor_avatar.jpg" : con.animal.photo}')`;

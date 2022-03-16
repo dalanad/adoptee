@@ -403,29 +403,36 @@ CREATE EVENT `SEND_VACCINE_REMINDERS` ON SCHEDULE EVERY 1 HOUR ENABLE
 DO
 BEGIN
 
-    SELECT CONCAT('Your pet ', a.name,' needs to be vaccinated with ',
-            IF(v.anti_rabies < DATE_SUB(NOW(), INTERVAL 1 YEAR) OR v.anti_rabies_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR),' "Anti-Rabies", ','' ),
-            IF(v.dhl < DATE_SUB(NOW(), INTERVAL 1 YEAR) OR v.dhl_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR),' "DHL", ','' ),
-            IF(v.parvo < DATE_SUB(NOW(), INTERVAL 1 YEAR) OR v.parvo_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR),' "PARVO", ','' ),
-            IF(v.tricat < DATE_SUB(NOW(), INTERVAL 1 YEAR) OR v.tricat_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR),' "TRICAT", ','' )
-        ) message,
-        'Vaccination Reminder' title,
-        v.*, up.user_id 
-    FROM animal_vaccines v 
-        INNER JOIN animal a ON a.animal_id = v.animal_id   
-        INNER JOIN user_pet up ON up.animal_id = v.animal_id
-    WHERE
-        a.animal_id = v.animal_id
-    AND (
-        v.anti_rabies < DATE_SUB(NOW(), INTERVAL 1 YEAR)
-        OR v.dhl < DATE_SUB(NOW(), INTERVAL 1 YEAR)
-        OR v.parvo < DATE_SUB(NOW(), INTERVAL 1 YEAR)
-        OR v.tricat < DATE_SUB(NOW(), INTERVAL 1 YEAR)
-        OR v.anti_rabies_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR)
-        OR v.dhl_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR)
-        OR v.parvo_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR)
-        OR v.tricat_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR)
-    );
+    INSERT INTO notifications (message,title,user_id)
 
+    SELECT * FROM (
+        SELECT CONCAT('Your pet ', a.name,' needs to be vaccinated with ',
+                IF(v.anti_rabies < DATE_SUB(NOW(), INTERVAL 1 YEAR) OR v.anti_rabies_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR),' "Anti-Rabies", ','' ),
+                IF(v.dhl < DATE_SUB(NOW(), INTERVAL 1 YEAR) OR v.dhl_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR),' "DHL", ','' ),
+                IF(v.parvo < DATE_SUB(NOW(), INTERVAL 1 YEAR) OR v.parvo_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR),' "PARVO", ','' ),
+                IF(v.tricat < DATE_SUB(NOW(), INTERVAL 1 YEAR) OR v.tricat_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR),' "TRICAT", ','' )
+            ) message,
+            'Vaccination Reminder' title,
+            up.user_id 
+        FROM animal_vaccines v 
+            INNER JOIN animal a ON a.animal_id = v.animal_id   
+            INNER JOIN user_pet up ON up.animal_id = v.animal_id
+        WHERE
+            a.animal_id = v.animal_id
+        AND (
+            v.anti_rabies < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+            OR v.dhl < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+            OR v.parvo < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+            OR v.tricat < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+            OR v.anti_rabies_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+            OR v.dhl_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+            OR v.parvo_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+            OR v.tricat_booster < DATE_SUB(NOW(), INTERVAL 1 YEAR)
+        )) r 
+    WHERE 
+    (SELECT count(*) FROM notifications n 
+            WHERE n.message = r.message 
+            AND n.user_id = r.user_id 
+            AND n.created_at > DATE_SUB(NOW(), INTERVAL 1 WEEK)) = 0;
 
 END;
