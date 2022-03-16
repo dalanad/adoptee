@@ -20,11 +20,20 @@ class AdoptionRequestController extends Controller{
 
     function submit()
     {
-        $submission = AdoptionRequest::createAdoptionRequest($_GET['animal_id'], $_GET['org_id'], $_SESSION['user']['user_id'], $_POST['has_pets'], $_POST['petsafety']?? "", $_POST['children'], $_POST['childsafety']?? "");
-        $request = new AdoptionRequest;
-        $org = new Organization;        
-        $petData = ["petdata" => $request->getPetData($_GET['animal_id']), "org" => $org->getOrgDetails($_GET['org_id']), "submitted" => true, "submission" => $submission];
-        View::render("public/adoptions/adoption_request", $petData);
+        // $submission = AdoptionRequest::createAdoptionRequest($_GET['animal_id'], $_GET['org_id'], $_SESSION['user']['user_id'], $_POST['has_pets'], $_POST['petsafety']?? "", $_POST['children'], $_POST['childsafety']?? "");
+        // $request = new AdoptionRequest;
+        // $org = new Organization;        
+        // $petData = [
+        //     "submission" => $submission,
+        //     "petdata" => $request->getPetData($_GET['animal_id']), 
+        //     "org" => $org->getOrgDetails($_GET['org_id']), 
+        //     "submitted" => true
+        // ];
+        // View::render("public/adoptions/adoption_request", $petData);
+
+        AdoptionRequest::createAdoptionRequest($_GET['animal_id'], $_GET['org_id'], $_SESSION['user']['user_id'], $_POST['has_pets'], $_POST['petsafety']?? "", $_POST['children'], $_POST['childsafety']?? "");
+        self::view();
+
         // Adoptions::hidePet($_GET['animal_id']); //backend incomplete
     }   
 }

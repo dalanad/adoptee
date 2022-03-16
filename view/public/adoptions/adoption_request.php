@@ -81,10 +81,11 @@
         justify-content: center;
     }
 </style>
-<?php $pet = $petdata[0] ?>
+<?php $pet = $petdata[0]; ?>
+
 <div class="container adoption-request">
     <div style="margin: 0 1rem;flex:1">
-        <button class="btn btn-faded black" style="margin-bottom: 1rem;" onclick="history.back()"><i class="fa fa-chevron-left"></i>&nbsp; Back</button>
+        <button class="btn btn-faded black" style="margin-bottom: 1rem;" onclick="location.href = '\\Adoptions';" ><i class="fa fa-chevron-left"></i>&nbsp; Back</button>
         <div class="images">
             <div style="margin-bottom: .5rem;display:flex">
                 <img class="avatar" style="background-image: url(<?= $pet['photo'] ?>);">
@@ -114,6 +115,7 @@
         </div>
     </div>
 
+    <!-- user info -->
     <div style="position: relative;margin: 0 1rem;">
         <h3><i class="far fa-dog-leashed"></i>&nbsp; Adoption Request</h3>
         <div class="user-info">
@@ -135,10 +137,16 @@
             </div>
             <p style="color:#ff0000;">If your personal details are incorrect, you can update them<a class="btn btn-link" href="/profile/user_profile">here</a></p>
         </div>
+
+        <!-- signed in;  -->
         <?php if (isset($_SESSION['user'])){
-            if (($req!=NULL) && ($req[0]['status'] == "PENDING")) { //signed in; pet requested already
+
+            // pet requested already
+            if (($req!=NULL) && ($req[0]['status'] == "PENDING")) { 
+
+                // pet requested by same user
                 if (($submission!=NULL) && ($submission[0]['user_id'] == $_SESSION['user']['user_id'])) { ?>
-                    <!--signed in; pet requested by same user-->
+                    
                     <br>
                     <h3 style="text-align:center;">Your request is pending approval</h3>
                     <br>
@@ -165,8 +173,10 @@
                             </div>
                         <?php } ?>
                     <?php }
-                } else { ?>
-                    <!--signed in; pet req by another user-->
+                } 
+                
+                // pet req by another user
+                else { ?>
                     <form action="/AdoptionRequest/submit?animal_id=<?= $_GET['animal_id'] ?>&org_id=<?= $_GET['org_id'] ?>" method="POST">
                         <div class='row'>
                             <label class="column" for="has_pets">Q. Do you own any pets?</label>
@@ -198,13 +208,18 @@
                     </div>
 
                 <?php }
-            } elseif (($req!=NULL) && ($req[0]['status'] == 'ADOPTED')) { ?>
+            }
+            
+            // already adopted in the last 2 days
+            elseif (($req!=NULL) && ($req[0]['status'] == 'ADOPTED')) { ?>
                 <div class="message">
                 <div style="font-weight: 600;">It looks like this pet has already found a home</div></br>
                     <a href="/Adoptions" class="btn btn-link">Continue Browsing &nbsp <i class="fas fa-paw"></i></a>
                 </div>
-            <?php } else { ?>
-                <!--not req at all-->
+            <?php }
+            
+            // not req at all
+            else { ?>                
                 <form action="/AdoptionRequest/submit?animal_id=<?= $_GET['animal_id'] ?>&org_id=<?= $_GET['org_id'] ?>" method="POST">
                     <div class='row'>
                         <label class="column" for="has_pets">Q. Do you own any pets?</label>
@@ -230,9 +245,11 @@
                     </div>
                     <button style="margin-bottom: 1rem;" class='btn' type="submit">Request to Adopt</button>
                 </form>
-            <?php }
+                <?php
+            }
+
+        //signed out
         } else { ?>
-            <!--signed out-->
             <div class="message">
                 <i class="far fa-user-lock fa-5x txt-clr orange"></i> <br>
                 <div style="font-weight: 600;"> Sign In Required</div> <br>
