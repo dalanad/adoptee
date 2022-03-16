@@ -15,8 +15,8 @@ adoption days and events to raise awareness, free of charge', '/assets/images/or
 
  
 INSERT INTO `org_content` (`org_id`, `heading`, `description`, `photos`)
-VALUES ('1', 'Clinic', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '["/assets/images/org/clinic.jpg"]'),
-  ('1', 'Vaccination Program', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '["/assets/images/org/KittenVaccination.jpg"]'),
+VALUES ('1', 'Clinic', 'Rescue and treatment program for street dogs has grown to become one of the most significant components of our work. We offer high standards of Veterinary care for homeless dogs at no charge, which is a much needed service in Sri Lanka considering the large numbers. As our work expanded, the numbers of rescue and treatment requests have also increased exponentially with a monthly estimate of over 1000 calls to the hotline. Each request is assessed by our team and addressed by our veterinarians either in-house, onsite or through hospitalization for more critical cases. Assessments are dependent on several factors. The most important being the consideration of both the physical and mental wellbeing, veterinary advise and the long term welfare of the dog.', '["/assets/images/org/clinic.jpg"]'),
+  ('1', 'Vaccination Programme','Mission Rabies in conjunction with local partner charity Dogstar Foundation ran a pilot vaccination campaign in January 2015 in Negombo, Sri Lanka to demonstrate the effectiveness of Mission Rabies’ working protocols and to establish the feasibility of transferring these to working outside of Sri Lanka.', '["/assets/images/org/KittenVaccination.jpg"]'),
   ('2', 'Volunteer', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '["/assets/images/org/volunteer.jpg"]'),
   ('2', 'Awareness Program', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '["/assets/images/org/awareness.jpg"]'),
   ('3', 'Adoption Day', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '["/assets/images/org/adoption.jpg"]'),
@@ -83,14 +83,14 @@ INSERT INTO `org_feedback` (`org_id`, `user_id`, `living_conditions`, `healthcar
 INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`, `photos`) VALUES 
 ('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/1a.jpg","/assets/data/dogs/1b.jpg","/assets/data/dogs/1c.jpg"]'),
 ('21', 'Playful and a joy to be around, weaned', '2021-08-26', 'LISTED', NULL, '3', NULL, '["/assets/data/cats/1a.jpg","/assets/data/cats/1b.jpg","/assets/data/cats/1c.jpg"]'),
-('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2', NULL, '["/assets/data/dogs/2a.jpg","/assets/data/dogs/2b.jpg","/assets/data/dogs/2c.jpg"]'),
-('3', 'jade-green eyes, not vaccinated','2021-09-01', 'LISTED', NULL, '1',NULL, '["/assets/data/dogs/3a.jpg","/assets/data/dogs/3b.jpg","/assets/data/dogs/3c.jpg"]'),
+('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/2a.jpg","/assets/data/dogs/2b.jpg","/assets/data/dogs/2c.jpg"]'),
+('3', 'jade-green eyes, not vaccinated','2021-09-01', 'ADOPTED', '2021-09-03', '1',3, '["/assets/data/dogs/3a.jpg","/assets/data/dogs/3b.jpg","/assets/data/dogs/3c.jpg"]'),
 ('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/cats/2a.jpg","/assets/data/cats/2b.jpg","/assets/data/cats/2c.jpg"]'),
 ('4', 'Playful and affectionate, vaccinated', '2021-08-26', 'ADOPTED', '2021-09-03', '1',3, '["/assets/data/dogs/4a.jpg","/assets/data/dogs/4b.jpg"]'),
 ('5', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/dogs/5a.jpg","/assets/data/dogs/5b.jpg","/assets/data/dogs/5c.jpg"]'),
 ('25', 'Healthy and a joy to be around, vaccinated', '2021-08-26', 'ADOPTED', '2021-01-14', '2', 3, '["/assets/data/cats/5a.jpg","/assets/data/cats/5b.jpg","/assets/data/cats/5c.jpg"]'),
-('6', 'Loves cuddles and needs attention, vaccinated', '2021-08-26', 'LISTED', NULL, '3', NULL, '["/assets/data/dogs/6a.jpg","/assets/data/dogs/6b.jpeg","/assets/data/dogs/6c.jpg"]'),
-('23', 'Independent and friendly, vaccinated', '2021-08-26', 'LISTED', NULL, '3',NULL, '["/assets/data/cats/3a.png","/assets/data/cats/3b.jpg","/assets/data/cats/3c.jpg"]'),
+('6', 'Loves cuddles and needs attention, vaccinated', '2021-08-26', 'LISTED', NULL, '1', 3, '["/assets/data/dogs/6a.jpg","/assets/data/dogs/6b.jpeg","/assets/data/dogs/6c.jpg"]'),
+('23', 'Independent and friendly, vaccinated', '2021-08-26', 'LISTED', NULL, '1',NULL, '["/assets/data/cats/3a.png","/assets/data/cats/3b.jpg","/assets/data/cats/3c.jpg"]'),
 ('15', 'Has tiny, hedgehog paws, not vaccinated', '2021-09-02', 'LISTED', NULL, '1',NULL, '["/assets/data/dogs/15a.jpg","/assets/data/dogs/15b.jpg","/assets/data/dogs/15c.jpg"]');
 
 INSERT INTO `user_pet`(`animal_id`, `user_id`, `status`)
@@ -106,17 +106,33 @@ VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  current_timestamp(), '076
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
 VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.',   current_timestamp(), '0761236547', 'Anuradhapura', POINT(6.8999, 79.9167), 'PENDING', '["/assets/data/cats/8.jpg"]');
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency',   current_timestamp(), '0771234567', 'Anuradhapura', POINT(6.8969, 79.9137), 'PENDING', '["/assets/data/cats/9.jpg"]');
+VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency',   current_timestamp(), '0771234567', 'Anuradhapura', POINT(6.8969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]');
+INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
+VALUES ('1', NULL, 'Dog', 'Injured Leg',   current_timestamp(), '0762457684', '12/1, Jayathilake Road, Anuradhapura', POINT(6.8269, 79.9737), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]');
+INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
+VALUES ('1', NULL, 'Cat', 'Severe skin rash',   current_timestamp(), '0775467215', '77/7, Silva Lane, Colombo 02', POINT(6.1969, 79.7137), 'PENDING', '["/assets/data/cats/10.jpg"]');
+INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
+VALUES ('1', NULL, 'Dog', 'Malnutritioned',   current_timestamp(), '0722247568', '44/A, Bishop Road, Nugegoda', POINT(6.4969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]');
+INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
+VALUES ('1', NULL, 'Hamster', 'Abandoned near a highway',   current_timestamp(), '071275645', 'Piliyandala, close to main road', POINT(6.8969, 79.0137), 'RESCUED', '["/assets/data/cats/10.jpg"]');
 
-INSERT INTO `rescued_animal`(`animal_id`,`report_id`,`rescued_date`)
-VALUES ('10', '1', '2021-08-28'), ('11', '2', '2021-08-30');
+INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
+VALUES ('1', '1', '2021-08-28');
+INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
+VALUES ('1', '2', '2021-08-30');
+INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
+VALUES ('1', '3', '2021-12-29');
+INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
+VALUES ('1', '4', '2021-12-28');
 
  INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
  VALUES ('1', '3', '1', '2021-08-01', 'PENDING', '1', 'The dog that I already have is easy going and bond well with other animals.', '1', 'Used to pets');
  INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
  VALUES ('2', '4', '1', '2021-09-02', 'PENDING', '0', '', '1', 'Used to pets');
  INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
- VALUES ('3', '4', '1', '2021-09-12', 'ADOPTED', '0', '', '1', 'Used to pets');
+ VALUES ('3', '4', '1', '2021-09-12', 'ACCEPTED', '0', '', '1', 'Used to pets');
+ INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
+ VALUES ('4', '3', '1', '2021-08-30', 'ACCEPTED', '1', 'Safe', '1', 'Safe');
 
  INSERT INTO `consultation` ( `consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
  VALUES 

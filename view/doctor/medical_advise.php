@@ -21,17 +21,33 @@ require_once  __DIR__ . '/_nav.php';
             <div class='dropdown' style='display:flex;align-items: center;line-height: 1;'>
                 &nbsp; <button class="btn btn-icon btn-link black "><i class="fa fa-filter"></i></button>&nbsp;
                 <div class='dropdown-content'>
+                    <div style="padding: 0 0.5rem .5rem; color:gray;font-size:.9em"> MODE </div>
                     <div style="display: flex; align-items: left;flex-direction:column; margin: 0 .5rem">
                         <label style="white-space:nowrap;line-height:1.5em" for="male">
                             <input id="male" class="ctrl-radio" onchange="showConversationsList()" type="radio" value="LIVE" name="type" />
-                            &nbsp; &nbsp;Live&nbsp;
+                            &nbsp; &nbsp;LIVE&nbsp;
                         </label>
                         <label style="white-space:nowrap;line-height:1.5em" for="female">
                             <input id="female" class="ctrl-radio" onchange="showConversationsList()" checked type="radio" value="ADVISE" name="type" />
-                            &nbsp; &nbsp;Advise&nbsp; </label>
+                            &nbsp; &nbsp;ADVISE&nbsp; </label>
                         <label style="white-space:nowrap;line-height:1.5em" for="any">
                             <input id="any" class="ctrl-radio" onchange="showConversationsList()"  type="radio" value="ANY" name="type" />
-                            &nbsp; &nbsp;Any&nbsp;
+                            &nbsp; &nbsp;ANY&nbsp;
+                        </label>
+                    </div>
+                    <div style="padding: .5rem; color:gray; font-size:.9em"> STATUS </div>
+                    <div style="display: flex; align-items: left;flex-direction:column; margin: 0 .5rem">
+                        <label style="white-space:nowrap;line-height:1.5em" for="act">
+                            <input id="act" class="ctrl-radio" onchange="showConversationsList()" checked type="radio" value="ACCEPTED" name="status" />
+                            &nbsp; &nbsp;ACTIVE&nbsp; 
+                        </label>
+                        <label style="white-space:nowrap;line-height:1.5em" for="com">
+                            <input id="com" class="ctrl-radio" onchange="showConversationsList()" type="radio" value="COMPLETED" name="status" />
+                            &nbsp; &nbsp;COMPLETED&nbsp;
+                        </label>
+                        <label style="white-space:nowrap;line-height:1.5em" for="all">
+                            <input id="all" class="ctrl-radio" onchange="showConversationsList()"  type="radio" value="ALL" name="status" />
+                            &nbsp; &nbsp;ALL&nbsp;
                         </label>
                     </div>
                 </div>
@@ -64,7 +80,8 @@ require_once  __DIR__ . '/_nav.php';
     async function showConversationsList() {
         let params = new URLSearchParams({
             search: document.getElementById('search').value,
-            type: document.querySelector("[name='type']:checked").value
+            type: document.querySelector("[name='type']:checked").value,
+            status: document.querySelector("[name='status']:checked").value,
         })
 
         let consultations = await fetch("/api/get_consultations?" + params.toString()).then(r => r.json())
