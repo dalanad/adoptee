@@ -15,7 +15,8 @@ class PrescriptionController extends Controller
 
         View::render('doctor/prescription', [
             "consultationId" => $consultationId,
-            "prescription" => $_SESSION['prescriptions'][$consultationId]
+            "prescription" => $_SESSION['prescriptions'][$consultationId],
+            "medicines" => Doctor::getMedicines($_SESSION["user"]["user_id"]),
         ]);
     }
 
@@ -34,11 +35,13 @@ class PrescriptionController extends Controller
                 'direction' => $_POST['direction'],
                 'duration' => $_POST['duration'],
             ]);
-        //
+            //
         } else if ($action == 'SEND') {
-            MedicalRecord::sendPrescription($consultationId, $_SESSION['prescriptions'][$consultationId]);
+            $medical_record_id = MedicalRecord::sendPrescription($consultationId, $_SESSION['prescriptions'][$consultationId]);
             unset($_SESSION['prescriptions'][$consultationId]);
-        // 
+            $this->redirect("view_prescription?id=$medical_record_id");
+            return;
+            // 
         } else if (strpos($action, "REMOVE") >= 0) {
             $index = explode("-", $action);
             array_splice($_SESSION['prescriptions'][$consultationId]['items'], intval($index[1]), 1);

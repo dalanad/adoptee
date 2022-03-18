@@ -50,10 +50,16 @@ class Doctor extends BaseModel
             "doctor_id" => $doctor_id,
             "consultation_id" => $consultation_id,
         ];
-        
+
         self::update($query, $params);
         $consultation =  Consultation::findConsultationById($consultation_id);
         Pay::refundPayment($consultation["payment_txn_id"]);
+
+        $query = "UPDATE `payment` SET status = 'REFUNDED' WHERE txn_id = :txn_id ";
+        $params = [
+            "txn_id" => $consultation["payment_txn_id"],
+        ];
+        self::update($query, $params);
 
         // TODO: send notification
     }
@@ -276,5 +282,28 @@ class Doctor extends BaseModel
     {
         $query = "INSERT INTO `payment` (`txn_id`,`amount`,`user`,`type`) VALUES (:txn_id, :amount, :doctor_id, 'WITHDRAWAL')";
         self::insert($query, ["doctor_id" => $doctor_id, "txn_id" => $txn_id, "amount" => $amount]);
+    }
+
+    public static function getMedicines($doctor_id)
+    {
+        $query = "SELECT * FROM medicine where doctor_id = :doctor_id";
+        return self::select($query, ["doctor_id" => $doctor_id]);
+    }
+
+    public static function getMedicine($medicine_id)
+    {
+        $query = "SELECT * FROM medicine where medicine_id = :medicine_id ";
+        return self::selectOne($query, ["medicine_id" => $medicine_id]);
+    }
+
+    public static function saveMedicine($doctor_id, $medicine)
+    {
+        if (isset($medicine["medicine_id"])) {
+            $query = "UPDATE medicine SET name = :name WHERE medicine_id = :medicine_id AND doctor_id = :doctor_id";
+            self::update($query, ["name" => $medicine["name"], "medicine_id" => $medicine["medicine_id"], "doctor_id" => $doctor_id]);
+        } else {
+            $query = "INSERT INTO medicine(name,doctor_id) VAlUES (:name,:doctor_id)";
+            self::insert($query, ["name" => $medicine["name"], "doctor_id" => $doctor_id]);
+        }
     }
 }

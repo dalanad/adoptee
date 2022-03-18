@@ -179,7 +179,8 @@ create table prescription_item (
 
 create table medicine (
     medicine_id int (10) auto_increment primary key,
-    name varchar(100)
+    name varchar(100),
+    doctor_id int(10) not null
 );
 
 create table payment (
@@ -263,7 +264,7 @@ create table adoption_request (
     user_id int(10),
     org_id int(10),
     request_date date,
-    status enum('PENDING','ACCEPTED','REJECTED') not null default 'PENDING',
+    status enum('PENDING','ACCEPTED','ADOPTED','REJECTED') not null default 'PENDING',
     has_pets boolean,
     petsafety varchar(100) ,
     children boolean,

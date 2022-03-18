@@ -130,7 +130,7 @@
                 <?php if (isset($slots)) {
                   foreach ($slots as $slot) { ?>
                     <input name="time" id="time_<?= $slot["time_slot"] ?>" value="<?= $slot["time_slot"] ?>" <?= isset($slot["consultation_id"]) ? "disabled" : "" ?> type="radio" <?php if ($_SESSION['time'] == $slot["time_slot"]) { ?>checked<?php } ?> required>
-                    <label for="time_<?= $slot["time_slot"] ?>"><?= substr($slot["time_slot"], 0, 5) ?></label>
+                    <label for="time_<?= $slot["time_slot"] ?>"><?= date('h:i A', strtotime(substr($slot["time_slot"], 0, 5))) ?></label>
                 <?php }
                 } ?>
               </div>

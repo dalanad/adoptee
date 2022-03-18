@@ -43,7 +43,12 @@
                     <legend style="padding: 0 0.4rem;">Add Drug</legend>
                     <div class="field">
                         <label>Drug Name</label>
-                        <input class="ctrl" type="text" name="name">
+                        <input class="ctrl" type="text" name="name" list="meds">
+                        <datalist id="meds">
+                            <?php foreach ($medicines as $medicine) { ?>
+                                <option value="<?= $medicine["name"] ?>">
+                                <?php } ?>
+                        </datalist>
                     </div>
                     <div class="field">
                         <label>Dose</label>
