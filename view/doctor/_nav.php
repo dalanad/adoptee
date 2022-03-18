@@ -9,6 +9,7 @@ $menu_items = array(
     "consulted_animals" =>  array("name" =>  "Consulted Animals", "icon" => "cat", "color" => "green"),
     "settings" => array("title" => "SETTINGS", "space_before" => true), //sub heading -> Settings
     "schedule" => array("name" => "Appointment Schedule", "icon" => "calendar-alt"),
+    "medicine"=> array("name" => "Medicine", "icon" => "pills"),
     "payments" => array("name" => "Payments", "icon" => "file-invoice-dollar"),
 );
 ?>

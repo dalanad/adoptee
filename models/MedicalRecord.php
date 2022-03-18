@@ -14,12 +14,12 @@ class MedicalRecord extends BaseModel
         $prescription_insert = "INSERT INTO `prescription` (`medical_record_id`, `next_visit_date`) VALUES (:medical_record_id, :next_visit_date)";
         self::insert($prescription_insert, ["medical_record_id" => $medical_record_id, "next_visit_date" => $prescription["next_visit_date"]]);
 
-        $medicine_insert = "INSERT INTO `medicine` (`name`) VALUES (:name)";
+        $medicine_insert = "INSERT INTO `medicine` (`name`,doctor_id) VALUES (:name,:doctor_id)";
         $prescription_item_insert = "INSERT INTO `prescription_item` (`medical_record_id`, `dose`, `duration`, `direction`, `medicine_id`) 
                                      VALUES (:medical_record_id, :dose, :duration, :direction, :medicine_id)";
 
         foreach ($prescription["items"] as $item) {
-            self::insert($medicine_insert, ["name" => $item["name"]]);
+            self::insert($medicine_insert, ["name" => $item["name"], "doctor_id" => $consultation["doctor_user_id"]]);
             $medicine_id = self::lastInsertId();
 
             self::insert($prescription_item_insert, [
@@ -32,6 +32,7 @@ class MedicalRecord extends BaseModel
         }
 
         Message::postMessage($consultation_id, $_SESSION["user"]["user_id"], "PRESCRIPTION", $medical_record_id, []);
+        return $medical_record_id;
     }
 
     public static function getPrescriptionById($medical_record_id)

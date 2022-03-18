@@ -108,7 +108,10 @@ class ProfileController extends Controller
 
     static function payments()
     {
-        $data = ["active" => "payments"];
+        $data = [
+            "active" => "payments",
+            "payments" => User::getPaymentsHistory($_SESSION['user']['user_id'])
+        ];
         View::render("auth/profile/user_profile", $data); //backend not connected
     }
 }

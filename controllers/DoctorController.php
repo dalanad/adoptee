@@ -158,4 +158,25 @@ class DoctorController extends Controller
             $this->redirect("/Doctor/payments");
         }
     }
+
+    public function medicine()
+    {
+        View::render("doctor/medicine", [
+            "medicines" => Doctor::getMedicines($this->doctor_id),
+        ]);
+    }
+
+    public function save_medicine()
+    {
+        Doctor::saveMedicine($this->doctor_id, $_POST);
+        $this->redirect('/doctor/medicine');
+    }
+
+    public function medicine_single()
+    {
+        $id = $_GET["medicine_id"];
+        View::render("doctor/medicine_single", [
+            "medicine" => $id != 'new' ? Doctor::getMedicine($id) : [],
+        ]);
+    }
 }

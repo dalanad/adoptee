@@ -115,4 +115,17 @@ class User extends BaseModel
 
         return self::select($query);
     }
+
+    public static function getPaymentsHistory($user_id)
+    {
+        $query = "SELECT 
+            p.*,
+            CONCAT(u.name, ' - Consultation <br><small>', c.type, ' - #', c.consultation_id,' - ', c.consultation_date , '</small>') reason
+        FROM payment p  
+            LEFT JOIN consultation c ON p.txn_id = c.payment_txn_id
+            LEFT JOIN user u ON c.doctor_user_id = u.user_id WHERE p.user = :user ORDER BY p.txn_time desc ";
+
+        return self::select($query, ["user" => $user_id]);
+    }
+
 }

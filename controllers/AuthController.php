@@ -36,7 +36,14 @@ class AuthController extends Controller
 
         $organizationUser = OrganizationUser::findUserByUID($user["user_id"]);
         $doctors = Doctor::findByUID($user["user_id"]);
+
         if (sizeof($organizationUser) > 0) {
+
+            if ($organizationUser[0]["status"] == 'DISABLED') {
+                $this->redirect("/auth/sign_in?error=true&message=Account Disabled");
+                return;
+            }
+
             $_SESSION['org_id'] =  $organizationUser[0]['org_id'];
             $_SESSION['org'] =  Organization::findOrgById($_SESSION['org_id'])[0];
             $_SESSION['user_role'] = strtolower("org_" . $organizationUser[0]['role']);
@@ -145,12 +152,10 @@ class AuthController extends Controller
             if (User::matchPasswords($_POST['new'], $_POST['confirm'])) {
                 User::changePassword($user['email'], $_POST['new']);
                 $this->redirect("/profile/change_password?successful=true");
-            }
-            else{
+            } else {
                 $this->redirect("/profile/change_password?error=nomatch");
             }
-        }
-        else{
+        } else {
             $this->redirect("/profile/change_password?error=wrongpassword");
         }
     }
