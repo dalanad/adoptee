@@ -29,7 +29,7 @@ class EmailService
         $mail->Port       = 465;
 
         //Recipients
-        $mail->setFrom('noreply@adoptee.lk', 'Adoptee');
+        $mail->setFrom('2019cs033@stu.ucsc.lk', 'Adoptee');
         $mail->addAddress("$to", "$toName");     // Add a recipient
 
         //Content
@@ -47,6 +47,6 @@ class EmailService
         $api_key = config::get("sms.key");
 
         // send HTTP get request to the API
-       // file_get_contents("https://app.notify.lk/api/v1/send?user_id=$user_id&api_key=$api_key&sender_id=NotifyDEMO&to=$to_address&message=$message");
+        file_get_contents("https://app.notify.lk/api/v1/send?user_id=$user_id&api_key=$api_key&sender_id=NotifyDEMO&to=$to_address&message=$message");
     }
 }
