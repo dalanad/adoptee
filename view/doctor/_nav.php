@@ -9,13 +9,57 @@ $menu_items = array(
     "consulted_animals" =>  array("name" =>  "Consulted Animals", "icon" => "cat", "color" => "green"),
     "settings" => array("title" => "SETTINGS", "space_before" => true), //sub heading -> Settings
     "schedule" => array("name" => "Appointment Schedule", "icon" => "calendar-alt"),
-    "medicine"=> array("name" => "Medicine", "icon" => "pills"),
+    "medicine" => array("name" => "Medicine", "icon" => "pills"),
     "payments" => array("name" => "Payments", "icon" => "file-invoice-dollar"),
 );
 ?>
+<style>
+    .side-nav-toggle {
+        display: none;
+    }
+
+    .side-nav-container {
+        overflow: hidden;
+    }
+
+    .content {
+        overflow: scroll;
+    }
+
+    @media screen and (max-width:600px) {
+        .side-nav {
+            position: fixed;
+            background: white;
+            display: none;
+            width: 100%;
+            z-index: 1000;
+            padding: .5rem 1rem;
+            box-sizing: border-box;
+        }
+
+        .side-nav-toggle {
+            display: inline;
+        }
+
+        .side-nav.shown {
+            display: flex;
+        }
+
+        #fold_toggle {
+            display: none;
+        }
+
+        .side-nav .side-link {
+            margin-right: .8rem;
+        }
+    }
+</style>
 <div class="side-nav-container">
     <div class="side-nav">
-        <div style="text-align: center;margin : 1rem 0; ">
+        <div style="text-align: center;margin : 1rem 0; display:flex;justify-content:center">
+            <button class="btn btn-link side-nav-toggle black" onclick="document.querySelector('.side-nav').classList.toggle('shown')">
+                <i class="far fa-bars"></i>
+            </button>
             <img src="/assets/images/logo_vector_filled.svg" class="logo">
             <img src="/assets/images/logo_icon.png" class="logo-mini">
         </div>
@@ -59,6 +103,9 @@ $menu_items = array(
     <div class="content" style="width: 100%;">
         <div class="admin-header">
             <div style="font-weight: 500;font-size:1.3rem">
+                <button class="btn btn-link side-nav-toggle black" onclick="document.querySelector('.side-nav').classList.toggle('shown')">
+                    <i class="fa fa-bars"></i>
+                </button>
                 <i class="fal fa-<?= $menu_items[$active]["icon"] ?> txt-clr <?= $menu_items[$active]["color"] ?>" style="font-size: 1.2em;"></i>
                 &nbsp;
                 <?= $menu_items[$active]["name"] ?>

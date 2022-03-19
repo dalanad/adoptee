@@ -14,9 +14,9 @@ class Config
         "db.pass" => "root",
 
         // email credentials
-        "email.host" => "smtp.sendgrid.net",
-        "email.user" => "apikey",
-        "email.pass" => "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",
+        "email.host" => "in-v3.mailjet.com",
+        "email.user" => "fb334c520e1319fa4a7d89c527f4dc4b",
+        "email.pass" => "c0fecdf4cb06efbd5ebee4601ac0bc5a",
 
         // GMaps credentials
         "maps.key" => "AIzaSyBSB7zeeAI3QC42UmxHEFqS715ulfPFASc",

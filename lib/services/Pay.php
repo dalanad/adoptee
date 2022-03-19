@@ -52,12 +52,17 @@ class Pay
             'payment_method_types' => [
                 'card',
             ],
-            'mode' => 'payment',
+            'mode' => 'subscription',
             'success_url' => Config::get('domain') . "$success?session_id={CHECKOUT_SESSION_ID}",
             'cancel_url' => Config::get('domain') . $cancel,
         ]);
 
         return $checkout_session->url;
+    }
+
+    public function unsubscribe($subscription_id)
+    {
+        # code...
     }
 
     public static function refundPayment($session_id)
