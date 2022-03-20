@@ -79,10 +79,10 @@
                     <span class="close" onclick="hideModel('popupModal-report')">&times;</span>
                     <h3 style="text-align: center;">Select report type</h3>
                     <div style="justify-items:center; align-items:center; display:flex;">
-                    <a href="/OrgManagement/animals_report" class="btn green" style="bottom: 25px; width: 80px">Animals Report</a>&emsp;&emsp;
-                    <a href="" class="btn pink" style="bottom: 25px; width: 80px">Adoption Requests Report</a>&emsp;&emsp;
-                    <a href="" class="btn blue" style="bottom: 25px; width: 80px">Rescues Report</a>&emsp;&emsp;
-                    <a href="" class="btn orange" style="bottom: 25px; width: 80px">Donations Report</a>&emsp;&emsp;
+                    <a href="/OrgManagement/animals_report" class="btn green" style="bottom: 25px; width: 80px">Animal Report</a>&emsp;&emsp;
+                    <a href="/OrgManagement/adoption_requests_report" class="btn pink" style="bottom: 25px; width: 80px">Adoption Requests Report</a>&emsp;&emsp;
+                    <a href="" class="btn blue" style="bottom: 25px; width: 80px">Rescue Report</a>&emsp;&emsp;
+                    <a href="" class="btn orange" style="bottom: 25px; width: 80px">Donation Report</a>&emsp;&emsp;
                     <a href="" class="btn" style="bottom: 25px; width: 80px;">General Summary</a>&emsp;&emsp;
                     </div>
                     
