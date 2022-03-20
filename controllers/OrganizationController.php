@@ -141,6 +141,7 @@ class OrganizationController extends Controller
 
     public function view_donation_success()
     {
+        
         View::render("public/organizations/donation_success");
     }
 

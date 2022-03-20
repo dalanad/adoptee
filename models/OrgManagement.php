@@ -6,7 +6,7 @@ class OrgManagement extends BaseModel
     {
         $org_id = $_SESSION['org_id'];
 
- /*        if ($type == 'other') {
+        /*        if ($type == 'other') {
             $type = $other;
         } */
         /* $type = ($type == 'other')? $other: $type; */
@@ -30,7 +30,14 @@ class OrgManagement extends BaseModel
     static function findAnimalsByOrgId()
     {
         $org_id = $_SESSION['org_id'];
-        $query = "SELECT animal.animal_id, name,type, other, color, dob, FLOOR(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', gender,date_listed,status,date_adopted,description, animal.photo as avatar_photo from animal_for_adoption,animal where org_id= $org_id and animal.animal_id=animal_for_adoption.animal_id and animal_for_adoption.status<>'DELETED'";
+        $query = "SELECT animal.animal_id, name,type, other, color, dob, 
+        FLOOR(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', gender,
+        date_listed,status,date_adopted,description, 
+        animal.photo as avatar_photo,
+        animal_for_adoption.photos as adoptee_photo
+        from animal_for_adoption,animal 
+            where org_id= $org_id 
+            and animal.animal_id=animal_for_adoption.animal_id and animal_for_adoption.status<>'DELETED'";
         return BaseModel::select($query);
     }
 
@@ -89,9 +96,9 @@ class OrgManagement extends BaseModel
         return BaseModel::select($query);
     }
 
-    static function accept_adoption_request($animal_id,$user_id)
+    static function accept_adoption_request($animal_id, $user_id)
     {
-    
+
         $query = "UPDATE `adoption_request` SET status = 'ACCEPTED' WHERE animal_id='$animal_id' AND user_id = '$user_id';
         INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES('$animal_id','$user_id');
         UPDATE `animal_for_adoption` SET status = 'ADOPTED', date_adopted = curdate(), user_id = '$user_id' WHERE animal_id='$animal_id'";
@@ -135,7 +142,7 @@ class OrgManagement extends BaseModel
     {
         $org_id = $_SESSION['org_id'];
 
-        $query = "SELECT * from report_rescue,rescued_animal WHERE rescued_animal.org_id = '$org_id'";
+        $query = "SELECT * from report_rescue, rescued_animal WHERE report_rescue.report_id = rescued_animal.report_id AND rescued_animal.org_id = '$org_id'";
         return BaseModel::select($query);
     }
 
@@ -146,7 +153,6 @@ class OrgManagement extends BaseModel
         $query = "UPDATE `report_rescue` SET description = '$description' WHERE report_id='$report_id';
         UPDATE `report_rescue` SET photos = '$photos' WHERE report_id='$report_id'";
         return BaseModel::insert($query);
-        
     }
 
     static function findOrgContentByOrgId()
@@ -191,10 +197,47 @@ class OrgManagement extends BaseModel
         return BaseModel::select($query);
     }
 
-    static function adoption_requests_report()
+    static function adoptions_updates_report()
+    {
+        $org_id = $_SESSION['org_id'];
+        $query = "SELECT
+            aa.animal_id,
+            a.name 'animal_name',
+            a.type,
+            aa.date_adopted,
+            a.gender,
+            DATEDIFF(CURRENT_DATE, a.dob) / 365 'age',
+            u.name 'adopter',
+            u.telephone 'adopter_contact',
+            (SELECT count(*) FROM routine_updates r WHERE r.animal_id = aa.animal_id) 'update_count',
+            (SELECT max(update_date) FROM routine_updates r WHERE r.animal_id = aa.animal_id) 'last_updated'
+        FROM
+            animal_for_adoption aa,
+            animal a,
+            user u
+        WHERE
+            aa.user_id = u.user_id AND a.animal_id = aa.animal_id and aa.org_id = :org_id;";
+        return BaseModel::select($query, ["org_id" => $org_id]);
+    }
+
+    static function rescue_to_adoption_report()
     {
         $org_id = $_SESSION['org_id'];
 
+        $query = "SELECT * from adoption_request WHERE org_id = '$org_id' ";
+        return BaseModel::select($query);
+    }
+
+    static function rescues_information_report()
+    {
+        $org_id = $_SESSION['org_id'];
+        $query = "SELECT * from adoption_request WHERE org_id = '$org_id' ";
+        return BaseModel::select($query);
+    }
+
+    static function donations_summary_report()
+    {
+        $org_id = $_SESSION['org_id'];
         $query = "SELECT * from adoption_request WHERE org_id = '$org_id' ";
         return BaseModel::select($query);
     }
