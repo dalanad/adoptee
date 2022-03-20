@@ -187,7 +187,15 @@ class OrgManagement extends BaseModel
     {
         $org_id = $_SESSION['org_id'];
 
-        $query = "SELECT * from animal_for_adoption WHERE org_id = '$org_id'";
+        $query = "SELECT * from animal_for_adoption WHERE org_id = '$org_id' ";
+        return BaseModel::select($query);
+    }
+
+    static function adoption_requests_report()
+    {
+        $org_id = $_SESSION['org_id'];
+
+        $query = "SELECT * from adoption_request WHERE org_id = '$org_id' ";
         return BaseModel::select($query);
     }
 }

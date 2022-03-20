@@ -154,7 +154,21 @@ class OrgManagementController extends Controller{
 
     function animals_report()
     {
-        View::render("org/org_dashboard/animals_report");
+        $data = [
+
+            "animals_reports"=>OrgManagement::animals_report()
+    ];
+        View::render("org/org_dashboard/animals_report",$data);
+        
+    }
+
+    function adoption_requests_report()
+    {
+        $data = [
+
+            "adoption_requests_report"=>OrgManagement::adoption_requests_report()
+    ];
+        View::render("org/org_dashboard/adoption_requests_report",$data);
         
     }
 }

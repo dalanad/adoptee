@@ -10,8 +10,7 @@ $management_menu = array(
     "reported_cases" =>  array("name" =>  "Reported Cases", "icon" => "exclamation-circle"),
     "org_rescues" =>  array("name" =>  "Rescues", "icon" => "ambulance"),
     "org_donations" =>  array("name" =>  "Donations", "icon" => "hand-holding-usd"),
-    "org_news_events" =>  array("name" =>  "News & Events", "icon" => "calendar-alt"),
-    "merch_orders" =>  array("name" =>  "Merchandise Orders", "icon" => "tshirt")
+    "org_news_events" =>  array("name" =>  "News & Events", "icon" => "calendar-alt")
 );
 
 $administration_menu = array(
