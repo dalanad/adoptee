@@ -85,7 +85,7 @@
 
 <div class="container adoption-request">
     <div style="margin: 0 1rem;flex:1">
-        <button class="btn btn-faded black" style="margin-bottom: 1rem;" onclick="location.href = '\\Adoptions';" ><i class="fa fa-chevron-left"></i>&nbsp; Back</button>
+        <button class="btn btn-faded black" style="margin-bottom: 1rem;" onclick="location.href = '\\Adoptions';"><i class="fa fa-chevron-left"></i>&nbsp; Back</button>
         <div class="images">
             <div style="margin-bottom: .5rem;display:flex">
                 <img class="avatar" style="background-image: url(<?= $pet['photo'] ?>);">
@@ -103,9 +103,9 @@
             <div class="thumbnails">
                 <div class="thumbnail" style="background-image: url(<?= $pet['photo'] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
                 <?php
-                $photos = explode(",",$pet['photos']);                
-                for ($i = 0; $i < sizeof($photos); $i++){ ?>
-                    <div class="thumbnail" style="background-image: url(../../..<?=str_replace("[","",str_replace("\"","",str_replace(" ","/",str_replace("]","",$photos[$i]))))?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                $photos = explode(",", $pet['photos']);
+                for ($i = 0; $i < sizeof($photos); $i++) { ?>
+                    <div class="thumbnail" style="background-image: url(../../..<?= str_replace("[", "", str_replace("\"", "", str_replace(" ", "/", str_replace("]", "", $photos[$i])))) ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
                 <?php } ?>
             </div>
         </div>
@@ -139,14 +139,14 @@
         </div>
 
         <!-- signed in;  -->
-        <?php if (isset($_SESSION['user'])){
+        <?php if (isset($_SESSION['user'])) {
 
             // pet requested already
-            if (($req!=NULL) && ($req[0]['status'] == "PENDING")) { 
+            if (($req != NULL) && ($req[0]['status'] == "PENDING")) {
 
                 // pet requested by same user
-                if (($submission!=NULL) && ($submission[0]['user_id'] == $_SESSION['user']['user_id'])) { ?>
-                    
+                if (($submission != NULL) && ($submission[0]['user_id'] == $_SESSION['user']['user_id'])) { ?>
+
                     <br>
                     <h3 style="text-align:center;">Your request is pending approval</h3>
                     <br>
@@ -173,8 +173,8 @@
                             </div>
                         <?php } ?>
                     <?php }
-                } 
-                
+                }
+
                 // pet req by another user
                 else { ?>
                     <form action="/AdoptionRequest/submit?animal_id=<?= $_GET['animal_id'] ?>&org_id=<?= $_GET['org_id'] ?>" method="POST">
@@ -209,17 +209,17 @@
 
                 <?php }
             }
-            
+
             // already adopted in the last 2 days
-            elseif (($req!=NULL) && ($req[0]['status'] == 'ADOPTED')) { ?>
+            elseif (($req != NULL) && ($req[0]['status'] == 'ADOPTED')) { ?>
                 <div class="message">
-                <div style="font-weight: 600;">It looks like this pet has already found a home</div></br>
+                    <div style="font-weight: 600;">It looks like this pet has already found a home</div></br>
                     <a href="/Adoptions" class="btn btn-link">Continue Browsing &nbsp <i class="fas fa-paw"></i></a>
                 </div>
             <?php }
-            
+
             // not req at all
-            else { ?>                
+            else { ?>
                 <form action="/AdoptionRequest/submit?animal_id=<?= $_GET['animal_id'] ?>&org_id=<?= $_GET['org_id'] ?>" method="POST">
                     <div class='row'>
                         <label class="column" for="has_pets">Q. Do you own any pets?</label>
@@ -245,10 +245,10 @@
                     </div>
                     <button style="margin-bottom: 1rem;" class='btn' type="submit">Request to Adopt</button>
                 </form>
-                <?php
+            <?php
             }
 
-        //signed out
+            //signed out
         } else { ?>
             <div class="message">
                 <i class="far fa-user-lock fa-5x txt-clr orange"></i> <br>
