@@ -75,4 +75,11 @@ class BaseModel
     {
         return self::getDB()->rollBack();
     }
+
+    protected static function delete($query, $params = [])
+    {
+        $db = self::getDB();
+        $stmt = $db->prepare($query);
+        return $stmt->execute($params);
+    }
 }

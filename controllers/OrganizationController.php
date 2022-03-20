@@ -45,15 +45,17 @@ class OrganizationController extends Controller
 
     static function get_org_sponsorships()
     {
+        $orgId = $_GET['org_id']?? $_SESSION['org_id'];
         $organization = new Organization;
         $orgData = [
-            "tiers" => $organization->getOrgSponsorships($_GET['org_id']), 
-            "sponsorships" => $organization->getUserSponsorships($_GET['org_id'],$_SESSION['user']['user_id']), 
+            "tiers" => $organization->getOrgSponsorships($orgId), 
+            "sponsorships" => isset($_SESSION['user'])? $organization->getUserSponsorships($orgId,$_SESSION['user']['user_id']) : "", 
             "active"=>"sponsorships", 
-            "details" => $organization->getOrgDetails($_GET['org_id'])
+            "details" => $organization->getOrgDetails($orgId)
         ];
         
         View::render("public/organizations/organization_profile", $orgData);
+        if(isset($_SESSION['org_id'])){unset($_SESSION['org_id']);}
     }
 
     static function get_org_about()
@@ -95,18 +97,45 @@ class OrganizationController extends Controller
 
     static function make_donation()
     {
+        $name = $_POST['displayName']?? NULL;
         $_SESSION['donation_org_id'] = $_POST['org_id'];
+        $donation_id = Organization::makeDonation($_SESSION['donation_org_id'], $name);
+        $_SESSION['donation_id'] = $donation_id;
+
         $amount = $_POST['amount']*100;        
-        $payment_link = Pay::payment("Donation", $amount, "/Organization/success", "/Organization/view_donation_page");
+        $payment_link = Pay::payment("Donation", $amount, "/Organization/success", "/Organization/cancel_donation_payment", $donation_id);
 
         $org= new OrganizationController;
         $org->redirect($payment_link);
+    }
 
-        // $name = $_POST['displayName']?? "";
-        // $subscriptionId = $_POST['subscribe']?? "";
-        // $receipt = (isset($_POST['sendReceipt']))? 'true':'false';
-        // $email = $_POST['sendReceipt']?? "";
-        // Organization::makeDonation($name, $email, $receipt, $subscriptionId);     // 
+    public function success()
+    {       
+        unset($_SESSION['donation_id']);
+        require __DIR__ . "/../lib/vendor/stripe-php-7.97.0/init.php";
+        \Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
+
+        $session = \Stripe\Checkout\Session::retrieve($_GET['session_id']);
+        BaseModel::beginTransaction();
+        Organization::recordPayment($session);
+        BaseModel::commit();
+
+        $this->redirect("/Organization/view_donation_success");
+    }
+
+    public function view_donation_success()
+    {
+        unset($_SESSION['donation_org_id']);
+        View::render("public/organizations/donation_success");
+    }
+
+    public static function cancel_donation_payment()
+    {
+        Organization::cancelDonationPayment($_SESSION['donation_id']);
+        unset($_SESSION['donation_id']);
+
+        $org = new OrgSettingsController;
+        $org->redirect("/Organization/view_donation_page");
     }
 
     static function makeReview()
@@ -125,41 +154,51 @@ class OrganizationController extends Controller
         View::render("public/organizations/review_organization", $data);
     }
 
-    public function success()
-    {
-        $this->redirect("/Organization/view_donation_success");
-        die();
-
-        require __DIR__ . "/../lib/vendor/stripe-php-7.97.0/init.php";
-        \Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
-
-        $session = \Stripe\Checkout\Session::retrieve($_GET['session_id']);
-
-        echo "<pre>";
-        echo json_encode($session, JSON_PRETTY_PRINT);
-    }
-
-    public function view_donation_success()
-    {
-        View::render("public/organizations/donation_success");
-    }
-
     public function subscribe()
     {
         $organization = new Organization;
-        $organization->subscribe($_POST['tier'],$_POST['org'],$_SESSION['user']['user_id']);
-        $orgData = ["sponsorship" => $organization->getOrgSponsorships($_POST['org'],$_SESSION['user']['user_id']), "active"=>"sponsorships", "details" => $organization->getOrgDetails($_POST['org'])];
-        print_r($orgData);
-        // View::render("public/organizations/organization_profile", $orgData);
+        $sub_id = $organization->subscribe($_POST['tier'],$_POST['org'],$_SESSION['user']['user_id'], $_POST['amount']);
+        $_SESSION['org_id'] = $_POST['org'];
+        $_SESSION['sub_id'] = $sub_id;
+
+        $amount = $_POST['amount']*100;        
+        $payment_link = Pay::subscribe("Subscription", $amount, "/Organization/subscription_success", "/Organization/cancel_subscription_payment", $sub_id);
+
+        $org = new OrganizationController;
+        $org->redirect($payment_link);
     }
 
     public function unsubscribe()
     {
         $organization = new Organization;
         $organization->unsubscribe($_POST['tier'],$_POST['org'],$_SESSION['user']['user_id']);
-        $orgData = ["sponsorship" => $organization->getOrgSponsorships($_POST['org'],$_SESSION['user']['user_id']), "active"=>"sponsorships", "details" => $organization->getOrgDetails($_POST['org'])];
-        print_r($orgData);
-    }    
-}
+        
+        $this->redirect("/Organization/get_org_listing");
+    }
+    
+    public function subscription_success()
+    {
+        unset($_SESSION['sub_id']);
 
-?>
+        $_SESSION['donation_id'] = Organization::makeDonation($_SESSION['org_id'],NULL);
+        
+        require __DIR__ . "/../lib/vendor/stripe-php-7.97.0/init.php";
+        \Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
+
+        $session = \Stripe\Checkout\Session::retrieve($_GET['session_id']);
+        BaseModel::beginTransaction();
+        Organization::recordPayment($session);
+        BaseModel::commit();
+
+        unset($_SESSION['donation_id']);
+
+        $this->redirect("/Organization/get_org_listing"); 
+    }
+
+    public function cancel_subscription_payment()
+    {
+        Organization::cancelSubscriptionPayment($_SESSION['sub_id']);
+        unset($_SESSION['sub_id']);
+        $this->redirect("/Organization/get_org_listing");
+    }
+}
