@@ -116,6 +116,28 @@
         opacity: 0.5;
         border-color: var(--primary);
     }
+
+    .thumbnails {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .thumbnail {
+        border-radius: 8px;
+        background-size: cover;
+        background-position: center;
+        width: 60px;
+        height: 70px;
+        margin: .5rem .25rem;
+        display: inline-block;
+        border: var(--border);
+    }
+
+    .thumbnail:hover {
+        transform: scale(1.1);
+    }
 </style>
 
 
@@ -352,11 +374,11 @@
 
 
                                         <div class="field column">
-                                            <div class="preview" style="background-image: url(<?= $animal['photo'] ?>);"> </div>
+                                            <div class="preview" style="background-image: url(<?= $animal['avatar_photo'] ?>);"> </div>
                                             <div class="thumbnails">
-                                                <div class="thumbnail" style="background-image: url(<?= $animal['photo'] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                                                <div class="thumbnail" style="background-image: url(<?= $animal['avatar_photo'] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
                                                 <?php
-                                                $photos = explode(",", $animal['photos']);
+                                                $photos = explode(",", $animal['adoptee_photo']);
                                                 for ($i = 0; $i < sizeof($photos); $i++) { ?>
                                                     <div class="thumbnail" style="background-image: url(../../..<?= str_replace("[", "", str_replace("\"", "", str_replace(" ", "/", str_replace("]", "", $photos[$i])))) ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
                                                 <?php } ?>
@@ -382,7 +404,7 @@
                                         <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-delete<?= $animal["animal_id"] ?>')">Cancel</a>
                                     </div>
                                 </div>
-                            <div>
+                                <div>
                     </td>
                 </tr>
 
@@ -394,6 +416,12 @@
 <div style="margin-left: 1200px; padding-bottom: 0px"><a href="/OrgManagement/add_new_animal" class="btn right outline button-hover" style="width: 60px; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Animal"><i class="fas fa-plus"></i></a></div>
 
 <script>
+        function displayPreview(_this) {
+        var prev = document.getElementsByClassName('preview')[0];
+        var thumb = _this.style.backgroundImage;
+        prev.style.backgroundImage = thumb;
+    }
+
     function displayPreview(_this) {
         var prev = document.getElementsByClassName('preview')[0];
         var thumb = _this.style.backgroundImage;
