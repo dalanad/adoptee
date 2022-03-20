@@ -59,73 +59,89 @@ $durations = [
 ?>
 
 <div class="overflow-auto" style="height:450px">
-    <table class="table">
-        <tr>
-            <th>TIER</th>
-            <th>AMOUNT</th>
-            <th>RECURRING DAYS</th>
-            <th>DESCRIPTION</th>
-        </tr>
-        <?php foreach ($tiers as $key => $value) { ?>
+
+    <div style="display:flex;">
+        <table class="table">
             <tr>
-                <td><?= $value['name'] ?></td>
-                <td>Rs.<?= $value['amount'] ?></td>
-                <td><?= $durations[$value['recurring_days']] ?></td>
-                <td><?= $value['description'] ?></td>
-                <td>
-                    <?php if (sizeof($sponsorships) == 0) { ?>
-                        <div onclick="showModel('popupmodel-subscribe<?= $value['name'] ?>')" class=" btn pink" style='margin-left :20px;'>Subscribe</div>
-                        <div id="popupmodel-subscribe<?= $value['name'] ?>" class="model">
-                            <form id="subscribe_form<?= $value['name'] ?>" action="/Organization/subscribe" method="post" class="model-content" style="width:20rem;text-align:center;">
-                                <span class="close" onclick="hideModel('popupmodel-subscribe<?= $value['name'] ?>')">&times;</span>
-                                <h3>Are you sure you want to subscribe to this sponsorship?</h3>
-                                <p>You can opt out at any time.</p>
-                                <div style="display:flex;justify-content:center;">
-                                    <button type="submit" class="btn btn-faded green mr2">Subscribe</button>
-                                    <input type="text" name="tier" value="<?= $value['name'] ?>" style="display:none;" />
-                                    <input type="text" name="org" value="<?= $_GET['org_id'] ?>" style="display:none;" />
-                                    <button type="button" class="btn btn-faded blue" onclick="hideModel('popupmodel-subscribe<?= $value['name'] ?>')">Cancel</button>
-                                </div>
-                            </form>
-                        </div>
-                        <?php } else foreach ($sponsorships as $sponsorship => $val) {
-                        if ($val['name'] == $value['name']) { ?>
-                            <!--User is already sponsoring the org-->
-                            <div onclick="showModel('popupmodel-unsubscribe<?= $value['name'] ?>')" class=" btn unsubscribe" style='margin-left :20px;'>Unsubscribe</div>
-                            <div id="popupmodel-unsubscribe<?= $value['name'] ?>" class="model">
-                                <form id="unsubscribe_form<?= $value['name'] ?>" action="/Organization/unsubscribe" method="post" class="model-content" style="width:20rem;text-align:center;">
-                                    <span class="close" onclick="hideModel('popupmodel-unsubscribe<?= $value['name'] ?>')">&times;</span>
-                                    <h3>Are you sure you want to unsubscribe from this sponsorship?</h3>
-                                    <div style="display:flex;justify-content:center;">
-                                        <button type="submit" class="btn btn-faded red mr2">Unsubscribe</button>
-                                        <input type="text" name="tier" value="<?= $value['name'] ?>" style="display:none;" />
-                                        <input type="text" name="org" value="<?= $_GET['org_id'] ?>" style="display:none;" />
-                                        <button type="button" class="btn btn-faded blue" onclick="hideModel('popupmodel-unsubscribe<?= $value['name'] ?>')">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
-                        <?php
-                        } else { ?>
-                            <div onclick="showModel('popupmodel-subscribe<?= $value['name'] ?>')" class=" btn pink" style='margin-left :20px;'>Subscribe</div>
-                            <div id="popupmodel-subscribe<?= $value['name'] ?>" class="model">
-                                <form id="subscribe_form<?= $value['name'] ?>" action="/Organization/subscribe" method="post" class="model-content" style="width:20rem;text-align:center;">
-                                    <span class="close" onclick="hideModel('popupmodel-subscribe<?= $value['name'] ?>')">&times;</span>
-                                    <h3>Are you sure you want to subscribe to this sponsorship?</h3>
-                                    <p>You can opt out at any time.</p>
-                                    <div style="display:flex;justify-content:center;">
-                                        <button type="submit" class="btn btn-faded green mr2">Subscribe</button>
-                                        <input type="text" name="tier" value="<?= $value['name'] ?>" style="display:none;" />
-                                        <input type="text" name="org" value="<?= $_GET['org_id'] ?>" style="display:none;" />
-                                        <button type="button" class="btn btn-faded blue" onclick="hideModel('popupmodel-subscribe<?= $value['name'] ?>')">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
-                    <?php }
-                    } ?>
-                </td>
+                <th>TIER</th>
+                <th>AMOUNT</th>
+                <th>RECURRING DAYS</th>
+                <th>DESCRIPTION</th>
             </tr>
+            <?php foreach ($tiers as $key => $value) { ?>
+                <tr>
+                    <td><?= $value['name'] ?></td>
+                    <td>Rs.<?= $value['amount'] ?></td>
+                    <td><?= $durations[$value['recurring_days']] ?></td>
+                    <td><?= $value['description'] ?></td>
+
+                    <!-- Button -->
+
+                    <?php if (isset($_SESSION['user'])) { ?>
+                        <td>
+                            <?php $found = false;
+                            foreach ($sponsorships as $key2 => $val) {
+                                
+                                if ($value['name'] == $val['name']) {
+                                    $found = true;
+                                }
+                            }
+                            //User is subscribed to this particular tier
+                            // Unsubscribe button
+                            if ($found) { ?>
+                                <div onclick="showModel('popupmodel-unsubscribe<?= $value['name'] ?>')" class=" btn unsubscribe" style='margin-left :20px;'>Unsubscribe</div>
+                                <div id="popupmodel-unsubscribe<?= $value['name'] ?>" class="model">
+                                    <form id="unsubscribe_form<?= $value['name'] ?>" action="/Organization/unsubscribe" method="post" class="model-content" style="width:20rem;text-align:center;">
+                                        <span class="close" onclick="hideModel('popupmodel-unsubscribe<?= $value['name'] ?>')">&times;</span>
+                                        <h3>Are you sure you want to unsubscribe from this sponsorship?</h3>
+                                        <div style="display:flex;justify-content:center;">
+                                            <button type="submit" class="btn btn-faded red mr2">Unsubscribe</button>
+                                            <input type="text" name="tier" value="<?= $value['name'] ?>" style="display:none;" />
+                                            <input type="text" name="org" value="<?= $_GET['org_id'] ?>" style="display:none;" />
+                                            <button type="button" class="btn btn-faded blue" onclick="hideModel('popupmodel-unsubscribe<?= $value['name'] ?>')">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            <?php
+
+                            }
+
+                            // User is not subscribed to this
+                            //Subscribe button
+                            else { ?>
+                                <div onclick="showModel('popupmodel-subscribe<?= $value['name'] ?>')" class=" btn pink" style='margin-left :20px;'>Subscribe</div>
+                                <div id="popupmodel-subscribe<?= $value['name'] ?>" class="model">
+                                    <form id="subscribe_form<?= $value['name'] ?>" action="/Organization/subscribe" method="post" class="model-content" style="width:20rem;text-align:center;">
+                                        <span class="close" onclick="hideModel('popupmodel-subscribe<?= $value['name'] ?>')">&times;</span>
+                                        <h3>Are you sure you want to subscribe to this sponsorship?</h3>
+                                        <p>You can opt out at any time.</p>
+                                        <div style="display:flex;justify-content:center;">
+                                            <button type="submit" class="btn btn-faded green mr2">Subscribe</button>
+                                            <input type="text" name="tier" value="<?= $value['name'] ?>" style="display:none;" />
+                                            <input type="text" name="org" value="<?= $_GET['org_id'] ?>" style="display:none;" />
+                                            <input type="float" name="amount" value="<?= $value['amount'] ?>" style="display:none;" />
+                                            <button type="button" class="btn btn-faded blue" onclick="hideModel('popupmodel-subscribe<?= $value['name'] ?>')">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            <?php
+
+                            }
+                            ?>
+                        </td>
+
+                    <?php } ?>
+                </tr>
+            <?php } ?>
+        </table>
+
+        <?php if (!isset($_SESSION['user'])) { ?>
+            <div>
+                <a class="bold" style="color:var(--primary);position:absolute;top:60%;">Sign in to subscribe</a>
+            </div>
         <?php } ?>
-    </table>
+
+    </div>
 </div>
 
 <script>

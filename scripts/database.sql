@@ -193,11 +193,10 @@ create table payment (
 );
 
 create table donation (
+    donation_id int(10) primary key AUTO_INCREMENT,
     org_id int(10),
-    txn_id varchar(50) primary key,
+    txn_id varchar(100),
     name varchar(50),
-    email varchar(50),
-    receipt boolean,
     subscription_id int(10)
 );
 

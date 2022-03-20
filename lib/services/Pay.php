@@ -52,7 +52,7 @@ class Pay
             'payment_method_types' => [
                 'card',
             ],
-            'mode' => 'subscription',
+            'mode' => 'payment',
             'success_url' => Config::get('domain') . "$success?session_id={CHECKOUT_SESSION_ID}",
             'cancel_url' => Config::get('domain') . $cancel,
         ]);

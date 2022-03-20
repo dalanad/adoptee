@@ -135,7 +135,7 @@ VALUES ('1', '4', '2021-12-28');
 
  INSERT INTO `consultation` ( `consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
  VALUES 
- ('2021-10-28', '10:30:00', '10', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
+ ('2021-10-28', '10:30:00', '10', '1', '3', 'ACCEPTED', 'ADVISE', '456'),
  ('2021-10-28', '11:30:00', '9', '1', '3', 'PENDING', 'LIVE', NULL),
  ('2021-10-30', '12:30:00', '8', '1', '2', 'ACCEPTED', 'ADVISE', NULL),
  ('2021-10-30', '13:30:00', '7', '1', '3', 'ACCEPTED', 'LIVE', NULL),
@@ -173,5 +173,15 @@ VALUES ('3', CURRENT_TIMESTAMP,   '1', 'How about the water intake ?'), ('3', '2
 ('6', CURRENT_TIMESTAMP,   '1', 'Home treatment advised'), ('2', '2021-09-13 00:00:00',  '1', 'Advised to take prescribed medicine'), 
 ('5', CURRENT_TIMESTAMP,   '1', 'Prescription given'),('11',CURRENT_TIMESTAMP, '1','Home treatment advised'),
 ('13',CURRENT_TIMESTAMP,   '1', 'Prescription given');
+
+INSERT INTO `sponsorship` (`org_id`,`name`,`user_id`,`amount_at_subscription`,`start_date`,`end_date`,`status`)
+VALUES ('1','Gold','3',1200,'2022-03-01',NULL,'ACTIVE');
+
+INSERT INTO `payment` (`txn_id`,`amount`,`txn_time`,`user`)
+VALUES ('123', 1200.00, '2021-03-19 21:26:38', '3'),
+('456', 4000.00, '2021-10-28 10:30:00', '3');
+
+INSERT INTO `donation` (`org_id`,`txn_id`,`name`,`subscription_id`) 
+VALUES ('1','123','Hiruni Dahanayake',NULL);
 
 COMMIT;

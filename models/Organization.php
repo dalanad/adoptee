@@ -108,22 +108,22 @@ class Organization extends BaseModel
 
     static function getOrgSponsorships($orgId)
     {
-        $query = "SELECT st.*
-        FROM sponsorship_tier st
-        WHERE st.org_id=$orgId
-        AND st.status='ACTIVE'";
+        $query = "SELECT *
+        FROM sponsorship_tier
+        WHERE org_id=$orgId
+        AND sponsorship_tier.status='ACTIVE' ";
         return self::select($query);
     }
 
-    static function getUserSponsorships($orgId,$userId)
+    static function getUserSponsorships($orgId, $userId)
     {
         $query = "SELECT * FROM sponsorship 
-        WHERE user_id=$userId 
-        and org_id=$orgId
-        and status='ACTIVE'";
+        WHERE sponsorship.user_id = $userId
+        AND org_id=$orgId
+        AND sponsorship.status='ACTIVE' ";
         return self::select($query);
     }
-    
+
     static function getOrgReviews($orgId)
     {
         $query = "SELECT of.*,user.name as u_name
@@ -133,15 +133,31 @@ class Organization extends BaseModel
         return self::select($query);
     }
 
-    static function makeDonation($name, $email, $receipt, $subscriptionId) //changes to be made
+    static function makeDonation($org_id, $name) //changes to be made           , $subscriptionId
     {
-        // todo :
-        $query = "INSERT INTO `donation` (`name`, `email`, `receipt`)
-                  VALUES('$name', '$email', $receipt);";
+        $query = "INSERT INTO `donation` (org_id, name)
+                  VALUES($org_id, '$name');";      //, subscription_id, $subscriptionId
+        self::insert($query);
+        return self::lastInsertId();
+    }
+
+    public static function recordPayment($session)
+    {
+        //insert into payment table
+        $user = $_SESSION["user"]["user_id"];
+        $id = $session['id'];
+        $amount = $session['amount_total'] / 100;
+        $donation_id = $_SESSION['donation_id']?? $session["client_reference_id"];
+
+        $query = "INSERT INTO `payment`(txn_id,amount,user) VALUES('$id', $amount, $user);";
+        self::insert($query);
+        
+        // update donation table with the payment
+        $query = "UPDATE `donation` set txn_id = '$id' WHERE donation_id = $donation_id;";
         self::insert($query);
     }
 
-    static function writeReview($living_conditions,$healthcare,$rescue_response,$adoptions,$resource_allocation,$comment,$name,$email,$org_id,$userid)
+    static function writeReview($living_conditions, $healthcare, $rescue_response, $adoptions, $resource_allocation, $comment, $name, $email, $org_id, $userid)
     {
         $query = "INSERT INTO 
         org_feedback(org_id,user_id,living_conditions,healthcare,rescue_response,adoptions,resource_allocation,comments,name,email)
@@ -150,8 +166,8 @@ class Organization extends BaseModel
 
         $rating = (self::select("SELECT rating FROM organization WHERE org_id=$org_id"))[0]['rating'];
         $count = (self::select("SELECT COUNT(*) FROM org_feedback WHERE org_id=$org_id"))[0]['COUNT(*)'];
-        $add_rate = ($living_conditions+$healthcare+$rescue_response+$adoptions+$resource_allocation)/5;
-        $rating = ( ($rating*($count-1) ) + $add_rate)/$count;
+        $add_rate = ($living_conditions + $healthcare + $rescue_response + $adoptions + $resource_allocation) / 5;
+        $rating = (($rating * ($count - 1)) + $add_rate) / $count;
 
         $query = "UPDATE organization SET rating = $rating WHERE org_id = $org_id";
         return self::insert($query);
@@ -170,21 +186,15 @@ class Organization extends BaseModel
         return self::select($query, ["org_id" => $orgId, "time" => $time, "user_id" => $userId]);
     }
 
-    public static function subscribe($tier,$orgId,$user)
+    public static function subscribe($tier, $orgId, $user, $amount)
     {
-        $query="SELECT * from sponsorship_tier st
-        where st.org_id=$orgId
-        and st.name='$tier'";
-        $data=self::select($query);
-
-        $amount=$data[0]['amount'];
-        $query="INSERT INTO sponsorship(`org_id`,`name`,`user_id`,`amount_at_subscription`,`start_date`,`status`)
+        $query = "INSERT INTO sponsorship(`org_id`,`name`,`user_id`,`amount_at_subscription`,`start_date`,`status`)
         VALUES($orgId,'$tier',$user,$amount,CURDATE(),'ACTIVE')";
-        // todo : grateway intergration 
-        return self::insert($query);
+        self::insert($query);
+        return self::lastInsertId();
     }
 
-    public static function unsubscribe($tier,$orgId,$user)
+    public static function unsubscribe($tier, $orgId, $user)
     {
         $query = "UPDATE sponsorship
         SET status='CANCELLED',
@@ -203,4 +213,15 @@ class Organization extends BaseModel
         return self::select($query, ["org_id" => $org_id]);
     }
 
+    public static function cancelSubscriptionPayment($subId)
+    {
+        $query = "DELETE FROM sponsorship WHERE subscription_id = $subId";
+        self::delete($query);
+    }
+
+    public static function cancelDonationPayment($donationId)
+    {
+        $query = "DELETE FROM donation WHERE donation_id = $donationId";
+        self::delete($query);
+    }
 }
