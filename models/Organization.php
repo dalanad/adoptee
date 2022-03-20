@@ -135,6 +135,7 @@ class Organization extends BaseModel
 
     static function makeDonation($name, $email, $receipt, $subscriptionId) //changes to be made
     {
+        // todo :
         $query = "INSERT INTO `donation` (`name`, `email`, `receipt`)
                   VALUES('$name', '$email', $receipt);";
         self::insert($query);
@@ -179,6 +180,7 @@ class Organization extends BaseModel
         $amount=$data[0]['amount'];
         $query="INSERT INTO sponsorship(`org_id`,`name`,`user_id`,`amount_at_subscription`,`start_date`,`status`)
         VALUES($orgId,'$tier',$user,$amount,CURDATE(),'ACTIVE')";
+        // todo : grateway intergration 
         return self::insert($query);
     }
 
@@ -190,8 +192,15 @@ class Organization extends BaseModel
         WHERE user_id=$user
         AND org_id=$orgId
         AND name='$tier'";
-
+        // todo: payment gateway intergration
         return self::update($query);
+    }
+
+    public static function getDonations($org_id)
+    {
+        // todo :
+        $query = "SELECT * FROM donation d where org_id = :org_id";
+        return self::select($query, ["org_id" => $org_id]);
     }
 
 }

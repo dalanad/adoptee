@@ -378,9 +378,9 @@
                                             <div class="thumbnails">
                                                 <div class="thumbnail" style="background-image: url(<?= $animal['avatar_photo'] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
                                                 <?php
-                                                $photos = explode(",", $animal['adoptee_photo']);
-                                                for ($i = 0; $i < sizeof($photos); $i++) { ?>
-                                                    <div class="thumbnail" style="background-image: url(../../..<?= str_replace("[", "", str_replace("\"", "", str_replace(" ", "/", str_replace("]", "", $photos[$i])))) ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                                                $photos = json_decode($animal['adoptee_photo']);
+                                                foreach ($photos as $photo) { ?>
+                                                    <div class="thumbnail" style="background-image: url(<?=$photo?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
                                                 <?php } ?>
                                             </div>
 

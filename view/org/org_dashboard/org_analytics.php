@@ -73,21 +73,8 @@
 
 <div style="padding-top: 2rem;">
     <div class="row">
-        <div class="column1"><button onclick="showModel('popupModal-report')" class="btn outline button-hover">Generate Report</button>
-            <div id="popupModal-report" class="modal">
-                <div class="modal-content" style="height: 150px; width: 930px; top: 40%; left: 50%">
-                    <span class="close" onclick="hideModel('popupModal-report')">&times;</span>
-                    <h3 style="text-align: center;">Select report type</h3>
-                    <div style="justify-items:center; align-items:center; display:flex;">
-                    <a href="/OrgManagement/animals_report" class="btn green" style="bottom: 25px; width: 80px">Animal Report</a>&emsp;&emsp;
-                    <a href="/OrgManagement/adoption_requests_report" class="btn pink" style="bottom: 25px; width: 80px">Adoption Requests Report</a>&emsp;&emsp;
-                    <a href="" class="btn blue" style="bottom: 25px; width: 80px">Rescue Report</a>&emsp;&emsp;
-                    <a href="" class="btn orange" style="bottom: 25px; width: 80px">Donation Report</a>&emsp;&emsp;
-                    <a href="" class="btn" style="bottom: 25px; width: 80px;">General Summary</a>&emsp;&emsp;
-                    </div>
-                    
-        </div>
-            </div>
+        <div class="column1">
+            
     </div>
 
             </div>

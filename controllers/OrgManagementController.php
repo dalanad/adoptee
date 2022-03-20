@@ -158,17 +158,40 @@ class OrgManagementController extends Controller{
 
             "animals_reports"=>OrgManagement::animals_report()
     ];
-        View::render("org/org_dashboard/animals_report",$data);
+        View::render("org/org_dashboard/reports/animals_report",$data);
         
     }
 
-    function adoption_requests_report()
+
+    public function reports_list()
     {
         $data = [
+            "active" => "reports_list"
+        ];
+        View::render("org/dashboard", $data);
+    }
 
-            "adoption_requests_report"=>OrgManagement::adoption_requests_report()
-    ];
-        View::render("org/org_dashboard/adoption_requests_report",$data);
-        
+    function adoptions_updates(){
+        $data = ["adoptions_updates"=>OrgManagement::adoptions_updates_report()];
+        View::render("org/org_dashboard/reports/adoptions_updates",$data);
+       
+    }
+
+    function rescue_to_adoption(){
+        $data = ["rescue_to_adoption"=>OrgManagement::rescue_to_adoption_report()];
+        View::render("org/org_dashboard/reports/rescue_to_adoption",$data);
+
+    }
+
+    function rescues_information(){
+        $data = ["rescues_information"=>OrgManagement::rescues_information_report()];
+        View::render("org/org_dashboard/reports/rescues_information",$data);
+
+    }
+
+    function donations_summary(){
+        $data = ["donations_summary"=>OrgManagement::donations_summary_report()];
+        View::render("org/org_dashboard/reports/donations_summary",$data);
+
     }
 }
