@@ -9,10 +9,8 @@
     </div>
     <table class="table">
         <tr>
-            <th>ANIMAL ID</th>
-            <th>NAME</th>
+            <th>REPORT ID</th>
             <th>TYPE</th>
-            <th>AGE</th>
             <th>REPORTED TIME</th>
             <th>ACCEPTED TIME</th>
             <th>RESCUED TIME</th>
@@ -22,16 +20,14 @@
         </tr>
         <?php foreach ($rescues_information as $data) { ?>
             <tr>
-                <td><?= $data["description"] ?></td>
-                <td><?= $data["description"] ?></td>
-                <td><?= $data["description"] ?></td>
-                <td><?= $data["description"] ?></td>
-                <td><?= $data["description"] ?></td>
-                <td><?= $data["description"] ?></td>
-                <td><?= $data["description"] ?></td>
-                <td><?= $data["description"] ?></td>
-                <td><?= $data["description"] ?></td>
-                <td><?= $data["description"] ?></td>
+                <td><?= $data["report_id"] ?></td>
+                <td><?= $data["type"] ?></td>
+                <td><?= $data["time_reported"] ?></td>
+                <td><?= $data["accepted_date"] ?></td>
+                <td><?= $data["rescued_date"] ?></td>
+                <td><?= $data["reported_to_accepted"] ?></td>
+                <td><?= $data["accepted_to_rescued"] ?></td>
+                <td><?= $data["total_time"] ?></td>
             </tr>
         <?php } ?>
     </table>
