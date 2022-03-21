@@ -22,8 +22,9 @@ class OrgManagement extends BaseModel
         echo ($query);
         BaseModel::insert($query);
 
-        $query = "INSERT INTO `animal_for_adoption` (animal_id, org_id, description, date_listed, dewormed, photos)
-                  VALUES ('$animal_ID', '$org_id', '$description', curdate(), '$dewormed', '$adoptee_photo')";
+        $report_id = $_POST['report_id'];
+        $query = "INSERT INTO `animal_for_adoption` (animal_id, org_id, description, date_listed, dewormed, photos, rescue_report_id)
+                  VALUES ('$animal_ID', '$org_id', '$description', curdate(), '$dewormed', '$adoptee_photo', '$report_id')";
         return BaseModel::insert($query);
     }
 
@@ -109,6 +110,15 @@ class OrgManagement extends BaseModel
     static function reject_adoption_request($animal_id)
     {
         $query = "UPDATE `adoption_request` SET status = 'REJECTED' WHERE animal_id='$animal_id'";
+
+        return BaseModel::insert($query);
+    }
+
+    static function mark_as_complete($report_id)
+    {
+    
+        $query = "UPDATE `report_rescue` SET status = 'RESCUED' WHERE report_id='$report_id';
+        INSERT INTO `rescued_animal`(`org_id`, `report_id`, `rescued_date`) VALUES('$_SESSION[org_id]','$report_id', curdate());";
 
         return BaseModel::insert($query);
     }

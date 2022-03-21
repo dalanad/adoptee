@@ -1,6 +1,3 @@
-
-
-
 <style>
     .updates {
         position: absolute;
@@ -62,15 +59,15 @@
     .div-size {
         width: 95%;
         height: 20px;
-     }  
+    }
 </style>
 
 
 
 
 <div style="padding-top: 2rem;">
-<!-- Filters - Start -->
-<div style="padding-left: 1rem;">
+    <!-- Filters - Start -->
+    <div style="padding-left: 1rem;">
         <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
             <div>
                 <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
@@ -93,26 +90,27 @@
     <!-- Filters - End -->
 
     <div style="height:600px">
-    <div class="div-size" style="display:flex; font-size: 0.8rem; font-weight: 500; border: none; padding-left: 1rem; padding-bottom: 1rem; padding-top:.5rem;">
-                    <div style="width: 150px;">TYPE</div>
-                    <div style="width: 180px;">DATE RESCUED</div>
-                    <div style="width: 180px;">CONTACT NUMBER</div>
-                    <div style="width: 250px;">DESCRIPTION</div>
-                    <div style="width: 250px;">LOCATION</div>
-                    <div style="width: 150px;">INFO</div>
-                    <div style="padding-right: 0.5rem; width: 100px;"></div>
-    </div>
-    <div class="overflow-auto" style="height:525px">
+        <div class="div-size" style="display:flex; font-size: 0.8rem; font-weight: 500; border: none; padding-left: 1rem; padding-bottom: 1rem; padding-top:.5rem;">
+            <div style="width: 120px;">TYPE</div>
+            <div style="width: 150px;">DATE RESCUED</div>
+            <div style="width: 150px;">CONTACT NUMBER</div>
+            <div style="width: 220px;">DESCRIPTION</div>
+            <div style="width: 220px;">LOCATION</div>
+            <div style="width: 120px;">INFO</div>
+            <div style="width: 120px;">MARK AS COMPLETE</div>
+            <div style="padding-right: 0.5rem; width: 100px;"></div>
+        </div>
+        <div class="overflow-auto" style="height:525px">
             <?php foreach ($org_rescues as $org_rescue) { ?>
-                    <div class="div-size" style="display:flex; padding-left: 1rem; padding-bottom: .5rem; padding-top:.5rem;">
-                    <div style="width: 150px;"><i class="txt-clr fa fa-lg fa-<?= $org_rescue['type'] == "Dog" ? 'dog' : ($org_rescue['type'] == "Cat" ? 'cat' : 'paw' ) ?>"></i>&nbsp;&nbsp; <?= $org_rescue['type'] ?></div>
-                    <div style="width: 180px;"><?= $org_rescue["rescued_date"] ?></div>
-                    <div style="width: 180px;"><?= $org_rescue["contact_number"] ?></div>
-                    <div style="width: 250px;"><?= $org_rescue["description"] ?></div>
-                    <div style="width: 250px;"><?= $org_rescue["location"] ?></div>
-                    
-                    <div style="width: 150px;">
-                    <button onclick="showModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')" title="More Details" class="btn btn-link">Details</button>
+                <div class="div-size" style="display:flex; padding-left: 1rem; padding-bottom: .5rem; padding-top:.5rem;">
+                    <div style="width: 120px;"><i class="txt-clr fa fa-lg fa-<?= $org_rescue['type'] == "Dog" ? 'dog' : ($org_rescue['type'] == "Cat" ? 'cat' : 'paw') ?>"></i>&nbsp;&nbsp; <?= $org_rescue['type'] ?></div>
+                    <div style="width: 150px;"><?= $org_rescue["rescued_date"] ?></div>
+                    <div style="width: 150px;"><?= $org_rescue["contact_number"] ?></div>
+                    <div style="width: 220px;"><?= $org_rescue["description"] ?></div>
+                    <div style="width: 220px;"><?= $org_rescue["location"] ?></div>
+
+                    <div style="width: 120px;">
+                        <button onclick="showModel('popupModal<?= $org_rescue["org_rescue_id"] ?>')" title="More Details" class="btn btn-link">Details</button>
                         <div id="popupModal<?= $org_rescue["report_id"] ?>" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="hideModel('popupModal<?= $org_rescue["report_id"] ?>')">&times;</span>
@@ -122,13 +120,35 @@
 
                         </div>
                     </div>
-                    <div style="padding-right: 0.5rem; width: 100px;"><a href="/OrgManagement/add_rescue_update" title="Add Update" class="btn btn-link" style="border-radius: 0.4rem; border: 0.1rem solid var(--primary);">Add Update</a></div>
-                
 
+                 
+
+                    <div style="padding-right: 0.5rem; width: 120px;">
+                    
+                    <?php if($org_rescue["status"] == "RESCUED") {?> 
+                        <a href="/OrgManagement/add_new_animal?report_id=<?=$org_rescue["report_id"]?>" class="btn btn-link btn-icon orange"><i class="fas fa-plus"></i>&nbsp;New Animal</button>
+                    <?php } else { ?>    
+                    
+                    <button onclick="showModel('popupModal-accept<?= $org_rescue["report_id"] ?>')" class="btn btn-link btn-icon <?= $org_rescue["status"] <> "RESCUED" ? 'green' : '' ?>"><i class="fas fa-check"></i>&nbsp;<?= $org_rescue["status"] <> "RESCUED" ? 'Complete' : '' ?> </button>
+                        <div id="popupModal-accept<?= $org_rescue["report_id"] ?>" class="modal">
+                            <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
+                                <span class="close" onclick="hideModel('popupModal-accept<?= $org_rescue["report_id"] ?>')">&times;</span>
+                                <h3 style="text-align: center;">Are you sure you want to mark rescue as complete?</h3>
+                                <a href="/OrgManagement/mark_as_complete?animal_id=<?= $org_rescue["report_id"] ?>&user_id=<?= $org_rescue["user_id"] ?>" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                <button class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-accept<?= $org_rescue["report_id"] ?>')">Cancel</button>
+                            </div>
+
+                        </div>
+                        <?php } ?>
                     </div>
-                    <br>
+
+                    <div style="padding-right: 0.5rem; width: 100px;"><a href="/OrgManagement/add_rescue_update" title="Add Update" class="btn btn-link" style="border-radius: 0.4rem; border: 0.1rem solid var(--primary);">Add Update</a></div>
+
+
+                </div>
+                <br>
             <?php } ?>
-    </div>
+        </div>
     </div>
 </div>
 

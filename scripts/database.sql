@@ -82,6 +82,7 @@ create table animal_for_adoption (
     org_id int(10),
     user_id int(10),
     photos JSON,
+    rescue_report_id int(10),
     primary key(animal_id)
 );
 
