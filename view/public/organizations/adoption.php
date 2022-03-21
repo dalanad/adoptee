@@ -46,25 +46,24 @@
     .adoption-card:hover .adoption-card-action {
         display: flex;
     }
- 
 </style>
 
 <div class="m2 adoption-grid">
-        <?php foreach ($animals as $animal) { ?>
-            <a class="adoption-card" onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal['animal_id'] ?>&org_id=<?= $details[0]['org_id'] ?>'">
-                <div class="adoption-card-image" style="background-image: url('<?= $animal['photo'] ?>');"></div>
-                <div class="adoption-card-details">
-                    <div class="adoption-card-action">ADOPT</div>
-                    <div style="display:flex; padding:.5rem 1rem;align-items: center;">
-                        <div style="flex:1 1 0">
-                            <div style="font-weight: 500;"><?= $animal["name"] ?></div>
-                            <div style="font-size:small"><?= $animal["type"] ?> - <?= round($animal["age"]) ?> years</div>
-                        </div>
-                        <div style="font-size: 1.5em;">
-                            <?= $animal["gender"] == 'MALE' ? '<i class="txt-clr blue fa fa-mars"></i>' : '<i class="txt-clr pink fa fa-venus"></i>' ?>
-                        </div>
+    <?php foreach ($animals as $animal) { ?>
+        <a class="adoption-card" onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal['animal_id'] ?>&org_id=<?= $details[0]['org_id'] ?>'">
+            <div class="adoption-card-image" style="background-image: url('<?= $animal['photo'] ?>');"></div>
+            <div class="adoption-card-details">
+                <div class="adoption-card-action" <?= $animal['status'] == 'ADOPTED' ? 'style="background-color:deeppink"' : '' ?> ><?= $animal['status'] == 'ADOPTED' ? 'ADOPTED' : 'ADOPT' ?></div>
+                <div style="display:flex; padding:.5rem 1rem;align-items: center;">
+                    <div style="flex:1 1 0">
+                        <div style="font-weight: 500;"><?= $animal["name"] ?></div>
+                        <div style="font-size:small"><?= $animal["type"] ?> - <?= round($animal["age"]) ?> years</div>
+                    </div>
+                    <div style="font-size: 1.5em;">
+                        <?= $animal["gender"] == 'MALE' ? '<i class="txt-clr blue fa fa-mars"></i>' : '<i class="txt-clr pink fa fa-venus"></i>' ?>
                     </div>
                 </div>
-            </a>
-        <?php } ?>
-    </div>
+            </div>
+        </a>
+    <?php } ?>
+</div>

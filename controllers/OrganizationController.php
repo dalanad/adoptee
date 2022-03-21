@@ -99,7 +99,7 @@ class OrganizationController extends Controller
     {
         $name = $_POST['displayName']?? NULL;
         $_SESSION['donation_org_id'] = $_POST['org_id'];
-        $donation_id = Organization::makeDonation($_SESSION['donation_org_id'], $name);
+        $donation_id = Organization::makeDonation($_SESSION['donation_org_id'], $name, $_POST['comment']);
         $_SESSION['donation_id'] = $donation_id;
 
         $amount = $_POST['amount']*100;        
@@ -180,7 +180,7 @@ class OrganizationController extends Controller
     {
         unset($_SESSION['sub_id']);
 
-        $_SESSION['donation_id'] = Organization::makeDonation($_SESSION['org_id'],NULL);
+        $_SESSION['donation_id'] = Organization::makeDonation($_SESSION['org_id'],NULL, NULL);
         
         require __DIR__ . "/../lib/vendor/stripe-php-7.97.0/init.php";
         \Stripe\Stripe::setApiKey(Config::get("stripe.secret"));
