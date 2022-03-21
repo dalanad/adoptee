@@ -102,6 +102,8 @@
         <input class="ctrl" type="text" name="name" required />
       </div>
 
+      <input type="hidden" name="rescue_report_id" value="<?= $_GET['report_id']?>">
+
       <div class='field column'>
         <label for='type'>Type</label>
         <select class="ctrl" name='type' required>
