@@ -5,11 +5,16 @@ class ConsultationController extends Controller
     {
         if (isset($_SESSION['user'])) {
 
-            $_SESSION['consultation_type'] = $_POST['consultation_type'] ?? "live";
+            if(isset($_POST['consultation_type'])){
+                $_SESSION['consultation_type'] = $_POST['consultation_type'];
+            }
+            elseif(!isset($_SESSION['consultation_type'] )){
+                $_SESSION['consultation_type'] = 'live';
+            }
 
             if (isset($_POST['doctor']) && isset($_POST['date'])) {
                 $_SESSION['doctor'] = $_POST['doctor'];
-                $_SESSION['date'] = $_POST['date'];
+                $_SESSION['date'] = $_POST['consultation_type'] == "live"? $_POST['date']: date("Y-m-d");
             }
 
             $data = [
@@ -24,7 +29,7 @@ class ConsultationController extends Controller
 
                 if ($_POST['step'] == "Make Consultation") {
                     $data['step'] = 2;
-                    $_SESSION['time'] = $_POST['time'];
+                    $_SESSION['time'] = $_POST['consultation_type'] == "live"? $_POST['time'] : date("h:i");
                     $_SESSION['consultation_type'] = $_POST['consultation_type'];
                 }
 
@@ -69,8 +74,10 @@ class ConsultationController extends Controller
 
     public function create_request()
     {
+        $date = $_SESSION['date']==''? NULL : $_SESSION['date'];
+        $time = $_SESSION['time']==''? NULL : $_SESSION['time'];
         if (isset($_SESSION['pet_name'])) {
-            $consultation_id = Consultation::bookConsultationNewPet($_SESSION['doctor'], $_SESSION['user']['user_id'], $_SESSION['consultation_type'], $_SESSION['date'], $_SESSION['time'], $_SESSION['pet_name'], $_SESSION['gender'], $_SESSION['animal_type'], $_SESSION['dob']);
+            $consultation_id = Consultation::bookConsultationNewPet($_SESSION['doctor'], $_SESSION['user']['user_id'], $_SESSION['consultation_type'], $date, $time, $_SESSION['pet_name'], $_SESSION['gender'], $_SESSION['animal_type'], $_SESSION['dob']);
             unset($_SESSION['pet_name'], $_SESSION['gender'], $_SESSION['animal_type'], $_SESSION['dob']);
         } else {
             $consultation_id = Consultation::bookConsultationPet($_SESSION['doctor'], $_SESSION['user']['user_id'], $_SESSION['consultation_type'], $_SESSION['date'], $_SESSION['time'], $_SESSION['existing_pet']);
