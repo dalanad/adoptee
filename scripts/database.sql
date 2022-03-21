@@ -117,8 +117,8 @@ create table user_pet (
 
 create table consultation (
     consultation_id int(10) auto_increment primary key, -- should we add a primary key ?
-    consultation_date date not null,
-    consultation_time time not null,
+    consultation_date date,
+    consultation_time time,
     animal_id int(10) not null,
     doctor_user_id int(10),
     user_id int(10),
@@ -198,6 +198,7 @@ create table donation (
     org_id int(10),
     txn_id varchar(100),
     name varchar(50),
+    comments varchar(200),
     subscription_id int(10)
 );
 

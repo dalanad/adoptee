@@ -133,10 +133,10 @@ class Organization extends BaseModel
         return self::select($query);
     }
 
-    static function makeDonation($org_id, $name) //changes to be made           , $subscriptionId
+    static function makeDonation($org_id, $name, $comments)
     {
-        $query = "INSERT INTO `donation` (org_id, name)
-                  VALUES($org_id, '$name');";      //, subscription_id, $subscriptionId
+        $query = "INSERT INTO `donation` (org_id, name, comments)
+                  VALUES($org_id, '$name', '$comments');";
         self::insert($query);
         return self::lastInsertId();
     }
