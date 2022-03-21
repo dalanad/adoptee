@@ -138,12 +138,7 @@ class OrgManagement extends BaseModel
         BaseModel::insert($query);
         $animal_ID = BaseModel::lastInsertId();
 
-        $query = "INSERT INTO `rescued_animal` (animal_id, report_id, org_id, rescued_date)
-        VALUES ('$animal_ID', '$report_id', '$org_id', curdate())";
-        echo ($query);
-        BaseModel::insert($query);
-
-        $query = "UPDATE `report_rescue` SET org_id = '$org_id' status = 'RESCUED' WHERE report_id='$report_id'";
+        $query = "UPDATE `report_rescue` SET org_id = '$org_id' status = 'IN PROGRESS' accepted_date=curdate() WHERE report_id='$report_id'";
         echo ($query);
         return BaseModel::insert($query);
     }
@@ -234,15 +229,44 @@ class OrgManagement extends BaseModel
     {
         $org_id = $_SESSION['org_id'];
 
-        $query = "SELECT * from adoption_request WHERE org_id = '$org_id' ";
-        return BaseModel::select($query);
+        $query = "SELECT
+            aa.animal_id,
+            a.name 'animal_name',
+            a.type,
+            aa.date_adopted,
+            a.gender,
+            DATEDIFF(CURRENT_DATE, a.dob) / 365 'age',
+            u.name 'adopter',
+            u.telephone 'adopter_contact',
+            (SELECT count(*) FROM routine_updates r WHERE r.animal_id = aa.animal_id) 'update_count',
+            (SELECT max(update_date) FROM routine_updates r WHERE r.animal_id = aa.animal_id) 'last_updated'
+        FROM
+            animal_for_adoption aa,
+            animal a,
+            user u
+        WHERE
+            aa.user_id = u.user_id AND a.animal_id = aa.animal_id and aa.org_id = :org_id;";
+        return BaseModel::select($query, ["org_id" => $org_id]);
     }
 
     static function rescues_information_report()
     {
         $org_id = $_SESSION['org_id'];
-        $query = "SELECT * from adoption_request WHERE org_id = '$org_id' ";
-        return BaseModel::select($query);
+        $query = "SELECT
+            rr.report_id,
+            rr.type,
+            rr.time_reported,
+            rr.accepted_date,
+            ra.rescued_date,
+            (SELECT TIMESTAMPDIFF(hour, time_reported, accepted_date)) AS reported_to_accepted,
+            (SELECT TIMESTAMPDIFF(hour, accepted_date, rescued_date)) AS accepted_to_rescued,
+            (SELECT (reported_to_accepted) + (accepted_to_rescued)) AS total_time
+        FROM
+            report_rescue rr,
+            rescued_animal ra
+        WHERE
+            rr.report_id = ra.report_id AND rr.org_id = :org_id;";
+        return BaseModel::select($query, ["org_id" => $org_id]);
     }
 
     static function donations_summary_report()

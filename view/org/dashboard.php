@@ -11,7 +11,7 @@ $management_menu = array(
     "org_rescues" =>  array("name" =>  "Rescues", "icon" => "ambulance"),
     "org_donations" =>  array("name" =>  "Donations", "icon" => "hand-holding-usd"),
     "org_news_events" =>  array("name" =>  "News & Events", "icon" => "calendar-alt"),
-    "reports_list" =>  array("name" =>  "Organization Reports", "icon" => "calendar-alt")
+    "reports_list" =>  array("name" =>  "Organization Reports", "icon" => "file-chart-pie")
 );
 
 $administration_menu = array(
