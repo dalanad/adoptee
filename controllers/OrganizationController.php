@@ -192,7 +192,7 @@ class OrganizationController extends Controller
 
         unset($_SESSION['donation_id']);
 
-        $this->redirect("/Organization/get_org_listing"); 
+        $this->redirect("/Profile/sponsorships"); 
     }
 
     public function cancel_subscription_payment()

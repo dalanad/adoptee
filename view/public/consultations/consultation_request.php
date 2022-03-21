@@ -85,7 +85,7 @@
           <div>
             <div class="field">
               <label>Doctor</label>
-              <input class="ctrl">
+              <!-- <input class="ctrl"> -->
             </div>
             <div class="radio-box" style="display: grid;">
               <?php foreach ($doctors as $doctor) { ?>
@@ -112,9 +112,9 @@
               <div class="field">
                 <label> Consultation Type </label>
                 <div class="radio-box ">
-                  <input name="consultation_type" id="live" type="radio" value="live" <?php if ($_SESSION['consultation_type'] == 'live') { ?>checked<?php } ?> onselect="displayTimes(this)" required>
+                  <input name="consultation_type" id="live" type="radio" value="live" <?php if ($_SESSION['consultation_type'] == 'live') { ?>checked<?php } ?> onchange="displayTimes(this)" required>
                   <label for="live"><i class="far fa-webcam"></i> &nbsp; Video</label>
-                  <input name="consultation_type" id="advise" type="radio" value="advise" <?php if ($_SESSION['consultation_type'] == 'advise') { ?>checked<?php } ?> onselect="displayTimes(this)">
+                  <input name="consultation_type" id="advise" type="radio" value="advise" <?php if ($_SESSION['consultation_type'] == 'advise') { ?>checked<?php } ?> onchange="displayTimes(this)">
                   <label for="advise"><i class="far fa-comments-alt"></i> &nbsp; Chat </label>
                 </div>
               </div>
@@ -245,11 +245,11 @@
           </tr>
           <tr>
             <td>Date:</td>
-            <td><?= $_SESSION['date'] ?></td>
+            <td><?= $_SESSION['consultation_type']=='live'? $_SESSION['date'] : "-" ?></td>
           </tr>
           <tr>
             <td>Time:</td>
-            <td><?= $_SESSION['time'] ?></td>
+            <td><?= $_SESSION['consultation_type']=='live'? $_SESSION['time'] : "-" ?></td>
           </tr>
           <tr>
             <td>Pet's name:</td>
@@ -309,19 +309,20 @@
   }
 
   function displayTimes(_this) {
-    // times=document.getElementById('time');
-    // date=document.getElementById("date");
-    // if(_this.value=='live'){
-    //   date.disabled=true;
-    // } else{
-    //   date.disabled=false;
-    // }
+    times = document.getElementsByName('time');
+    date = document.getElementById("date");
+    if (_this.id == 'advise') {
+      times.forEach(function(times) {
+        times.disabled = true;
+      });
+      date.disabled = true;
+      times.value = '';
+      date.value = '';
+    } else {
+      times.forEach(function(times) {
+        times.disabled = false;
+      });
+      date.disabled = false;
+    }
   }
-
-  // var dis1 = document.getElementById("dis_rm");
-  // dis1.onchange = function() {
-  //   if (this.value != "" || this.value.length > 0) {
-  //     document.getElementById("dis_per").disabled = true;
-  //   }
-  // }
 </script>
