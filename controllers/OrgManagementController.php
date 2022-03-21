@@ -110,7 +110,8 @@ class OrgManagementController extends Controller{
     function org_donations()
     {
         $data = [
-            "active" => "org_donations"
+            "active" => "org_donations",
+            "donations" => Organization::getDonations($_SESSION["org_id"])
 
     ];
         View::render("org/dashboard", $data);

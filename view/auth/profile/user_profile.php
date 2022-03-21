@@ -2,17 +2,25 @@
 
 require_once  __DIR__ . '/../../_layout/header.php';
 
+// common profile menu
 $profile_menu = array(
     "update_profile" => array("name" => "Profile", "icon" => "user-cog"),
     "change_password" =>  array("name" =>  "Password", "icon" => "unlock-alt"),
     "notifications" =>  array("name" =>  "Notifications", "icon" => "bell"),
-    "consultations" =>  array("name" =>  "Consultations", "icon" => "user-md-chat"),
-    "adoptions" =>  array("name" =>  "Adoptions", "icon" => "dog"),
-    "rescues" =>  array("name" =>  "Rescues", "icon" => "briefcase-medical"),
-    "my_pets" => array("name" => "My Pets", "icon" => "paw"),
-    "sponsorships" =>  array("name" =>  "Sponsorships", "icon" => "donate"),
-    "payments" =>  array("name" =>  "Payments", "icon" => "money-check"),
 );
+
+// Add links to the registerd user functions only if the current user is a normal user
+if ($_SESSION['user_role'] == "reg_user") {
+    $reg_user = array(
+        "consultations" =>  array("name" =>  "Consultations", "icon" => "user-md-chat"),
+        "adoptions" =>  array("name" =>  "Adoptions", "icon" => "dog"),
+        "rescues" =>  array("name" =>  "Rescues", "icon" => "briefcase-medical"),
+        "my_pets" => array("name" => "My Pets", "icon" => "paw"),
+        "sponsorships" =>  array("name" =>  "Sponsorships", "icon" => "donate"),
+        "payments" =>  array("name" =>  "Payments", "icon" => "money-check"),
+    );
+    $profile_menu = array_merge($profile_menu, $reg_user);
+}
 ?>
 
 <style>
@@ -51,7 +59,7 @@ $profile_menu = array(
 </style>
 
 <div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="margin-left:1rem;"><?= $_SESSION['user']['name'];?></h2>
+    <h2 style="margin-left:1rem;"><?= $_SESSION['user']['name']; ?></h2>
     <div class="settings-container ">
         <div class="side-nav">
             <?php foreach ($profile_menu as $key => $value) { ?>

@@ -299,11 +299,36 @@ class Doctor extends BaseModel
     public static function saveMedicine($doctor_id, $medicine)
     {
         if (isset($medicine["medicine_id"])) {
-            $query = "UPDATE medicine SET name = :name WHERE medicine_id = :medicine_id AND doctor_id = :doctor_id";
-            self::update($query, ["name" => $medicine["name"], "medicine_id" => $medicine["medicine_id"], "doctor_id" => $doctor_id]);
+
+            $query = "UPDATE medicine SET 
+                    name = :name,
+                    age_min = :age_min,
+                    age_max = :age_max,
+                    weight_min = :weight_min,
+                    weight_max = :weight_max
+                WHERE medicine_id = :medicine_id AND doctor_id = :doctor_id";
+
+            self::update($query, [
+                "name" => $medicine["name"],
+                "medicine_id" => $medicine["medicine_id"],
+                "doctor_id" => $doctor_id,
+                "age_min" => $medicine["age_min"],
+                "age_max" => $medicine["age_max"],
+                "weight_min" => $medicine["weight_min"],
+                "weight_max" => $medicine["weight_max"],
+            ]);
+            
         } else {
-            $query = "INSERT INTO medicine(name,doctor_id) VAlUES (:name,:doctor_id)";
-            self::insert($query, ["name" => $medicine["name"], "doctor_id" => $doctor_id]);
+
+            $query = "INSERT INTO medicine(name,doctor_id,age_min,age_max,weight_min,weight_max) 
+                      VAlUES (:name,:doctor_id,:age_min,:age_max,:weight_min,:weight_max)";
+            self::insert($query, [
+                "name" => $medicine["name"], "doctor_id" => $doctor_id,
+                "age_min" => $medicine["age_min"],
+                "age_max" => $medicine["age_max"],
+                "weight_min" => $medicine["weight_min"],
+                "weight_max" => $medicine["weight_max"],
+            ]);
         }
     }
 }

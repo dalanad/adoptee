@@ -181,6 +181,10 @@ create table prescription_item (
 create table medicine (
     medicine_id int (10) auto_increment primary key,
     name varchar(100),
+    age_min int(10),
+    age_max int(10),
+    weight_min int(10),
+    weight_max int(10),
     doctor_id int(10) not null
 );
 
@@ -224,7 +228,7 @@ create table sponsorship (
 );
 
 create table report_rescue(
-    org_id int(10),
+    org_id int(10), 
     report_id int(10) AUTO_INCREMENT primary key,
     type varchar(50), 
     description varchar(200),

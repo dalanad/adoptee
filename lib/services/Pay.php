@@ -34,14 +34,18 @@ class Pay
 
     public static function subscribe($reason, $amount, $success, $cancel, $subscription_id)
     {
+
+        // todo : fetch subscription Info & set recurring Period
         $checkout_session = \Stripe\Checkout\Session::create([
             'client_reference_id' => "$subscription_id",
             'metadata' => ['user_id' => $_SESSION["user"]["user_id"]],
             'customer_email' =>  $_SESSION["user"]["email"],
-            'submit_type' => 'pay',
             'line_items' => [[
                 'price_data' => [
                     "currency" => "lkr",
+                    "recurring" => [
+                        "interval" => "month"
+                    ],
                     "product_data" => [
                         "name" => $reason
                     ],
@@ -49,10 +53,7 @@ class Pay
                 ],
                 'quantity' => 1,
             ]],
-            'payment_method_types' => [
-                'card',
-            ],
-            'mode' => 'payment',
+            'mode' => 'subscription',
             'success_url' => Config::get('domain') . "$success?session_id={CHECKOUT_SESSION_ID}",
             'cancel_url' => Config::get('domain') . $cancel,
         ]);
