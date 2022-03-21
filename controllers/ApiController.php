@@ -49,4 +49,9 @@ class ApiController extends Controller
         }
         $this->redirect($_POST["return_url"]);
     }
+
+    public function notification_seen()
+    {
+        Notification::markAllSeen($_SESSION["user"]["user_id"]);
+    }
 }
