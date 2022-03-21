@@ -285,7 +285,8 @@ create table notifications (
     title varchar(200),
     message varchar(500) not null,
     type enum("SMS","EMAIL","NOTIFICATION") default 'NOTIFICATION',
-    sent boolean default false -- whether the sms or email is sent
+    sent boolean default false, -- whether the sms or email is sent
+    seen boolean default false -- whether user has seen the notification
 );
 
 create table vaccines (

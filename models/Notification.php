@@ -10,6 +10,12 @@ class Notification extends BaseModel
         self::triggerProcessing();
     }
 
+    public static function markAllSeen($user_id)
+    {
+        $query = "UPDATE `notifications` SET seen = true WHERE user_id = :user_id";
+        self::update($query, ["user_id" => $user_id]);
+    }
+
     public static function triggerProcessing()
     {
         $url = "http://127.0.0.1/main/send_notifications";

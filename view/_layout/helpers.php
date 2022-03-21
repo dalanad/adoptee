@@ -24,22 +24,59 @@ function user_btn()
 function notif_btn()
 {
     if (isset($_SESSION['user'])) {
-        $notifications = User::getNotifications($_SESSION['user']['user_id']); ?>
+        $notifications = User::getNotifications($_SESSION['user']['user_id']);
+        $new_notifi = array_filter($notifications, function ($k) {
+            return !$k["seen"];
+        });
+?>
 
         <div class='dropdown' style='display:flex;align-items: center;line-height: 1;'>
-            <i class='far fa-bell' style='font-size:1.2em'> </i>
+
+            <i class='<?php if (sizeof($new_notifi) != 0) { echo "fas fa-bell txt-clr";  } else { echo "far fa-bell"; }?>' id="drop-icon" style='font-size:1.2em'> </i>
+
             <div class='dropdown-content' style="padding: 0;">
                 <?php if (sizeof($notifications) == 0) { ?>
                     <div style="padding: 1rem;text-align:center"> No New Notifications Available</div>
                 <?php } ?>
                 <?php foreach ($notifications as $notification) { ?>
                     <div class="notification-item">
-                        <b style="padding: .5rem  1rem"> <i class="far fa-envelope"></i> &nbsp; <?= $notification['title'] ?></b>
+                        <b style="padding: .5rem  1rem">
+                            <i class="<?php if ($notification["seen"]) { ?>far fa-envelope-open <? } else { ?>fas fa-envelope txt-clr <? } ?>"></i>
+                            &nbsp; <?= $notification['title'] ?></b>
                         <div style='padding: .5rem 1rem;font-size:.9em;'><?= $notification['message'] ?></div>
                     </div>
                 <?php } ?>
             </div>
         </div>
+
+        <script>
+            let el = document.querySelector('#drop-icon')
+            slide_init(el)
+
+            function slide_init(element) {
+                var timer; //wait 2 seconds
+                element.onmouseover = function() {
+                    timer = setTimeout("slide()", 1000);
+                }
+                element.onmouseout = function() {
+                    clearTimeout(timer);
+                } //remove timer
+            }
+
+            function slide() {
+                fetch("/api/notification_seen").then(e => {
+                    el.classList.add("fa-bell",'far')
+                    el.classList.remove("fa-bell-plus",'fas', "txt-clr");
+                    
+                    // todo one by ony delay
+                    for (let el of document.querySelectorAll(".fa-envelope")) {
+                        el.classList.remove("fas", "fa-envelope", "txt-clr")
+                        el.classList.add("far", "fa-envelope-open")
+                    }
+
+                })
+            }
+        </script>
     <?php
     }
 }
