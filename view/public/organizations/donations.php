@@ -60,6 +60,11 @@
                 <input class="ctrl" type="number" name="amount" step="0.01" min="200.00" placeholder="Rs. 0.00" style="width:8rem;" required>
             </div>
 
+            <div class="field">
+                <label for="comment">Comments</label>
+                <textarea rows="6" class="ctrl" name="comment"></textarea>
+            </div>
+
             <div class='field'>
                 <div class="row">
                     <div class="column"><input type="checkbox" value="<?= $_SESSION['user']['name'] ?>" name="displayName" class="ctrl-check">&nbsp I would like to display my name:</div>
