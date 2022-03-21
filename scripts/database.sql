@@ -103,7 +103,7 @@ create table animal_vaccines (
 create table rescued_animal (
     org_id  int(10),
     report_id int(10) primary key,
-    rescued_date date
+    rescued_date timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
 create table user_pet (
@@ -232,6 +232,7 @@ create table report_rescue(
     location varchar(100) not null,
     location_coordinates POINT,
     status enum('PENDING', 'IN PROGRESS','RESCUED') not null default 'PENDING',
+    accepted_date timestamp DEFAULT CURRENT_TIMESTAMP,
     photos JSON not null    
 );
 
