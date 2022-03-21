@@ -208,8 +208,13 @@ class Organization extends BaseModel
 
     public static function getDonations($org_id)
     {
-        // todo :
-        $query = "SELECT * FROM donation d where org_id = :org_id";
+        $query = "SELECT * ,
+                u.name 'donor'
+            FROM donation d, payment p, user u 
+            WHERE 
+                  p.txn_id = d.txn_id 
+                  AND p.user = u.user_id 
+                  AND d.org_id = :org_id";
         return self::select($query, ["org_id" => $org_id]);
     }
 
