@@ -147,6 +147,7 @@ create table consultation_message (
      medical_record_id int(10),
      attachments JSON,
      sender int(10) not null,
+     seen boolean default false,
      message varchar(128),
      primary key (consultation_id, created_at)
 );

@@ -73,15 +73,20 @@ class Consultation extends BaseModel
     public static function findConsultationsByDoctorId($doctorId, $type, $search, $status = "ALL")
     {
 
-        $query =  "SELECT c.* FROM `consultation` c
+        $query =  "SELECT 
+                    c.*,
+                    (SELECT count(*) 'count' FROM `consultation_message` cm 
+                    WHERE cm.consultation_id = c.consultation_id AND seen = FALSE AND sender != :user_id ) 'new_msgs'
+                FROM `consultation` c
                     inner join animal a on a.animal_id = c.animal_id
                     WHERE c.doctor_user_id = $doctorId
-                    and status in ('ACCEPTED','COMPLETED')"
+                    and status in ('ACCEPTED','COMPLETED') "
             . (isset($type) && $type != "ANY" ? " and c.type = '$type' " : "")
             . ($status != "ALL" ? " and c.status = '$status' " : "")
-            . (isset($search) && $search != "" ? " and a.name like '%$search%' " : "");
+            . (isset($search) && $search != "" ? " and a.name like '%$search%' " : "") 
+            . " ORDER BY new_msgs DESC ";
 
-        $consultations = self::select($query);
+        $consultations = self::select($query, ["user_id" => $doctorId]);
         //print_r($query);
         $consultations = array_map(function ($item) {
             $item["animal"] =  Animal::getAnimalById($item["animal_id"]);

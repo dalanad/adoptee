@@ -8,8 +8,14 @@ class ApiController extends Controller
 
     function get_consultations()
     {
-        $consultations = Consultation::findConsultationsByDoctorId($_SESSION["user"]["user_id"],$_GET["type"],$_GET["search"],$_GET['status']);
+        $consultations = Consultation::findConsultationsByDoctorId($_SESSION["user"]["user_id"], $_GET["type"], $_GET["search"], $_GET['status'], isset($_GET['new_msg_count']));
         View::json($consultations);
+    }
+
+    function mark_messages_read()
+    {
+        Message::markAllMessagesAsRead($_GET["consultation_id"], $_SESSION["user"]["user_id"]);
+        View::json(["success" => true]);
     }
 
     function get_consultation_by_id()
@@ -45,7 +51,7 @@ class ApiController extends Controller
         if (isset($_POST["rating"])) {
             Consultation::complete_user($consultationId, $_POST["rating"]);
         } else {
-            Consultation::complete_doctor($consultationId,5);
+            Consultation::complete_doctor($consultationId, 5);
         }
         $this->redirect($_POST["return_url"]);
     }
