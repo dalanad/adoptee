@@ -41,7 +41,7 @@ function notif_btn()
                 <?php foreach ($notifications as $notification) { ?>
                     <div class="notification-item">
                         <b style="padding: .5rem  1rem">
-                            <i class="<?php if ($notification["seen"]) { ?>far fa-envelope-open <? } else { ?>fas fa-envelope txt-clr <? } ?>"></i>
+                            <i class="<?php if ($notification["seen"]) { ?>far fa-envelope-open <?php } else { ?>fas fa-envelope txt-clr <?php } ?>"></i>
                             &nbsp; <?= $notification['title'] ?></b>
                         <div style='padding: .5rem 1rem;font-size:.9em;'><?= $notification['message'] ?></div>
                     </div>
