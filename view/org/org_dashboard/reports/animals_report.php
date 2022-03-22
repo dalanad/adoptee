@@ -1,23 +1,23 @@
-<?php require __DIR__ . "/../../../_layout/header.php"; ?>
+<?php require __DIR__ . "/../../../_layout/layout.php"; ?>
 
 <style>
-    .ctrl2 {
-        padding: 0.4em 0.5em;
-        line-height: 1;
-        border-radius: 8px;
-        font-family: inherit;
-        color: var(--color);
-        font-size: 1rem;
-        border: 0.2rem solid var(--gray-2);
-        background: var(--gray-1);
-        width: 25%;
-        box-sizing: border-box;
-    }
+  .ctrl2 {
+    padding: 0.4em 0.5em;
+    line-height: 1;
+    border-radius: 8px;
+    font-family: inherit;
+    color: var(--color);
+    font-size: 1rem;
+    border: 0.2rem solid var(--gray-2);
+    background: var(--gray-1);
+    width: 25%;
+    box-sizing: border-box;
+  }
 
 
-    .box {
-        display: none;
-    }
+  .box {
+    display: none;
+  }
 
   .row {
     display: flex;
@@ -88,56 +88,86 @@
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
+
+  table,
+  td,
+  th {
+    border: 0.1rem solid var(--muted);
+    border-radius: 0.4rem;
+    border-collapse: collapse;
+  }
+
+  .sub-table {
+    border: none;
+  }
 </style>
 
 
 <div class='container px2'>
+  <div style="display: flex;align-items:center;margin-top:1rem">
     <div>
-        <a href="/OrgManagement/org_news_events" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
+      <a href="/OrgManagement/reports_list" class="btn btn-link btn-icon mr1 " style="font-size: 1em;">
+        <i class="fa fa-arrow-left"></i></a>
     </div>
-    <h3 class='mt1 txt-clr'>Animal Report</h3>
+    <h2 style="margin:0">Adoption Updates Report</h2>
+  </div>
 
-    <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
+  <br>
+  <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
 
-        <div class='field column'>
-            <label for='from'>From</label>
-            <div>
-                <input class="ctrl2" type="date" max="" name="dob" id="datefield" required />
-                <p id="result"></p>
-            </div>
-        </div>
+    <div class='field column'>
+      <label for='from'>From</label>
+      <div>
+        <input class="ctrl2" type="date" max="" name="dob" id="datefield" required />
+        <p id="result"></p>
+      </div>
+    </div>
 
-        <div class='field column'>
-            <label for='to'>To</label>
-            <div>
-                <input class="ctrl2" type="date" max="" name="dob" id="datefield" required />
-                <p id="result"></p>
-            </div>
-        </div>
+    <div class='field column'>
+      <label for='to'>To</label>
+      <div>
+        <input class="ctrl2" type="date" max="" name="dob" id="datefield" required />
+        <p id="result"></p>
+      </div>
+    </div>
 
-</form>
+  </form>
 
-<table class="table">
+  <table class="table">
     <tr>
-        <th>Animal ID</th>
-        <th>STATUS</th>
-        <th>DATE LISTED</th>
-        <th>DATE ADOPTED</th>
-        <th>USER ID</th>
-        <th>DESCRIPTION</th>
+      <th>Animal INFO</th>
+      <th>STATUS</th>
+      <th>DATE LISTED</th>
+      <th>DATE ADOPTED</th>
+      <th>USER ID</th>
+      <th>DESCRIPTION</th>
     </tr>
 
     <?php foreach ($animals_reports as $animals_report) { ?>
-        <tr>
-            <td><?= $animals_report["animal_id"] ?></td>
-            <td><?= $animals_report["status"] ?></td>
-            <td><?= $animals_report["date_listed"] ?></td>
-            <td><?= $animals_report["date_adopted"] ?></td>
-            <td><?= $animals_report["user_id"] ?></td>
-            <td><?= $animals_report["description"] ?></td>
-        </tr>
+      <tr>
+
+        <td>
+          <table class="sub-table">
+            <tr>
+              <td class="sub-table"><img src="<?= $animals_report["avatar_photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
+              <td class="sub-table">
+                <div>
+                  <div style="padding: 3px;"><?= $animals_report["name"] ?></div>
+                  <div style="padding: 3px; font-size:0.8rem"><?= $animals_report["age"] ?>&nbsp; Years</div>
+                  <div style="padding: 3px;"><i class="txt-clr fa fa-lg fa-<?= $animals_report['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i></div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td><?= $animals_report["status"] ?></td>
+        <td><?= $animals_report["date_listed"] ?></td>
+        <td><?= $animals_report["date_adopted"] ?></td>
+        <td><?= $animals_report["user_id"] ?></td>
+        <td><?= $animals_report["description"] ?></td>
+      </tr>
     <?php } ?>
-</table>
+  </table>
 
 
 </div>

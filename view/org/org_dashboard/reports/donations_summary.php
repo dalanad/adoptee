@@ -18,10 +18,11 @@
         </tr>
         <?php foreach ($donations_summary as $data) { ?>
             <tr>
-                <td><?= $data["id"] ?></td>
-                <td><?= $data["id"] ?></td>
-                <td><?= $data["id"] ?></td>
-                <td><?= $data["id"] ?></td>
+                <td><?= $data["txn_time"] ?></td>
+                <td><?= $data["donation_count"] ?></td>
+                <td><?= $data["donation_amount"] ?></td>
+                <td><?= $data["subscription_count"] ?></td>
+                <td><?= $data["subscription_amount"] ?></td>
             </tr>
         <?php } ?>
     </table>

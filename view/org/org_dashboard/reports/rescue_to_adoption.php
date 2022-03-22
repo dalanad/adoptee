@@ -1,4 +1,15 @@
 <?php require __DIR__ . "/../../../_layout/layout.php"; ?>
+
+<style>
+    table,
+    td,
+    th {
+        border: 0.1rem solid var(--muted);
+        border-radius: 0.4rem;
+        border-collapse: collapse;
+    }
+</style>
+
 <div class='container px2'>
     <div style="display: flex;align-items:center;margin-top:1rem">
         <div>
