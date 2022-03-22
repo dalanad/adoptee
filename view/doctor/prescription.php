@@ -3,6 +3,44 @@
     body {
         height: 95%
     }
+
+    .auto-complete {
+        position: relative;
+        display: inline-block;
+    }
+
+    .auto-complete-content {
+        display: none;
+        position: absolute;
+        min-width: 100%;
+        box-sizing: border-box;
+        padding: 0.5rem 0;
+        margin-top: .3rem;
+        top: 100%;
+        border: var(--border);
+        border-radius: 0.3rem;
+        overflow: auto;
+        box-shadow: var(--shadow);
+        z-index: 1000;
+        background: white;
+        right: 0;
+        max-height: 180px;
+    }
+
+    .auto-complete.show .auto-complete-content {
+        display: block;
+    }
+
+    .auto-complete-content .item:hover {
+        background: var(--gray-2);
+    }
+
+    .auto-complete-content .item {
+        padding: 0.5rem 1rem;
+        display: block;
+        border-radius: 0;
+        text-decoration: none;
+    }
 </style>
 <?php if (isset($consultationId)) { ?>
     <form style="padding:1rem;padding-top:0" method="POST" action="/prescription/save_consultation_prescription?consultation_id=<?= $consultationId ?>">
@@ -43,12 +81,10 @@
                     <legend style="padding: 0 0.4rem;">Add Drug</legend>
                     <div class="field">
                         <label>Drug Name</label>
-                        <input class="ctrl" type="text" name="name" list="meds">
-                        <datalist id="meds">
-                            <?php foreach ($medicines as $medicine) { ?>
-                                <option value="<?= $medicine["name"] ?>">
-                                <?php } ?>
-                        </datalist>
+                        <input class="ctrl" type="text" name="name" id="drug-input">
+                        <div class='auto-complete' style='display:flex;align-items: center;line-height: 1;'>
+                            <div class='auto-complete-content'> </div>
+                        </div>
                     </div>
                     <div class="field">
                         <label>Dose</label>
@@ -66,6 +102,35 @@
                         <button name="action" value="ADD" class="btn">Add</button>
                     </div>
                 </fieldset>
+
+                <script>
+                    let meds = <?= json_encode($medicines) ?>;
+                    let input = document.getElementById('drug-input');
+                    let autocomplete = document.querySelector('.auto-complete');
+                    let content = document.querySelector('.auto-complete-content')
+
+                    input.addEventListener('focus', () => {
+                        autocomplete.classList.add('show')
+                        content.innerHTML = ''
+                    })
+
+                    input.addEventListener('focusout', () => {
+                        autocomplete.classList.remove('show')
+                        content.innerHTML = ''
+                    })
+
+                    input.addEventListener('keydown', () => {
+
+                        let filterd = meds.filter(e => String(e.name).toLowerCase().includes(String(input.value).toLowerCase()))
+                        if (filterd.length > 0) {
+                            content.innerHTML = filterd.map(e => `<div class='item' >${e.name}</div>`).reduce((a, b) => a + b)
+                        } else {
+                            content.innerHTML = ''
+                        }
+                    })
+
+                </script>
+
                 Remarks
                 <textarea class="ctrl" name="remarks"><?= $prescription['remarks'] ?? "" ?></textarea>
                 <br>
@@ -74,6 +139,8 @@
                     <!-- <button type='button' class="btn btn-faded pink" onclick="document.querySelector('.overlay').remove()">Cancel</button> -->
                     <button class="btn green" name="action" value="SEND">Send</button>
                 </div>
+
+
             </div>
         <?php } else { ?>
             <br>
