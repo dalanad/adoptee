@@ -184,4 +184,10 @@ VALUES ('123', 1200.00, '2021-03-19 21:26:38', '3'),
 INSERT INTO `donation` (`org_id`,`txn_id`,`name`,`subscription_id`) 
 VALUES ('1','123','Hiruni Dahanayake',NULL);
 
+INSERT INTO `breeds` (`type`,`breed`,`height`,`weight`,`life_expectancy`,`color`,`photo`,`child_friendly`,`pet_friendly`,`health`,`problems`)
+VALUES ('DOG','Beagle',20.0,10.0,10,'["Black"]','["/assets/data/dogs/2.jpg"]','Very Good','Social with other dogs','High risk of eye related issues','Not known for behavioural problems'),
+('DOG','Labrador',60.0,20.0,15,'["White","Black","Brown"]','["/assets/data/dogs/3.jpg"]','Very Good','Social, but can become aggressive','High risk of diabetes and cancer','Very high appetite. Need regular exercise'),
+('CAT','Domestic Shorthair',20.0,5.0,12,'["White","Black","Brown","Grey","Orange"]','["/assets/data/cats/1.jpg"]','Average','Needs to be exposed to other pets as a kitten','Kidney problems','May become territorial'),
+('CAT','Persian',20.0,3.0,12,'["White","Black","Brown","Grey","Orange"]','["/assets/data/cats/6.jpg"]','Average','Not social','Respiratory problems','Need regular grooming');
+
 COMMIT;

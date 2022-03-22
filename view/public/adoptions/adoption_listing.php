@@ -139,7 +139,7 @@
                         <label for="cat">&nbsp; <i class="far fa-cat"></i>&nbsp; Cat </label>
                     </div>
 
-                    <div style="margin: .5rem;display:flex">
+                    <!-- <div style="margin: .5rem;display:flex">
                         <input name="animal_type[]" class="ctrl-check" value="Bird" type="checkbox" onchange='_form.submit()' <?= in_array('Bird', $filter['animal_type']) ? "checked" : ""; ?> />
                         <label for="bird">&nbsp; <i class="far fa-dove"></i>&nbsp; Bird</label>
                     </div>
@@ -147,7 +147,7 @@
                     <div style="margin: .5rem;display:flex">
                         <input name="animal_type[]" class="ctrl-check" value="Other" type="checkbox" onchange='_form.submit()' <?= in_array('Other', $filter['animal_type']) ? "checked" : ""; ?> />
                         <label for="other">&nbsp; <i class="far fa-paw"></i>&nbsp; Other </label>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="field">
                     <!--Color-->
