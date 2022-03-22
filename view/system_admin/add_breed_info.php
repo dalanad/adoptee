@@ -70,7 +70,7 @@
             </div>
             <div class="field" style="display:inline;width:6rem;">
                 <label for="height">Height:</label>
-                    <input type="number" step="0.1" min="0.10" max="1.10" class="ctrl" name="height" id="height" required /> meters
+                    <input type="number" step="1" min="10" max="110" class="ctrl" name="height" id="height" required /> centimeters
             </div>
             <div class="field" style="display:inline;width:6rem;">
                 <label for="weight">Weight:</label>

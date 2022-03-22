@@ -26,14 +26,41 @@ class AdoptionsController extends Controller
 
     function viewBreeds()
     {
+        $selections = Adoptions::getSelections();
+
+        //check if breed belongs to selected type
+        $match = false;
+        foreach ($selections as $key => $value) {
+            if ($value['type'] == $_GET['type']) {
+                if ($value['breed'] == $_GET['breed']) {
+                    $match = true;
+                }
+            }
+        }
+
+        //find first breed under selected type
+        $index = 0;
+        foreach ($selections as $key => $value) {
+            if ($value['type'] == $_GET['type']) {
+                $index = $key;
+                break;
+            }
+        }
+
+        //set the breed for the filter
+        $breed = $_GET["breed"] ?? "select";
+        if (!$match) {
+            $breed = $selections[$index]['breed'];
+        }
+
         $filter = [
             "type" => $_GET["type"] ?? "select",
-            "breed" => $_GET["breed"] ?? "select",
+            "breed" => $breed,
         ];
-
+        
         $data = [
             "info" => Adoptions::getBreedInfo($filter),
-            "selections" => Adoptions::getSelections(),
+            "selections" => $selections,
             "filter" => $filter
         ];
 

@@ -307,7 +307,7 @@ create table animal_vaccinations (
 create table breeds (
     breedId int(11) primary key auto_increment,
     type enum("CAT","DOG"),
-    breed varchar(20) unique,
+    breed varchar(30) unique,
     height double,
     weight double,
     life_expectancy int,

@@ -101,7 +101,7 @@ class Adoptions extends BaseModel
 
     static function getSelections()
     {
-        return self::select("SELECT breeds.type,breed FROM breeds;");
+        return self::select("SELECT breeds.type, breeds.breed FROM breeds;");
     }
 
     static function addNewPet($name,$type,$gender,$dob,$color,$antirabies,$parvo,$dhl,$tricat,$antirabies_booster,$parvo_booster,$dhl_booster,$tricat_booster,$dewormed,$photo,$vaccproof,$user)
