@@ -198,7 +198,15 @@ class OrgManagement extends BaseModel
     {
         $org_id = $_SESSION['org_id'];
 
-        $query = "SELECT * from animal_for_adoption WHERE org_id = '$org_id' ";
+        $query = "SELECT animal.animal_id, name,type, color, dob, 
+        FLOOR(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', gender,
+        date_listed,status,date_adopted,description,
+        animal_for_adoption.user_id as user_id,
+        animal.name as name,  
+        animal.photo as avatar_photo
+        from animal_for_adoption,animal 
+            where org_id= $org_id 
+            and animal.animal_id=animal_for_adoption.animal_id";
         return BaseModel::select($query);
     }
 
@@ -207,11 +215,12 @@ class OrgManagement extends BaseModel
         $org_id = $_SESSION['org_id'];
         $query = "SELECT
             aa.animal_id,
+            a.photo as avatar_photo,
             a.name 'animal_name',
             a.type,
             aa.date_adopted,
             a.gender,
-            DATEDIFF(CURRENT_DATE, a.dob) / 365 'age',
+            FLOOR(DATEDIFF(CURRENT_DATE, a.dob) / 365) 'age',
             u.name 'adopter',
             u.telephone 'adopter_contact',
             (SELECT count(*) FROM routine_updates r WHERE r.animal_id = aa.animal_id) 'update_count',
@@ -272,7 +281,19 @@ class OrgManagement extends BaseModel
     static function donations_summary_report()
     {
         $org_id = $_SESSION['org_id'];
-        $query = "SELECT * from adoption_request WHERE org_id = '$org_id' ";
+        
+        $query = "SELECT
+        payment.txn_time,
+        (SELECT COUNT(donation.txn_id) FROM donation GROUP BY txn_time) AS donation_count,
+        (SELECT SUM(payment.amount) FROM donation GROUP BY txn_time) AS donation_amount,
+        (SELECT COUNT(donation.subscription_id) FROM donation GROUP BY txn_time) AS subscription_count,
+        (SELECT SUM(payment.amount) FROM donation GROUP BY txn_time) AS subscription_amount
+    FROM
+        donation,
+        payment
+    WHERE
+    donation.txn_id = payment.txn_id AND donation.org_id = $org_id;";
+
         return BaseModel::select($query);
     }
 }

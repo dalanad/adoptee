@@ -1,4 +1,15 @@
 <?php require __DIR__ . "/../../../_layout/layout.php"; ?>
+
+<style>
+    table,
+    td,
+    th {
+        border: 0.1rem solid var(--muted);
+        border-radius: 0.4rem;
+        border-collapse: collapse;
+    }
+</style>
+
 <div class='container px2'>
     <div style="display: flex;align-items:center;margin-top:1rem">
         <div>
@@ -7,6 +18,8 @@
         </div>
         <h2 style="margin:0">Rescue Information Report</h2>
     </div>
+
+    <br>
     <table class="table">
         <tr>
             <th>REPORT ID</th>
@@ -25,9 +38,9 @@
                 <td><?= $data["time_reported"] ?></td>
                 <td><?= $data["accepted_date"] ?></td>
                 <td><?= $data["rescued_date"] ?></td>
-                <td><?= $data["reported_to_accepted"] ?></td>
-                <td><?= $data["accepted_to_rescued"] ?></td>
-                <td><?= $data["total_time"] ?></td>
+                <td><?= $data["reported_to_accepted"] ?>&nbsp; Hours</td>
+                <td><?= $data["accepted_to_rescued"] ?>&nbsp; Hours</td>
+                <td><?= $data["total_time"] ?>&nbsp; Hours</td>
             </tr>
         <?php } ?>
     </table>
