@@ -45,7 +45,7 @@
 </style>
 
 <h3 style="margin-left:1rem;">My Rescues</h3>
-<div class="overflow-auto" style="height:450px"><?php print_r($rescues) ?>
+<div class="overflow-auto" style="height:450px"><?php //print_r($rescues) ?>
     <table class="table">
         <tr>
             <th></th>
@@ -55,27 +55,25 @@
             <th>RESCUED DATE</th>
             <th>STATUS</th>
             <th>RESPONDED ORGANIZATION</th>
-            <th>PROGRESS</th>
-            <th>REPORT</th> <!-- remove and put into model-->
         </tr>
 
         <?php foreach ($rescues as $key => $value) { ?>
             <tr style="font-size: 0.8rem;">
                 <td>
-                    <img src="<?= json_decode($value['photos'])[0] ?>" style="width: 30px; height: 30px; border-radius: 50%;">
+                    <img src="<?= json_decode($value['photos'])[0] ?>" style="width: 40px; height: 40px; border-radius: 50%;">
                 </td>
                 </td>
                 <td><?= $value["type"] ?></td>
                 <td><?= $value["location"] ?></td>
                 <td><?= substr($value["time_reported"], 0, 10) ?></td>
-                <td><?= $value["status"] == "RESCUED" ? $value["rescued_date"] : "" ?></td>
+                <td><?= $value["status"] == "RESCUED" ? substr($value["rescued_date"],0,10) : "" ?></td>
                 <td><span class="tag <?= $value["status"] == "RESCUED" ? 'green' : 'orange' ?>"><?= $value["status"] ?> </span></td>
                 <td><?= $value["status"] == "RESCUED" ? ($value["o_name"]) : "" ?></td>
-                <td>
-                    <div class="btn btn-link" onclick="showModel('progressModel<?= $value['animal_id'] ?>')" title="View"><i class="far fa-eye"></i></div>
-                    <div class="model" id="progressModel<?= $value['animal_id'] ?>">
+                <!-- <td>
+                    <div class="btn btn-link" onclick="showModel('progressModel?= $value['animal_id'] ?>')" title="View"><i class="far fa-eye"></i></div>
+                    <div class="model" id="progressModel?= $value['animal_id'] ?>">
                         <div class="model-content">
-                            <span class="close" onclick="hideModel('progressModel<?= $value['animal_id'] ?>')">&times;</span>
+                            <span class="close" onclick="hideModel('progressModel?= $value['animal_id'] ?>')">&times;</span>
                             <table class="table">
                                 <tr>
                                     <th>DATE</th>
@@ -84,12 +82,12 @@
                                 </tr>
                                 
                                 <tr>
-                                    <td><?= $rescues[''] ?></td>
+                                    <td></td>
                                 </tr>
                             </div>
                         </div>
                     </div>
-                </td>
+                </td> -->
             </tr>
         <?php } ?>
 
