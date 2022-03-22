@@ -14,6 +14,14 @@ class Message extends BaseModel
         );
     }
 
+    public static function markAllMessagesAsRead($consultationId, $userId)
+    {
+        $query = "UPDATE consultation_message SET seen = TRUE WHERE consultation_id = :consultation_id AND sender != :user_id";
+        self::update($query, [
+            "consultation_id" => $consultationId,
+            "user_id" => $userId
+        ]);
+    }
 
     public static function postMessage($consultationId, $userId, $message, $medical_record_id = null, $attachments = [])
     {

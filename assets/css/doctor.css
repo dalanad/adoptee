@@ -284,6 +284,24 @@
 	height: 50px;
 	background-size: cover;
 	border-radius: 50%;
+	position: relative;
+	transition: border 200ms ease-in;
+}
+
+.animal-image.new{
+	border: .1rem red solid;
+}
+
+.new-msg-indicator{
+	color: white;
+    background-color: red;
+    border-radius: 50%;
+    font-size: 0.75em;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+    padding: 0.2em;
+    line-height: 0.75rem;
 }
 
 .chat-window {
