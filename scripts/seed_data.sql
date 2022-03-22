@@ -102,13 +102,13 @@ VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599
  (5, '0748345654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_64.png"]');
 
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  current_timestamp(), '0761236547', 'Anuradhapura', POINT(6.8929, 79.9187), 'RESCUED', '["/assets/data/dogs/10.jpg"]');
+VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  '2021-08-27 19:55:20', '0761236547', 'Anuradhapura', POINT(6.8929, 79.9187), 'RESCUED', '["/assets/data/dogs/10.jpg"]');
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.',   current_timestamp(), '0761236547', 'Anuradhapura', POINT(6.8999, 79.9167), 'PENDING', '["/assets/data/cats/8.jpg"]');
+VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.',   '2021-08-28 19:55:20', '0761236547', 'Anuradhapura', POINT(6.8999, 79.9167), 'PENDING', '["/assets/data/cats/8.jpg"]');
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency',   current_timestamp(), '0771234567', 'Anuradhapura', POINT(6.8969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]');
+VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency',   '2021-12-27 19:55:20', '0771234567', 'Anuradhapura', POINT(6.8969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]');
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('1', NULL, 'Dog', 'Injured Leg',   current_timestamp(), '0762457684', '12/1, Jayathilake Road, Anuradhapura', POINT(6.8269, 79.9737), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]');
+VALUES ('1', NULL, 'Dog', 'Injured Leg',   '2021-12-27 19:55:20', '0762457684', '12/1, Jayathilake Road, Anuradhapura', POINT(6.8269, 79.9737), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]');
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
 VALUES ('1', NULL, 'Cat', 'Severe skin rash',   current_timestamp(), '0775467215', '77/7, Silva Lane, Colombo 02', POINT(6.1969, 79.7137), 'PENDING', '["/assets/data/cats/10.jpg"]');
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
@@ -119,9 +119,9 @@ VALUES ('1', NULL, 'Hamster', 'Abandoned near a highway',   current_timestamp(),
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
 VALUES ('1', '1', '2021-08-28');
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
-VALUES ('1', '2', '2021-08-30');
+VALUES ('2', '2', '2021-08-30');
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
-VALUES ('1', '3', '2021-12-29');
+VALUES ('3', '3', '2021-12-29');
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
 VALUES ('1', '4', '2021-12-28');
 
