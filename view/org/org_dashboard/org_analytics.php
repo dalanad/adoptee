@@ -101,22 +101,22 @@
                             <div class="div-totals" style="background-color:#e2f5f5; justify-items:center; align-items:center; padding-left: .5rem;">
                                 <div style="justify-items:center; align-items:center; display:flex; font-size:0.7rem; width: 90px; height:20px; border-radius: 5rem; background-color:#6fcdcd; padding-left: .6rem;"><i class="fa fa-hand-holding-usd"></i>&nbsp;Donations</div>&nbsp;&nbsp;
                                 <div>
-                                    <div style="font-size: 1.5rem; padding-top:5px;">Rs. 41,200</div>
+                                    <div style="font-size: 1.5rem; padding-top:5px;">Rs. <?=$total_donations?></div>
                                     <div style="font-size: 0.7rem; font-weight: 400; padding-bottom:5px;">All time donations received</div>
                                 </div>
                             </div>
                             <div class="div-totals" style="background-color:#ffe6eb; justify-items:center; align-items:center;padding-left: .5rem;">
                                 <div style="justify-items:center; align-items:center; display:flex; font-size:0.7rem; width: 90px; height:20px; border-radius: 5rem; background-color:#ff829d; padding-left: .6rem;"><i class="fa fa-donate"></i>&nbsp;Sponsorships</div>&nbsp;&nbsp;
                                 <div>
-                                    <div style="font-size: 1.5rem; padding-top:5px;">Rs. 140,200</div>
+                                    <div style="font-size: 1.5rem; padding-top:5px;">Rs. <?=$total_sponsorships?></div>
                                     <div style="font-size: 0.7rem; font-weight: 400;  padding-bottom:5px;">All time sponsorships received</div>
                                 </div>
                             </div>
                             <div class="div-totals" style="background-color:#fff3d7; justify-items:center; align-items:center;padding-left: .5rem;">
                                 <div style="justify-items:center; align-items:center; display:flex; font-size:0.7rem; width: 90px; height:20px; border-radius: 5rem; background-color:#ffd778; padding-left: .8rem;"><i class="fa fa-tshirt"></i>&nbsp;Orders</div>&nbsp;&nbsp;
                                 <div>
-                                    <div style="font-size: 1.5rem; padding-top:5px;">151</div>
-                                    <div style="font-size: 0.7rem; font-weight: 400;  padding-bottom:5px;">Completed orders</div>
+                                    <div style="font-size: 1.5rem; padding-top:5px;"><?=$total_rescues?></div>
+                                    <div style="font-size: 0.7rem; font-weight: 400;  padding-bottom:5px;">Total Rescues Done</div>
                                 </div>
                             </div>
                         </div>
@@ -159,17 +159,13 @@
                                 label: 'Male',
                                 backgroundColor: '#5eb5ef',
                                 borderColor: '#5eb5ef',
-                                data: Array.from({
-                                    length: 6
-                                }, (_, i) => Math.round(Math.random() * 30))
+                                data: <?=json_encode($male_adoptees)?>
                             },
                             {
                                 label: 'Female',
                                 backgroundColor: '#ff829d',
                                 borderColor: '#ff829d',
-                                data: Array.from({
-                                    length: 6
-                                }, (_, i) => Math.round(Math.random() * 30))
+                                data: <?=json_encode($female_adoptees)?>
                             }
                         ]
                     },
@@ -202,21 +198,13 @@
                 });
 
                 /* Chart 2 */
-
-                let labels2 = [
-                    'Jan',
-                    'Feb',
-                    'Mar',
-                    'Apr',
-                    'May',
-                    'June',
-                    'July',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec'
-                ];
+                // generate the names of the last 12 months
+                <?php for ($i = 11; $i >= 0; $i--) {
+                    $mon[] = date("M", strtotime(date('Y-m-01') . " -$i months"));
+                }
+                ?>
+                
+                let labels2 = <?=json_encode($mon)?>;
 
                 let myChart2 = document.getElementById("myChart2").getContext('2d');
 
@@ -229,18 +217,14 @@
                                 backgroundColor: '#ff829d',
                                 borderColor: '#ff829d',
                                 cubicInterpolationMode: 'monotone',
-                                data: Array.from({
-                                    length: 30
-                                }, (_, i) => Math.round(Math.random() * 8))
+                                data:  <?=json_encode($donations)?>
                             },
                             {
                                 label: 'Sponsorships',
                                 backgroundColor: '#6fcdcd',
                                 borderColor: '#6fcdcd',
                                 cubicInterpolationMode: 'monotone',
-                                data: Array.from({
-                                    length: 30
-                                }, (_, i) => Math.round(Math.random() * 12))
+                                data: <?=json_encode($sponsorships)?>
                             },
                         ]
                     },
@@ -275,9 +259,7 @@
                     'Other'
                 ];
 
-                let data5 = [
-                    60, 30, 20
-                ];
+                let data5 = <?=json_encode($rescues)?>
 
                 let colors5 = [
                     'rgb(255, 130, 157)',
@@ -319,9 +301,7 @@
                     'Other'
                 ];
 
-                let data6 = [
-                    60, 50, 50
-                ];
+                let data6 = <?=json_encode($adoption_requests)?>
 
                 let colors6 = [
                     'rgb(255, 130, 157)',

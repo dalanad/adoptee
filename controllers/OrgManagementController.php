@@ -9,7 +9,10 @@ class OrgManagementController extends Controller{
 
     function org_analytics()
     {
-        View::render("org/dashboard",["active"=>"org_analytics"]);
+
+        $data = OrgManagement::getDashboardData();
+        $data["active"]="org_analytics";
+        View::render("org/dashboard",$data);
     }
 
     function org_adoption_listing()
