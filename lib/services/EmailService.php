@@ -25,11 +25,11 @@ class EmailService
         $mail->Password   = config::get("email.pass");
 
         //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            // Enable implicit TLS encryption
-        $mail->Port       = 465;
+        $mail->SMTPSecure = "tls";         // Enable implicit TLS encryption
+        $mail->Port       = 587;
 
         //Recipients
-        $mail->setFrom('2019cs033@stu.ucsc.lk', 'Adoptee');
+        $mail->setFrom('adopteelk@gmail.com', 'Adoptee System');
         $mail->addAddress("$to", "$toName");     // Add a recipient
 
         //Content
