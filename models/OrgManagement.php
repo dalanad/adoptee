@@ -2,6 +2,105 @@
 
 class OrgManagement extends BaseModel
 {
+    static public function getDashboardData()
+    {
+
+        $org_id = $_SESSION["org_id"];
+
+        $male_adoptees_query = "SELECT animal.type, COUNT(animal.type) as total FROM animal,animal_for_adoption 
+            WHERE animal.gender = 'MALE' 
+            AND animal_for_adoption.animal_id=animal.animal_id 
+            AND animal_for_adoption.org_id = $org_id
+            GROUP BY animal.type ORDER BY animal.type;";
+
+        $female_adoptees_query = "SELECT animal.type, COUNT(animal.type) as total FROM animal,animal_for_adoption 
+            WHERE animal.gender = 'MALE' 
+            AND animal_for_adoption.animal_id=animal.animal_id 
+            AND animal_for_adoption.org_id = $org_id
+            GROUP BY animal.type;";
+
+        $adoption_requests_query = "SELECT animal.type, COUNT(adoption_request.animal_id) as total 
+            FROM animal,adoption_request 
+            WHERE adoption_request.animal_id=animal.animal_id AND adoption_request.org_id = $org_id 
+            GROUP BY animal.type ;";
+
+        $rescues_query = "SELECT report_rescue.type, COUNT(rescued_animal.report_id) as total 
+            FROM animal,rescued_animal,report_rescue 
+            WHERE rescued_animal.report_id=report_rescue.report_id AND rescued_animal.org_id = $org_id
+            GROUP BY report_rescue.type";
+
+        $sponsorship_12_month = "SELECT YEAR(p.txn_time), MONTH(p.txn_time) mon, SUM(p.amount) 'total' 
+            FROM donation d, payment p 
+            WHERE d.txn_id = p.txn_id AND p.txn_time BETWEEN NOW() - INTERVAL 12 MONTH AND NOW() 
+            AND d.subscription_id IS NOT NULL AND d.org_id = $org_id 
+            GROUP BY YEAR(p.txn_time), MONTH(p.txn_time) ORDER BY YEAR(p.txn_time), MONTH(p.txn_time)";
+
+        $donation_12_month = "SELECT YEAR(p.txn_time), MONTH(p.txn_time) mon, SUM(p.amount) 'total' 
+            FROM donation d, payment p 
+            WHERE d.txn_id = p.txn_id AND p.txn_time BETWEEN NOW() - INTERVAL 12 MONTH AND NOW() 
+            AND d.subscription_id IS NULL AND d.org_id = $org_id
+            GROUP BY YEAR(p.txn_time), MONTH(p.txn_time) ORDER BY YEAR(p.txn_time), MONTH(p.txn_time)";
+
+        $total_donations_query = "SELECT SUM(payment.amount) 'total' FROM donation, payment WHERE donation.txn_id = payment.txn_id AND donation.org_id =  $org_id;";
+        $sponsorship_total = "SELECT sum(s.amount_at_subscription) 'total' FROM sponsorship s WHERE s.org_id = $org_id";
+        $total_rescues_query = "SELECT COUNT(report_id) 'total' FROM rescued_animal AS total_rescues WHERE org_id = $org_id;";
+
+
+        $data = [
+            "male_adoptees" => self::processAnimalTypeData($male_adoptees_query),
+            "female_adoptees" => self::processAnimalTypeData($female_adoptees_query),
+            "donations" => self::last12Months($donation_12_month),
+            "sponsorships" => self::last12Months($sponsorship_12_month),
+            "adoption_requests" => self::processAnimalTypeData($adoption_requests_query),
+            "rescues" => self::processAnimalTypeData($rescues_query),
+            "total_donations" => self::select($total_donations_query)[0]['total'],
+            "total_sponsorships" => self::select($sponsorship_total)[0]['total'],
+            "total_rescues" => self::select($total_rescues_query)[0]['total']
+        ];
+        return $data;
+    }
+
+    // return data in an array with the order cats, dogs, other
+    static function processAnimalTypeData($query)
+    {
+        $result = self::select($query);
+
+        $data = [];
+        $animal_types = ['cat', 'dog', 'other'];
+        $j = 0;
+        for ($i = 0; $i < 3; $i++) {
+
+            if (strtolower($animal_types[$i]) == strtolower($result[$j]["total"])) {
+                array_push($data, $result[$j]["total"]);
+                $j++;
+            } else {
+                array_push($data, 0);
+            }
+        }
+        return $data;
+    }
+
+    // process data to add missing months to the last 12 month data
+    static function last12Months($query)
+    {
+        $result = self::select($query);
+
+        $data = [];
+        $j = 0;
+        for ($i = 11; $i >= 0; $i--) {
+            $mon = date("m", strtotime(date('Y-m-01') . " -$i months"));
+
+            if (isset($result[$j]) && $mon == $result[$j]["mon"]) {
+                array_push($data, $result[$j]["total"]);
+                $j++;
+            } else {
+                array_push($data, 0);
+            }
+        }
+
+        return $data;
+    }
+
     static function createNewAnimal($org_id, $name, $type, $gender, $dob, $color, $description, $anti_rabies, $dhl, $parvo, $tricat, $anti_rabies_booster, $dhl_booster, $parvo_booster, $tricat_booster, $dewormed, $vacc_proof, $avatar_photo, $adoptee_photo)
     {
         $org_id = $_SESSION['org_id'];
@@ -116,7 +215,7 @@ class OrgManagement extends BaseModel
 
     static function mark_as_complete($report_id)
     {
-    
+
         $query = "UPDATE `report_rescue` SET status = 'RESCUED' WHERE report_id='$report_id';
         INSERT INTO `rescued_animal`(`org_id`, `report_id`, `rescued_date`) VALUES('$_SESSION[org_id]','$report_id', curdate());";
 
@@ -281,7 +380,7 @@ class OrgManagement extends BaseModel
     static function donations_summary_report()
     {
         $org_id = $_SESSION['org_id'];
-        
+
         $query = "SELECT
         payment.txn_time,
         (SELECT COUNT(donation.txn_id) FROM donation GROUP BY txn_time) AS donation_count,

@@ -119,7 +119,7 @@
                         content.innerHTML = ''
                     })
 
-                    input.addEventListener('keydown', () => {
+                    input.addEventListener('keyup', () => {
 
                         let filterd = meds.filter(e => String(e.name).toLowerCase().includes(String(input.value).toLowerCase()))
                         if (filterd.length > 0) {
