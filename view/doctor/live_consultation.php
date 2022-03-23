@@ -179,7 +179,7 @@ if (!isset($_GET["view"])) {
         showOverlay(`
             <h3 style='margin-top:0'>Cancel Consultation ? &nbsp; &nbsp; &nbsp;</h3>
             <div style="display:flex;justify-content:space-between">
-                <button class="btn black btn-faded overlay-close">Cancel</button>
+                <button class="btn black btn-faded overlay-close">Close</button>
                 <a class="btn red" href="/doctor/reject_request?consultation_id=${id}">Cancel</a> 
             </div>
         `)

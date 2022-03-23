@@ -14,9 +14,9 @@ class Config
         "db.pass" => "root",
 
         // email credentials
-        "email.host" => "in-v3.mailjet.com",
-        "email.user" => "fb334c520e1319fa4a7d89c527f4dc4b",
-        "email.pass" => "c0fecdf4cb06efbd5ebee4601ac0bc5a",
+        "email.host" => "smtp.gmail.com",
+        "email.user" => "adopteelk@gmail.com",
+        "email.pass" => "Adoptee123@#",
 
         // GMaps credentials
         "maps.key" => "AIzaSyBSB7zeeAI3QC42UmxHEFqS715ulfPFASc",
