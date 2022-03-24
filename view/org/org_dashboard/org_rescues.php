@@ -104,7 +104,7 @@
             <?php foreach ($org_rescues as $org_rescue) { ?>
                 <div class="div-size" style="display:flex; padding-left: 1rem; padding-bottom: .5rem; padding-top:.5rem;">
                     <div style="width: 120px;"><i class="txt-clr fa fa-lg fa-<?= $org_rescue['type'] == "Dog" ? 'dog' : ($org_rescue['type'] == "Cat" ? 'cat' : 'paw') ?>"></i>&nbsp;&nbsp; <?= $org_rescue['type'] ?></div>
-                    <div style="width: 150px;"><?= $org_rescue["rescued_date"] ?></div>
+                    <div style="width: 150px;"><?= date('Y-m-d', strtotime($org_rescue["rescued_date"])) ?></div>
                     <div style="width: 150px;"><?= $org_rescue["contact_number"] ?></div>
                     <div style="width: 220px;"><?= $org_rescue["description"] ?></div>
                     <div style="width: 220px;"><?= $org_rescue["location"] ?></div>
@@ -134,7 +134,7 @@
                             <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
                                 <span class="close" onclick="hideModel('popupModal-accept<?= $org_rescue["report_id"] ?>')">&times;</span>
                                 <h3 style="text-align: center;">Are you sure you want to mark rescue as complete?</h3>
-                                <a href="/OrgManagement/mark_as_complete?animal_id=<?= $org_rescue["report_id"] ?>&user_id=<?= $org_rescue["user_id"] ?>" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                <a href="/OrgManagement/mark_as_complete?report_id=<?= $org_rescue["report_id"] ?>&user_id=<?= $org_rescue["user_id"] ?>" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
                                 <button class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-accept<?= $org_rescue["report_id"] ?>')">Cancel</button>
                             </div>
 

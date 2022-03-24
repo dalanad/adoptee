@@ -214,8 +214,8 @@ class OrgManagement extends BaseModel
     static function mark_as_complete($report_id)
     {
 
-        $query = "UPDATE `report_rescue` SET status = 'RESCUED' WHERE report_id='$report_id';
-        INSERT INTO `rescued_animal`(`org_id`, `report_id`, `rescued_date`) VALUES('$_SESSION[org_id]','$report_id', curdate());";
+        $query = "UPDATE `report_rescue` SET status = 'RESCUED' WHERE report_id=$report_id;
+        INSERT INTO `rescued_animal`(`org_id`, `report_id`, `rescued_date`) VALUES(".$_SESSION['org_id'].",'$report_id', curdate());";
 
         return BaseModel::insert($query);
     }
