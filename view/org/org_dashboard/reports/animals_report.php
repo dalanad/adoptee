@@ -100,47 +100,43 @@
   .sub-table {
     border: none;
   }
+
+  .table th {
+    padding: .5rem;
+  }
 </style>
 
 
 <div class='container px2'>
-  <div style="display: flex;align-items:center;margin-top:1rem">
-    <div>
-      <a href="/OrgManagement/reports_list" class="btn btn-link btn-icon mr1 " style="font-size: 1em;">
-        <i class="fa fa-arrow-left"></i></a>
-    </div>
-    <h2 style="margin:0">Adoption Updates Report</h2>
-  </div>
+  <a class="btn btn-faded black" href="/OrgManagement/reports_list" style="margin: .5rem 0rem; "><i class="fa fa-chevron-left"></i>&nbsp; Back</a>
+  <h2 style="margin:0">Adoption Animals Report</h2>
 
   <br>
   <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
-
-    <div class='field column'>
+    <div style="margin-top: 0.8rem;">Listed : &nbsp;</div>
+    <div class='field'>
       <label for='from'>From</label>
-      <div>
-        <input class="ctrl2" type="date" max="" name="dob" id="datefield" required />
-        <p id="result"></p>
-      </div>
+      <input class="ctrl" type="date" max="" name="from" />
     </div>
-
-    <div class='field column'>
+    &nbsp;
+    &nbsp;
+    <div class='field'>
       <label for='to'>To</label>
-      <div>
-        <input class="ctrl2" type="date" max="" name="dob" id="datefield" required />
-        <p id="result"></p>
-      </div>
+      <input class="ctrl" type="date" max="" name="to" />
     </div>
-
+    <span style="flex: 1 1 0"></span>
+    <button class="btn outline pink" onclick="window.print()"><i class="fa fa-print"></i>&nbsp; Print</button>
   </form>
 
   <table class="table">
     <tr>
-      <th>Animal INFO</th>
-      <th>STATUS</th>
+      <th>ANIMAL INFO</th>
       <th>DATE LISTED</th>
-      <th>DATE ADOPTED</th>
-      <th>USER ID</th>
       <th>DESCRIPTION</th>
+      <th>STATUS</th>
+      <th>DATE ADOPTED</th>
+      <th>ADOPTER NAME</th>
+      <th>ADOPTER TEL</th>
     </tr>
 
     <?php foreach ($animals_reports as $animals_report) { ?>
@@ -149,64 +145,26 @@
         <td>
           <table class="sub-table">
             <tr>
-              <td class="sub-table"><img src="<?= $animals_report["avatar_photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
+              <td class="sub-table" style="padding: 0px;"><img src="<?= $animals_report["avatar_photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
               <td class="sub-table">
                 <div>
                   <div style="padding: 3px;"><?= $animals_report["name"] ?></div>
-                  <div style="padding: 3px; font-size:0.8rem"><?= $animals_report["age"] ?>&nbsp; Years</div>
-                  <div style="padding: 3px;"><i class="txt-clr fa fa-lg fa-<?= $animals_report['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i></div>
+                  <span style="padding: 3px; font-size:0.8rem"><?= $animals_report["age"] ?>&nbsp; Years</span>
+                  <span style="padding: 3px;"><i class="txt-clr fa fa-lg fa-<?= $animals_report['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i></span>
                 </div>
               </td>
             </tr>
           </table>
         </td>
-        <td><?= $animals_report["status"] ?></td>
         <td><?= $animals_report["date_listed"] ?></td>
-        <td><?= $animals_report["date_adopted"] ?></td>
-        <td><?= $animals_report["user_id"] ?></td>
         <td><?= $animals_report["description"] ?></td>
+        <td><?= $animals_report["status"] ?></td>
+        <td><?= $animals_report["date_adopted"] ?></td>
+        <td><?= $animals_report["adopter_name"] ?></td>
+        <td><?= $animals_report["adopter_tel"] ?></td>
       </tr>
     <?php } ?>
   </table>
 
 
 </div>
-
-<script>
-  $(document).ready(function() {
-    $("select").change(function() {
-      $(this).find("option:selected").each(function() {
-        var optionValue = $(this).attr("value");
-        if (optionValue) {
-          $(".box").not("." + optionValue).hide();
-          $("." + optionValue).show();
-        } else {
-          $(".box").hide();
-        }
-      });
-    }).change();
-  });
-
-  ClassicEditor
-    .create(document.querySelector('#editor'), {
-      toolbar: ['undo', 'redo', '|', 'bold', 'italic', 'link', '|', 'numberedList', 'bulletedList']
-    })
-    .catch(error => {
-      console.log(error);
-    });
-
-  //Max Date input
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth() + 1;
-  var yyyy = today.getFullYear();
-  if (dd < 10) {
-    dd = '0' + dd
-  }
-  if (mm < 10) {
-    mm = '0' + mm
-  }
-
-  today = yyyy + '-' + mm + '-' + dd;
-  document.getElementById("datefield").setAttribute("max", today);
-</script>

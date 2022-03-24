@@ -39,7 +39,7 @@ require_once  __DIR__ . '/_nav.php';
             </td>
             <td><?= $animal["name"] ?></td>
             <td><?= $animal["owner_name"] ?></td>
-            <td><?= $animal["type"] ?></td>
+            <td><?= strtoupper($animal["type"]) ?></td>
             <td><?= $animal["gender"] ?></td>
             <td><?= $animal["age"] ?> Years</td>
             <td><?= $animal["last_consultation"] ?></td>

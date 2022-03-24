@@ -101,29 +101,23 @@ INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `pr
 VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_63.png"]'),
  (5, '0748345654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_64.png"]');
 
-INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  '2021-08-27 19:55:20', '0761236547', 'Anuradhapura', POINT(6.8929, 79.9187), 'RESCUED', '["/assets/data/dogs/10.jpg"]');
-INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.',   '2021-08-28 19:55:20', '0761236547', 'Anuradhapura', POINT(6.8999, 79.9167), 'PENDING', '["/assets/data/cats/8.jpg"]');
-INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency',   '2021-12-27 19:55:20', '0771234567', 'Anuradhapura', POINT(6.8969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]');
-INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('1', NULL, 'Dog', 'Injured Leg',   '2021-12-27 19:55:20', '0762457684', '12/1, Jayathilake Road, Anuradhapura', POINT(6.8269, 79.9737), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]');
-INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('1', NULL, 'Cat', 'Severe skin rash',   current_timestamp(), '0775467215', '77/7, Silva Lane, Colombo 02', POINT(6.1969, 79.7137), 'PENDING', '["/assets/data/cats/10.jpg"]');
-INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('1', NULL, 'Dog', 'Malnutritioned',   current_timestamp(), '0722247568', '44/A, Bishop Road, Nugegoda', POINT(6.4969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]');
-INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('1', NULL, 'Hamster', 'Abandoned near a highway',   current_timestamp(), '071275645', 'Piliyandala, close to main road', POINT(6.8969, 79.0137), 'RESCUED', '["/assets/data/cats/10.jpg"]');
+INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`,`accepted_date`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
+VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  '2021-08-25 09:15:20','2021-08-25 11:25:20', '0761236547', 'Anuradhapura', POINT(6.8929, 79.9187), 'RESCUED', '["/assets/data/dogs/10.jpg"]'),
+('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.',   '2021-08-28 19:55:20','2021-08-28 19:55:20', '0761236547', 'Anuradhapura', POINT(6.8999, 79.9167), 'PENDING', '["/assets/data/cats/8.jpg"]'),
+('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency',   '2021-12-29 08:14:20','2021-12-29 10:04:20', '0771234567', 'Anuradhapura', POINT(6.8969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]'),
+('1', NULL, 'Dog', 'Injured Leg',   '2021-12-27 18:55:20','2021-12-27 19:55:20', '0762457684', '12/1, Jayathilake Road, Anuradhapura', POINT(6.8269, 79.9737), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]'),
+('1', NULL, 'Cat', 'Severe skin rash',   current_timestamp(),NULL, '0775467215', '77/7, Silva Lane, Colombo 02', POINT(6.1969, 79.7137), 'PENDING', '["/assets/data/cats/10.jpg"]'),
+('1', NULL, 'Dog', 'Malnutritioned',   current_timestamp(),NULL, '0722247568', '44/A, Bishop Road, Nugegoda', POINT(6.4969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]'),
+('1', NULL, 'Hamster', 'Abandoned near a highway',   current_timestamp(),NULL, '071275645', 'Piliyandala, close to main road', POINT(6.8969, 79.0137), 'RESCUED', '["/assets/data/cats/10.jpg"]');
 
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
-VALUES ('1', '1', '2021-08-28');
+VALUES ('1', '1', '2021-08-25 16:25:20');
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
-VALUES ('2', '2', '2021-08-30');
+VALUES ('2', '2', '2021-08-30 14:35:20');
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
-VALUES ('3', '3', '2021-12-29');
+VALUES ('3', '3', '2021-12-29 19:45:20');
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
-VALUES ('1', '4', '2021-12-28');
+VALUES ('1', '4', '2021-12-29 13:04:20');
 
  INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
  VALUES 
@@ -181,8 +175,14 @@ INSERT INTO `payment` (`txn_id`,`amount`,`txn_time`,`user`)
 VALUES ('123', 1200.00, '2021-03-19 21:26:38', '3'),
 ('456', 4000.00, '2021-10-28 10:30:00', '3');
 
-INSERT INTO `donation` (`org_id`,`txn_id`,`name`,`subscription_id`) 
-VALUES ('1','123','Hiruni Dahanayake',NULL);
+INSERT INTO `payment` (`txn_id`, `amount`, `txn_time`, `user`, `status`, `type`) VALUES
+('cs_test_a1q3VMzZw4DndD3hXwkmNXiUkJu0dBqW85FQAZTSPAjTM7JGujFNmr8YsM', 2000,	'2022-03-24 05:54:55', 3, 'PAID','PAYMENT'),
+('cs_test_a1q3VMzZw4DndD3hXwkmNXiUkJu0dBqW85FQAZTSPAjTM7JGujFNmr8Ys3', 4000,	'2022-02-14 05:54:55', 3, 'PAID','PAYMENT');
+
+INSERT INTO `donation` (`org_id`,`txn_id`,`name`,comments,`subscription_id`) 
+VALUES ('1','123','Hiruni Dahanayake',NULL,NULL),
+(1,'cs_test_a1q3VMzZw4DndD3hXwkmNXiUkJu0dBqW85FQAZTSPAjTM7JGujFNmr8Ys3','Dalana','Good Work Keep Going',NULL),
+(1,'cs_test_a1q3VMzZw4DndD3hXwkmNXiUkJu0dBqW85FQAZTSPAjTM7JGujFNmr8YsM','Dalana','Use for Animal Foods',1);
 
 INSERT INTO `breeds` (`type`,`breed`,`height`,`weight`,`life_expectancy`,`color`,`photo`,`child_friendly`,`pet_friendly`,`health`,`problems`)
 VALUES ('DOG','Beagle',20.0,10.0,10,'["Black"]','["/assets/data/dogs/2.jpg"]','Very Good','Social with other dogs','High risk of eye related issues','Not known for behavioural problems'),
@@ -190,4 +190,15 @@ VALUES ('DOG','Beagle',20.0,10.0,10,'["Black"]','["/assets/data/dogs/2.jpg"]','V
 ('CAT','Domestic Shorthair',20.0,5.0,12,'["White","Black","Brown","Grey","Orange"]','["/assets/data/cats/1.jpg"]','Average','Needs to be exposed to other pets as a kitten','Kidney problems','May become territorial'),
 ('CAT','Persian',20.0,3.0,12,'["White","Black","Brown","Grey","Orange"]','["/assets/data/cats/6.jpg"]','Average','Not social','Respiratory problems','Need regular grooming');
 
+
+INSERT INTO medicine(name,doctor_id,age_min,age_max,weight_min,weight_max) 
+VAlUES ('Cefovecin',1,null,null,null,null),
+       ('Tylosin',1,null,null,null,null),
+       ('Amoxicillin',1,null,null,null,null),
+       ('Gentamicin',1,null,null,null,null),
+       ('Carprofen',1,null,null,null,null),
+       ('Selamectin',1,null,null,null,null),
+       ('Glycopyrrolate',1,null,null,null,null), 
+       ('Hydroxyzine',1,null,null,null,null),
+       ('Vermectin',1,null,null,null,null);
 COMMIT;

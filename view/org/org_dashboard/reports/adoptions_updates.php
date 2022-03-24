@@ -12,18 +12,19 @@
     .sub-table {
         border: none;
     }
+
+    .table th {
+        padding: .5rem;
+    }
 </style>
 
 <div class='container px2'>
-    <div style="display: flex;align-items:center;margin-top:1rem">
-        <div>
-            <a href="/OrgManagement/reports_list" class="btn btn-link btn-icon mr1 " style="font-size: 1em;">
-                <i class="fa fa-arrow-left"></i></a>
-        </div>
-        <h2 style="margin:0">Adoption Updates Report</h2>
-
-    </div>
-
+    <a class="btn btn-faded black" href="/OrgManagement/reports_list" style="margin: .5rem 0rem; "><i class="fa fa-chevron-left"></i>&nbsp; Back</a>
+    <h2 style="margin:0">Adoption Updates Report</h2>
+    <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
+        <span style="flex: 1 1 0"></span>
+        <button class="btn outline pink" onclick="window.print()"><i class="fa fa-print"></i>&nbsp; Print</button>
+    </form>
     <table class="table">
         <tr>
             <th>ANIMAL INFO</th>
@@ -38,12 +39,12 @@
                 <td>
                     <table class="sub-table">
                         <tr>
-                            <td class="sub-table"><img src="<?= $data["avatar_photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
+                            <td class="sub-table" style="padding: 0px;" ><img src="<?= $data["avatar_photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
                             <td class="sub-table">
                                 <div>
                                     <div style="padding: 3px;"><?= $data["animal_name"] ?></div>
-                                    <div style="padding: 3px; font-size:0.8rem"><?= $data["age"] ?>&nbsp; Years</div>
-                                    <div style="padding: 3px;"><i class="txt-clr fa fa-lg fa-<?= $data['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i></div>
+                                    <span style="padding: 3px; font-size:0.8rem"><?= $data["age"] ?>&nbsp; Years</span>
+                                    <span style="padding: 3px;"><i class="txt-clr fa fa-lg fa-<?= $data['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i></span>
                                 </div>
                             </td>
                         </tr>

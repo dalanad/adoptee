@@ -115,20 +115,26 @@
                     })
 
                     input.addEventListener('focusout', () => {
-                        autocomplete.classList.remove('show')
-                        content.innerHTML = ''
+                        setTimeout(() => {
+                            autocomplete.classList.remove('show')
+                            content.innerHTML = ''
+                        }, 200)
                     })
+
+                    function setValue(v) {
+                        input.value = v;
+                    }
 
                     input.addEventListener('keyup', () => {
 
                         let filterd = meds.filter(e => String(e.name).toLowerCase().includes(String(input.value).toLowerCase()))
                         if (filterd.length > 0) {
-                            content.innerHTML = filterd.map(e => `<div class='item' >${e.name}</div>`).reduce((a, b) => a + b)
+                            content.innerHTML = filterd.map(e => `<div class='item' onclick="setValue('${e.name}')">${e.name}</div>`).reduce((a, b) => a + b)
+
                         } else {
                             content.innerHTML = ''
                         }
                     })
-
                 </script>
 
                 Remarks

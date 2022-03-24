@@ -70,7 +70,7 @@ class OrgManagement extends BaseModel
         $j = 0;
         for ($i = 0; $i < 3; $i++) {
 
-            if (strtolower($animal_types[$i]) == strtolower($result[$j]["total"])) {
+            if (isset($result[$j]) && strtolower($animal_types[$i]) == strtolower($result[$j]["type"])) {
                 array_push($data, $result[$j]["total"]);
                 $j++;
             } else {
@@ -84,7 +84,6 @@ class OrgManagement extends BaseModel
     static function last12Months($query)
     {
         $result = self::select($query);
-
         $data = [];
         $j = 0;
         for ($i = 11; $i >= 0; $i--) {
@@ -97,7 +96,6 @@ class OrgManagement extends BaseModel
                 array_push($data, 0);
             }
         }
-
         return $data;
     }
 
@@ -297,15 +295,17 @@ class OrgManagement extends BaseModel
     {
         $org_id = $_SESSION['org_id'];
 
-        $query = "SELECT animal.animal_id, name,type, color, dob, 
+        $query = "SELECT animal.animal_id, animal.name,type, color, dob, 
         FLOOR(DATEDIFF(CURRENT_DATE, animal.dob) / 365) 'age', gender,
         date_listed,status,date_adopted,description,
         animal_for_adoption.user_id as user_id,
         animal.name as name,  
-        animal.photo as avatar_photo
-        from animal_for_adoption,animal 
+        animal.photo as avatar_photo,
+        u.name as adopter_name,
+        u.telephone as adopter_tel
+        from  animal, animal_for_adoption LEFT JOIN user u ON u.user_id = animal_for_adoption.user_id
             where org_id= $org_id 
-            and animal.animal_id=animal_for_adoption.animal_id";
+            and animal.animal_id=animal_for_adoption.animal_id ";
         return BaseModel::select($query);
     }
 
@@ -341,19 +341,20 @@ class OrgManagement extends BaseModel
             aa.animal_id,
             a.name 'animal_name',
             a.type,
+            a.photo as avatar_photo,
             aa.date_adopted,
+            aa.date_listed,
+            aa.date_listed as date_rescued,
             a.gender,
-            DATEDIFF(CURRENT_DATE, a.dob) / 365 'age',
-            u.name 'adopter',
-            u.telephone 'adopter_contact',
-            (SELECT count(*) FROM routine_updates r WHERE r.animal_id = aa.animal_id) 'update_count',
-            (SELECT max(update_date) FROM routine_updates r WHERE r.animal_id = aa.animal_id) 'last_updated'
+            FLOOR(DATEDIFF(CURRENT_DATE, a.dob) / 365) 'age',
+            (SELECT TIMESTAMPDIFF(day, date_rescued , aa.date_listed)) as rescued_to_listed,
+            (SELECT TIMESTAMPDIFF(day, aa.date_listed , aa.date_adopted)) as listed_to_adopted,
+            (SELECT TIMESTAMPDIFF(day, date_rescued , aa.date_adopted)) as rescued_to_adopted
         FROM
             animal_for_adoption aa,
-            animal a,
-            user u
+            animal a
         WHERE
-            aa.user_id = u.user_id AND a.animal_id = aa.animal_id and aa.org_id = :org_id;";
+           a.animal_id = aa.animal_id and aa.org_id = :org_id;";
         return BaseModel::select($query, ["org_id" => $org_id]);
     }
 
@@ -382,16 +383,16 @@ class OrgManagement extends BaseModel
         $org_id = $_SESSION['org_id'];
 
         $query = "SELECT
-        payment.txn_time,
+        px.txn_time,
         (SELECT COUNT(donation.txn_id) FROM donation GROUP BY txn_time) AS donation_count,
         (SELECT SUM(payment.amount) FROM donation GROUP BY txn_time) AS donation_amount,
         (SELECT COUNT(donation.subscription_id) FROM donation GROUP BY txn_time) AS subscription_count,
         (SELECT SUM(payment.amount) FROM donation GROUP BY txn_time) AS subscription_amount
     FROM
         donation,
-        payment
+        payment px
     WHERE
-    donation.txn_id = payment.txn_id AND donation.org_id = $org_id;";
+    donation.txn_id = px.txn_id AND donation.org_id = $org_id;";
 
         return BaseModel::select($query);
     }
