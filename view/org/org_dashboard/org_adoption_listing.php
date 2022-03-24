@@ -376,12 +376,15 @@
                                         <div class="field column">
                                             <div class="preview" style="background-image: url(<?= $animal['avatar_photo'] ?>);"> </div>
                                             <div class="thumbnails">
-                                                <div class="thumbnail" style="background-image: url(<?= $animal['avatar_photo'] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
-                                                <?php
-                                                $photos = json_decode($animal['adoptee_photo']);
-                                                foreach ($photos as $photo) { ?>
-                                                    <div class="thumbnail" style="background-image: url(<?=$photo?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
-                                                <?php } ?>
+                                                <div>
+                                                    <div class="thumbnail" style="background-image: url(<?= $animal['avatar_photo'] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                                                    <?php
+                                                    $photos = json_decode($animal['adoptee_photo']);
+                                                    foreach ($photos as $photo) { ?>
+                                                        <div class="thumbnail" style="background-image: url(<?= $photo ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                                                    <?php } ?>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -416,7 +419,7 @@
 <div style="margin-left: 1200px; padding-bottom: 0px"><a href="/OrgManagement/add_new_animal" class="btn right outline button-hover" style="width: 60px; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Animal"><i class="fas fa-plus"></i></a></div>
 
 <script>
-        function displayPreview(_this) {
+    function displayPreview(_this) {
         var prev = document.getElementsByClassName('preview')[0];
         var thumb = _this.style.backgroundImage;
         prev.style.backgroundImage = thumb;

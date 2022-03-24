@@ -223,7 +223,10 @@
 <div class="details">
     <div style="height:180px; overflow-y: auto;">
         <h4>More Details</h4>
+        <div style="display:flex;"><i class="txt-clr fa fa-lg fa-<?= $reported_case['type'] == "Dog" ? 'dog' : ($reported_case['type'] == "Cat" ? 'cat' : 'paw') ?>"></i>&nbsp;&nbsp; <?= $reported_case['type'] ?></div>
         <p style="font-size: small;"><?= $reported_case["description"] ?></p>
+        <p style="font-size: small;"><?= $reported_case["time_reported"] ?></p>
+        <div style="display:flex;"><i class="txt-clr fa fa-lg fa-phone"></i>&nbsp;&nbsp; <?= $reported_case['contact_number'] ?></div>
         <div style=""></div>
     </div>
 </div>
