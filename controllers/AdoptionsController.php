@@ -28,6 +28,12 @@ class AdoptionsController extends Controller
     {
         $selections = Adoptions::getSelections();
 
+        if (!isset($_GET['type'])) {
+            $_GET['type'] = 'select';
+        }
+        if (!isset($_GET['breed'])) {
+            $_GET['breed'] = 'select';
+        }
         //check if breed belongs to selected type
         $match = false;
         foreach ($selections as $key => $value) {
@@ -57,7 +63,7 @@ class AdoptionsController extends Controller
             "type" => $_GET["type"] ?? "select",
             "breed" => $breed,
         ];
-        
+
         $data = [
             "info" => Adoptions::getBreedInfo($filter),
             "selections" => $selections,

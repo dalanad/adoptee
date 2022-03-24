@@ -1,13 +1,11 @@
 <?php require __DIR__ . "/../../../_layout/layout.php"; ?>
 <div class='container px2'>
-    <div style="display: flex;align-items:center;margin-top:1rem">
-        <div>
-            <a href="/OrgManagement/reports_list" class="btn btn-link btn-icon mr1 " style="font-size: 1em;">
-                <i class="fa fa-arrow-left"></i></a>
-        </div>
-        <h2 style="margin:0">Donations Summary Report</h2>
-    </div>
-
+    <a class="btn btn-faded black" href="/OrgManagement/reports_list" style="margin: .5rem 0rem; "><i class="fa fa-chevron-left"></i>&nbsp; Back</a>
+    <h2 style="margin:0">Donations Summary Report</h2>
+    <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
+        <span style="flex: 1 1 0"></span>
+        <button class="btn outline pink" onclick="window.print()"><i class="fa fa-print"></i>&nbsp; Print</button>
+    </form>
     <table class="table">
         <tr>
             <th>DATE</th>

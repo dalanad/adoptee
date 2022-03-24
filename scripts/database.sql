@@ -238,7 +238,7 @@ create table report_rescue(
     location varchar(100) not null,
     location_coordinates POINT,
     status enum('PENDING', 'IN PROGRESS','RESCUED') not null default 'PENDING',
-    accepted_date timestamp DEFAULT CURRENT_TIMESTAMP,
+    accepted_date timestamp,
     photos JSON not null    
 );
 
