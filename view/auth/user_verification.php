@@ -114,7 +114,7 @@
                                 <div style="margin-top: 1rem; text-align:center">
                                     <button type="submit" class="btn outline green">Verify</button>
                                 </div>
-                                <!-- <?= $_SESSION["otp"] ?> -->
+                                
                             </form>
 
                         <?php } ?>

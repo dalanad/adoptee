@@ -1,40 +1,40 @@
 <style>
-    .item{
-        width:50rem;
+    .item {
+        width: 50rem;
         padding: 1rem;
-        border-radius:8px;
-        box-shadow:var(--shadow);
-        margin:1rem 1rem 1rem 0rem;
-        display:flex;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        margin: 1rem 1rem 1rem 0rem;
+        display: flex;
     }
 
-    .item .image-column{
-        display:flex;
-        flex:25%;
-        padding:0.1 0.2 0.1 0.1rem;
+    .item .image-column {
+        display: flex;
+        flex: 25%;
+        padding: 0.1 0.2 0.1 0.1rem;
         align-items: center;
         justify-content: center;
     }
 
-    .image{
+    .image {
         margin-right: 1rem;
         max-width: 100%;
         max-height: 100%;
         border-radius: 5px;
-    }    
+    }
 
-    .item .content-column{
-        flex:75%;
+    .item .content-column {
+        flex: 75%;
         flex-direction: column;
     }
 
-    .item .content-column .heading{
+    .item .content-column .heading {
         font-size: 1.2rem;
         padding-bottom: 0.2rem;
         font-weight: bold;
     }
 
-    .item .content-column .time{
+    .item .content-column .time {
         color: grey;
         font-weight: bold;
         padding-bottom: 0.3rem;
@@ -45,11 +45,17 @@
 <?php
 foreach ($content as $key => $value) { ?>
     <div class="item">
-        <div class="image-column"><img class="image" src="<?= str_replace("[\"","",str_replace(" ","/",str_replace("\"]","",$value['photos'])))?>"></div>
+        <div class="image-column">
+            <?php
+            $photos = json_decode($value['photos']);
+            foreach ($photos as $key1 => $value1) { ?>
+                <img class="image" src="<?= $value1 ?>">
+            <?php } ?>
+        </div>
         <div class="content-column">
             <div class="heading"><?= $value['heading']; ?></div>
-            <div class="time"><?= explode(" ",$value['created_time'])[0]; ?></div>
-            <div><?= $value['description']; ?></div>
+            <div class="time"><?= explode(" ", $value['created_time'])[0]; ?></div>
+            <div><?= str_replace("\r\n", "<br>", $value['description']); ?></div>
         </div>
     </div>
 <?php } ?>

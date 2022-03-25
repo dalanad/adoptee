@@ -55,8 +55,10 @@ class User extends BaseModel
     static function changePassword($email, $new)
     {
         $hashed_password = Crypto::hash($new);
-        $query = "UPDATE user set password= '$hashed_password' WHERE email = '$email'";
-        if(self::update($query)){print_r("hello");};
+        $query = "UPDATE user set password= '$hashed_password' WHERE email = '$email'";    //not complete
+        // if (self::update($query)) {
+        //     print_r("hello");
+        // };
     }
 
     static function getAdoptions($user_id)
@@ -93,14 +95,15 @@ class User extends BaseModel
         WHERE c.user_id = $user_id
         AND c.doctor_user_id = u.user_id
         AND a.animal_id = c.animal_id
-        AND (status='PENDING' OR status='ACCEPTED')";
+        AND (status='PENDING' OR status='ACCEPTED')
+        ORDER BY created_date DESC";
         return self::select($query);
     }
 
     static function getNotifications($user_id, $limit_to = 3)
     {
         $query = "SELECT * FROM `notifications` WHERE user_id = :user_id LIMIT  $limit_to";
-        return self::select($query, ["user_id" => $user_id ]);
+        return self::select($query, ["user_id" => $user_id]);
     }
 
     static function getSubscriptions()
