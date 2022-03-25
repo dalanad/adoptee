@@ -62,12 +62,12 @@ INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) VALUES
 ('Cat', 'Nova',   'Female', '2013-10-01', '["Grey"]','/assets/data/cats/10.jpg');
 
 INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_verified`, `telephone_verified`) VALUES
-('Dr. Weerasinghe', 'doctor@example.com', '0761236547', 'No 129/A, Temple Lane, Gampaha', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
-('Ovini Medagedara', 'orguser@example.com', '0761236547', 'No. 58, 5th Lane, Battaramulla', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
-('Hiruni Dahanayake', 'user@example.com', '0761236547', 'No 14/2, Flower Street, Colombo 07', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
-('Dalana Pasindu', 'user2@example.com', '0761236547', 'No 65, 3rd Lane, Dehiwala', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 0, 0),
-('Dr. Rathnayake', 'doctor2@example.com', '0761236547', 'No 79/A, Circular Road, Kandy', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
-('Tharani Perera', 'admin1@example.com', '0761236547', 'No. 58, 5th Lane, Battaramulla', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1);
+('Dr. Weerasinghe', 'doctor@example.com', '0761234567', 'No 129/A, Temple Lane, Gampaha', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
+('Ovini Medagedara', 'orguser@example.com', '0761235674', 'No. 58, 5th Lane, Battaramulla', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
+('Hiruni Dahanayake', 'user@example.com', '0761231234', 'No 14/2, Flower Street, Colombo 07', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1),
+('Dalana Pasindu', 'user2@example.com', '0761237654', 'No 65, 3rd Lane, Dehiwala', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 0, 0),
+('Dr. Rathnayake', 'doctor2@example.com', '0761231212', 'No 79/A, Circular Road, Kandy', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW',1, 1),
+('Tharani Perera', 'admin1@example.com', '0761237766', 'No. 58, 5th Lane, Battaramulla', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1, 1);
 
 INSERT INTO `notifications` (`notif_id`, `user_id`, `title`, `message` ) 
 VALUES (NULL, '3',  'Vaccination Reminder', 'Your pet Tina needs to be vaccinated by 10-10-2021'  ), 
@@ -82,16 +82,16 @@ INSERT INTO `org_feedback` (`org_id`, `user_id`, `living_conditions`, `healthcar
 
 INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`, `photos`) VALUES 
 ('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/1a.jpg","/assets/data/dogs/1b.jpg","/assets/data/dogs/1c.jpg"]'),
-('21', 'Playful and a joy to be around, weaned', '2021-08-26', 'LISTED', NULL, '3', NULL, '["/assets/data/cats/1a.jpg","/assets/data/cats/1b.jpg","/assets/data/cats/1c.jpg"]'),
+('21', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '3', NULL, '["/assets/data/cats/1a.jpg","/assets/data/cats/1b.jpg","/assets/data/cats/1c.jpg"]'),
 ('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2', NULL, '["/assets/data/dogs/2a.jpg","/assets/data/dogs/2b.jpg","/assets/data/dogs/2c.jpg"]'),
-('3', 'jade-green eyes, not vaccinated','2021-09-01', 'ADOPTED', '2021-09-13', '1','4', '["/assets/data/dogs/3a.jpg","/assets/data/dogs/3b.jpg","/assets/data/dogs/3c.jpg"]'),
+('3', 'jade-green eyes, vaccinated','2021-09-01', 'ADOPTED', '2021-09-13', '1','4', '["/assets/data/dogs/3a.jpg","/assets/data/dogs/3b.jpg","/assets/data/dogs/3c.jpg"]'),
 ('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/cats/2a.jpg","/assets/data/cats/2b.jpg","/assets/data/cats/2c.jpg"]'),
 ('4', 'Playful and affectionate, vaccinated', '2021-08-26', 'ADOPTED', '2021-09-03', '1',3, '["/assets/data/dogs/4a.jpg","/assets/data/dogs/4b.jpg"]'),
 ('5', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/dogs/5a.jpg","/assets/data/dogs/5b.jpg","/assets/data/dogs/5c.jpg"]'),
 ('25', 'Healthy and a joy to be around, vaccinated', '2021-08-26', 'ADOPTED', '2021-01-14', '2', 3, '["/assets/data/cats/5a.jpg","/assets/data/cats/5b.jpg","/assets/data/cats/5c.jpg"]'),
 ('6', 'Loves cuddles and needs attention, vaccinated', '2021-08-26', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/6a.jpg","/assets/data/dogs/6b.jpeg","/assets/data/dogs/6c.jpg"]'),
 ('23', 'Independent and friendly, vaccinated', '2021-08-26', 'LISTED', NULL, '1',NULL, '["/assets/data/cats/3a.png","/assets/data/cats/3b.jpg","/assets/data/cats/3c.jpg"]'),
-('15', 'Has tiny, hedgehog paws, not vaccinated', '2021-09-02', 'LISTED', NULL, '1',NULL, '["/assets/data/dogs/15a.jpg","/assets/data/dogs/15b.jpg","/assets/data/dogs/15c.jpg"]');
+('15', 'Has tiny, hedgehog paws, vaccinated', '2021-09-02', 'LISTED', NULL, '1',NULL, '["/assets/data/dogs/15a.jpg","/assets/data/dogs/15b.jpg","/assets/data/dogs/15c.jpg"]');
 
 INSERT INTO `user_pet`(`animal_id`, `user_id`, `status`)
 VALUES ('10','3',"ACTIVE"), ('9', '3',"ACTIVE"), ('8', '2',"ACTIVE"), ('7', '3',"ACTIVE"), ('6', '2',"ACTIVE"), ('5', '4',"ACTIVE"), 
@@ -102,10 +102,10 @@ VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599
  (5, '0748345654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_64.png"]');
 
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`,`accepted_date`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  '2021-08-25 09:15:20','2021-08-25 11:25:20', '0761236547', 'Anuradhapura', POINT(6.8929, 79.9187), 'RESCUED', '["/assets/data/dogs/10.jpg"]'),
-('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.',   '2021-08-28 19:55:20','2021-08-28 19:55:20', '0761236547', 'Anuradhapura', POINT(6.8999, 79.9167), 'PENDING', '["/assets/data/cats/8.jpg"]'),
+VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  '2021-08-25 09:15:20','2021-08-25 11:25:20', '0761231234', 'Anuradhapura', POINT(6.8929, 79.9187), 'RESCUED', '["/assets/data/dogs/10.jpg"]'),
+('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.',   '2021-08-28 19:55:20','2021-08-28 19:55:20', '0761231234', 'Anuradhapura', POINT(6.8999, 79.9167), 'PENDING', '["/assets/data/cats/8.jpg"]'),
 ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency',   '2021-12-29 08:14:20','2021-12-29 10:04:20', '0771234567', 'Anuradhapura', POINT(6.8969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]'),
-('1', NULL, 'Dog', 'Injured Leg',   '2021-12-27 18:55:20','2021-12-27 19:55:20', '0762457684', '12/1, Jayathilake Road, Anuradhapura', POINT(6.8269, 79.9737), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]'),
+('1', NULL, 'Dog', 'Injured Leg',   '2021-12-27 18:55:20','2021-12-27 19:55:20', '0762457654', '12/1, Jayathilake Road, Anuradhapura', POINT(6.8269, 79.9737), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]'),
 ('1', NULL, 'Cat', 'Severe skin rash',   current_timestamp(),NULL, '0775467215', '77/7, Silva Lane, Colombo 02', POINT(6.1969, 79.7137), 'PENDING', '["/assets/data/cats/10.jpg"]'),
 ('1', NULL, 'Dog', 'Malnutritioned',   current_timestamp(),NULL, '0722247568', '44/A, Bishop Road, Nugegoda', POINT(6.4969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]'),
 ('1', NULL, 'Hamster', 'Abandoned near a highway',   current_timestamp(),NULL, '071275645', 'Piliyandala, close to main road', POINT(6.8969, 79.0137), 'RESCUED', '["/assets/data/cats/10.jpg"]');
@@ -201,4 +201,18 @@ VAlUES ('Cefovecin',1,null,null,null,null),
        ('Glycopyrrolate',1,null,null,null,null), 
        ('Hydroxyzine',1,null,null,null,null),
        ('Vermectin',1,null,null,null,null);
+       
+INSERT INTO `animal_vaccines`(`animal_id`,`anti_rabies`,`dhl`,`parvo`,`tricat`,`anti_rabies_booster`,`dhl_booster`,`parvo_booster`,`tricat_booster`,`vacc_proof`) 
+VALUES('1','2015-10-04','2015-08-02','2015-08-15',NULL,'2021-10-01','2021-08-06','2021-09-16',NULL,'["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
+('2','2016-04-12','2016-02-27','2016-02-27',NULL,'2021-04-06','2022-02-10','2022-02-10',NULL,'["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
+('3','2021-01-04','2020-11-14','2020-11-14',NULL,'2022-01-10','2021-11-03',NULL,NULL,'["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
+('4','2020-05-10','2020-04-20','2020-04-20',NULL,'2021-05-10','2021-04-15',NULL,NULL,'["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
+('5','2016-01-03','2015-11-12','2015-11-12',NULL,'2022-01-19','2021-11-17','2021-11-17',NULL,'["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
+('6','2016-01-03','2015-11-12','2015-11-12',NULL,'2022-01-19','2021-11-17','2021-11-17',NULL,'["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
+('15','2016-01-03','2015-11-12','2015-11-12',NULL,'2022-01-19','2021-11-17','2021-11-17',NULL,'["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
+('21','2016-01-03',NULL,'2016-02-06','2016-03-12','2022-01-11',NULL,'2022-02-17','2022-02-17','["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
+('22','2016-01-03',NULL,'2016-02-06','2016-03-12','2022-01-11',NULL,'2022-02-17','2022-02-17','["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
+('23','2016-01-03',NULL,'2016-02-06','2016-03-12','2022-01-11',NULL,'2022-02-17','2022-02-17','["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
+('25','2016-01-03',NULL,'2016-02-06','2016-03-12','2022-01-11',NULL,'2022-02-17','2022-02-17','["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]');
+
 COMMIT;

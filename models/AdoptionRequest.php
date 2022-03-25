@@ -12,10 +12,15 @@ class AdoptionRequest extends BaseModel
 
     public function getPetData($animal_id)
     {
-        $query = "SELECT `name`, `gender`, `dob`, `color`, `description`, `type`, `photo`, DATEDIFF(CURRENT_DATE, animal.dob)/365 'age', `photos`
+        $query = "SELECT * FROM
+        (SELECT `name`,animal.animal_id, `gender`, `dob`, `color`, `description`, `type`, `photo`, DATEDIFF(CURRENT_DATE, animal.dob)/365 'age', `photos`, `dewormed`
         FROM  `animal`, `animal_for_adoption`
-        WHERE animal.animal_id = $animal_id
-        AND animal_for_adoption.animal_id = $animal_id";
+        WHERE animal.animal_id = $animal_id 
+        AND animal_for_adoption.animal_id = $animal_id) 
+        animal_data
+        LEFT JOIN
+        (SELECT * FROM `animal_vaccines` WHERE animal_vaccines.animal_id = $animal_id) animal_vax
+        ON animal_data.animal_id = animal_vax.animal_id";
         return self::select($query);
     }
 
@@ -32,11 +37,6 @@ class AdoptionRequest extends BaseModel
         $query = "SELECT * FROM `adoption_request` WHERE animal_id = $animalId AND user_id = $userId";
         return self::select($query);
     }    
-
-    function validateForm()
-    {
-
-    }
 }
 
 ?>

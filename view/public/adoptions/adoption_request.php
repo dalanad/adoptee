@@ -80,10 +80,72 @@
         flex-direction: column;
         justify-content: center;
     }
+
+    .model {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .model-content {
+        background-color: #fefefe;
+        box-shadow: var(--shadow);
+        border-radius: 0.5rem;
+        padding: 20px;
+        border: 1px solid #888;
+        position: fixed;
+        top: 40%;
+        left: 31%;
+        max-height: calc(100vh - 210px);
+        overflow-y: auto;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .popup {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .vax_name {
+        grid-column: 1;
+        margin-bottom: 0.5rem;
+    }
+
+    .details {
+        grid-column: 3;
+    }
+
+    .proof {
+        width: 30rem;
+        height: auto;
+
+    }
 </style>
 <?php $pet = $petdata[0]; ?>
 
 <div class="container adoption-request">
+
+    <!-- Pet Info -->
     <div style="margin: 0 1rem;flex:1">
         <button class="btn btn-faded black" style="margin-bottom: 1rem;" onclick="location.href = '\\Adoptions';"><i class="fa fa-chevron-left"></i>&nbsp; Back</button>
         <div class="images">
@@ -103,9 +165,16 @@
             <div class="thumbnails">
                 <div class="thumbnail" style="background-image: url(<?= $pet['photo'] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
                 <?php
-                $photos = explode(",", $pet['photos']);
+                $photos = json_decode($pet['photos']);
                 for ($i = 0; $i < sizeof($photos); $i++) { ?>
-                    <div class="thumbnail" style="background-image: url(../../..<?= str_replace("[", "", str_replace("\"", "", str_replace(" ", "/", str_replace("]", "", $photos[$i])))) ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                    <div class="thumbnail" style="background-image: url(<?php if ($photos[$i][0] == '/') {
+                                                                            echo '';
+                                                                        } else {
+                                                                            echo '/';
+                                                                        }
+                                                                        echo $photos[$i];
+                                                                        ?>);
+                                                cursor:pointer;" onclick="displayPreview(this)"> </div>
                 <?php } ?>
             </div>
         </div>
@@ -113,11 +182,88 @@
             <h4 style="margin: 0.5rem 0;">Description</h4>
             <?= $pet['description'] ?>
         </div>
+
+        <div class="btn-link btn" onclick='showModel("health-records");'>
+            <i class="fas fa-info-circle"></i>&nbsp;
+            <h4>Health Records</h4>
+        </div>
+
+        <!-- Medical records popup -->
+        <div id="health-records" class="model">
+            <div class="model-content" style="width:fit-content;height:fit-content;top:10%;left:30%;">
+                <span class="close" onclick='hideModel("health-records");'>&times;</span>
+
+                <!-- Initial Vaccines -->
+                <div class="popup" style="margin-top: 2rem;">
+                    <h4 class="vax-name">Initial Vaccine</h4>
+                    <h4 class="details">Date</h4>
+                </div>
+                <div class="popup">
+                    <div class="vax_name">Anti-rabies</div>
+                    <div class="details"><?= (isset($pet['anti_rabies']) && $pet['anti_rabies'] != 0) ? $pet['anti_rabies'] : '-' ?></div>
+                </div>
+                <div class="popup">
+                    <div class="vax_name">Parvo</div>
+                    <div class="details"><?= (isset($pet['parvo']) && $pet['parvo'] != 0) ? $pet['parvo'] : '-' ?></div>
+                </div>
+                <div class="popup">
+                    <div class="vax_name"><?= $pet['type'] == 'Dog' ? 'DHL' : 'Tricat' ?></div>
+                    <div class="details">
+                        <?php if (isset($pet['dhl']) && $pet['dhl'] != 0) {
+                            print_r($pet['dhl']);
+                        } else if (isset($pet['tricat']) && $pet['tricat'] != 0) {
+                            print_r($pet['tricat']);
+                        } else echo '-' ?>
+                    </div>
+                </div>
+
+                <!-- Boosters -->
+                <div class="popup" style="margin-top: 2rem;">
+                    <h4 class="vax-name">Last Booster Vaccine</h4>
+                    <h4 class="details">Date</h4>
+                </div>
+                <div class="popup">
+                    <div class="vax_name">Anti-rabies Booster</div>
+                    <div class="details"><?= (isset($pet['anti_rabies_booster']) && $pet['anti_rabies_booster'] != 0) ? $pet['anti_rabies_booster'] : '-' ?></div>
+                </div>
+                <div class="popup">
+                    <div class="vax_name">Parvo Booster</div>
+                    <div class="details"><?= (isset($pet['parvo_booster']) && $pet['parvo_booster'] != 0) ? $pet['parvo_booster'] : '-' ?></div>
+                </div>
+                <div class="popup">
+                    <div class="vax_name"><?= $pet['type'] == 'Dog' ? 'DHL' : 'Tricat' ?></div>
+                    <div class="details">
+                        <?php if (isset($pet['dhl_booster']) && $pet['dhl_booster'] != 0) {
+                            print_r($pet['dhl_booster']);
+                        } else if (isset($pet['tricat_booster']) && $pet['tricat_booster'] != 0) {
+                            print_r($pet['tricat_booster']);
+                        } else echo '-' ?>
+                    </div>
+                </div>
+
+                <!-- Vaccination proof -->
+                <h4 class="vax-name" style="margin-top: 2rem;">Proof of Vaccination</h4>
+                <div style="width:fit-content;margin-right:1rem;">
+                    <?php
+                    $vacc =  json_decode($pet['vacc_proof']);
+                    if (isset($vacc)) {
+                        foreach ($vacc as $key => $value) { ?>
+                            <img class="proof" src="/<?= $value ?>"></br>
+                    <?php }
+                    }
+                    else{
+                        echo '-';
+                    } ?>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- user info -->
     <div style="position: relative;margin: 0 1rem;">
         <h3><i class="far fa-dog-leashed"></i>&nbsp; Adoption Request</h3>
+
+        <!-- user info -->
         <div class="user-info">
             <div class="row">
                 <div class="column bold">Name of adopter:</div>
@@ -284,5 +430,24 @@
         var prev = document.getElementsByClassName('preview')[0];
         var thumb = _this.style.backgroundImage;
         prev.style.backgroundImage = thumb;
+    }
+
+    function showModel(id) {
+        document.getElementById(id).classList.add("shown")
+        document.getElementById(id).style.display = "block";
+        document.getElementById(id).onclick = function(event) {
+            if (event.target.classList.contains('model') && !event.target.classList.contains('model-content')) {
+                let model = document.querySelector('.model.shown');
+                model.style.display = "none"
+                model.classList.remove("shown")
+                document.getElementById(id).onclick = null
+            }
+        }
+    }
+
+    function hideModel(id) {
+        document.getElementById(id).classList.remove("shown")
+        document.getElementById(id).style.display = "none";
+        document.getElementById(id).onclick = null
     }
 </script>

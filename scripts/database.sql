@@ -62,8 +62,8 @@ create table routine_updates (
 
 create table animal (
     animal_id int(10) AUTO_INCREMENT not null,
-    type varchar(10),
-    other varchar(10), 
+    type varchar(10), 
+    other varchar(10),
     name varchar(50),
     gender enum('MALE', 'FEMALE', 'UNKNOWN') default 'UNKNOWN',
     dob date,
@@ -288,20 +288,6 @@ create table notifications (
     type enum("SMS","EMAIL","NOTIFICATION") default 'NOTIFICATION',
     sent boolean default false, -- whether the sms or email is sent
     seen boolean default false -- whether user has seen the notification
-);
-
-create table vaccines (
-    vacine_id int(10) AUTO_INCREMENT primary key,
-    name varchar(50) not null,
-    type enum("ONE-TIME","RECURRING") not null default "RECURRING",
-    inter int(5)   
-);
-
-create table animal_vaccinations (
-    animal_id int(10),
-    vacine_id int(10),
-    given_date date,
-    primary key(animal_id, vacine_id, given_date)
 );
 
 create table breeds (
