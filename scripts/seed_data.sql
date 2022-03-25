@@ -15,7 +15,8 @@ adoption days and events to raise awareness, free of charge', '/assets/images/or
 
  
 INSERT INTO `org_content` (`org_id`, `heading`, `description`, `photos`)
-VALUES ('1', 'Clinic', 'Rescue and treatment program for street dogs has grown to become one of the most significant components of our work. We offer high standards of Veterinary care for homeless dogs at no charge, which is a much needed service in Sri Lanka considering the large numbers. As our work expanded, the numbers of rescue and treatment requests have also increased exponentially with a monthly estimate of over 1000 calls to the hotline. Each request is assessed by our team and addressed by our veterinarians either in-house, onsite or through hospitalization for more critical cases. Assessments are dependent on several factors. The most important being the consideration of both the physical and mental wellbeing, veterinary advise and the long term welfare of the dog.', '["/assets/images/org/clinic.jpg"]'),
+VALUES ('1', 'Clinic', 'Rescue and treatment program for street dogs has grown to become one of the most significant components of our work. We offer high standards of Veterinary care for homeless dogs at no charge, which is a much needed service in Sri Lanka considering the large numbers. As our work expanded, the numbers of rescue and treatment requests have also increased exponentially with a monthly estimate of over 1000 calls to the hotline.
+\r\n Each request is assessed by our team and addressed by our veterinarians either in-house, onsite or through hospitalization for more critical cases. Assessments are dependent on several factors. The most important being the consideration of both the physical and mental wellbeing, veterinary advise and the long term welfare of the dog.', '["/assets/images/org/clinic.jpg"]'),
   ('1', 'Vaccination Programme','Mission Rabies in conjunction with local partner charity Dogstar Foundation ran a pilot vaccination campaign in January 2015 in Negombo, Sri Lanka to demonstrate the effectiveness of Mission Rabies’ working protocols and to establish the feasibility of transferring these to working outside of Sri Lanka.', '["/assets/images/org/KittenVaccination.jpg"]'),
   ('2', 'Volunteer', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '["/assets/images/org/volunteer.jpg"]'),
   ('2', 'Awareness Program', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '["/assets/images/org/awareness.jpg"]'),
@@ -130,13 +131,13 @@ VALUES ('1', '4', '2021-12-29 13:04:20');
  INSERT INTO `consultation` ( `consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
  VALUES 
  ('2021-10-28', '10:30:00', '10', '1', '3', 'ACCEPTED', 'ADVISE', '456'),
- ('2021-10-28', '11:30:00', '9', '1', '3', 'PENDING', 'LIVE', NULL),
+ ('2022-04-15', '11:30:00', '9', '1', '3', 'PENDING', 'LIVE', NULL),
  ('2021-10-30', '12:30:00', '8', '1', '2', 'ACCEPTED', 'ADVISE', NULL),
- ('2021-10-30', '13:30:00', '7', '1', '3', 'ACCEPTED', 'LIVE', NULL),
+ ('2022-04-02', '13:30:00', '7', '1', '3', 'ACCEPTED', 'LIVE', NULL),
  ('2021-10-30', '14:30:00', '6', '1', '2', 'ACCEPTED', 'ADVISE', NULL),
  ('2021-10-30', '11:00:00', '5', '1', '4', 'ACCEPTED', 'LIVE', NULL),
  ('2021-11-04', '12:00:00', '4', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
- ('2021-11-07', '13:00:00', '1', '1', '3', 'ACCEPTED', 'LIVE', NULL),
+ ('2022-03-30', '13:00:00', '1', '1', '3', 'ACCEPTED', 'LIVE', NULL),
  ('2021-11-08', '09:00:00', '2', '1', '2', 'COMPLETED', 'ADVISE', NULL),
  ('2021-11-08', '09:30:00', '2', '1', '2', 'COMPLETED', 'LIVE', NULL),
  ('2021-11-03', '10:00:00', '5', '1', '4', 'COMPLETED', 'ADVISE', NULL),
@@ -201,7 +202,7 @@ VAlUES ('Cefovecin',1,null,null,null,null),
        ('Glycopyrrolate',1,null,null,null,null), 
        ('Hydroxyzine',1,null,null,null,null),
        ('Vermectin',1,null,null,null,null);
-       
+
 INSERT INTO `animal_vaccines`(`animal_id`,`anti_rabies`,`dhl`,`parvo`,`tricat`,`anti_rabies_booster`,`dhl_booster`,`parvo_booster`,`tricat_booster`,`vacc_proof`) 
 VALUES('1','2015-10-04','2015-08-02','2015-08-15',NULL,'2021-10-01','2021-08-06','2021-09-16',NULL,'["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
 ('2','2016-04-12','2016-02-27','2016-02-27',NULL,'2021-04-06','2022-02-10','2022-02-10',NULL,'["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),

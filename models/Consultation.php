@@ -4,8 +4,8 @@ class Consultation extends BaseModel
 
     public static function bookConsultationPet($doctorId, $userId, $type, $date, $time,  $animalId)
     {
-        $query = "INSERT INTO `consultation` (`consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
-        VALUES ('$date', '$time', '$animalId', '$doctorId', '$userId', '" . ($type == 'ADVISE' ? 'ACCEPTED' : 'PENDING') . "', '$type', NULL);";
+        $query = "INSERT INTO `consultation` (`consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`, `created_date`) 
+        VALUES ('$date', '$time', '$animalId', '$doctorId', '$userId', '" . ($type == 'ADVISE' ? 'ACCEPTED' : 'PENDING') . "', '$type', NULL, CURRENT_DATE);";
         self::insert($query);
         return self::lastInsertId(); //to insert the txn_id into consultation table later
     }

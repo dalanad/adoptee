@@ -126,7 +126,8 @@ create table consultation (
     type enum('LIVE','ADVISE') not null default 'ADVISE',
     payment_txn_id varchar(100),
     doctor_rating int(5),
-    meeting_id varchar(50) default '7ewh-ve15-16uf'
+    meeting_id varchar(50) default '7ewh-ve15-16uf',
+    created_date date
 );
 
 create table consultation_schedule (
@@ -238,7 +239,7 @@ create table report_rescue(
     location varchar(100) not null,
     location_coordinates POINT,
     status enum('PENDING', 'IN PROGRESS','RESCUED') not null default 'PENDING',
-    accepted_date timestamp,
+    accepted_date timestamp DEFAULT CURRENT_TIMESTAMP,
     photos JSON not null    
 );
 
