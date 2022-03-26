@@ -134,7 +134,7 @@ class AuthController extends Controller
             $status = "sms_sent";
         } elseif ($_GET["action"] == "validate_sms") {
             if ($_SESSION["otp"] == $_POST['otp']) {
-                User::verifySMS($user["email"]); // TODO:
+                User::verifySMS($user["email"]);
                 $status = "sms_verified";
             } else {
                 $status = "otp_invalid";
@@ -142,6 +142,54 @@ class AuthController extends Controller
         }
 
         View::render("auth/user_verification", ["status" =>  $status, "user" => $user]);
+    }
+
+    function verify_email()
+    {
+        $status = "";
+        $email = $_GET['email'];
+        $user = User::findUserByEmail($email);
+
+        if (!isset($_GET["action"]) && $user['email_verified'] == 0) {
+
+            $email = new EmailService();
+            $token = Crypto::encrypt($user["email"]);
+            $body = "Dear " . $user["name"] . ", Click the link below to verify your email<br> <a href='" . config::get('domain') . "/auth/verify_email?email=" . $_GET["email"] . "&action=verify_email&token=$token'> Verify Email </a> ";
+            $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
+            $status = "email_sent";
+            View::render("auth/user_verification", ["status" =>  $status, "user" => $user]);
+        }
+
+        else if (isset($_GET["action"]) && $_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
+            User::verifyEmail($user["email"]);
+            $this->redirect("/Profile/user_profile");
+        }
+    }
+
+    function verify_telephone()
+    {
+        $status = "";
+        $email = $_GET['email'];
+        $user = User::findUserByEmail($email);
+
+        if (!isset($_GET["action"]) && $user['telephone_verified'] == 0) {
+            $notification = new EmailService();
+            $otp = rand(100000, 999999);
+            $_SESSION["otp"] = $otp;
+            $notification->sendSMS("94" . (int) $user["telephone"], "Adoptee OTP : $otp");
+            $status = "sms_sent";
+            View::render("auth/user_verification", ["status" =>  $status, "user" => $user]);
+        }
+
+        elseif ($_GET["action"] == "validate_sms") {
+            if ($_SESSION["otp"] == $_POST['otp']) {
+                User::verifySMS($user["email"]);
+                $this->redirect("/Profile/user_profile");
+            } else {
+                $status = "otp_invalid";
+                View::render("auth/user_verification", ["status" =>  $status, "user" => $user]);
+            };
+        }
     }
 
     function change_password()
