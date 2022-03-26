@@ -19,13 +19,13 @@
         <div class="row">
             <div class="field column">
                 <label>Name</label>
-                <input class="ctrl" name="name" type="text" value="<?= $_SESSION['user']['name'];?>">
+                <input class="ctrl" name="name" type="text" value="<?= $user_data['name'];?>">
                 <span class="field-msg"></span>
             </div>
 
             <div class="field column">
                 <label>Email</label>
-                <input class="ctrl" name="email" type="email" value="<?= $_SESSION['user']['email'];?>">
+                <input class="ctrl" name="email" type="email" value="<?= $user_data['email'];?>">
                 <span class="field-msg"></span>
             </div>
         </div>
@@ -33,7 +33,7 @@
         <div class="row">
             <div class="field column">
                 <label>Mobile Phone Number</label>
-                <input class="ctrl" name="telephone" type="text" value="<?= $_SESSION['user']['telephone'];?>">
+                <input class="ctrl" name="telephone" type="text" value="<?= strlen($user_data['telephone'])<10? '0' . $user_data['telephone']:$user_data['telephone'] ;?>">
                 <span class="field-msg"></span>
             </div>
         </div>
@@ -41,10 +41,10 @@
         <div class="row">
             <div class="field column">
                 <label>Address</label>
-                <input class="ctrl" name="address" type="text" value="<?= $_SESSION['user']['address'];?>">
+                <input class="ctrl" name="address" type="text" value="<?= $user_data['address'];?>">
                 <span class="field-msg"></span>
             </div>
         </div>
 
-        <div><button class="btn">Update</button></div>
+        <div><button type="submit" class="btn">Update</button></div>
 </form>

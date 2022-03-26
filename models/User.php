@@ -19,13 +19,32 @@ class User extends BaseModel
         return self::lastInsertId();
     }
 
-    static function updateProfileData($name, $email, $telephone, $address)
+    static function updateProfileData($name, $email, $telephone, $address, $user_id)
     {
-        $query = "UPDATE `user` SET name = '$name' WHERE isset($name);
-        UPDATE `user` SET email = '$email' WHERE isset($email);
-        UPDATE `user` SET telephone = $telephone WHERE isset($telephone);
-        UPDATE `user` SET address = '$address' WHERE isset($address)";
-        return self::insert($query);
+        $query = "SELECT * from `user` WHERE user_id = $user_id";
+        $user = self::select($query);
+
+        if ($name != $user[0]['name']) {
+            $query = "UPDATE `user` SET name = '$name' WHERE user_id = $user_id";
+            self::update($query);
+            $_SESSION['user']['name'] = $name;
+        }
+
+        if ($address != $user[0]['address']) {
+            $query = "UPDATE `user` SET address = '$address' WHERE user_id = $user_id";
+            self::update($query);
+            $_SESSION['user']['address'] = $address;
+        }
+
+        if ($email != $user[0]['email']) {
+            $query = "UPDATE `user` SET email = '$email', email_verified = 0  WHERE user_id = $user_id";
+            self::update($query);
+        }
+        $telephone = strval($telephone);
+        if ($telephone != $user[0]['telephone']) {
+            $query = "UPDATE `user` SET telephone = '$telephone', telephone_verified = 0 WHERE user_id = $user_id";
+            self::update($query);
+        }
     }
 
     static function findUserByEmail($email)
@@ -130,5 +149,4 @@ class User extends BaseModel
 
         return self::select($query, ["user" => $user_id]);
     }
-
 }

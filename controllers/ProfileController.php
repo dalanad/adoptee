@@ -10,17 +10,29 @@ class ProfileController extends Controller
 
     function user_profile()
     {
-        $id = ["active" => "update_profile", "user_id" => Crypto::encrypt($_SESSION['user']['user_id'])];
+        $id = [
+            "active" => "update_profile",
+            "user_id" => Crypto::encrypt($_SESSION['user']['user_id']),
+            "user_data" => User::findUserById($_SESSION['user']['user_id'])
+        ];
         View::render("auth/profile/user_profile", $id);
     }
 
     function update_profile()
     {
-        $data = ["active" => "update_profile"];
-        View::render("auth/profile/user_profile", $data);
-        if (isset($_POST['submit'])) {
-            User::updateProfileData($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address']);
+        User::updateProfileData($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_SESSION['user']['user_id']);
+        if ($_POST['email'] != $_SESSION['user']['email']) {
+            $this->redirect('/auth/verify_email?email=' . $_POST['email']);
+            $_SESSION['user']['email'] = $_POST['email'];
         }
+
+        //TODO: if navigates back without verifying
+
+        if($_POST['telephone'] != $_SESSION['user']['telephone']) {
+            $this->redirect('/auth/verify_telephone?email=' . $_POST['email']);
+            $_SESSION['user']['telephone'] = $_POST['telephone'];
+        }
+        $this->redirect("user_profile");
     }
 
     static function change_password()
@@ -55,7 +67,10 @@ class ProfileController extends Controller
     static function rescues()
     {
         $report = new ReportRescue;
-        $data = ["active" => "rescues", "rescues" => $report->getRescuedPets($_SESSION['user']['user_id'])];
+        $data = [
+            "active" => "rescues",
+            "rescues" => $report->getRescuedPets($_SESSION['user']['user_id'])
+        ];
         View::render("auth/profile/user_profile", $data);
     }
 
@@ -77,17 +92,17 @@ class ProfileController extends Controller
     {
         $vacc_proof =  image::multi("vacc_proof");
         $photo =  image::single("photo");
-        
-        $_POST['anti_rabies']?? '';
-        $_POST['parvo']?? '';
-        $_POST['dhl']?? '';
-        $_POST['tricat']?? '';
-        $_POST['anti_rabies_booster']?? '';
-        $_POST['parvo_booster']?? '';
-        $_POST['dhl_booster']?? '';
-        $_POST['tricat_booster']?? '';
-        $dewormed = isset($_POST['dewormed'])? '1':'0';
-        Adoptions::addNewPet($_POST['name'],$_POST['type'],$_POST['gender'],$_POST['dob'],$_POST['color'],$_POST['anti_rabies'],$_POST['parvo'],$_POST['dhl'],$_POST['tricat'],$_POST['anti_rabies_booster'],$_POST['parvo_booster'],$_POST['dhl_booster'],$_POST['tricat_booster'],$dewormed,$photo,$vacc_proof,$_SESSION['user']['user_id']);
+
+        $_POST['anti_rabies'] ?? '';
+        $_POST['parvo'] ?? '';
+        $_POST['dhl'] ?? '';
+        $_POST['tricat'] ?? '';
+        $_POST['anti_rabies_booster'] ?? '';
+        $_POST['parvo_booster'] ?? '';
+        $_POST['dhl_booster'] ?? '';
+        $_POST['tricat_booster'] ?? '';
+        $dewormed = isset($_POST['dewormed']) ? '1' : '0';
+        Adoptions::addNewPet($_POST['name'], $_POST['type'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['anti_rabies'], $_POST['parvo'], $_POST['dhl'], $_POST['tricat'], $_POST['anti_rabies_booster'], $_POST['parvo_booster'], $_POST['dhl_booster'], $_POST['tricat_booster'], $dewormed, $photo, $vacc_proof, $_SESSION['user']['user_id']);
         $this->redirect("/Profile/my_pets");
     }
 

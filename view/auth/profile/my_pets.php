@@ -81,7 +81,7 @@
     }
 
     input[type="date"] {
-        width: 10.2rem;
+        width: 10.5rem;
     }
 
     .fa-times-circle {
@@ -175,19 +175,19 @@
                 </br>
                 <div class="vax">
                     <label for='anti_rabies'>Anti Rabies</label>
-                    <input class="ctrl vacc" type="date" name="anti_rabies" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" min="<?= getdate()['year'] - 20 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" onchange="setMin(this);">
+                    <input class="ctrl vacc" type="date" name="anti_rabies" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" min="<?= getdate()['year'] - 15 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" onchange="setMin(this);">
                 </div>
                 <div class="vax">
                     <label for='parvo'>Parvo</label>
-                    <input class="ctrl vacc" type="date" name="parvo" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" min="<?= getdate()['year'] - 20 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" onchange="setMin(this);">
+                    <input class="ctrl vacc" type="date" name="parvo" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" min="<?= getdate()['year'] - 15 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" onchange="setMin(this);">
                 </div>
                 <div class="vax dogVax">
                     <label for='dhl'>DHL</label>
-                    <input class="ctrl vacc" type="date" name="dhl" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" min="<?= getdate()['year'] - 20 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" onchange="setMin(this);">
+                    <input class="ctrl vacc" type="date" name="dhl" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" min="<?= getdate()['year'] - 15 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" onchange="setMin(this);">
                 </div>
                 <div class="vax catVax">
                     <label for='tricat'>Tricat</label>
-                    <input class="ctrl vacc" type="date" name="tricat" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" min="<?= getdate()['year'] - 20 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" onchange="setMin(this);">
+                    <input class="ctrl vacc" type="date" name="tricat" max="<?= getdate()['year'] ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" min="<?= getdate()['year'] - 15 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" onchange="setMin(this);">
                 </div>
                 <div style="height:min-content">
                     <span class="field-msg">Select date only if vaccinated</span>
@@ -435,15 +435,10 @@ foreach ($petdata as $key => $value) { ?>
         var today = new Date();
         var initial = new Date(_this.value);
         var diff = (today.getTime() - initial.getTime()) / (1000 * 60 * 60 * 24);
-
-        if (diff > 365) {
-            booster.min = (parseInt(today.getUTCFullYear()) - 1).toString().concat(month_day);
-        } else if (diff < 365) {
-            var year = today.getUTCFullYear().toString();
-            var month = (today.getUTCMonth() + 1).toString().padStart(2, '0');
-            var day = today.getUTCDate().toString().padStart(2, '0');
-            booster.min = year.concat('-').concat(month).concat('-').concat(day);
-            console.log(booster.min);
+        
+        if (diff < 365) {
+            var year = (parseInt(_this.value.slice(0,4))+1).toString();
+            booster.min = year.concat(month_day)
         }
     }
 
@@ -451,7 +446,6 @@ foreach ($petdata as $key => $value) { ?>
         var vaccinations = document.querySelectorAll('.vacc');
         vaccinations.forEach(function(vacc) {
             vacc.min = _this.value;
-            console.log(vacc.min);
         });
     }
 </script>
