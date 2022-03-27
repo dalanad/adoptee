@@ -68,9 +68,13 @@ class Pay
 
     public static function refundPayment($session_id)
     {
-        $session = \Stripe\Checkout\Session::retrieve($session_id);
-        \Stripe\Refund::create([
-            'payment_intent' => $session['payment_intent']
-        ]);
+        try {
+            $session = \Stripe\Checkout\Session::retrieve($session_id);
+            \Stripe\Refund::create([
+                'payment_intent' => $session['payment_intent']
+            ]);
+        } catch (Exception $e) {
+
+        }
     }
 }

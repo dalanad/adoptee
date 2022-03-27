@@ -20,7 +20,13 @@ class Doctor extends BaseModel
 
     public static function getDoctors()
     {
-        return self::select("SELECT * FROM doctor INNER JOIN user ON user.user_id = doctor.user_id");
+        return self::select("SELECT 
+            *, 
+            (   SELECT ROUND(AVG(doctor_rating)) as rating 
+                FROM consultation 
+                WHERE doctor_user_id = u.user_id AND doctor_rating IS NOT NULL
+            ) as rating 
+        FROM doctor d INNER JOIN user u ON u.user_id = d.user_id");
     }
 
     public static function findByUID($user_id)
@@ -370,5 +376,12 @@ class Doctor extends BaseModel
                 "weight_max" => $medicine["weight_max"],
             ]);
         }
+    }
+
+    public static function getDoctorRating($doctor_id)
+    {
+        $query = "SELECT ROUND(AVG(doctor_rating)) as rating FROM consultation WHERE doctor_user_id = :doctor_id AND doctor_rating IS NOT NULL;";
+        return self::selectOne($query, ["doctor_id" => $doctor_id])["rating"];
+   
     }
 }
