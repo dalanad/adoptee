@@ -127,9 +127,21 @@ class DoctorController extends Controller
 
     public function payments()
     {
+        $filter = [
+            "status" =>  $_GET["status"] ?? [],
+            "type" => $_GET["type"] ?? [],
+            "sort" => $_GET["sort"] ?? ["txn_time  " => "desc"],
+            "page" => $_GET["page"] ?? 0,
+            "size" => $_GET["size"] ?? 10,
+        ];
+        
+        $result = Doctor::getPaymentHistory($this->doctor_id, $filter);
+
         View::render("doctor/payments", [
-            "pay_history" => Doctor::getPaymentHistory($this->doctor_id),
-            "balance" => Doctor::getPaymentBalance($this->doctor_id)
+            "pay_history" => $result["items"],
+            "balance" => Doctor::getPaymentBalance($this->doctor_id),
+            "count" => $result["count"],
+            "filter" => $filter
         ]);
     }
 

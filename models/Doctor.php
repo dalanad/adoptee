@@ -30,7 +30,7 @@ class Doctor extends BaseModel
     }
 
     public static function accept_consultation_request($doctor_id, $consultation_id)
-    {
+    {  
         $query = "UPDATE `consultation` SET status = 'ACCEPTED', meeting_id = :meeting_id WHERE doctor_user_id = :doctor_id and consultation_id = :consultation_id";
 
         $params = [
@@ -39,7 +39,15 @@ class Doctor extends BaseModel
             "meeting_id" => VideoConference::createMeetingId()
         ];
 
-        return self::update($query, $params);
+        self::update($query, $params);
+
+        $con =  Consultation::findConsultationById($consultation_id);
+        $doctor = User::findUserById($doctor_id);
+        Notification::sendNotification(
+            $con["user_id"],
+            "Doctor Consultaion Accepted",
+            $doctor["name"] . " accepted your consultation on " . $con["consultation_date"] . " @ " . $con["consultation_time"]
+        );
     }
 
     public static function cancel_consultation_request($doctor_id, $consultation_id)
@@ -61,7 +69,13 @@ class Doctor extends BaseModel
         ];
         self::update($query, $params);
 
-        // TODO: send notification
+        $con =  Consultation::findConsultationById($consultation_id);
+        $doctor = User::findUserById($doctor_id);
+        Notification::sendNotification(
+            $con["user_id"],
+            "Doctor Consultaion Cancelled",
+            $doctor["name"] . " cancelled your consultation on " . $con["consultation_date"] . " @ " . $con["consultation_time"]
+        );
     }
 
     public static function updateCharges($doctor_id, $live_charge, $advise_charge)
@@ -256,21 +270,48 @@ class Doctor extends BaseModel
         return  $consultations;
     }
 
-    public static function getPaymentHistory($doctor_id)
+    public static function getPaymentHistory($doctor_id, $filter)
     {
-        $query = "SELECT p.*,
+        $query = "SELECT SQL_CALC_FOUND_ROWS p.*,
                       CONCAT('Payment for Consultation - ', c.type, ' - #', c.consultation_id) description
                   FROM payment p
                       LEFT JOIN consultation c ON p.txn_id = c.payment_txn_id
-                  WHERE c.doctor_user_id = :doctor_id OR p.user = :doctor_id
-                  ORDER BY p.txn_time desc ";
+                  WHERE (c.doctor_user_id = :doctor_id OR p.user = :doctor_id)";
 
-        return self::select($query, ["doctor_id" => $doctor_id]);
+
+
+        // filter by type
+        $type =  $filter["type"];
+        if (sizeof($type) > 0) {
+            $query = $query . " AND p.type IN ('" . implode("','", $type) . "') ";
+        }
+
+        // filter by type
+        $type =  $filter["status"];
+        if (sizeof($type) > 0) {
+            $query = $query . " AND p.status IN ('" . implode("','", $type) . "') ";
+        }
+
+        // sort
+        $sort =  $filter["sort"];
+        if (isset($sort) && sizeof($sort) > 0) {
+            $directions = [];
+            foreach ($sort as $column => $direction) {
+                array_push($directions, " $column $direction ");
+            }
+            $query = $query . " ORDER BY " . implode(",", $directions);
+        }
+
+        $query = $query . " LIMIT " . $filter['size'] . " OFFSET " . (intval($filter['size']) * intval($filter['page']));
+        return [
+            "items" => self::select($query, ["doctor_id" => $doctor_id]),
+            "count" => self::selectOne("SELECT FOUND_ROWS() total ")["total"]
+        ];
     }
 
     public static function getPaymentBalance($doctor_id)
     {
-        $payments_query = "SELECT SUM(amount) total FROM payment p JOIN consultation c ON p.txn_id = c.payment_txn_id WHERE c.doctor_user_id = :doctor_id";
+        $payments_query = "SELECT SUM(amount) total FROM payment p JOIN consultation c ON p.txn_id = c.payment_txn_id WHERE c.doctor_user_id = :doctor_id AND p.status != 'REFUNDED'";
         $total_payments = self::select($payments_query, ["doctor_id" => $doctor_id])[0]["total"];
 
         $withdrawal_query = "SELECT SUM(amount) total FROM payment p WHERE p.user = :doctor_id AND p.type = 'WITHDRAWAL'";
@@ -317,7 +358,6 @@ class Doctor extends BaseModel
                 "weight_min" => $medicine["weight_min"],
                 "weight_max" => $medicine["weight_max"],
             ]);
-            
         } else {
 
             $query = "INSERT INTO medicine(name,doctor_id,age_min,age_max,weight_min,weight_max) 
