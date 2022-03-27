@@ -95,8 +95,8 @@ class Image
     public static function multi(string $field_name)
     {
         $urls = [];
-        echo "<pre>";
-        print_r($_FILES);
+        // echo "<pre>";
+        // print_r($_FILES);
         $file_count = sizeof($_FILES[$field_name]["name"]);
 
         for ($i = 0; $i < $file_count; $i++) {

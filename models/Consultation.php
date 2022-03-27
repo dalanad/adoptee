@@ -118,7 +118,15 @@ class Consultation extends BaseModel
             "consultation_id" => $consultation_id,
         ];
 
-        return self::update($query, $params);
+        self::update($query, $params);
+
+        $con =  Consultation::findConsultationById($consultation_id);
+        $doctor = User::findUserById($con["doctor_user_id"]);
+        Notification::sendNotification(
+            $con["user_id"],
+            "Doctor Consultaion Completed",
+            "Thank You. Your consultation with ". $doctor["name"] . " has been completed " 
+        );
     }
 
     public static function findConsultationsByPetId($animal_id)

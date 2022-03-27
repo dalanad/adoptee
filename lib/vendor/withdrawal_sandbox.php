@@ -15,7 +15,7 @@ $txn_id =  rndId() . rndId() . rndId();
     </div>
     <br>
     <p>Amount to Withdraw = Rs.<?= $_GET['amount'] ?></p>
-    <p>Transaction Outcome :
+    <p style="white-space: nowrap;">Transaction Outcome :
         <a href="/Doctor/withdraw_callback?amount=<?= $_GET['amount'] ?>&txn_id=<?= $txn_id ?>&status=SUCCESS" style='color:green'>SUCCESS</a> |
         <a href="/Doctor/withdraw_callback?status=ERROR" style='color:red'>ERROR</a> |
         <a href="/Doctor/withdraw_callback?status=CANCELED">CANCEL</a>
@@ -26,7 +26,7 @@ $txn_id =  rndId() . rndId() . rndId();
 <style>
     body {
         font-family: monospace;
-        width: 500px;
+        width: 550px;
         font-size: 18px;
         margin: 2rem auto;
     }
