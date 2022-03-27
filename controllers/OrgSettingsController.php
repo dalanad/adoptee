@@ -75,7 +75,10 @@ class OrgSettingsController extends Controller
 
     public function sponsorship()
     {
-        $data = ["active" => "sponsorship"];
+        $data = [
+            "active" => "sponsorship",
+            "sponsorships" => SponsorshipTier::getSponsorshipsForOrg($_SESSION['org_id'])
+        ];
         View::render("org/settings", $data);
     }
 

@@ -1,7 +1,9 @@
- <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4)">
+ <h3 class="m0 flex justify-between items-center p1 px2 border-bottom" style="border-color:var(--gray-4);margin:1rem 0">
      Users
      <a href="create_user" class="btn outline right">New User</a>
  </h3>
+ <div class="mx2">
+
  <table class="table">
      <tr>
          <th>Name</th>
@@ -26,15 +28,48 @@
                      <i class="far fa-pen"></i>
                  </a>
                  &nbsp;
-                 <a href="#" onclick='disableUser(<?= $user["user_id"] ?>, <?= json_encode($user) ?>)' title="Deactivate User" class="btn btn-link btn-icon red">
-                     <i class="far fa-trash"></i>
-                 </a>
+                 <?php if ($user['status'] == "ACTIVE") { ?>
+                     <a href="#" onclick='disableUser(<?= $user["user_id"] ?>, <?= json_encode($user) ?>)' title="Deactivate User" class="btn btn-link btn-icon red">
+                         <i class="far fa-user-lock"></i>
+                     </a>
+                 <?php } else { ?>
+                     <a href="#" onclick='enableUser(<?= $user["user_id"] ?>, <?= json_encode($user) ?>)' title="Enable User" class="btn btn-link btn-icon green">
+                     <i class="fa fa-user-check"></i>
+                     </a>
+                 <?php } ?>
+
              </td>
          </tr>
      <?php } ?>
  </table>
+ </div>
+
+ <style>
+    table,
+    td,
+    th {
+        border: 1px solid var(--muted);
+        border-collapse: collapse;
+    }
+</style>
 
  <script>
+     function enableUser(uid, user) {
+         let template = ` <form style="min-width:400px;padding:.5rem" action="/OrgSettings/change_user_status">
+            <input type='hidden' name='user_id' value='${uid}'>
+            <input type='hidden' name='status' value='ACTIVE'>
+            <h3 style='margin-top:0;display: flex;align-items: center;'>
+                <i class="far fa-user-lock" style="font-size:1.5rem" ></i> &nbsp; Enable User ?</h3>
+            <p>Enable Access to the user</p>
+            <div style="display:flex;justify-content:space-between">
+                <button class="btn black btn-faded overlay-close">Cancel</button>
+                <button class="btn green outline" type="submit">Enable</button>
+            </div>
+        </form>
+         `
+         showOverlay(template)
+     }
+
      function disableUser(uid, user) {
          let template = ` <form style="min-width:400px;padding:.5rem" action="/OrgSettings/change_user_status">
             <input type='hidden' name='user_id' value='${uid}'>

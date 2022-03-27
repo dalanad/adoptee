@@ -4,7 +4,7 @@ require __DIR__ . "/../_layout/layout.php";
 $menu_items = array(
     "general" => array("name" => "General", "icon" => "building"),
     "users" =>  array("name" =>  "Users", "icon" => "users"),
-    "sponsorship" =>  array("name" =>  "Sponsorships", "icon" => "donate"),
+    "sponsorship" =>  array("name" =>  "Sponsors", "icon" => "hand-holding-heart"),
     "sponsorship_tiers" =>  array("name" =>  "Sponsorships Tiers", "icon" => "donate"),
 );
 
@@ -99,7 +99,7 @@ if (!isset($active)) {
             <img style="max-height:50px" src="/assets/images/logo_vector_filled.svg" alt="Adoptee Logo" />
             <br>
             <div style="display:flex;align-items:center">
-                <a href="/OrgManagement/org_adoption_listing" class="btn btn-faded black"><i class="fa fa-arrow-left"></i> &nbsp; Back</a>
+                <a href="/OrgManagement/org_adoption_listing" class="btn btn-faded black"><i class="fa fa-arrow-left"></i> &nbsp; Back</a> &nbsp; &nbsp;
                 <h2 class="flex items-center">  &nbsp; <i class="far fa-cogs"></i> &nbsp; Organization Settings </h2>
             </div>
         </div>

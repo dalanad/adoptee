@@ -61,7 +61,7 @@
             <button class="btn">Save</button>
         </div>
         <div class="sec">
-            <a class="btn btn-faded pink" href="/OrgSettings/sponsorships">Go Back</a>
+            <a class="btn btn-faded pink" href="/OrgSettings/sponsorship_tiers">Go Back</a>
         </div>
     </div>
 
