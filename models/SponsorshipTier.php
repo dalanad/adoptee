@@ -55,4 +55,11 @@ class SponsorshipTier extends BaseModel
 
         return self::insert($query, ["name" => $name, "org_id" => $orgId]);
     }
+
+    public static function getSponsorshipsForOrg($orgId)
+    {
+        $query = "SELECT u.name as user_name, s.*, st.recurring_days FROM user u, sponsorship s LEFT JOIN sponsorship_tier st on st.name = s.name
+                    WHERE u.user_id = s.user_id AND s.org_id = :org_id ; ";
+        return self::select($query, ["org_id" => $orgId]);
+    }
 }
