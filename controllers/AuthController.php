@@ -162,6 +162,7 @@ class AuthController extends Controller
 
         else if (isset($_GET["action"]) && $_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
             User::verifyEmail($user["email"]);
+            $_SESSION['user']['email'] = $user['email'];
             $this->redirect("/Profile/user_profile");
         }
     }
@@ -184,6 +185,7 @@ class AuthController extends Controller
         elseif ($_GET["action"] == "validate_sms") {
             if ($_SESSION["otp"] == $_POST['otp']) {
                 User::verifySMS($user["email"]);
+                $_SESSION['user']['telephone'] = $user['telephone'];
                 $this->redirect("/Profile/user_profile");
             } else {
                 $status = "otp_invalid";

@@ -106,10 +106,10 @@
                 <label for="dog"><i class="far fa-dog"></i><br>Dog</label>
                 <input name="type" id="cat" type="radio" value="cat">
                 <label for="cat"><i class="far fa-cat"></i><br> Cat </label>
-                <input name="type" id="bird" type="radio">
+                <!-- <input name="type" id="bird" type="radio">
                 <label for="bird"><i class="far fa-dove"></i><br> Bird</label>
                 <input name="type" id="other" type="radio">
-                <label for="other"><i class="far fa-paw"></i><br>Other </label>
+                <label for="other"><i class="far fa-paw"></i><br>Other </label> -->
             </div>
         </div>
 

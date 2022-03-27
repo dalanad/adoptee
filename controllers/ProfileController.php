@@ -20,18 +20,34 @@ class ProfileController extends Controller
 
     function update_profile()
     {
-        User::updateProfileData($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_SESSION['user']['user_id']);
-        if ($_POST['email'] != $_SESSION['user']['email']) {
-            $this->redirect('/auth/verify_email?email=' . $_POST['email']);
-            $_SESSION['user']['email'] = $_POST['email'];
+        $data = [
+            "active" => "update_profile",
+            "user_id" => Crypto::encrypt($_SESSION['user']['user_id']),
+            "user_data" => User::findUserById($_SESSION['user']['user_id'])
+        ];
+
+        // form not submitted
+        if (isset($_POST) && (empty($_POST))) {
+            View::render("auth/profile/user_profile", $data);
+        }
+
+        // form submitted
+        else if (isset($_POST) && (!empty($_POST))) {
+            User::updateProfileData($_POST['name'], $_POST['email'], $_POST['telephone'], $_POST['address'], $_SESSION['user']['user_id']);
+            if (($_POST['email'] != $_SESSION['user']['email']) && ($_POST['telephone'] == $_SESSION['user']['telephone'])) {
+                $this->redirect('/auth/verify_email?email=' . $_POST['email']);
+            }
+
+            if (($_POST['telephone'] != $_SESSION['user']['telephone']) && ($_POST['email'] == $_SESSION['user']['email'])) {
+                $this->redirect('/auth/verify_telephone?email=' . $_POST['email']);
+            }
+
+            if (($_POST['telephone'] != $_SESSION['user']['telephone']) && ($_POST['email'] != $_SESSION['user']['email'])) {
+                $this->redirect('/auth/verify?email=' . $_POST['email']);
+            }
         }
 
         //TODO: if navigates back without verifying
-
-        if($_POST['telephone'] != $_SESSION['user']['telephone']) {
-            $this->redirect('/auth/verify_telephone?email=' . $_POST['email']);
-            $_SESSION['user']['telephone'] = $_POST['telephone'];
-        }
         $this->redirect("user_profile");
     }
 
@@ -44,7 +60,7 @@ class ProfileController extends Controller
     static function notifications()
     {
         $data = ["active" => "notifications", "notifications" => User::getNotifications($_SESSION['user']['user_id'], 200)];
-        View::render("auth/profile/user_profile", $data); //backend not connected
+        View::render("auth/profile/user_profile", $data);
     }
 
     static function consultations()

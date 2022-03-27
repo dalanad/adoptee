@@ -170,6 +170,8 @@
         </div>
 
         <div style="display:flex;line-height:100%;">
+
+            <!-- initial vaccines -->
             <div class='field' style="margin-right:3rem;">
                 <label style="margin-top: 1rem; margin-bottom: 0.5rem;">Initial Vaccine</label>
                 </br>
@@ -194,8 +196,8 @@
                 </div>
             </div>
 
+            <!--yearly booster-->
             <div class="field">
-                <!--yearly booster-->
                 <label style="margin-top: 1rem; margin-bottom: 0.5rem;">Yearly Booster</label>
                 </br>
                 <div class="vax">
@@ -267,7 +269,7 @@ foreach ($petdata as $key => $value) { ?>
 
                                     <!-- Medical popup -->
                                     <div id="popupmodelMedical<?= $value["animal_id"] ?>" class="model">
-                                        <div class="model-content">
+                                        <div class="model-content" style="width:fit-content;height:fit-content;top:20%;left:30%;">
                                             <span class="close" onclick="hideModel('popupmodelMedical<?= $value['animal_id'] ?>')">&times;</span>
                                             <!--add vaccination history-->
                                             <?php if ($value['consultdata'] == NULL) { ?>
@@ -345,7 +347,7 @@ foreach ($petdata as $key => $value) { ?>
                                                         <textarea name="prescription" id="prescription" class="ctrl mb2" style="max-width:100vh;"></textarea>
                                                     </div>
                                                     <div class="field" style="margin-top:0.3rem;">
-                                                        <label for="prescription-proof">Proof of Vaccination</label>
+                                                        <label for="prescription-proof">Proof</label>
                                                         <input type="file" name="prescription-proof" id="prescription-proof" class="ctrl" style="width:15rem;" />
                                                         <small class="field-hint">Upload a photo of the prescription <br />that includes the veterinarian's signature and date</small>
                                                     </div>
@@ -428,16 +430,16 @@ foreach ($petdata as $key => $value) { ?>
         }
     }
 
-    function setMin(_this) {                         //_this is the initial vaccine
-        var booster = document.getElementsByName(_this.name.concat("_booster"))[0];     //relevant booster
+    function setMin(_this) { //_this is the initial vaccine
+        var booster = document.getElementsByName(_this.name.concat("_booster"))[0]; //relevant booster
         var month_day = _this.value.slice(4, 10);
 
         var today = new Date();
         var initial = new Date(_this.value);
         var diff = (today.getTime() - initial.getTime()) / (1000 * 60 * 60 * 24);
-        
+
         if (diff < 365) {
-            var year = (parseInt(_this.value.slice(0,4))+1).toString();
+            var year = (parseInt(_this.value.slice(0, 4)) + 1).toString();
             booster.min = year.concat(month_day)
         }
     }
