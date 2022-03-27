@@ -40,8 +40,27 @@ class ScheduledTasks extends BaseModel
 
     public static function adoption_request_auto_decline()
     {
+        $items = self::select("SELECT * FROM adoption_request 
+                               WHERE request_date < DATE_SUB(DATE(NOW()), INTERVAL 2 DAY) 
+                               AND status = 'PENDING')");
 
+        foreach ($items as $request) {
+
+            $query = "UPDATE adoption_request SET status = 'REJECTED' WHERE request_id = :request_id ";
+            $params = [
+                "request_id" => $request['request_id']
+            ];
+
+            self::update($query, $params);
+
+            $animal = Animal::getAnimalById($request['animal_id']);
+            Notification::sendNotification(
+                $request["user_id"],
+                "Adoption Request Expired",
+                "Your Request made on",
+                $request["request_date"] . " to adopt " .$animal['name']. " has expired due to not accepting "
+            );
+        }
     }
-
-    
 }
+
