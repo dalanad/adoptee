@@ -95,11 +95,13 @@
                     <div>
                       <div style="font-weight: 500;"><?= $doctor["name"] ?></div>
                       <div style="font-size: .9rem; margin-top:.3rem">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="far fa-star"></span>
-                        <span class="far fa-star"></span>
+                        <?php if ($doctor["rating"] == 0 or !isset($doctor["rating"])) { ?>
+                          <small style="opacity: .4;">Rating Unavailable</small>
+                        <?php } else { ?>
+                          <?php for ($i = 1; $i <= 5; $i++) { ?>
+                            <span class="fa fa-star <?= $doctor["rating"] >= $i ? "checked" : "" ?>"></span>
+                          <?php } ?>
+                        <?php } ?>
                       </div>
                     </div>
                   </div>
@@ -245,11 +247,11 @@
           </tr>
           <tr>
             <td>Date:</td>
-            <td><?= $_SESSION['consultation_type']=='live'? $_SESSION['date'] : "-" ?></td>
+            <td><?= $_SESSION['consultation_type'] == 'live' ? $_SESSION['date'] : "-" ?></td>
           </tr>
           <tr>
             <td>Time:</td>
-            <td><?= $_SESSION['consultation_type']=='live'? $_SESSION['time'] : "-" ?></td>
+            <td><?= $_SESSION['consultation_type'] == 'live' ? $_SESSION['time'] : "-" ?></td>
           </tr>
           <tr>
             <td>Pet's name:</td>

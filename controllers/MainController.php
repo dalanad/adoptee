@@ -31,4 +31,9 @@ class MainController extends Controller
     {
         Notification::processQueue();
     }
+
+    function run_task()
+    {
+        ScheduledTasks::run($_GET["task_name"]);
+    }
 }
