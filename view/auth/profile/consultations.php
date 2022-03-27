@@ -12,8 +12,8 @@
         </tr>
         <?php foreach ($consultations as $key => $value) { ?>
             <tr>
-                <td style="font-size:0.9rem;"><?= $value['type'] == 'ADVISE' ? '-' : $value['date'] ?></td>
-                <td style="font-size:0.9rem;"><?= $value['type'] == 'ADVISE' ? '-' : substr($value['time'], 0, 5) ?></td>
+                <td style="font-size:0.9rem;"><?= $value['date'] ?></td>
+                <td style="font-size:0.9rem;"><?= substr($value['time'], 0, 5) ?></td>
                 <td><?= $value['pet'] ?></td>
                 <td><?= $value['doctor'] ?></td>
                 <td><span class="tag <?= $value['type'] == 'ADVISE' ? "green" : "orange" ?>"><?= $value['type'] ?></span></td>

@@ -130,13 +130,13 @@ VALUES ('1', '4', '2021-12-29 13:04:20');
 
  INSERT INTO `consultation` ( `consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`) 
  VALUES 
- ('2021-10-28', '10:30:00', '10', '1', '3', 'ACCEPTED', 'ADVISE', '456'),
+ ('2022-04-28', '10:30:00', '10', '1', '3', 'ACCEPTED', 'ADVISE', '456'),
  ('2022-04-15', '11:30:00', '9', '1', '3', 'PENDING', 'LIVE', NULL),
  ('2021-10-30', '12:30:00', '8', '1', '2', 'ACCEPTED', 'ADVISE', NULL),
  ('2022-04-02', '13:30:00', '7', '1', '3', 'ACCEPTED', 'LIVE', NULL),
  ('2021-10-30', '14:30:00', '6', '1', '2', 'ACCEPTED', 'ADVISE', NULL),
  ('2021-10-30', '11:00:00', '5', '1', '4', 'ACCEPTED', 'LIVE', NULL),
- ('2021-11-04', '12:00:00', '4', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
+ ('2022-05-04', '12:00:00', '4', '1', '3', 'ACCEPTED', 'ADVISE', NULL),
  ('2022-03-30', '13:00:00', '1', '1', '3', 'ACCEPTED', 'LIVE', NULL),
  ('2021-11-08', '09:00:00', '2', '1', '2', 'COMPLETED', 'ADVISE', NULL),
  ('2021-11-08', '09:30:00', '2', '1', '2', 'COMPLETED', 'LIVE', NULL),
@@ -170,7 +170,7 @@ VALUES ('3', CURRENT_TIMESTAMP,   '1', 'How about the water intake ?'), ('3', '2
 ('13',CURRENT_TIMESTAMP,   '1', 'Prescription given');
 
 INSERT INTO `sponsorship` (`org_id`,`name`,`user_id`,`amount_at_subscription`,`start_date`,`end_date`,`status`)
-VALUES ('1','Gold','3',1200,'2022-03-01',NULL,'ACTIVE');
+VALUES ('1','Gold','3',5000,'2022-03-01',NULL,'ACTIVE');
 
 INSERT INTO `payment` (`txn_id`,`amount`,`txn_time`,`user`)
 VALUES ('123', 1200.00, '2021-03-19 21:26:38', '3'),

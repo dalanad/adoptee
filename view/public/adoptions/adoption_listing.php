@@ -197,8 +197,8 @@
                 </select>&nbsp;
 
                 <select class="ctrl sm" style="max-width: 5em;" name="order" onchange="_form.submit()">
-                    <option value="desc" <?= $filter['sort'] == 'desc' ? "selected" : "" ?>>DESC</option>
-                    <option value="asc" <?= $filter['sort'] == 'asc' ? "selected" : "" ?>>ASC</option>
+                    <option value="desc" <?= $filter['order'] == 'desc' ? "selected" : "" ?>>DESC</option>
+                    <option value="asc" <?= $filter['order'] == 'asc' ? "selected" : "" ?>>ASC</option>
                 </select>
 
                 <a class="btn btn-link btn-faded primary" style="padding: 0.5rem; float:right;" href="Adoptions/viewBreeds">View Breeds</a>
