@@ -268,6 +268,7 @@ create table org_feedback (
 );
 
 create table adoption_request (
+    request_id int(10) AUTO_INCREMENT primary key,
     animal_id int(10),
     user_id int(10),
     org_id int(10),
@@ -276,8 +277,7 @@ create table adoption_request (
     has_pets boolean,
     petsafety varchar(100) ,
     children boolean,
-    childsafety varchar(100) ,
-    primary key(animal_id, user_id)
+    childsafety varchar(100)
 );
 
 create table notifications (
