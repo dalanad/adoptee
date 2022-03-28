@@ -400,7 +400,7 @@ async function initChat(id, is_user = false) {
 	<div class="chat-footer">
 		<button class="btn btn-link black ${is_user && " hidden "}" id="btn-prescribe" ><i class="far fa-file-prescription"></i></button>
 		<button class="btn btn-link black" id="btn-upload"><i class="fa fa-paperclip"></i></button>
-		<input name="message" class="ctrl" placeholder="Your Message ...">
+		<input name="message" size="128" class="ctrl" placeholder="Your Message ...">
 		<button id="send-message" class="btn btn-link black"><i class="fa fa-paper-plane"></i></button>
 	</div>`;
 

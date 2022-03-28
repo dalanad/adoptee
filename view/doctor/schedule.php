@@ -6,12 +6,12 @@ require_once  __DIR__ . '/_nav.php';
 <div style="display: grid;grid-template-columns:auto;grid-gap:0rem;max-width:900px;margin:0 auto">
     <form action="/Doctor/update_pricing" method="POST">
         <div style="font-size: 1.1em;margin-bottom:.5rem">Charges</div>
-        <div style="display: flex;max-width:30rem">
+        <div style="display: flex;max-width:30rem;flex-wrap:wrap;margin-bottom:.5rem">
             <div class="field">
                 <label>Appointment - Live</label>
                 <div class="ctrl-group">
                     <span class="ctrl static">Rs.</span>
-                    <input class="ctrl" type="number" style="text-align: right;" name="live" value="<?= $doctor["live_charge"] ?>">
+                    <input class="ctrl" type="number" style="text-align: right;max-width:6em;min-width:6em" name="live" value="<?= $doctor["live_charge"] ?>">
                     <span class="ctrl static">.00</span>
                 </div>
             </div>
@@ -21,7 +21,7 @@ require_once  __DIR__ . '/_nav.php';
                 <label>Chat / Advise</label>
                 <div class="ctrl-group">
                     <span class="ctrl static">Rs.</span>
-                    <input class="ctrl" type="number" style="text-align: right;" name="advise" value="<?= $doctor["advise_charge"] ?>">
+                    <input class="ctrl" type="number" style="text-align: right;max-width:6em;min-width:6em" name="advise" value="<?= $doctor["advise_charge"] ?>">
                     <span class="ctrl static">.00</span>
                 </div>
             </div>
@@ -103,5 +103,9 @@ require_once  __DIR__ . '/_nav.php';
     #appointments-timeline.editing .timeline-column:nth-child(2n) {
         transition: background-color .3s ease;
         background: #f1f1f1;
+    }
+
+    @media screen and (max-width:600px) {
+
     }
 </style>

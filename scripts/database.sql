@@ -68,7 +68,7 @@ create table animal (
     gender enum('MALE', 'FEMALE', 'UNKNOWN') default 'UNKNOWN',
     dob date,
     color JSON,
-    photo varchar(100),
+    photo varchar(100) default '/assets/images/dogs/default.png',
     primary key(animal_id)
 );
 

@@ -13,6 +13,9 @@ require_once  __DIR__ . '/_nav.php';
         background: white
     }
 </style>
+<div>
+    <button class="btn btn-faded black" id="back-btn" onclick="closeChat()" style="display: none;margin: 0rem 1rem;margin-bottom:1rem "><i class="fa fa-arrow-left"></i>&nbsp; Back</button>
+</div>
 <div class="chat-container">
     <div class="chat-conversations">
         <div id="filters">
@@ -55,7 +58,7 @@ require_once  __DIR__ . '/_nav.php';
 
         </div>
     </div>
-    <div class="chat-window"> </div>
+    <div class="chat-window hidden-md"> </div>
 </div>
 
 <script>
@@ -81,6 +84,22 @@ require_once  __DIR__ . '/_nav.php';
                 el.querySelector(".new-msg-indicator").remove()
             }, 500)
         })
+        document.querySelector('.chat-window').classList.remove('hidden-md')
+        document.querySelector('.chat-conversations').classList.add('hidden-md')
+        document.querySelector('#back-btn').style.display = 'inline-flex'
+
+    }
+
+    function closeChat() {
+        let active_el = document.querySelector('.chat-animal.active')
+        if (active_el) {
+            active_el.classList.remove("active")
+        }
+        document.querySelector('.chat-window').classList.add('hidden-md')
+        document.querySelector('.chat-conversations').classList.remove('hidden-md')       
+         document.querySelector('#back-btn').style.display = 'none'
+
+        document.querySelector('.chat-window').innerHTML = ''
     }
 
     async function markAllMessagesAsRead(consultation_id) {
@@ -127,3 +146,29 @@ require_once  __DIR__ . '/_nav.php';
 
     showConversationsList();
 </script>
+
+<style>
+    @media screen and (max-width:900px) {
+        .chat-container {
+            box-shadow: none;
+            margin: 0;
+            grid-template-columns: 1fr;
+        }
+
+        .chat-conversations {
+            border-right: none;
+        }
+
+        .content>:nth-child(2) {
+            padding: 0 !important;
+        }
+
+        .hidden-md {
+            display: none;
+        }
+
+        .chat-window {
+            height: calc(100vh - 10rem);
+        }
+    }
+</style>

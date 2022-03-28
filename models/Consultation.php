@@ -15,6 +15,8 @@ class Consultation extends BaseModel
         $query = "INSERT INTO `animal` (type, name, gender, dob) VALUES ('$animal_type','$name', '$gender', '$dob');";
         self::insert($query);
         $animalId = self::lastInsertId();
+        self::insert("INSERT INTO `user_pet` (`animal_id`, `user_id`) VALUES ('$animalId', $userId)");
+        
         return self::bookConsultationPet($doctorId, $userId, $type, $date, $time, $animalId);
     }
 

@@ -162,10 +162,9 @@ class OrganizationController extends Controller
         $_SESSION['sub_id'] = $sub_id;
 
         $amount = $_POST['amount']*100;        
-        $payment_link = Pay::subscribe("Subscription", $amount, "/Organization/subscription_success", "/Organization/cancel_subscription_payment", $sub_id);
+        $payment_link = Pay::subscribe($_POST['tier']." Subscription", $amount, "/Organization/subscription_success", "/Organization/cancel_subscription_payment", $sub_id);
 
-        $org = new OrganizationController;
-        $org->redirect($payment_link);
+        $this->redirect($payment_link);
     }
 
     public function unsubscribe()

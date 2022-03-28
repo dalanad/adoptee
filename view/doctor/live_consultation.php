@@ -6,7 +6,7 @@ if (!isset($_GET["view"])) {
 }
 ?>
 
-<div style="display: grid;grid-template-columns:auto minmax(250px,300px);grid-gap:1rem">
+<div class="live-consult-grid <?= $_GET["view"] ?>-view">
     <div style="display: flex;align-items: center; font-size: 1.2em;margin-top:-.5rem">
         <span style="flex: 1 1 0"></span>
         <div class='dropdown' style="padding: 0;">
@@ -27,8 +27,8 @@ if (!isset($_GET["view"])) {
         <?php } ?>
     </div>
 
-    <div>
-        <div style="box-shadow:var(--shadow);padding:1rem;aspect-ratio:1/1;margin-bottom:1rem;border-radius:.4rem;">
+    <div class="calender-bar">
+        <div class="consult-info empty">
             <div style="text-align:center;" id="consultation-blank">
                 <?php if ($_GET["view"] != "day") { ?>
                     <b>
@@ -101,6 +101,7 @@ if (!isset($_GET["view"])) {
             </div>
             ${ consultationActions(data) }
             `
+        document.querySelector('.consult-info').classList.remove('empty')
     }
 
     function showDayTimeline(date, consultations) {
@@ -111,7 +112,7 @@ if (!isset($_GET["view"])) {
             <div style="margin: 1rem; margin-bottom: 0.3rem;font-weight: 400;">
                 <i class='fal fa-poll-people'></i> &nbsp; APPOINTMENTS ON : ${date}
             </div>
-            <div style="max-height: calc(100vh - 13rem)">
+            <div class="day-item-list">
                 ${Object.values(consultations).map(single_consultation).join("")}
             </div>`
 
@@ -127,19 +128,23 @@ if (!isset($_GET["view"])) {
             end_time.setMinutes(end_time.getMinutes() + 30);
 
             return `<div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;padding:.5rem 1rem;border-bottom:1px solid var(--gray-3)" >
+                        <div class="day-timeline-item" >
+                            <div style="display:flex">
                             <img src="${animal.photo}"  style ="height:80px;border-radius:.3rem"> 
                             <div style="width:10rem;margin-left:.5rem"> 
                                 <b>${animal.name}</b>  <i class="far fa-${String(animal.type).toLowerCase()}"></i>
                                 <div style="margin: 0.2em 0;" class="owner-name">${user.name} </div>
                                 <small>${con.consultation_date} : ${con.consultation_time.substr(0, 5)} - ${end_time.toISOString().substr(11, 5)}</small>
                             </div>
-                            <span style="flex:1 1 0"></span>
-                               <div style="width:6rem;text-align:center">
-                                <span class="tag ${status_colors[status]}">${status}</span>
                             </div>
-                            <span style="flex:1 1 0"></span>
-                            ${ consultationActions(con) }
+                            <div class="day-timeline-actions">
+                                <span style="flex:1 1 0"></span>
+                                <div style="width:6rem;text-align:center">
+                                    <span class="tag ${status_colors[status]}">${status}</span>
+                                </div>
+                                <span style="flex:1 1 0"></span>
+                                ${ consultationActions(con) }
+                            </div>
                         </div>
                     </div>
                     `
@@ -249,5 +254,96 @@ if (!isset($_GET["view"])) {
 
     .day-view .timeline-column.active::before {
         background: none !important;
+    }
+
+    .live-consult-grid {
+        display: grid;
+        grid-template-columns: auto minmax(250px, 300px);
+        grid-gap: 1rem
+    }
+
+    .consult-info {
+        box-shadow: var(--shadow);
+        padding: 1rem;
+        aspect-ratio: 1/1;
+        margin-bottom: 1rem;
+        border-radius: .4rem;
+    }
+
+    .day-timeline-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: .5rem 1rem;
+        border-bottom: 1px solid var(--gray-3)
+    }
+
+    .day-timeline-actions {
+        display: flex;
+        flex: 1 1 0
+    }
+
+    .day-item-list {
+        max-height: calc(100vh - 13rem)
+    }
+
+    @media screen and (max-width:900px) {
+        .live-consult-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 1rem
+        }
+
+        .day-view .consult-info,
+        .consult-info.empty {
+            display: none;
+        }
+
+        .consult-info {
+            aspect-ratio: unset;
+        }
+
+        .calender-bar {
+            grid-row: 2;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+
+
+        .day-timeline-actions {
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .day-timeline-actions .tag {
+            margin-bottom: 1rem;
+            display: block;
+            line-height: 1.1em;
+        }
+
+        .day-item-list {
+            max-height: unset;
+        }
+    }
+
+    @media screen and (max-width:450px) {
+        .day-timeline-item {
+            flex-direction: column;
+            align-items: baseline;
+        }
+
+        .day-timeline-actions {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .day-timeline-actions .tag {
+            margin-bottom: 0rem;
+            margin-top: 0.5rem;
+        }
     }
 </style>

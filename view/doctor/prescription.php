@@ -112,6 +112,7 @@
                     input.addEventListener('focus', () => {
                         autocomplete.classList.add('show')
                         content.innerHTML = ''
+                        showFiltered()
                     })
 
                     input.addEventListener('focusout', () => {
@@ -125,8 +126,7 @@
                         input.value = v;
                     }
 
-                    input.addEventListener('keyup', () => {
-
+                    function showFiltered() {
                         let filterd = meds.filter(e => String(e.name).toLowerCase().includes(String(input.value).toLowerCase()))
                         if (filterd.length > 0) {
                             content.innerHTML = filterd.map(e => `<div class='item' onclick="setValue('${e.name}')">${e.name}</div>`).reduce((a, b) => a + b)
@@ -134,6 +134,10 @@
                         } else {
                             content.innerHTML = ''
                         }
+                    }
+
+                    input.addEventListener('keyup', () => {
+                        showFiltered()
                     })
                 </script>
 

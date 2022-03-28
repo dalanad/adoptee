@@ -126,10 +126,9 @@ class Organization extends BaseModel
 
     static function getOrgReviews($orgId)
     {
-        $query = "SELECT of.*,user.name as u_name
-        from org_feedback of,user 
-        where of.org_id=$orgId 
-        and of.user_id=user.user_id";
+        $query = "SELECT f.*,user.name as u_name from org_feedback f,user 
+            WHERE f.org_id=$orgId 
+            AND f.user_id=user.user_id";
         return self::select($query);
     }
 

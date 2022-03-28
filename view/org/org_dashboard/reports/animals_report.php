@@ -112,17 +112,20 @@
   <h2 style="margin:0">Adoption Animals Report</h2>
 
   <br>
-  <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
+  <form method="get" action="" id="f_form" style="display: flex;align-items:center;margin-bottom:1rem">
     <div style="margin-top: 0.8rem;">Listed : &nbsp;</div>
     <div class='field'>
       <label for='from'>From</label>
-      <input class="ctrl" type="date" max="" name="from" />
+      <input class="ctrl" type="date" max="" onchange="f_form.submit()" name="listed_from" value="<?= $_GET["listed_from"] ?>" />
     </div>
     &nbsp;
     &nbsp;
     <div class='field'>
       <label for='to'>To</label>
-      <input class="ctrl" type="date" max="" name="to" />
+      <input class="ctrl" type="date" max="" onchange="f_form.submit()" name="listed_to" value="<?= $_GET["listed_to"] ?>" />
+    </div>
+    <div style="margin-top: 0.8rem;">
+      <a href="/OrgManagement/animals_report" class="btn btn-link">Clear Filters</a>
     </div>
     <span style="flex: 1 1 0"></span>
     <button class="btn outline pink" onclick="window.print()"><i class="fa fa-print"></i>&nbsp; Print</button>
