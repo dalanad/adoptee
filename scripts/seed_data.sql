@@ -130,9 +130,9 @@ VALUES (NULL, '3',  'Vaccination Reminder', 'Your pet Tina needs to be vaccinate
 INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL'), ('6', '1', 'ADMIN');
 
 INSERT INTO `org_feedback` (`org_id`, `user_id`, `living_conditions`, `healthcare`, `rescue_response`, `adoptions`, `resource_allocation`, `comments`, `name`, `email`) 
-       VALUES ('1', '2', '3', '4', '3', '4', '3', 'Good Work Keep Up', '1', '1'),
+       VALUES ('1', '4', '3', '4', '3', '4', '3', 'Good Work Keep Up', '1', '1'),
        ('1', '3', '2', '4', '2', '3', '4', 'Fast Response to Rescue', '1', '1'),
-       ('1', '1', '3', '2', '1', '2', '1', 'Great', '1', '1');
+       ('1', '7', '3', '2', '1', '2', '1', 'Great', '1', '1');
 
 INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`, `photos`) VALUES 
 ('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/1a.jpg","/assets/data/dogs/1b.jpg","/assets/data/dogs/1c.jpg"]'),
@@ -179,7 +179,7 @@ VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599
 
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`,`accepted_date`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
 VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  '2021-08-25 09:15:20','2021-08-25 11:25:20', '0761231234', 'Anuradhapura', POINT(6.8929, 79.9187), 'RESCUED', '["/assets/data/dogs/10.jpg"]'),
-('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.',   '2021-08-28 19:55:20','2021-08-28 19:55:20', '0761231234', 'Anuradhapura', POINT(6.8999, 79.9167), 'PENDING', '["/assets/data/cats/8.jpg"]'),
+('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.',   '2022-03-23 19:55:20','2021-08-28 19:55:20', '0761231234', 'Anuradhapura', POINT(6.8999, 79.9167), 'PENDING', '["/assets/data/cats/8.jpg"]'),
 ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency',   '2021-12-29 08:14:20','2021-12-29 10:04:20', '0771234567', 'Anuradhapura', POINT(6.8969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]'),
 ('1', NULL, 'Dog', 'Injured Leg',   '2021-12-27 18:55:20','2021-12-27 19:55:20', '0762457654', '12/1, Jayathilake Road, Anuradhapura', POINT(6.8269, 79.9737), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]'),
 ('1', NULL, 'Cat', 'Severe skin rash',   current_timestamp(),NULL, '0775467215', '77/7, Silva Lane, Colombo 02', POINT(6.1969, 79.7137), 'PENDING', '["/assets/data/cats/10.jpg"]'),
@@ -387,5 +387,8 @@ VALUES('1','2015-10-04','2015-08-02','2015-08-15',NULL,'2021-10-01','2021-08-06'
 ('22','2016-01-03',NULL,'2016-02-06','2016-03-12','2022-01-11',NULL,'2022-02-17','2022-02-17','["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
 ('23','2016-01-03',NULL,'2016-02-06','2016-03-12','2022-01-11',NULL,'2022-02-17','2022-02-17','["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
 ('25','2016-01-03',NULL,'2016-02-06','2016-03-12','2022-01-11',NULL,'2022-02-17','2022-02-17','["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]');
+
+INSERT INTO `routine_updates`(`user_id`, `animal_id`, `type`, `description`, `photo`, `update_date`)
+VALUES ('3','4','Nutrition','Started giving vitamins and is more energetic', 'assets/data/dogs/4a.jpg', '2021-12-03');
 
 COMMIT;

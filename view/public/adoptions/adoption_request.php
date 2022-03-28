@@ -231,7 +231,7 @@
                     <div class="details"><?= (isset($pet['parvo_booster']) && $pet['parvo_booster'] != 0) ? $pet['parvo_booster'] : '-' ?></div>
                 </div>
                 <div class="popup">
-                    <div class="vax_name"><?= $pet['type'] == 'Dog' ? 'DHL' : 'Tricat' ?></div>
+                    <div class="vax_name"><?= $pet['type'] == 'Dog' ? 'DHL Booster' : 'Tricat Booster' ?></div>
                     <div class="details">
                         <?php if (isset($pet['dhl_booster']) && $pet['dhl_booster'] != 0) {
                             print_r($pet['dhl_booster']);

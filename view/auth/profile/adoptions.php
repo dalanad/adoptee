@@ -114,10 +114,10 @@
                         </div>
                         <table class="table update-table">
                             <tr>
-                                <th>Date</th>
-                                <th>Type</th>
-                                <th>Description</th>
-                                <th>Photo</th>
+                                <th style="width:7rem">Date</th>
+                                <th style="width:7rem">Type</th>
+                                <th style="width:15rem">Description</th>
+                                <th style="width:10rem">Photo</th>
                             </tr>
                             <?php foreach ($updates as $update) {
                                 if ($update['animal_id'] == $value['a_id']) { ?>
@@ -125,7 +125,7 @@
                                         <td><?= $update['update_date'] ?></td>
                                         <td><?= $update['type'] ?></td>
                                         <td><?= $update['description'] ?></td>
-                                        <td><img src="<?= $update['photo'] ?>" style="width:3rem;height:3rem;border-radius:4px;justify-content:center;"></td>
+                                        <td><img src="/<?= $update['photo'] ?>" style="width:6rem;height:6rem;border-radius:4px;justify-content:center;"></td>
                                     </tr>
                             <?php }
                             }
