@@ -248,7 +248,7 @@ create table rescue_updates (
     org_id int(10),
     heading varchar(100),
     description varchar(500) ,
-    photo varchar(100),
+    photos json,
     time_updated timestamp DEFAULT CURRENT_TIMESTAMP,
     primary key(report_id, org_id,time_updated)
 );

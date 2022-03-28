@@ -142,7 +142,7 @@
                         <?php } ?>
                     </div>
 
-                    <div style="padding-right: 0.5rem; width: 100px;"><a href="/OrgManagement/add_rescue_update" title="Add Update" class="btn btn-link" style="border-radius: 0.4rem; border: 0.1rem solid var(--primary);">Add Update</a></div>
+                    <div style="padding-right: 0.5rem; width: 100px;"><a href="/OrgManagement/add_rescue_update?report_id=<?=$org_rescue["report_id"]?>" title="Add Update" class="btn btn-link" style="border-radius: 0.4rem; border: 0.1rem solid var(--primary);">Add Update</a></div>
 
 
                 </div>
