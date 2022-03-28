@@ -25,12 +25,13 @@
     <a class="btn btn-faded black" href="/OrgManagement/org_rescues" style="margin: .5rem 0rem; "><i class="fa fa-chevron-left"></i>&nbsp; Back</a>
     <h2 style="margin:0">Add Rescue Update</h2>
 
-    <form action="/OrgManagement/add_rescue_update" method="post" enctype="multipart/form-data">
+    <form action="/OrgManagement/process_add_rescue_update" method="post" enctype="multipart/form-data">
         <div class="field">
             <label for='heading'>Heading</label>
             <textarea rows="6" class="ctrl field-font" name="heading" placeholder="Update Heading"></textarea>
             <span class="field-msg"> </span>
         </div>
+        <input type="hidden" name="report_id" value="<?= $_GET["report_id"] ?>" />
 
         <div class="field">
             <label for='description'>Description</label>
@@ -42,7 +43,7 @@
             <label>Upload Photo</label>
             <div class="ctrl-group field-font">
                 <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-                <input class="ctrl field-font" type="file" name="photos[]" multiple />
+                <input class="ctrl field-font" type="file" name="photos[]" required multiple />
             </div>
             <span class="field-msg"> </span>
         </div>

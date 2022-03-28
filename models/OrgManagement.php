@@ -196,6 +196,7 @@ class OrgManagement extends BaseModel
         routine_updates.animal_id, 
         routine_updates.user_id,
         routine_updates.type, 
+        routine_updates.photo, 
         routine_updates.description,
         routine_updates.update_date
         from routine_updates
@@ -209,12 +210,11 @@ class OrgManagement extends BaseModel
 
     static function accept_adoption_request($animal_id, $user_id)
     {
-
-        $query = "UPDATE `adoption_request` SET status = 'ADOPTED' WHERE animal_id='$animal_id' AND user_id = '$user_id';
-        INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES('$animal_id','$user_id');
-        UPDATE `animal_for_adoption` SET status = 'ADOPTED', date_adopted = curdate(), user_id = '$user_id' WHERE animal_id='$animal_id'";
-
-        return BaseModel::insert($query);
+        self::beginTransaction();
+        self::insert("UPDATE `adoption_request` SET status = 'ADOPTED' WHERE animal_id='$animal_id' AND user_id = '$user_id';");
+        self::insert("INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES('$animal_id','$user_id');");
+        self::insert("UPDATE `animal_for_adoption` SET status = 'ADOPTED', date_adopted = curdate(), user_id = '$user_id' WHERE animal_id='$animal_id'");
+        self::commit();
     }
 
     static function reject_adoption_request($animal_id)
@@ -263,11 +263,8 @@ class OrgManagement extends BaseModel
 
     static function add_rescue_update($report_id,$org_id, $heading, $description, $photo)
     {
-        $report_id = $_SESSION['report_id'];
-        $org_id = $_SESSION['org_id'];
-
-        $query = "INSERT INTO `rescue_updates` (`report_id`, `org_id`, `heading`, `description`, `photo`, `time_updated`)
-        VALUES ('$report_id','$org_id', '$heading', '$description', '$photo', curdate())";
+        $query = "INSERT INTO `rescue_updates` (`report_id`, `org_id`, `heading`, `description`, `photos`, `time_updated`)
+        VALUES ('$report_id','$org_id', '$heading', '$description', '$photo', current_timestamp())";
         return BaseModel::insert($query);
     }
 

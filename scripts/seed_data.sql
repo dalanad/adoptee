@@ -149,7 +149,7 @@ INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `s
 
 INSERT INTO `user_pet`(`animal_id`, `user_id`, `status`)
 VALUES ('10','4',"ACTIVE"), ('9', '3',"ACTIVE"), ('8', '2',"ACTIVE"), ('7', '3',"ACTIVE"), ('6', '2',"ACTIVE"), ('5', '4',"ACTIVE"), 
-       ('4', '3',"ACTIVE"), ('1', '4',"ACTIVE"), ('2', '2',"ACTIVE"),
+       ('4', '3',"ACTIVE"), 
 (31,	7,	'ACTIVE'),
 (32,	8,	'ACTIVE'),
 (33,	9,	'ACTIVE'),
@@ -237,8 +237,8 @@ VALUES ('1', '4', '2021-12-29 13:04:20');
 ('2022-03-30', '13:30:00', 7 , 1, 3 ,     'ACCEPTED',   'LIVE',       'cs_test_jgwMM0OTIuNjANjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  '7ewh-ve15-16uf'),
 ('2022-03-30', '14:00:00', 35, 1, 11,	'PENDING',	'LIVE',	'cs_test_TgyMc0ODcuNzYNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',	NULL,	'7ewh-ve15-16uf'),
 ('2022-03-30', '14:30:00', 6 , 1, 2 ,     'ACCEPTED',   'ADVISE',     'cs_test_DY1OkzODguNDkNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  NULL),
-('2022-03-31', '09:30:00', 2 , 1, 2 ,     'PENDING',  'LIVE',         'cs_test_jQzMMwNjguNTINjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  '7ewh-ve15-16uf'),
-('2022-03-31', '13:00:00', 1 , 1, 3 ,     'ACCEPTED',   'LIVE',       'cs_test_zY5Mc4MTIuNDgNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  '7ewh-ve15-16uf'),
+('2022-03-31', '09:30:00', 3 , 1, 2 ,     'PENDING',  'LIVE',         'cs_test_jQzMMwNjguNTINjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  '7ewh-ve15-16uf'),
+('2022-03-31', '13:00:00', 4 , 1, 3 ,     'ACCEPTED',   'LIVE',       'cs_test_zY5Mc4MTIuNDgNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  '7ewh-ve15-16uf'),
 ('2022-03-31', '13:30:00', 7 , 1, 3 ,     'ACCEPTED',  'ADVISE',      'cs_test_TgzNEzNjcuMjUNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  NULL)
 ;
 

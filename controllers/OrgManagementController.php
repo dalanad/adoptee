@@ -55,7 +55,7 @@ class OrgManagementController extends Controller{
         $data = [
             "active" => "adoption_requests",
             "adoption_requests"=>OrgManagement::findRequestsByOrgId($_SESSION['org_id']),
-            "adoption_updates"=>OrgManagement::findUpdates($_GET['animal_id'],$_GET['user_id'])
+            
     ];
         View::render("org/dashboard", $data);
     }
@@ -104,11 +104,13 @@ class OrgManagementController extends Controller{
     function add_rescue_update()
     {
         View::render("org/org_dashboard/add_rescue_update");
+    }
 
-        $photo =  image::multi("photo");
-        
-        OrgManagement::add_rescue_update($_SESSION['report_id'],$_SESSION['org_id'], $_POST['heading'],$_POST['description'], $photo);
-        
+    function process_add_rescue_update()
+    {
+        $photos=  image::multi("photos");
+        OrgManagement::add_rescue_update($_POST['report_id'], $_SESSION['org_id'], $_POST['heading'],$_POST['description'], $photos);
+        $this->redirect('/OrgManagement/org_rescues');
     }
 
     function org_donations()
