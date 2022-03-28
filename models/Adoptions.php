@@ -124,4 +124,16 @@ class Adoptions extends BaseModel
         VALUES($animal_id,$user,'ACTIVE',$dewormed)";
         self::insert($query);        
     }
+
+    static function editPet($name,$photo,$animal_id)
+    {
+        if($name != NULL){
+            $query = "UPDATE animal SET name = '$name' WHERE animal_id = $animal_id";
+            self::update($query);
+        }
+        if($photo != NULL) {
+            $query = "UPDATE animal SET photo = '$photo' WHERE animal_id = $animal_id";
+            self::update($query);
+        }        
+    }
 }

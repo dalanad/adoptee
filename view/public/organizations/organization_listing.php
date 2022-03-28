@@ -9,6 +9,7 @@
         cursor: pointer;
         display: inline-block;
         width: 13rem;
+        margin-right: 1rem;
     }
 
     .tier-card:hover {
@@ -34,6 +35,12 @@
         margin: 0.6rem;
     }
 
+    @media (max-width: 785px) {
+        .tier-card{
+            margin-bottom: 2rem;
+        }
+    }
+
     img {
         max-width: 11rem;
         max-height: 11rem;
@@ -51,7 +58,7 @@
     }
 </style>
 
-<div class="container" style="text-align:center;">
+<div class="container" style="text-align:center;margin-top:6rem;">
 
     <?php
     foreach ($orgs as $key => $value) { ?>

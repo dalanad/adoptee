@@ -85,10 +85,10 @@
                 <table>
                     <tr>
                         <td rowspan="2"><img src="../../../<?= $value['photo'] ?>" style="width:50px;height:50px;border-radius:50%;margin-left:0px;"></td>
-                        <td><?= $value["a_name"] ?></td>
+                        <td style="padding-left:0"><?= $value["a_name"] ?></td>
                     </tr>
                     <tr>
-                        <td><?= round($value["age"]) ?> Years</td>
+                        <td style="padding-left:0;font-size:0.9rem;text-align:center;"><?= round($value["age"]) ?> Years</td>
                     </tr>
                 </table>
             </td>

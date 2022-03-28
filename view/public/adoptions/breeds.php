@@ -17,7 +17,10 @@
     }
 
     form {
-        margin: 3rem;
+        /* margin: 3rem; */
+        text-align: center;
+        margin-bottom: 6rem;
+        margin-top: 4rem;
     }
 
     .preview {

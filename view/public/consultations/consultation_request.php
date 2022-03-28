@@ -194,7 +194,6 @@
                 <div style="display: flex; align-items: center;height: 2rem;">
                   <input id="male" class="ctrl-radio" type="radio" value="male" name="gender" <?php if ($_SESSION['gender'] == 'male') { ?>checked<?php } ?> />&nbsp &nbsp<label for="male">Male&nbsp; </label>
                   <input id="female" class="ctrl-radio" type="radio" value="female" name="gender" <?php if ($_SESSION['gender'] == 'female') { ?>checked<?php } ?> />&nbsp &nbsp<label for="female">Female&nbsp; </label>
-                  <input id="unkown" class="ctrl-radio" type="radio" value="unknown" name="gender" <?php if ($_SESSION['gender'] == 'unkown') { ?>checked<?php } ?> />&nbsp &nbsp<label for="unknown">Unknown&nbsp; </label>
                 </div>
               </div>
             </div>
@@ -206,12 +205,7 @@
 
                 <input name="animal_type" id="cat" type="radio" value="cat" <?php if ($_SESSION['animal_type'] == 'cat') { ?>checked<?php } ?>>
                 <label for="cat"><i class="far fa-cat"></i><br> Cat </label>
-
-                <input name="animal_type" id="bird" type="radio" value="bird" <?php if ($_SESSION['animal_type'] == 'bird') { ?>checked<?php } ?>>
-                <label for="bird"><i class="far fa-dove"></i><br> Bird</label>
-
-                <input name="animal_type" id="other" type="radio" value="other" <?php if ($_SESSION['animal_type'] == 'other') { ?>checked<?php } ?>>
-                <label for="other"><i class="far fa-paw"></i><br>Other </label>
+              
               </div>
             </div>
             <div style="display: grid;grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); grid-column-gap:1rem">

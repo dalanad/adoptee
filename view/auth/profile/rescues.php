@@ -1,8 +1,4 @@
 <style>
-    th {
-        width: 5rem;
-    }
-
     .model {
         display: none;
         position: fixed;
@@ -23,8 +19,8 @@
         padding: 20px;
         border: 1px solid #888;
         position: fixed;
-        top: 20%;
-        left: 31%;
+        top: 30%;
+        left: 35%;
         max-height: calc(100vh - 210px);
         overflow-y: auto;
     }
@@ -42,52 +38,61 @@
         text-decoration: none;
         cursor: pointer;
     }
+
+    .row {
+        display: flex;
+        margin-bottom: 2rem;
+    }
+
+    .column {
+        margin-right: 1rem;
+        flex: 50%;
+    }
 </style>
 
 <h3 style="margin-left:1rem;">My Rescues</h3>
-<div class="overflow-auto" style="height:450px"><?php //print_r($rescues) ?>
+<div class="overflow-auto" style="height:450px">
     <table class="table">
         <tr>
-            <th></th>
-            <th>TYPE</th>
-            <th>LOCATION</th> <!-- remove and put into model-->
+            <th style="width:3rem;"></th>
+            <th style="width:3rem;">TYPE</th>
+            <th>LOCATION</th>
             <th>REPORTED DATE</th>
-            <th>RESCUED DATE</th>
-            <th>STATUS</th>
-            <th>RESPONDED ORGANIZATION</th>
+            <th style="text-align:center;">STATUS</th>
+            <th style="width:1.5rem;"></th>
         </tr>
 
         <?php foreach ($rescues as $key => $value) { ?>
-            <tr style="font-size: 0.8rem;">
+            <tr>
                 <td>
                     <img src="<?= json_decode($value['photos'])[0] ?>" style="width: 40px; height: 40px; border-radius: 50%;">
-                </td>
                 </td>
                 <td><?= $value["type"] ?></td>
                 <td><?= $value["location"] ?></td>
                 <td><?= substr($value["time_reported"], 0, 10) ?></td>
-                <td><?= $value["status"] == "RESCUED" ? substr($value["rescued_date"],0,10) : "" ?></td>
-                <td><span class="tag <?= $value["status"] == "RESCUED" ? 'green' : 'orange' ?>"><?= $value["status"] ?> </span></td>
-                <td><?= $value["status"] == "RESCUED" ? ($value["o_name"]) : "" ?></td>
-                <!-- <td>
-                    <div class="btn btn-link" onclick="showModel('progressModel?= $value['animal_id'] ?>')" title="View"><i class="far fa-eye"></i></div>
-                    <div class="model" id="progressModel?= $value['animal_id'] ?>">
+                <td style="text-align:center;"><span class="tag <?= $value["status"] == "RESCUED" ? 'green' : 'orange' ?>"><?= $value["status"] ?> </span></td>
+                <td>
+                    <div class="btn btn-link" onclick="showModel('progressModel<?= $value['report_id'] ?>')" title="View"><i class="far fa-eye"></i></div>
+                    <div class="model" id="progressModel<?= $value['report_id'] ?>">
                         <div class="model-content">
-                            <span class="close" onclick="hideModel('progressModel?= $value['animal_id'] ?>')">&times;</span>
-                            <table class="table">
-                                <tr>
-                                    <th>DATE</th>
-                                    <th>DESCRIPTION</th>
-                                    <th>PHOTOS</th>
-                                </tr>
-                                
-                                <tr>
-                                    <td></td>
-                                </tr>
+                            <span class="close" onclick="hideModel('progressModel<?= $value['report_id'] ?>')">&times;</span>
+                            
+                            <div class="row" style="margin-top: 2rem;">
+                                <div class="column"><b>Rescued Date:</b></div>
+                                <div class="column"><?= $value["status"] == "RESCUED" ? substr($value["rescued_date"], 0, 10) : "" ?></div>
                             </div>
+                            <div class="row">
+                                <div class="column"><b>Responded Organization:</b></div>
+                                <div class="column"><?= $value["status"] == "RESCUED" ? ($value["o_name"]) : "" ?></div>
+                            </div>
+                            <div class="row">
+                                <div class="column"><b>Progress:</b></div>
+                                <div class="column"></div>
+                            </div>
+
                         </div>
                     </div>
-                </td> -->
+                </td>
             </tr>
         <?php } ?>
 
