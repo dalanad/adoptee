@@ -14,15 +14,14 @@ VALUES ('Animal Welfare Centre', '0114567891', 'No. 120', 'Circular Road', 'Dehi
 adoption days and events to raise awareness, free of charge', '/assets/images/org/about3.png', 4);
 
  
-INSERT INTO `org_content` (`org_id`, `heading`, `description`, `photos`)
-VALUES ('1', 'Clinic', 'Rescue and treatment program for street dogs has grown to become one of the most significant components of our work. We offer high standards of Veterinary care for homeless dogs at no charge, which is a much needed service in Sri Lanka considering the large numbers. As our work expanded, the numbers of rescue and treatment requests have also increased exponentially with a monthly estimate of over 1000 calls to the hotline.
-\r\n Each request is assessed by our team and addressed by our veterinarians either in-house, onsite or through hospitalization for more critical cases. Assessments are dependent on several factors. The most important being the consideration of both the physical and mental wellbeing, veterinary advise and the long term welfare of the dog.', '["/assets/images/org/clinic.jpg"]'),
-  ('1', 'Vaccination Programme','Mission Rabies in conjunction with local partner charity Dogstar Foundation ran a pilot vaccination campaign in January 2015 in Negombo, Sri Lanka to demonstrate the effectiveness of Mission Rabies’ working protocols and to establish the feasibility of transferring these to working outside of Sri Lanka.', '["/assets/images/org/KittenVaccination.jpg"]'),
-  ('2', 'Volunteer', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '["/assets/images/org/volunteer.jpg"]'),
-  ('2', 'Awareness Program', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '["/assets/images/org/awareness.jpg"]'),
-  ('3', 'Adoption Day', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '["/assets/images/org/adoption.jpg"]'),
- ('3', 'Feeding Strays', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.', '["/assets/images/org/StrayFeeding2.jpg"]');
- 
+INSERT INTO `org_content` ( `org_id`, `created_time`, `heading`, `description`, `photos`) VALUES
+(1,	'2022-03-27 16:42:55',	'Clinic',	'Rescue and treatment program for street dogs has grown to become one of the most significant components of our work. We offer high standards of Veterinary care for homeless dogs at no charge, which is a much needed service in Sri Lanka considering the large numbers. As our work expanded, the numbers of rescue and treatment requests have also increased exponentially with a monthly estimate of over 1000 calls to the hotline.\n\r\n Each request is assessed by our team and addressed by our veterinarians either in-house, onsite or through hospitalization for more critical cases. Assessments are dependent on several factors. The most important being the consideration of both the physical and mental wellbeing, veterinary advise and the long term welfare of the dog.',	'[\"/assets/images/org/clinic.jpg\"]'),
+(1,	'2022-03-28 16:42:55',	'Vaccination Programme',	'Mission Rabies in conjunction with local partner charity Dogstar Foundation ran a pilot vaccination campaign in January 2015 in Negombo, Sri Lanka to demonstrate the effectiveness of Mission Rabies’ working protocols and to establish the feasibility of transferring these to working outside of Sri Lanka.',	'[\"/assets/images/org/KittenVaccination.jpg\"]'),
+(2,	'2022-03-26 16:42:55',	'Volunteer',	'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.',	'[\"/assets/images/org/volunteer.jpg\"]'),
+(2,	'2022-03-28 16:42:55',	'Awareness Program',	'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.',	'[\"/assets/images/org/awareness.jpg\"]'),
+(3,	'2022-03-24 16:42:55',	'Adoption Day',	'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.',	'[\"/assets/images/org/adoption.jpg\"]'),
+(3,	'2022-03-28 16:42:55',	'Feeding Strays',	'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus justo eget libero sodales, ac hendrerit est scelerisque. Ut cursus ante bibendum ante  molestie, a varius nisl sodales.',	'[\"/assets/images/org/StrayFeeding2.jpg\"]');
+
 INSERT INTO `sponsorship_tier` (`org_id`, `name`, `amount`, `recurring_days`, `description`)
 VALUES ('1','Gold',5000.00,'30','Funds are allocated for veterinary needs'),
 ('1','Silver',2500.00,'30','Funds are allocated for veterinary needs'),
@@ -285,8 +284,8 @@ VALUES ('1','Gold','3',5000,'2022-03-01',NULL,'ACTIVE');
 
 INSERT INTO `payment` (`txn_id`, `amount`, `txn_time`, `user`, `status`, `type`) VALUES
 ('cs_test_a1q3VMzZw4DndD3hXwkmNXiUkJu0dBqW85FQAZTSPAjTM7JGujFNmr8YsM', 2000, '2022-03-24 05:54:55', 3, 'PAID','PAYMENT'),
-('cs_test_a1q3VMzZw4DndD3hXwkmNXiUkJu0dBqW85FQAZTSPAjTM7JGujFNmr8Ys3', 4000, '2022-02-14 05:54:55', 3, 'PAID','PAYMENT'),
-('cs_test_Nzg5NTQzMzMxMTUuOTIwMDEENzc5ODU4NzE2ODAuODMyMzQEODMwNTE1Mz', 1200, '2021-03-19 21:26:38', 3, 'PAID','PAYMENT'),
+('cs_test_a1q3VMzZw4DndD3hXwkmNXiUkJu0dBqW85FQAZTSPAjTM7JGujFNmr8Ys3', 4000, '2022-02-14 05:54:55', 9, 'PAID','PAYMENT'),
+('cs_test_Nzg5NTQzMzMxMTUuOTIwMDEENzc5ODU4NzE2ODAuODMyMzQEODMwNTE1Mz', 1200, '2021-03-19 21:26:38', 8, 'PAID','PAYMENT'),
 -- Consutation Payments
 
 ('cs_test_NjIzMzcxNzg1ODIuMTY4MweEODI0NDc2NTUxMzEuMDMxMzQEMzIxMjE4MD', 4000, '2022-03-22 11:30:10', 14, 'PAID','PAYMENT'),
@@ -334,7 +333,7 @@ INSERT INTO `payment` (`txn_id`, `amount`, `txn_time`, `user`, `status`, `type`)
 ('cs_test_TM1Ng5ODcuMzENjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj', 2000, '2022-03-24 05:54:55', 2, 'PAID','PAYMENT');
 
 INSERT INTO `donation` (`org_id`,`txn_id`,`name`,comments,`subscription_id`) VALUES 
-(1,'cs_test_Nzg5NTQzMzMxMTUuOTIwMDEENzc5ODU4NzE2ODAuODMyMzQEODMwNTE1Mz','Hiruni Dahanayake',NULL,NULL),
+(1,'cs_test_Nzg5NTQzMzMxMTUuOTIwMDEENzc5ODU4NzE2ODAuODMyMzQEODMwNTE1Mz','Hiruni Dahanayake', 'You are doing an amazing job ',NULL),
 (1,'cs_test_a1q3VMzZw4DndD3hXwkmNXiUkJu0dBqW85FQAZTSPAjTM7JGujFNmr8Ys3','Dalana','Good Work Keep Going',NULL),
 (1,'cs_test_a1q3VMzZw4DndD3hXwkmNXiUkJu0dBqW85FQAZTSPAjTM7JGujFNmr8YsM','Dalana','Use for Animal Foods',1);
 
@@ -390,5 +389,8 @@ VALUES('1','2015-10-04','2015-08-02','2015-08-15',NULL,'2021-10-01','2021-08-06'
 
 INSERT INTO `routine_updates`(`user_id`, `animal_id`, `type`, `description`, `photo`, `update_date`)
 VALUES ('3','4','Nutrition','Started giving vitamins and is more energetic', 'assets/data/dogs/4a.jpg', '2021-12-03');
+
+INSERT INTO `rescue_updates`(`report_id`,`org_id`,`heading`,`description`,`photo`)
+VALUES ('1','1','Treatment successful','The injured leg was treated and is now being given antibiotics. Next visit to the clinic is scheduled for 2021-11-25','assets/images/dogs/wounded1.jpg');
 
 COMMIT;

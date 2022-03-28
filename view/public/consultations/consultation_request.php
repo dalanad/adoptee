@@ -205,7 +205,7 @@
 
                 <input name="animal_type" id="cat" type="radio" value="cat" <?php if ($_SESSION['animal_type'] == 'cat') { ?>checked<?php } ?>>
                 <label for="cat"><i class="far fa-cat"></i><br> Cat </label>
-              
+
               </div>
             </div>
             <div style="display: grid;grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); grid-column-gap:1rem">
@@ -230,41 +230,53 @@
 
       <div style="text-align: center;">
         <h3>Confirmation & Payment</h3>
-        <table class="table">
+        <style>
+          .confirmation-table {
+            border-collapse: collapse;
+            border-color: var(--muted);
+            max-width: 450px;
+            margin: 0 auto;
+          }
+
+          .confirmation-table th {
+            padding: .5rem;
+          }
+        </style>
+        <table class="table confirmation-table" border="1">
           <tr>
-            <td>Doctor:</td>
+            <th>Doctor</th>
             <td><?= $doc[0]['name'] ?></td>
           </tr>
           <tr>
-            <td>Consultation type:</td>
-            <td><?= $_SESSION['consultation_type'] ?></td>
+            <th>Consultation Type</th>
+            <td><?= strtoupper($_SESSION['consultation_type']) ?></td>
           </tr>
           <tr>
-            <td>Date:</td>
+            <th>Date</th>
             <td><?= $_SESSION['consultation_type'] == 'live' ? $_SESSION['date'] : "-" ?></td>
           </tr>
           <tr>
-            <td>Time:</td>
-            <td><?= $_SESSION['consultation_type'] == 'live' ? $_SESSION['time'] : "-" ?></td>
+            <th>Time</th>
+            <td><?= $_SESSION['consultation_type'] == 'live' ? date('h:i A', strtotime(substr($_SESSION['time'], 0, 5)))  : "-" ?></td>
           </tr>
           <tr>
-            <td>Pet's name:</td>
+            <th>Pet's name</th>
             <td><?= $_SESSION['pet_name'] ?></td>
           </tr>
           <tr>
-            <td>Gender:</td>
-            <td><?= $_SESSION['gender'] ?></td>
+            <th>Gender:</th>
+            <td><?= strtoupper($_SESSION['gender']) ?></td>
           </tr>
           <tr>
-            <td>Animal type:</td>
-            <td><?= $_SESSION['animal_type'] ?></td>
+            <th>Animal type</th>
+            <td><?= strtoupper($_SESSION['animal_type']) ?></td>
           </tr>
           <tr>
-            <td>Date of Birth:</td>
+            <th>Date of Birth</th>
             <td><?= $_SESSION['dob'] ?></td>
           </tr>
           <tr>
-            <td>Doctor's Fee:</td>
+            <th>Doctor's Fee</th>
             <td>Rs. <?= $_SESSION['consultation_type'] == "live" ? $doc[0]["live_charge"] : $doc[0]["advise_charge"] ?>.00</td>
           </tr>
         </table>
