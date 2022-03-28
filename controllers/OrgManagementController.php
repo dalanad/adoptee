@@ -17,10 +17,14 @@ class OrgManagementController extends Controller{
 
     function org_adoption_listing()
     {
+        $filter = [
+            "status" => $_GET["status"] ?? "ANY"
+        ];
+
         $data = [
             "active" => "org_adoption_listing",
-
-            "animals"=>OrgManagement::findAnimalsByOrgId(1)
+            "filter" => $filter,
+            "animals"=>OrgManagement::findAnimalsByOrgId($filter)
     ];
         View::render("org/dashboard", $data);
     }
