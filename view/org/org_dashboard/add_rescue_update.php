@@ -1,4 +1,4 @@
-<?php require __DIR__ . "/../../_layout/header.php"; ?>
+<?php require __DIR__ . "/../../_layout/layout.php"; ?>
 
 <style>
     .ctrl2 {
@@ -22,11 +22,16 @@
 
 
 <div class='container px2'>
-    <div>
-        <a href="/OrgManagement/org_rescues" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
-    </div>
-    <h3 class='mt1 txt-clr'>Add Update</h3>
-    <form action="/OrgManagement/add_rescue_update" method="post">
+    <a class="btn btn-faded black" href="/OrgManagement/org_rescues" style="margin: .5rem 0rem; "><i class="fa fa-chevron-left"></i>&nbsp; Back</a>
+    <h2 style="margin:0">Add Rescue Update</h2>
+
+    <form action="/OrgManagement/add_rescue_update" method="post" enctype="multipart/form-data">
+        <div class="field">
+            <label for='heading'>Heading</label>
+            <textarea rows="6" class="ctrl field-font" name="heading" placeholder="Update Heading"></textarea>
+            <span class="field-msg"> </span>
+        </div>
+
         <div class="field">
             <label for='description'>Description</label>
             <textarea rows="6" class="ctrl field-font" name="description" placeholder="Update Description"></textarea>

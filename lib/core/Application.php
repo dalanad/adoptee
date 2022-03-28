@@ -67,7 +67,7 @@ class Application
     {
         if (error_reporting() !== 0) {
             echo  $message;
-            // throw new \ErrorException($message, 0, $level, $file, $line);
+            /* throw new \ErrorException($message, 0, $level, $file, $line); */
         }
     }
 }

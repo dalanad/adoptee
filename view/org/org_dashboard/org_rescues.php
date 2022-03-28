@@ -97,7 +97,7 @@
             <div style="width: 220px;">DESCRIPTION</div>
             <div style="width: 220px;">LOCATION</div>
             <div style="width: 120px;">INFO</div>
-            <div style="width: 120px;">MARK AS COMPLETE</div>
+            <div style="width: 120px;">ACTION</div>
             <div style="padding-right: 0.5rem; width: 100px;"></div>
         </div>
         <div class="overflow-auto" style="height:525px">

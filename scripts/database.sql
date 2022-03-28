@@ -243,6 +243,17 @@ create table report_rescue(
     photos JSON not null    
 );
 
+create table rescue_updates (
+    report_id int(10),
+    org_id int(10),
+    heading varchar(100),
+    description varchar(500) ,
+    photo varchar(100),
+    time_updated timestamp DEFAULT CURRENT_TIMESTAMP,
+    primary key(report_id, org_id,time_updated)
+);
+
+
 create table org_content (
     item_id int(10) AUTO_INCREMENT primary key,
     org_id int(10),
@@ -273,7 +284,7 @@ create table adoption_request (
     user_id int(10),
     org_id int(10),
     request_date date,
-    status enum('PENDING','ACCEPTED','ADOPTED','REJECTED') not null default 'PENDING',
+    status enum('PENDING','ADOPTED','REJECTED') not null default 'PENDING',
     has_pets boolean,
     petsafety varchar(100) ,
     children boolean,
@@ -333,6 +344,10 @@ add foreign key(user_id) references user(user_id);
 alter table routine_updates
 add foreign key(user_id) references user(user_id),
 add foreign key(animal_id) references animal(animal_id);
+
+alter table rescue_updates
+add foreign key(report_id) references report_rescue(report_id),
+add foreign key(org_id) references organization(org_id);
 
 alter table animal_for_adoption
 add foreign key(org_id) references organization(org_id),

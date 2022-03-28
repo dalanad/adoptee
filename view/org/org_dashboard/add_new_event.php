@@ -1,4 +1,4 @@
-<?php require __DIR__ . "/../../_layout/header.php"; ?>
+<?php require __DIR__ . "/../../_layout/layout.php"; ?>
 
 <style>
     .ctrl2 {
@@ -22,34 +22,33 @@
 
 
 <div class='container px2'>
-    <div>
-        <a href="/OrgManagement/org_news_events" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
-    </div>
-    <h3 class='mt1 txt-clr'>Add New Event</h3>
+    <a class="btn btn-faded black" href="/OrgManagement/org_news_events" style="margin: .5rem 0rem; "><i class="fa fa-chevron-left"></i>&nbsp; Back</a>
+    <h2 style="margin:0">Add New Event</h2>
+
     <form action="/OrgManagement/add_new_event" method="post">
         <div class="field">
             <label for='name'>Event Name</label>
-            <input class="ctrl field-font" type="text" name="heading" required/>
+            <input class="ctrl field-font" type="text" name="heading" required />
         </div>
         <div class="field">
             <div>
-            <label for='description'>Description</label>
-            <textarea rows="6" class="ctrl field-font" name="description" required></textarea>
+                <label for='description'>Description</label>
+                <textarea rows="6" class="ctrl field-font" name="description" required></textarea>
             </div>
             <div>
-            <span class="field-msg">Update Description</span>
+                <span class="field-msg">Update Description</span>
             </div>
         </div>
 
         <div class="field ">
-      <label>Upload Photo</label>
-      <div class="ctrl-group">
-        <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-        <input type="file" name="photos[]" class="ctrl" multiple accept="image/*" required>
-      </div>
-      <span class="field-msg">Upload a photo of the event</span>
-    </div>
-    <br>
+            <label>Upload Photo</label>
+            <div class="ctrl-group">
+                <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
+                <input type="file" name="photos[]" class="ctrl" multiple accept="image/*" required>
+            </div>
+            <span class="field-msg">Upload a photo of the event</span>
+        </div>
+        <br>
         <br>
 
         <button class='btn mr2' type='reset'>Clear</button>

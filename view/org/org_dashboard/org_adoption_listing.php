@@ -378,10 +378,31 @@
                                             <div class="thumbnails">
                                                 <div>
                                                     <div class="thumbnail" style="background-image: url(<?= $animal['avatar_photo'] ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                                                    <!--  avatar_photo edit -->
+                                                    <button onclick="showModel('popupModal-edit-avatar<?= $animal["animal_id"] ?>')" class="btn btn-link btn-icon"><i class="fas fa-pen"></i></button>
+                                                    <div id="popupModal-edit-avatar<?= $animal["animal_id"] ?>" class="modal">
+                                                        <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 50%">
+                                                            <span class="close" onclick="hideModel('popupModal-edit-avatar<?= $animal["animal_id"] ?>')">&times;</span>
+                                                            <h3 style="text-align: center;">Are you sure you want to delete avatar photo?</h3>
+                                                            <a href="/OrgManagement/edit_avatar?animal_id=<?= $animal["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                                            <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-edit-avatar<?= $animal["animal_id"] ?>')">Cancel</a>
+                                                        </div>
+                                                    </div>
                                                     <?php
                                                     $photos = json_decode($animal['adoptee_photo']);
                                                     foreach ($photos as $photo) { ?>
                                                         <div class="thumbnail" style="background-image: url(<?= $photo ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                                                        <!--  other photos delete -->
+                                                        <button onclick="showModel('popupModal-delete-photo<?= $animal["animal_id"] ?>')" class="btn btn-link btn-icon red"><i class="fas fa-trash-alt"></i></button>
+                                                        <div id="popupModal-delete-photo<?= $animal["animal_id"] ?>" class="modal">
+                                                            <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 50%">
+                                                                <span class="close" onclick="hideModel('popupModal-delete-photo<?= $animal["animal_id"] ?>')">&times;</span>
+                                                                <h3 style="text-align: center;">Are you sure you want to photo?</h3>
+                                                                <a href="/OrgManagement/delete_photo?animal_id=<?= $animal["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                                                <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-delete-photo<?= $animal["animal_id"] ?>')">Cancel</a>
+                                                            </div>
+                                                        </div>
+
                                                     <?php } ?>
                                                 </div>
 
