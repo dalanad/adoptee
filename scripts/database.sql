@@ -109,7 +109,7 @@ create table rescued_animal (
 create table user_pet (
     animal_id int(10) ,
     user_id int(10),
-    status enum("ACTIVE","REMOVED"),
+    status enum("ACTIVE","REMOVED") not null default "ACTIVE",
     dewormed boolean,
     primary key (animal_id),
     unique (animal_id, user_id)

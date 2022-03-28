@@ -26,28 +26,26 @@
         display: none;
         position: fixed;
         z-index: 1;
-        padding-top: 100px;
         left: 0;
         top: 0;
         width: 100%;
         height: 100%;
         background-color: rgb(0, 0, 0);
         background-color: rgba(0, 0, 0, 0.4);
+        align-items: center;
+        justify-content: center;
     }
 
     .modal-content {
         background-color: #fefefe;
         box-shadow: var(--shadow);
         border-radius: 0.5rem;
-        /* margin: auto; */
         padding: 20px;
         border: 1px solid #888;
-        /* width: 50%; */
-        position: fixed;
-        top: 20%;
-        left: 31%;
         max-height: calc(100vh - 210px);
         overflow-y: auto;
+        margin-bottom: 20rem;
+        width: 50%;
     }
 
     .close {
@@ -69,11 +67,11 @@
     } */
 </style>
 
-<h3 style="margin-left:1rem;">My Adoptions</h3>
+<h3 style="margin:0rem;">My Adoptions</h3>
 <div class="overflow-auto" style="height:450px">
     <table class="table">
         <tr>
-            <th>PET</th>
+            <th style="padding-left:0">PET</th>
             <th>ADOPTED FROM</th>
             <th>DATE ADOPTED</th>
             <th></th>
@@ -81,16 +79,17 @@
 
         <?php foreach ($adoptions as $key => $value) { ?>
         <tr style="font-size: 1rem;">
-            <td>
-                <table>
-                    <tr>
-                        <td rowspan="2"><img src="../../../<?= $value['photo'] ?>" style="width:50px;height:50px;border-radius:50%;margin-left:0px;"></td>
-                        <td style="padding-left:0"><?= $value["a_name"] ?></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left:0;font-size:0.9rem;text-align:center;"><?= round($value["age"]) ?> Years</td>
-                    </tr>
-                </table>
+            <td style="padding-left:0">
+                <div style="display: flex;align-items:center">
+                    <div>
+                        <div><img src="../../../<?= $value['photo'] ?>" style="width:50px;height:50px;border-radius:50%;margin-left:0px;"></div>
+                    </div>
+                    <div style="margin-left: 1rem;">
+                        <div ><b><?= $value["a_name"] ?></b></div>
+                        <div style="font-size:0.9rem;;"> <?= $value["type"] ?> | <?= $value["gender"] ?></div>
+                        <div style="font-size:0.9rem;;"><?= round($value["age"]) ?> Years </div>
+                    </div>
+                </div>
             </td>
             <td><?= $value["o_name"] ?></td>
             <td><?= $value["date_adopted"] ?></td>
@@ -105,10 +104,14 @@
             </td>
             <td>
                 <!-- Past updates -->
-                <span onclick="showModel('pastUpdates<?= $value['a_id'] ?>')" class="btn btn-link pink">Past Updates</span>
+                <span onclick="showModel('pastUpdates<?= $value['a_id'] ?>')" class="btn btn-link">View Updates</span>
                 <div id="pastUpdates<?= $value['a_id'] ?>" class="modal">
                     <div class="modal-content">
-                        <span class="close" onclick="hideModel('pastUpdates<?= $value['a_id'] ?>')">&times;</span>
+                        <div>
+                            Updates for <b><?= $value["a_name"] ?></b> 
+                            <small> ( <?= strtoupper($value["type"]) ?> | <?= $value["gender"] ?> | <?= round($value["age"]) ?> Years ) </small>
+                            <span  style="float:right" class="close" onclick="hideModel('pastUpdates<?= $value['a_id'] ?>')">&times;</span>
+                        </div>
                         <table class="table update-table">
                             <tr>
                                 <th>Date</th>
@@ -169,7 +172,7 @@
 <script>
     function showModel(id) {
         document.getElementById(id).classList.add("shown")
-        document.getElementById(id).style.display = "block";
+        document.getElementById(id).style.display = "flex";
         document.getElementById(id).onclick = function(event) {
             if (event.target.classList.contains('modal') && !event.target.classList.contains('modal-content')) {
                 let model = document.querySelector('.modal.shown');

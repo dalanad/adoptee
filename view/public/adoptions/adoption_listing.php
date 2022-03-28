@@ -96,7 +96,9 @@
 </style>
 
 <form class="container" style="padding:1rem 2rem;" name="_form" action="" method="get">
-    <h2> Pet Adoption</h2>
+    <h2> Pet Adoption
+        <a class="btn btn-link btn-faded primary" style="padding: 0.5rem; float:right;" href="Adoptions/viewBreeds">Breeds Information</a>
+    </h2>
     <div class="flex justify-between" style="width:100%">
         <button class="btn btn-link more-btn" onclick="//show_filters">
             <i class="fas fa-filter"></i>Filters
@@ -182,7 +184,7 @@
         </div>
 
         <div style="flex: 1 1 0;">
-            <div style="margin:0 1rem;align-items:center" class="filters">
+            <div style="margin:0 1rem;align-items:center;display:flex" class="filters">
                 <!--display: flex;-->
                 <!--move out avail pets msg -->
                 <!--sorting filters-->
@@ -201,7 +203,6 @@
                     <option value="asc" <?= $filter['order'] == 'asc' ? "selected" : "" ?>>ASC</option>
                 </select>
 
-                <a class="btn btn-link btn-faded primary" style="padding: 0.5rem; float:right;" href="Adoptions/viewBreeds">View Breeds</a>
             </div>
 
             <div class="adoption-grid">
@@ -210,7 +211,7 @@
                     <a class="adoption-card" id=<?= $animal['type'] ?> onclick="location.href='/AdoptionRequest/view?animal_id=<?= $animal['animal_id'] ?>&org_id=<?= $animal['org_id'] ?>'">
                         <div class="adoption-card-image" style="background-image: url('<?= $animal['photo'] ?>');"></div>
                         <div class="adoption-card-details">
-                            <div class="adoption-card-action" <?= $animal['status']=='ADOPTED'?'style="background-color:deeppink"':''?> ><?= $animal['status']=='ADOPTED'?'ADOPTED':'ADOPT'?></div>
+                            <div class="adoption-card-action" <?= $animal['status'] == 'ADOPTED' ? 'style="background-color:deeppink"' : '' ?>><?= $animal['status'] == 'ADOPTED' ? 'ADOPTED' : 'ADOPT' ?></div>
                             <div style="display:flex; padding:.5rem 1rem;align-items: center;">
                                 <div style="flex:1 1 0">
                                     <div style="font-weight: 500;"> <?= $animal["name"] ?></div>
