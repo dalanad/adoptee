@@ -1,5 +1,5 @@
 <style>
-.modal {
+    .modal {
         display: none;
         position: fixed;
         z-index: 1;
@@ -42,6 +42,9 @@
 
     }
 
+    .mouse-over-div {
+        border: 1px solid var(--gray-3);
+    }
 
     .close {
         color: #aaaaaa;
@@ -69,7 +72,7 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
-        border: 3px solid var(--gray-3);
+        border: 1px solid var(--gray-3);
         margin-bottom: 2rem;
         object-fit: cover;
         width: 380px;
@@ -78,8 +81,6 @@
     }
 
     .div-size {
-        width: 1150px;
-        height: 400px;
         min-height: 3rem;
         margin-bottom: 1rem;
     }
@@ -121,39 +122,38 @@
 </style>
 
 
-<div style="padding-top: 0.5rem;">
-    <div style="height: 555px; padding-top: 2rem;">
+<div>
+    <div>
 
         <!-- Filters - Start -->
         <div style="padding-left: 1rem;">
-            <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
+            <form method="get" action="" id="_form" style="display: flex;align-items:center;margin-bottom:1rem">
                 <div>
-                    <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
+                    <input style="width: 10em;margin-right:.5rem" value="<?=$filter['search']?>" name="search" class="ctrl" type="search" >
                     <button class="btn outline button-hover">Search</button>
                 </div> &nbsp; | &nbsp;
                 <div style="white-space: nowrap;">
                     <b>Sort by :</b> &nbsp;
-                    <select class="ctrl field-font" style="width: 65%;" required>
-                        <option selected='true' disabled='disabled'>- Select -</option>
-                        <option value='name'>Event Name</option>
-                        <option value='date'>Date Published</option>
+                    <select class="ctrl field-font" style="width: 65%;" name="sort" onchange="_form.submit()" required>
+                        <option <?=$filter["sort"] == 'heading' ? 'selected' : '' ?> value='heading'>Event Name</option>
+                        <option <?=$filter["sort"] == 'created_time' ? 'selected' : '' ?> value='created_time'>Date Published</option>
                     </select>
                 </div> &nbsp;
                 <div style="white-space: nowrap;">
-                    <input class="ctrl-radio" type="radio" onchange="" name="order" value="asc" /> Asc
-                    <input class="ctrl-radio" type="radio" onchange="" name="order" value="desc" /> Desc
+                    <input class="ctrl-radio" type="radio" <?=$filter["order"] == 'asc' ? 'checked' : '' ?>  onchange="_form.submit()"  name="order" value="asc" /> Asc
+                    <input class="ctrl-radio" type="radio" <?=$filter["order"] == 'desc' ? 'checked' : '' ?>  onchange="_form.submit()"  name="order" value="desc" /> Desc
                 </div>
             </form>
         </div>
         <!-- Filters - End -->
-        <div class="overflow-auto" style="height: 480px;">
+        <div class="overflow-auto" style="height: calc(100vh - 200px)">
             <table class="table">
                 <?php foreach ($org_news_events as $org_news_event) { ?>
                     <tr>
                         <td>
                             <div class="" style="position: relative; justify-items:center; align-items:center; display:flex;">
                                 <div class="mouse-over-div div-size" style="left: 0px;">
-                                    <h2 class="center"><?= $org_news_event["heading"] ?></h2>
+                                    <h2 class="center" style="margin: 0;"><?= $org_news_event["heading"] ?></h2>
                                     <table>
                                         <tr>
                                             <td>
@@ -230,7 +230,7 @@
     </div>
 
 </div>
-<div style="margin-left: 1200px; padding-bottom: 0px"><a href="/OrgManagement/add_new_event" class="btn right outline button-hover" style="width: 60px; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Event"><i class="fas fa-plus"></i></a></div>
+<div style="position:fixed;right:20px;bottom:20px;  padding-bottom: 0px"><a href="/OrgManagement/add_new_event" class="btn right outline button-hover" style="width: 60px; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Event"><i class="fas fa-plus"></i></a></div>
 
 <script>
     function showModel(id) {

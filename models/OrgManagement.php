@@ -275,11 +275,21 @@ class OrgManagement extends BaseModel
         return BaseModel::insert($query);
     }
 
-    static function findOrgContentByOrgId()
+    static function findOrgContentByOrgId($filter)
     {
         $org_id = $_SESSION['org_id'];
+        $sort_column = $filter["sort"];
+        $sort_direction = $filter["order"];
 
-        $query = "SELECT * from org_content WHERE org_id = '$org_id'";
+        $query = "SELECT * from org_content WHERE org_id = '$org_id' ";
+
+        if(isset($filter["search"])){
+            $search = $filter["search"];
+            $query = $query . "AND (description like '%$search%' OR heading like '%$search%') ";
+        }
+
+        $query = $query . (isset($filter) ? (" ORDER BY $sort_column $sort_direction") : '' );
+
         return BaseModel::select($query);
     }
 
