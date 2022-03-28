@@ -96,6 +96,7 @@ class ProfileController extends Controller
         $petdata = $user->getUserPets($_SESSION['user']['user_id']);
         for ($i = 0; $i < sizeof($petdata); $i++) {
             $petdata[$i]["consultdata"] = Consultation::getPetConsultation($petdata[$i]['animal_id']);
+            $petdata[$i]["vaccinedata"] = User::getPetVaccines($petdata[$i]['animal_id']);
         }
         $data = [
             "active" => "my_pets",
