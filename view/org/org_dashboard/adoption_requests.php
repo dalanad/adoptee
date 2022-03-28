@@ -48,17 +48,17 @@
 
         <!-- Filters - Start -->
         <div style="padding-left: 1rem;">
-            <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
+            <form method="get" name="_form" style="display: flex;align-items:center;margin-bottom:1rem">
                 <div>
                     <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
                     <button class="btn outline button-hover">Search</button>
                 </div> &nbsp; | &nbsp;
                 <div style="white-space: nowrap;">
                     <b>View :</b> &nbsp;
-                    <input class="ctrl-radio" type="radio" onchange="" name="status" value="Adopted" /> Adopted
-                    <input class="ctrl-radio" type="radio" onchange="" name="status" value="Pending" /> Pending
-                    <input class="ctrl-radio" type="radio" onchange="" name="status" value="Pending" /> Rejected
-                    <input class="ctrl-radio" type="radio" onchange="" name="status" value="Any" /> Any
+                    <input class="ctrl-radio" type="radio" name="status" value="ADOPTED" onchange='_form.submit()' <?= $filter['status'] == "ADOPTED" ? "checked" : "" ?>/> Adopted
+                    <input class="ctrl-radio" type="radio" name="status" value="PENDING" onchange='_form.submit()' <?= $filter['status'] == "PENDING" ? "checked" : "" ?>/> Pending
+                    <input class="ctrl-radio" type="radio" name="status" value="REJECTED" onchange='_form.submit()' <?= $filter['status'] == "REJECTED" ? "checked" : "" ?>/> Rejected
+                    <input class="ctrl-radio" type="radio" name="status" value="ANY" onchange='_form.submit()' <?= $filter['status'] == "ANY" ? "checked" : "" ?>/> Any
                 </div> &nbsp; | &nbsp;
                 <div style="white-space: nowrap;">
                     <b>Sort by :</b> &nbsp;

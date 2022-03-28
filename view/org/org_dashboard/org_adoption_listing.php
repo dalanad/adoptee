@@ -163,17 +163,17 @@
             </div> &nbsp; | &nbsp;
             <div style="white-space: nowrap;">
                 <b>Sort by :</b> &nbsp;
-                <select class="ctrl field-font" style="width: 65%;" required>
+                <select class="ctrl field-font" style="width: 65%;" onchange='_form.submit()'>
                     <option selected='true' disabled='disabled'>- Select -</option>
-                    <option value='name'>Adoptee Name</option>
-                    <option value='type'>Adoptee Type</option>
-                    <option value='gender'>Gender</option>
-                    <option value='age'>Age</option>
+                    <option value='name' <?= $filter['sort'] == 'name' ? "selected" : "" ?>>Adoptee Name</option>
+                    <option value='type' <?= $filter['sort'] == 'type' ? "selected" : "" ?>>Adoptee Type</option>
+                    <option value='gender' <?= $filter['sort'] == 'gender' ? "selected" : "" ?>>Gender</option>
+                    <option value='age' <?= $filter['sort'] == 'age' ? "selected" : "" ?>>Age</option>
                 </select>
             </div> &nbsp;
             <div style="white-space: nowrap;">
-                <input class="ctrl-radio" type="radio" onchange="" name="order" value="asc" /> Asc
-                <input class="ctrl-radio" type="radio" onchange="" name="order" value="desc" /> Desc
+                <input class="ctrl-radio" type="radio" name="order" value="asc"  onchange="_form.submit()" <?= $filter['order'] == 'asc' ? "selected" : "" ?>/> Asc
+                <input class="ctrl-radio" type="radio" name="order" value="desc"  onchange="_form.submit()" <?= $filter['order'] == 'desc' ? "selected" : "" ?>/> Desc
             </div>
         </form>
     </div>
