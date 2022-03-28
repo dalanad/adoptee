@@ -205,15 +205,26 @@ class Organization extends BaseModel
         return self::update($query);
     }
 
-    public static function getDonations($org_id)
+    public static function getDonations($org_id,$filter)
     {
+        $sort_column = $filter["sort"];
+        $sort_direction = $filter["order"];
+
         $query = "SELECT * ,
                 u.name 'donor'
             FROM donation d, payment p, user u 
             WHERE 
                   p.txn_id = d.txn_id 
                   AND p.user = u.user_id 
-                  AND d.org_id = :org_id";
+                  AND d.org_id = :org_id ";
+
+        if(isset($filter["search"])){
+            $search = $filter["search"];
+            $query = $query . "AND (u.name like '%$search%' OR comments like '%$search%') ";
+        }
+
+        $query = $query . (isset($filter) ? (" ORDER BY $sort_column $sort_direction") : '' );
+
         return self::select($query, ["org_id" => $org_id]);
     }
 

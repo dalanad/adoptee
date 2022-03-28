@@ -126,20 +126,32 @@ class OrgManagementController extends Controller{
 
     function org_donations()
     {
+        $filter = [
+            "sort" => $_GET["sort"] ?? "txn_time",
+            "order" => $_GET["order"] ?? "desc",
+            "search" => $_GET["search"] ?? ""
+        ];
         $data = [
             "active" => "org_donations",
-            "donations" => Organization::getDonations($_SESSION["org_id"])
-
-    ];
+            "donations" => Organization::getDonations($_SESSION["org_id"],$filter),
+            "filter" => $filter
+        ];
         View::render("org/dashboard", $data);
     }
 
     function org_news_events()
     {
+        $filter = [
+            "sort" => $_GET["sort"] ?? "created_time",
+            "order" => $_GET["order"] ?? "desc",
+            "search" => $_GET["search"] ?? ""
+        ];
+
         $data = [
             "active" => "org_news_events",
-            "org_news_events"=>OrgManagement::findOrgContentByOrgId()
-    ];
+            "org_news_events"=>OrgManagement::findOrgContentByOrgId($filter),
+            "filter" => $filter
+        ];
         View::render("org/dashboard", $data);
     }
 

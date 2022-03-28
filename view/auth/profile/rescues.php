@@ -19,8 +19,8 @@
         padding: 20px;
         border: 1px solid #888;
         position: fixed;
-        top: 30%;
-        left: 35%;
+        top: 25%;
+        left: 25%;
         max-height: calc(100vh - 210px);
         overflow-y: auto;
     }
@@ -45,7 +45,7 @@
     }
 
     .column {
-        margin-right: 1rem;
+        /* margin-right: 1rem; */
         flex: 50%;
     }
 </style>
@@ -74,9 +74,9 @@
                 <td>
                     <div class="btn btn-link" onclick="showModel('progressModel<?= $value['report_id'] ?>')" title="View"><i class="far fa-eye"></i></div>
                     <div class="model" id="progressModel<?= $value['report_id'] ?>">
-                        <div class="model-content">
+                        <div class="model-content" style="width:fit-content;height:fit-content;top:10%;left:25%;">
                             <span class="close" onclick="hideModel('progressModel<?= $value['report_id'] ?>')">&times;</span>
-                            
+
                             <div class="row" style="margin-top: 2rem;">
                                 <div class="column"><b>Rescued Date:</b></div>
                                 <div class="column"><?= $value["status"] == "RESCUED" ? substr($value["rescued_date"], 0, 10) : "" ?></div>
@@ -87,7 +87,14 @@
                             </div>
                             <div class="row">
                                 <div class="column"><b>Progress:</b></div>
-                                <div class="column"></div>
+                                <div class="column">
+                                    <b><?= $value["status"] == "RESCUED" ? $value['heading'] : "-" ?> </b></br></br>
+                                    <p><?= $value["status"] == "RESCUED" ? $value['description'] : "-" ?></p>
+                                    <?php if ($value["status"] == "RESCUED") { ?>
+                                        <div><img src="/<?= $value['photo'] ?>" style="width:20rem;height:auto;border-radius:4px"></div>
+                                        <span class="field-msg"><?= explode(" ", $value['time_updated'])[0] ?></span>
+                                    <?php } ?>
+                                </div>
                             </div>
 
                         </div>
