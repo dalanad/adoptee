@@ -271,7 +271,7 @@ foreach ($petdata as $key => $value) { ?>
                                     <div id="popupmodelMedical<?= $value["animal_id"] ?>" class="model">
                                         <div class="model-content" style="width:fit-content;height:fit-content;top:20%;left:30%;">
                                             <span class="close" onclick="hideModel('popupmodelMedical<?= $value['animal_id'] ?>')">&times;</span>
-                                            <!--add vaccination history-->
+                                            <!--consultation history-->
                                             <?php if ($value['consultdata'] == NULL) { ?>
                                                 <div style="text-align:center;font-size:medium;">No consultation history to show</div>
                                             <?php } else { ?>
@@ -297,19 +297,14 @@ foreach ($petdata as $key => $value) { ?>
                                                 <caption>GENERAL</caption>
                                                 <!--not taken from database-->
                                                 <tr>
-                                                    <th>Anti Rabies Vaccination</th>
-                                                    <th>Deworming</th>
-                                                    <th>DHL Vaccination</th>
+                                                    <th style="width:8rem;">Anti Rabies</th>
+                                                    <th style="width:8rem;">Parvo</th>
+                                                    <th style="width:8rem;"><?= $value['type']=="Dog"? 'DHL' : 'Tricat' ?></th>
                                                 </tr>
                                                 <tr>
-                                                    <td>2020-06-28</td>
-                                                    <td>2020-08-14</td>
-                                                    <td>2020-12-23</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2021-06-03</td>
-                                                    <td>2021-02-10</td>
-                                                    <td></td>
+                                                    <td><?= $value['vaccinedata'][0]['anti_rabies_booster']?? '-' ?></td>
+                                                    <td><?= $value['vaccinedata'][0]['parvo_booster']?? '-' ?></td>
+                                                    <td><?= $value['type']=="Dog"? ($value['vaccinedata'][0]['dhl_booster']?? '-') : ($value['vaccinedata'][0]['tricat_booster']?? '-') ?></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -319,7 +314,7 @@ foreach ($petdata as $key => $value) { ?>
 
                                     <!--Edit pet details-->
                                     <td>
-                                        <div onclick="showModel('popupmodel-edit<?= $value['animal_id'] ?>')" class="btn btn-link" title="Add New"><i class="fas fa-plus-circle"></i></div>
+                                        <div onclick="showModel('popupmodel-edit<?= $value['animal_id'] ?>')" class="btn btn-link" title="Edit Pet Details"><i class="fas fa-plus-circle"></i></div>
                                         <div id="popupmodel-edit<?= $value['animal_id'] ?>" class="model">
                                             <div class="model-content" style="max-height:100vh-10px;top:30%;left:40%;width:20rem;">
                                                 <span class="close" onclick="hideModel('popupmodel-edit<?= $value['animal_id'] ?>')">&times</span>
