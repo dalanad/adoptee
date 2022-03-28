@@ -31,7 +31,10 @@
 <?php foreach ($notifications as $notification) { ?>
     <div class="row mb2">
         <div style="margin-right: .5rem;">
-            <div><i class="fas fa-bell"></i> &nbsp;<b><?= $notification['title'] ?></b></div>
+            <div style="padding: .2rem  .3rem;padding-bottom:0;display:flex">
+                <i class="<?php if ($notification["seen"]) { ?>far fa-envelope-open <?php } else { ?>fas fa-envelope txt-clr <?php } ?>"></i>
+                <b style="display:block;margin-left:.5rem"> <?= $notification['title'] ?> </b>
+            </div>
             <div class="date"><?= substr($notification['created_at'], 0, 16) ?></div>
         </div>
         <div class="details"><?= $notification['message'] ?></div>

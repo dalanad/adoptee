@@ -215,7 +215,7 @@ class OrgManagement extends BaseModel
     {
 
         $query = "UPDATE `report_rescue` SET status = 'RESCUED' WHERE report_id=$report_id;
-        INSERT INTO `rescued_animal`(`org_id`, `report_id`, `rescued_date`) VALUES(".$_SESSION['org_id'].",'$report_id', curdate());";
+        INSERT INTO `rescued_animal`(`org_id`, `report_id`, `rescued_date`) VALUES(" . $_SESSION['org_id'] . ",'$report_id', curdate());";
 
         return BaseModel::insert($query);
     }
@@ -291,7 +291,7 @@ class OrgManagement extends BaseModel
         return self::select($query);
     }
 
-    static function animals_report()
+    static function animals_report($listed_from, $listed_to)
     {
         $org_id = $_SESSION['org_id'];
 
@@ -303,9 +303,11 @@ class OrgManagement extends BaseModel
         animal.photo as avatar_photo,
         u.name as adopter_name,
         u.telephone as adopter_tel
-        from  animal, animal_for_adoption LEFT JOIN user u ON u.user_id = animal_for_adoption.user_id
-            where org_id= $org_id 
-            and animal.animal_id=animal_for_adoption.animal_id ";
+        from  animal, animal_for_adoption JOIN user u ON u.user_id = animal_for_adoption.user_id
+            where org_id= $org_id "
+            . (isset($listed_from) && $listed_from  != '' ? " AND date_listed > '$listed_from'" : '')
+            . (isset($listed_to) && $listed_to  != '' ? " AND date_listed < '$listed_to'"  : '')
+            . " and animal.animal_id=animal_for_adoption.animal_id ";
         return BaseModel::select($query);
     }
 

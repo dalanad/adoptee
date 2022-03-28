@@ -39,8 +39,38 @@ $user = isset($user) ? $user : false;
         left: 0;
         top: 0;
     }
+
+    .main-container {
+        max-width: 1280px;
+        padding: 0 1rem;
+        margin: 0 auto;
+        padding-bottom: 1rem
+    }
+
+    .chat-container {
+        grid-template-columns: 1fr
+    }
+
+    .chat-container.in-session {
+        grid-template-columns: auto 280px
+    }
+
+    @media screen and (max-width:900px) {
+        .chat-container {
+            box-shadow: none;
+        }
+
+        .chat-container.in-session {
+            grid-template-columns: 1fr !important;
+
+        }
+
+        .main-container {
+            padding: 0;
+        }
+    }
 </style>
-<div style="max-width:1280px;padding: 0 1rem;margin:0 auto;padding-bottom:1rem">
+<div class="main-container">
     <div style="display: flex;justify-content:space-between;margin:.5rem;align-items:center">
         <img src="/assets/images/logo_vector_filled.svg" alt="Adoptee Logo" style="height: 40px;" />
         <h3 style="margin-left: 1rem;">Live Consultation</h3>
@@ -49,7 +79,7 @@ $user = isset($user) ? $user : false;
     </div>
     <div style="display:flex;align-items:center">
     </div>
-    <div class="chat-container" style="grid-template-columns: 1fr">
+    <div class="chat-container" style="">
         <div class="chat-conversations" style="height: unset;overflow:hidden;position:relative">
             <video id="speakerVideo" style="display:none;width:100%;max-height:600px" muted autoplay></video>
             <audio id="speakerAudio" autoplay></audio>
@@ -67,7 +97,7 @@ $user = isset($user) ? $user : false;
             </div>
 
             <div id="join_screen">
-                <a class="btn btn-faded pink" style="font-weight: 400; position:absolute;left:1rem;top:1rem" href="/doctor/live_consultation">
+                <a class="btn btn-faded pink" style="font-weight: 400; position:absolute;left:1rem;top:2rem" href="/doctor/live_consultation">
                     <i class="far fa-arrow-left"></i> &nbsp; Back
                 </a>
                 <div>
@@ -88,13 +118,13 @@ $user = isset($user) ? $user : false;
                             </div>
                         </div>
                         <div style="margin: 1rem;text-align:center">
-                        <?php if($user){ ?> 
-                            <div style="white-space: nowrap;"><b>Doctor</b> <br> <span><?= $consultation["doctor"]["name"] ?></span></div>
-                            <small> <?= $consultation["doctor"]["email"] ?><br><?= $consultation["doctor"]["telephone"] ?></small> 
-                        <?php } else { ?>  
-                            <div style="white-space: nowrap;"><b>Owner</b> <br> <span><?= $consultation["user"]["name"] ?></span></div>
-                            <small> <?= $consultation["user"]["email"] ?><br><?= $consultation["user"]["telephone"] ?></small> 
-                        <?php }?>
+                            <?php if ($user) { ?>
+                                <div style="white-space: nowrap;"><b>Doctor</b> <br> <span><?= $consultation["doctor"]["name"] ?></span></div>
+                                <small> <?= $consultation["doctor"]["email"] ?><br><?= $consultation["doctor"]["telephone"] ?></small>
+                            <?php } else { ?>
+                                <div style="white-space: nowrap;"><b>Owner</b> <br> <span><?= $consultation["user"]["name"] ?></span></div>
+                                <small> <?= $consultation["user"]["email"] ?><br><?= $consultation["user"]["telephone"] ?></small>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -172,8 +202,8 @@ $user = isset($user) ? $user : false;
         loading_msg.style.display = 'unset'
         btn_join.style.display = 'none';
         await meeting.join();
-        document.querySelector(".chat-container").style.gridTemplateColumns = 'auto  280px'
-        initChat(<?= $consultation["consultation_id"] ?>,<?=$user?>)
+        document.querySelector(".chat-container").classList.add('in-session')
+        initChat(<?= $consultation["consultation_id"] ?>, <?= $user ?>)
         await startCam();
         await startMic()
         loading_msg.style.display = 'none';

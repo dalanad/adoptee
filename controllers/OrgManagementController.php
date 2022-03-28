@@ -163,10 +163,11 @@ class OrgManagementController extends Controller{
 
     function animals_report()
     {
+        $listed_from = $_GET["listed_from"] ?? "";
+        $listed_to = $_GET["listed_to"] ?? "";
         $data = [
-
-            "animals_reports"=>OrgManagement::animals_report()
-    ];
+            "animals_reports"=>OrgManagement::animals_report($listed_from, $listed_to)
+        ];
         View::render("org/org_dashboard/reports/animals_report",$data);
         
     }

@@ -16,7 +16,7 @@ $months = array_reverse($months);
 </style>
 <div class="hed">
     <div>
-        <div style="display:grid;grid-template-columns:2fr 4fr">
+        <div class="chart-grid">
             <div>
                 <canvas id="myChart"></canvas>
             </div>
@@ -24,7 +24,19 @@ $months = array_reverse($months);
                 <canvas id="myChart2"></canvas>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            .chart-grid {
+                display: grid;
+                grid-template-columns: 2fr 4fr
+            }
+
+            @media screen and (max-width:600px) {
+                .chart-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+        <script src="/assets/vendor/charts.js"></script>
         <script>
             Chart.defaults.font.family = "Roboto, sans-serif"
             Chart.defaults.color = '#000000'

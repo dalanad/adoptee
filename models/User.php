@@ -119,7 +119,7 @@ class User extends BaseModel
 
     static function getNotifications($user_id, $limit_to = 3)
     {
-        $query = "SELECT * FROM `notifications` WHERE user_id = :user_id LIMIT  $limit_to";
+        $query = "SELECT * FROM `notifications` WHERE user_id = :user_id ORDER BY created_at desc LIMIT  $limit_to";
         return self::select($query, ["user_id" => $user_id]);
     }
 

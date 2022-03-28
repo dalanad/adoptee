@@ -32,20 +32,28 @@ function notif_btn()
 
         <div class='dropdown' style='display:flex;align-items: center;line-height: 1;'>
 
-            <i class='<?php if (sizeof($new_notifi) != 0) { echo "fas fa-bell txt-clr";  } else { echo "far fa-bell"; }?>' id="drop-icon" style='font-size:1.2em'> </i>
+            <i class='<?php if (sizeof($new_notifi) != 0) {
+                            echo "fas fa-bell txt-clr";
+                        } else {
+                            echo "far fa-bell";
+                        } ?>' id="drop-icon" style='font-size:1.2em'> </i>
 
-            <div class='dropdown-content' style="padding: 0;">
+            <div class='dropdown-content' style="padding: 0;min-width:200px">
                 <?php if (sizeof($notifications) == 0) { ?>
                     <div style="padding: 1rem;text-align:center"> No New Notifications Available</div>
                 <?php } ?>
                 <?php foreach ($notifications as $notification) { ?>
                     <div class="notification-item">
-                        <b style="padding: .5rem  1rem">
+                        <div style="padding: .5rem  1rem;padding-bottom:0;display:flex">
                             <i class="<?php if ($notification["seen"]) { ?>far fa-envelope-open <?php } else { ?>fas fa-envelope txt-clr <?php } ?>"></i>
-                            &nbsp; <?= $notification['title'] ?></b>
+                            <b style="display:block;margin-left:.5rem"> <?= $notification['title'] ?> </b>
+                        </div>
                         <div style='padding: .5rem 1rem;font-size:.9em;'><?= $notification['message'] ?></div>
                     </div>
                 <?php } ?>
+                <a href="/profile/notifications" class="notification-item btn btn-link" style="margin: 0;text-align:center"> 
+                    View More
+                </a>
             </div>
         </div>
 
@@ -65,9 +73,9 @@ function notif_btn()
 
             function slide() {
                 fetch("/api/notification_seen").then(e => {
-                    el.classList.add("fa-bell",'far')
-                    el.classList.remove("fa-bell-plus",'fas', "txt-clr");
-                    
+                    el.classList.add("fa-bell", 'far')
+                    el.classList.remove("fa-bell-plus", 'fas', "txt-clr");
+
                     // todo one by ony delay
                     for (let el of document.querySelectorAll(".fa-envelope")) {
                         el.classList.remove("fas", "fa-envelope", "txt-clr")
