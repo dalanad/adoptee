@@ -390,4 +390,7 @@ VALUES('1','2015-10-04','2015-08-02','2015-08-15',NULL,'2021-10-01','2021-08-06'
 INSERT INTO `routine_updates`(`user_id`, `animal_id`, `type`, `description`, `photo`, `update_date`)
 VALUES ('3','4','Nutrition','Started giving vitamins and is more energetic', 'assets/data/dogs/4a.jpg', '2021-12-03');
 
+INSERT INTO `rescue_updates`(`report_id`,`org_id`,`heading`,`description`,`photo`)
+VALUES ('1','1','Treatment successful','The injured leg was treated and is now being given antibiotics. Next visit to the clinic is scheduled for 2021-11-25','assets/images/dogs/wounded1.jpg');
+
 COMMIT;

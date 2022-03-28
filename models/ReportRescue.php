@@ -29,12 +29,18 @@ class ReportRescue extends BaseModel
 
     static function getRescuedPets($user_id)
     {
-        $query = "SELECT o.name 'o_name', type, location, photos, ra.*, rr.*
-        FROM organization o, report_rescue rr, user, rescued_animal ra
-        WHERE o.org_id=rr.org_id 
-        AND rr.contact_number=user.telephone
-        AND user.user_id=$user_id
-        AND rr.report_id=ra.report_id";
+        $query = 
+        "SELECT * FROM
+            (SELECT o.name 'o_name', ra.rescued_date, rr.*
+            FROM organization o, report_rescue rr, user, rescued_animal ra
+            WHERE o.org_id=rr.org_id 
+            AND rr.contact_number=user.telephone
+            AND user.user_id=$user_id
+            AND rr.report_id=ra.report_id) report_data
+        LEFT JOIN
+            (SELECT ru.heading, ru.description, ru.photo, ru.time_updated, ru.report_id
+             FROM rescue_updates ru) update_data
+        ON report_data.report_id = update_data.report_id";
         return self::select($query);
     }
 
