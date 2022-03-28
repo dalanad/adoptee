@@ -3,23 +3,22 @@
 <div style="padding-top: 2rem;">
 <!-- Filters - Start -->
 <div style="padding-left: 1rem;">
-        <form method="get" action="" id="" style="display: flex;align-items:center;margin-bottom:1rem">
+        <form method="get" action="" id="_form" style="display: flex;align-items:center;margin-bottom:1rem">
             <div>
-                <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
+                <input style="width: 10em;margin-right:.5rem" name="search" value="<?=$filter['search']?>" class="ctrl" type="search">
                 <button class="btn outline button-hover">Search</button>
             </div> &nbsp; | &nbsp;
             <div style="white-space: nowrap;">
                 <b>Sort by :</b> &nbsp;
-                <select class="ctrl field-font" style="width: 65%;" required>
-                    <option selected='true' disabled='disabled'>- Select -</option>
-                    <option value='name'>Donor</option>
-                    <option value='name'>Amount</option>
-                    <option value='type'>Date Donated</option>
+                <select class="ctrl field-font" style="width: 65%;" name="sort" onchange="_form.submit()" required>
+                    <option <?=$filter["sort"] == 'donor' ? 'selected' : '' ?> value='donor'>Donor</option>
+                    <option <?=$filter["sort"] == 'amount' ? 'selected' : '' ?> value='amount'>Amount</option>
+                    <option <?=$filter["sort"] == 'txn_time' ? 'selected' : '' ?> value='txn_time'>Date Donated</option>
                 </select>
             </div> &nbsp;
             <div style="white-space: nowrap;">
-                <input class="ctrl-radio" type="radio" onchange="" name="order" value="asc" /> Asc
-                <input class="ctrl-radio" type="radio" onchange="" name="order" value="desc" /> Desc
+                <input class="ctrl-radio" type="radio" <?=$filter["order"] == 'asc' ? 'checked' : '' ?>  onchange="_form.submit()" name="order" value="asc" /> Asc
+                <input class="ctrl-radio" type="radio" <?=$filter["order"] == 'desc' ? 'checked' : '' ?>  onchange="_form.submit()" name="order" value="desc" /> Desc
             </div>
         </form>
     </div>
