@@ -125,7 +125,7 @@ class OrgManagement extends BaseModel
         return BaseModel::insert($query);
     }
 
-    static function findAnimalsByOrgId()
+    static function findAnimalsByOrgId($filter)
     {
         $org_id = $_SESSION['org_id'];
         $query = "SELECT animal.animal_id, name,type, other, color, dob, 
@@ -135,7 +135,14 @@ class OrgManagement extends BaseModel
         animal_for_adoption.photos as adoptee_photo
         from animal_for_adoption,animal 
             where org_id= $org_id 
-            and animal.animal_id=animal_for_adoption.animal_id and animal_for_adoption.status<>'DELETED'";
+            and animal.animal_id=animal_for_adoption.animal_id ";
+
+        //filters
+        //status
+        $status = $filter["status"];
+        if ($status != "ANY") {
+            $query = $query . " AND animal_for_adoption.status ='$status' ";
+        }
         return BaseModel::select($query);
     }
 
