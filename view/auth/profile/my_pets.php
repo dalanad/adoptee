@@ -107,10 +107,13 @@
     }
 </style>
 
-<h3 style="margin-left:1rem;">My Pets</h3>
+<div style="display: flex;justify-content:space-between">
 
+<h3 style="margin:0rem;">My Pets</h3>
 <!--Add new pet-->
-<button class="btn right outline m2" onclick="showModel('popupmodel_add_pet')"> Add New Pet </button>
+<button class="btn right outline" style="margin-bottom: 1rem;" onclick="showModel('popupmodel_add_pet')"> Add New Pet </button>
+</div>
+
 <div class="model" id="popupmodel_add_pet">
     <form action="/Profile/add_pet" method="post" class="model-content" style="width:fit-content;height:fit-content;top:10%;left:25%;" enctype="multipart/form-data">
         <span class="close" onclick="hideModel('popupmodel_add_pet')">&times;</span>
@@ -263,9 +266,9 @@ foreach ($petdata as $key => $value) { ?>
                                 <td><?= $value["gender"] ?></td>
                             </tr>
                             <tr>
-                                <td class='bold' style='font-size:0.9rem;'>MEDICAL HISTORY
+                                <td class='bold' style='font-size:0.9rem;'>
 
-                                    <button onclick="showModel('popupmodelMedical<?= $value['animal_id'] ?>')" title="More Details" class="btn btn-link btn-icon"><i class="fas fa-info-circle"></i></button>
+                                    <button onclick="showModel('popupmodelMedical<?= $value['animal_id'] ?>')" title="More Details" class="btn btn-link btn-icon pink"><i class="fas fa-plus-circle"></i> &nbsp; View Medical History</button>
 
                                     <!-- Medical popup -->
                                     <div id="popupmodelMedical<?= $value["animal_id"] ?>" class="model">
@@ -314,11 +317,11 @@ foreach ($petdata as $key => $value) { ?>
 
                                     <!--Edit pet details-->
                                     <td>
-                                        <div onclick="showModel('popupmodel-edit<?= $value['animal_id'] ?>')" class="btn btn-link" title="Edit Pet Details"><i class="fas fa-plus-circle"></i></div>
+                                        <div onclick="showModel('popupmodel-edit<?= $value['animal_id'] ?>')" class="btn btn-link" title="Edit Pet Details"><i class="fas fa-pen"></i> &nbsp; Edit Details</div>
                                         <div id="popupmodel-edit<?= $value['animal_id'] ?>" class="model">
                                             <div class="model-content" style="max-height:100vh-10px;top:30%;left:40%;width:20rem;">
                                                 <span class="close" onclick="hideModel('popupmodel-edit<?= $value['animal_id'] ?>')">&times</span>
-
+                                                <h3 style="margin-top: 0;">Update Pet Details</h3>
                                                 <form action="/Profile/edit_pet" method="POST" enctype="multipart/form-data">
 
                                                     <div class="field">

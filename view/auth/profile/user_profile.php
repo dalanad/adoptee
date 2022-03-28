@@ -58,8 +58,20 @@ if ($_SESSION['user_role'] == "reg_user") {
     }
 </style>
 
-<div style="max-width: 900px; margin: 0 auto;">
-    <h2 style="margin-left:1rem;"><?= $_SESSION['user']['name']; ?></h2>
+<div style="max-width: 1024px; margin: 1rem auto;">
+    <div style="margin:0 2rem;display:flex;align-items:center">
+        <div style="background: url('/assets/images/auth/avatar.png');
+            width:50px;height:50px;background-size:cover;border-radius:50%">
+        </div>
+        <div style="margin-left:1rem ;">
+            <h2 style="margin: 0;"><?= $_SESSION['user']['name']; ?></h2>
+            <div><?= $_SESSION['user']['email']; ?></div>
+        </div>
+        <span style="flex : 1 1 0"></span>
+        <a class='btn pink btn-faded' href='/auth/sign_out'> <i class='fa fa-sign-out'></i>&nbsp; Sign Out</a>
+
+    </div>
+
     <div class="settings-container ">
         <div class="side-nav">
             <?php foreach ($profile_menu as $key => $value) { ?>

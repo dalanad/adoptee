@@ -1,5 +1,5 @@
 <div style="margin-left:-1rem">
-    <h3 style="margin : 0 1rem;">Your Consultations</h3>
+    <h3 style="margin : 0 1rem;">Doctor Consultations</h3>
     <table class="table">
         <tr>
             <th>Date</th>

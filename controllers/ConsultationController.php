@@ -19,7 +19,7 @@ class ConsultationController extends Controller
 
             $data = [
                 "doctors" => Doctor::getDoctors(),
-                "slots" => ((isset($_POST['doctor']) && isset($_POST['date'])) ? Doctor::getSlots((int)$_POST['doctor'], $_POST['date']) : NULL),
+                "slots" => (( isset($_POST['doctor']) && isset($_POST['date']) && $_POST['date'] != '' )  ? Doctor::getSlots((int)$_POST['doctor'], $_POST['date']) : NULL),
                 "pets" => User::getUserPets($_SESSION['user']['user_id']),
                 "step" => $_GET['step'] ?? 1,
                 // "petdata" => isset($_SESSION['existing_pet'])? Animal::getAnimalById($_SESSION['existing_pet']) : ''

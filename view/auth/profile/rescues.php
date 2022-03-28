@@ -50,7 +50,7 @@
     }
 </style>
 
-<h3 style="margin-left:1rem;">My Rescues</h3>
+<h3 style="margin:0rem;">My Rescues</h3>
 <div class="overflow-auto" style="height:450px">
     <table class="table">
         <tr>
