@@ -19,7 +19,7 @@ class OrgManagementController extends Controller{
     {
         $filter = [
             "status" => $_GET["status"] ?? "ANY",
-            "sort" => $_GET['sort'] ?? "date-listed",
+            "sort" => $_GET['sort'] ?? "name",
             "order" => $_GET['order'] ?? "desc"
         ];
 
@@ -59,13 +59,15 @@ class OrgManagementController extends Controller{
     function adoption_requests()
     {
         $filter = [
-            "status" => $_GET["status"] ?? "ANY"
+            "status" => $_GET["status"] ?? "ANY",
+            "sort" => $_GET['sort'] ?? "request_date",
+            "order" => $_GET['order'] ?? "desc"
         ];
 
         $data = [
             "active" => "adoption_requests",
             "filter" => $filter,
-            "adoption_requests"=>OrgManagement::findRequestsByOrgId($_SESSION['org_id'],$filter),
+            "adoption_requests"=>OrgManagement::findRequestsByOrgId($filter),
             
     ];
         View::render("org/dashboard", $data);
@@ -104,10 +106,15 @@ class OrgManagementController extends Controller{
 
     function org_rescues()
     {
+        $filter = [
+            "sort" => $_GET['sort'] ?? "rescued_date",
+            "order" => $_GET['order'] ?? "desc"
+        ];
+
         $data = [
             "active" => "org_rescues",
-
-            "org_rescues"=>OrgManagement::findRescuedAnimalsByOrgId()
+            "filter" => $filter,
+            "org_rescues"=>OrgManagement::findRescuedAnimalsByOrgId($filter)
     ];
         View::render("org/dashboard", $data);
     }
