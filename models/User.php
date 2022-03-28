@@ -99,6 +99,12 @@ class User extends BaseModel
         return self::select($query);
     }
 
+    static function getPetVaccines($animal_id)
+    {
+        $query = "SELECT * FROM animal_vaccines WHERE animal_id = $animal_id";
+        return self::select($query);
+    }
+
     static function deletePet($petid)
     {
         $query = "UPDATE `user_pet` SET `status`='REMOVED' WHERE animal_id = $petid;";
