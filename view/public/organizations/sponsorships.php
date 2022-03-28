@@ -47,6 +47,20 @@
         background: #bbbaba;
         border: none;
     }
+
+    .message {
+        width:30%;
+        height:30%;
+        border-radius: 12px;
+        background: #ffffffcc;
+        position: absolute;
+        top: 60%;
+        left: 30%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
 </style>
 
 <?php
@@ -60,7 +74,7 @@ $durations = [
 
 <div class="overflow-auto" style="height:450px">
 
-    <div style="display:flex;">
+    <div style="display:flex;flex-direction:column;">
         <table class="table">
             <tr>
                 <th>TIER</th>
@@ -81,7 +95,7 @@ $durations = [
                         <td>
                             <?php $found = false;
                             foreach ($sponsorships as $key2 => $val) {
-                                
+
                                 if ($value['name'] == $val['name']) {
                                     $found = true;
                                 }
@@ -136,12 +150,15 @@ $durations = [
         </table>
 
         <?php if (!isset($_SESSION['user'])) { ?>
-            <div>
-                <a class="bold" style="color:var(--primary);position:absolute;top:60%;">Sign in to subscribe</a>
+            <div class="message">
+                <i class="far fa-user-lock fa-5x txt-clr orange"></i> <br>
+                <div style="font-weight: 600;"> Sign In To Subscribe</div> <br>
+                <a class="btn green" href="/auth/sign_in">Sign In</a>
             </div>
         <?php } ?>
 
     </div>
+
 </div>
 
 <script>

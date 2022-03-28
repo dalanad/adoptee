@@ -319,41 +319,32 @@ foreach ($petdata as $key => $value) { ?>
 
                                     <!--Edit pet details-->
                                     <td>
-                                        <div onclick="showModel('popupmodel-edit<?= $value['animal_id'] ?>')" class="btn btn-link" title="Add New"><i class="fas fa-notes-medical"></i></div>
+                                        <div onclick="showModel('popupmodel-edit<?= $value['animal_id'] ?>')" class="btn btn-link" title="Add New"><i class="fas fa-plus-circle"></i></div>
                                         <div id="popupmodel-edit<?= $value['animal_id'] ?>" class="model">
-                                            <div class="model-content" style="max-height:100vh-10px;top:10%;left:35%;">
+                                            <div class="model-content" style="max-height:100vh-10px;top:30%;left:40%;width:20rem;">
                                                 <span class="close" onclick="hideModel('popupmodel-edit<?= $value['animal_id'] ?>')">&times</span>
-                                                <form action="" method="POST">
-                                                    <div style="display:flex">
-                                                        <h3>Vaccination</h3><i class="fas fa-syringe" style="color:var(--red);"></i>
-                                                    </div>
-                                                    <div style="display:flex">
-                                                        <div class="field">
-                                                            <label for="vaccine">Vaccine name</label>
-                                                            <input type="text" name="vaccine" id="proof" class="ctrl mb2" style="width:10rem;" />
-                                                        </div>
-                                                        <div class="field">
-                                                            <label for="vax-proof">Proof of Vaccination</label>
-                                                            <input type="file" name="vax-proof" id="vax-proof" class="ctrl" style="width:15rem;" />
-                                                            <small class="field-hint">Upload a photo of proof of vaccination <br />that includes the veterinarian's signature and date</small>
-                                                        </div>
-                                                    </div>
-                                                    <hr style="color:var(--primary);" /></br>
-                                                    <div style="display:flex">
-                                                        <h3>Medical Prescription</h3><i class="fas fa-prescription" style="color:var(--primary);"></i>
-                                                    </div>
+
+                                                <form action="/Profile/edit_pet" method="POST" enctype="multipart/form-data">
+
                                                     <div class="field">
-                                                        <label for="prescription">Description</label>
-                                                        <textarea name="prescription" id="prescription" class="ctrl mb2" style="max-width:100vh;"></textarea>
+                                                        <label for="edit_name">Name</label>
+                                                        <input class="ctrl ctrl2" type="text" name="edit_name" id="edit_name" />
                                                     </div>
-                                                    <div class="field" style="margin-top:0.3rem;">
-                                                        <label for="prescription-proof">Proof</label>
-                                                        <input type="file" name="prescription-proof" id="prescription-proof" class="ctrl" style="width:15rem;" />
-                                                        <small class="field-hint">Upload a photo of the prescription <br />that includes the veterinarian's signature and date</small>
+
+                                                    <div class="field" style="width:15rem;">
+                                                        <label for="edit_photo">Photo:</label>
+                                                        <div class="ctrl-group" style="width: 20rem;">
+                                                            <span class="ctrl static"><i class="fa fa-image"></i></span>
+                                                            <input class="ctrl" name="edit_photo" id="edit_photo" type="file" />
+                                                        </div>
                                                     </div>
+
+                                                    <input type="text" name="animal_id" value="<?= $value['animal_id'] ?>" style="display:none;" />
+
                                                     <button type="submit" class="btn mt2">Save</button>
                                                     <button type="reset" class="btn mt2 ml2">Clear</button>
                                                 </form>
+
                                             </div>
                                         </div>
                                     </td>
