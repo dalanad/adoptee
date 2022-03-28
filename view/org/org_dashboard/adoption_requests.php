@@ -113,7 +113,7 @@
                     <td><?= $adoption_request["request_date"] ?></td>
                     <td><span class="tag <?= $adoption_request["has_pets"] ? 'green' : 'red' ?>"><?= $adoption_request["has_pets"] ? "YES" : "NO" ?> </span></td>
                     <td><span class="tag <?= $adoption_request["children"] ? 'green' : 'red' ?>"><?= $adoption_request["children"] ? "YES" : "NO" ?> </span></td>
-                    <td><span class="tag <?= $adoption_request["status"] == "PENDING" ? 'orange' :($adoption_request["status"] == "ACCEPTED" ? 'green' : 'red')  ?>" title="<?= $adoption_request["status"] == "ACCEPTED" ? 'fas fa-check' : ''?>"> <?= $adoption_request["status"] ?> </span></td>
+                    <td><span class="tag <?= $adoption_request["status"] == "PENDING" ? 'orange' :($adoption_request["status"] == "ADOPTED" ? 'green' : 'red')  ?>" title="<?= $adoption_request["status"] == "ACCEPTED" ? 'fas fa-check' : ''?>"> <?= $adoption_request["status"] ?> </span></td>
                     <td>
                         <button  onclick="showModel('popupModal<?= $adoption_request["animal_id"] ?>')" title="More Details" class="btn btn-link">Details</button>
                         <div id="popupModal<?= $adoption_request["animal_id"] ?>" class="modal">
@@ -128,6 +128,7 @@
                         </div>
                     </td>
                     <td>
+                    <?php if($adoption_request["status"] != "ADOPTED") {?> 
                         <button onclick="showModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon green"><i class="<?= $adoption_request["status"] == "PENDING" ? 'fas fa-check' : ''?>"></i>&nbsp;<?= $adoption_request["status"] == "PENDING" ? 'Accept' : ''?> </button>
                         <div id="popupModal-accept<?= $adoption_request["animal_id"] ?>" class="modal">
                             <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
@@ -147,6 +148,40 @@
                                 <a href="/OrgManagement/reject_adoption_request?animal_id=<?= $adoption_request["animal_id"] ?>" class="btn red" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
                                 <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')">Cancel</a>
                             </div>
+                        
+                            <?php } else { ?>  
+                                <button  onclick="showModel('popupModal-updates<?= $adoption_request["animal_id"] ?>')" title="View Updates" class="btn btn-link">View Updates</button>
+                        <div id="popupModal-updates<?= $adoption_request["animal_id"] ?>" class="modal">
+                            <div class="modal-content">
+                                <span class="close" onclick="hideModel('popupModal-updates<?= $adoption_request["animal_id"] ?>')">&times;</span>
+                                <h3>Adoption Updates</h3>
+                                <table class="table">
+                                    <tr>
+                                        <th>UPDATE DATE</th>
+                                        <th>TYPE</th>
+                                        <th>DESCRIPTION</th>
+                                        <th>PHOTO</th>
+                                    </tr>
+
+                                <?php foreach ($adoption_updates as $adoption_update) { ?>
+                                    <tr>
+                                     <td>
+                                     <td><?= $adoption_update["update_date"] ?></td>
+                                     <td><?= $adoption_update["type"] ?></td>
+                                     <td><?= $adoption_update["description"] ?></td>
+                                     <td>
+                                     <?php
+                                        $photos = json_decode($adoption_update['update_photo']);
+                                            foreach ($photos as $photo) { ?>
+                                            <div class="thumbnail" style="background-image: url(<?= $photo ?>);cursor:pointer;" onclick="displayPreview(this)"> </div>
+                                     <?php } ?>
+                                    </td>
+                                    
+                                            </tr>
+                                            <?php } ?>
+                            </div>
+                        </div>
+                        <?php } ?> 
 
                     </td>
                     
@@ -180,5 +215,4 @@
     function showFlash() {
         window.FlashMessage.success('This is a successs flash message !');
     }
-
 </script>

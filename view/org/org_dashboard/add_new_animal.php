@@ -1,4 +1,4 @@
-<?php require __DIR__ . "/../../_layout/header.php"; ?>
+<?php require __DIR__ . "/../../_layout/layout.php"; ?>
 
 <style>
   .ctrl2 {
@@ -90,10 +90,9 @@
 </style>
 
 <div class='container px2'>
-  <div>
-    <a href="/OrgManagement/org_adoption_listing" class="btn btn-link btn-icon mr1 " style="font-size: 1em;"><i class="fa fa-arrow-left"></i></a>
-  </div>
-  <h3 class='mt1 txt-clr'>Add New Animal for Adoption</h3>
+  <a class="btn btn-faded black" href="/OrgManagement/org_adoption_listing" style="margin: .5rem 0rem; "><i class="fa fa-chevron-left"></i>&nbsp; Back</a>
+  <h2 style="margin:0">Add New Animal for Adoption</h2>
+
   <form action="/OrgManagement/process_add_new_animal" method="post" enctype="multipart/form-data">
 
     <div class="row">
@@ -102,7 +101,7 @@
         <input class="ctrl" type="text" name="name" required />
       </div>
 
-      <input type="hidden" name="rescue_report_id" value="<?= $_GET['report_id']?>">
+      <input type="hidden" name="rescue_report_id" value="<?= $_GET['report_id'] ?>">
 
       <div class='field column'>
         <label for='type'>Type</label>
@@ -113,7 +112,7 @@
         </select>
       </div>
     </div>
-    
+
     <div class="row">
       <div class='field column'>
         <label for='gender'>Gender</label>
@@ -161,16 +160,16 @@
                 <div><input class="ctrl2" type="date" name="anti_rabies" max="" id="datefield"></div>
               </div>
               <div class="Dog box" style="margin: 0.5rem;">
-              <label for='dhl'>DHL</label>
-              <div><input class="ctrl2" type="date" name="dhl" max="" id="datefield"></div>
+                <label for='dhl'>DHL</label>
+                <div><input class="ctrl2" type="date" name="dhl" max="" id="datefield"></div>
               </div>
               <div style="margin: 0.5rem;">
-              <label for='parvo'>Parvo</label>
-              <div><input class="ctrl2" type="date" name="parvo" max="" id="datefield"></div>
+                <label for='parvo'>Parvo</label>
+                <div><input class="ctrl2" type="date" name="parvo" max="" id="datefield"></div>
               </div>
-              <div  class="Cat box" style="margin: 0.5rem;">
-              <label for='tricat'>Tricat</label>
-              <div><input class="ctrl2" type="date" name="tricat" max="" id="datefield"></div>
+              <div class="Cat box" style="margin: 0.5rem;">
+                <label for='tricat'>Tricat</label>
+                <div><input class="ctrl2" type="date" name="tricat" max="" id="datefield"></div>
               </div>
               <div>
                 <span class="field-msg">Select date only if vaccinated</span>
@@ -181,20 +180,20 @@
               <label style="margin-top: 1rem; margin-bottom: 1rem;">Yearly Booster</label>
               <br>
               <div style="margin: 0.5rem;">
-              <label for='anti_rabies_booster'>Anti Rabies Booster</label>
-              <div><input class="ctrl2" type="date" name="anti_rabies_booster" max="" id="datefield"></div>
+                <label for='anti_rabies_booster'>Anti Rabies Booster</label>
+                <div><input class="ctrl2" type="date" name="anti_rabies_booster" max="" id="datefield"></div>
               </div>
-              <div  class="Dog box" style="margin: 0.5rem;">
-              <label for='dhl_booster'>DHL Booster</label>
-              <div><input class="ctrl2" type="date" name="dhl_booster" max="" id="datefield"></div>
+              <div class="Dog box" style="margin: 0.5rem;">
+                <label for='dhl_booster'>DHL Booster</label>
+                <div><input class="ctrl2" type="date" name="dhl_booster" max="" id="datefield"></div>
               </div>
               <div style="margin: 0.5rem;">
-              <label for='parvo_booster'>Parvo Booster</label>
-              <div><input class="ctrl2" type="date" name="parvo_booster" max="" id="datefield"></div>
+                <label for='parvo_booster'>Parvo Booster</label>
+                <div><input class="ctrl2" type="date" name="parvo_booster" max="" id="datefield"></div>
               </div>
-              <div  class="Cat box" style="margin: 0.5rem;">
-              <label for='tricat_booster'>Tricat Booster</label>
-              <div><input class="ctrl2" type="date" name="tricat_booster" max="" id="datefield"></div>
+              <div class="Cat box" style="margin: 0.5rem;">
+                <label for='tricat_booster'>Tricat Booster</label>
+                <div><input class="ctrl2" type="date" name="tricat_booster" max="" id="datefield"></div>
               </div>
               <div>
                 <span class="field-msg">Select date only if vaccinated this year</span>
@@ -204,8 +203,8 @@
           </div>
           <div class='field'>
             <div>
-            <label for='dewormed'>Dewormed</label>
-            <div><input class="ctrl2" type="date" name="dewormed" max="" id="datefield"></div>
+              <label for='dewormed'>Dewormed</label>
+              <div><input class="ctrl2" type="date" name="dewormed" max="" id="datefield"></div>
             </div>
             <div>
               <span class="field-msg">Select date only if dewormed within the past 6 months</span>
@@ -236,29 +235,29 @@
     </div>
     <br>
 
-    <div class="row">
-      <div class="field column">
-        <label>Upload Photo for Avatar</label>
-        <div class="ctrl-group">
-          <span class="ctrl static"><i class="fa fa-image"></i></span>
-          <input type="file" name="avatar_photo" class="ctrl" accept="image/*" required>
+    <div class=" row">
+        <div class="field column">
+          <label>Upload Photo for Avatar</label>
+          <div class="ctrl-group">
+            <span class="ctrl static"><i class="fa fa-image"></i></span>
+            <input type="file" name="avatar_photo" class="ctrl" accept="image/*" required>
+          </div>
+          <span class="field-msg">Upload photo for profile image</span>
         </div>
-        <span class="field-msg">Upload photo for profile image</span>
-      </div>
 
-      <div class="field column">
-        <label>Upload Other Photos</label>
-        <div class="ctrl-group">
-          <span class="ctrl static"><i class="fa fa-images"></i></span>
-          <input type="file" name="adoptee_photo[]" class="ctrl" multiple accept="image/*" required>
+        <div class="field column">
+          <label>Upload Other Photos</label>
+          <div class="ctrl-group">
+            <span class="ctrl static"><i class="fa fa-images"></i></span>
+            <input type="file" name="adoptee_photo[]" class="ctrl" multiple accept="image/*" required>
+          </div>
+          <span class="field-msg">Upload other photos of the animal</span>
         </div>
-        <span class="field-msg">Upload other photos of the animal</span>
-      </div>
 
-    </div>
-    <br>
-    <button class='btn mr2' type='reset'>Clear</button>
-    <button class='btn mr2' type="submit">Add</button>
+      </div>
+      <br>
+      <button class='btn mr2' type='reset'>Clear</button>
+      <button class='btn mr2' type="submit">Add</button>
   </form>
 
 </div>

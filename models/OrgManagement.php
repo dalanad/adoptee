@@ -140,7 +140,7 @@ class OrgManagement extends BaseModel
     }
 
 
-    static function editAnimalData($status, $name, $type, $gender, $dob, $description, $photos)
+    static function editAnimalData($animal_id, $status, $name, $type, $gender, $dob, $description, $photo, $photos)
     {
 
         /*         $query = "INSERT INTO `animal_for_adoption` (photo)
@@ -148,12 +148,8 @@ class OrgManagement extends BaseModel
         echo($query);
         BaseModel::insert($query); */
 
-        $query = "UPDATE `animal_for_adoption` SET status = '$status' WHERE isset($status);
-        UPDATE `animal` SET name = '$name' WHERE isset($name);
-        UPDATE `animal` SET type = $type WHERE isset($type);
-        UPDATE `animal` SET gender = '$gender' WHERE isset($gender);
-        UPDATE `animal` SET dob = '$dob' WHERE isset($dob);
-        UPDATE `animal_for_adoption` SET description = '$description' WHERE isset($description)";
+        $query = "UPDATE `animal_for_adoption` SET status = '$status' name = '$name' type = $type gender = '$gender' SET dob = '$dob' photo = '$photo' WHERE animal.animal_id = '$animal_id';
+        UPDATE `animal_for_adoption` SET description = '$description' photos = '$photos' animal_for_adoption.animal_id = '$animal_id'";
 
         return BaseModel::insert($query);
     }
@@ -194,10 +190,27 @@ class OrgManagement extends BaseModel
         return BaseModel::select($query);
     }
 
+    static function findUpdates($animal_id,$user_id)
+    {
+        $query = "SELECT 
+        routine_updates.animal_id, 
+        routine_updates.user_id,
+        routine_updates.type, 
+        routine_updates.description,
+        routine_updates.update_date
+        from routine_updates
+        INNER JOIN animal ON
+            routine_updates.animal_id = animal.animal_id
+        INNER JOIN user ON
+            user.user_id = routine_updates.user_id
+        WHERE routine_updates.animal_id='$animal_id' AND routine_updates.user_id = '$user_id'";
+        return BaseModel::select($query);
+    }
+
     static function accept_adoption_request($animal_id, $user_id)
     {
 
-        $query = "UPDATE `adoption_request` SET status = 'ACCEPTED' WHERE animal_id='$animal_id' AND user_id = '$user_id';
+        $query = "UPDATE `adoption_request` SET status = 'ADOPTED' WHERE animal_id='$animal_id' AND user_id = '$user_id';
         INSERT INTO `user_pet`(`animal_id`, `user_id`) VALUES('$animal_id','$user_id');
         UPDATE `animal_for_adoption` SET status = 'ADOPTED', date_adopted = curdate(), user_id = '$user_id' WHERE animal_id='$animal_id'";
 
@@ -248,12 +261,13 @@ class OrgManagement extends BaseModel
         return BaseModel::select($query);
     }
 
-    static function add_rescue_update($report_id, $description, $photos)
+    static function add_rescue_update($report_id,$org_id, $heading, $description, $photo)
     {
-        $report_id = $_SESSION[$report_id];
+        $report_id = $_SESSION['report_id'];
+        $org_id = $_SESSION['org_id'];
 
-        $query = "UPDATE `report_rescue` SET description = '$description' WHERE report_id='$report_id';
-        UPDATE `report_rescue` SET photos = '$photos' WHERE report_id='$report_id'";
+        $query = "INSERT INTO `rescue_updates` (`report_id`, `org_id`, `heading`, `description`, `photo`, `time_updated`)
+        VALUES ('$report_id','$org_id', '$heading', '$description', '$photo', curdate())";
         return BaseModel::insert($query);
     }
 
@@ -269,6 +283,20 @@ class OrgManagement extends BaseModel
     {
         $query = "INSERT INTO `org_content` (org_id, created_time, heading, description, photos)
         VALUES ('$org_id', CURRENT_TIMESTAMP, '$heading', '$description', '$photos')";
+
+        return BaseModel::insert($query);
+    }
+
+    static function update_news_event($item_id,$heading, $description, $photos)
+    {
+        $query = "UPDATE `org_content` SET heading = '$heading' description = '$description' photos = '$photos' created_time = curdate() WHERE item_id=$item_id;";
+
+        return BaseModel::insert($query);
+    }
+
+    static function delete_news_event($item_id)
+    {
+        $query = "DELETE FROM org_content WHERE item_id=$item_id";
 
         return BaseModel::insert($query);
     }

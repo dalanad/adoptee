@@ -42,7 +42,7 @@ class OrgManagementController extends Controller{
     }  
 
     function edit_animal_for_adoption(){
-        if(isset($_POST['submit'])){OrgManagement::editAnimalData($_POST['status'], $_POST['name'], $_POST['type'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['descripion'], $_POST['photos']);}
+        if(isset($_POST['submit'])){OrgManagement::editAnimalData($_POST['animal_id'], $_POST['status'], $_POST['name'], $_POST['type'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['descripion'], $_POST['photo'], $_POST['photos']);}
     }
 
     function delete_animal(){
@@ -54,7 +54,8 @@ class OrgManagementController extends Controller{
     {
         $data = [
             "active" => "adoption_requests",
-            "adoption_requests"=>OrgManagement::findRequestsByOrgId($_SESSION['org_id'])
+            "adoption_requests"=>OrgManagement::findRequestsByOrgId($_SESSION['org_id']),
+            "adoption_updates"=>OrgManagement::findUpdates($_GET['animal_id'],$_GET['user_id'])
     ];
         View::render("org/dashboard", $data);
     }
@@ -104,9 +105,9 @@ class OrgManagementController extends Controller{
     {
         View::render("org/org_dashboard/add_rescue_update");
 
-        $photos =  image::multi("photos");
+        $photo =  image::multi("photo");
         
-        OrgManagement::add_rescue_update($_SESSION['report_id'], $_POST['description'], $photos);
+        OrgManagement::add_rescue_update($_SESSION['report_id'],$_SESSION['org_id'], $_POST['heading'],$_POST['description'], $photo);
         
     }
 
@@ -127,6 +128,20 @@ class OrgManagementController extends Controller{
             "org_news_events"=>OrgManagement::findOrgContentByOrgId()
     ];
         View::render("org/dashboard", $data);
+    }
+
+    function delete_news_event(){
+        OrgManagement::delete_news_event($_GET['item_id']);
+        $this->redirect('/OrgManagement/org_news_events');
+    }
+
+    function update_news_event()
+    {
+       
+        $photo =  image::multi("photo");
+        
+        OrgManagement::update_news_event($_SESSION['item_id'], $_POST['heading'],$_POST['description'], $photo);
+        
     }
 
     function feedback_list()
