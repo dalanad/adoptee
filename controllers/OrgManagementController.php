@@ -18,7 +18,9 @@ class OrgManagementController extends Controller{
     function org_adoption_listing()
     {
         $filter = [
-            "status" => $_GET["status"] ?? "ANY"
+            "status" => $_GET["status"] ?? "ANY",
+            "sort" => $_GET['sort'] ?? "date-listed",
+            "order" => $_GET['order'] ?? "desc"
         ];
 
         $data = [
@@ -56,9 +58,14 @@ class OrgManagementController extends Controller{
 
     function adoption_requests()
     {
+        $filter = [
+            "status" => $_GET["status"] ?? "ANY"
+        ];
+
         $data = [
             "active" => "adoption_requests",
-            "adoption_requests"=>OrgManagement::findRequestsByOrgId($_SESSION['org_id']),
+            "filter" => $filter,
+            "adoption_requests"=>OrgManagement::findRequestsByOrgId($_SESSION['org_id'],$filter),
             
     ];
         View::render("org/dashboard", $data);

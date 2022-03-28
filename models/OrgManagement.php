@@ -143,6 +143,14 @@ class OrgManagement extends BaseModel
         if ($status != "ANY") {
             $query = $query . " AND animal_for_adoption.status ='$status' ";
         }
+
+        //sort
+        $sort = $filter['sort'];
+        $order = $filter['order'];
+        if (isset($sort) && $sort != "date-listed") {
+            $query = $query . " ORDER BY $sort $order ";
+        }
+
         return BaseModel::select($query);
     }
 
@@ -168,7 +176,7 @@ class OrgManagement extends BaseModel
         return BaseModel::insert($query);
     }
 
-    static function findRequestsByOrgId()
+    static function findRequestsByOrgId($filter)
     {
         $query = "SELECT 
         animal.name as animal_name, 
@@ -193,7 +201,15 @@ class OrgManagement extends BaseModel
             animal.animal_id = adoption_request.animal_id
         INNER JOIN user ON
             user.user_id = adoption_request.user_id
-        WHERE org_id = '$_SESSION[org_id]'";
+        WHERE org_id = '$_SESSION[org_id]' ";
+
+        //filters
+        //status
+        $status = $filter["status"];
+        if ($status != "ANY") {
+            $query = $query . " AND adoption_request.status ='$status' ";
+        }
+
         return BaseModel::select($query);
     }
 
