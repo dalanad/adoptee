@@ -151,37 +151,38 @@
                         <label for="other">&nbsp; <i class="far fa-paw"></i>&nbsp; Other </label>
                     </div> -->
                 </div>
-                <div class="field">
-                    <!--Color-->
-                    <label for="color"> Color </label>
-                    <div class="check">
-                        <input id="white" name="color[]" type="checkbox" value="White" onchange='_form.submit()' <?= in_array('White', $filter['color']) ? "checked" : ""; ?>>
-                        <label for="white" style="background:cornsilk;" title="White"></label>
-                        <input id="grey" name="color[]" type="checkbox" value="Grey" onchange='_form.submit()' <?= in_array('Grey', $filter['color']) ? "checked" : ""; ?>>
-                        <label for="grey" style="background:grey;" title="Grey"></label>
-                        <input id="orange" name="color[]" type="checkbox" value="Orange" onchange='_form.submit()' <?= in_array('Orange', $filter['color']) ? "checked" : ""; ?>>
-                        <label for="orange" style="background:darkgoldenrod;" title="Orange"></label>
-                        <input id="brown" name="color[]" type="checkbox" value="Brown" onchange='_form.submit()' <?= in_array('Brown', $filter['color']) ? "checked" : ""; ?>>
-                        <label for="brown" style="background:saddlebrown;" title="Brown"></label>
-                        <input id="black" name="color[]" type="checkbox" value="Black" onchange='_form.submit()' <?= in_array('Black', $filter['color']) ? "checked" : ""; ?>>
-                        <label for="black" style="background:black;color:white;" title="Black"></label>
-                    </div>
+            </div>
+            <div class="field">
+                <!--Color-->
+                <label for="color"> Color </label>
+                <div class="check">
+                    <input id="white" name="color[]" type="checkbox" value="White" onchange='_form.submit()' <?= in_array('White', $filter['color']) ? "checked" : ""; ?>>
+                    <label for="white" style="background:cornsilk;" title="White"></label>
+                    <input id="grey" name="color[]" type="checkbox" value="Grey" onchange='_form.submit()' <?= in_array('Grey', $filter['color']) ? "checked" : ""; ?>>
+                    <label for="grey" style="background:grey;" title="Grey"></label>
+                    <input id="orange" name="color[]" type="checkbox" value="Orange" onchange='_form.submit()' <?= in_array('Orange', $filter['color']) ? "checked" : ""; ?>>
+                    <label for="orange" style="background:darkgoldenrod;" title="Orange"></label>
+                    <input id="brown" name="color[]" type="checkbox" value="Brown" onchange='_form.submit()' <?= in_array('Brown', $filter['color']) ? "checked" : ""; ?>>
+                    <label for="brown" style="background:saddlebrown;" title="Brown"></label>
+                    <input id="black" name="color[]" type="checkbox" value="Black" onchange='_form.submit()' <?= in_array('Black', $filter['color']) ? "checked" : ""; ?>>
+                    <label for="black" style="background:black;color:white;" title="Black"></label>
                 </div>
-                <div class="field">
-                    <!--Org-->
+            </div>
+            <div class="field">
+                <!--Org-->
 
-                    <label> Organization </label>
-                    <div class="radio-box">
-                        <?php foreach ($organizations as $org) { ?>
-                            <div style="margin: .5rem;display:flex">
-                                <input name="organization[]" value="<?= $org["org_id"] ?>" class="ctrl-check" id="org_<?= $org["org_id"] ?>" type="checkbox" onchange='_form.submit()' <?= in_array($org["org_id"], $filter['organization']) ? "checked" : ""; ?>>
-                                <label for="org_<?= $org["org_id"] ?>"> &nbsp; <?= $org["name"] ?></label>
-                            </div>
-                        <?php } ?>
-                    </div>
+                <label> Organization </label>
+                <div class="radio-box">
+                    <?php foreach ($organizations as $org) { ?>
+                        <div style="margin: .5rem;display:flex">
+                            <input name="organization[]" value="<?= $org["org_id"] ?>" class="ctrl-check" id="org_<?= $org["org_id"] ?>" type="checkbox" onchange='_form.submit()' <?= in_array($org["org_id"], $filter['organization']) ? "checked" : ""; ?>>
+                            <label for="org_<?= $org["org_id"] ?>"> &nbsp; <?= $org["name"] ?></label>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
+
 
         <div style="flex: 1 1 0;">
             <div style="margin:0 1rem;align-items:center;display:flex" class="filters">
@@ -227,6 +228,5 @@
                 <?php } ?>
             </div>
         </div>
-    </div>
     </div>
 </form>
