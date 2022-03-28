@@ -147,7 +147,7 @@ class OrgManagement extends BaseModel
         //sort
         $sort = $filter['sort'];
         $order = $filter['order'];
-        if (isset($sort) && $sort != "date-listed") {
+        if (isset($sort) && $sort != "date_listed") {
             $query = $query . " ORDER BY $sort $order ";
         }
 
@@ -210,10 +210,17 @@ class OrgManagement extends BaseModel
             $query = $query . " AND adoption_request.status ='$status' ";
         }
 
+        //sort
+        $sort = $filter['sort'];
+        $order = $filter['order'];
+        if (isset($sort) && $sort != "request_date") {
+            $query = $query . " ORDER BY $sort $order ";
+        }
+
         return BaseModel::select($query);
     }
 
-    static function findUpdates($animal_id,$user_id)
+    static function findUpdates($animal_id, $user_id)
     {
         $query = "SELECT 
         routine_updates.animal_id, 
@@ -276,15 +283,24 @@ class OrgManagement extends BaseModel
         return BaseModel::insert($query);
     }
 
-    static function findRescuedAnimalsByOrgId()
+    static function findRescuedAnimalsByOrgId($filter)
     {
         $org_id = $_SESSION['org_id'];
 
-        $query = "SELECT * from report_rescue, rescued_animal WHERE report_rescue.report_id = rescued_animal.report_id AND rescued_animal.org_id = '$org_id'";
+        $query = "SELECT * from report_rescue, rescued_animal WHERE report_rescue.report_id = rescued_animal.report_id AND rescued_animal.org_id = '$org_id' ";
+
+        //sort
+        $sort = $filter['sort'];
+        $order = $filter['order'];
+        if (isset($sort) && $sort != "rescued_date") {
+            $query = $query . " ORDER BY $sort $order ";
+        }
+
+
         return BaseModel::select($query);
     }
 
-    static function add_rescue_update($report_id,$org_id, $heading, $description, $photo)
+    static function add_rescue_update($report_id, $org_id, $heading, $description, $photo)
     {
         $query = "INSERT INTO `rescue_updates` (`report_id`, `org_id`, `heading`, `description`, `photos`, `time_updated`)
         VALUES ('$report_id','$org_id', '$heading', '$description', '$photo', current_timestamp())";
@@ -317,7 +333,7 @@ class OrgManagement extends BaseModel
         return BaseModel::insert($query);
     }
 
-    static function update_news_event($item_id,$heading, $description, $photos)
+    static function update_news_event($item_id, $heading, $description, $photos)
     {
         $query = "UPDATE `org_content` SET heading = '$heading' description = '$description' photos = '$photos' created_time = curdate() WHERE item_id=$item_id;";
 

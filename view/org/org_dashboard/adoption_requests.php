@@ -48,7 +48,7 @@
 
         <!-- Filters - Start -->
         <div style="padding-left: 1rem;">
-            <form method="get" name="_form" style="display: flex;align-items:center;margin-bottom:1rem">
+            <form method="get" id="_form" style="display: flex;align-items:center;margin-bottom:1rem">
                 <div>
                     <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
                     <button class="btn outline button-hover">Search</button>
@@ -62,18 +62,18 @@
                 </div> &nbsp; | &nbsp;
                 <div style="white-space: nowrap;">
                     <b>Sort by :</b> &nbsp;
-                    <select class="ctrl field-font" style="width: 65%;" required>
+                    <select class="ctrl field-font" name="sort" style="width: 65%;" onchange='_form.submit()'>
                         <option selected='true' disabled='disabled'>- Select -</option>
-                        <option value='name'>Adoptee Name</option>
-                        <option value='name'>Adoptor Name</option>
-                        <option value='type'>Adoptee Type</option>
-                        <option value='gender'>Gender</option>
-                        <option value='age'>Requested Date</option>
+                        <option value='animal_name' <?= $filter['sort'] == 'animal_name' ? "selected" : "" ?>>Adoptee Name</option>
+                        <option value='user_name' <?= $filter['sort'] == 'user_name' ? "selected" : "" ?>>Adoptor Name</option>
+                        <option value='type' <?= $filter['sort'] == 'type' ? "selected" : "" ?>>Adoptee Type</option>
+                        <option value='gender' <?= $filter['sort'] == 'gender' ? "selected" : "" ?>>Gender</option>
+                        <option value='request_date' <?= $filter['sort'] == 'age' ? "selected" : "" ?>>Requested Date</option>
                     </select>
                 </div> &nbsp;
                 <div style="white-space: nowrap;">
-                    <input class="ctrl-radio" type="radio" onchange="" name="order" value="asc" /> Asc
-                    <input class="ctrl-radio" type="radio" onchange="" name="order" value="desc" /> Desc
+                    <input class="ctrl-radio" type="radio" name="order" value="asc" onchange="_form.submit()" <?= $filter['order'] == 'asc' ? "checked" : "" ?>/> Asc
+                    <input class="ctrl-radio" type="radio" name="order" value="desc" onchange="_form.submit()" <?= $filter['order'] == 'desc' ? "checked" : "" ?> /> Desc
                 </div>
             </form>
         </div>

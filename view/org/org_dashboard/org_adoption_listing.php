@@ -149,7 +149,7 @@
 
     <!-- Filters - Start -->
     <div style="padding-left: 1rem;">
-        <form method="get" name="_form" style="display: flex;align-items:center;margin-bottom:1rem">
+        <form method="get" id="_form" style="display: flex;align-items:center;margin-bottom:1rem">
             <div>
                 <input style="width: 10em;margin-right:.5rem" name="search" class="ctrl" type="search" value="">
                 <button class="btn outline button-hover">Search</button>
@@ -163,8 +163,7 @@
             </div> &nbsp; | &nbsp;
             <div style="white-space: nowrap;">
                 <b>Sort by :</b> &nbsp;
-                <select class="ctrl field-font" style="width: 65%;" onchange='_form.submit()'>
-                    <option selected='true' disabled='disabled'>- Select -</option>
+                <select class="ctrl field-font" name="sort" style="width: 65%;" onchange='_form.submit()'>
                     <option value='name' <?= $filter['sort'] == 'name' ? "selected" : "" ?>>Adoptee Name</option>
                     <option value='type' <?= $filter['sort'] == 'type' ? "selected" : "" ?>>Adoptee Type</option>
                     <option value='gender' <?= $filter['sort'] == 'gender' ? "selected" : "" ?>>Gender</option>
@@ -172,8 +171,8 @@
                 </select>
             </div> &nbsp;
             <div style="white-space: nowrap;">
-                <input class="ctrl-radio" type="radio" name="order" value="asc"  onchange="_form.submit()" <?= $filter['order'] == 'asc' ? "selected" : "" ?>/> Asc
-                <input class="ctrl-radio" type="radio" name="order" value="desc"  onchange="_form.submit()" <?= $filter['order'] == 'desc' ? "selected" : "" ?>/> Desc
+                <input class="ctrl-radio" type="radio" name="order" value="asc"  onchange="_form.submit()" <?= $filter['order'] == 'asc' ? "checked" : "" ?>/> Asc
+                <input class="ctrl-radio" type="radio" name="order" value="desc"  onchange="_form.submit()" <?= $filter['order'] == 'desc' ? "checked" : "" ?>/> Desc
             </div>
         </form>
     </div>
@@ -246,7 +245,7 @@
 
                                             <div class='field column'>
                                                 <label for='type'>Type</label>
-                                                <select class="ctrl field-font" name='type' required>
+                                                <select class="ctrl field-font animal_type_select" name='type' required>
                                                     <option selected='true' disabled='disabled'><?= $animal["type"] ?></option>
                                                     <option value='dog'>Dog</option>
                                                     <option value='cat'>Cat</option>
@@ -472,7 +471,7 @@
     }
 
     $(document).ready(function() {
-        $("select").change(function() {
+        $("select:not([name=sort])").change(function() {
             $(this).find("option:selected").each(function() {
                 var optionValue = $(this).attr("value");
                 if (optionValue) {
