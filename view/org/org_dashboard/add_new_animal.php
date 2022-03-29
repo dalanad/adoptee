@@ -126,7 +126,7 @@
       <div class='field column'>
         <label for='dob'>Approximate DOB</label>
         <div>
-          <input class="ctrl2" type="date" max="" name="dob" id="datefield" onclick="ageCalculator()" required />
+          <input class="ctrl2" type="date" max="" name="dob" id="datefield" onclick="ageCalculator()" onchange="setVaxMinDates(this)" required min="<?= getdate()['year'] - 15 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>" />
           <p id="result"></p>
         </div>
       </div>
@@ -157,19 +157,19 @@
               <br>
               <div style="margin: 0.5rem;">
                 <label for='anti_rabies'>Anti Rabies</label>
-                <div><input class="ctrl2" type="date" name="anti_rabies" max="" id="datefield"></div>
+                <div><input class="ctrl2" type="date" name="anti_rabies" max="" id="datefield" min="<?= getdate()['year'] - 15 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>"></div>
               </div>
               <div class="Dog box" style="margin: 0.5rem;">
                 <label for='dhl'>DHL</label>
-                <div><input class="ctrl2" type="date" name="dhl" max="" id="datefield"></div>
+                <div><input class="ctrl2" type="date" name="dhl" max="" id="datefield" min="<?= getdate()['year'] - 15 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>"></div>
               </div>
               <div style="margin: 0.5rem;">
                 <label for='parvo'>Parvo</label>
-                <div><input class="ctrl2" type="date" name="parvo" max="" id="datefield"></div>
+                <div><input class="ctrl2" type="date" name="parvo" max="" id="datefield" min="<?= getdate()['year'] - 15 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>"></div>
               </div>
               <div class="Cat box" style="margin: 0.5rem;">
                 <label for='tricat'>Tricat</label>
-                <div><input class="ctrl2" type="date" name="tricat" max="" id="datefield"></div>
+                <div><input class="ctrl2" type="date" name="tricat" max="" id="datefield" min="<?= getdate()['year'] - 15 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>"></div>
               </div>
               <div>
                 <span class="field-msg">Select date only if vaccinated</span>
@@ -181,19 +181,19 @@
               <br>
               <div style="margin: 0.5rem;">
                 <label for='anti_rabies_booster'>Anti Rabies Booster</label>
-                <div><input class="ctrl2" type="date" name="anti_rabies_booster" max="" id="datefield"></div>
+                <div><input class="ctrl2" type="date" name="anti_rabies_booster" max="" id="datefield" min="<?= getdate()['year'] - 1 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>"></div>
               </div>
               <div class="Dog box" style="margin: 0.5rem;">
                 <label for='dhl_booster'>DHL Booster</label>
-                <div><input class="ctrl2" type="date" name="dhl_booster" max="" id="datefield"></div>
+                <div><input class="ctrl2" type="date" name="dhl_booster" max="" id="datefield" min="<?= getdate()['year'] - 1 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>"></div>
               </div>
               <div style="margin: 0.5rem;">
                 <label for='parvo_booster'>Parvo Booster</label>
-                <div><input class="ctrl2" type="date" name="parvo_booster" max="" id="datefield"></div>
+                <div><input class="ctrl2" type="date" name="parvo_booster" max="" id="datefield" min="<?= getdate()['year'] - 1 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>"></div>
               </div>
               <div class="Cat box" style="margin: 0.5rem;">
                 <label for='tricat_booster'>Tricat Booster</label>
-                <div><input class="ctrl2" type="date" name="tricat_booster" max="" id="datefield"></div>
+                <div><input class="ctrl2" type="date" name="tricat_booster" max="" id="datefield" min="<?= getdate()['year'] - 1 ?>-<?= str_pad(getdate()['mon'], 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>"></div>
               </div>
               <div>
                 <span class="field-msg">Select date only if vaccinated this year</span>
@@ -204,7 +204,7 @@
           <div class='field'>
             <div>
               <label for='dewormed'>Dewormed</label>
-              <div><input class="ctrl2" type="date" name="dewormed" max="" id="datefield"></div>
+              <div><input class="ctrl2" type="date" name="dewormed" max="" id="datefield" min="<?= getdate()['year'] - 1 ?>-<?= str_pad((getdate()['mon'] + 6), 2, "0", STR_PAD_LEFT) ?>-<?= str_pad(getdate()['mday'], 2, "0", STR_PAD_LEFT) ?>"></div>
             </div>
             <div>
               <span class="field-msg">Select date only if dewormed within the past 6 months</span>
@@ -325,4 +325,10 @@
          "Age: " + age + " years. ";
      }
    } */
+  function setVaxMinDates(_this) {
+    var vaccinations = document.querySelectorAll('.vacc');
+    vaccinations.forEach(function(vacc) {
+      vacc.min = _this.value;
+    });
+  }
 </script>

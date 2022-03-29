@@ -238,17 +238,17 @@ VALUES ('1', '7', '2022-01-29 13:04:20');
 ('2022-03-29', '12:30:00', 32, 1, 8 ,	'ACCEPTED',	'LIVE',	'cs_test_zMxME2ODAuODMNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',	NULL,	'7ewh-ve15-16uf'),
 ('2022-03-29', '13:30:00', 34, 1, 10,	'PENDING',	'LIVE',	'cs_test_zg1OUxMzEuMDMNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',	NULL,	'7ewh-ve15-16uf'),
 ('2022-03-29', '14:30:00', 36, 1, 12,	'PENDING',	'LIVE',	'cs_test_Dk5NQ5NzEuMTcNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',	NULL,	'7ewh-ve15-16uf'),
-('2022-03-30', '09:00:00', 2 , 1, 2 ,     'PENDING',  'ADVISE',       'cs_test_jY1MM5OTUuMTQNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  NULL),
+('2022-03-29', '09:00:00', 2 , 1, 4 ,     'PENDING',  'ADVISE',       'cs_test_jY1MM5OTUuMTQNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  NULL),
 ('2022-03-30', '11:00:00', 37, 1, 13,	'PENDING',	'LIVE',	'cs_test_DA1NkzMjEuOTUNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',	NULL,	'7ewh-ve15-16uf'),
 ('2022-03-30', '11:30:00', 5 , 1, 4 ,     'ACCEPTED',   'LIVE',       'cs_test_DkxMQuNzI4MzINjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  '7ewh-ve15-16uf'),
-('2022-03-30', '12:00:00', 6 , 1, 2 ,     'ACCEPTED',  'ADVISE',      'cs_test_DI4MY5NjIuNjcNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  NULL),
-('2022-03-30', '12:30:00', 8 , 1, 2 ,     'ACCEPTED',   'ADVISE',     'cs_test_jMwNA1MjAuNTkNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  NULL),
+('2022-03-29', '12:00:00', 6 , 1, 8 ,     'ACCEPTED',  'ADVISE',      'cs_test_DI4MY5NjIuNjcNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  NULL),
+('2022-03-29', '12:30:00', 8 , 1, 9 ,     'ACCEPTED',   'ADVISE',     'cs_test_jMwNA1MjAuNTkNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  NULL),
 ('2022-03-30', '13:30:00', 7 , 1, 3 ,     'ACCEPTED',   'LIVE',       'cs_test_jgwMM0OTIuNjANjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  '7ewh-ve15-16uf'),
 ('2022-03-30', '14:00:00', 35, 1, 11,	'PENDING',	'LIVE',	'cs_test_TgyMc0ODcuNzYNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',	NULL,	'7ewh-ve15-16uf'),
-('2022-03-30', '14:30:00', 6 , 1, 2 ,     'ACCEPTED',   'ADVISE',     'cs_test_DY1OkzODguNDkNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  NULL),
-('2022-03-31', '09:30:00', 3 , 1, 2 ,     'PENDING',  'LIVE',         'cs_test_jQzMMwNjguNTINjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  '7ewh-ve15-16uf'),
+('2022-03-28', '14:30:00', 6 , 1, 10 ,     'ACCEPTED',   'ADVISE',     'cs_test_DY1OkzODguNDkNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  NULL),
+('2022-03-31', '09:30:00', 3 , 1, 12 ,     'PENDING',  'LIVE',         'cs_test_jQzMMwNjguNTINjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  '7ewh-ve15-16uf'),
 ('2022-03-31', '13:00:00', 4 , 1, 3 ,     'ACCEPTED',   'LIVE',       'cs_test_zY5Mc4MTIuNDgNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  '7ewh-ve15-16uf'),
-('2022-03-31', '13:30:00', 7 , 1, 3 ,     'ACCEPTED',  'ADVISE',      'cs_test_TgzNEzNjcuMjUNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  NULL)
+('2022-03-29', '13:30:00', 7 , 1, 3 ,     'ACCEPTED',  'ADVISE',      'cs_test_TgzNEzNjcuMjUNjUyOTkzMDcuMzA0MTkEzU2MDAuMDQxMjYEMjgwMzAyMj',  NULL,  NULL)
 ;
 
 INSERT INTO `consultation_schedule` (`doctor_user_id`, `day_of_week`, `time_slot`, `charge`) VALUES
