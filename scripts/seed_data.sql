@@ -205,8 +205,6 @@ VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  '2021-08-20 09:15:20','20
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
 VALUES ('1', '1', '2021-08-22 16:25:20');
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
-VALUES ('2', '2', '2021-08-30 14:35:20');
-INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
 VALUES ('3', '3', '2021-12-29 19:45:20');
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
 VALUES ('1', '7', '2022-01-29 13:04:20');
@@ -381,7 +379,7 @@ INSERT INTO `prescription_item` (`medical_record_id`, `dose`, `duration`, `direc
 (1,	'280mg',	'1 Month',	'3 Times',	10),(2,	'150mg',	'1 Week',	'3 Times',	9);
 
 INSERT INTO `consultation_message` (`consultation_id`, `created_at`, `medical_record_id`, `attachments`, `sender`, `seen`, `message`) 
-VALUES (10,	'2022-03-27 18:53:50',	NULL,	'[]',	3,	0,	'Can you reccomend a good food suppliment ?'),
+VALUES (10,	'2022-03-27 18:53:50',	NULL,	'[]',	3,	1,	'Can you reccomend a good food suppliment ?'),
        (10,	'2022-03-27 19:53:50',	1,	'[]',	1,	0,	'PRESCRIPTION'),
        (11,	'2022-03-27 19:53:50',	2,	'[]',	1,	0,	'PRESCRIPTION'),
        (10,	'2022-03-27 19:55:50',	NULL,	'[]',	1,	0,	'Please refer the given prescription');

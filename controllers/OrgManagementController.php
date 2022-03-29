@@ -94,9 +94,10 @@ class OrgManagementController extends Controller{
 
     function rescue_animal()
     {
-        $report_id = $_POST['report_id'];
-        $type = $_POST['type'];
+        $report_id = $_GET['report_id'];
+        $type = "";//$_POST['type'];
         OrgManagement::rescue_animal($report_id, $type);
+        $this->redirect('/OrgManagement/org_rescues');
     }
 
     function mark_as_complete(){

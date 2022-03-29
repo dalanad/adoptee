@@ -209,7 +209,7 @@
         <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
             <span class="close" onclick="hideModel('popupModal-confirm<?= $reported_case["report_id"] ?>')">&times;</span>
             <h3 style="text-align: center;">Are you sure you want to confirm rescue?</h3>
-            <button onclick="" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</button>
+            <a href="/OrgManagement/rescue_animal?report_id=<?= $reported_case["report_id"] ?>" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
             <button class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-confirm<?= $reported_case["report_id"] ?>')">Cancel</button>
         </div>
     </div>
