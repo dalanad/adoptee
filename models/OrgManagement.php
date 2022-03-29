@@ -257,14 +257,14 @@ class OrgManagement extends BaseModel
     {
 
         $query = "UPDATE `report_rescue` SET status = 'RESCUED' WHERE report_id=$report_id;
-        INSERT INTO `rescued_animal`(`org_id`, `report_id`, `rescued_date`) VALUES(" . $_SESSION['org_id'] . ",'$report_id', curdate());";
+        UPDATE `rescued_animal` SET `rescued_date` = current_timestamp() WHERE report_id = '$report_id' AND `org_id`= " . $_SESSION['org_id'] . "";
 
         return BaseModel::insert($query);
     }
 
     static function findReportedCases()
     {
-        $query = "SELECT type, description, contact_number,location, st_y(location_coordinates) as longi, st_x(location_coordinates) as lat, status, photos, time_reported from report_rescue";
+        $query = "SELECT type, description,report_id, contact_number,location, st_y(location_coordinates) as longi, st_x(location_coordinates) as lat, status, photos, time_reported from report_rescue WHERE status IN ('PENDING','IN PROGRESS') ";
         return BaseModel::select($query);
     }
 
@@ -272,13 +272,13 @@ class OrgManagement extends BaseModel
     {
         $org_id = $_SESSION['org_id'];
 
-        $query = " INSERT INTO `animal` (type) VALUES ('$type')";
-        echo ($query);
+        $query = " INSERT INTO `rescued_animal`(`org_id`, `report_id`) VALUES(" . $_SESSION['org_id'] . ",'$report_id')";
+        //echo ($query);
         BaseModel::insert($query);
         $animal_ID = BaseModel::lastInsertId();
 
-        $query = "UPDATE `report_rescue` SET org_id = '$org_id' status = 'IN PROGRESS' accepted_date=curdate() WHERE report_id='$report_id'";
-        echo ($query);
+        $query = "UPDATE `report_rescue` SET org_id = '$org_id', status = 'IN PROGRESS', accepted_date = curdate() WHERE report_id='$report_id'";
+        //echo ($query);
         return BaseModel::insert($query);
     }
 
