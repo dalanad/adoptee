@@ -182,7 +182,7 @@ class Organization extends BaseModel
     public static function acknowledgeFeedback($orgId, $userId, $time)
     {
         $query = "UPDATE `org_feedback` SET acknowledged = 1 WHERE user_id =:user_id AND org_id = :org_id AND created_time = :time";
-        return self::select($query, ["org_id" => $orgId, "time" => $time, "user_id" => $userId]);
+        return self::update($query, ["org_id" => $orgId, "time" => $time, "user_id" => $userId]);
     }
 
     public static function subscribe($tier, $orgId, $user, $amount)
