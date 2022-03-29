@@ -74,7 +74,9 @@ class MedicalRecord extends BaseModel
         $attachments = [];
 
         foreach ($messages as $message) {
-            array_push($attachments, ...json_decode($message["attachments"]));
+            if(sizeof(json_decode($message["attachments"]))>0) {
+                array_push($attachments, ...json_decode($message["attachments"]));
+            }
         }
 
         return $attachments;
