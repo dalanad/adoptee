@@ -19,7 +19,7 @@ class Consultation extends BaseModel
         self::insert($query);
         $animalId = self::lastInsertId();
         self::insert("INSERT INTO `user_pet` (`animal_id`, `user_id`) VALUES ('$animalId', $userId)");
-        
+
         return self::bookConsultationPet($doctorId, $userId, $type, $date, $time, $animalId);
     }
 
@@ -44,10 +44,23 @@ class Consultation extends BaseModel
         assert(isset($doctorId) && isset($start_date) && isset($end_date) && $doctorId != "" && $start_date != "" && $end_date != "");
 
         $bookings = [];
+        $sort = $_GET["sort"];
+        $sort_dir = $_GET["sort_dir"];
+        $animal_type = $_GET["type"];
 
+        $query = "SELECT c.*, 
+                        a.type as animal_type ,
+                        c.consultation_time as time 
+                    FROM `consultation` c , animal a
+                    WHERE c.animal_id = a.animal_id 
+                        AND c.doctor_user_id = $doctorId 
+                        AND c.TYPE = 'LIVE' 
+                        AND c.consultation_date BETWEEN '$start_date' AND '$end_date' " . 
+                  ($animal_type != "ANY" ? " AND UPPER(a.type) = UPPER('$animal_type')":"") .
+                  " ORDER BY $sort $sort_dir";
+        // print_r($query);
         $result = self::select(
-            "SELECT * FROM `consultation` WHERE doctor_user_id = :user_id AND TYPE = 'LIVE' AND consultation_date BETWEEN :start_date AND :end_date ",
-            ["user_id" => $doctorId, "start_date" => $start_date, "end_date" => $end_date]
+            $query,
         );
 
         foreach ($result as $item) {
@@ -88,7 +101,7 @@ class Consultation extends BaseModel
                     and status in ('ACCEPTED','COMPLETED') "
             . (isset($type) && $type != "ANY" ? " and c.type = '$type' " : "")
             . ($status != "ALL" ? " and c.status = '$status' " : "")
-            . (isset($search) && $search != "" ? " and a.name like '%$search%' " : "") 
+            . (isset($search) && $search != "" ? " and a.name like '%$search%' " : "")
             . " ORDER BY new_msgs DESC ";
 
         $consultations = self::select($query, ["user_id" => $doctorId]);
@@ -129,7 +142,7 @@ class Consultation extends BaseModel
         Notification::sendNotification(
             $con["user_id"],
             "Doctor Consultaion Completed",
-            "Thank You. Your consultation with ". $doctor["name"] . " has been completed " 
+            "Thank You. Your consultation with " . $doctor["name"] . " has been completed "
         );
     }
 

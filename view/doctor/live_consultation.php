@@ -8,6 +8,24 @@ if (!isset($_GET["view"])) {
 
 <div class="live-consult-grid <?= $_GET["view"] ?>-view">
     <div style="display: flex;align-items: center; font-size: 1.2em;margin-top:-.5rem">
+        <div style="white-space: nowrap;font-size:1rem">
+            <b>Animal Type :</b> &nbsp;
+            <input class="ctrl-radio" type="radio" onchange="showTimes()" name="type" value="DOG" /> DOG
+            <input class="ctrl-radio" type="radio" onchange="showTimes()" name="type" value="CAT" /> CAT
+            <input class="ctrl-radio" type="radio" onchange="showTimes()" name="type" checked value="ANY" /> ANY
+        </div>
+        &nbsp; | &nbsp;
+        <div style="white-space: nowrap;font-size:1rem">
+            <b>Sort By :</b> &nbsp;
+            <select name="sort" class="ctrl" onchange="showTimes()" style="width: 12em;">
+                <option value="time" selected>Consultation Time</option>
+                <option value="name">Animal Name</option>
+            </select>
+            <select name="sort_dir" class="ctrl" onchange="showTimes()" style="width: 6em;">
+                <option value="asc" selected>ASC</option>
+                <option value="desc">DESC</option>
+            </select>
+        </div>
         <span style="flex: 1 1 0"></span>
         <div class='dropdown' style="padding: 0;">
             <button class="btn btn-faded black">
@@ -54,13 +72,16 @@ if (!isset($_GET["view"])) {
 
     let timeline = new AppointmentsTimeline(appointments_timeline);
 
-    cal.onChange(async () => {
-
+    async function showTimes() {
         if (view == 'day') {
 
             let url = new URL(window.location.href);
             let current_date = new Date(url.searchParams.get("calender_date") || new Date()).toISOString().substr(0, 10);
-            let data = await fetch(`/doctor/get_live_bookings?start_date=${current_date}&end_date=${current_date}`).then((res) => res.json());
+            let type = document.querySelector('[name=type]:checked')
+            let sort = document.querySelector('[name=sort]')
+            let sort_dir = document.querySelector('[name=sort_dir]')
+
+            let data = await fetch(`/doctor/get_live_bookings?start_date=${current_date}&end_date=${current_date}&sort=${sort.value}&type=${type.value}&sort_dir=${sort_dir.value}`).then((res) => res.json());
             showDayTimeline(current_date, data[current_date] ?? {})
 
         } else {
@@ -71,6 +92,9 @@ if (!isset($_GET["view"])) {
             await timeline.showBookings();
 
         }
+    }
+    cal.onChange(async () => {
+        showTimes()
     });
 
     cal.init();
