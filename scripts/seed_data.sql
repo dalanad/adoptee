@@ -138,17 +138,17 @@ INSERT INTO `org_feedback` (`org_id`, `user_id`, `living_conditions`, `healthcar
        ('1', '7', '3', '2', '1', '2', '1', 'Great', '1', '1');
 
 INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`, `photos`,`rescue_report_id`) VALUES 
-('14', 'Active and loves cuddles, vaccinated', '2021-08-31', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/1a.jpg","/assets/data/dogs/1b.jpg","/assets/data/dogs/1c.jpg"]', NULL ),
+('14', 'Active and loves cuddles, vaccinated', '2021-08-31', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/3a.jpg","/assets/data/dogs/3b.jpg","/assets/data/dogs/3c.jpg"]', NULL ),
 ('21', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '3', NULL, '["/assets/data/cats/1a.jpg","/assets/data/cats/1b.jpg","/assets/data/cats/1c.jpg"]', NULL),
-('12', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2', NULL, '["/assets/data/dogs/2a.jpg","/assets/data/dogs/2b.jpg","/assets/data/dogs/2c.jpg"]', NULL),
-('9', 'jade-green eyes, vaccinated','2022-03-01', 'ADOPTED', '2022-03-21', '1','3', '["/assets/data/dogs/3a.jpg","/assets/data/dogs/3b.jpg","/assets/data/dogs/3c.jpg"]', 7),
+('12', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2', NULL, '["/assets/data/dogs/5a.jpg","/assets/data/dogs/5b.jpg","/assets/data/dogs/5c.jpg"]', NULL),
+('9', 'jade-green eyes, vaccinated','2022-03-01', 'ADOPTED', '2022-03-21', '1','3', '["/assets/data/cats/5a.jpg","/assets/data/cats/5b.jpg","/assets/data/cats/5c.jpg"]', 7),
 ('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/cats/2a.jpg","/assets/data/cats/2b.jpg","/assets/data/cats/2c.jpg"]', NULL),
-('10', 'Playful and affectionate, vaccinated', '2021-08-26', 'ADOPTED', '2021-09-15', '1',4, '["/assets/data/dogs/4a.jpg","/assets/data/dogs/4b.jpg"]', 1),
-('15', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/dogs/5a.jpg","/assets/data/dogs/5b.jpg","/assets/data/dogs/5c.jpg"]',NULL),
-('4', 'Healthy and a joy to be around, vaccinated', '2021-08-26', 'ADOPTED', '2021-09-14', '1', 3, '["/assets/data/cats/5a.jpg","/assets/data/cats/5b.jpg","/assets/data/cats/5c.jpg"]', NULL),
+('10', 'Playful and affectionate, vaccinated', '2021-08-26', 'ADOPTED', '2021-09-15', '1',4, '["/assets/data/dogs/1a.jpg","/assets/data/dogs/1b.jpg","/assets/data/dogs/1c.jpg"]', 1),
+('15', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/dogs/15a.jpg","/assets/data/dogs/15b.jpg","/assets/data/dogs/15c.jpg"]',NULL),
+('4', 'Healthy and a joy to be around, vaccinated', '2021-08-26', 'ADOPTED', '2021-09-14', '1', 3, '["/assets/data/dogs/4a.jpg","/assets/data/dogs/4b.jpg"]', NULL),
 ('16', 'Loves cuddles and needs attention, vaccinated', '2021-08-26', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/6a.jpg","/assets/data/dogs/6b.jpeg","/assets/data/dogs/6c.jpg"]', NULL),
 ('23', 'Independent and friendly, vaccinated', '2021-08-26', 'LISTED', NULL, '1',NULL, '["/assets/data/cats/3a.png","/assets/data/cats/3b.jpg","/assets/data/cats/3c.jpg"]', NULL),
-('19', 'Has tiny, hedgehog paws, vaccinated', '2022-03-22', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/15a.jpg","/assets/data/dogs/15b.jpg","/assets/data/dogs/15c.jpg"]', NULL);
+('19', 'Has tiny, hedgehog paws, vaccinated', '2022-03-22', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/5a.jpg","/assets/data/dogs/5b.jpg","/assets/data/dogs/5c.jpg"]', NULL);
 
 INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
  VALUES 
