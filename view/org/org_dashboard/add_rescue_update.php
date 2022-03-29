@@ -43,14 +43,14 @@
             <label>Upload Photo</label>
             <div class="ctrl-group field-font">
                 <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-                <input class="ctrl field-font" type="file" name="photos[]" required multiple />
+                <input class="ctrl field-font" type="file" name="photo" required />
             </div>
             <span class="field-msg"> </span>
         </div>
         <br>
 
-        <button class='btn mr2' type='reset'>Clear</button>
         <button class='btn mr2' type="submit">Add Update</button>
+        <button class='btn mr2 btn-faded pink' type='reset'>Clear</button>
     </form>
 
 </div>

@@ -51,7 +51,7 @@ class Doctor extends BaseModel
         $doctor = User::findUserById($doctor_id);
         Notification::sendNotification(
             $con["user_id"],
-            "Doctor Consultaion Accepted",
+            "Doctor Consultation Accepted",
             $doctor["name"] . " accepted your consultation on " . $con["consultation_date"] . " @ " . $con["consultation_time"]
         );
     }
@@ -79,7 +79,7 @@ class Doctor extends BaseModel
         $doctor = User::findUserById($doctor_id);
         Notification::sendNotification(
             $con["user_id"],
-            "Doctor Consultaion Cancelled",
+            "Doctor Consultation Cancelled",
             $doctor["name"] . " cancelled your consultation on " . $con["consultation_date"] . " @ " . $con["consultation_time"]
         );
     }

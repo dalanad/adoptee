@@ -126,7 +126,7 @@ class OrgManagementController extends Controller{
 
     function process_add_rescue_update()
     {
-        $photos=  image::multi("photos");
+        $photos=  image::single("photo");
         OrgManagement::add_rescue_update($_POST['report_id'], $_SESSION['org_id'], $_POST['heading'],$_POST['description'], $photos);
         $this->redirect('/OrgManagement/org_rescues');
     }
@@ -170,10 +170,10 @@ class OrgManagementController extends Controller{
     function update_news_event()
     {
        
-        $photo =  image::multi("photo");
-        
-        OrgManagement::update_news_event($_SESSION['item_id'], $_POST['heading'],$_POST['description'], $photo);
-        
+        $photo =  image::single("photo");
+        OrgManagement::update_news_event($_POST['item_id'], $_POST['heading'],$_POST['description'], '["'.$photo.'"]');
+        $this->redirect('/OrgManagement/org_news_events');
+
     }
 
     function feedback_list()
@@ -195,9 +195,14 @@ class OrgManagementController extends Controller{
     {
         View::render("org/org_dashboard/add_new_event");
 
-        $photos =  image::multi("photos");
-        
-        OrgManagement::add_new_event($_SESSION['org_id'], $_POST['heading'], $_POST['description'], $photos);
+    }
+
+    function process_add_new_event()
+    {
+        $photo =  image::single("photo");
+        OrgManagement::add_new_event($_SESSION['org_id'], $_POST['heading'], $_POST['description'], '["'.$photo.'"]');
+        $this->redirect('/OrgManagement/org_news_events');
+  
     }
 
     function merch_orders()

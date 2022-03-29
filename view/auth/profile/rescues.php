@@ -91,7 +91,7 @@
                                     <b><?= $value["status"] == "RESCUED" ? $value['heading'] : "-" ?> </b></br></br>
                                     <p><?= $value["status"] == "RESCUED" ? $value['description'] : "-" ?></p>
                                     <?php if ($value["status"] == "RESCUED") { ?>
-                                        <div><img src="/<?= $value['photo'] ?>" style="width:20rem;height:auto;border-radius:4px"></div>
+                                        <div><img src="<?= $value['photo'] ?>" style="width:20rem;height:auto;border-radius:4px"></div>
                                         <span class="field-msg"><?= explode(" ", $value['time_updated'])[0] ?></span>
                                     <?php } ?>
                                 </div>

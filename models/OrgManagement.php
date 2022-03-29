@@ -187,7 +187,6 @@ class OrgManagement extends BaseModel
         user.address as address,
         user.email as email,
         user.telephone as contact,
-        request_date,
         status,
         has_pets,
         petsafety,
@@ -213,7 +212,7 @@ class OrgManagement extends BaseModel
         //sort
         $sort = $filter['sort'];
         $order = $filter['order'];
-        if (isset($sort) && $sort != "request_date") {
+        if (isset($sort)) {
             $query = $query . " ORDER BY $sort $order ";
         }
 
@@ -302,7 +301,7 @@ class OrgManagement extends BaseModel
 
     static function add_rescue_update($report_id, $org_id, $heading, $description, $photo)
     {
-        $query = "INSERT INTO `rescue_updates` (`report_id`, `org_id`, `heading`, `description`, `photos`, `time_updated`)
+        $query = "INSERT INTO `rescue_updates` (`report_id`, `org_id`, `heading`, `description`, `photo`, `time_updated`)
         VALUES ('$report_id','$org_id', '$heading', '$description', '$photo', current_timestamp())";
         return BaseModel::insert($query);
     }
@@ -335,8 +334,7 @@ class OrgManagement extends BaseModel
 
     static function update_news_event($item_id, $heading, $description, $photos)
     {
-        $query = "UPDATE `org_content` SET heading = '$heading' description = '$description' photos = '$photos' created_time = curdate() WHERE item_id=$item_id;";
-
+        $query = "UPDATE `org_content` SET heading = '$heading', description = '$description', photos = '$photos' WHERE item_id=$item_id;";
         return BaseModel::insert($query);
     }
 
@@ -420,7 +418,7 @@ class OrgManagement extends BaseModel
             a.photo as avatar_photo,
             aa.date_adopted,
             aa.date_listed,
-            aa.date_listed as date_rescued,
+            IFNULL((SELECT rescued_date from rescued_animal where report_id = aa.rescue_report_id),date_listed) as date_rescued,
             a.gender,
             FLOOR(DATEDIFF(CURRENT_DATE, a.dob) / 365) 'age',
             (SELECT TIMESTAMPDIFF(day, date_rescued , aa.date_listed)) as rescued_to_listed,

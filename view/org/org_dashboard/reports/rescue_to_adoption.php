@@ -58,12 +58,30 @@
                         </tr>
                     </table>
                 </td>
-                <td><?= $data["date_rescued"] ?></td>
+                <td><?= date('Y-m-d', strtotime($data["date_rescued"])) ?></td>
                 <td><?= $data["date_listed"] ?></td>
-                <td><?= $data["date_adopted"] ?></td>
+                <td>
+                    <?php if ($data["date_adopted"] != "") {
+                        echo $data["date_adopted"];
+                    } else {
+                        echo "NOT ADOPTED";
+                    }  ?>
+                </td>
                 <td><?= $data["rescued_to_listed"] ?> Days</td>
-                <td><?= $data["listed_to_adopted"] ?> Days </td>
-                <td><?= $data["rescued_to_adopted"] ?> Days </td>
+                <td>
+                    <?php if ($data["listed_to_adopted"] != "") {
+                        echo $data["listed_to_adopted"] . " Days";
+                    } else {
+                        echo "N/A";
+                    }  ?>
+                </td>
+                <td>
+                    <?php if ($data["rescued_to_adopted"] != "") {
+                        echo $data["rescued_to_adopted"] . " Days";
+                    } else {
+                        echo "N/A";
+                    }  ?>
+                </td>
             </tr>
         <?php } ?>
     </table>
