@@ -128,10 +128,6 @@
         <!-- Filters - Start -->
         <div style="padding-left: 1rem;">
             <form method="get" action="" id="_form" style="display: flex;align-items:center;margin-bottom:1rem">
-                <div>
-                    <input style="width: 10em;margin-right:.5rem" value="<?=$filter['search']?>" name="search" class="ctrl" type="search" >
-                    <button class="btn outline button-hover">Search</button>
-                </div> &nbsp; | &nbsp;
                 <div style="white-space: nowrap;">
                     <b>Sort by :</b> &nbsp;
                     <select class="ctrl field-font" style="width: 65%;" name="sort" onchange="_form.submit()" required>

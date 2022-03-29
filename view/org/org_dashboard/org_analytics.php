@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                             <div class="div-totals" style="background-color:#fff3d7; justify-items:center; align-items:center;padding-left: .5rem;">
-                                <div style="justify-items:center; align-items:center; display:flex; font-size:0.7rem; width: 90px; height:20px; border-radius: 5rem; background-color:#ffd778; padding-left: .8rem;"><i class="fa fa-tshirt"></i>&nbsp;Orders</div>&nbsp;&nbsp;
+                                <div style="justify-items:center; align-items:center; display:flex; font-size:0.7rem; width: 90px; height:20px; border-radius: 5rem; background-color:#ffd778; padding-left: .8rem;"><i class="fa fa-paw"></i>&nbsp;Rescues</div>&nbsp;&nbsp;
                                 <div>
                                     <div style="font-size: 1.5rem; padding-top:5px;"><?=$total_rescues?></div>
                                     <div style="font-size: 0.7rem; font-weight: 400;  padding-bottom:5px;">Total Rescues Done</div>
