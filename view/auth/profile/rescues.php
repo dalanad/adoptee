@@ -74,22 +74,26 @@
                 <td>
                     <div class="btn btn-link" onclick="showModel('progressModel<?= $value['report_id'] ?>')" title="View"><i class="far fa-eye"></i></div>
                     <div class="model" id="progressModel<?= $value['report_id'] ?>">
-                        <div class="model-content" style="width:fit-content;height:fit-content;top:10%;left:25%;">
+                        <div class="model-content" style="height:40rem;top:15%;left:25%;width:40rem;">
                             <span class="close" onclick="hideModel('progressModel<?= $value['report_id'] ?>')">&times;</span>
 
                             <div class="row" style="margin-top: 2rem;">
+                                <div class="column"><b>Reason to Report:</b></div>
+                                <div class="column"><?= $value["description"]?></div>
+                            </div>
+                            <div class="row" style="margin-top: 2rem;">
                                 <div class="column"><b>Rescued Date:</b></div>
-                                <div class="column"><?= $value["status"] == "RESCUED" ? substr($value["rescued_date"], 0, 10) : "" ?></div>
+                                <div class="column"><?= $value["status"] == "RESCUED" ? substr($value["rescued_date"], 0, 10) : "-" ?></div>
                             </div>
                             <div class="row">
                                 <div class="column"><b>Responded Organization:</b></div>
-                                <div class="column"><?= $value["status"] == "RESCUED" ? ($value["o_name"]) : "" ?></div>
+                                <div class="column"><?= $value["status"] == "RESCUED" ? ($value["o_name"]) : "-" ?></div>
                             </div>
                             <div class="row">
                                 <div class="column"><b>Progress:</b></div>
                                 <div class="column">
                                     <b><?= $value["status"] == "RESCUED" ? $value['heading'] : "-" ?> </b></br></br>
-                                    <p><?= $value["status"] == "RESCUED" ? $value['description'] : "-" ?></p>
+                                    <p><?= $value["status"] == "RESCUED" ? $value['update_description'] : "-" ?></p>
                                     <?php if ($value["status"] == "RESCUED") { ?>
                                         <div><img src="<?= $value['photo'] ?>" style="width:20rem;height:auto;border-radius:4px"></div>
                                         <span class="field-msg"><?= explode(" ", $value['time_updated'])[0] ?></span>

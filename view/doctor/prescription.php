@@ -81,8 +81,8 @@
                     <legend style="padding: 0 0.4rem;">Add Drug</legend>
                     <div class="field">
                         <label>Drug Name</label>
-                        <input class="ctrl" type="text" name="name" id="drug-input">
-                        <div class='auto-complete' style='display:flex;align-items: center;line-height: 1;'>
+                        <input class="ctrl" type="text" autocomplete='false' name="name" id="drug-input">
+                        <div class='auto-complete'  style='display:flex;align-items: center;line-height: 1;'>
                             <div class='auto-complete-content'> </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                         setTimeout(() => {
                             autocomplete.classList.remove('show')
                             content.innerHTML = ''
-                        }, 200)
+                        }, 1000)
                     })
 
                     function setValue(v) {
@@ -129,7 +129,7 @@
                     function showFiltered() {
                         let filterd = meds.filter(e => String(e.name).toLowerCase().includes(String(input.value).toLowerCase()))
                         if (filterd.length > 0) {
-                            content.innerHTML = filterd.map(e => `<div class='item' onclick="setValue('${e.name}')">${e.name}</div>`).reduce((a, b) => a + b)
+                            content.innerHTML = filterd.map(e => `<div class='item' onclick="console.log('e');setValue('${e.name}')">${e.name}</div>`).reduce((a, b) => a + b)
 
                         } else {
                             content.innerHTML = ''

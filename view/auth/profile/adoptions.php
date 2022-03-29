@@ -125,7 +125,7 @@
                                         <td><?= $update['update_date'] ?></td>
                                         <td><?= $update['type'] ?></td>
                                         <td><?= $update['description'] ?></td>
-                                        <td><img src="/<?= $update['photo'] ?>" style="width:6rem;height:6rem;border-radius:4px;justify-content:center;"></td>
+                                        <td><img src="<?= $update['photo'] ?>" style="width:6rem;height:6rem;border-radius:4px;justify-content:center;"></td>
                                     </tr>
                             <?php }
                             }
