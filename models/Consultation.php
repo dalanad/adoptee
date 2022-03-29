@@ -1,4 +1,7 @@
 <?php
+
+use PhpMyAdmin\SqlParser\Utils\Query;
+
 class Consultation extends BaseModel
 {
 
@@ -102,8 +105,7 @@ class Consultation extends BaseModel
 
     public static function complete_user($consultation_id, $doctor_rating)
     {
-        $query = "UPDATE `consultation` SET status = 'COMPLETED' and doctor_rating =:doctor_rating WHERE consultation_id = :consultation_id ";
-
+        $query = "UPDATE `consultation` SET status = 'COMPLETED' , doctor_rating =:doctor_rating WHERE consultation_id = :consultation_id ";
         $params = [
             "consultation_id" => $consultation_id,
             "doctor_rating" => $doctor_rating
