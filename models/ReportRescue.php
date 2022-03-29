@@ -38,7 +38,7 @@ class ReportRescue extends BaseModel
             AND user.user_id=$user_id
             AND rr.report_id=ra.report_id) report_data
         LEFT JOIN
-            (SELECT ru.heading, ru.description, ru.photo, ru.time_updated, ru.report_id
+            (SELECT ru.heading, ru.description as update_description, ru.photo, ru.time_updated, ru.report_id
              FROM rescue_updates ru) update_data
         ON report_data.report_id = update_data.report_id";
         return self::select($query);
