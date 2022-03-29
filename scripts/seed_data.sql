@@ -38,6 +38,7 @@ INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) VALUES
 ('Dog', 'Luna',   'Female', '2017-10-01', '["Black", "Brown"]','/assets/data/dogs/6.jpg'),
 ('Dog', 'Riley',  'Male',   '2014-10-01', '["Grey"]','/assets/data/dogs/7.jpg'),
 ('Dog', 'Nala',   'Female', '2015-10-01', '["Orange"]','/assets/data/dogs/8.jpg'),
+('Cat', 'Rosie',  'Female', '2013-10-01', '["Grey"]','/assets/data/cats/8.jpg'),
 ('Dog', 'Duke',   'Male',   '2015-10-01', '["Grey"]','/assets/data/dogs/9.jpg'),
 ('Dog', 'Bear',   'Male',   '2013-10-01', '["Grey"]','/assets/data/dogs/10.jpg'),
 ('Cat', 'Sophie', 'Female', '2015-10-01', '["Grey"]','/assets/data/dogs/11.jpg'),
@@ -57,7 +58,6 @@ INSERT INTO `animal` ( `type`, `name`, `gender`, `dob`, `color`,`photo`) VALUES
 ('Cat', 'Garfield','Male',   '2013-10-01', '["Grey", "White", "Black"]','/assets/data/cats/5.jpg'),
 ('Cat', 'Penny',  'Female', '2013-10-01', '["Grey"]','/assets/data/cats/6.jpg'),
 ('Cat', 'Lily',   'Female', '2013-10-01', '["Grey"]','/assets/data/cats/7.jpg'),
-('Cat', 'Rosie',  'Female', '2013-10-01', '["Grey"]','/assets/data/cats/8.jpg'),
 ('Cat', 'Maggie', 'Female', '2013-10-01', '["Grey"]','/assets/data/cats/9.jpg'),
 ('Cat', 'Nova',   'Female', '2013-10-01', '["Grey"]','/assets/data/cats/10.jpg'),
 ('cat', 'Jasper',    'FEMALE',	'2018-04-01',	'[\"Black\"]',	'/assets/data/cats/3.jpg'),
@@ -122,9 +122,13 @@ INSERT INTO `user` (`name`, `email`, `telephone`, `address`, `password`, `email_
 ('Shan Amarasekara',	       'u24@example.com',	'0764303331',	'No. 57, 4th Lane, Kottawa', '$2y$10$VnsCjO9nOHxbaSrOubIJFuadqw.hkaGgcg4DoKGAAYyooimqMhbGW', 1,	1);
 
 
-INSERT INTO `notifications` (`notif_id`, `user_id`, `title`, `message` ) 
-VALUES (NULL, '3',  'Vaccination Reminder', 'Your pet Tina needs to be vaccinated by 10-10-2021'  ), 
-(NULL, '3', 'Adoption Request Update', 'Your request to adopt Tigger has been accepted' );
+INSERT INTO `notifications` ( `user_id`, `created_at`, `title`, `message`, `type`, `sent`, `seen`) VALUES
+(3,'2022-03-28 19:52:18', 'Doctor Consultation Accepted',	'Dr. Weerasinghe accepted your consultation on 2022-03-31 @ 13.30',	'NOTIFICATION',	0,	1),
+(3,'2022-03-28 19:52:18', 'Doctor Consultation Accepted',	'Dr. Weerasinghe accepted your consultation on 2022-03-31 @ 13.00p',	'NOTIFICATION',	0,	1),
+(3,'2022-03-27 19:12:18', 'Doctor Consultation Cancelled',	'Dr. Weerasinghe cancelled your consultation on 2022-03-26 @ 13.00 ',	'NOTIFICATION',	0,	1),
+(3,'2022-03-28 19:32:17', 'Vaccination Reminder',	'Your pet Milo needs to be vaccinated with  \"Anti-Rabies\",  \"DHL\",  \"PARVO\", ',	'NOTIFICATION',	0,	0),
+(4,'2022-03-28 19:32:17', 'Vaccination Reminder',	'Your pet Simba needs to be vaccinated with  \"Anti-Rabies\",  \"DHL\",  \"PARVO\", ',	'NOTIFICATION',	0,	0),
+(2,'2022-03-28 19:32:17', 'Vaccination Reminder',	'Your pet Luna needs to be vaccinated with  \"Anti-Rabies\",  \"DHL\",  \"PARVO\", ',	'NOTIFICATION',	0,	0);
 
 INSERT INTO `org_user` (`user_id`, `org_id`, `role`) VALUES ('2', '1', 'NORMAL'), ('6', '1', 'ADMIN');
 
@@ -133,18 +137,31 @@ INSERT INTO `org_feedback` (`org_id`, `user_id`, `living_conditions`, `healthcar
        ('1', '3', '2', '4', '2', '3', '4', 'Fast Response to Rescue', '1', '1'),
        ('1', '7', '3', '2', '1', '2', '1', 'Great', '1', '1');
 
-INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`, `photos`) VALUES 
-('1', 'Active and loves cuddles, vaccinated', '2021-08-31', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/1a.jpg","/assets/data/dogs/1b.jpg","/assets/data/dogs/1c.jpg"]'),
-('21', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '3', NULL, '["/assets/data/cats/1a.jpg","/assets/data/cats/1b.jpg","/assets/data/cats/1c.jpg"]'),
-('2', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2', NULL, '["/assets/data/dogs/2a.jpg","/assets/data/dogs/2b.jpg","/assets/data/dogs/2c.jpg"]'),
-('3', 'jade-green eyes, vaccinated','2021-09-01', 'ADOPTED', '2021-09-13', '1','4', '["/assets/data/dogs/3a.jpg","/assets/data/dogs/3b.jpg","/assets/data/dogs/3c.jpg"]'),
-('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/cats/2a.jpg","/assets/data/cats/2b.jpg","/assets/data/cats/2c.jpg"]'),
-('4', 'Playful and affectionate, vaccinated', '2021-08-26', 'ADOPTED', '2021-09-03', '1',3, '["/assets/data/dogs/4a.jpg","/assets/data/dogs/4b.jpg"]'),
-('5', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/dogs/5a.jpg","/assets/data/dogs/5b.jpg","/assets/data/dogs/5c.jpg"]'),
-('25', 'Healthy and a joy to be around, vaccinated', '2021-08-26', 'ADOPTED', '2021-01-14', '2', 3, '["/assets/data/cats/5a.jpg","/assets/data/cats/5b.jpg","/assets/data/cats/5c.jpg"]'),
-('6', 'Loves cuddles and needs attention, vaccinated', '2021-08-26', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/6a.jpg","/assets/data/dogs/6b.jpeg","/assets/data/dogs/6c.jpg"]'),
-('23', 'Independent and friendly, vaccinated', '2021-08-26', 'LISTED', NULL, '1',NULL, '["/assets/data/cats/3a.png","/assets/data/cats/3b.jpg","/assets/data/cats/3c.jpg"]'),
-('15', 'Has tiny, hedgehog paws, vaccinated', '2021-09-02', 'LISTED', NULL, '1',NULL, '["/assets/data/dogs/15a.jpg","/assets/data/dogs/15b.jpg","/assets/data/dogs/15c.jpg"]');
+INSERT INTO `animal_for_adoption` (`animal_id`, `description`, `date_listed`, `status`, `date_adopted`, `org_id`, `user_id`, `photos`,`rescue_report_id`) VALUES 
+('14', 'Active and loves cuddles, vaccinated', '2021-08-31', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/1a.jpg","/assets/data/dogs/1b.jpg","/assets/data/dogs/1c.jpg"]', NULL ),
+('21', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '3', NULL, '["/assets/data/cats/1a.jpg","/assets/data/cats/1b.jpg","/assets/data/cats/1c.jpg"]', NULL),
+('12', 'Loves to sleep with his favorite toy, vaccinated', '2021-09-01', 'LISTED', NULL, '2', NULL, '["/assets/data/dogs/2a.jpg","/assets/data/dogs/2b.jpg","/assets/data/dogs/2c.jpg"]', NULL),
+('9', 'jade-green eyes, vaccinated','2022-03-01', 'ADOPTED', '2022-03-21', '1','3', '["/assets/data/dogs/3a.jpg","/assets/data/dogs/3b.jpg","/assets/data/dogs/3c.jpg"]', 7),
+('22', 'Playful and a joy to be around, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/cats/2a.jpg","/assets/data/cats/2b.jpg","/assets/data/cats/2c.jpg"]', NULL),
+('10', 'Playful and affectionate, vaccinated', '2021-08-26', 'ADOPTED', '2021-09-15', '1',4, '["/assets/data/dogs/4a.jpg","/assets/data/dogs/4b.jpg"]', 1),
+('15', 'Playful and active, vaccinated', '2021-08-26', 'LISTED', NULL, '2',NULL, '["/assets/data/dogs/5a.jpg","/assets/data/dogs/5b.jpg","/assets/data/dogs/5c.jpg"]',NULL),
+('4', 'Healthy and a joy to be around, vaccinated', '2021-08-26', 'ADOPTED', '2021-09-14', '1', 3, '["/assets/data/cats/5a.jpg","/assets/data/cats/5b.jpg","/assets/data/cats/5c.jpg"]', NULL),
+('16', 'Loves cuddles and needs attention, vaccinated', '2021-08-26', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/6a.jpg","/assets/data/dogs/6b.jpeg","/assets/data/dogs/6c.jpg"]', NULL),
+('23', 'Independent and friendly, vaccinated', '2021-08-26', 'LISTED', NULL, '1',NULL, '["/assets/data/cats/3a.png","/assets/data/cats/3b.jpg","/assets/data/cats/3c.jpg"]', NULL),
+('19', 'Has tiny, hedgehog paws, vaccinated', '2022-03-22', 'LISTED', NULL, '1', NULL, '["/assets/data/dogs/15a.jpg","/assets/data/dogs/15b.jpg","/assets/data/dogs/15c.jpg"]', NULL);
+
+INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
+ VALUES 
+('9', '3', '1', '2022-03-28', 'ADOPTED', '1', 'The dog that I already have is easy going and bond well with other animals.', '1', 'Used to pets'),
+('14', '4', '1', '2022-03-20', 'PENDING', '0', '', '1', 'Had a dog as a pet previously'),
+('10', '4', '1', '2021-09-12', 'ADOPTED', '0', '', '1', 'Already Have a pet so Used to pets'), --
+('4', '3', '1', '2021-09-02', 'ADOPTED', '0', '', '1', 'Used to pets'), --
+('19', '9', '1', '2022-03-27', 'PENDING', '0', '', '1', 'The dog that I already have is easy going and bond well with other animals');
+
+INSERT INTO `routine_updates`(`user_id`, `animal_id`, `type`, `description`, `photo`, `update_date`)
+VALUES ('3','4','NUTRITION','Started giving vitamins and is more energetic', '/assets/data/dogs/4a.jpg', '2021-12-03'),
+       ('3','4','HEALTH','Playful and active', '/assets/data/dogs/4b.jpg', '2022-02-03');
+
 
 INSERT INTO `user_pet`(`animal_id`, `user_id`, `status`)
 VALUES ('10','4',"ACTIVE"), ('9', '3',"ACTIVE"), ('8', '2',"ACTIVE"), ('7', '3',"ACTIVE"), ('6', '2',"ACTIVE"), ('5', '4',"ACTIVE"), 
@@ -174,33 +191,26 @@ VALUES ('10','4',"ACTIVE"), ('9', '3',"ACTIVE"), ('8', '2',"ACTIVE"), ('7', '3',
 
 INSERT INTO `doctor` (`user_id`, `reg_no`, `telephone_fixed`, `credentials`, `proof_image`) 
 VALUES (1, '0778985654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_63.png"]'),
- (5, '0748345654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_64.png"]');
+       (5, '0748345654', '0112136545', 'B.V.Sc.(Sri Lanka)', '["/uploads/1630599314_64.png"]');
 
 INSERT INTO `report_rescue` (`org_id`, `report_id`, `type`, `description`,  `time_reported`,`accepted_date`, `contact_number`, `location`, `location_coordinates`, `status`, `photos`) 
-VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  '2021-08-25 09:15:20','2021-08-25 11:25:20', '0761231234', 'Anuradhapura', POINT(6.8929, 79.9187), 'RESCUED', '["/assets/data/dogs/10.jpg"]'),
+VALUES ('1', NULL, 'Dog', 'Injured Leg - Emergemcy.',  '2021-08-20 09:15:20','2021-08-20 11:25:20', '0761231234', 'Anuradhapura', POINT(6.8929, 79.9187), 'RESCUED', '["/assets/data/dogs/10.jpg"]'),
 ('2', NULL, 'Cat', 'Malnutritioned - Need Immediate Care.',   '2022-03-23 19:55:20','2021-08-28 19:55:20', '0761231234', 'Anuradhapura', POINT(6.8999, 79.9167), 'PENDING', '["/assets/data/cats/8.jpg"]'),
 ('3', NULL, 'Calf', 'Have got hit by a vehicle - Emergency',   '2021-12-29 08:14:20','2021-12-29 10:04:20', '0771234567', 'Anuradhapura', POINT(6.8969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]'),
 ('1', NULL, 'Dog', 'Injured Leg',   '2021-12-27 18:55:20','2021-12-27 19:55:20', '0762457654', '12/1, Jayathilake Road, Anuradhapura', POINT(6.8269, 79.9737), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]'),
 ('1', NULL, 'Cat', 'Severe skin rash',   current_timestamp(),NULL, '0775467215', '77/7, Silva Lane, Colombo 02', POINT(6.1969, 79.7137), 'PENDING', '["/assets/data/cats/10.jpg"]'),
 ('1', NULL, 'Dog', 'Malnutritioned',   current_timestamp(),NULL, '0722247568', '44/A, Bishop Road, Nugegoda', POINT(6.4969, 79.9137), 'IN PROGRESS', '["/assets/data/cats/10.jpg"]'),
-('1', NULL, 'Hamster', 'Abandoned near a highway',   current_timestamp(),NULL, '071275645', 'Piliyandala, close to main road', POINT(6.8969, 79.0137), 'RESCUED', '["/assets/data/cats/10.jpg"]');
+('1', NULL, 'Cat', 'Abandoned near a highway',  '2022-01-22 08:14:20', '2022-01-23 10:04:20', '071275645', 'Piliyandala, close to main road', POINT(6.8969, 79.0137), 'RESCUED', '["/assets/data/cats/10.jpg"]');
 
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
-VALUES ('1', '1', '2021-08-25 16:25:20');
+VALUES ('1', '1', '2021-08-22 16:25:20');
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
 VALUES ('2', '2', '2021-08-30 14:35:20');
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
 VALUES ('3', '3', '2021-12-29 19:45:20');
 INSERT INTO `rescued_animal` (`org_id`, `report_id`, `rescued_date`) 
-VALUES ('1', '4', '2021-12-29 13:04:20');
+VALUES ('1', '7', '2022-01-29 13:04:20');
 
- INSERT INTO `adoption_request` (`animal_id`, `user_id`, `org_id`, `request_date`, `status`, `has_pets`, `petsafety`, `children`, `childsafety`) 
- VALUES 
- ('1', '3', '1', '2022-03-28', 'PENDING', '1', 'The dog that I already have is easy going and bond well with other animals.', '1', 'Used to pets'),
- ('2', '4', '1', '2022-03-28', 'PENDING', '0', '', '1', 'Used to pets'),
- ('3', '4', '1', '2021-09-12', 'ADOPTED', '0', '', '1', 'Used to pets'),
- ('4', '3', '1', '2021-09-02', 'ADOPTED', '0', '', '1', 'Used to pets'),
- ('25', '3', '2', '2021-01-11', 'ADOPTED', '0', '', '1', 'Used to pets');
 
  INSERT INTO `consultation` ( `consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`,`doctor_rating`, `meeting_id`) 
  VALUES 
@@ -268,7 +278,6 @@ VALUES ('3', '2022-03-27 08:00:00',  '3', 'My pet have not eaten much in the rec
        ('2', '2021-09-13 00:00:00',  '1', 'Advised to take prescribed medicine',false), 
 
        ('5', '2022-03-28 08:15:00',  '3', 'My pet has swollen paws. What should I do?',true), 
-       ('5', '2022-03-28 08:16:00',  '1', 'Swollen paws can occur for a variety of reasons.',false),
        ('5', '2022-03-28 08:17:00',  '1', 'Swelling can be the result of an insect bite or sting, infection, tissue damage, or other type of injury.',false),
        ('5', '2022-03-28 08:18:00',  '1', 'Do your pet has any signs of pain or discomfort?',false), 
        ('5', '2022-03-28 08:19:00',  '3', 'No', false), 
@@ -277,6 +286,8 @@ VALUES ('3', '2022-03-27 08:00:00',  '3', 'My pet have not eaten much in the rec
        ('13',CURRENT_TIMESTAMP,   '1', 'Prescription given',false);
 
 
+INSERT INTO `consultation_message` (`consultation_id`, `created_at`, `medical_record_id`, `attachments`, `sender`, `seen`, `message`) VALUES
+(5,	'2022-03-28 08:16:00',	NULL,	'[\"/assets/images/dogs/wounded1.jpg\"]',	3,	1,	'');
 
 INSERT INTO `sponsorship` (`org_id`,`name`,`user_id`,`amount_at_subscription`,`start_date`,`end_date`,`status`)
 VALUES ('1','Gold','3',5000,'2022-03-01',NULL,'ACTIVE');
@@ -387,10 +398,8 @@ VALUES('1','2015-10-04','2015-08-02','2015-08-15',NULL,'2021-10-01','2021-08-06'
 ('23','2016-01-03',NULL,'2016-02-06','2016-03-12','2022-01-11',NULL,'2022-02-17','2022-02-17','["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]'),
 ('25','2016-01-03',NULL,'2016-02-06','2016-03-12','2022-01-11',NULL,'2022-02-17','2022-02-17','["assets/images/vaxproof1.jpg","assets/images/vaxproof2.png","assets/images/vaxproof3.jpg"]');
 
-INSERT INTO `routine_updates`(`user_id`, `animal_id`, `type`, `description`, `photo`, `update_date`)
-VALUES ('3','4','Nutrition','Started giving vitamins and is more energetic', 'assets/data/dogs/4a.jpg', '2021-12-03');
 
 INSERT INTO `rescue_updates`(`report_id`,`org_id`,`heading`,`description`,`photo`)
-VALUES ('1','1','Treatment successful','The injured leg was treated and is now being given antibiotics. Next visit to the clinic is scheduled for 2021-11-25','assets/images/dogs/wounded1.jpg');
+VALUES ('1','1','Treatment successful','The injured leg was treated and is now being given antibiotics. Next visit to the clinic is scheduled for 2021-11-25','/assets/images/dogs/wounded1.jpg');
 
 COMMIT;

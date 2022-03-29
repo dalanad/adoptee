@@ -436,7 +436,7 @@
         </table>
     </div>
 </div>
-<div style="margin-left: 1200px; padding-bottom: 0px"><a href="/OrgManagement/add_new_animal" class="btn right outline button-hover" style="width: 60px; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Animal"><i class="fas fa-plus"></i></a></div>
+<div style="position:fixed;right:20px;bottom:20px; padding-bottom: 0px"><a href="/OrgManagement/add_new_animal" class="btn right outline button-hover" style="width: 60px; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Animal"><i class="fas fa-plus"></i></a></div>
 
 <script>
     function displayPreview(_this) {

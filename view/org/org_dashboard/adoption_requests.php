@@ -20,7 +20,6 @@
         margin: auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 25%;
         position: fixed;
         top: 40%;
         left: 35%;
@@ -68,7 +67,7 @@
                         <option value='user_name' <?= $filter['sort'] == 'user_name' ? "selected" : "" ?>>Adoptor Name</option>
                         <option value='type' <?= $filter['sort'] == 'type' ? "selected" : "" ?>>Adoptee Type</option>
                         <option value='gender' <?= $filter['sort'] == 'gender' ? "selected" : "" ?>>Gender</option>
-                        <option value='request_date' <?= $filter['sort'] == 'age' ? "selected" : "" ?>>Requested Date</option>
+                        <option value='request_date' <?= $filter['sort'] == 'request_date' ? "selected" : "" ?>>Requested Date</option>
                     </select>
                 </div> &nbsp;
                 <div style="white-space: nowrap;">
@@ -154,7 +153,7 @@
                                 <div class="modal-content">
                                     <span class="close" onclick="hideModel('popupModal-updates<?= $adoption_request["animal_id"] ?>')">&times;</span>
                                     <h3>Adoption Updates</h3>
-                                    <table class="table">
+                                    <table class="table" >
                                         <tr>
                                             <th>UPDATE DATE</th>
                                             <th>TYPE</th>
@@ -169,11 +168,7 @@
                                                 <td><?= $adoption_update["type"] ?></td>
                                                 <td><?= $adoption_update["description"] ?></td>
                                                 <td>
-                                                    <?php
-                                                    $photos = json_decode($adoption_update['photo']);
-                                                    foreach ($photos as $photo) { ?>
-                                                        <div class="thumbnail" style="background-image: url(<?= $photo ?>);cursor:pointer;" onclick="displayPreview(this)"> eee </div>
-                                                    <?php } ?>
+                                                    <div class="thumbnail" style="background-image: url(<?= $adoption_update['photo'] ?>);background-size: contain;cursor:pointer;width:50px;height:50px" onclick="displayPreview(this)"> </div>
                                                 </td>
 
                                             </tr>

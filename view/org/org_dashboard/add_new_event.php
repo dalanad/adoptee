@@ -23,9 +23,9 @@
 
 <div class='container px2'>
     <a class="btn btn-faded black" href="/OrgManagement/org_news_events" style="margin: .5rem 0rem; "><i class="fa fa-chevron-left"></i>&nbsp; Back</a>
-    <h2 style="margin:0">Add New Event</h2>
+    <h2 >Add New Event</h2>
 
-    <form action="/OrgManagement/add_new_event" method="post">
+    <form action="/OrgManagement/process_add_new_event" method="post"  enctype="multipart/form-data">
         <div class="field">
             <label for='name'>Event Name</label>
             <input class="ctrl field-font" type="text" name="heading" required />
@@ -44,15 +44,15 @@
             <label>Upload Photo</label>
             <div class="ctrl-group">
                 <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-                <input type="file" name="photos[]" class="ctrl" multiple accept="image/*" required>
+                <input type="file" name="photo" class="ctrl" accept="image/*" required>
             </div>
             <span class="field-msg">Upload a photo of the event</span>
         </div>
         <br>
         <br>
 
-        <button class='btn mr2' type='reset'>Clear</button>
-        <button class='btn mr2' type="submit">Add Update</button>
+        <button class='btn mr2' type="submit">Add Event</button>
+        <button class='btn mr2 btn-faded pink' type='reset'>Clear</button>
     </form>
 
 </div>

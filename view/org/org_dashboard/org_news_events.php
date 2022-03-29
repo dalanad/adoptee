@@ -177,10 +177,11 @@
                                                 <div class="update-form">
                                                     <span class="close" onclick="hideModel('popupModal-edit<?= $org_news_event["item_id"] ?>')">&times;</span>
                                                     <h3 class='mt1 txt-clr'>Update News / Event</h3>
-                                                    <form action="/OrgManagement/update_news_event" method="post">
+                                                    <form action="/OrgManagement/update_news_event" method="post" enctype="multipart/form-data">
                                                         <div class="field">
                                                             <label for='name'>Update Event Name</label>
                                                             <input class="ctrl field-font" type="text" name="heading" value="<?= $org_news_event["heading"] ?>" required />
+                                                            <input type="hidden" name="item_id" value="<?= $org_news_event["item_id"] ?>" />
                                                         </div>
                                                         <div class="field">
                                                             <div>
@@ -196,9 +197,9 @@
                                                             <label>Update Photo</label>
                                                             <div class="ctrl-group">
                                                                 <span class="ctrl static"><i class="fa fa-photo-video"></i></span>
-                                                                <input type="file" name="photos[]" class="ctrl" multiple accept="image/*">
+                                                                <input type="file" name="photo" class="ctrl" required accept="image/*">
                                                             </div>
-                                                            <span class="field-msg">Upload a photo of the event</span>
+                                                            <span class="field-msg">Upload a photo of the event to replace</span>
                                                         </div>
                                                         <br>
                                                         <br>

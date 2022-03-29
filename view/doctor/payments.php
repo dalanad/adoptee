@@ -20,7 +20,7 @@ require_once  __DIR__ . '/_nav.php';
         &nbsp; | &nbsp;
         <a href="/Doctor/payments" class="btn btn-link">Clear Filters</a>
         <span style="flex:1 1 0"></span>
-        <button class="btn outline green" onclick='location.href="/Doctor/withdraw"' style=" margin:.5rem 0;" <?= $balance > 0 ? '' : 'disabled' ?>>
+        <button class="btn outline green" type="button" onclick='location.href="/Doctor/withdraw"' style=" margin:.5rem 0;" <?= $balance > 0 ? '' : 'disabled' ?>>
             <i class="far fa-credit-card"></i>&nbsp; Withdraw
         </button>
     </form>
