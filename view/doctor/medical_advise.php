@@ -14,7 +14,7 @@ require_once  __DIR__ . '/_nav.php';
     }
 </style>
 <div>
-    <button class="btn btn-faded black" id="back-btn" onclick="closeChat()" style="display: none;margin: 0rem 1rem;margin-bottom:1rem "><i class="fa fa-arrow-left"></i>&nbsp; Back</button>
+    <button class="btn btn-faded black only-md" id="back-btn" onclick="closeChat()" style="display: none;margin: 0rem 1rem;margin-bottom:1rem "><i class="fa fa-arrow-left"></i>&nbsp; Back</button>
 </div>
 <div class="chat-container">
     <div class="chat-conversations">
@@ -148,7 +148,15 @@ require_once  __DIR__ . '/_nav.php';
 </script>
 
 <style>
+    .only-md {
+        display: none !important;
+    }
+       
     @media screen and (max-width:900px) {
+        .only-md {
+            display: inline-flex !important;
+        }
+
         .chat-container {
             box-shadow: none;
             margin: 0;
