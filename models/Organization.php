@@ -146,11 +146,11 @@ class Organization extends BaseModel
         $user = $_SESSION["user"]["user_id"];
         $id = $session['id'];
         $amount = $session['amount_total'] / 100;
-        $donation_id = $_SESSION['donation_id']?? $session["client_reference_id"];
+        $donation_id = $_SESSION['donation_id'] ?? $session["client_reference_id"];
 
         $query = "INSERT INTO `payment`(txn_id,amount,user) VALUES('$id', $amount, $user);";
         self::insert($query);
-        
+
         // update donation table with the payment
         $query = "UPDATE `donation` set txn_id = '$id' WHERE donation_id = $donation_id;";
         self::insert($query);
@@ -205,7 +205,7 @@ class Organization extends BaseModel
         return self::update($query);
     }
 
-    public static function getDonations($org_id,$filter)
+    public static function getDonations($org_id, $filter)
     {
         $sort_column = $filter["sort"];
         $sort_direction = $filter["order"];
@@ -218,12 +218,12 @@ class Organization extends BaseModel
                   AND p.user = u.user_id 
                   AND d.org_id = :org_id ";
 
-        if(isset($filter["search"])){
+        if (isset($filter["search"])) {
             $search = $filter["search"];
             $query = $query . "AND (u.name like '%$search%' OR comments like '%$search%') ";
         }
 
-        $query = $query . (isset($filter) ? (" ORDER BY $sort_column $sort_direction") : '' );
+        $query = $query . (isset($filter) ? (" ORDER BY $sort_column $sort_direction") : '');
 
         return self::select($query, ["org_id" => $org_id]);
     }

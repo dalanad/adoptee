@@ -92,7 +92,7 @@ class Adoptions extends BaseModel
             $query = $query . " AND breeds.type = '$type'";
         }
 
-        if($breed != "select"){
+        if ($breed != "select") {
             $query = $query . " AND breeds.breed = '$breed'";
         }
         // print_r($query);
@@ -104,17 +104,17 @@ class Adoptions extends BaseModel
         return self::select("SELECT breeds.type, breeds.breed FROM breeds;");
     }
 
-    static function addNewPet($name,$type,$gender,$dob,$color,$antirabies,$parvo,$dhl,$tricat,$antirabies_booster,$parvo_booster,$dhl_booster,$tricat_booster,$dewormed,$photo,$vaccproof,$user)
+    static function addNewPet($name, $type, $gender, $dob, $color, $antirabies, $parvo, $dhl, $tricat, $antirabies_booster, $parvo_booster, $dhl_booster, $tricat_booster, $dewormed, $photo, $vaccproof, $user)
     {
         $color = json_encode($color);
 
         $query = "INSERT INTO animal(`type`,`name`,`gender`,`dob`,`color`,`photo`) 
         VALUES('$type','$name','$gender','$dob','$color','$photo')";
-        
+
         self::insert($query);
 
         $animal_id = self::lastInsertId();
-        
+
 
         $query = "INSERT INTO animal_vaccines(`animal_id`,`anti_rabies`,`dhl`,`parvo`,`tricat`,`anti_rabies_booster`,`dhl_booster`,`parvo_booster`,`tricat_booster`,`vacc_proof`)
         VALUES($animal_id,'$antirabies','$dhl','$parvo','$tricat','$antirabies_booster','$dhl_booster','$parvo_booster','$tricat_booster','$vaccproof')";
@@ -122,18 +122,18 @@ class Adoptions extends BaseModel
 
         $query = "INSERT INTO user_pet(`animal_id`,`user_id`,`status`,`dewormed`) 
         VALUES($animal_id,$user,'ACTIVE',$dewormed)";
-        self::insert($query);        
+        self::insert($query);
     }
 
-    static function editPet($name,$photo,$animal_id)
+    static function editPet($name, $photo, $animal_id)
     {
-        if($name != NULL){
+        if ($name != NULL) {
             $query = "UPDATE animal SET name = '$name' WHERE animal_id = $animal_id";
             self::update($query);
         }
-        if($photo != NULL) {
+        if ($photo != NULL) {
             $query = "UPDATE animal SET photo = '$photo' WHERE animal_id = $animal_id";
             self::update($query);
-        }        
+        }
     }
 }

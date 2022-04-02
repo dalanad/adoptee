@@ -7,7 +7,7 @@ class View
         require __DIR__ . "/../../view/$view_name.php";
         die();
     }
-    
+
     static function json($data)
     {
         header('Content-Type: application/json');
