@@ -74,7 +74,6 @@ class Pay
                 'payment_intent' => $session['payment_intent']
             ]);
         } catch (Exception $e) {
-
         }
     }
 }

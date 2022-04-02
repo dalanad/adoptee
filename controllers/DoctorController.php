@@ -134,7 +134,7 @@ class DoctorController extends Controller
             "page" => $_GET["page"] ?? 0,
             "size" => $_GET["size"] ?? 10,
         ];
-        
+
         $result = Doctor::getPaymentHistory($this->doctor_id, $filter);
 
         View::render("doctor/payments", [
