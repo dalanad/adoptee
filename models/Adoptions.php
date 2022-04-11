@@ -13,6 +13,7 @@ class Adoptions extends BaseModel
                     o.org_id 'org_id'
         FROM animal_for_adoption afa, animal  a, organization o
         WHERE a.animal_id = afa.animal_id
+        AND afa.status != 'DELETED'
         AND o.org_id = afa.org_id      ";
 
         //filters

@@ -39,7 +39,16 @@
         text-decoration: none;
         cursor: pointer;
     }
+
 </style>
+
+<?php
+$status_color = [
+    "ADOPTED" => "green",
+    "PENDING" => "orange",
+    "REJECTED" => "red"
+];
+?>
 
 
 <div style="padding-top: 0.5rem;">
@@ -50,14 +59,14 @@
             <form method="get" id="_form" style="display: flex;align-items:center;margin-bottom:1rem">
                 <div style="white-space: nowrap;">
                     <b>View :</b> &nbsp;
-                    <input class="ctrl-radio" type="radio" name="status" value="ADOPTED" onchange='_form.submit()' <?= $filter['status'] == "ADOPTED" ? "checked" : "" ?>/> Adopted
-                    <input class="ctrl-radio" type="radio" name="status" value="PENDING" onchange='_form.submit()' <?= $filter['status'] == "PENDING" ? "checked" : "" ?>/> Pending
-                    <input class="ctrl-radio" type="radio" name="status" value="REJECTED" onchange='_form.submit()' <?= $filter['status'] == "REJECTED" ? "checked" : "" ?>/> Rejected
-                    <input class="ctrl-radio" type="radio" name="status" value="ANY" onchange='_form.submit()' <?= $filter['status'] == "ANY" ? "checked" : "" ?>/> Any
+                    <input class="ctrl-radio" type="radio" name="status" value="ADOPTED" onchange='_form.submit()' <?= $filter['status'] == "ADOPTED" ? "checked" : "" ?> /> Adopted
+                    <input class="ctrl-radio" type="radio" name="status" value="PENDING" onchange='_form.submit()' <?= $filter['status'] == "PENDING" ? "checked" : "" ?> /> Pending
+                    <input class="ctrl-radio" type="radio" name="status" value="REJECTED" onchange='_form.submit()' <?= $filter['status'] == "REJECTED" ? "checked" : "" ?> /> Rejected
+                    <input class="ctrl-radio" type="radio" name="status" value="ANY" onchange='_form.submit()' <?= $filter['status'] == "ANY" ? "checked" : "" ?> /> Any
                 </div> &nbsp; | &nbsp;
                 <div style="white-space: nowrap;">
                     <b>Sort by :</b> &nbsp;
-                    <select class="ctrl field-font" name="sort" style="width: 65%;" onchange='_form.submit()'>
+                    <select class="ctrl field-font" name="sort" style="width: 10rem;" onchange='_form.submit()'>
                         <option selected='true' disabled='disabled'>- Select -</option>
                         <option value='animal_name' <?= $filter['sort'] == 'animal_name' ? "selected" : "" ?>>Adoptee Name</option>
                         <option value='user_name' <?= $filter['sort'] == 'user_name' ? "selected" : "" ?>>Adoptor Name</option>
@@ -67,63 +76,62 @@
                     </select>
                 </div> &nbsp;
                 <div style="white-space: nowrap;">
-                    <input class="ctrl-radio" type="radio" name="order" value="asc" onchange="_form.submit()" <?= $filter['order'] == 'asc' ? "checked" : "" ?>/> Asc
+                    <input class="ctrl-radio" type="radio" name="order" value="asc" onchange="_form.submit()" <?= $filter['order'] == 'asc' ? "checked" : "" ?> /> Asc
                     <input class="ctrl-radio" type="radio" name="order" value="desc" onchange="_form.submit()" <?= $filter['order'] == 'desc' ? "checked" : "" ?> /> Desc
                 </div>
             </form>
         </div>
         <!-- Filters - End -->
-        <br>
-
-        <table class="table">
+        <table class="table border-bottom">
             <tr>
                 <th>ADOPTEE</th>
-                <th>ADOPTEE TYPE</th>
+                <th>TYPE</th>
                 <th>ADOPTER</th>
                 <th>REQUEST DATE</th>
                 <th>HAVE PETS</th>
                 <th>HAVE CHILDREN</th>
                 <th>STATUS</th>
                 <th>INFO</th>
+                <th></th>
             </tr>
 
             <?php foreach ($adoption_requests as $adoption_request) { ?>
                 <tr>
                     <td>
-                        <table>
-                            <tr>
-                                <td><img src="<?= $adoption_request["photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
-                                <td>
-                                    <div>
-                                        <div style="padding: 3px;"><?= $adoption_request["animal_name"] ?></div>
-                                        <div style="padding: 3px;"><i class="txt-clr fa fa-lg fa-<?= $adoption_request['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div style="display: flex;align-items:center">
+                            <img src="<?= $adoption_request["photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;">
+                            <div style="margin-left: .5rem;">
+                                <div style="padding: 3px;"><?= $adoption_request["animal_name"] ?></div>
+                                <div style="padding: 3px;">
+                                    <i class="txt-clr fa fa-lg fa-<?= $adoption_request['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i>
+                                </div>
+                            </div>
+                        </div>
                     </td>
-                    <td><?= $adoption_request["type"] ?></td>
+                    <td><?= strtoupper($adoption_request["type"]) ?></td>
                     <td><?= $adoption_request["user_name"] ?></td>
                     <td><?= $adoption_request["request_date"] ?></td>
                     <td><span class="tag <?= $adoption_request["has_pets"] ? 'green' : 'red' ?>"><?= $adoption_request["has_pets"] ? "YES" : "NO" ?> </span></td>
                     <td><span class="tag <?= $adoption_request["children"] ? 'green' : 'red' ?>"><?= $adoption_request["children"] ? "YES" : "NO" ?> </span></td>
-                    <td><span class="tag <?= $adoption_request["status"] == "PENDING" ? 'orange' : ($adoption_request["status"] == "ADOPTED" ? 'green' : 'red')  ?>" title="<?= $adoption_request["status"] == "ACCEPTED" ? 'fas fa-check' : '' ?>"> <?= $adoption_request["status"] ?> </span></td>
+                    <td><span class="tag <?= $status_color[$adoption_request["status"]] ?>"> <?= $adoption_request["status"] ?> </span></td>
                     <td>
-                        <button onclick="showModel('popupModal<?= $adoption_request["animal_id"] ?>')" title="More Details" class="btn btn-link">Details</button>
+                        <button onclick="showModel('popupModal<?= $adoption_request["animal_id"] ?>')" title="More Details" class="btn btn-link mini">Details</button>
                         <div id="popupModal<?= $adoption_request["animal_id"] ?>" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="hideModel('popupModal<?= $adoption_request["animal_id"] ?>')">&times;</span>
                                 <h3>More Details</h3>
-                                <div style="padding: 5px;"><button title="Adoptor Name" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-user"></i></button><?= $adoption_request["user_name"] ?></div>
-                                <div style="padding: 5px;"><button title="Adoptor Mobile" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-phone"></i></button><?= $adoption_request["contact"] ?></div>
-                                <div style="padding: 5px;"><button title="Adoptor Email" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-envelope"></i></button><?= $adoption_request["email"] ?></div>
-                                <div style="padding: 5px;"><button title="Adoptor Address" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-map-marker-alt"></i></button><?= $adoption_request["address"] ?></div>
+                                <div style="padding: 5px;"><button title="Adopter Name" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-user"></i></button><?= $adoption_request["user_name"] ?></div>
+                                <div style="padding: 5px;"><button title="Adopter Mobile" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-phone"></i></button><?= $adoption_request["contact"] ?></div>
+                                <div style="padding: 5px;"><button title="Adopter Email" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-envelope"></i></button><?= $adoption_request["email"] ?></div>
+                                <div style="padding: 5px;"><button title="Adopter Address" class="btn btn-link btn-icon" style=" padding-right: 20px;"><i class="fas fa-map-marker-alt"></i></button><?= $adoption_request["address"] ?></div>
                             </div>
                         </div>
                     </td>
-                    <td>
+                    <td style="text-align: center;">
                         <?php if ($adoption_request["status"] != "ADOPTED") { ?>
-                            <button onclick="showModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon green"><i class="<?= $adoption_request["status"] == "PENDING" ? 'fas fa-check' : '' ?>"></i>&nbsp;<?= $adoption_request["status"] == "PENDING" ? 'Accept' : '' ?> </button>
+                            <button onclick="showModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon green">
+                                <i class="<?= $adoption_request["status"] == "PENDING" ? 'fas fa-check' : '' ?>"></i>&nbsp;<?= $adoption_request["status"] == "PENDING" ? 'Accept' : '' ?>
+                            </button>
                             <div id="popupModal-accept<?= $adoption_request["animal_id"] ?>" class="modal">
                                 <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
                                     <span class="close" onclick="hideModel('popupModal-accept<?= $adoption_request["animal_id"] ?>')">&times;</span>
@@ -134,7 +142,9 @@
 
                             </div>
                             &nbsp;
-                            <button onclick="showModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon red"><i class="<?= $adoption_request["status"] == "PENDING" ? 'fas fa-times' : '' ?>"></i>&nbsp;<?= $adoption_request["status"] == "PENDING" ? 'Reject' : '' ?></button>
+                            <button onclick="showModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')" class="btn btn-link btn-icon red">
+                                <i class="<?= $adoption_request["status"] == "PENDING" ? 'fas fa-times' : '' ?>"></i>&nbsp;<?= $adoption_request["status"] == "PENDING" ? 'Reject' : '' ?>
+                            </button>
                             <div id="popupModal-reject<?= $adoption_request["animal_id"] ?>" class="modal">
                                 <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
                                     <span class="close" onclick="hideModel('popupModal-reject<?= $adoption_request["animal_id"] ?>')">&times;</span>
@@ -144,20 +154,20 @@
                                 </div>
                             </div>
                         <?php } else { ?>
-                            <button onclick="showModel('popupModal-updates<?= $adoption_request["animal_id"] ?>')" title="View Updates" class="btn btn-link">View Updates</button>
+                            <button onclick="showModel('popupModal-updates<?= $adoption_request["animal_id"] ?>')" class="btn btn-faded black">View Updates</button>
                             <div id="popupModal-updates<?= $adoption_request["animal_id"] ?>" class="modal">
                                 <div class="modal-content">
                                     <span class="close" onclick="hideModel('popupModal-updates<?= $adoption_request["animal_id"] ?>')">&times;</span>
                                     <h3>Adoption Updates</h3>
-                                    <table class="table" >
+                                    <table class="table">
                                         <tr>
                                             <th>UPDATE DATE</th>
                                             <th>TYPE</th>
                                             <th>DESCRIPTION</th>
                                             <th>PHOTO</th>
                                         </tr>
-                                        <?php 
-                                        $adoption_updates = OrgManagement::findUpdates($adoption_request["animal_id"],$adoption_request['user_id']);
+                                        <?php
+                                        $adoption_updates = OrgManagement::findUpdates($adoption_request["animal_id"], $adoption_request['user_id']);
                                         foreach ($adoption_updates as $adoption_update) { ?>
                                             <tr>
                                                 <td><?= $adoption_update["update_date"] ?></td>

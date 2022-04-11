@@ -59,6 +59,7 @@ th {
 .black {
 	--primary: black;
 }
+
 .rounded {
 	border-radius: 1rem;
 }
@@ -138,6 +139,11 @@ th {
 	border: none;
 	min-height: 1.2em;
 	box-shadow: none;
+}
+
+.btn-link.mini {
+	text-transform: uppercase;
+	font-size: 0.9em
 }
 
 .btn-faded {
@@ -249,6 +255,7 @@ header .logo img {
 	header .logo img {
 		height: 40px;
 	}
+
 	.user-info {
 		display: none;
 	}
@@ -359,7 +366,7 @@ header .logo img {
 	justify-content: start;
 }
 
-.field > label {
+.field>label {
 	display: block;
 	margin-bottom: 0.3em;
 	font-weight: 500;
@@ -420,6 +427,7 @@ header .logo img {
 .ctrl-radio[type="radio"][type="radio"]:checked::before {
 	content: "\f192";
 }
+
 .form-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -477,6 +485,11 @@ header .logo img {
 
 .table th {
 	padding-top: 1rem;
+}
+
+.table.border-bottom td,
+.table.border-bottom th {
+	border-bottom: 1px solid var(--muted);
 }
 
 .tag {
@@ -626,10 +639,12 @@ header .logo img {
 	0% {
 		opacity: 0;
 	}
+
 	100% {
 		opacity: 1;
 	}
 }
+
 /* ANIMATIONS END */
 
 /* PHOTO PICKER */
@@ -666,6 +681,7 @@ header .logo img {
 	animation: fadeIn 0.5s;
 	display: flex;
 }
+
 /* END PHOTO PICKER */
 
 /* START ALERT */
@@ -697,6 +713,7 @@ header .logo img {
 .alert ul {
 	margin: 0 -1.5rem;
 }
+
 /* END ALERT */
 
 /* START MOUSE OVER DIV */
@@ -762,7 +779,7 @@ header .logo img {
 	background-color: #0000002b;
 }
 
-.overlay > div {
+.overlay>div {
 	max-width: 80vw;
 	margin: 0 auto;
 	box-shadow: var(--shadow-heavy);
