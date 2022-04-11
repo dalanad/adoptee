@@ -71,15 +71,15 @@
         <form method="get" id="_form" style="display: flex;align-items:center;margin-bottom:1rem">
             <div style="white-space: nowrap;">
                 <b>Sort by :</b> &nbsp;
-                <select class="ctrl field-font" name="sort" style="width: 65%;"  onchange='_form.submit()'>
+                <select class="ctrl field-font" name="sort" style="width: 65%;" onchange='_form.submit()'>
                     <option selected='true' disabled='disabled'>- Select -</option>
                     <option value='type' <?= $filter['sort'] == 'type' ? "selected" : "" ?>>Animal Type</option>
                     <option value='rescued_date' <?= $filter['sort'] == 'rescued_date' ? "selected" : "" ?>>Date Rescued</option>
                 </select>
             </div> &nbsp;
             <div style="white-space: nowrap;">
-                <input class="ctrl-radio" type="radio" name="order" value="asc"  onchange="_form.submit()" <?= $filter['order'] == 'asc' ? "checked" : "" ?> /> Asc
-                <input class="ctrl-radio" type="radio" name="order" value="desc"  onchange="_form.submit()" <?= $filter['order'] == 'desc' ? "checked" : "" ?> /> Desc
+                <input class="ctrl-radio" type="radio" name="order" value="asc" onchange="_form.submit()" <?= $filter['order'] == 'asc' ? "checked" : "" ?> /> Asc
+                <input class="ctrl-radio" type="radio" name="order" value="desc" onchange="_form.submit()" <?= $filter['order'] == 'desc' ? "checked" : "" ?> /> Desc
             </div>
         </form>
     </div>
@@ -99,7 +99,7 @@
         <div class="overflow-auto" style="height:525px">
             <?php foreach ($org_rescues as $org_rescue) { ?>
                 <div class="div-size" style="display:flex; padding-left: 1rem; padding-bottom: .5rem; padding-top:.5rem;">
-                    <div style="width: 120px;"><i class="txt-clr fa fa-lg fa-<?= $org_rescue['type'] == "Dog" ? 'dog' : ($org_rescue['type'] == "Cat" ? 'cat' : 'paw') ?>"></i>&nbsp;&nbsp; <?= $org_rescue['type'] ?></div>
+                    <div style="width: 120px;"><i class="txt-clr far fa-lg fa-<?= $org_rescue['type'] == "Dog" ? 'dog' : ($org_rescue['type'] == "Cat" ? 'cat' : 'paw') ?>"></i>&nbsp;&nbsp; <?= $org_rescue['type'] ?></div>
                     <div style="width: 150px;"><?= date('Y-m-d', strtotime($org_rescue["rescued_date"])) ?></div>
                     <div style="width: 150px;"><?= $org_rescue["contact_number"] ?></div>
                     <div style="width: 220px;"><?= $org_rescue["description"] ?></div>
@@ -113,34 +113,30 @@
                                 <h3>Description</h3>
                                 <?= $org_rescue["description"] ?>
                             </div>
-
                         </div>
                     </div>
-
-                 
 
                     <div style="padding-right: 0.5rem; width: 120px;">
-                    
-                    <?php if($org_rescue["status"] == "RESCUED") {?> 
-                        <a href="/OrgManagement/add_new_animal?report_id=<?=$org_rescue["report_id"]?>" class="btn btn-link btn-icon orange"><i class="fas fa-plus"></i>&nbsp;New Animal</button>
-                    <?php } else { ?>    
-                    
-                    <button onclick="showModel('popupModal-accept<?= $org_rescue["report_id"] ?>')" class="btn btn-link btn-icon <?= $org_rescue["status"] <> "RESCUED" ? 'green' : '' ?>"><i class="fas fa-check"></i>&nbsp;<?= $org_rescue["status"] <> "RESCUED" ? 'Complete' : '' ?> </button>
-                        <div id="popupModal-accept<?= $org_rescue["report_id"] ?>" class="modal">
-                            <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
-                                <span class="close" onclick="hideModel('popupModal-accept<?= $org_rescue["report_id"] ?>')">&times;</span>
-                                <h3 style="text-align: center;">Are you sure you want to mark rescue as complete?</h3>
-                                <a href="/OrgManagement/mark_as_complete?report_id=<?= $org_rescue["report_id"] ?>&user_id=<?= $org_rescue["user_id"] ?>" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
-                                <button class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-accept<?= $org_rescue["report_id"] ?>')">Cancel</button>
-                            </div>
 
-                        </div>
+                        <?php if ($org_rescue["status"] == "RESCUED") { ?>
+                            <a href="/OrgManagement/add_new_animal?report_id=<?= $org_rescue["report_id"] ?>" class="btn btn-link btn-icon orange"><i class="fas fa-plus"></i>&nbsp;New Animal</a>
+                        <?php } else { ?>
+                            <button onclick="showModel('popupModal-accept<?= $org_rescue['report_id'] ?>')" class="btn btn-link btn-icon <?= $org_rescue["status"] <> "RESCUED" ? 'green' : '' ?>">
+                                <i class="fas fa-check"></i>&nbsp;<?= $org_rescue["status"] <> "RESCUED" ? 'Complete' : '' ?>
+                            </button>
+                            <div id="popupModal-accept<?= $org_rescue["report_id"] ?>" class="modal">
+                                <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 45%">
+                                    <span class="close" onclick="hideModel('popupModal-accept<?= $org_rescue["report_id"] ?>')">&times;</span>
+                                    <h3 style="text-align: center;">Are you sure you want to mark rescue as complete?</h3>
+                                    <a href="/OrgManagement/mark_as_complete?report_id=<?= $org_rescue["report_id"] ?>&user_id=<?= $org_rescue["user_id"] ?>" class="btn green" style="position: absolute; right: 40px; bottom: 25px; width: 80px">Yes</a>
+                                    <button class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-accept<?= $org_rescue['report_id'] ?>')">Cancel</button>
+                                </div>
+                            </div>
                         <?php } ?>
                     </div>
-
-                    <div style="padding-right: 0.5rem; width: 100px;"><a href="/OrgManagement/add_rescue_update?report_id=<?=$org_rescue["report_id"]?>" title="Add Update" class="btn btn-link" style="border-radius: 0.4rem; border: 0.1rem solid var(--primary);">Add Update</a></div>
-
-
+                    <div style="padding-right: 0.5rem; width: 100px;">
+                        <a href="/OrgManagement/add_rescue_update?report_id=<?= $org_rescue["report_id"] ?>" title="Add Update" class="btn btn-link" style="border-radius: 0.4rem; border: 0.1rem solid var(--primary);">Add Update</a>
+                    </div>
                 </div>
                 <br>
             <?php } ?>
