@@ -13,6 +13,7 @@ class Adoptions extends BaseModel
                     o.org_id 'org_id'
         FROM animal_for_adoption afa, animal  a, organization o
         WHERE a.animal_id = afa.animal_id
+        AND afa.status != 'DELETED'
         AND o.org_id = afa.org_id      ";
 
         //filters
@@ -92,7 +93,7 @@ class Adoptions extends BaseModel
             $query = $query . " AND breeds.type = '$type'";
         }
 
-        if($breed != "select"){
+        if ($breed != "select") {
             $query = $query . " AND breeds.breed = '$breed'";
         }
         // print_r($query);
@@ -104,36 +105,59 @@ class Adoptions extends BaseModel
         return self::select("SELECT breeds.type, breeds.breed FROM breeds;");
     }
 
-    static function addNewPet($name,$type,$gender,$dob,$color,$antirabies,$parvo,$dhl,$tricat,$antirabies_booster,$parvo_booster,$dhl_booster,$tricat_booster,$dewormed,$photo,$vaccproof,$user)
+    static function addNewPet($name, $type, $gender, $dob, $color, $antirabies, $parvo, $dhl, $tricat, $antirabies_booster, $parvo_booster, $dhl_booster, $tricat_booster, $dewormed, $photo, $vaccproof, $user)
     {
         $color = json_encode($color);
 
         $query = "INSERT INTO animal(`type`,`name`,`gender`,`dob`,`color`,`photo`) 
-        VALUES('$type','$name','$gender','$dob','$color','$photo')";
-        
-        self::insert($query);
+                  VALUES(:type, :name, :gender, :dob, :color, :photo) ";
+
+        self::insert($query, [
+            "type" => $type,
+            "name" => $name,
+            "gender" => $gender,
+            "dob" => $dob,
+            "color" => $color,
+            "photo" => $photo
+        ]);
 
         $animal_id = self::lastInsertId();
-        
 
         $query = "INSERT INTO animal_vaccines(`animal_id`,`anti_rabies`,`dhl`,`parvo`,`tricat`,`anti_rabies_booster`,`dhl_booster`,`parvo_booster`,`tricat_booster`,`vacc_proof`)
-        VALUES($animal_id,'$antirabies','$dhl','$parvo','$tricat','$antirabies_booster','$dhl_booster','$parvo_booster','$tricat_booster','$vaccproof')";
-        self::insert($query);
+                  VALUES(:animal_id, :antirabies, :dhl, :parvo, :tricat, :antirabies_booster, :dhl_booster, :parvo_booster, :tricat_booster, :vaccproof)";
+
+        self::insert($query, [
+            "animal_id" => $animal_id,
+            "antirabies" => $antirabies,
+            "dhl" => $dhl,
+            "parvo" => $parvo,
+            "tricat" => $tricat,
+            "antirabies_booster" => $antirabies_booster,
+            "dhl_booster" => $dhl_booster,
+            "parvo_booster" => $parvo_booster,
+            "tricat_booster" => $tricat_booster,
+            "vaccproof" => $vaccproof
+        ]);
 
         $query = "INSERT INTO user_pet(`animal_id`,`user_id`,`status`,`dewormed`) 
-        VALUES($animal_id,$user,'ACTIVE',$dewormed)";
-        self::insert($query);        
+                  VALUES(:animal_id,:user,'ACTIVE',:dewormed)";
+
+        self::insert($query, [
+            "animal_id" => $animal_id,
+            "user" => $user,
+            "dewormed" => $dewormed
+        ]);
     }
 
-    static function editPet($name,$photo,$animal_id)
+    static function editPet($name, $photo, $animal_id)
     {
-        if($name != NULL){
-            $query = "UPDATE animal SET name = '$name' WHERE animal_id = $animal_id";
-            self::update($query);
+        if ($name != NULL) {
+            $query = "UPDATE animal SET name = name WHERE animal_id = :animal_id";
+            self::update($query, ["animal_id" => $animal_id, "name" => $name]);
         }
-        if($photo != NULL) {
-            $query = "UPDATE animal SET photo = '$photo' WHERE animal_id = $animal_id";
-            self::update($query);
-        }        
+        if ($photo != NULL) {
+            $query = "UPDATE animal SET photo = photo WHERE animal_id = :animal_id";
+            self::update($query, ["animal_id" => $animal_id, "photo" => $photo]);
+        }
     }
 }

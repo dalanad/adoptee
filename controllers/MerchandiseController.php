@@ -24,4 +24,3 @@ class MerchandiseController extends Controller{
         $this->redirect($payment_link);
     }
 }
-?>

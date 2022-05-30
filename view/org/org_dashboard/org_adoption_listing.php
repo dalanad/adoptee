@@ -140,13 +140,16 @@
     }
 </style>
 
+<?php
+$status_color = [
+    "ADOPTED" => "green",
+    "LISTED" => "orange",
+    "DELETED" => "red"
+];
 
-
+?>
 
 <div style="padding-top: 2.5rem;">
-
-
-
     <!-- Filters - Start -->
     <div style="padding-left: 1rem;">
         <form method="get" id="_form" style="display: flex;align-items:center;margin-bottom:1rem">
@@ -154,13 +157,13 @@
             <div style="white-space: nowrap;">
                 <b>View :</b> &nbsp;
                 <input class="ctrl-radio" type="radio" name="status" value="LISTED" onchange='_form.submit()' <?= $filter['status'] == "LISTED" ? "checked" : "" ?> /> Listed
-                <input class="ctrl-radio" type="radio"  name="status" value="ADOPTED" onchange='_form.submit()' <?= $filter['status'] == "ADOPTED" ? "checked" : "" ?> /> Adopted
-                <input class="ctrl-radio" type="radio" name="status" value="DELETED" onchange='_form.submit()' <?= $filter['status'] == "DELETED" ? "checked" : "" ?>  /> Deleted
-                <input class="ctrl-radio" type="radio"  name="status" value="ANY" onchange='_form.submit()' <?= $filter['status'] == "ANY" ? "checked" : "" ?>  /> Any
+                <input class="ctrl-radio" type="radio" name="status" value="ADOPTED" onchange='_form.submit()' <?= $filter['status'] == "ADOPTED" ? "checked" : "" ?> /> Adopted
+                <input class="ctrl-radio" type="radio" name="status" value="DELETED" onchange='_form.submit()' <?= $filter['status'] == "DELETED" ? "checked" : "" ?> /> Deleted
+                <input class="ctrl-radio" type="radio" name="status" value="ANY" onchange='_form.submit()' <?= $filter['status'] == "ANY" ? "checked" : "" ?> /> Any
             </div> &nbsp; | &nbsp;
             <div style="white-space: nowrap;">
                 <b>Sort by :</b> &nbsp;
-                <select class="ctrl field-font" name="sort" style="width: 65%;" onchange='_form.submit()'>
+                <select class="ctrl field-font" name="sort" style="width: 10rem" onchange='_form.submit()'>
                     <option value='name' <?= $filter['sort'] == 'name' ? "selected" : "" ?>>Adoptee Name</option>
                     <option value='type' <?= $filter['sort'] == 'type' ? "selected" : "" ?>>Adoptee Type</option>
                     <option value='gender' <?= $filter['sort'] == 'gender' ? "selected" : "" ?>>Gender</option>
@@ -168,14 +171,14 @@
                 </select>
             </div> &nbsp;
             <div style="white-space: nowrap;">
-                <input class="ctrl-radio" type="radio" name="order" value="asc"  onchange="_form.submit()" <?= $filter['order'] == 'asc' ? "checked" : "" ?>/> Asc
-                <input class="ctrl-radio" type="radio" name="order" value="desc"  onchange="_form.submit()" <?= $filter['order'] == 'desc' ? "checked" : "" ?>/> Desc
+                <input class="ctrl-radio" type="radio" name="order" value="asc" onchange="_form.submit()" <?= $filter['order'] == 'asc' ? "checked" : "" ?> /> Asc
+                <input class="ctrl-radio" type="radio" name="order" value="desc" onchange="_form.submit()" <?= $filter['order'] == 'desc' ? "checked" : "" ?> /> Desc
             </div>
         </form>
     </div>
     <!-- Filters - End -->
     <div class="overflow-auto" style="height: 500px;">
-        <table class="table">
+        <table class="table border-bottom">
             <tr>
                 <th>animal</th>
                 <th>TYPE</th>
@@ -186,30 +189,28 @@
                 <th>INFO</th>
                 <th></th>
             </tr>
-            <br>
-
             <?php foreach ($animals as $animal) { ?>
                 <tr>
                     <td>
-                        <table>
-                            <tr>
-                                <td><img src="<?= $animal["avatar_photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;"></td>
-                                <td>
-                                    <div>
-                                        <div style="padding: 3px;"><?= $animal["name"] ?></div>
-                                        <div style="padding: 3px;"><i class="txt-clr fa fa-lg fa-<?= $animal['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div style="display: flex;align-items:center">
+                            <img src="<?= $animal["avatar_photo"] ?>" style="width: 40px; height: 40px; border-radius: 50%;">
+                            <div style="margin-left: .5rem;">
+                                <div style="padding: 3px;"><?= $animal["name"] ?></div>
+                                <div style="padding: 3px;">
+                                    <i class="txt-clr fa fa-lg fa-<?= $animal['gender'] == "MALE" ? 'mars blue' : 'venus pink' ?>"></i>
+                                </div>
+                            </div>
+                        </div>
                     </td>
-                    <td><?= $animal["type"] ?></td>
-                    <td><?= $animal["age"] ?> years</td>
+                    <td><?= strtoupper($animal["type"]) ?></td>
+                    <td><?= $animal["age"] ?> Years</td>
                     <td><?= $animal["date_listed"] ?></td>
-                    <td><span class="tag <?= $animal["status"] == "ADOPTED" ? 'green' : 'pink' ?>"> <?= $animal["status"] ?> </span></td>
+                    <td>
+                        <span class="tag <?= $status_color[$animal["status"]] ?>"> <?= $animal["status"] ?> </span>
+                    </td>
                     <td><?= $animal["date_adopted"] ?></td>
                     <td>
-                        <button onclick="showModel('popupModal-1<?= $animal["animal_id"] ?>')" title="More Details" class="btn btn-link">Details</button>
+                        <button onclick="showModel('popupModal-1<?= $animal["animal_id"] ?>')" title="More Details" class="btn btn-link mini">Details</button>
                         <div id="popupModal-1<?= $animal["animal_id"] ?>" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="hideModel('popupModal-1<?= $animal["animal_id"] ?>')">&times;</span>
@@ -222,7 +223,11 @@
 
                     <td>
                         <div style="display: flex;">
-                            <div><button onclick="showModel('popupModal-2<?= $animal["animal_id"] ?>')" title="Update Details" class="btn btn-link btn-icon"><i class="<?= $animal["status"] == "LISTED" ? 'fas fa-pen' : '' ?>"></i></button></div>
+                            <div>
+                                <button onclick="showModel('popupModal-2<?= $animal['animal_id'] ?>')" title="Update Details" class="btn btn-link btn-icon">
+                                    <i class="<?= $animal["status"] == "LISTED" ? 'far fa-pen' : '' ?>"></i>
+                                </button>
+                            </div>
                             <div id="popupModal-2<?= $animal["animal_id"] ?>" class="modal overflow-auto">
                                 <div class="update-form">
                                     <span class="close" onclick="hideModel('popupModal-2<?= $animal["animal_id"] ?>')">&times;</span>
@@ -415,7 +420,9 @@
 
                             </div>&nbsp;
                             <div>
-                                <button onclick="showModel('popupModal-delete<?= $animal["animal_id"] ?>')" class="btn btn-link btn-icon red"><i class="<?= $animal["status"] == "LISTED" ? 'fas fa-trash-alt' : '' ?>"></i></button>
+                                <button onclick="showModel('popupModal-delete<?= $animal['animal_id'] ?>')" class="btn btn-link btn-icon red">
+                                    <i class="<?= $animal["status"] == "LISTED" ? 'far fa-trash-alt' : '' ?>"></i>
+                                </button>
                                 <div id="popupModal-delete<?= $animal["animal_id"] ?>" class="modal">
                                     <div class="modal-content" style="height: 150px; width: 250px; top: 40%; left: 50%">
                                         <span class="close" onclick="hideModel('popupModal-delete<?= $animal["animal_id"] ?>')">&times;</span>
@@ -424,16 +431,20 @@
                                         <a class="btn" style="position: absolute; left: 40px; bottom: 25px; width: 80px; background-color: var(--gray-5); border-color: var(--gray-5);" onclick="hideModel('popupModal-delete<?= $animal["animal_id"] ?>')">Cancel</a>
                                     </div>
                                 </div>
-                                <div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
-
             <?php } ?>
-
         </table>
     </div>
 </div>
-<div style="position:fixed;right:20px;bottom:20px; padding-bottom: 0px"><a href="/OrgManagement/add_new_animal" class="btn right outline button-hover" style="width: 60px; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Animal"><i class="fas fa-plus"></i></a></div>
+
+<div style="position:fixed;right:20px;bottom:20px; padding-bottom: 0px">
+    <a href="/OrgManagement/add_new_animal" class="btn right button-hover" style="width: 60px;font-size: 1.5rem; height:60px; border-radius: 5rem; box-shadow: var(--shadow);" title="Add New Animal">
+        <i class="far fa-plus"></i>
+    </a>
+</div>
 
 <script>
     function displayPreview(_this) {

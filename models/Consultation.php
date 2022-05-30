@@ -1,24 +1,42 @@
 <?php
 
-use PhpMyAdmin\SqlParser\Utils\Query;
-
 class Consultation extends BaseModel
 {
 
     public static function bookConsultationPet($doctorId, $userId, $type, $date, $time,  $animalId)
     {
-        $query = "INSERT INTO `consultation` (`consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `payment_txn_id`, `created_date`) 
-        VALUES ('$date', '$time', '$animalId', '$doctorId', '$userId', '" . ($type == 'ADVISE' ? 'ACCEPTED' : 'PENDING') . "', '$type', NULL, CURRENT_DATE);";
-        self::insert($query);
+        $query = "INSERT INTO `consultation` (`consultation_date`, `consultation_time`, `animal_id`, `doctor_user_id`, `user_id`, `status`, `type`, `created_date`) 
+                  VALUES (:date, :time, :animal_id, :doctor_id, :user_id, :status, :type, CURRENT_DATE);";
+
+        self::insert($query, [
+            "date" => $date,
+            "time" => $time,
+            "animal_id" => $animalId,
+            "doctor_id" => $doctorId,
+            "user_id" => $userId,
+            "status" => ($type == 'ADVISE' ? 'ACCEPTED' : 'PENDING'),
+            "type" => $type,
+        ]);
+
         return self::lastInsertId(); //to insert the txn_id into consultation table later
     }
 
     public static function bookConsultationNewPet($doctorId, $userId, $type, $date, $time,  $name, $gender, $animal_type, $dob)
     {
-        $query = "INSERT INTO `animal` (type, name, gender, dob) VALUES ('$animal_type','$name', '$gender', '$dob');";
-        self::insert($query);
+        $query = "INSERT INTO `animal` (type, name, gender, dob) VALUES (:animal_type, :name, :gender, :dob);";
+
+        self::insert($query, [
+            "animal_type" => $animal_type,
+            "name" => $name,
+            "gender" => $gender,
+            "dob" => $dob
+        ]);
+
         $animalId = self::lastInsertId();
-        self::insert("INSERT INTO `user_pet` (`animal_id`, `user_id`) VALUES ('$animalId', $userId)");
+
+        $query = "INSERT INTO `user_pet` (`animal_id`, `user_id`) VALUES (:animal_id, :user_id)";
+
+        self::insert($query, ["animal_id" => $animalId, "user_id" => $userId]);
 
         return self::bookConsultationPet($doctorId, $userId, $type, $date, $time, $animalId);
     }
@@ -55,9 +73,9 @@ class Consultation extends BaseModel
                     WHERE c.animal_id = a.animal_id 
                         AND c.doctor_user_id = $doctorId 
                         AND c.TYPE = 'LIVE' 
-                        AND c.consultation_date BETWEEN '$start_date' AND '$end_date' " . 
-                  ($animal_type != "ANY" ? " AND UPPER(a.type) = UPPER('$animal_type')":"") .
-                  " ORDER BY $sort $sort_dir";
+                        AND c.consultation_date BETWEEN '$start_date' AND '$end_date' " .
+            ($animal_type != "ANY" ? " AND UPPER(a.type) = UPPER('$animal_type')" : "") .
+            " ORDER BY $sort $sort_dir";
         // print_r($query);
         $result = self::select(
             $query,
@@ -155,20 +173,18 @@ class Consultation extends BaseModel
     public static function getPetConsultation($animalId)
     {
         $query = "SELECT c.*, cm.consultation_id, cm.message, user_pet.animal_id
-        FROM consultation c, consultation_message cm, user_pet
-        WHERE c.animal_id=user_pet.animal_id
-        AND c.status='COMPLETED'
-        AND cm.consultation_id=c.consultation_id
-        AND user_pet.animal_id = $animalId";
+            FROM consultation c, consultation_message cm, user_pet
+            WHERE c.animal_id=user_pet.animal_id
+            AND c.status='COMPLETED'
+            AND cm.consultation_id=c.consultation_id
+            AND user_pet.animal_id = $animalId";
         return self::select($query);
     }
 
     public static function getUpcomingConsultations($animalId)
     {
-        $query = "SELECT c.*
-        FROM consultation c
-        WHERE animal_id = $animalId
-        AND (status = 'PENDING'
-        OR status = 'ACCEPTED');";
+        $query = "SELECT c.* FROM consultation c
+            WHERE animal_id = $animalId
+            AND (status = 'PENDING' OR status = 'ACCEPTED');";
     }
 }

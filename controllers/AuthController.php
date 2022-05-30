@@ -158,9 +158,7 @@ class AuthController extends Controller
             $email->sendMail($user["email"], $user["name"], "Email Verification", $body);
             $status = "email_sent";
             View::render("auth/user_verification", ["status" =>  $status, "user" => $user]);
-        }
-
-        else if (isset($_GET["action"]) && $_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
+        } else if (isset($_GET["action"]) && $_GET["action"] == "verify_email" &&  $user["email"] == Crypto::decrypt($_GET["token"])) {
             User::verifyEmail($user["email"]);
             $_SESSION['user']['email'] = $user['email'];
             $this->redirect("/Profile/user_profile");
@@ -180,9 +178,7 @@ class AuthController extends Controller
             $notification->sendSMS("94" . (int) $user["telephone"], "Adoptee OTP : $otp");
             $status = "sms_sent";
             View::render("auth/user_verification", ["status" =>  $status, "user" => $user]);
-        }
-
-        elseif ($_GET["action"] == "validate_sms") {
+        } elseif ($_GET["action"] == "validate_sms") {
             if ($_SESSION["otp"] == $_POST['otp']) {
                 User::verifySMS($user["email"]);
                 $_SESSION['user']['telephone'] = $user['telephone'];
