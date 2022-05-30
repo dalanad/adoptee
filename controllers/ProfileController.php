@@ -149,13 +149,13 @@ class ProfileController extends Controller
 
     static function edit_pet()
     {
-        
+
         $photo = NULL;
-        if(($_FILES['edit_photo']['size'])>0){
+        if (($_FILES['edit_photo']['size']) > 0) {
             $photo = image::single("edit_photo");
-        }        
-        $name =  ($_POST['edit_name']=='')? NULL : $_POST['edit_name'];
-        Adoptions::editPet($name,$photo,$_POST['animal_id']);
+        }
+        $name =  ($_POST['edit_name'] == '') ? NULL : $_POST['edit_name'];
+        Adoptions::editPet($name, $photo, $_POST['animal_id']);
         self::my_pets();
     }
 }

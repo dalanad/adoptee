@@ -1,16 +1,17 @@
 <?php
 
-class AdoptionRequestController extends Controller{
+class AdoptionRequestController extends Controller
+{
 
     function view()
     {
         $request = new AdoptionRequest;
         $org = new Organization;
-        if(isset($_SESSION['user'])){
-            $submission = $request -> getUserRequest($_GET['animal_id'], $_SESSION['user']['user_id']);
+        if (isset($_SESSION['user'])) {
+            $submission = $request->getUserRequest($_GET['animal_id'], $_SESSION['user']['user_id']);
         };
         $petData = [
-            "submission" => $submission?? "",
+            "submission" => $submission ?? "",
             "petdata" => $request->getPetData($_GET['animal_id']),
             "org" => $org->getOrgDetails($_GET['org_id']),
             "req" => $request->checkRequestsForPet($_GET['animal_id'])
@@ -31,9 +32,9 @@ class AdoptionRequestController extends Controller{
         // ];
         // View::render("public/adoptions/adoption_request", $petData);
 
-        AdoptionRequest::createAdoptionRequest($_GET['animal_id'], $_GET['org_id'], $_SESSION['user']['user_id'], $_POST['has_pets'], $_POST['petsafety']?? "", $_POST['children'], $_POST['childsafety']?? "");
+        AdoptionRequest::createAdoptionRequest($_GET['animal_id'], $_GET['org_id'], $_SESSION['user']['user_id'], $_POST['has_pets'], $_POST['petsafety'] ?? "", $_POST['children'], $_POST['childsafety'] ?? "");
         self::view();
 
         // Adoptions::hidePet($_GET['animal_id']); //backend incomplete
-    }   
+    }
 }

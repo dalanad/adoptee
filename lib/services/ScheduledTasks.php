@@ -58,9 +58,8 @@ class ScheduledTasks extends BaseModel
                 $request["user_id"],
                 "Adoption Request Expired",
                 "Your Request made on",
-                $request["request_date"] . " to adopt " .$animal['name']. " has expired due to not accepting "
+                $request["request_date"] . " to adopt " . $animal['name'] . " has expired due to not accepting "
             );
         }
     }
 }
-

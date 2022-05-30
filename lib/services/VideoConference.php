@@ -14,7 +14,6 @@ class VideoConference
         );
     }
 
-
     public static function createMeetingId()
     {
         $authorization_token = self::createAuthToken();

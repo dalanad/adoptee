@@ -1,18 +1,19 @@
 <?php
 
-class OrgManagementController extends Controller{
+class OrgManagementController extends Controller
+{
 
-    public function __construct() 
+    public function __construct()
     {
-        $this->isLoggedIn(["org_normal","org_admin"]);
+        $this->isLoggedIn(["org_normal", "org_admin"]);
     }
 
     function org_analytics()
     {
 
         $data = OrgManagement::getDashboardData();
-        $data["active"]="org_analytics";
-        View::render("org/dashboard",$data);
+        $data["active"] = "org_analytics";
+        View::render("org/dashboard", $data);
     }
 
     function org_adoption_listing()
@@ -26,8 +27,8 @@ class OrgManagementController extends Controller{
         $data = [
             "active" => "org_adoption_listing",
             "filter" => $filter,
-            "animals"=>OrgManagement::findAnimalsByOrgId($filter)
-    ];
+            "animals" => OrgManagement::findAnimalsByOrgId($filter)
+        ];
         View::render("org/dashboard", $data);
     }
 
@@ -36,22 +37,26 @@ class OrgManagementController extends Controller{
         View::render("org/org_dashboard/add_new_animal");
     }
 
-    function process_add_new_animal(){
+    function process_add_new_animal()
+    {
         $vacc_proof =  image::multi("vacc_proof");
         $avatar_photo =  image::single("avatar_photo");
         $adoptee_photo =  image::multi("adoptee_photo");
 
-        
+
         OrgManagement::createNewAnimal($_SESSION['org_id'], $_POST['name'], $_POST['type'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['description'], $_POST['anti_rabies'], $_POST['dhl'], $_POST['parvo'], $_POST['tricat'], $_POST['anti_rabies_booster'], $_POST['dhl_booster'], $_POST['parvo_booster'], $_POST['tricat_booster'], $_POST['dewormed'], $vacc_proof, $avatar_photo, $adoptee_photo);
         $this->redirect('/OrgManagement/org_adoption_listing');
-
-    }  
-
-    function edit_animal_for_adoption(){
-        if(isset($_POST['submit'])){OrgManagement::editAnimalData($_POST['animal_id'], $_POST['status'], $_POST['name'], $_POST['type'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['descripion'], $_POST['photo'], $_POST['photos']);}
     }
 
-    function delete_animal(){
+    function edit_animal_for_adoption()
+    {
+        if (isset($_POST['submit'])) {
+            OrgManagement::editAnimalData($_POST['animal_id'], $_POST['status'], $_POST['name'], $_POST['type'], $_POST['gender'], $_POST['dob'], $_POST['color'], $_POST['descripion'], $_POST['photo'], $_POST['photos']);
+        }
+    }
+
+    function delete_animal()
+    {
         OrgManagement::delete_animal($_GET['animal_id']);
         $this->redirect('/OrgManagement/org_adoption_listing');
     }
@@ -67,18 +72,20 @@ class OrgManagementController extends Controller{
         $data = [
             "active" => "adoption_requests",
             "filter" => $filter,
-            "adoption_requests"=>OrgManagement::findRequestsByOrgId($filter),
-            
-    ];
+            "adoption_requests" => OrgManagement::findRequestsByOrgId($filter),
+
+        ];
         View::render("org/dashboard", $data);
     }
 
-    function accept_adoption_request(){
-        OrgManagement::accept_adoption_request($_GET['animal_id'],$_GET['user_id']);
+    function accept_adoption_request()
+    {
+        OrgManagement::accept_adoption_request($_GET['animal_id'], $_GET['user_id']);
         $this->redirect('/OrgManagement/adoption_requests');
     }
 
-    function reject_adoption_request(){
+    function reject_adoption_request()
+    {
         OrgManagement::reject_adoption_request($_GET['animal_id']);
         $this->redirect('/OrgManagement/adoption_requests');
     }
@@ -87,20 +94,21 @@ class OrgManagementController extends Controller{
     {
         $data = [
             "active" => "reported_cases",
-            "reported_cases"=>OrgManagement::findReportedCases()
-    ];
+            "reported_cases" => OrgManagement::findReportedCases()
+        ];
         View::render("org/dashboard", $data);
     }
 
     function rescue_animal()
     {
         $report_id = $_GET['report_id'];
-        $type = "";//$_POST['type'];
+        $type = ""; //$_POST['type'];
         OrgManagement::rescue_animal($report_id, $type);
         $this->redirect('/OrgManagement/org_rescues');
     }
 
-    function mark_as_complete(){
+    function mark_as_complete()
+    {
         OrgManagement::mark_as_complete($_GET['report_id']);
         $this->redirect('/OrgManagement/org_rescues');
     }
@@ -115,8 +123,8 @@ class OrgManagementController extends Controller{
         $data = [
             "active" => "org_rescues",
             "filter" => $filter,
-            "org_rescues"=>OrgManagement::findRescuedAnimalsByOrgId($filter)
-    ];
+            "org_rescues" => OrgManagement::findRescuedAnimalsByOrgId($filter)
+        ];
         View::render("org/dashboard", $data);
     }
 
@@ -127,8 +135,8 @@ class OrgManagementController extends Controller{
 
     function process_add_rescue_update()
     {
-        $photos=  image::single("photo");
-        OrgManagement::add_rescue_update($_POST['report_id'], $_SESSION['org_id'], $_POST['heading'],$_POST['description'], $photos);
+        $photos =  image::single("photo");
+        OrgManagement::add_rescue_update($_POST['report_id'], $_SESSION['org_id'], $_POST['heading'], $_POST['description'], $photos);
         $this->redirect('/OrgManagement/org_rescues');
     }
 
@@ -141,7 +149,7 @@ class OrgManagementController extends Controller{
         ];
         $data = [
             "active" => "org_donations",
-            "donations" => Organization::getDonations($_SESSION["org_id"],$filter),
+            "donations" => Organization::getDonations($_SESSION["org_id"], $filter),
             "filter" => $filter
         ];
         View::render("org/dashboard", $data);
@@ -157,24 +165,24 @@ class OrgManagementController extends Controller{
 
         $data = [
             "active" => "org_news_events",
-            "org_news_events"=>OrgManagement::findOrgContentByOrgId($filter),
+            "org_news_events" => OrgManagement::findOrgContentByOrgId($filter),
             "filter" => $filter
         ];
         View::render("org/dashboard", $data);
     }
 
-    function delete_news_event(){
+    function delete_news_event()
+    {
         OrgManagement::delete_news_event($_GET['item_id']);
         $this->redirect('/OrgManagement/org_news_events');
     }
 
     function update_news_event()
     {
-       
-        $photo =  image::single("photo");
-        OrgManagement::update_news_event($_POST['item_id'], $_POST['heading'],$_POST['description'], '["'.$photo.'"]');
-        $this->redirect('/OrgManagement/org_news_events');
 
+        $photo =  image::single("photo");
+        OrgManagement::update_news_event($_POST['item_id'], $_POST['heading'], $_POST['description'], '["' . $photo . '"]');
+        $this->redirect('/OrgManagement/org_news_events');
     }
 
     function feedback_list()
@@ -188,22 +196,20 @@ class OrgManagementController extends Controller{
 
     function acknowledge_feedback()
     {
-        Organization::acknowledgeFeedback($_SESSION['org_id'],$_GET["user_id"],$_GET["time"]);
+        Organization::acknowledgeFeedback($_SESSION['org_id'], $_GET["user_id"], $_GET["time"]);
         $this->redirect("feedback_list");
     }
 
     function add_new_event()
     {
         View::render("org/org_dashboard/add_new_event");
-
     }
 
     function process_add_new_event()
     {
         $photo =  image::single("photo");
-        OrgManagement::add_new_event($_SESSION['org_id'], $_POST['heading'], $_POST['description'], '["'.$photo.'"]');
+        OrgManagement::add_new_event($_SESSION['org_id'], $_POST['heading'], $_POST['description'], '["' . $photo . '"]');
         $this->redirect('/OrgManagement/org_news_events');
-  
     }
 
     function merch_orders()
@@ -219,10 +225,9 @@ class OrgManagementController extends Controller{
         $listed_from = $_GET["listed_from"] ?? "";
         $listed_to = $_GET["listed_to"] ?? "";
         $data = [
-            "animals_reports"=>OrgManagement::animals_report($listed_from, $listed_to)
+            "animals_reports" => OrgManagement::animals_report($listed_from, $listed_to)
         ];
-        View::render("org/org_dashboard/reports/animals_report",$data);
-        
+        View::render("org/org_dashboard/reports/animals_report", $data);
     }
 
 
@@ -234,27 +239,27 @@ class OrgManagementController extends Controller{
         View::render("org/dashboard", $data);
     }
 
-    function adoptions_updates(){
-        $data = ["adoptions_updates"=>OrgManagement::adoptions_updates_report()];
-        View::render("org/org_dashboard/reports/adoptions_updates",$data);
-       
+    function adoptions_updates()
+    {
+        $data = ["adoptions_updates" => OrgManagement::adoptions_updates_report()];
+        View::render("org/org_dashboard/reports/adoptions_updates", $data);
     }
 
-    function rescue_to_adoption(){
-        $data = ["rescue_to_adoption"=>OrgManagement::rescue_to_adoption_report()];
-        View::render("org/org_dashboard/reports/rescue_to_adoption",$data);
-
+    function rescue_to_adoption()
+    {
+        $data = ["rescue_to_adoption" => OrgManagement::rescue_to_adoption_report()];
+        View::render("org/org_dashboard/reports/rescue_to_adoption", $data);
     }
 
-    function rescues_information(){
-        $data = ["rescues_information"=>OrgManagement::rescues_information_report()];
-        View::render("org/org_dashboard/reports/rescues_information",$data);
-
+    function rescues_information()
+    {
+        $data = ["rescues_information" => OrgManagement::rescues_information_report()];
+        View::render("org/org_dashboard/reports/rescues_information", $data);
     }
 
-    function donations_summary(){
-        $data = ["donations_summary"=>OrgManagement::donations_summary_report()];
-        View::render("org/org_dashboard/reports/donations_summary",$data);
-
+    function donations_summary()
+    {
+        $data = ["donations_summary" => OrgManagement::donations_summary_report()];
+        View::render("org/org_dashboard/reports/donations_summary", $data);
     }
 }
