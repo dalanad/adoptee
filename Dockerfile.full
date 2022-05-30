@@ -1,0 +1,14 @@
+FROM mattrayner/lamp:latest-1804
+
+
+ 
+RUN a2enmod rewrite
+RUN a2enmod headers
+
+RUN apt-get update && apt-get install -y cron curl 
+
+# Copy application source
+COPY ./ /app
+
+
+CMD ["./run.sh"]
