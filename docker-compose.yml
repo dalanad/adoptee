@@ -8,6 +8,18 @@ services:
       - default
     environment:
       - DB_HOST=db 
+      - DB_USER=root
+      - DB_PASS=root
+      - EMAIL_HOST=
+      - EMAIL_USER=
+      - EMAIL_PASS=
+      - MAPS_KEY=
+      - SMS_USER=
+      - SMS_KEY=
+      - VIDEOSDK_KEY=
+      - VIDEOSDK_SECRERT=
+      - STRIPE_SECRET=
+      - STRIPE_PUBLISHABLE=
     volumes:
       - ".:/var/www"       
   db:

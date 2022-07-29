@@ -10,33 +10,37 @@ class Config
 
         // database credentials
         "db.dsn" => "mysql:host=" . db_host . ";dbname=adoptee;charset=utf8",
-        "db.user" => "root",
-        "db.pass" => "root",
+        "db.user" => null,
+        "db.pass" => null,
 
         // email credentials
-        "email.host" => "smtp.gmail.com",
-        "email.user" => "adopteelk@gmail.com",
-        "email.pass" => "Adoptee123@#",
+        "email.host" => null,
+        "email.user" => null,
+        "email.pass" => null,
 
         // GMaps credentials
-        "maps.key" => "AIzaSyBSB7zeeAI3QC42UmxHEFqS715ulfPFASc",
+        "maps.key" => null,
 
         // sms (Notify.lk) credentials
-        "sms.user" => "13947",
-        "sms.key" => "oHMY3jsF85FFUo9AWvWz",
+        "sms.user" => null,
+        "sms.key" => null,
 
         // VideoSDK credentials
-        "videosdk.key" => "136ee81a-3694-47bf-8fe1-777df33a8467",
-        "videosdk.secret" => "1dce5c535747b314ae1126641ad7c51f788026be2de628efc915080f9eae5cf3",
+        "videosdk.key" => null,
+        "videosdk.secret" => null,
 
         // Payment Gateway credentials
-        "stripe.secret" => "sk_test_51JBINKEu3mtzXdk1hnpQNEAIMfA93QrzvlckDFM5y6xI0JDLptM8k13RF0MTBhTzDUkZG4lMxli88h54SwKp0VeZ00csMtwzQJ",
-        "stripe.publishable" => "pk_test_51JBINKEu3mtzXdk1RZaQ4mqJoyuHQS7ZL9UdpSrR3oDcRgkbNmCTl9dEKTK5KigEoeDBwO89lCtyQKydIBL7Mf2q00POFEpI41"
+        "stripe.secret" => null,
+        "stripe.publishable" => null
     );
 
 
     public static function get($key)
     {
-        return self::$configuration_data[$key];
+        if (self::$configuration_data[$key]) {
+            return self::$configuration_data[$key];
+        } else {
+            return getenv(strtoupper(str_replace('.', '_', $key)));
+        };
     }
 }
