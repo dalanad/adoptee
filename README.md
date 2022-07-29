@@ -19,6 +19,7 @@ animal welfare organizations in Sri Lanka.
 ### Development
 
 - Install Docker 
+- setup config variables in docker compose or in `/lib/core/Config.php`
 - Run `docker compose up`
 - Goto  `"localhost/scripts/admin.php"` and click "seed data"
 
@@ -36,6 +37,13 @@ animal welfare organizations in Sri Lanka.
 
 ### Deployment
 - Use the `docker-compose-prod.yml` to deploy full application
+- Setup config variables in docker compose or in `/lib/core/Config.php`
 - Optional : You can also build `Dockerfile` to get an application image
     - Provide database host as `DB_HOST` environment variable
 
+
+### Screen Captures
+<div style="text-align:center"><img src="./_docs/screenshots/screenshot_1.png" /></div>
+<div style="text-align:center"><img src="./_docs/screenshots/screenshot_3.png" /></div>
+<div style="text-align:center"><img src="./_docs/screenshots/screenshot_2.png" /></div>
+<div style="text-align:center"><img src="./_docs/screenshots/screenshot_4.png" /></div>
